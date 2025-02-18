@@ -7,7 +7,7 @@ export default function Banner() {
   return (
     <div>
       {/* Banner Section */}
-      <section className="relative bg-gradient-to-r text-white py-20">
+      <section className="relative bg-gradient-to-r text-white py-20 " >
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between">
           {/* Left Section - Text and Buttons */}
           <div className="max-w-3xl text-center md:text-left">
@@ -51,7 +51,7 @@ export default function Banner() {
       </section>
 
       {/* Cards Section */}
-      <section className="container mx-auto px-4 md:px-8 py-12 relative">
+      <section className="container mx-auto px-4 md:px-8 py-12 relative ">
   <div className="absolute inset-0 bg-[#F55D3E] opacity-20"></div> {/* Overlay Background for Section */}
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
     {/* Card 1 */}
