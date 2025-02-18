@@ -35,24 +35,7 @@ const Benefits = () => {
     }
   ];
 
-  const newStats = [
-    {
-      number: '2L+',
-      label: 'Users Worldwide'
-    },
-    {
-      number: '20L+',
-      label: 'Hours of Classes'
-    },
-    {
-      number: '80K+',
-      label: 'Students Passed'
-    },
-    {
-      number: '10+',
-      label: 'Years Legacy'
-    }
-  ];
+ 
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white">
