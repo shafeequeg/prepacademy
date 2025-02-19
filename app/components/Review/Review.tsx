@@ -27,7 +27,7 @@ const StudentTestimonials = () => {
     },
   ];
 
-  const renderStars = (rating) => {
+  const renderStars = (rating : number) => {
     return Array(5)
       .fill(0)
       .map((_, index) => (
