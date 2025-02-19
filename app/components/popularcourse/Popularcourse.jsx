@@ -67,46 +67,47 @@ const PopularCourses = () => {
 
       {/* Team Section */}
       <div className="bg-gradient-to-r from-[#402424] to-[#723232] rounded-lg mt-12 p-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Left Section */}
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold">
-              <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
-              <br />Will Always Be There For You
-            </h2>
-            <ul className="space-y-3">
-              {features.map((feature) => (
-                <li key={feature} className="flex items-center gap-2">
-                  <span className="text-[#F55D3E]">•</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
+  <div className="grid md:grid-cols-2 gap-8 items-center h-full">
+    {/* Left Section - Vertically Centered */}
+    <div className="space-y-6 flex flex-col justify-center h-full">
+      <h2 className="text-3xl font-bold">
+        <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
+        <br />Will Always Be There For You
+      </h2>
+      <ul className="space-y-3">
+        {features.map((feature) => (
+          <li key={feature} className="flex items-center gap-2">
+            <span className="text-[#F55D3E]">•</span>
+            {feature}
+          </li>
+        ))}
+      </ul>
+    </div>
 
-          {/* Right Section - Images stacked one by one */}
-          <div className="flex flex-col items-center gap-4">
-            {/* Prep Academy Logo */}
-            <div className="w-32 h-32">
-              <img 
-                src="/preplogopopularcourse.png" 
-                alt="Prep Academy Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-            
-            {/* Team Photo */}
-            <div className="w-full h-[280px] relative">
-              <img 
-                src="/groupphotopopularcourse.png" 
-                alt="Team of Expert Educators" 
-                className="w-full h-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
-            </div>
-          </div>
-        </div>
+    {/* Right Section - Images stacked */}
+    <div className="flex flex-col items-center gap-4">
+      {/* Prep Academy Logo */}
+      <div className="w-32 h-32 ml-4"> {/* Added ml-4 for left margin */}
+        <img 
+          src="/preplogopopularcourse.png" 
+          alt="Prep Academy Logo" 
+          className="w-full h-full object-contain"
+        />
       </div>
+      
+      {/* Team Photo */}
+      <div className="w-full h-[280px] relative">
+        <img 
+          src="/groupphotopopularcourse.png" 
+          alt="Team of Expert Educators" 
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
+      </div>
+    </div>
+  </div>
+</div>
+
 
       <div className="w-3/4 mx-auto mt-12 grid md:grid-cols-[2fr_1fr] gap-8 bg-[#2B1615] rounded-lg overflow-hidden">
         {/* Left Section */}

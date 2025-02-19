@@ -17,7 +17,7 @@ const CourseVideos = () => {
   ];
 
   return (
-    <section className="py-16 ">
+    <section className="py-16">
       <div className="container mx-auto px-4 md:px-8">
         {/* Heading */}
         <div className="mb-8">
@@ -31,7 +31,7 @@ const CourseVideos = () => {
           {videos.map((video, index) => (
             <div
               key={index}
-              className=" rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Video Thumbnail (Placeholder) */}
               <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
@@ -40,7 +40,7 @@ const CourseVideos = () => {
 
               {/* Video Title (Heading) */}
               <div className="p-6">
-                <h3 className="text-xl font-bold  mb-4 text-white">
+                <h3 className="text-xl font-bold mb-4 text-white">
                   {video.title}
                 </h3>
               </div>
@@ -69,6 +69,67 @@ const CourseVideos = () => {
           </button>
         </div>
       </div>
+
+      {/* Read Features Section */}
+      <div className="relative w-full bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] bg-black mt-16 py-12">
+  {/* Soft Overlay */}
+  <div className="absolute pointer-events-none"></div>
+
+  <div className="relative container mx-auto px-4 md:px-8">
+    <div className="flex flex-col items-center">
+      {/* Heading with Online in bold */}
+      <h2 className="text-2xl md:text-3xl font-medium mb-12 relative z-10">
+        <span className="text-[#F55D3E]">Read Features</span>
+        <span className="text-white font-bold"> Online</span>
+      </h2>
+
+      {/* Logo Container */}
+      <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 relative z-10">
+        {/* DailyHunt Logo */}
+        <div className="flex items-center">
+          <div className="h-20 w-px mr-4 hidden md:block"></div>
+          <img 
+            src="/dailyhunt.png"
+            alt="DailyHunt logo" 
+            className="h-20 md:h-26"
+          />
+        </div>
+
+        {/* Business Standard Logo */}
+        <div className="flex items-center">
+          <div className="h-16 w-px mr-4 hidden md:block"></div>
+          <img 
+            src="/businessstandard.png"
+            alt="Business Standard logo" 
+            className="h-20 md:h-26"
+          />
+        </div>
+
+        {/* AsiaNet News Logo */}
+        <div className="flex items-center">
+          <div className="h-16 w-px mr-4 hidden md:block"></div>
+          <img 
+            src="/asianetnews.png"
+            alt="AsiaNet News logo" 
+            className="h-20 md:h-26"
+          />
+        </div>
+
+        {/* Mint Logo */}
+        <div className="flex items-center">
+          <div className="h-16 w-px mr-4 hidden md:block"></div>
+          <img 
+            src="/mint.png"
+            alt="Mint logo" 
+            className="h-20 md:h-26"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     </section>
   );
 };

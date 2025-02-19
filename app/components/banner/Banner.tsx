@@ -37,16 +37,25 @@ export default function Banner() {
           </div>
 
           {/* Right Section - Image */}
-          <div className="relative mt-10 md:mt-0 md:w-1/2">
-            <Image
-              src="/prepbannerlogo.png" // Update with your image source
-              alt="Background"
-              layout="responsive"
-              width={600} // Adjust according to the aspect ratio
-              height={400} // Adjust according to the aspect ratio
-              className="object-cover rounded-lg"
-            />
-          </div>
+        {/* Right Section - Image with Background */}
+<div className="relative mt-10 md:mt-0 md:w-1/2">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center opacity-50"
+    style={{ backgroundImage: "url('/bannerround.png')" }} // Replace with your actual image path
+  ></div>
+
+  {/* Foreground Image */}
+  <Image
+    src="/prepbannerlogo.png" // Update with your actual foreground image
+    alt="Foreground"
+    layout="responsive"
+    width={600} // Adjust according to the aspect ratio
+    height={400} // Adjust according to the aspect ratio
+    className="relative object-cover rounded-lg"
+  />
+</div>
+
         </div>
       </section>
 
