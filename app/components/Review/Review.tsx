@@ -28,19 +28,20 @@ const StudentTestimonials = () => {
   ];
 
   const renderStars = (rating: number) => {
-    return Array(5)
-      .fill(0)
-      .map((_, index) => (
-        <svg
-          key={index}
-          className="w-4 h-4 fill-current text-[#F55D3E]"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      ));
+    return Array.from({ length: 5 }, (_, index) => (
+      <svg
+        key={index}
+        className={`w-4 h-4 ${
+          index < rating ? "fill-current text-[#F55D3E]" : "fill-current text-gray-400"
+        }`}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+      </svg>
+    ));
   };
+  
   
 
   return (
