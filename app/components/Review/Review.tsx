@@ -27,7 +27,7 @@ const StudentTestimonials = () => {
     },
   ];
 
-  const renderStars = (rating : number) => {
+  const renderStars = (rating: number) => {
     return Array(5)
       .fill(0)
       .map((_, index) => (
@@ -41,6 +41,7 @@ const StudentTestimonials = () => {
         </svg>
       ));
   };
+  
 
   return (
     <section className="py-16 bg-[#231815] text-white">
