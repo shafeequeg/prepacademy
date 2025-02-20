@@ -86,25 +86,26 @@ const PopularCourses = () => {
 
     {/* Right Section - Images stacked */}
     <div className="flex flex-col items-center gap-4">
-      {/* Prep Academy Logo */}
-      <div className="w-32 h-32 ml-4"> {/* Added ml-4 for left margin */}
-        <img 
-          src="/preplogopopularcourse.png" 
-          alt="Prep Academy Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
-      
-      {/* Team Photo */}
-      <div className="w-full h-[280px] relative">
-        <img 
-          src="/groupphotopopularcourse.png" 
-          alt="Team of Expert Educators" 
-          className="w-full h-full object-cover rounded-lg"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
-      </div>
-    </div>
+  {/* Prep Academy Logo */}
+  <div className="w-32 h-32 ml-4"> {/* Added ml-4 for left margin */}
+    <img 
+      src="/preplogopopularcourse.png" 
+      alt="Prep Academy Logo" 
+      className="w-full h-full object-contain"
+    />
+  </div>
+
+  {/* Team Photo */}
+  <div className="w-full h-[200px] md:h-[250px] lg:h-[280px] relative">
+    <img 
+      src="/groupphotopopularcourse.png" 
+      alt="Team of Expert Educators" 
+      className="w-full h-full object-cover rounded-lg"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
+  </div>
+</div>
+
   </div>
 </div>
 
