@@ -22,10 +22,11 @@ const SuccessStories = () => {
           <span className="font-serif italic text-[#FF6B45]">Our Success</span> Stories
         </h2>
         <p className="max-w-3xl mx-auto text-gray-300 text-base md:text-lg">
-          At Prep Academy, we take pride in our students' achievements. From excelling in competitive exams to gaining
-          admission into top universities, our students' success reflects our commitment to providing the best
-          career counseling services and academic support.
-        </p>
+  At Prep Academy, we take pride in our students&apos; achievements. From excelling in competitive exams to gaining
+  admission into top universities, our students&apos; success reflects our commitment to providing the best
+  career counseling services and academic support.
+</p>
+
       </div>
 
       {/* Gallery Grid */}
