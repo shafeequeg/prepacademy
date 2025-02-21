@@ -58,8 +58,8 @@ const AboutSection = () => {
                 Student-Centric Education
               </h3>
               <p className="text-gray-300 text-sm">
-                We prioritize our students growth through customized learning experiences.
-              </p>
+           We prioritize our students&apos; growth through customized learning experiences.
+             </p>
             </div>
 
             {/* Card 2 */}
@@ -88,8 +88,8 @@ const AboutSection = () => {
                 Success-Oriented Academic Support
               </h3>
               <p className="text-gray-300 text-sm">
-                Our programs are designed to ensure student success in both academics and life.
-              </p>
+  Our programs are designed to ensure students&apos; success in both academics and life.
+</p>
             </div>
           </div>
         </div>
