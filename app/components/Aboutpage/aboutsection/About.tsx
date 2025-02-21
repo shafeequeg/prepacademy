@@ -58,7 +58,7 @@ const AboutSection = () => {
                 Student-Centric Education
               </h3>
               <p className="text-gray-300 text-sm">
-                We prioritize our students' growth through customized learning experiences.
+                We prioritize our students growth through customized learning experiences.
               </p>
             </div>
 
