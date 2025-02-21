@@ -85,7 +85,7 @@ const PopularCourses = () => {
     </div>
 
     {/* Right Section - Images stacked */}
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4  groupdiv">
   {/* Prep Academy Logo */}
   <div className="w-32 h-32 ml-4"> {/* Added ml-4 for left margin */}
     <img 
@@ -96,11 +96,31 @@ const PopularCourses = () => {
   </div>
 
   {/* Team Photo */}
-  <div className="w-full h-[200px] md:h-[250px] lg:h-[280px] relative">
+  <div className="w-full h-[200px] md:h-[250px] lg:h-[280px] relative groupimagediv">
+
+  <style>
+    {`
+      @media (max-width: 767px) {
+        .groupimage {
+          height: 170px !important; /* Adjust height for better fit */
+          border-radius: 0 !important; /* Remove rounded corners */
+        }
+          .groupimagediv  {
+         width:380px
+         margin-rigth:10px
+          }
+
+          .groupdiv {
+height:200px
+          }
+      }
+    `}
+  </style>
+
     <img 
       src="/groupphotopopularcourse.png" 
       alt="Team of Expert Educators" 
-      className="w-full h-full object-cover rounded-lg"
+      className="w-full h-full object-cover rounded-lg groupimage"
     />
     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
   </div>

@@ -2,13 +2,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
 
   return (
-    <header className="w-[95%] bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl">
+    <header className="w-[100%] bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl">
     <div className="container mx-auto">
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -24,12 +25,12 @@ export default function Header() {
   
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 items-center">
-          <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <a href="/" className="text-gray-800 hover:text-white text-sm font-semibold">
             Home
           </a>
-          <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/about" className="text-gray-800 hover:text-white text-sm font-semibold">
             About Us
-          </a>
+          </Link>
   
           {/* All Courses Dropdown */}
           <div className="relative">
@@ -55,7 +56,7 @@ export default function Header() {
               </div>
             )}
           </div>
-  
+         
           <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
             Blogs
           </a>
