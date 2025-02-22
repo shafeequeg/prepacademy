@@ -50,7 +50,7 @@ const StudentTestimonials = () => {
         {/* Row 1: Heading and Motivational Text */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-medium mb-4">
-            Read what Our{" "}
+           <span className="font-dmserif italic"> Read what Our{" "}</span>
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">

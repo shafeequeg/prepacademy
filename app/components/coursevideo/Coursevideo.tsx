@@ -22,7 +22,7 @@ const CourseVideos = () => {
         {/* Heading */}
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-left text-white">
-            Course Related <span className="text-[#F55D3E]">Videos</span>
+           <span className="font-dmserif italic">Course Related</span>  <span className="text-[#F55D3E]">Videos</span>
           </h2>
         </div>
 
@@ -79,7 +79,7 @@ const CourseVideos = () => {
     <div className="flex flex-col items-center">
       {/* Heading with Online in bold */}
       <h2 className="text-2xl md:text-3xl font-medium mb-12 relative z-10">
-        <span className="text-[#F55D3E]">Read Features</span>
+        <span className="text-[#F55D3E] font-dmserif italic">Read Features</span>
         <span className="text-white font-bold"> Online</span>
       </h2>
 

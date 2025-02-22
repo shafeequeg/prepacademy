@@ -43,7 +43,7 @@ const Benefits = () => {
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div>
           <h2 className="text-4xl font-bold">
-            <span className="text-[#F55D3E]">Why Study with</span>
+            <span className="text-[#F55D3E] font-dmserif italic">Why Study with</span>
             <br />PrepAcademy?
           </h2>
         </div>
@@ -75,7 +75,7 @@ const Benefits = () => {
           {/* Left Side (Heading & Button) */}
           <div className="flex flex-col items-start flex-1">
             <h2 className="text-4xl font-bold">
-              <span className="text-[#F55D3E]">Register</span> and Get a Free Trial
+              <span className="text-[#F55D3E] font-dmserif italic">Register</span> and Get a Free Trial
             </h2>
             <button className="mt-4 px-6 py-3 bg-[#F55D3E] text-white rounded-full font-semibold hover:bg-[#a52a1a] transition-colors flex items-center gap-2">
               JOIN NOW

@@ -28,7 +28,7 @@ const DrivesUsSection = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <h2 className="text-4xl font-bold">
-              <span className="text-orange-500">What</span>{" "}
+              <span className="text-orange-500 font-dmserif italic">What</span>{" "}
               <span className="text-white">Drives Us</span>
             </h2>
             
@@ -68,7 +68,7 @@ const DrivesUsSection = () => {
   <div className="w-full">
     {/* Section Title */}
     <h2 className="text-4xl font-bold mb-16 text-center">
-      <span className="text-[#FF5733]">Our Secret</span>{" "}
+      <span className="text-[#FF5733] font-dmserif italic">Our Secret</span>{" "}
       <span className="text-white">Sauce</span>
     </h2>
 

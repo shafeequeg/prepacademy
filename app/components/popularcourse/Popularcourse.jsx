@@ -17,7 +17,7 @@ const PopularCourses = () => {
       {/* Popular Courses Header */}
       <div className="mb-12">
         <h2 className="text-4xl font-bold mb-8">
-          <span className="text-[#F55D3E]">Our Popular</span> Courses
+          <span className="text-[#F55D3E] font-dmserif italic">Our Popular</span> Courses
         </h2>
         
         {/* Course Navigation */}
@@ -70,7 +70,7 @@ const PopularCourses = () => {
   <div className="grid md:grid-cols-2 gap-8 items-center h-full">
     {/* Left Section - Vertically Centered */}
     <div className="space-y-6 flex flex-col justify-center h-full">
-      <h2 className="text-3xl font-bold">
+      <h2 className="text-3xl font-bold font-dmserif italic">
         <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
         <br />Will Always Be There For You
       </h2>
@@ -137,8 +137,8 @@ height:200px
             Get Early Access
           </button>
           <div className="space-y-2">
-            <h2 className="text-4xl font-bold">
-              <span className="text-[#F55D3E]">Looking For The Best</span>
+            <h2 className="text-4xl font-bold font-dmserif italic">
+              <span className="text-[#F55D3E] ">Looking For The Best</span>
               <br />Educational Academy
               <br />Near You?
             </h2>
@@ -147,7 +147,7 @@ height:200px
 
         {/* Right Section */}
         <div className="bg-[#F55D3E] p-6 flex flex-col items-center justify-center text-center">
-          <h3 className="text-2xl font-bold mb-4">
+          <h3 className="text-2xl font-bold mb-4 font-dmserif italic">
             Join the
             <br />Summer
             <br />Bootcamp

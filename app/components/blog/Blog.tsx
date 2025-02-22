@@ -29,8 +29,8 @@ const BlogsSection = () => {
       <div className="container mx-auto px-4 md:px-8">
         {/* Heading */}
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-medium italic text-center md:text-left">
-            Know More With <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+          <h2 className="text-3xl md:text-4xl font-medium  text-center md:text-left">
+           <span className="font-dmserif italic"> Know More With</span> <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
           </h2>
         </div>
 

@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=swap');
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+.font-dm-serif {
+    font-family: 'DM Serif Display', serif;
+  }

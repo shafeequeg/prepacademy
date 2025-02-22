@@ -55,7 +55,7 @@ const TestimonialsAndCTA = () => {
       {/* Testimonials Section */}
       <div className="max-w-6xl mx-auto mb-16">
         <h2 className="text-4xl font-bold text-center mb-12">
-          <span className="text-[#FF5733]">Real Talks</span>{" "}
+          <span className="text-[#FF5733] font-dmserif italic">Real Talks</span>{" "}
           <span className="text-white">From Our</span>{" "}
           <span className="text-white block mt-2">Students</span>
         </h2>
@@ -98,7 +98,7 @@ const TestimonialsAndCTA = () => {
             {/* Text Content */}
             <div className="w-full p-4 lg:p-14">
               <h2 className="text-2xl lg:text-3xl font-bold">
-                <span className="text-[#FF5733]">Serious About Your Exam?</span>
+                <span className="text-[#FF5733] font-dmserif italic">Serious About Your Exam?</span>
                 <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
                 </h2>
 

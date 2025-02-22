@@ -29,7 +29,7 @@ const SaveStudyTime = () => {
           {/* Left Side - Text Content */}
           <div className="w-full md:w-1/2 mb-6 md:mb-0">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-[#F55D3E]">Save Study Time <br /> <span className="text-white">upto 40%</span></span>
+              <span className="text-[#F55D3E] font-dmserif italic">Save Study Time <br /></span> <span className="text-white">upto 40%</span>
             </h2>
           </div>
 

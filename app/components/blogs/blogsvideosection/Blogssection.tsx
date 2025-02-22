@@ -51,8 +51,8 @@ const BlogSection = () => {
     <div className="w-full bg-[#1A1A1A] min-h-screen p-6 md:p-8">
       {/* Header */}
       <div className="mb-8">
-        <h2 className="text-white text-2xl font-semibold">
-          Recent <span className="text-[#FF5733]">Blogs</span>
+        <h2 className="text-white text-2xl font-semibold ">
+        <span className='font-dmserif italic'>Recent</span>   <span className="text-[#FF5733]">Blogs</span>
         </h2>
       </div>
 
