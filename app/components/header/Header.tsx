@@ -28,7 +28,7 @@ export default function Header() {
           <Link href="/" className="text-gray-800 hover:text-white text-sm font-semibold">
             Home
           </Link>
-          <Link href="/about" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/aboutus" className="text-gray-800 hover:text-white text-sm font-semibold">
             About Us
           </Link>
   
@@ -43,23 +43,23 @@ export default function Header() {
   
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-lg w-48">
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Web Development
+              <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                 School Courses
                 </a>
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Data Science
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                College Courses
                 </a>
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Digital Marketing
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                  Study Abroad
                 </a>
               </div>
             )}
           </div>
          
-          <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/blogs" className="text-gray-800 hover:text-white text-sm font-semibold">
             Blogs
-          </a>
+          </Link>
           <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
             Contact
           </a>
@@ -80,12 +80,12 @@ export default function Header() {
       {/* Mobile Menu */}
       {isOpen && (
         <nav className="md:hidden flex flex-col items-center bg-gray-100 py-4 px-6 space-y-4">
-          <a href="#" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
+          <Link href="/" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
             Home
-          </a>
-          <a href="#" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
+          </Link>
+          <Link href="/about" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
             About Us
-          </a>
+          </Link>
   
           {/* Mobile Dropdown for All Courses */}
           <div className="relative">
@@ -98,14 +98,14 @@ export default function Header() {
   
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-lg w-48">
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
+              <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
                   Web Development
                 </a>
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
                   Data Science
                 </a>
-                <a href="#" className="block text-gray-800 hover:text-[#F55D3E] px-4 py-2 text-sm">
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
                   Digital Marketing
                 </a>
               </div>

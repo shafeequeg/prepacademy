@@ -4,7 +4,6 @@ import Image from 'next/image';
 const AboutSection = () => {
   return (
     <div className="w-full">
-      {/* About Us Header */}
       <div className="bg-[#0c0f17] pt-6 pb-6 px-8 md:px-16">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold">
@@ -13,7 +12,6 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Welcome Section with Mascot */}
       <div className="bg-[#231818] py-10 px-8 md:px-16">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between">
           <div className="w-full md:w-1/2 pr-0 md:pr-8">
@@ -44,7 +42,6 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Why Choose Section */}
       <div className="bg-[#0c0f17] py-16 px-8 md:px-16">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -52,7 +49,6 @@ const AboutSection = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
             <div className="bg-[#1e1717] border border-[#3d2a2a] rounded p-6 hover:bg-[#231a1a] transition-colors">
               <h3 className="text-[#ff6035] font-medium text-lg mb-3">
                 Student-Centric Education
@@ -61,8 +57,6 @@ const AboutSection = () => {
            We prioritize our students&apos; growth through customized learning experiences.
              </p>
             </div>
-
-            {/* Card 2 */}
             <div className="bg-[#1e1717] border border-[#3d2a2a] rounded p-6 hover:bg-[#231a1a] transition-colors">
               <h3 className="text-[#ff6035] font-medium text-lg mb-3">
                 Comprehensive Career Counseling
@@ -72,7 +66,6 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* Card 3 */}
             <div className="bg-[#1e1717] border border-[#3d2a2a] rounded p-6 hover:bg-[#231a1a] transition-colors">
               <h3 className="text-[#ff6035] font-medium text-lg mb-3">
                 Innovative Learning Techniques
@@ -82,14 +75,13 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* Card 4 */}
             <div className="bg-[#1e1717] border border-[#3d2a2a] rounded p-6 hover:bg-[#231a1a] transition-colors">
               <h3 className="text-[#ff6035] font-medium text-lg mb-3">
                 Success-Oriented Academic Support
               </h3>
               <p className="text-gray-300 text-sm">
-  Our programs are designed to ensure students&apos; success in both academics and life.
-</p>
+                Our programs are designed to ensure students&apos; success in both academics and life.
+              </p>
             </div>
           </div>
         </div>
