@@ -38,11 +38,11 @@ const PrepAcademyTransform = () => {
       </h2>
       <h3 className="text-2xl md:text-4xl font-bold mb-6">We Transform!</h3>
       <p className="text-gray-300 text-sm md:text-base mb-8 max-w-lg">
-        Welcome to Prep Academy - where dreams take flight and success isn't just a destination, 
-        but a way of learning. Whether you're chasing the CAT, MAT, GMAT, XAT, SAT or CSAT dream, 
-        we've got your back with experienced mentors, smart strategies, and a learning experience 
-        that's anything but ordinary.
-      </p>
+  Welcome to Prep Academy - where dreams take flight and success isn&apos;t just a destination, 
+  but a way of learning. Whether you&apos;re chasing the CAT, MAT, GMAT, XAT, SAT or CSAT dream, 
+  we&apos;ve got your back with experienced mentors, smart strategies, and a learning experience 
+  that&apos;s anything but ordinary.
+</p>
 
       <ul className="space-y-3">
         {[
@@ -86,8 +86,8 @@ const PrepAcademyTransform = () => {
 
       </div>
 
-<div className="absolute w-full top-full mt-11">
-<p className="absolute w-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+      <div className="absolute w-full top-full mt-11">
+      <p className="absolute w-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                       bg-[#2A1810] bg-opacity-80 text-[#FF6B45] text-sm md:text-base 
                       px-4 py-2 rounded-lg text-center">
           At Prep Academy, We Turn Preparation Into An Adventure. <b>Are You Ready?</b>
@@ -117,8 +117,8 @@ const PrepAcademyTransform = () => {
 
     {/* Right Side - Description */}
     <h5 className="text-gray-300 text-sm md:text-base max-w-md md:max-w-lg md:text-right mt-4 md:mt-0">
-      Behind every student's success is a passionate, experienced, and dedicated educator who's cracked the toughest exams themselves.
-    </h5>
+  Behind every student&apos;s success is a passionate, experienced, and dedicated educator who&apos;s cracked the toughest exams themselves.
+</h5>
   </div>
 
   {/* Gladiators Grid */}

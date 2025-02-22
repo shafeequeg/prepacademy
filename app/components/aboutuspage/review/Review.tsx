@@ -99,8 +99,8 @@ const TestimonialsAndCTA = () => {
             <div className="w-full p-4 lg:p-14">
               <h2 className="text-2xl lg:text-3xl font-bold">
                 <span className="text-[#FF5733]">Serious About Your Exam?</span>
-                <span className="text-white block mt-2">Let's Make It Happen</span>
-              </h2>
+                <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
+                </h2>
 
               <button className="bg-[#FF5733] text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
                 Click to start your journey
