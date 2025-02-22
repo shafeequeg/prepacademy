@@ -34,7 +34,7 @@ const PrepAcademyTransform = () => {
     {/* Content */}
     <div className="w-full md:w-1/2 mb-10 md:mb-0 md:pr-8">
       <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl mb-2">
-        We Don't Just Teach
+        We Don&pos;t Just Teach
       </h2>
       <h3 className="text-2xl md:text-4xl font-bold mb-6">We Transform!</h3>
       <p className="text-gray-300 text-sm md:text-base mb-8 max-w-lg">
