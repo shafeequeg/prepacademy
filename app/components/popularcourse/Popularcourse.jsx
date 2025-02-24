@@ -1,31 +1,51 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 
 const PopularCourses = () => {
+  const [activeCourse, setActiveCourse] = useState('MBA');
+
   const courses = [
     'MBA', 'NID', 'NIFT', 'NATA', 'CLAT', 'KLEE', 'CUET', 'SAT', 'NDA'
   ];
 
+  const courseData = {
+    MBA: `The Master of Business Administration (MBA) is a highly sought-after qualification, with entrance exams in India being extremely competitive. These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT,
+     and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.`,
+    NID: "The National Institute of Design (NID) entrance exam is a crucial step for students aspiring for a career in design. The exam tests creativity, problem-solving, and design aptitude.",
+    NIFT: "The National Institute of Fashion Technology (NIFT) entrance exam assesses students' aptitude in design, creativity, and fashion-related skills for admission to top fashion institutes.",
+    NATA: "The National Aptitude Test in Architecture (NATA) is an entrance exam for students seeking admission to architecture programs in India, testing drawing and observation skills.",
+    CLAT: "The Common Law Admission Test (CLAT) is the gateway to prestigious law universities in India. It assesses logical reasoning, legal aptitude, and English proficiency.",
+    KLEE: "The Kerala Law Entrance Exam (KLEE) is conducted for admission to law colleges in Kerala, testing candidates' knowledge in legal aptitude, general English, and general knowledge.",
+    CUET: "The Common University Entrance Test (CUET) is conducted for undergraduate admissions in central universities, covering subjects like mathematics, science, and general knowledge.",
+    SAT: "The Scholastic Assessment Test (SAT) is a standardized test widely used for college admissions in the United States, assessing reading, writing, and mathematical skills.",
+    NDA: "The National Defence Academy (NDA) entrance exam is conducted for candidates aspiring to join the Indian Army, Navy, and Air Force, testing mathematics, general knowledge, and aptitude."
+  };
+
   const features = [
-    'Dynamic Live Sessions',
-    '1000+ Targeted Questions',
-    '20 Simulated Mock Tests',
-    'Personalized Learning Path'
+    { image: "/aboutusverified.png", text: "Dynamic Live Sessions" },
+    { image: "/aboutusverified.png", text: "1000+ Targeted Questions" },
+    { image: "/aboutusverified.png", text: "20 Simulated Mock Tests" },
+    { image: "/aboutusverified.png", text: "Personalized Learning Path" }
   ];
+  
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white">
       {/* Popular Courses Header */}
-      <div className="mb-12">
+      {/* Popular Courses Header */}
+      <div className="w-full bg-[#2B1615] px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="text-4xl font-bold mb-8">
           <span className="text-[#F55D3E] font-dmserif italic">Our Popular</span> Courses
         </h2>
-        
+
         {/* Course Navigation */}
         <div className="flex flex-wrap gap-4 mb-8">
           {courses.map((course) => (
             <button
               key={course}
-              className="px-4 py-2 text-white hover:text-[#F55D3E] transition-colors"
+              className={`px-4 py-2 transition-colors ${activeCourse === course ? 'text-[#F55D3E] border-b-2 border-[#F55D3E]' : 'text-white hover:text-[#F55D3E]'}`}
+              onClick={() => setActiveCourse(course)}
             >
               {course}
             </button>
@@ -35,14 +55,7 @@ const PopularCourses = () => {
         {/* Course Info Section */}
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <p className="text-gray-300">
-              The Master of Business Administration (MBA) is a highly sought-after
-              qualification with entrance exams in India being extremely competitive. These
-              exams serve as gateways to prestigious B-Schools across the country and
-              internationally. Popular exams include CAT, XAT, GMAT, and CMAT, with the
-              CAT being especially challenging due to limited seats and a vast pool of
-              applicants.
-            </p>
+            <p className="text-gray-300">{courseData[activeCourse]}</p>
             <div className="flex gap-4">
               <button className="px-6 py-2 bg-[#F55D3E] hover:bg-[#a52a1a] rounded-md transition-colors">
                 Apply Now
@@ -56,98 +69,80 @@ const PopularCourses = () => {
           <div className="space-y-4">
             <h3 className="text-[#F55D3E] text-xl font-semibold">Exams and Criteria</h3>
             <ul className="space-y-3 text-gray-300">
-              <li>• The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.</li>
-              <li>• Candidates must possess an undergraduate degree to be eligible for CAT 2025. The minimum grade point average should be 50% (45% for students in reserved categories).</li>
-              <li>• To appear for the exam, candidates must register within the given deadline and download the CAT 2025 admit card for details about the venue, time, and slot.</li>
-              <li>• Taking coaching classes, giving mock exams, and relevant study materials can help candidates prepare for the exam.</li>
+              <li>• The entrance exams vary depending on the course, with some being highly competitive.</li>
+              <li>• Candidates must meet the eligibility criteria, such as educational qualifications and minimum scores.</li>
+              <li>• Registration deadlines must be followed strictly to avoid disqualification.</li>
+              <li>• Proper preparation with mock tests and study materials increases the chances of success.</li>
             </ul>
           </div>
         </div>
-      </div>
 
       {/* Team Section */}
-      <div className="bg-gradient-to-r from-[#402424] to-[#723232] rounded-lg mt-12 p-8">
-  <div className="grid md:grid-cols-2 gap-8 items-center h-full">
-    {/* Left Section - Vertically Centered */}
-    <div className="space-y-6 flex flex-col justify-center h-full">
-      <h2 className="text-3xl font-bold font-dmserif italic">
-        <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
-        <br />Will Always Be There For You
-      </h2>
-      <ul className="space-y-3">
-        {features.map((feature) => (
-          <li key={feature} className="flex items-center gap-2">
-            <span className="text-[#F55D3E]">•</span>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Right Section - Images stacked */}
-    <div className="flex flex-col items-center gap-4  groupdiv">
-  {/* Prep Academy Logo */}
-  <div className="w-32 h-32 ml-4"> {/* Added ml-4 for left margin */}
+      <div className="bg-gradient-to-r from-[#402424] to-[#723232] rounded-lg mt-12 p-5 md:p-6 lg:p-8 relative">
+  
+  {/* Header Logo - Positioned Top Right */}
+  <div className="absolute top-3 right-3 md:top-5 md:right-5 w-16 h-16 md:w-20 md:h-20">
     <img 
-      src="/preplogopopularcourse.png" 
+      src="/Headerlogo.png" 
       alt="Prep Academy Logo" 
       className="w-full h-full object-contain"
     />
   </div>
 
-  {/* Team Photo */}
-  <div className="w-full h-[200px] md:h-[250px] lg:h-[280px] relative groupimagediv">
+  <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
+    
+    {/* Left Section */}
+    <div className="space-y-4 md:space-y-5 flex flex-col justify-center">
+      <h2 className="text-3xl md:text-4xl font-bold font-dmserif italic text-center md:text-left leading-tight">
+        <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
+        <br />Will Always Be There For You
+      </h2>
+      <ul className="space-y-2 md:space-y-3">
+        {features.map((feature, index) => (
+          <li key={index} className="flex items-center gap-2">
+            <img src={feature.image} alt="Bullet Icon" className="w-6 h-6 md:w-7 md:h-7" />
+            <span className="text-base md:text-lg">{feature.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-  <style>
-    {`
-      @media (max-width: 767px) {
-        .groupimage {
-          height: 170px !important; /* Adjust height for better fit */
-          border-radius: 0 !important; /* Remove rounded corners */
-        }
-          .groupimagediv  {
-         width:380px
-         margin-rigth:10px
-          }
-
-          .groupdiv {
-height:200px
-          }
-      }
-    `}
-  </style>
-
-    <img 
-      src="/groupphotopopularcourse.png" 
-      alt="Team of Expert Educators" 
-      className="w-full h-full object-cover rounded-lg groupimage"
-    />
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
-  </div>
-</div>
+    {/* Right Section (Team Photo) */}
+    <div className="w-full max-w-xs md:max-w-sm lg:max-w-md relative">
+      <img 
+        src="/groupphotopopularcourse.png" 
+        alt="Team of Expert Educators" 
+        className="w-full h-48 md:h-56 lg:h-64 object-cover rounded-lg"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
+    </div>
 
   </div>
 </div>
+</div>
 
 
-      <div className="w-3/4 mx-auto mt-12 grid md:grid-cols-[2fr_1fr] gap-8 bg-[#2B1615] rounded-lg overflow-hidden">
+
+<div className="w-3/4 mx-auto mt-12 grid md:grid-cols-[2fr_1fr]  rounded-lg overflow-hidden">
         {/* Left Section */}
-        <div className="p-8 space-y-4">
+        <div className="p-8 space-y-4 relative bg-[#2B1615] rounded-md">
           <button className="px-4 py-1 bg-[#3A1F1D] text-[#F55D3E] rounded-full text-sm">
             Get Early Access
           </button>
           <div className="space-y-2">
             <h2 className="text-4xl font-bold font-dmserif italic">
-              <span className="text-[#F55D3E] ">Looking For The Best</span>
+              <span className="text-[#F55D3E]">Looking For The Best</span>
               <br />Educational Academy
               <br />Near You?
             </h2>
           </div>
+          {/* Add right border with gap effect */}
+          <div className="absolute right-0 top-0 h-full w-[1px] bg-[#3A1F1D]"></div>
         </div>
 
-        {/* Right Section */}
-        <div className="bg-[#F55D3E] p-6 flex flex-col items-center justify-center text-center">
-          <h3 className="text-2xl font-bold mb-4 font-dmserif italic">
+        {/* Right Section - with gap */}
+        <div className="bg-[#F55D3E] p-6 flex flex-col items-center justify-center rounded-md text-center relative ml-4">
+          <h3 className="text-2xl font-bold mb-4 font-dmserif italic text-white">
             Join the
             <br />Summer
             <br />Bootcamp

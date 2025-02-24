@@ -9,11 +9,13 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
 
   return (
-    <header className="w-[100%] bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl">
+    <header className="w-[95%] mx-auto text-center bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl">
     <div className="container mx-auto">
       <div className="flex items-center justify-between">
         {/* Logo */}
+        
         <div className="flex items-center">
+
           <Image
             src="/Headerlogo.png"
             alt="Prep Academy Logo"
@@ -111,7 +113,12 @@ export default function Header() {
               </div>
             )}
           </div>
-  
+         <Link href="/blogs" className="text-gray-800 hover:text-white text-sm font-semibold">
+            Blogs
+          </Link>
+  <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+            Contact
+          </a>
           <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
             Take A Quick Test
           </a>

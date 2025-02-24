@@ -52,7 +52,7 @@ const BlogSection = () => {
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-white text-2xl font-semibold ">
-        <span className='font-dmserif italic'>Recent</span>   <span className="text-[#FF5733]">Blogs</span>
+        <span className='font-dmserif italic'>  Recent</span>   <span className="text-[#FF5733]">Blogs</span>
         </h2>
       </div>
 
@@ -94,7 +94,7 @@ const BlogSection = () => {
     ].map((tag) => (
       <button
         key={tag}
-        className="w-full md:w-auto bg-[#F55D3E1A] text-white px-4 py-2 rounded-md text-sm hover:bg-[#F55D3E33] transition-colors"
+        className="w-full md:w-auto bg-[#F55D3E1A] text-[#F55D3E] px-4 py-2 rounded-md text-sm hover:bg-[#F55D3E33] transition-colors"
       >
         {tag}
       </button>
@@ -124,6 +124,36 @@ const BlogSection = () => {
           </div>
         ))}
       </div>
+
+      <div className="relative w-full rounded-xl overflow-hidden bg-gradient-to-r from-[#2A1810] to-[#3A2820] p-8 md:p-12 mt-4">
+        {/* Content Container */}
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          {/* Text Content */}
+          <div className="z-10 max-w-xl">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
+              <span className="text-[#FF5733] font-serif italic">Talk To Our Mentors</span>
+              <br />
+              <span className="text-white font-serif italic">For Free Counselling</span>
+            </h2>
+            <button className="bg-[#FF5733] text-white px-6 py-2 rounded flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
+              Lets Talk
+              <span className="text-lg">→</span>
+            </button>
+          </div>
+
+          {/* Image Group */}
+          <div className="relative mt-8 md:mt-0">
+            <img
+              src="/groupphotopopularcourse.png"
+              alt="Our Mentors"
+              className="w-full md:w-[500px] h-auto object-contain"
+            />
+            {/* Badge */}
+        
+          </div>
+        </div>
+       </div>
+
     </div>
   );
 };

@@ -28,78 +28,72 @@ const PrepAcademyTransform = () => {
   return (
     <div className="w-full bg-black text-white">
       {/* Transform Section */}
-      <section className="bg-gradient-to-b py-12 md:py-16 px-6 md:px-10">
+      <section className="bg-gradient-to-b py-10 md:py-14 px-4 md:px-8">
   <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
     
     {/* Content */}
-    <div className="w-full md:w-1/2 mb-10 md:mb-0 md:pr-8">
-    <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl mb-2">
-  We Don&apos;t Just Teach
-</h2>
+    <div className="w-full md:w-3/5 mb-8 md:mb-0 md:pr-6">
+  <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl mb-2">
+    We Don&apos;t Just Teach
+  </h2>
 
-      <h3 className="text-2xl md:text-4xl font-bold mb-6">We Transform!</h3>
-      <p className="text-gray-300 text-sm md:text-base mb-8 max-w-lg">
-  Welcome to Prep Academy - where dreams take flight and success isn&apos;t just a destination, 
-  but a way of learning. Whether you&apos;re chasing the CAT, MAT, GMAT, XAT, SAT or CSAT dream, 
-  we&apos;ve got your back with experienced mentors, smart strategies, and a learning experience 
-  that&apos;s anything but ordinary.
-</p>
+  <h3 className="text-2xl md:text-3xl font-bold mb-5">We Transform!</h3>
+  
+  <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
+    Welcome to Prep Academy - where dreams take flight and success isn&apos;t just a destination, 
+    but a way of learning. Whether you&apos;re chasing the CAT, MAT, GMAT, XAT, SAT, or CSAT dream, 
+    we&apos;ve got your back with experienced mentors, smart strategies, and a learning experience 
+    that&apos;s anything but ordinary.
+  </p>
 
-      <ul className="space-y-3">
-        {[
-          "No Boring Lectures",
-          "No One-Size-Fits-All Learning",
-          "No More Guesswork",
-        ].map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <div
-              className="w-5 h-5 rounded-full flex-shrink-0 mr-3"
-              style={{
-                backgroundImage: "url('/aboutusverified.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-            <span className="text-sm md:text-base">{feature}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+  <ul className="space-y-2">
+    {[
+      "No Boring Lectures",
+      "No One-Size-Fits-All Learning",
+      "No More Guesswork",
+    ].map((feature, index) => (
+      <li key={index} className="flex items-center">
+        <div
+          className="w-4 h-4 rounded-full flex-shrink-0 mr-2"
+          style={{
+            backgroundImage: "url('/aboutusverified.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
+        <span className="text-sm md:text-base">{feature}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
     {/* Mascot Image */}
-    <div 
-      className="w-full md:w-1/2 flex justify-center mt-8 md:mt-10 relative bg-[url('/bannerround.png')] bg-cover bg-center bg-no-repeat"
-    >
-      <div className="relative w-80 h-[28rem] md:w-[28rem] md:h-[32rem]">
-        
-        {/* New p tag for the text overlay */}
-       
-
+    <div className="w-full md:w-1/2 flex justify-center mt-6 md:mt-8 relative bg-[url('/bannerround.png')] bg-cover bg-center bg-no-repeat">
+      <div className="relative w-72 h-[26rem] md:w-[26rem] md:h-[30rem]">
         <Image
           src="/prepbannerlogo.png"
           alt="Prep Academy Mascot"
           layout="fill"
           objectFit="contain"
           priority
-          className="mt-24"
+          className="mt-20"
         />
-
-
       </div>
 
-      <div className="absolute w-full top-full mt-11">
-      <p className="absolute w-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                      bg-[#2A1810] bg-opacity-80 text-[#FF6B45] text-sm md:text-base 
-                      px-4 py-2 rounded-lg text-center">
+      {/* Text Overlay */}
+      <div className="absolute w-full top-full mt-8">
+        <p className="absolute w-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                      bg-[#2A1810] bg-opacity-80 text-[#FF6B45] text-xs md:text-sm 
+                      px-3 py-2 rounded-lg text-center">
           At Prep Academy, We Turn Preparation Into An Adventure. <b>Are You Ready?</b>
         </p>
-</div>
-    
+      </div>
     </div>
-    
-   
+
   </div>
 </section>
+
 
       
       {/* Gladiators Section */}
