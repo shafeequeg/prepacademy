@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebook, FaTwitter, FaLinkedin, FaShare } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export default function BlogDetails() {
 
@@ -51,7 +51,7 @@ export default function BlogDetails() {
           <div className="border-l-2 border-orange-600 pl-4 mb-6">
   <h3 className="text-lg font-medium text-orange-600 mb-2">Online Class</h3>
   <Link href="#" className="block text-gray-300 text-base mb-2 hover:text-white font-semibold">
-    What's on 2025
+    What&apos;s on 2025
   </Link>
   <Link href="#" className="block text-gray-300 text-base mb-2 hover:text-white font-semibold">
     Special Classes
@@ -85,12 +85,12 @@ export default function BlogDetails() {
               <p className="text-gray-300 mb-4 text-sm">
                 Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
                 <strong className="text-white"> Welcome to Prep Academy </strong>
-                – where dreams take flight, and ambitions get a structured hold over learning. Whether you're aiming towards IIM-A, IIM-B, IIM-C or FMS, we've got expert mentors by your side to make your journey smooth, engaging, and a learning experience that's anything but ordinary.
+                – where dreams take flight, and ambitions get a structured hold over learning. Whether you&apos;re aiming towards IIM-A, IIM-B, IIM-C or FMS, we&apos;ve got expert mentors by your side to make your journey smooth, engaging, and a learning experience that&apos;s anything but ordinary.
               </p>
               <p className="text-gray-300 mb-4 text-sm">
                 Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
                 <strong className="text-white"> Welcome to Prep Academy </strong>
-                – where dreams take flight, and ambitions soar. At Prep Academy, we don't just teach with top-notch mentors, AI-driven insights, and bleeding-edge tech; we're shifting paradigms.
+                – where dreams take flight, and ambitions soar. At Prep Academy, we don&apos;t just teach with top-notch mentors, AI-driven insights, and bleeding-edge tech; we&apos;re shifting paradigms.
               </p>
             </div>
 
