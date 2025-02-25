@@ -1,6 +1,6 @@
 "use client"; // Mark as client component to use usePathname
 
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { usePathname } from "next/navigation"; // Import usePathname
 import "./globals.css";
