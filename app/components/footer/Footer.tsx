@@ -18,9 +18,14 @@ const Footer = () => {
               </div> */}
 
                 <div>
-                <div className="text-[#F1291F] font-bold text-xl leading-none">
-                   PREP <span className="text-[#4EBBB5]">ACADEMY</span>
+                <div className="flex items-center">
+                   <img 
+                     src="/Headerlogo.png" 
+                     alt="Prep Academy Logo" 
+                     className="h-11 w-auto" 
+                   />
                  </div>
+
                   {/* <div className="text-[#4EBBB5] text-sm leading-none mt-1">ACADEMY</div> */}
                 </div>
               </div>

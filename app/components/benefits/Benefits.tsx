@@ -51,6 +51,37 @@ const Benefits = () => {
     <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white ">
       {/* Header Section */}
       <div className="w-full bg-[#2B1615] px-4 md:px-8 lg:px-16 py-12 rounded-md">
+      <div 
+  className="rounded-md p-6 relative mx-auto mb-12 w-[85%]"
+  style={{
+    background: "radial-gradient(circle, #4E211B 0%, #3A1511 50%, #321310 100%)"
+  }}
+>
+  <div className="flex items-center justify-between">
+    {/* Left Side (Heading & Button) */}
+    <div className="flex flex-col items-start text-left">
+      <h2 className="text-2xl md:text-3xl font-bold">
+        <span className="text-[#F55D3E] italic font-medium">Register</span> 
+        <span className="text-white"> and Get a Free Trial</span>
+      </h2>
+      <button className="mt-3 px-4 py-2 bg-[#F55D3E] text-white rounded text-sm font-medium hover:bg-[#E04D2E] flex items-center gap-1">
+        JOIN NOW
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {/* Right Side (Mascot Image) */}
+    <div className="w-20 h-20">
+      <img
+        src="/charater2.png"
+        alt="Prep Academy Mascot"
+        className="w-full h-full object-contain"
+      />
+    </div>
+  </div>
+</div>
   <div className="grid md:grid-cols-2 gap-8 mb-12">
     <div>
       <h2 className="text-4xl font-bold">
@@ -81,31 +112,7 @@ const Benefits = () => {
   </div>
 
   {/* Registration Section */}
-  <div className="bg-gradient-to-r from-[#58221f] to-[#9c4829] rounded-lg p-8 relative  mx-auto text-center overflow-hidden mb-12 w-[80%]">
-  <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-    {/* Left Side (Heading & Button) */}
-    <div className="flex flex-col items-start flex-1">
-      <h2 className="text-4xl font-bold text-white">
-        <span className="font-dmserif italic">Register</span> and Get a Free Trial
-      </h2>
-      <button className="mt-4 px-6 py-3 bg-white text-[#F55D3E] rounded-full font-semibold hover:bg-gray-200 transition-colors flex items-center gap-2">
-        JOIN NOW
-        <svg className="w-4 h-4 text-[#F55D3E]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
-    </div>
-
-    {/* Right Side (Mascot Image) */}
-    <div className="w-24 h-24 flex-shrink-0">
-      <img
-        src="/charater2.png"
-        alt="Prep Academy Mascot"
-        className="w-full h-full object-contain"
-      />
-    </div>
-  </div>
-</div>
+ 
 
 </div>
 

@@ -1,16 +1,42 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        // Scrolling Down - Hide Header
+        setIsVisible(false);
+      } else {
+        // Scrolling Up - Show Header
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+  
   return (
-    <header className="w-[95%] mx-auto text-center bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl">
-    <div className="container mx-auto">
+    <header
+      className={`w-[95%] fixed top-0 left-1/2 transform -translate-x-1/2 mx-auto text-center 
+      bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl z-50 
+      transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+    >
+    <div className="container mx-auto ">
       <div className="flex items-center justify-between">
         {/* Logo */}
         
@@ -27,10 +53,10 @@ export default function Header() {
   
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 items-center">
-          <Link href="/" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/" className="text-gray-800 hover:text-white text-base  font-semibold">
             Home
           </Link>
-          <Link href="/aboutus" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/aboutus" className="text-gray-800 hover:text-white text-base font-semibold">
             About Us
           </Link>
   
@@ -38,7 +64,7 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="text-gray-800 hover:text-white text-sm font-semibold flex items-center"
+              className="text-gray-800 hover:text-white text-base font-semibold flex items-center"
             >
               All Courses ▼
             </button>
@@ -55,14 +81,18 @@ export default function Header() {
                 <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
                   Study Abroad
                 </a>
+
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                  Career Counseling
+                </a>
               </div>
             )}
           </div>
          
-          <Link href="/blogs" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <Link href="/blogs" className="text-gray-800 hover:text-white text-base font-semibold">
             Blogs
           </Link>
-          <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+          <a href="#" className="text-gray-800 hover:text-white text-base font-semibold">
             Contact
           </a>
           <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
@@ -102,13 +132,17 @@ export default function Header() {
             {isDropdownOpen && (
               <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
                 <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Web Development
+                 School Courses
                 </a>
                 <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Data Science
+                College Courses
                 </a>
                 <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Digital Marketing
+                  Study Abroad
+                </a>
+
+                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                  Career Counseling
                 </a>
               </div>
             )}

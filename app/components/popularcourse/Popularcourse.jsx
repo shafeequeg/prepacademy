@@ -78,53 +78,24 @@ const PopularCourses = () => {
         </div>
 
       {/* Team Section */}
-      <div className="bg-gradient-to-r from-[#402424] to-[#723232] rounded-lg mt-12 p-5 md:p-6 lg:p-8 relative">
+      <div className="bg-gradient-to-r  rounded-lg mt-12 p-5 md:p-6 lg:p-8 relative flex justify-center items-center">
   
-  {/* Header Logo - Positioned Top Right */}
-  <div className="absolute top-3 right-3 md:top-5 md:right-5 w-16 h-16 md:w-20 md:h-20">
-    <img 
-      src="/Headerlogo.png" 
-      alt="Prep Academy Logo" 
-      className="w-full h-full object-contain"
-    />
-  </div>
+  {/* Single Image */}
+  <img 
+    src="/popularcourseteambanner.png"  // Replace with your actual image path
+    alt="Expert Educators" 
+    className="w-full h-auto max-w-full object-contain rounded-lg"
+  />
 
-  <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
-    
-    {/* Left Section */}
-    <div className="space-y-4 md:space-y-5 flex flex-col justify-center">
-      <h2 className="text-3xl md:text-4xl font-bold font-dmserif italic text-center md:text-left leading-tight">
-        <span className="text-[#F55D3E]">Our Team Of Expert Educators</span>
-        <br />Will Always Be There For You
-      </h2>
-      <ul className="space-y-2 md:space-y-3">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center gap-2">
-            <img src={feature.image} alt="Bullet Icon" className="w-6 h-6 md:w-7 md:h-7" />
-            <span className="text-base md:text-lg">{feature.text}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Right Section (Team Photo) */}
-    <div className="w-full max-w-xs md:max-w-sm lg:max-w-md relative">
-      <img 
-        src="/groupphotopopularcourse.png" 
-        alt="Team of Expert Educators" 
-        className="w-full h-48 md:h-56 lg:h-64 object-cover rounded-lg"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#723232]/50 rounded-lg" />
-    </div>
-
-  </div>
 </div>
+
 </div>
 
 
 
 <div className="w-3/4 mx-auto mt-12 grid md:grid-cols-[2fr_1fr]  rounded-lg overflow-hidden">
         {/* Left Section */}
+        
         <div className="p-8 space-y-4 relative bg-[#2B1615] rounded-md">
           <button className="px-4 py-1 bg-[#3A1F1D] text-[#F55D3E] rounded-full text-sm">
             Get Early Access

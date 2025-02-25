@@ -83,7 +83,7 @@ const PrepAcademyTransform = () => {
 
       {/* Text Overlay */}
       <div className="absolute w-full top-full mt-8">
-        <p className="absolute w-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+        <p className="absolute w-full right-3/4 transform -translate-x-1/2 -translate-y-1/2 
                       bg-[#2A1810] bg-opacity-80 text-[#FF6B45] text-xs md:text-sm 
                       px-3 py-2 rounded-lg text-center">
           At Prep Academy, We Turn Preparation Into An Adventure. <b>Are You Ready?</b>

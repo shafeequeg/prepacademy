@@ -2,151 +2,151 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+
 
 export default function Banner() {
+
+  const [showIcons, setShowIcons] = useState(true); // Initially visible
+  const [lastScrollY, setLastScrollY] = useState  (0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < lastScrollY) {
+        setShowIcons(true); // Show when scrolling up
+      } else if (window.scrollY > 100) {
+        setShowIcons(false); // Hide when scrolling down
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <div>
+    <div className="w-[95%] mx-auto mt-5"> {/* Increased width slightly */}
       {/* Banner Section */}
-      <section className="relative bg-gradient-to-r text-white py-14 md:py-12">
-  <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-center md:justify-around">
-    {/* Left Section - Text and Buttons */}
-    <div className="max-w-xl text-center md:text-left">
-      <h1 className="text-3xl md:text-4xl font-bold mb-4">
-        <span className="bg-none text-[#F55D3E]">Your Mentor <br /> And Guide <br /></span> For Brighter Future
-      </h1>
-      <p className="text-base md:text-lg mb-5">
-        Empowering students with knowledge and skills for a brighter future
-        through exceptional education and unwavering support.
-      </p>
-
-      <div className="flex flex-col md:flex-row justify-center md:justify-start space-y-3 md:space-y-0 md:space-x-4">
-        <Link
-          href="#"
-          className="bg-[#F55D3E] text-black px-5 py-3 rounded-lg font-semibold hover:bg-[#a52a1a] transition"
-        >
-          FREE Career Counseling
-        </Link>
-
-        <Link
-          href="#"
-          className="bg-none text-[#F55D3E] px-5 py-3 rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition"
-        >
-          KNOW MORE
-        </Link>
-      </div>
-    </div>
-
-    {/* Right Section - Image */}
-    <div className="relative mt-6 md:mt-0 md:w-4/12">
-      {/* Background Image */}
+      <section className="relative bg-gradient-to-r text-white py-16 md:py-14 mt-20 md:mt-0">
       <div
-        className="absolute left-0 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: "url('/bannerround.png')" }}
-      ></div>
-
-      <style>
-        {`
-          @media (min-width: 768px) and (max-width: 1024px) {
-            .bannerimage {
-              top: 100px !important;
-            }
-          }
-
-          @media (min-width: 1024px) {
-            .bannerimage {
-              top: 50px !important;
-            }
-          }
-        `}
-      </style>
-
-      {/* Foreground Image */}
-      <Image
-        src="/prepbannerlogo.png"
-        alt="Foreground"
-        layout="responsive"
-        width={450} // Reduced slightly
-        height={300}
-        className="relative object-cover rounded-lg bannerimage"
-        style={{ top: "50px", maxWidth: "85%" }}
-      />
-    </div>
+        className={`fixed top-1/4 right-5 flex items-center gap-3 shadow-lg p-4 rounded-xl transition duration-300
+          hover:shadow-2xl
+          ${showIcons ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+          transition-opacity transition-transform duration-300 ease-in-out`}
+      >
+          <div className="flex justify-center bg-gray-100/80 p-2 rounded-md">
+    <a href="tel:+1234567890" 
+       className="text-blue-900 text-3xl hover:text-[#F55D3E] transition-transform transform hover:scale-110">
+      <FaPhoneAlt />
+    </a>
   </div>
-</section>
+  <div className="flex justify-center bg-gray-100/80 rounded-md p-2">
+    <a href="https://wa.me/1234567890" 
+       target="_blank" 
+       className="text-green-600 text-3xl hover:text-[#4EBBB5] transition-transform transform hover:scale-110">
+      <FaWhatsapp />
+    </a>
+  </div>
+</div>
 
 
+
+        
+        <div className="container mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center justify-center md:justify-around">
+          {/* Left Section */}
+          <div className="max-w-xl text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-none text-[#F55D3E]">Your Mentor <br /> And Guide <br /></span> For Brighter Future
+            </h1>
+            <p className="text-lg md:text-xl mb-6">
+              Empowering students with knowledge and skills for a brighter future through exceptional education and unwavering support.
+            </p>
+
+            <div className="flex flex-col md:flex-row justify-center md:justify-start space-y-4 md:space-y-0 md:space-x-5">
+              <Link href="#" className="bg-[#F55D3E] text-black px-6 py-3 text-lg rounded-lg font-semibold hover:bg-[#a52a1a] transition">
+                FREE Career Counseling
+              </Link>
+              <Link href="#" className="border-2 border-[#F55D3E] text-[#F55D3E] px-6 py-3 text-lg rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
+                KNOW MORE
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Section */}
+          <div className="relative mt-6 md:mt-0 md:w-5/12"> {/* Adjusted margin */}     
+
+  <div 
+    className="absolute inset-0 bg-cover bg-center" 
+    style={{
+      backgroundImage: "url('/bannerround.png')",
+      backgroundSize: "105%", // Slightly reduced size for compactness
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      marginTop:"80px",
+    }}
+  ></div>
+
+<Image
+  src="/prepbannerlogo.png"
+  alt="Foreground"
+  layout="responsive"
+  width={450} // Decreased from 480 to 450
+  height={300} // Decreased from 320 to 300
+  className="relative object-cover rounded-lg"
+  style={{ top: "55px", maxWidth: "95%" }} // Adjusted top positioning and max-width
+/>
+
+</div>
+
+        </div>
+      </section>
 
       {/* Cards Section */}
-      <section className="container mx-auto px-4 md:px-8 py-12  bg-[#2B1615] relative w-[90%]">
-  <style>
-    {`
-      @media (max-width: 912px) {
-        section {
-          width: 100vw !important;
-          max-width: 100% !important;
-        }
-      }
-    `}
-  </style>
-
-  {/* Background gradient overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#F55D3E]/5 to-transparent"></div>
-
-  <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-8 relative z-10 w-full">
-    {/* Card 1 */}
-    <div className="bg-gradient-to-b from-[#F55D3E]/30 to-transparent border-l border-[#F55D3E] rounded-lg p-6 text-center relative w-full group">
-      <div className="absolute inset-0 bg-white/10 rounded-lg"></div>
-      <div className="mb-4 relative z-10">
-        <Image
-          src="/bannerbook.png"
-          alt="School Logo"
-          width={50}
-          height={50}
-          className="mx-auto"
-        />
+      <section className="w-full bg-[#130808] py-10 p-6 rounded-md"> {/* Dark background matching image */}
+      <div className="container mx-auto">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {[
+      { 
+        image: "/bannerbook.png",  // Update with actual image path
+        title: "School",
+        color: "#F55D3E" 
+      },
+      { 
+        image: "/bannerbank.png",  // Update with actual image path
+        title: "College",
+        color: "#F55D3E"  
+      },
+      { 
+        image: "/bannerglobal.png",  // Update with actual image path
+        title: "Study Abroad",
+        color: "#F55D3E"  
+      },
+    ].map((item, index) => (
+      <div 
+        key={index} 
+        className="bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md px-6 py-8"
+      >
+        <div className="flex flex-col items-center">
+          {/* Image Replacing Icon */}
+          <img 
+            src={item.image} 
+            alt={item.title} 
+            className="w-16 h-16 mb-3 object-contain"
+          />
+          
+          <h2 className="text-[#F55D3E] text-xl font-medium mb-1">{item.title}</h2>
+          <p className="text-white text-sm mb-1">Foundational Learning</p>
+          <p className="text-gray-400 text-sm">For All Ages</p>
+        </div>
       </div>
-      <h2 className="text-white text-2xl font-bold mb-4 relative z-10">School</h2>
-      <p className="text-white/90 text-sm mb-2 relative z-10">Foundational Learning</p>
-      <p className="text-white/70 text-sm relative z-10">For All Ages</p>
-    </div>
-
-    {/* Card 2 */}
-    <div className=" bg-gradient-to-b from-[#F55D3E]/20 to-transparent border-l border-[#F55D3E] rounded-lg p-6 text-center relative w-full group">
-      <div className="absolute inset-0 bg-white/10 rounded-lg"></div>
-      <div className="mb-4 relative z-10">
-        <Image
-          src="/bannerbank.png"
-          alt="College Logo"
-          width={50}
-          height={50}
-          className="mx-auto"
-        />
-      </div>
-      <h2 className="text-white text-2xl font-bold mb-4 relative z-10">College</h2>
-      <p className="text-white/90 text-sm mb-2 relative z-10">Foundational Learning</p>
-      <p className="text-white/70 text-sm relative z-10">For All Ages</p>
-    </div>
-
-    {/* Card 3 */}
-    <div className="bg-gradient-to-b from-[#F55D3E]/20 to-transparent border-l border-[#F55D3E] rounded-lg p-6 text-center relative w-full group">
-      <div className="absolute inset-0 bg-white/10 rounded-lg"></div>
-      <div className="mb-4 relative z-10">
-        <Image
-          src="/bannerglobal.png"
-          alt="Study Abroad Logo"
-          width={50}
-          height={50}
-          className="mx-auto"
-        />
-      </div>
-      <h2 className="text-white text-2xl font-bold mb-4 relative z-10">Study Abroad</h2>
-      <p className="text-white/90 text-sm mb-2 relative z-10">Foundational Learning</p>
-      <p className="text-white/70 text-sm relative z-10">For All Ages</p>
-    </div>
+    ))}
   </div>
+</div>
+
 </section>
-
-
     </div>
   );
 }
+

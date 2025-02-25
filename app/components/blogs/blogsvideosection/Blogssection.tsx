@@ -1,7 +1,12 @@
-import React from 'react';
+"use client";
+
+import React from "react";
+import Link from "next/link";
 
 // Simple Search Icon Component
 const SearchIcon = () => (
+
+
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     width="20" 
@@ -20,6 +25,8 @@ const SearchIcon = () => (
 );
 
 const BlogSection = () => {
+
+
   const blogs = [
     {
       id: 1,
@@ -47,8 +54,9 @@ const BlogSection = () => {
     image: ["/blogcommonimage.png", "/blogcommonimage.png", "/blogcommonimage.png"][i % 3],
   })));
 
+
   return (
-    <div className="w-full bg-[#1A1A1A] min-h-screen p-6 md:p-8">
+    <div className="w-full bg-[#1A1A1A] min-h-screen mt-28 p-6 md:p-8">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-white text-2xl font-semibold ">
@@ -76,30 +84,31 @@ const BlogSection = () => {
       <select className="w-full md:w-auto bg-[#F55D3E1A] text-white rounded-md py-2 px-4">
         <option>Categories</option>
       </select>
-      <select className="w-full md:w-auto bg-[#F55D3E1A] text-white rounded-md py-2 px-4">
+      {/* <select className="w-full md:w-auto bg-[#F55D3E1A] text-white rounded-md py-2 px-4">
         <option>Categories</option>
-      </select>
+      </select> */}
     </div>
   </div>
 
   {/* Tags */}
-  <div className="flex flex-wrap gap-2 w-full">
-    {[
-      "Success Stories",
-      "Exam Strategies",
-      "Popular Articles",
-      "Latest Updates & Notification",
-      "Study Plans & Tips",
-      "Entrance Exams"
-    ].map((tag) => (
-      <button
-        key={tag}
-        className="w-full md:w-auto bg-[#F55D3E1A] text-[#F55D3E] px-4 py-2 rounded-md text-sm hover:bg-[#F55D3E33] transition-colors"
-      >
-        {tag}
-      </button>
-    ))}
-  </div>
+  <div className="flex flex-wrap gap-3 w-full">
+  {[
+    "Success Stories",
+    "Exam Strategies",
+    "Popular Articles",
+    "Latest Updates & Notification",
+    "Study Plans & Tips",
+    "Entrance Exams"
+  ].map((tag) => (
+    <button
+      key={tag}
+      className="w-full md:w-auto min-w-[220px] bg-[#F55D3E1A] text-[#F55D3E] px-6 py-3 rounded-md text-sm text-center hover:bg-[#F55D3E33] transition-colors"
+    >
+      {tag}
+    </button>
+  ))}
+</div>
+
 </div>
 
 
@@ -116,10 +125,12 @@ const BlogSection = () => {
             <div className="p-4">
               <h3 className="text-white font-semibold text-lg mb-2">{blog.title}</h3>
               <p className="text-gray-400 text-sm mb-4">{blog.description}</p>
-              <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
-                Read More
-                <span>→</span>
-              </button>
+              <Link href="/blogdetails">
+                <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
+                  Read More <span>→</span>
+                </button>
+              </Link>
+             
             </div>
           </div>
         ))}
