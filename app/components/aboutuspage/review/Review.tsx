@@ -77,7 +77,7 @@ const TestimonialsAndCTA = () => {
                 ))}
               </div>
               
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-400 text-lg leading-relaxed">
                 {testimonial.text}
               </p>
             </div>
@@ -90,40 +90,41 @@ const TestimonialsAndCTA = () => {
       <div className="bg-[#2A1810] rounded-xl p-4 lg:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left Section */}
-        <div className="w-full md:w-[75%] rounded-xl p-4" 
-          style={{ background: 'linear-gradient(to bottom, rgba(205, 93, 62, 0.5), rgba(143, 54, 36, 0.5))' }}
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            
-            {/* Text Content */}
-            <div className="w-full p-4 lg:p-14">
-              <h2 className="text-2xl lg:text-3xl font-bold">
-                <span className="text-[#FF5733] font-dmserif italic">Serious About Your Exam?</span>
-                <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
-                </h2>
+        <div className="w-full md:w-[85%] rounded-xl p-4 lg:p-10 mx-auto" 
+     style={{ background: 'linear-gradient(to bottom, rgba(205, 93, 62, 0.5), rgba(143, 54, 36, 0.5))' }}>
+  
+  <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+    
+    {/* Text Content */}
+    <div className="w-full max-w-[60%] p-4">
+      <h2 className="text-2xl lg:text-3xl font-bold">
+        <span className="text-[#FF5733] font-dmserif italic">Serious About Your Exam?</span>
+        <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
+      </h2>
 
-              <button className="bg-[#FF5733] text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
-                Click to start your journey
-                <span className="text-lg">→</span>
-              </button>
-            </div>
-            
-            {/* Image Container */}
-            <div className="w-32 md:w-40 lg:w-56 aspect-square flex-shrink-0">
-              <img 
-                src="/aboutusexamregister.png" 
-                alt="Mascot" 
-                className="w-full h-full object-contain"
-              />
-            </div>
+      <button className="bg-[#FF5733] text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
+        Click to start your journey
+        <span className="text-lg">→</span>
+      </button>
+    </div>
+    
+    {/* Image Container */}
+    <div className="w-28 md:w-36 lg:w-48 aspect-square flex-shrink-0">
+      <img 
+        src="/charater2.png" 
+        alt="Mascot" 
+        className="w-full h-full object-contain"
+      />
+    </div>
 
-          </div>
-        </div>
+  </div>
+</div>
+
 
         {/* Right Section */}
         <div className="w-full md:w-[25%] p-2 lg:p-5">
           <div 
-            className="p-4 lg:p-8 rounded-lg text-center shadow-lg min-h-[200px] lg:min-h-[300px] flex flex-col justify-center"
+            className="p-4 lg:p-8 rounded-lg text-center shadow-lg min-h-[200px] lg:min-h-[270px] flex flex-col justify-center"
             style={{ background: 'linear-gradient(to bottom, rgba(205, 93, 62, 0.5), rgba(143, 54, 36, 0.5))' }}
           >
             <div className="mx-auto mb-3 w-6 lg:w-8 h-6 lg:h-8">

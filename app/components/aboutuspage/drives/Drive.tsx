@@ -82,7 +82,7 @@ const DrivesUsSection = () => {
       <h3 className="text-[#FF5733] font-bold text-lg leading-tight">
         {feature.title}
       </h3>
-      <p className="text-gray-400 text-sm leading-relaxed opacity-90">
+      <p className="text-gray-400 text-lg  leading-relaxed opacity-90">
         {feature.description}
       </p>
     </div>

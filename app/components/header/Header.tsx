@@ -3,12 +3,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Import Next.js router
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -61,33 +63,36 @@ export default function Header() {
           </Link>
   
           {/* All Courses Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="text-gray-800 hover:text-white text-base font-semibold flex items-center"
+         <div 
+              className="relative group" 
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              All Courses ▼
-            </button>
-  
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                 School Courses
-                </a>
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                College Courses
-                </a>
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Study Abroad
-                </a>
+              <button
+                onClick={() => router.push("/allcourses")} // Redirects when clicked
+                className="text-gray-800 hover:text-white text-base font-semibold flex items-center"
+              >
+                All Courses ▼
+              </button>
 
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Career Counseling
-                </a>
-              </div>
-            )}
-          </div>
+              {/* Dropdown Menu (visible on hover) */}
+              {isDropdownOpen && (
+                <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
+                  <Link href="/school-courses" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                    School Courses
+                  </Link>
+                  <Link href="/college-courses" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                    College Courses
+                  </Link>
+                  <Link href="/study-abroad" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                    Study Abroad
+                  </Link>
+                  <Link href="/career-counseling" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
+                    Career Counseling
+                  </Link>
+                </div>
+              )}
+            </div>
          
           <Link href="/blogs" className="text-gray-800 hover:text-white text-base font-semibold">
             Blogs

@@ -137,8 +137,8 @@ export default function Banner() {
           />
           
           <h2 className="text-[#F55D3E] text-xl font-medium mb-1">{item.title}</h2>
-          <p className="text-white text-sm mb-1">Foundational Learning</p>
-          <p className="text-gray-400 text-sm">For All Ages</p>
+          <p className="text-white text-sm mb-1">Foundational Learning <br />For All Ages</p>
+          <p className="text-gray-400 text-sm"></p>
         </div>
       </div>
     ))}

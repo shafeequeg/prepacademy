@@ -102,7 +102,7 @@ const BlogSection = () => {
   ].map((tag) => (
     <button
       key={tag}
-      className="w-full md:w-auto min-w-[220px] bg-[#F55D3E1A] text-[#F55D3E] px-6 py-3 rounded-md text-sm text-center hover:bg-[#F55D3E33] transition-colors"
+      className="w-full md:w-auto min-w-[200px] bg-[#F55D3E1A] text-[#F55D3E] px-6 py-3  font-bold rounded-md text-base text-center hover:bg-[#F55D3E33] transition-colors"
     >
       {tag}
     </button>
