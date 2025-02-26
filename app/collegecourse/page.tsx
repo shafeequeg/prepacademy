@@ -1,12 +1,12 @@
 
-import Blogdetails from "@/app/components/blogs/blogdetails/Blogdetails";
+import Collegecousre from "@/app/components/allcourses/allcoursepage/Collegecourse";
 
 
 export default function Home() {
   return (
     <div >
       
-     <Blogdetails/>
+     <Collegecousre/>
 
     </div>
   );

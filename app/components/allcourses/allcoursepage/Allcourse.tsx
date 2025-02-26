@@ -42,7 +42,7 @@ const AllCourses: React.FC = () => {
       code: "MGMT",
       title: "Management",
       description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MAH CET",
-      path: "/courses/management"
+      path: "/collegecourse"
     },
     {
       code: "CIVIL",
@@ -199,7 +199,7 @@ const AllCourses: React.FC = () => {
               </h2>
               <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
                 The beauty of learning was never meant to be confined within the four walls of a classroom. Prep Academy goes above and beyond the traditional teaching methods, bringing together the most skilled faculty to create an unparalleled learning experience for our students. When others rely on textbooks, we rely on innovation.
-                 When they focus on memorization, we focus on understanding. That's what sets us apart.
+                 When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
               </p>
             </div>
             <div className="w-full md:w-1/2">
