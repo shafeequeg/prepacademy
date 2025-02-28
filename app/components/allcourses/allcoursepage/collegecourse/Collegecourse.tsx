@@ -127,33 +127,7 @@ const courseCards = [
 
 
 
-const ClassCard: React.FC<ClassCardProps> = ({ title, thumbnail, features }) => {
-  return (
-    <div className="bg-[#17191A] rounded-lg overflow-hidden">
-      <div className="relative w-full h-40">
-        <Image
-          src={thumbnail}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="p-4">
-      <p className="text-lg md:text-xl text-gray-300 mb-6">
-      {title}</p>
-        <ul className="list-disc list-inside text-gray-300 text-sm mb-4">
-          {features.map((feature, index) => (
-            <li key={index}>{feature}</li>
-          ))}
-        </ul>
-        <Link href="#" className="text-[#F55D3E] text-sm flex items-center hover:underline">
-          <span>Read More</span>
-          <ChevronRight size={16} />
-        </Link>
-      </div>
-    </div>
-  );
-};
+
 
 
 
@@ -174,48 +148,7 @@ const CatExamApplySection: React.FC = () => {
   ];
 
 
-  const classCards = [
-    {
-      title: "CAT Online Classes",
-      thumbnail: "/news1.png",
-      features: [
-        "Live Interactive Sessions by IIM alumni",
-        "Comprehensive Study Material",
-        "Practice Tests & Solving Workshops",
-        "Personal Mentorship Program"
-      ]
-    },
-    {
-      title: "CAT Offline Classes",
-      thumbnail: "/news1.png",
-      features: [
-        "Live In-Person Sessions by IIM alumni",
-        "Face to Face Doubt Clarification",
-        "Access to Physical Study Material",
-        "Weekly Mock Tests & Analysis"
-      ]
-    },
-    {
-      title: "CAT Hybrid Classes",
-      thumbnail: "/news1.png",
-      features: [
-        "Flexible Mode of Learning",
-        "Weekend In-Person Workshops",
-        "Access to Online Portal 24/7",
-        "Personalized Study Plan"
-      ]
-    },
-    // {
-    //   title: "CAT Night Classes",
-    //   thumbnail: "/class-thumbnail-4.jpg",
-    //   features: [
-    //     "Evening/Night Batches for Working Professionals",
-    //     "Weekend Doubt Clearing Sessions",
-    //     "Study at Your Own Pace Program",
-    //     "Mock CAT Series with Analysis"
-    //   ]
-    // }
-  ];
+ 
 
   const demoVideos = [
     {
@@ -480,7 +413,7 @@ const CatExamApplySection: React.FC = () => {
             Serious About Your Exam?
           </h1>
           <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
-            Let's Make It Happen
+            Let&apos;s Make It Happen
           </h2>
           <a 
             href="#" 

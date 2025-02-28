@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+
 
 const ExamPrepLowerSections: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -97,27 +96,27 @@ const ExamPrepLowerSections: React.FC = () => {
       <div className="w-full md:w-4/5 pl-0 md:pl-8 mt-4 md:mt-0">
         <div className="space-y-2">
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner's Guide Volume 1</p>
+            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 1</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner's Guide Volume 2</p>
+            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 2</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner's Guide Volume 3</p>
+            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 3</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner's Guide Volume 4</p>
+            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 4</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-sm">Beginner's Guide Volume 5</p>
+            <p className="text-white text-sm">Beginner&apos;s Guide Volume 5</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner's Guide Volume 6</p>
+            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 6</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
         </div>
