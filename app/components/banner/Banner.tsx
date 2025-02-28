@@ -38,7 +38,7 @@ export default function Banner() {
       >
           <div className="flex justify-center bg-gray-100/80 p-2 rounded-md">
     <a href="tel:+1234567890" 
-       className="text-blue-900 text-3xl hover:text-[#F55D3E] transition-transform transform hover:scale-110">
+       className="text-[#F55D3E] text-3xl hover:text-[#F55D3E] transition-transform transform hover:scale-110">
       <FaPhoneAlt />
     </a>
   </div>

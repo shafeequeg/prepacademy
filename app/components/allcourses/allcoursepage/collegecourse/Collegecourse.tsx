@@ -1,0 +1,559 @@
+// CatExamApplySection.tsx
+
+"use client"
+
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronRight , Play } from 'lucide-react';
+import { useState } from "react";
+
+
+interface VideoCardProps {
+  title: string;
+  thumbnail: string;
+}
+
+interface ClassCardProps {
+  title: string;
+  thumbnail: string;
+  features: string[];
+}
+
+const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
+  return (
+    <div className="relative group overflow-hidden rounded-lg w-full">
+      <div className="relative w-full h-56 md:h-64 lg:h-72">
+        <Image
+          src={thumbnail}
+          alt={title}
+          fill
+          className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+        />
+        {/* Play button overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-black bg-opacity-30 rounded-full p-3 flex items-center justify-center">
+            <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
+          </div>
+        </div>
+      </div>
+      <p className="text-lg md:text-xl text-gray-300 mb-6">
+      {title}</p>
+    </div>
+  );
+};
+
+const DemoVideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
+  return (
+    <div className="relative group cursor-pointer">
+      <div className="relative w-full h-56 md:h-64 lg:h-72">
+      <Image
+          src={thumbnail}
+          alt={title}
+          fill
+          className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+        />
+        {/* Play button overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-white bg-opacity-20 rounded-full w-12 h-12 flex items-center justify-center">
+            <Play size={24} color="white" fill="white" />
+          </div>
+        </div>
+      </div>
+      <p className="text-lg md:text-xl text-gray-300 mb-6">
+      {title}</p>
+    </div>
+  );
+};
+
+const offeringTypes = [
+  { id: "online", label: "Online Class" },
+  { id: "offline1", label: "Offline Class" },
+  { id: "offline2", label: "Offline Class" },
+  { id: "offline3", label: "Offline Class" },
+];
+
+const courseCards = [
+  {
+    id: "cat-online-1",
+    title: "CAT Online Classes ",
+    image: "/news1.png",
+    type: "online",
+    features: [
+      "Live & interactive sessions by IIM alumni",
+      "Ideal for first-time CAT takers",
+      "Focus on building a strong foundation",
+      "Day & Evening batches available",
+    ],
+  },
+  {
+    id: "cat-online-2",
+    title: "CAT Online Classes ",
+    image: "/news1.png",
+    type: "online",
+    features: [
+      "Live & interactive sessions by IIM alumni",
+      "Ideal for first-time CAT takers",
+      "Focus on building a strong foundation",
+      "Day & Evening batches available",
+    ],
+  },
+  {
+    id: "cat-online-3",
+    title: "CAT Online Night Classes",
+    image: "/news1.png",
+    type: "online",
+    features: [
+      "Live doubt-solving sessions",
+      "Advanced problem-solving techniques",
+      "Mock test series with AI analysis",
+      "Best for repeat CAT takers",
+    ],
+  },
+  {
+    id: "cat-night",
+    title: "CAT Night Classes",
+    image: "/news1.png",
+    type: "offline1",
+    features: [
+      "Advanced batches led by our Faculty",
+      "Ideal for those having conceptual clarity",
+      "Focus on a fast-paced study approach",
+      "Night sessions from 9:30 PM",
+    ],
+  },
+];
+
+
+
+
+const ClassCard: React.FC<ClassCardProps> = ({ title, thumbnail, features }) => {
+  return (
+    <div className="bg-[#17191A] rounded-lg overflow-hidden">
+      <div className="relative w-full h-40">
+        <Image
+          src={thumbnail}
+          alt={title}
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="p-4">
+      <p className="text-lg md:text-xl text-gray-300 mb-6">
+      {title}</p>
+        <ul className="list-disc list-inside text-gray-300 text-sm mb-4">
+          {features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
+        <Link href="#" className="text-[#F55D3E] text-sm flex items-center hover:underline">
+          <span>Read More</span>
+          <ChevronRight size={16} />
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+
+
+const CatExamApplySection: React.FC = () => {
+  const videoCards = [
+    {
+      title: "Explore About Courses",
+      thumbnail: "/news1.png",
+    },
+    {
+      title: "Explore About Courses",
+      thumbnail: "/new2.png",
+    },
+    {
+      title: "Explore About Courses",
+      thumbnail: "/news3.png",
+    },
+  ];
+
+
+  const classCards = [
+    {
+      title: "CAT Online Classes",
+      thumbnail: "/news1.png",
+      features: [
+        "Live Interactive Sessions by IIM alumni",
+        "Comprehensive Study Material",
+        "Practice Tests & Solving Workshops",
+        "Personal Mentorship Program"
+      ]
+    },
+    {
+      title: "CAT Offline Classes",
+      thumbnail: "/news1.png",
+      features: [
+        "Live In-Person Sessions by IIM alumni",
+        "Face to Face Doubt Clarification",
+        "Access to Physical Study Material",
+        "Weekly Mock Tests & Analysis"
+      ]
+    },
+    {
+      title: "CAT Hybrid Classes",
+      thumbnail: "/news1.png",
+      features: [
+        "Flexible Mode of Learning",
+        "Weekend In-Person Workshops",
+        "Access to Online Portal 24/7",
+        "Personalized Study Plan"
+      ]
+    },
+    // {
+    //   title: "CAT Night Classes",
+    //   thumbnail: "/class-thumbnail-4.jpg",
+    //   features: [
+    //     "Evening/Night Batches for Working Professionals",
+    //     "Weekend Doubt Clearing Sessions",
+    //     "Study at Your Own Pace Program",
+    //     "Mock CAT Series with Analysis"
+    //   ]
+    // }
+  ];
+
+  const demoVideos = [
+    {
+      title: "Preparing for the CAT 2025",
+      thumbnail: "/news1.png",
+    },
+    {
+      title: "Strategies for CAT 2025",
+      thumbnail: "/new2.png",
+    },
+    {
+      title: "Best Coaching Centers",
+      thumbnail: "/news3.png",
+    }
+  ];
+
+  const [activeTab, setActiveTab] = useState("online");
+
+  const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+
+  return (
+    <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+  {/* Background Image Between Sections */}
+  {/* Main Content */}
+  <div className="relative w-full z-10">
+    {/* Apply Section with Mascot */}
+    <div 
+      className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover "
+    >
+      <div className="w-full px-4 mt-24">
+        <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
+          {/* Left Content */}
+          <div className="lg:w-[35%]">
+            <div className="mb-6">
+              <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
+                Learn from the Experts
+              </p>
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Apply For CAT 2025</h2>
+              <p className="text-gray-300 mb-8">
+                Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
+              </p>
+            </div>
+
+            {/* Progress Items */}
+            <div className="space-y-3 mb-8">
+  <div className="flex items-center">
+    <img 
+      src="/aboutusverified.png" 
+      alt="Check Icon" 
+      className="w-5 h-5 mr-3"
+    />
+    <p className="text-white">Minimum Grade Point Average Should Be 50%</p>
+  </div>
+  <div className="flex items-center">
+    <img 
+      src="/aboutusverified.png" 
+      alt="Check Icon" 
+      className="w-5 h-5 mr-3"
+    />
+    <p className="text-white">Minimum Grade Point Average Should Be 50%</p>
+  </div>
+</div>
+
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                Enroll Now
+              </button>
+              <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
+                Get a FREE Trial
+              </button>
+            </div>
+
+            {/* Telegram Link with Underline */}
+            <div className="mt-4">
+  <a 
+    href="#" 
+    className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
+      >
+        <img 
+          src="/catexamtelegram.png" 
+          alt="Telegram Icon" 
+          className="w-5 h-5 mr-2"
+        />
+        Join Our Telegram Channel
+      </a>
+    </div>
+
+          </div>
+
+          {/* Middle section with character background */}
+          <div className="hidden lg:block lg:w-[20%] relative">
+            <div 
+              className="absolute inset-0 bg-contain bg-no-repeat bg-center"
+              style={{ backgroundImage: "url('/charater2.png')" }}
+            ></div>
+          </div>
+
+          {/* Right Content - Form */}
+          <div className="lg:w-[45%] flex flex-col">
+            <div className="bg-[#0E1721] p-8 rounded-lg border border-[#1A2836] shadow-lg">
+              <h3 className="text-[#FF6B3D] text-xl font-semibold mb-3">NEED ASSISTANCE?</h3>
+              <p className="text-white mb-6">Get guidance and clear your doubts</p>
+              
+              {/* Form Fields */}
+              <div className="space-y-4 mb-6">
+                <input 
+                  type="text" 
+                  placeholder="Enter your Full Name" 
+                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                />
+                <input 
+                  type="tel" 
+                  placeholder="Mobile Number" 
+                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                />
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                />
+                <input 
+                  type="text" 
+                  placeholder="College Studied" 
+                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                />
+                <div className="relative">
+                  <select 
+                    className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>Preferred Online Program</option>
+                    <option value="program1">CAT Preparation</option>
+                    <option value="program2">MBA Entrance</option>
+                    <option value="program3">GMAT Preparation</option>
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1L7 7L13 1" stroke="#FF6B3D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Related Videos Section */}
+    <div className="bg-black text-white flex justify-center">
+  {/* Related Videos Section */}
+  <div className="px-6 py-10 max-w-7xl w-full">
+    <h2 className="text-4xl font-semibold text-left mb-6 ml-2">
+      <span className="font-serif italic font-normal">Related</span>{" "}
+      <span className="text-[#F55D3E] font-semibold">Videos</span>
+    </h2>
+
+    {/* Make videos full width */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 w-full">
+      {videoCards.map((video, index) => (
+        <VideoCard key={index} title={video.title} thumbnail={video.thumbnail} />
+      ))}
+    </div>
+
+    {/* Centered View More Button */}
+    <div className="flex justify-center mt-4">
+      <a href="/videos" className="text-[#F55D3E] flex items-center hover:underline text-sm">
+        <span>View More</span>
+        <ChevronRight size={16} className="ml-1" />
+      </a>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+    {/* Offerings Section */}
+    <div className="bg-[#1A0E0E] py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          {/* Section Title */}
+          <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
+          <span className="text-[#F55D3E] font-serif italic">Our</span>{" "}
+  <span className="text-white">Offerings</span>
+</h2>
+
+
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex border-b border-[#2A1A1A]">
+              {offeringTypes.map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => setActiveTab(type.id)}
+                  className={`px-8 py-2 text-xl transition-colors relative ${
+                    activeTab === type.id
+                      ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
+                      : "text-gray-500 hover:text-gray-400"
+                  }`}
+                >
+                        {/* <p className="text-lg md:text-xl text-gray-300 mb-6"> */}
+
+                  {type.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Course Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCourses.length > 0 ? (
+              filteredCourses.map((card) => (
+                <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
+                  <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+                  <div className="p-6">
+                    <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
+                    <ul className="space-y-2 mb-6">
+                      {card.features.map((feature, idx) => (
+                        <li key={idx} className="flex text-gray-300 text-sm">
+                          <span className="text-[#F55D3E] mr-2">•</span>
+
+                          <span className='text-base md:text-lg text-gray-300 mb-6'>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
+                      Enroll Now <ChevronRight size={16} className="ml-1" />
+                    </a>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-400">No courses available for this category.</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+    {/* Mascot Banner Section */}
+    <div className="bg-black py-8">
+  <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
+    {/* First CTA Section (Compact Width) */}
+    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 ml-24"> 
+      <div 
+        className="absolute top-0 left-0 right-0 h-1" 
+        style={{
+          background: 'linear-gradient(90deg, #F55D3E 0%, #F55D3E 50%, transparent 100%)'
+        }}
+      ></div>
+      
+      <div className="flex flex-col md:flex-row items-center justify-center w-full">
+        <div className="relative z-10 text-center md:text-left">
+          <h1 className="text-[#F55D3E] font-serif italic text-2xl md:text-3xl lg:text-4xl mb-2">
+            Serious About Your Exam?
+          </h1>
+          <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
+            Let's Make It Happen
+          </h2>
+          <a 
+            href="#" 
+            className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
+          >
+            Apply for DEMO Class →
+          </a>
+        </div>
+
+        <div className="mx-auto my-auto">
+          <img
+            src="/charater2.png"
+            alt="Prep Mascot"
+            className="h-40 md:h-48"
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Second CTA Section (Slightly Wider) */}
+    <div className="lg:col-span-1.5 rounded-lg overflow-hidden bg-[#1F1414] relative flex flex-col justify-center items-center">
+      <div 
+        className="absolute top-0 left-0 right-0 h-1" 
+        style={{
+          background: 'linear-gradient(90deg, #F55D3E 0%, #F55D3E 50%, transparent 100%)'
+        }}
+      ></div>
+      
+      <div className="p-8 flex flex-col items-center justify-center h-full">
+        <div className="flex items-center justify-center mb-4 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <h3 className="text-white text-center text-lg font-medium mb-5">CAT Master Class</h3>
+        <a 
+          href="#" 
+          className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
+        >
+          Book Free TRIAL
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    {/* Demo Videos Section */}
+    <div className="container mx-auto px-4 py-10">
+      <div className="flex justify-between items-center mb-8">
+      <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
+      <span className="text-white font-serif italic">Demo</span> <span className="text-[#F55D3E]">Videos</span>
+        </h2>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        {demoVideos.map((video, index) => (
+          <DemoVideoCard key={index} title={video.title} thumbnail={video.thumbnail} />
+        ))}
+      </div>
+
+      <div className="flex justify-center">
+        <Link href="/videos" className="text-[#F55D3E] flex items-center hover:underline">
+          <span className='text-lg md:text-xl text-[#F55D3E] '>View More</span>
+          <ChevronRight size={16} />
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+  );
+};
+
+export default CatExamApplySection;

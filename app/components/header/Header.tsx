@@ -97,7 +97,7 @@ export default function Header() {
           <Link href="/blogs" className="text-gray-800 hover:text-white text-base font-semibold">
             Blogs
           </Link>
-          <a href="#" className="text-gray-800 hover:text-white text-base font-semibold">
+          <a href="/contact" className="text-gray-800 hover:text-white text-base font-semibold">
             Contact
           </a>
           <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
@@ -155,7 +155,7 @@ export default function Header() {
          <Link href="/blogs" className="text-gray-800 hover:text-white text-sm font-semibold">
             Blogs
           </Link>
-  <a href="#" className="text-gray-800 hover:text-white text-sm font-semibold">
+  <a href="/contact" className="text-gray-800 hover:text-white text-sm font-semibold">
             Contact
           </a>
           <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">

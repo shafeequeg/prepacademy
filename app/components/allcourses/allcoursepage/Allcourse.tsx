@@ -105,7 +105,7 @@ const AllCourses: React.FC = () => {
     {
       code: "CUET",
       title: "COMMON UNIVERSITY ENTRANCE TEST",
-      description: "COMMON UNIVERSITY ENTRANCE TEST",
+        description: "COMMON UNIVERSITY ENTRANCE TEST",
       classType: "CLASSES FOR 12TH & DROPPERS"
     },
     {
@@ -166,7 +166,7 @@ const AllCourses: React.FC = () => {
                   src="/allcoursecollege.png" 
                   alt="College Students" 
                   width={600} 
-                  height={300}
+                  height={400}
                   className="rounded-lg object-cover w-full h-full max-h-72"
                 />
               </div>
