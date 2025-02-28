@@ -14,11 +14,7 @@ interface VideoCardProps {
   thumbnail: string;
 }
 
-interface ClassCardProps {
-  title: string;
-  thumbnail: string;
-  features: string[];
-}
+
 
 const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
   return (
