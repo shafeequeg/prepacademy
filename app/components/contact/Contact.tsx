@@ -135,7 +135,6 @@ export default function ContactPage() {
     <FaLinkedinIn className="text-white text-2xl" /> {/* Increased size */}
   </a>
 </div>
-
       </div>
 
       {/* Right Column - Contact Form */}
@@ -221,7 +220,7 @@ export default function ContactPage() {
     <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E]">
       <h3 className="text-[#E25B41] text-xl font-medium mb-2">Become A Franchise</h3>
       <p className="text-gray-300 text-base md:text-lg  mb-4 leading-relaxed">
-        We prioritize our students' growth through customized learning experiences.
+        We prioritize our students&apos; growth through customized learning experiences.
       </p>
       <a href="#" className="text-[#E25B41] text-base md:text-lg  inline-flex items-center">
         Lets Go <span className="ml-1">→</span>
@@ -262,7 +261,7 @@ export default function ContactPage() {
           href="#" 
           className="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg text-lg font-medium"
         >
-          Let's Talk <span className="ml-2">→</span>
+          Let&apos;s Talk <span className="ml-2">→</span>
         </a>
       </div>
       <div className="mt-8 md:mt-0 md:absolute md:right-6 md:bottom-0"> {/* Adjusted right position */}
