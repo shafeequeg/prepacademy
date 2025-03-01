@@ -5,6 +5,9 @@ import React, { useState } from 'react';
 // import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPlus, FaWhatsapp } from 'react-icons/fa';
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
+import emailjs from 'emailjs-com'; // Import EmailJS
+import { toast } from 'react-toastify';
+
 
 type Location = {
   name: string;
@@ -27,6 +30,14 @@ export default function ContactPage() {
     newFaqOpen[index] = !newFaqOpen[index];
     setFaqOpen(newFaqOpen);
   };
+
+  const [formData, setFormData] = useState({
+    fullname: '',
+    phone: '',
+    email: '',
+    message: '',
+  });
+
 
   const locations: Location[] = [
     {
@@ -74,8 +85,40 @@ export default function ContactPage() {
     setIsOpen(false);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
+ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
+    // Replace with your EmailJS service ID, template ID, and user ID
+    const serviceID = 'service_uwzjjoc';
+    const templateID = 'template_lqeg482';
+    const userID = 'nk7-kQzPEcwr5RxjW';
+
+    // Send the form data via EmailJS
+    emailjs.send(serviceID, templateID, formData, userID)
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+        toast.success('Your message has been sent successfully!');
+        // Reset the form
+        setFormData({
+          fullname: '',
+          phone: '',
+          email: '',
+          message: '',
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to send email:', error);
+        toast.error('Failed to send the message. Please try again.');
+      });
+  };
 
   return (
     <div className="bg-black text-white min-h-screen ">
@@ -203,33 +246,49 @@ export default function ContactPage() {
                 <p className="text-gray-300 text-base md:text-lg">Enter your queries and get in touch.</p>
               </div>
 
-              <form className="space-y-3">
+              <form className="space-y-3" onSubmit={handleSubmit}>
                 <div>
                   <input
                     type="text"
+                    name="fullname"
                     placeholder="Enter your fullname"
+                    value={formData.fullname}
+                    onChange={handleInputChange}
                     className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+                    required
                   />
                 </div>
                 <div>
                   <input
                     type="tel"
+                    name="phone"
                     placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+                    required
                   />
                 </div>
                 <div>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+                    required
                   />
                 </div>
                 <div>
                   <textarea
+                    name="message"
                     placeholder="Message"
                     rows={4}
+                    value={formData.message}
+                    onChange={handleInputChange}
                     className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+                    required
                   ></textarea>
                 </div>
 
