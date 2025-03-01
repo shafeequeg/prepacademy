@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 // import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPlus, FaWhatsapp } from 'react-icons/fa';
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
@@ -18,7 +18,7 @@ export default function ContactPage() {
   const [faqOpen, setFaqOpen] = useState<boolean[]>(Array(4).fill(false));
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("Thiruvalla, Kerala");
-  const [contactNumber, setContactNumber] = useState("+91 9221911394"); // Default contact number
+  // const [contactNumber, setContactNumber] = useState("+91 9221911394"); // Default contact number
 
   const [mapUrl, setMapUrl] = useState(
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.241518748576!2d78.12345678901234!3d26.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDA3JzI0LjQiTiA3OMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin");
@@ -70,7 +70,6 @@ export default function ContactPage() {
 
   const handleLocationSelect = (location: Location) => {
     setSelectedLocation(location.name);
-    setContactNumber(`+91 ${location.phone}`); // Update contact number
     setMapUrl(location.mapUrl); // Update map URL
     setIsOpen(false);
   };
