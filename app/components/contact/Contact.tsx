@@ -97,7 +97,7 @@ export default function ContactPage() {
     e.preventDefault();
 
     // Replace with your EmailJS service ID, template ID, and user ID
-    const serviceID = 'service_uwzjjoc';
+    const serviceID = 'service_eb5cvhl';
     const templateID = 'template_lqeg482';
     const userID = 'nk7-kQzPEcwr5RxjW';
 
