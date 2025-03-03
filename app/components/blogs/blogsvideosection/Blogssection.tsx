@@ -30,29 +30,54 @@ const BlogSection = () => {
   const blogs = [
     {
       id: 1,
-      title: "Strategies for CAT 2025",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/blogcommonimage.png",
+      title: "Best IPM BBA Coaching & Exam Preparation Institute in India",
+      description: "Your Path to Success",
+      image: "/blogs/blog1.png",
     },
     {
       id: 2,
-      title: "Ace the CAT Essential",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/blogcommonimage.png",
+      title: "CAT Exam Preparation: Ace the CAT ",
+      description: "Essential Tips and Resources for Exam Preparation",
+      image: "/blogs/blog2.png",
     },
     {
       id: 3,
-      title: "How to Crack CAT?",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/blogcommonimage.png",
+      title: "Important Study Hacks for CAT 2025 Students",
+      description: "Important Study Hacks for CAT 2025 Students",
+      image: "/blogs/blog3.png",
+    },
+    {
+      id: 4,
+      title: "CAT 2025 Course",
+      description: "CAT 2025 Courses: Which One is Right for You?",
+      image: "/blogs/blog4.png",
+    },
+    {
+      id: 5,
+      title: "CAT 2025 Exam Preparation",
+      description: "From Zero to Hero: Comprehensive CAT 2025 Exam Preparation",
+      image: "/blogs/blog5.png",
+    },
+    {
+      id: 6,
+      title: "Prep Academy Blog - Strategy for CAT 2025 Mastering the CAT: ",
+      description: "Mastering the CAT: A Comprehensive Strategy for CAT 2025",
+      image: "/blogs/blog6.png",
+    },
+    {
+      id: 7,
+      title: "Unlock Your Potential",
+      description: "The Best CAT 2025 Classes to Join",
+      image: "/blogs/blog7.png",
+    },
+    {
+      id: 8,
+      title: "CAT 2025",
+      description: "The Ultimate Guide to Preparing and Succeeding",
+      image: "/blogs/blog8.png",
     },
     // Duplicate entries for the grid
-  ].concat([...Array(6)].map((_, i) => ({
-    id: i + 4,
-    title: ["Strategies for CAT 2025", "Ace the CAT Essential", "How to Crack CAT?"][i % 3],
-    description: "Preparing for the CAT 2025 exam is a significant step to...",
-    image: ["/blogcommonimage.png", "/blogcommonimage.png", "/blogcommonimage.png"][i % 3],
-  })));
+  ]
 
 
   return (
@@ -125,11 +150,12 @@ const BlogSection = () => {
             <div className="p-4">
               <h3 className="text-white font-semibold text-lg mb-2">{blog.title}</h3>
               <p className="text-gray-400 text-sm mb-4">{blog.description}</p>
-              <Link href="/blogdetails">
-                <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
-                  Read More <span>→</span>
-                </button>
-              </Link>
+              <Link href={`/blogdetails/${blog.id}`} passHref>
+  <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
+    Read More <span>→</span>
+  </button>
+</Link>
+
              
             </div>
           </div>
