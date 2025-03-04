@@ -5,10 +5,64 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
+import emailjs from 'emailjs-com'; // Import EmailJS
+import { toast } from "react-toastify";
+
 
 export default function Banner() {
   const [showIcons, setShowIcons] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const [formData, setFormData] = useState({
+    fullname: '',
+    phone: '',
+    email: '',
+    class: '',
+    school: '',
+  });
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    console.log(`Input changed: ${name} = ${value}`); // Debugging log
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Replace with your EmailJS service ID, template ID, and user ID
+    const serviceID = 'service_eb5cvhl';
+    const templateID = 'template_lqeg482';
+    const userID = 'nk7-kQzPEcwr5RxjW';
+
+    // Send the form data via EmailJS
+    emailjs.send(serviceID, templateID, formData, userID)
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+        toast.success('Your message has been sent successfully!');
+        // Reset the form
+        setFormData({
+          fullname: '',
+          phone: '',
+          email: '',
+          class: '',
+          school: '',
+        });
+        closeModal(); // Close the modal after successful submission
+      })
+      .catch((error) => {
+        console.error('Failed to send email:', error);
+        toast.error('Failed to send the message. Please try again.');
+      });
+  };
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +77,9 @@ export default function Banner() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="w-full h-screen flex flex-col overflow-hidden">
@@ -64,10 +121,13 @@ export default function Banner() {
       </p>
 
       <div className="flex flex-col md:flex-row justify-center md:justify-start space-y-2 md:space-y-0 md:space-x-3">
-        <Link href="#" className="bg-[#F55D3E] text-black px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#a52a1a] transition">
-          FREE Career Counseling
-        </Link>
-        <Link href="#" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
+      <button
+                onClick={openModal}
+                className="bg-[#F55D3E] text-black px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#a52a1a] transition"
+              >
+                FREE Career Counseling
+              </button>
+        <Link href="/aboutus" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
           KNOW MORE
         </Link>
       </div>
@@ -150,6 +210,123 @@ export default function Banner() {
   </div>
 </section>
 
+
+{isModalOpen && (
+       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+       <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-lg relative">
+         {/* Close button */}
+         <button 
+           onClick={closeModal} 
+           className="absolute top-4 right-4 text-gray-700 hover:text-black"
+           aria-label="Close"
+         >
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+             <path d="M18 6L6 18M6 6l12 12" />
+           </svg>
+         </button>
+         
+         <div className="p-6 pt-5">
+           <h2 className="text-center text-2xl font-bold mb-6">Fast Track Your Trial Class</h2>
+           
+           <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* First row */}
+                  <div>
+                    <input 
+                      type="text" 
+                      name="fullname"
+                      placeholder="Name" 
+                      value={formData.fullname}
+                      onChange={handleInputChange}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      placeholder="Mobile" 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                      required
+                    />
+                  </div>
+                  
+                  {/* Second row */}
+                  <div>
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="Email" 
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input 
+                      type="text" 
+                      name="class"
+                      placeholder="Class" 
+                      value={formData.class}
+                      onChange={handleInputChange}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                {/* School/Institute - full width */}
+                <div>
+                  <input 
+                    type="text" 
+                    name="school"
+                    placeholder="School/Institute" 
+                    value={formData.school}
+                    onChange={handleInputChange}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                    required
+                  />
+                </div>
+                
+                {/* reCAPTCHA */}
+                <div className="border border-gray-300 rounded-md p-4 flex items-center justify-between bg-gray-50">
+                  <div className="flex items-center">
+                    <input 
+                      type="checkbox" 
+                      id="recaptcha" 
+                      className="h-5 w-5 border-gray-300 mr-2 focus:ring-0 cursor-pointer"
+                      required
+                    />
+                    <label htmlFor="recaptcha" className="text-sm text-gray-700">I'm not a robot</label>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <div className="w-12 h-12">
+                      <img 
+                        src="https://www.gstatic.com/recaptcha/api2/logo_48.png" 
+                        alt="reCAPTCHA logo" 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">Privacy - Terms</div>
+                  </div>
+                </div>
+                
+                {/* Submit Button */}
+                <button 
+                  type="submit" 
+                  className="w-full bg-red-600 text-white py-3 px-4 rounded-md font-medium hover:bg-red-700 transition-colors"
+                >
+                  Submit
+                </button>
+              </form>
+         </div>
+       </div>
+     </div>
+      )}
     </div>
   );
 }

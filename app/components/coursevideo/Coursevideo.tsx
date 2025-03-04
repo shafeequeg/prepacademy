@@ -6,15 +6,18 @@ const CourseVideos = () => {
   const videos = [
     {
       title: "Preparing for the CAT 2025",
+      url: "https://www.youtube.com/embed/Qiy4xihD_kM",
     },
     {
       title: "Best Coaching Centres",
+      url: "https://www.youtube.com/embed/M33APKoNOqE",
     },
     {
       title: "How to Approach CAT Quantitative Ability",
+      url: "https://www.youtube.com/embed/4g7cyj774_M",
     },
-    // Add more videos as needed
   ];
+  
 
   return (
     <section className="py-16">
@@ -34,9 +37,17 @@ const CourseVideos = () => {
               className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Video Thumbnail (Placeholder) */}
-              <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
-                <span className="text-gray-600 text-lg">Video Thumbnail</span>
+              <div className="w-full h-48">
+                <iframe
+                  className="w-full h-full"
+                  src={video.url}
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
+
 
               {/* Video Title (Heading) */}
               <div className="p-6">
@@ -49,25 +60,32 @@ const CourseVideos = () => {
         </div>
 
         {/* View More Button */}
-        <div className="text-center mt-8 flex items-center justify-center">
-          <button className="bg-[#F55D3E] text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#a52a1a] transition-colors">
-            View More
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+      {/* View More Button */}
+<div className="text-center mt-8 flex items-center justify-center">
+  <a
+    href="https://www.youtube.com/@PrepAcademy" // Replace with your actual channel link
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-[#F55D3E] text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#a52a1a] transition-colors"
+  >
+    View More
+    <svg
+      className="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9 18L15 12L9 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </a>
+</div>
+
       </div>
 
       {/* Read Features Section */}

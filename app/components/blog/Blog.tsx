@@ -6,21 +6,21 @@ const BlogsSection = () => {
   const blogs = [
     {
       id: 1,
-      title: "Strategies for CAT 2025",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/api/placeholder/400/240",
+      title: "Best IPM BBA Coaching & Exam Preparation Institute in India",
+      description: "Your Path to Success",
+      image: "/blogs/blog1.png",
     },
     {
       id: 2,
-      title: "Ace the CAT Essential",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/api/placeholder/400/240",
+      title: "CAT Exam Preparation: Ace the CAT ",
+      description: "Essential Tips and Resources for Exam Preparation",
+      image: "/blogs/blog2.png",
     },
     {
       id: 3,
-      title: "How to Crack CAT?",
-      description: "Preparing for the CAT 2025 exam is a significant step to...",
-      image: "/api/placeholder/400/240",
+      title: "Important Study Hacks for CAT 2025 Students",
+      description: "Important Study Hacks for CAT 2025 Students",
+      image: "/blogs/blog3.png",
     },
   ];
 
@@ -64,7 +64,7 @@ const BlogsSection = () => {
 
                 {/* Read Full Button */}
                 <a
-                  href="#"
+                  href={`/blogdetails/${blog.id}`}
                   className="inline-flex items-center text-[#F55D3E] hover:text-[#FF7D5E] font-medium"
                 >
                   Read Full
@@ -91,7 +91,7 @@ const BlogsSection = () => {
         {/* View More Button */}
         <div className="text-center">
           <a
-            href="#"
+            href="/blogs"
             className="inline-flex items-center text-white hover:text-gray-200 font-medium"
           >
             View More
