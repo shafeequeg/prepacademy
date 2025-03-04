@@ -278,7 +278,7 @@ const Benefits = () => {
                       className="h-5 w-5 border-gray-300 mr-2 focus:ring-0 cursor-pointer"
                       required
                     />
-                    <label htmlFor="recaptcha" className="text-sm text-gray-700">I'm not a robot</label>
+                    <label htmlFor="recaptcha" className="text-sm text-gray-700">I&apos;m not a robot</label>
                   </div>
                   <div className="flex flex-col items-end">
                     <div className="w-12 h-12">

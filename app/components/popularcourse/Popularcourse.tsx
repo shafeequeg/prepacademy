@@ -84,12 +84,12 @@ console.log(formData);
 
 
 
-  const features = [
-    { image: "/aboutusverified.png", text: "Dynamic Live Sessions" },
-    { image: "/aboutusverified.png", text: "1000+ Targeted Questions" },
-    { image: "/aboutusverified.png", text: "20 Simulated Mock Tests" },
-    { image: "/aboutusverified.png", text: "Personalized Learning Path" }
-  ];
+  // const features = [
+  //   { image: "/aboutusverified.png", text: "Dynamic Live Sessions" },
+  //   { image: "/aboutusverified.png", text: "1000+ Targeted Questions" },
+  //   { image: "/aboutusverified.png", text: "20 Simulated Mock Tests" },
+  //   { image: "/aboutusverified.png", text: "Personalized Learning Path" }
+  // ];
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
