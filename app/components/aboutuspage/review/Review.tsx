@@ -65,6 +65,7 @@ const TestimonialsAndCTA = () => {
       class: '',
       school: '',
     });
+  console.log(showIcons);
   
   
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

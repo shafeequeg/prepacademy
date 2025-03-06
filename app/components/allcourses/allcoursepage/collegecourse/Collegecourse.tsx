@@ -5,7 +5,7 @@
 import React from 'react';
 // import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronRight , Play } from 'lucide-react';
+import { ChevronRight  } from 'lucide-react';
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com'; // Import EmailJS
