@@ -3,64 +3,67 @@
 "use client"
 
 import React from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight , Play } from 'lucide-react';
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import emailjs from 'emailjs-com'; // Import EmailJS
 
 
-interface VideoCardProps {
+// interface VideoCardProps {
+//   title: string;
+//   thumbnail: string;
+// }
+
+interface DemoVideoCardProps {
   title: string;
-  thumbnail: string;
+  videoId: string;
 }
 
 
 
-const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
+// const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
+//   return (
+//     <div className="relative group overflow-hidden rounded-lg w-full">
+//       <div className="relative w-full h-56 md:h-64 lg:h-72">
+//         <Image
+//           src={thumbnail}
+//           alt={title}
+//           fill
+//           className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+//         />
+//         {/* Play button overlay */}
+//         <div className="absolute inset-0 flex items-center justify-center">
+//           <div className="bg-black bg-opacity-30 rounded-full p-3 flex items-center justify-center">
+//             <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
+//           </div>
+//         </div>
+//       </div>
+//       <p className="text-lg md:text-xl text-gray-300 mb-6">
+//       {title}</p>
+//     </div>
+//   );
+// };
+
+const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   return (
-    <div className="relative group overflow-hidden rounded-lg w-full">
+    <div className="relative group cursor-pointer">
       <div className="relative w-full h-56 md:h-64 lg:h-72">
-        <Image
-          src={thumbnail}
-          alt={title}
-          fill
-          className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+        {/* YouTube Embed */}
+        <iframe 
+          className="w-full h-full rounded-lg"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
         />
-        {/* Play button overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="bg-black bg-opacity-30 rounded-full p-3 flex items-center justify-center">
-            <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
-          </div>
-        </div>
       </div>
-      <p className="text-lg md:text-xl text-gray-300 mb-6">
-      {title}</p>
+      {/* <p className="text-lg md:text-xl text-gray-300 mt-3">{title}</p> */}
     </div>
   );
 };
 
-const DemoVideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
-  return (
-    <div className="relative group cursor-pointer">
-      <div className="relative w-full h-56 md:h-64 lg:h-72">
-      <Image
-          src={thumbnail}
-          alt={title}
-          fill
-          className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-        />
-        {/* Play button overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="bg-white bg-opacity-20 rounded-full w-12 h-12 flex items-center justify-center">
-            <Play size={24} color="white" fill="white" />
-          </div>
-        </div>
-      </div>
-      <p className="text-lg md:text-xl text-gray-300 mb-6">
-      {title}</p>
-    </div>
-  );
-};
 
 const offeringTypes = [
   { id: "online", label: "Online Class" },
@@ -125,23 +128,80 @@ const courseCards = [
 
 
 
-
-
 const CatExamApplySection: React.FC = () => {
-  const videoCards = [
-    {
-      title: "Explore About Courses",
-      thumbnail: "/news1.png",
-    },
-    {
-      title: "Explore About Courses",
-      thumbnail: "/new2.png",
-    },
-    {
-      title: "Explore About Courses",
-      thumbnail: "/news3.png",
-    },
-  ];
+
+
+//   const [showIcons, setShowIcons] = useState(true);
+// const [lastScrollY, setLastScrollY] = useState(0);
+// const [isModalOpen, setIsModalOpen] = useState(false);
+  
+const [formData, setFormData] = useState({
+  fullname: "",
+  phone: "",
+  email: "",
+  college: "",
+  program: "",
+});
+
+
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const { name, value } = e.target;
+  console.log(`Input changed: ${name} = ${value}`); // Debugging log
+
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+  
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+  
+      // Replace with your EmailJS service ID, template ID, and user ID
+      const serviceID = "service_eb5cvhl";
+      const templateID = "template_lqeg482";
+      const userID = "nk7-kQzPEcwr5RxjW";
+  
+      // Send the form data via EmailJS
+      emailjs
+        .send(serviceID, templateID, formData, userID)
+        .then((response) => {
+          console.log("Email sent successfully!", response.status, response.text);
+          toast.success("Your message has been sent successfully!");
+          // Reset the form
+          setFormData({
+            fullname: "",
+            phone: "",
+            email: "",
+            college: "",
+            program: "",
+          });
+        })
+        .catch((error) => {
+          console.error("Failed to send email:", error);
+          toast.error("Failed to send the message. Please try again.");
+        });
+    };
+  
+
+    // const openModal = () => setIsModalOpen(true);
+    // const closeModal = () => setIsModalOpen(false);
+
+  // const videoCards = [
+  //   {
+  //     title: "Explore About Courses",
+  //     thumbnail: "/news1.png",
+  //   },
+  //   {
+  //     title: "Explore About Courses",
+  //     thumbnail: "/new2.png",
+  //   },
+  //   {
+  //     title: "Explore About Courses",
+  //     thumbnail: "/news3.png",
+  //   },
+  // ];
 
 
  
@@ -149,17 +209,18 @@ const CatExamApplySection: React.FC = () => {
   const demoVideos = [
     {
       title: "Preparing for the CAT 2025",
-      thumbnail: "/news1.png",
+      videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
       title: "Strategies for CAT 2025",
-      thumbnail: "/new2.png",
+      videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
       title: "Best Coaching Centers",
-      thumbnail: "/news3.png",
+      videoId: "4g7cyj774_M", // Remove "&t=26s"
     }
   ];
+  
 
   const [activeTab, setActiveTab] = useState("online");
 
@@ -251,49 +312,87 @@ const CatExamApplySection: React.FC = () => {
               <p className="text-white mb-6">Get guidance and clear your doubts</p>
               
               {/* Form Fields */}
-              <div className="space-y-4 mb-6">
-                <input 
-                  type="text" 
-                  placeholder="Enter your Full Name" 
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                />
-                <input 
-                  type="tel" 
-                  placeholder="Mobile Number" 
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                />
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                />
-                <input 
-                  type="text" 
-                  placeholder="College Studied" 
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                />
-                <div className="relative">
-                  <select 
-                    className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Preferred Online Program</option>
-                    <option value="program1">CAT Preparation</option>
-                    <option value="program2">MBA Entrance</option>
-                    <option value="program3">GMAT Preparation</option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L7 7L13 1" stroke="#FF6B3D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
+              <form onSubmit={handleSubmit}>
+                    <div className="space-y-4 mb-6">
+                      <input
+                        type="text"
+                        name="fullname"
+                        placeholder="Enter your Full Name"
+                        value={formData.fullname}
+                        onChange={handleInputChange}
+                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                        required
+                      />
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Mobile Number"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                        required
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                        required
+                      />
+                      <input
+                        type="text"
+                        name="college"
+                        placeholder="College Studied"
+                        value={formData.college}
+                        onChange={handleInputChange}
+                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                        required
+                      />
+                      <div className="relative">
+                        <select
+                          name="program"
+                          value={formData.program}
+                          onChange={handleInputChange}
+                          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
+                          required
+                        >
+                          <option value="" disabled>
+                            Preferred Online Program
+                          </option>
+                          <option value="CAT Preparation">CAT Preparation</option>
+                          <option value="MBA Entrance">MBA Entrance</option>
+                          <option value="GMAT Preparation">GMAT Preparation</option>
+                        </select>
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                          <svg
+                            width="14"
+                            height="8"
+                            viewBox="0 0 14 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1 1L7 7L13 1"
+                              stroke="#FF6B3D"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
 
-              {/* Submit Button */}
-              <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors">
-                Submit
-              </button>
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
+                    >
+                      Submit
+                    </button>
+                  </form>
             </div>
           </div>
         </div>
@@ -310,19 +409,18 @@ const CatExamApplySection: React.FC = () => {
     </h2>
 
     {/* Make videos full width */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 w-full">
-      {videoCards.map((video, index) => (
-        <VideoCard key={index} title={video.title} thumbnail={video.thumbnail} />
-      ))}
-    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    {demoVideos.map((video, index) => (
+      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
+    ))}
+  </div>
 
-    {/* Centered View More Button */}
-    <div className="flex justify-center mt-4">
-      <a href="/videos" className="text-[#F55D3E] flex items-center hover:underline text-sm">
-        <span>View More</span>
-        <ChevronRight size={16} className="ml-1" />
-      </a>
-    </div>
+  <div className="flex justify-center">
+    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
+      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
+      <ChevronRight size={16} />
+    </Link>
+  </div>
   </div>
 </div>
 
@@ -461,25 +559,26 @@ const CatExamApplySection: React.FC = () => {
 
     {/* Demo Videos Section */}
     <div className="container mx-auto px-4 py-10">
-      <div className="flex justify-between items-center mb-8">
-      <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
-      <span className="text-white font-serif italic">Demo</span> <span className="text-[#F55D3E]">Videos</span>
-        </h2>
-      </div>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        {demoVideos.map((video, index) => (
-          <DemoVideoCard key={index} title={video.title} thumbnail={video.thumbnail} />
-        ))}
-      </div>
+  <div className="flex justify-between items-center mb-8">
+    <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
+      <span className="text-white font-serif italic">Demo</span> 
+      <span className="text-[#F55D3E]"> Videos</span>
+    </h2>
+  </div>
 
-      <div className="flex justify-center">
-        <Link href="/videos" className="text-[#F55D3E] flex items-center hover:underline">
-          <span className='text-lg md:text-xl text-[#F55D3E] '>View More</span>
-          <ChevronRight size={16} />
-        </Link>
-      </div>
-    </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    {demoVideos.map((video, index) => (
+      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
+    ))}
+  </div>
+
+  <div className="flex justify-center">
+    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
+      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
+      <ChevronRight size={16} />
+    </Link>
+  </div>
+</div>
   </div>
 </div>
   );

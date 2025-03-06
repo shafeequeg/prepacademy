@@ -61,6 +61,25 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
       description: "The Ultimate Guide to Preparing and Succeeding",
       image: "/blogs/blog8.png",
     },
+    {
+      id: 9,
+      image: "/aboutusnews/aboutusnews1.jpeg",
+      title: "Registration and examination date announced “NMMIMS NPAT 2025”",
+      description: "The Narsee Monjee Institute of Management Studies (NMIMS) has announced the registration and examination dates for the NPAT 2025. The registration process commenced in mid-December 2024 and will continue until April 2025. The examination is scheduled to be held from March 1 to May 31, 2025. ",
+    },
+    {
+      id: 10,
+      title: "NTA CUET 2025: UG Registration, Exam Dates, Notification, Eligibility, Pattern (Revised), Syllabus",
+      description: "The National Testing Agency (NTA) is set to commence the registration process for the Common University Entrance Test (CUET) 2025 for undergraduate (UG) programs. The registration is expected to begin in the first week of February 2025 and will conclude in the first week of April 2025. Prospective candidates can apply online through the official CUET website: cuet.nta.nic.in. ",
+      image: "/aboutusnews/aboutusnews2.jpeg",
+    },
+
+    {
+      id: 11,
+      image: "/news3.png",
+      title: "How to Crack CAT?",
+      description: "Cracking the Common Admission Test (CAT) 2025 requires a strategic and disciplined approach. Here's a comprehensive guide to help you prepare effectively:",
+    },
   ];
 
   // Find the blog with the matching ID
@@ -100,11 +119,11 @@ console.log(blogContent);
                 {blog.title}
               </h1>
               
-              <div className="text-gray-300 text-sm mb-4">
+              {/* <div className="text-gray-300 text-sm mb-4">
                 Posted on 10 February 2025 | 2:05 PM
                 <br />
                 By: Ashwani Nair
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -145,12 +164,12 @@ console.log(blogContent);
 
             {/* Main Content */}
             <div className="flex-1">
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Based On Past Trends</h2>
                 <p className="text-gray-300 mb-4 text-sm">
                   {blog.description}
                 </p>
-              </div>
+              </div> */}
 
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Exams And Criteria</h2>

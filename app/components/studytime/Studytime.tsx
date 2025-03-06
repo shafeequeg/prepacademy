@@ -1,26 +1,29 @@
 "use client";
 
 import React from "react";
+import CountUp from "react-countup";
+
 
 const SaveStudyTime = () => {
   const stats = [
     {
-      number: "2L+",
+      number: 2000000, // 2L+ (2 lakh)
       label: "Users Worldwide",
     },
     {
-      number: "20L+",
+      number: 20000000, // 20L+ (20 lakh)
       label: "Hours of Classes",
     },
     {
-      number: "80K+",
+      number: 80000, // 80K+ (80 thousand)
       label: "Students Passed",
     },
     {
-      number: "10+",
+      number: 10, // 10+ (10 years)
       label: "Years Legacy",
     },
   ];
+
 
   return (
     <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] text-white py-16">
@@ -46,16 +49,18 @@ const SaveStudyTime = () => {
 
         {/* Right Side - Statistics Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-  {stats.map((stat, index) => (
-    <div
-      key={index}
-      className="h-52 bg-[#1A0F0E] rounded-lg flex flex-col items-center justify-center text-center hover:bg-[#2B1615] transition-all duration-300 border-l-4 border-[#F55D3E]"
-    >
-      <span className="text-[#F55D3E] text-3xl font-bold">{stat.number}</span>
-      <span className="text-gray-300 text-sm">{stat.label}</span>
-    </div>
-  ))}
-</div>
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="h-52 bg-[#1A0F0E] rounded-lg flex flex-col items-center justify-center text-center hover:bg-[#2B1615] transition-all duration-300 border-l-4 border-[#F55D3E]"
+            >
+              <span className="text-[#F55D3E] text-3xl font-bold">
+                <CountUp start={0} end={stat.number} duration={20} separator="," />
+              </span>
+              <span className="text-gray-300 text-sm">{stat.label}</span>
+            </div>
+          ))}
+        </div>
 
       </div>
     </section>

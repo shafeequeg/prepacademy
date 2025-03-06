@@ -79,7 +79,7 @@ const StudyAbroadSection: React.FC = () => {
             <h2 className="text-2xl mb-4">
               <span className="text-[#F55D3E] font-serif italic">Career</span> Counseling
             </h2>
-            <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
+            <p className="text-white text-base md:text-lg mb-6 max-w-lg">
               Our career counseling program is designed to help individuals make 
               informed career decisions. We provide professional guidance on resume 
               building, interview preparation, and skill development to enhance 
@@ -93,10 +93,10 @@ const StudyAbroadSection: React.FC = () => {
           {careerCounselingCards.map((card, index) => (
             <div 
               key={index} 
-              className="bg-white shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
+              className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
             >
               <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
-              <p className="text-gray-700 text-base md:text-lg">{card.description}</p>
+              <p className="text-white text-base md:text-lg">{card.description}</p>
             </div>
           ))}
         </div>

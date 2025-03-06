@@ -54,7 +54,7 @@ const DrivesUsSection = () => {
           
           <div className="relative h-64 md:h-80">
             <Image
-              src="/drive.png"
+              src="/aboususdriveus.jpg"
               alt="Students studying together"
               fill
               className="rounded-lg object-cover"

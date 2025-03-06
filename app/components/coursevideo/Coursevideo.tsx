@@ -31,33 +31,26 @@ const CourseVideos = () => {
 
         {/* Video Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-          {videos.map((video, index) => (
-            <div
-              key={index}
-              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              {/* Video Thumbnail (Placeholder) */}
-              <div className="w-full h-48">
-                <iframe
-                  className="w-full h-full"
-                  src={video.url}
-                  title={video.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
+  {videos.map((video, index) => (
+    <div
+      key={index}
+      className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+    >
+      {/* Video Thumbnail */}
+      <div className="w-full h-64"> {/* Increased height from h-48 to h-64 */}
+        <iframe
+          className="w-full h-full"
+          src={video.url}
+          title={video.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    </div>
+  ))}
+</div>
 
-
-              {/* Video Title (Heading) */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-4 text-white">
-                  {video.title}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
 
         {/* View More Button */}
       {/* View More Button */}

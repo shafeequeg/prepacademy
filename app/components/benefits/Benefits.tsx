@@ -180,7 +180,7 @@ const Benefits = () => {
     >
       <span className="text-[#F55D3E] text-5xl font-bold mb-2">
         {isVisible && (
-          <CountUp start={0} end={stat.number} duration={10} separator="," />
+          <CountUp start={0} end={stat.number} duration={20} separator="," />
         )}
       </span>
       <span className="text-gray-300 text-lg">{stat.label}</span>
