@@ -9,12 +9,12 @@ interface ArticleCardProps {
 
 }
 
-interface Blog {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-}
+// interface Blog {
+//   id: number;
+//   title: string;
+//   description: string;
+//   image: string;
+// }
 
 
 const ArticleCard: React.FC<ArticleCardProps> = ({id, image, title, description }) => (
