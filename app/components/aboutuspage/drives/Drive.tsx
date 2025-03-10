@@ -5,19 +5,19 @@ const DrivesUsSection = () => {
   const features = [
     {
       title: "Smarter Learning  With AI",
-      description: "Your study plan adapts to your needs and pace"
+      // description: "Your study plan adapts to your needs and pace"
     },
     {
       title: "Gamified Test Prep",
-      description: "Challenges, leaderboards & rewards to keep you hooked"
+      // description: "Challenges, leaderboards & rewards to keep you hooked"
     },
     {
       title: "Mentors Who've Walked the Path",
-      description: "Learn from top scorers and experienced guides"
+      // description: "Learn from top scorers and experienced guides"
     },
     {
       title: "Live Rapid Fire Stories",
-      description: "Connect, ask, stay sharp; succeed at every challenge"
+      // description: "Connect, ask, stay sharp; succeed at every challenge"
     }
   ];
 
@@ -82,9 +82,9 @@ const DrivesUsSection = () => {
       <h3 className="text-[#FF5733] font-bold text-lg leading-tight">
         {feature.title}
       </h3>
-      <p className="text-gray-400 text-lg  leading-relaxed opacity-90">
+      {/* <p className="text-gray-400 text-lg  leading-relaxed opacity-90">
         {feature.description}
-      </p>
+      </p> */}
     </div>
   ))}
 </div>

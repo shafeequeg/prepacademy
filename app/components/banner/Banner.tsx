@@ -137,10 +137,50 @@ export default function Banner() {
               >
                 FREE Career Counseling
               </button>
-        <Link href="/aboutus" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
+        <Link href="/collegecourse" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
           KNOW MORE
         </Link>
+
+
       </div>
+
+      <div className="mt-4 w-full bg-[#130808] rounded-lg overflow-hidden">
+        <style jsx>{`
+          @keyframes marquee { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-100%); } 
+          } 
+          
+          @keyframes marquee2 { 
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(0); } 
+          } 
+          
+          .animate-marquee { 
+            animation: marquee 15s linear infinite; 
+          } 
+          
+          .animate-marquee2 { 
+            animation: marquee2 15s linear infinite; 
+          }
+        `}</style>
+        <div className="relative py-2 whitespace-nowrap">
+          <div className="animate-marquee inline-block">
+            <span className="mx-4 text-sm text-white font-medium">🔔 New Batch Starting Soon!</span>
+            <span className="mx-4 text-sm  text-white  font-medium">📚 50% Off on Study Materials</span>
+            <span className="mx-4 text-sm text-white  font-medium">🎓 Scholarship Test on 15th March</span>
+            <span className="mx-4 text-sm  text-white font-medium">⭐ 95% Success Rate in Last Exams</span>
+          </div>
+          
+          <div className="absolute top-2  animate-marquee2 inline-block">
+            <span className="mx-4 text-sm  text-white font-medium">🔔 New Batch Starting Soon!</span>
+            <span className="mx-4 text-sm  text-white font-medium">📚 50% Off on Study Materials</span>
+            <span className="mx-4 text-sm  text-white font-medium">🎓 Scholarship Test on 15th March</span>
+            <span className="mx-4 text-sm  text-white font-medium">⭐ 95% Success Rate in Last Exams</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     {/* Right Section - more responsive sizing */}

@@ -67,29 +67,54 @@ const ExamPrepHomepage: React.FC = () => {
 
   const carouselRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
-  
-    // Auto-scroll effect
-    useEffect(() => {
-      const interval = setInterval(() => {
-        if (carouselRef.current) {
-          setActiveIndex((prevIndex) => {
-            const newIndex = (prevIndex + 1) % Math.ceil(gladiators.length / 4);
-            // Only scroll if the ref exists
-            if (carouselRef.current) {
-              const slideWidth = carouselRef.current.offsetWidth;
-              carouselRef.current.scrollTo({
-                left: newIndex * slideWidth,
-                behavior: 'smooth'
-              });
-            }
-            return newIndex;
-          });
-        }
-      }, 3000); // Change slide every 3 seconds
-    
-      return () => clearInterval(interval);
-    }, [gladiators.length]);
+    const totalSlides = Math.ceil(gladiators.length / 4);
 
+    // Auto-scroll effect
+    // useEffect(() => {
+    //   const interval = setInterval(() => {
+    //     if (carouselRef.current) {
+    //       setActiveIndex((prevIndex) => {
+    //         const newIndex = (prevIndex + 1) % Math.ceil(gladiators.length / 4);
+    //         // Only scroll if the ref exists
+    //         if (carouselRef.current) {
+    //           const slideWidth = carouselRef.current.offsetWidth;
+    //           carouselRef.current.scrollTo({
+    //             left: newIndex * slideWidth,
+    //             behavior: 'smooth'
+    //           });
+    //         }
+    //         return newIndex;
+    //       });
+    //     }
+    //   }, 3000); // Change slide every 3 seconds
+    
+    //   return () => clearInterval(interval);
+    // }, [gladiators.length]);
+
+    const scrollLeft = () => {
+      if (carouselRef.current) {
+        const newIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+        setActiveIndex(newIndex);
+        const slideWidth = carouselRef.current.offsetWidth;
+        carouselRef.current.scrollTo({
+          left: newIndex * slideWidth,
+          behavior: "smooth",
+        });
+      }
+    };
+    
+    // Function to scroll right
+    const scrollRight = () => {
+      if (carouselRef.current) {
+        const newIndex = (activeIndex + 1) % totalSlides;
+        setActiveIndex(newIndex);
+        const slideWidth = carouselRef.current.offsetWidth;
+        carouselRef.current.scrollTo({
+          left: newIndex * slideWidth,
+          behavior: "smooth",
+        });
+      }
+    };
 
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
@@ -97,54 +122,68 @@ const ExamPrepHomepage: React.FC = () => {
       <header className="bg-gradient-to-r from-gray-900 to-gray-800 ">
         {/* Remove container and max-width constraints */}
         <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
-        {/* Section Header - Updated for Responsive Layout */}
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
-          {/* Left Side - Title & Subtitle */}
-          <div className="flex items-center">
-            <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
-              Meet Your Exam <br /><span className='text-3xl md:text-5xl font-bold text-white'>Gladiators</span>
-            </h2>
-          </div>
-      
-          {/* Right Side - Description */}
-          <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
-        Behind every student&apos;s success are passionate, experienced educators who&apos;ve cracked the toughest exams.
-      </h4>
-      
-        </div>
-      
-        {/* Gladiators Carousel - Updated to show 4 in a row */}
-       {/* Gladiators Carousel - Updated to show 4 in a row */}
-      <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative">
-        <div 
-          ref={carouselRef}
-          className="flex transition-transform duration-1500 ease-in-out overflow-x-hidden"
-          style={{
-            scrollSnapType: 'x mandatory',
-            msOverflowStyle: 'none',  // Hide scrollbar in IE/Edge
-            scrollbarWidth: 'none'    // Hide scrollbar in Firefox
-          }}
-        >
-          {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
-          <style jsx>{`
-            div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-      
-          {/* Group gladiators into sets of 4 */}
-          {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
-        <div 
-          key={groupIndex} 
+  {/* Section Header - Updated for Responsive Layout */}
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
+    {/* Left Side - Title & Subtitle */}
+    <div className="flex items-center">
+      <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
+        Meet Your Exam <br />
+        <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
+      </h2>
+    </div>
+
+    {/* Right Side - Description */}
+    <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
+      Behind every student&apos;s success are passionate, experienced educators who&apos;ve cracked the toughest exams.
+    </h4>
+  </div>
+
+  {/* Gladiators Carousel - Updated to show 4 in a row */}
+  <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
+    {/* Left Scroll Button */}
+    <button
+      onClick={scrollLeft}
+      className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+      aria-label="Scroll left"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    {/* Carousel Container */}
+    <div
+      ref={carouselRef}
+      className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+      style={{
+        scrollSnapType: "x mandatory",
+        msOverflowStyle: "none", // Hide scrollbar in IE/Edge
+        scrollbarWidth: "none", // Hide scrollbar in Firefox
+      }}
+    >
+      {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+
+      {/* Group gladiators into sets of 4 */}
+      {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
+        <div
+          key={groupIndex}
           className="min-w-full flex justify-center px-4 flex-nowrap"
-          style={{ scrollSnapAlign: 'start' }}
+          style={{ scrollSnapAlign: "start" }}
         >
           {/* Display 4 gladiators per slide */}
           {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-            <div 
-              key={index} 
-              className="w-1/4 px-2"
-            >
+            <div key={index} className="w-1/4 px-2">
               <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
                 <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 relative overflow-hidden rounded-full mb-4">
                   <Image
@@ -155,41 +194,58 @@ const ExamPrepHomepage: React.FC = () => {
                     className="rounded-full"
                   />
                 </div>
-                <h4 className="font-semibold text-sm md:text-lg text-white text-center">{gladiator.name}</h4>
+                <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                  {gladiator.name}
+                </h4>
                 <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
               </div>
             </div>
           ))}
         </div>
       ))}
-      
-        </div>
-        
-        {/* Carousel Indicators - Updated for groups of 4 */}
-        <div className="flex justify-center mt-8 space-x-2">
-        {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setActiveIndex(index);
-              if (carouselRef.current) {
-                const slideWidth = carouselRef.current.offsetWidth;
-                carouselRef.current.scrollTo({
-                  left: index * slideWidth,
-                  behavior: 'smooth'
-                });
-              }
-            }}
-            className={`w-3 h-3 rounded-full ${activeIndex === index ? 'bg-[#FF6B45]' : 'bg-gray-500'}`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-      
-      </div>
-      
-      </section>
-      
+    </div>
+
+    {/* Right Scroll Button */}
+    <button
+      onClick={scrollRight}
+      className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+      aria-label="Scroll right"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  {/* Carousel Indicators - Updated for groups of 4 */}
+  <div className="flex justify-center mt-8 space-x-2">
+    {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, index) => (
+      <button
+        key={index}
+        onClick={() => {
+          setActiveIndex(index);
+          if (carouselRef.current) {
+            const slideWidth = carouselRef.current.offsetWidth;
+            carouselRef.current.scrollTo({
+              left: index * slideWidth,
+              behavior: "smooth",
+            });
+          }
+        }}
+        className={`w-3 h-3 rounded-full ${
+          activeIndex === index ? "bg-[#FF6B45]" : "bg-gray-500"
+        }`}
+        aria-label={`Go to slide ${index + 1}`}
+      />
+    ))}
+  </div>
+</section>
 
       </header>
 

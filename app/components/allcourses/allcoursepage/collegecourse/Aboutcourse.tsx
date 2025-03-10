@@ -1,10 +1,13 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 const ExamPrepLowerSections: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+ const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
 
   const toggleFaq = (index: number) => {
     if (openFaq === index) {
@@ -13,6 +16,8 @@ const ExamPrepLowerSections: React.FC = () => {
       setOpenFaq(index);
     }
   };
+
+  
 
   const faqs = [
     {
@@ -69,7 +74,43 @@ const ExamPrepLowerSections: React.FC = () => {
       comment: "Best faculty training, excellent classes (Especially Arun sir)",
       avatar: "/api/placeholder/40/40",
     },
+    {
+      id: 4,
+      name: "John Doe",
+      rating: 4,
+      comment: "Great experience with the course. Highly recommended!",
+      avatar: "/api/placeholder/40/40",
+    },
+    {
+      id: 5,
+      name: "Jane Smith",
+      rating: 5,
+      comment: "The faculty is amazing and the study material is top-notch.",
+      avatar: "/api/placeholder/40/40",
+    },
+    {
+      id: 6,
+      name: "Alice Johnson",
+      rating: 5,
+      comment: "The mock tests were very helpful for my preparation.",
+      avatar: "/api/placeholder/40/40",
+    },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (carouselRef.current) {
+        const nextIndex = (currentIndex + 1) % (testimonials.length / 4);
+        setCurrentIndex(nextIndex);
+        carouselRef.current.scrollTo({
+          left: nextIndex * carouselRef.current.clientWidth,
+          behavior: "smooth",
+        });
+      }
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [currentIndex, testimonials.length]);
 
   return (
     <div className="flex flex-col bg-gray-900 text-white">
@@ -169,29 +210,35 @@ const ExamPrepLowerSections: React.FC = () => {
         </div>
 
         {/* Row 2: Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
+        <div
+          ref={carouselRef}
+          className="flex overflow-x-hidden scroll-smooth relative"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-[#2C2422] p-6 rounded-lg shadow-md"
+              className="flex-shrink-0 w-1/4 p-2" // 4 cards in a row
             >
-              {/* Avatar and Name */}
-              <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                  />
+              <div className="bg-[#2C2422] p-6 rounded-lg shadow-md h-full">
+                {/* Avatar and Name */}
+                <div className="flex items-center mb-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-lg font-medium">{testimonial.name}</h3>
                 </div>
-                <h3 className="text-lg font-medium">{testimonial.name}</h3>
+
+                {/* Rating Stars */}
+                <div className="flex mb-3">{renderStars(testimonial.rating)}</div>
+
+                {/* Comment */}
+                <p className="text-sm text-gray-300">{testimonial.comment}</p>
               </div>
-
-              {/* Rating Stars */}
-              <div className="flex mb-3">{renderStars(testimonial.rating)}</div>
-
-              {/* Comment */}
-              <p className="text-sm text-gray-300">{testimonial.comment}</p>
             </div>
           ))}
         </div>

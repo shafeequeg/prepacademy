@@ -10,7 +10,7 @@ const StudyAbroadSection: React.FC = () => {
   const studyAbroadCards: CourseCard[] = [
     { title: 'IELTS', description: 'English proficiency test for study, work, and migration' },
     { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.' },
-    { title: 'ACET', description: 'Entrance exam for admission into various universities' },
+    { title: 'ACT', description: 'Entrance exam for admission into various universities' },
     { title: 'GRE', description: 'Graduate school admission test for various disciplines' },
     { title: 'GMAT', description: 'Global entrance exam for MBA and business programs' }
   ];

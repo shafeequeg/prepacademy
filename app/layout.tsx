@@ -8,6 +8,8 @@ import Header from "@/app/components/header/Header";
 import Footer from "@/app/components/footer/Footer";
 import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import Toast styles
+// import { metadata } from "./metadata"; // Import metadata
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +39,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}>
-        {/* Hide Header on "/hidden-page" */}
         <ToastContainer position="top-right" autoClose={3000} />
 
         {pathname !== "/blogdetails" && <Header />}

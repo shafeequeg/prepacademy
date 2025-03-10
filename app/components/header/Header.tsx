@@ -43,22 +43,24 @@ export default function Header() {
         {/* Logo */}
         
         <div className="flex items-center">
-
-          <Image
+<Link href={"/"}>
+<Image
             src="/Headerlogo.png"
             alt="Prep Academy Logo"
             width={150}
             height={50}
             className="h-12 w-auto"
           />
+</Link>
+          
         </div>
   
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 items-center">
-          <Link href="/" className="text-gray-800 hover:text-white text-base  font-semibold">
+          <Link href="/" className="text-gray-800 hover:text-white text-xl  font-semibold">
             Home
           </Link>
-          <Link href="/aboutus" className="text-gray-800 hover:text-white text-base font-semibold">
+          <Link href="/aboutus" className="text-gray-800 hover:text-white text-xl font-semibold">
             About Us
           </Link>
   
@@ -70,7 +72,7 @@ export default function Header() {
             >
               <button
                 onClick={() => router.push("/allcourses")} // Redirects when clicked
-                className="text-gray-800 hover:text-white text-base font-semibold flex items-center"
+                className="text-gray-800 hover:text-white text-xl font-semibold flex items-center"
               >
                 All Courses ▼
               </button>
@@ -94,13 +96,13 @@ export default function Header() {
               )}
             </div>
          
-          <Link href="/blogs" className="text-gray-800 hover:text-white text-base font-semibold">
+          <Link href="/blogs" className="text-gray-800 hover:text-white text-xl font-semibold">
             Blogs
           </Link>
-          <a href="/contact" className="text-gray-800 hover:text-white text-base font-semibold">
+          <a href="/contact" className="text-gray-800 hover:text-white text-xl font-semibold">
             Contact
           </a>
-          <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
+          <a href="https://test.prepacademy.in/" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-xl font-semibold">
             Take A Quick Test
           </a>
         </nav>
@@ -158,7 +160,7 @@ export default function Header() {
   <a href="/contact" className="text-gray-800 hover:text-white text-sm font-semibold">
             Contact
           </a>
-          <a href="#" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
+          <a href="https://test.prepacademy.in/" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
             Take A Quick Test
           </a>
         </nav>
