@@ -13,6 +13,7 @@ export default function Banner() {
   const [showIcons, setShowIcons] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
 
   const [formData, setFormData] = useState({
@@ -81,6 +82,31 @@ export default function Banner() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const allcoursescard = [
+    { 
+      image: "/bannerbook.png",
+      title: "School",
+      color: "#F55D3E",
+      description: "Foundational learning for all ages.",
+      path: "/school-courses"
+    },
+    { 
+      image: "/bannerbank.png", 
+      title: "College",
+      color: "#F55D3E",
+      description: "Higher education, diverse disciplines.",
+      path: "/college-courses"
+    },
+    { 
+      image: "/bannerglobal.png",
+      title: "Study Abroad",
+      color: "#F55D3E",
+      description: "Global opportunities, endless horizons.",
+      path: "/study-abroad"
+    },
+  ];
+
+
   return (
     <div className="w-full h-screen flex flex-col overflow-hidden">
       {/* Fixed Contact Icons */}
@@ -89,6 +115,7 @@ export default function Banner() {
     ${showIcons ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
     transition-all duration-500 ease-in-out`}
 >
+  
   {/* Phone Icon with pulse animation */}
   <div className="group relative">
     <div className="absolute inset-0 bg-[#F55D3E]/20 rounded-full animate-ping group-hover:animate-none"></div>
@@ -122,8 +149,9 @@ export default function Banner() {
       <section className="flex-grow bg-gradient-to-r text-white py-4 flex items-center mt-14">
   <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-8">
     {/* Left Section - reduced text size and spacing */}
-    <div className="max-w-xl text-center md:text-left md:w-2/5 mb-6 md:mb-0">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
+    <div className="max-w-xl text-center  md:text-left md:w-2/5 mb-6 md:mb-0 custom-mt">
+   
+      <h1 className="text-2xl md:text-3xl md:mt-12 lg:text-4xl font-bold mb-2">
         <span className="bg-none text-[#F55D3E]">Your Mentor <br /> And Guide <br /></span> For Brighter Future
       </h1>
       <p className="text-sm md:text-base lg:text-lg mb-3">
@@ -157,12 +185,15 @@ export default function Banner() {
           } 
           
           .animate-marquee { 
-            animation: marquee 15s linear infinite; 
+            animation: marquee 35s linear infinite; 
           } 
           
           .animate-marquee2 { 
-            animation: marquee2 15s linear infinite; 
+            animation: marquee 35s linear infinite; 
           }
+         @media (min-width: 1024px) and (max-width: 1024px) { 
+ 
+
         `}</style>
         <div className="relative py-2 whitespace-nowrap">
           <div className="animate-marquee inline-block">
@@ -217,48 +248,37 @@ export default function Banner() {
 </section>
       {/* Cards Section - reduced padding and size */}
    {/* Cards Section - reduced padding and size */}
-<section className="bg-[#130808] py-3 px-3 md:py-4 z-10  md:px-4 rounded-md mt-auto">
-  <div className="container mx-auto">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
-      {[
-        { 
-          image: "/bannerbook.png",
-          title: "School",
-          color: "#F55D3E",
-          description: "Foundational learning for all ages."
-        },
-        { 
-          image: "/bannerbank.png", 
-          title: "College",
-          color: "#F55D3E",
-          description: "Higher education, diverse disciplines."
-        },
-        { 
-          image: "/bannerglobal.png",
-          title: "Study Abroad",
-          color: "#F55D3E",
-          description: "Global opportunities, endless horizons."
-        },
-      ].map((item, index) => (
-        <div 
-          key={index} 
-          className="bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md px-3 py-3 md:px-4 md:py-4"
-        >
-          <div className="flex flex-col items-center">
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
-            />
-            
-            <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold mb-2">{item.title}</h2>
-            <p className="text-white text-base md:text-lg ">{item.description}</p> 
-          </div>
+   <section className="bg-[#130808] py-3 px-3 md:py- z-10 md:px- rounded-md mt-auto">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
+          {allcoursescard.map((item, index) => (
+            <Link 
+              href={item.path} 
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              className="transition-transform duration-200 ease-in-out"
+            >
+              <div 
+                className={`bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md px-3 py-3 md:px-4 md:py-4 transform ${
+                  activeIndex === index ? "scale-105 shadow-lg shadow-[#F55D3E]" : "hover:scale-105"
+                } transition-all duration-300`}
+              >
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
+                  />
+                  
+                  <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold mb-2">{item.title}</h2>
+                  <p className="text-white text-base md:text-lg">{item.description}</p> 
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
 
 {isModalOpen && (

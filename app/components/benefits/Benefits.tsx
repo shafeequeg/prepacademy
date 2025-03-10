@@ -51,19 +51,19 @@ const Benefits = () => {
   const benefitCards = [
     {
       title: 'Innovative Live Platform',
-      // description: 'We integrate real-time interactive features, adaptive learning technologies, and immersive content delivery to enhance the educational experience.'
+      icon: '/whystudywithus1.png', // Replace with your image path
     },
     {
       title: 'State of The Operating System',
-      // description: 'Providing students with comprehensive knowledge essential for academic and professional success.'
+      icon: '/whystudywithus2.png',
     },
     {
       title: 'Hybrid Model Coaching Program',
-      // description: 'Combines face-to-face training with online support, offering personalized guidance.'
+      icon: '/whystudywithus3.png',
     },
     {
       title: 'Expert Educators',
-      // description: 'Our expert educators are highly skilled professionals who continually enhance their teaching methods.'
+      icon: '/whystudywithus3.png',
     }
   ];
 
@@ -182,16 +182,16 @@ const Benefits = () => {
 
         {/* Benefits Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          {benefitCards.map((card, index) => (
-            <div 
-              key={index}
-              className="bg-gradient-to-b from-[#2B1615] to-[#1A0F0E] rounded-lg p-6 hover:from-[#3A1F1D] hover:to-[#2B1615] transition-all duration-300"
-            >
-              <h3 className="text-[#F55D3E] text-xl font-semibold mb-4">{card.title}</h3>
-              {/* <p className="text-gray-300">{card.description}</p> */}
-            </div>
-          ))}
-        </div>
+  {benefitCards.map((card, index) => (
+    <div 
+      key={index}
+      className="bg-gradient-to-b from-[#2B1615] to-[#1A0F0E] rounded-lg p-6 hover:from-[#3A1F1D] hover:to-[#2B1615] transition-all duration-300 flex flex-col items-center text-center"
+    >
+      <img src={card.icon} alt={card.title} className="w-12 h-12 mb-4" /> 
+      <h3 className="text-[#F55D3E] text-xl font-semibold mb-4">{card.title}</h3>
+    </div>
+  ))}
+</div>
       </div>
 
       {/* Statistics Section - Using Intersection Observer */}
