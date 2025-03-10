@@ -103,7 +103,7 @@ const StudentTestimonials = () => {
           className="flex overflow-x-hidden scroll-smooth relative"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
               className="flex-shrink-0 w-1/4 p-2" // 4 cards in a row
