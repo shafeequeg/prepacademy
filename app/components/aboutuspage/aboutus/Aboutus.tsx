@@ -483,9 +483,9 @@ const PrepAcademyTransform = () => {
                   });
                 }
               }}
-              className={`w-3 h-3 rounded-full ${
-                activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-              }`}
+              // className={`w-3 h-3 rounded-full ${
+              //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+              // }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -506,9 +506,9 @@ const PrepAcademyTransform = () => {
                  });
                }
              }}
-             className={`w-3 h-3 rounded-full ${
-              activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-             }`}
+            //  className={`w-3 h-3 rounded-full ${
+            //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+            //  }`}
              aria-label={`Go to slide ${index + 1}`}
            />
          ))}
