@@ -68,8 +68,8 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
 const offeringTypes = [
   { id: "online", label: "Online Class" },
   { id: "Classroom", label: "Classroom" },
-  { id: "test", label: "test Series" },
-  { id: "Bookmaterials", label: "Book materials" },
+  { id: "test", label: "Test Series" },
+  { id: "Bookmaterials", label: "Book Materials" },
   { id: "SelfBased", label: "Self Based" },
 
 ];

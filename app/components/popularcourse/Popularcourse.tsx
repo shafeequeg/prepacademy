@@ -216,7 +216,7 @@ console.log(formData);
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left column - Community section */}
             <div className="bg-[#140A0A] rounded-lg p-6">
-              <h3 className="text-xl font-medium text-white mb-4">Help us building Largest CAT Communities</h3>
+              <h3 className="text-xl font-medium text-white mb-4">Help us building Largest  Communities</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#220F0F] rounded-lg p-4 flex items-center justify-center gap-x-48 col-span-1 sm:col-span-2">
@@ -281,7 +281,7 @@ console.log(formData);
             
             {/* Right column - Form */}
             <div className="bg-[#140A0A] rounded-lg p-6">
-              <h3 className="text-xl font-medium text-white mb-6">Book 1 on 1 Counselling from MBA Experts</h3>
+              <h3 className="text-xl font-medium text-white mb-6">Book 1 on 1 Counselling from  Experts</h3>
               
               <form>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">

@@ -141,7 +141,7 @@ const Benefits = () => {
             
             {/* Left Side (Heading & Button) */}
             <div className="flex flex-col items-start text-left w-[60%]">
-              <h2 className="text-2xl md:text-3xl font-bold ">
+              <h2 className="text-2xl md:text-2xl font-bold ">
                 <span className="text-[#F55D3E] italic font-medium">Register</span> 
                 <span className="text-white"> and Get a Free Trial</span>
               </h2>

@@ -323,7 +323,8 @@ export default function ContactPage() {
       <div className="bg-[#1E1615] px-4 sm:px-6 lg:px-8 py-12">
   <h2 className="text-center text-4xl font-semibold mb-8">
     <span className="text-[#E25B41] font-serif italic font-bold">Do More With</span>
-    <span className="text-white"> PrepAcademy?</span>
+    {/* <span className="text-white"> */}
+    <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>       ?
   </h2>
 
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
