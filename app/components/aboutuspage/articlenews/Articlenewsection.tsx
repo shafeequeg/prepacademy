@@ -68,6 +68,7 @@ const NewsAndArticles: React.FC = () => {
       title: "How to Crack CAT?",
       description: "Cracking the Common Admission Test (CAT) 2025 requires a strategic and disciplined approach. Here's a comprehensive guide to help you prepare effectively:",
     },
+    
   ];
 
   // const defaultBlogs: Blog[] = [

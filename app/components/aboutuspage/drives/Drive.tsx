@@ -10,12 +10,12 @@ const DrivesUsSection = () => {
     },
     {
       title: "Gamified Test Prep",
-      icon: "/secretsauce2.png"
+      icon: "/sauce2.png"
       // description: "Challenges, leaderboards & rewards to keep you hooked"
     },
-    {
+      {
       title: "Mentors Who've Walked the Path",
-      icon: "/secretsauce3.jpg"
+      icon: "/secret3.png"
       // description: "Learn from top scorers and experienced guides"
     },
     {

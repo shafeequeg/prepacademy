@@ -8,119 +8,119 @@ import { ArrowRight } from 'lucide-react';
 const ExamPrepHomepage: React.FC = () => {
   const gladiators = [
     {
-      name: 'Dr. Swati A. Mishra',
-      title: 'Director Operations Lucknow Centre',
-      image: '/gladiators/gladiator1.jpg'
+      name: 'Hanna Susan Koshy ',
+      title: 'Founder',
+      image: '/gladiators/HannaSusanKoshy.png'
     },
     {
-      name: 'Ashutosh Mishra',
-      title: 'Master IIM Ahmedabad',
-      image: '/gladiators/gladiator2.webp'
+      name: '	Dr. Nithya S Cherian ',
+      title: 'Co-Founder',
+      image: '/gladiators/DrNithyaSCherian.png'
     },
     {
-      name: 'Deepak Kushwaha',
-      title: 'Master IIM Lucknow',
-      image: '/gladiators/gladiator3.jpg'
+      name: '	Dr. Aleena Arun ',
+      title: 'Co-Founder',
+      image: '/gladiators/aleenaarun.png'
     },
     {
-      name: 'Raghav Shukla',
-      title: 'Co-Founder @ CAT Tutorials',
-      image: '/gladiators/gladiator4.jpg'
+      name: '	Annie Eapen ',
+      title: 'Co-Founder ',
+      image: '/gladiators/AnnieEapen.png'
     },
     {
-      name: 'Nikhil Bhalla',
-      title: 'CEO @ CATTutorials',
-      image: '/gladiators/gladiator5.jpg'
+      name: '	Ashutosh Mishra',
+      title: 'Mentor - IIM Ahmedabad',
+      image: '/gladiators/AshutoshMishra.png'
     },
     {
-      name: 'Taruna B. Khanna',
-      title: '23 Years EXPERIENCED Certified Trainer VARC/DM/GWPI',
-      image: '/gladiators/gladiator6.png'
+      name: '	Deepak Kushwaha ',
+      title: 'Mentor - IIM Lucknow',
+      image: '/gladiators/deepakkushwah.png'
     },
     {
-      name: 'Nitin Kukreja',
-      title: 'IIM Raipur',
-      image: '/gladiators/gladiator7.webp'
+      name: '	Raghav Shukla',
+      title: '',
+      image: '/gladiators/RaghavShukla.png'
     },
     {
-      name: 'Kavya Narayani',
+      name: '	Nikhil Bhalla',
       title: '22 Years Experienced VARC Mentor',
-      image: '/gladiators/gladiator8.jpg'
+      image: '/gladiators/NikhilBhalla.png'
     },
-    {
-      name: 'Rahul',
-      title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
-      image: '/gladiators/gladiator9.jpg'
-    },
-    {
-      name: 'Ashutosh Mishra',
-      title: 'Master IIM Ahmedabad',
-      image: '/gladiators/gladiator10.png'
-    },
-    {
-      name: 'Deepak Kushwaha',
-      title: 'Master IIM Lucknow',
-      image: '/gladiators/gladiator11.png'
-    }
+    // {
+    //   name: 'Rahul',
+    //   title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
+    //   image: '/gladiators/gladiator9.jpg'
+    // },
+    // {
+    //   name: 'Ashutosh Mishra',
+    //   title: 'Master IIM Ahmedabad',
+    //   image: '/gladiators/gladiator10.png'
+    // },
+    // {
+    //   name: 'Deepak Kushwaha',
+    //   title: 'Master IIM Lucknow',
+    //   image: '/gladiators/gladiator11.png'
+    // }
 
   ];
 
   const gladiatorssecond = [
     {
-      name: 'Dr. Swati A. Mishra',
-      title: 'Director Operations Lucknow Centre',
-      image: '/gladiators/gladiator1.jpg'
+      name: 'Praveen J Nair ',
+      title: 'Mentor, QA Expert',
+      image: '/gladiators/PraveenJNair.png'
     },
     {
-      name: 'Ashutosh Mishra',
-      title: 'Master IIM Ahmedabad',
-      image: '/gladiators/gladiator2.webp'
+      name: '	Sreejith A',
+      title: 'Mentor, VARC Expert',
+      image: '/gladiators/sreejith.png'
     },
     {
-      name: 'Deepak Kushwaha',
-      title: 'Master IIM Lucknow',
-      image: '/gladiators/gladiator3.jpg'
+      name: '	Varghese Joseph ',
+      title: 'Mentor, QA Expert',
+      image: '/gladiators/Varghese.png'
     },
     {
-      name: 'Raghav Shukla',
-      title: 'Co-Founder @ CAT Tutorials',
-      image: '/gladiators/gladiator4.jpg'
+      name: 'Dr. Swati A. Mishra ',
+      title: 'Mentor',
+      image: '/gladiators/DrSwatiAMishra.png'
     },
     {
-      name: 'Nikhil Bhalla',
-      title: 'CEO @ CATTutorials',
-      image: '/gladiators/gladiator5.jpg'
+      name: 'Taruna B. Khanna ',
+      title: 'Mentor',
+      image: '/gladiators/TarunaBKhann.png'
     },
     {
-      name: 'Taruna B. Khanna',
-      title: '23 Years EXPERIENCED Certified Trainer VARC/DM/GWPI',
-      image: '/gladiators/gladiator6.png'
+      name: 'Kavya Narayani ',
+      title: 'Mentor',
+      image: '/gladiators/Kavya.png'
     },
     {
-      name: 'Nitin Kukreja',
-      title: 'IIM Raipur',
-      image: '/gladiators/gladiator7.webp'
+      name: 'Nandhu Anilkumar ',
+      title: 'Business Development Manager',
+      image: '/gladiators/NandhuAnilkumar.png'
     },
     {
-      name: 'Kavya Narayani',
-      title: '22 Years Experienced VARC Mentor',
-      image: '/gladiators/gladiator8.jpg'
+      name: 'Sandya K V',
+      title: 'Student Counselor',
+      image: '/gladiators/SandyaKV.png'
     },
-    {
-      name: 'Rahul',
-      title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
-      image: '/gladiators/gladiator9.jpg'
-    },
-    {
-      name: 'Ashutosh Mishra',
-      title: 'Master IIM Ahmedabad',
-      image: '/gladiators/gladiator10.png'
-    },
-    {
-      name: 'Deepak Kushwaha',
-      title: 'Master IIM Lucknow',
-      image: '/gladiators/gladiator11.png'
-    }
+    // {
+    //   name: 'Rahul',
+    //   title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
+    //   image: '/gladiators/gladiator9.jpg'
+    // },
+    // {
+    //   name: 'Ashutosh Mishra',
+    //   title: 'Master IIM Ahmedabad',
+    //   image: '/gladiators/gladiator10.png'
+    // },
+    // {
+    //   name: 'Deepak Kushwaha',
+    //   title: 'Master IIM Lucknow',
+    //   image: '/gladiators/gladiator11.png'
+    // }
 
   ];
 
@@ -241,231 +241,255 @@ const ExamPrepHomepage: React.FC = () => {
       {/* Header Section with Gladiators - Full Width */}
       <header className="bg-gradient-to-r from-gray-900 to-gray-800 ">
         {/* Remove container and max-width constraints */}
-            <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
-              {/* Section Header - Updated for Responsive Layout */}
-              <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
-                {/* Left Side - Title & Subtitle */}
-                <div className="flex items-center">
-                  <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
-                    Meet Your Exam <br />
-                    <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
-                  </h2>
+              <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
+                 {/* Section Header - Updated for Responsive Layout */}
+                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
+                   {/* Left Side - Title & Subtitle */}
+                   <div className="flex items-center">
+                     <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
+                       Meet Your Exam <br />
+                       <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
+                     </h2>
+                   </div>
+               
+                   {/* Right Side - Description */}
+                   {/* <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
+                     Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+                     Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+                     Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+          
+                   </h4> */}
+                <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
+            <span className="text-2xl md:text-5xl text-gray-400  absolute -left-2 top-0">"</span>
+            <span>Behind every student&apos;s success are passionate, <br />
+            experienced educators who&apos;ve cracked the toughest exams.</span>
+            <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">”</span>
+          </h4>
+                 </div>
+               
+                 {/* Gladiators Carousel - Updated to show 4 in a row */}
+                 <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
+                   {/* Left Scroll Button */}
+                   <button
+                     onClick={scrollLeft}
+                     className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+                     aria-label="Scroll left"
+                   >
+                     <svg
+                       xmlns="http://www.w3.org/2000/svg"
+                       className="h-6 w-6"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor"
+                     >
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                     </svg>
+                   </button>
+               
+                   {/* Carousel Container */}
+                   <div
+            ref={carouselRef}
+            className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+            style={{
+              scrollSnapType: "x mandatory",
+              msOverflowStyle: "none", // Hide scrollbar in IE/Edge
+              scrollbarWidth: "none", // Hide scrollbar in Firefox
+            }}
+          >
+            {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
+          
+            {/* Group gladiators into sets of 4 */}
+            {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
+              <div
+                key={groupIndex}
+                className="min-w-full flex justify-center px-4 flex-nowrap"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                {/* Display 4 gladiators per slide */}
+               {/* First Carousel - Update this code */}
+          {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
+            <div key={index} className="w-1/4 px-2">
+              <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Image
+                      src={gladiator.image}
+                      alt={gladiator.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-full"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectPosition: "center"
+                      }}
+                    />
+                  </div>
                 </div>
-            
-                {/* Right Side - Description */}
-                <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
-                  Behind every student&apos;s success are passionate, experienced educators who&apos;ve cracked the toughest exams.
+                <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                  {gladiator.name}
                 </h4>
+                <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
               </div>
-            
-              {/* Gladiators Carousel - Updated to show 4 in a row */}
-              <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
-                {/* Left Scroll Button */}
-                <button
-                  onClick={scrollLeft}
-                  className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                  aria-label="Scroll left"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-            
-                {/* Carousel Container */}
-                <div
-                  ref={carouselRef}
-                  className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
-                  style={{
-                    scrollSnapType: "x mandatory",
-                    msOverflowStyle: "none", // Hide scrollbar in IE/Edge
-                    scrollbarWidth: "none", // Hide scrollbar in Firefox
-                  }}
-                >
-                  {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
-                  <style jsx>{`
-                    div::-webkit-scrollbar {
-                      display: none;
-                    }
-                  `}</style>
-            
-                  {/* Group gladiators into sets of 4 */}
-                  {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
-                    <div
-                      key={groupIndex}
-                      className="min-w-full flex justify-center px-4 flex-nowrap"
-                      style={{ scrollSnapAlign: "start" }}
+            </div>
+          ))}
+              </div>
+            ))}
+          </div>
+               
+                   {/* Right Scroll Button */}
+                   <button
+                     onClick={scrollRight}
+                     className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+                     aria-label="Scroll right"
+                   >
+                     <svg
+                       xmlns="http://www.w3.org/2000/svg"
+                       className="h-6 w-6"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor"
+          
+                     >
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                     </svg>
+                   </button>
+                 </div>
+          
+                 <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
+                    <button
+                      onClick={scrollLeftsecond}
+                      className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+                      aria-label="Scroll left"
                     >
-                      {/* Display 4 gladiators per slide */}
-                      {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-                        <div key={index} className="w-1/4 px-2">
-                          <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                            <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 relative overflow-hidden rounded-full mb-4">
-                              <Image
-                                src={gladiator.image}
-                                alt={gladiator.name}
-                                layout="fill"
-                                objectFit="cover"
-                                className="rounded-full"
-                              />
-                            </div>
-                            <h4 className="font-semibold text-sm md:text-lg text-white text-center">
-                              {gladiator.name}
-                            </h4>
-                            <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
-                          </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <div
+                      ref={carouselRefsecond}
+                      className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+                      style={{
+                        scrollSnapType: "x mandatory",
+                        msOverflowStyle: "none",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      <style jsx>{`
+                        div::-webkit-scrollbar {
+                          display: none;
+                        }
+                      `}</style>
+                      {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, groupIndex) => (
+                        <div
+                          key={groupIndex}
+                          className="min-w-full flex justify-center px-4 flex-nowrap"
+                          style={{ scrollSnapAlign: "start" }}
+                        >
+                         {gladiatorssecond.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
+            <div key={index} className="w-1/4 px-2">
+              <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Image
+                      src={gladiator.image}
+                      alt={gladiator.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-full"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectPosition: "center"
+                      }}
+                    />
+                  </div>
+                </div>
+                <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                  {gladiator.name}
+                </h4>
+                <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
+              </div>
+            </div>
+          ))}
                         </div>
                       ))}
                     </div>
-                  ))}
-                </div>
-            
-                {/* Right Scroll Button */}
-                <button
-                  onClick={scrollRight}
-                  className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                  aria-label="Scroll right"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-       
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-       
-              <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
-                 <button
-                   onClick={scrollLeftsecond}
-                   className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                   aria-label="Scroll left"
-                 >
-                   <svg
-                     xmlns="http://www.w3.org/2000/svg"
-                     className="h-6 w-6"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                   >
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                   </svg>
-                 </button>
-                 <div
-                   ref={carouselRefsecond}
-                   className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
-                   style={{
-                     scrollSnapType: "x mandatory",
-                     msOverflowStyle: "none",
-                     scrollbarWidth: "none",
-                   }}
-                 >
-                   <style jsx>{`
-                     div::-webkit-scrollbar {
-                       display: none;
-                     }
-                   `}</style>
-                   {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, groupIndex) => (
-                     <div
-                       key={groupIndex}
-                       className="min-w-full flex justify-center px-4 flex-nowrap"
-                       style={{ scrollSnapAlign: "start" }}
-                     >
-                       {gladiatorssecond.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-                         <div key={index} className="w-1/4 px-2">
-                           <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                             <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 relative overflow-hidden rounded-full mb-4">
-                               <Image
-                                 src={gladiator.image}
-                                 alt={gladiator.name}
-                                 layout="fill"
-                                 objectFit="cover"
-                                 className="rounded-full"
-                               />
-                             </div>
-                             <h4 className="font-semibold text-sm md:text-lg text-white text-center">
-                               {gladiator.name}
-                             </h4>
-                             <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
-                           </div>
-                         </div>
-                       ))}
-                     </div>
+                    <button
+                      onClick={scrollRightsecond}
+                      className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+                      aria-label="Scroll right"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+          
+                  { /* Carousel Indicators */ }
+                 {/* Remove this duplicate section */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveIndexsecond(index);
+                  if (carouselRefsecond.current) {
+                    const slideWidth = carouselRefsecond.current.offsetWidth;
+                    carouselRefsecond.current.scrollTo({
+                      left: index * slideWidth,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                // className={`w-3 h-3 rounded-full ${
+                //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+                // }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+               
+                 {/* Carousel Indicators - Updated for groups of 4 */}
+                 <div className="flex justify-center mt-8 space-x-2">
+                   {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, index) => (
+                     <button
+                       key={index}
+                       onClick={() => {
+                        setActiveIndexsecond(index);
+                         if (carouselRefsecond.current) {
+                           const slideWidth = carouselRefsecond.current.offsetWidth;
+                           carouselRefsecond.current.scrollTo({
+                             left: index * slideWidth,
+                             behavior: "smooth",
+                           });
+                         }
+                       }}
+                      //  className={`w-3 h-3 rounded-full ${
+                      //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+                      //  }`}
+                       aria-label={`Go to slide ${index + 1}`}
+                     />
                    ))}
                  </div>
-                 <button
-                   onClick={scrollRightsecond}
-                   className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                   aria-label="Scroll right"
-                 >
-                   <svg
-                     xmlns="http://www.w3.org/2000/svg"
-                     className="h-6 w-6"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                   >
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                   </svg>
-                 </button>
-               </div>
-       
-               { /* Carousel Indicators */ }
-               <div className="flex justify-center mt-8 space-x-2">
-                 {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, index) => (
-                   <button
-                     key={index}
-                     onClick={() => {
-                       setActiveIndexsecond(index);
-                       if (carouselRefsecond.current) {
-                         const slideWidth = carouselRefsecond.current.offsetWidth;
-                         carouselRefsecond.current.scrollTo({
-                           left: index * slideWidth,
-                           behavior: "smooth",
-                         });
-                       }
-                     }}
-                     // className={`w-3 h-3 rounded-full ${
-                     //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-                     // }`}
-                     aria-label={`Go to slide ${index + 1}`}
-                   />
-                 ))}
-               </div>
-            
-              {/* Carousel Indicators - Updated for groups of 4 */}
-              <div className="flex justify-center mt-8 space-x-2">
-                {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                     setActiveIndexsecond(index);
-                      if (carouselRefsecond.current) {
-                        const slideWidth = carouselRefsecond.current.offsetWidth;
-                        carouselRefsecond.current.scrollTo({
-                          left: index * slideWidth,
-                          behavior: "smooth",
-                        });
-                      }
-                    }}
-                   //  className={`w-3 h-3 rounded-full ${
-                   //   activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-                   //  }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </section> 
-
+               </section> 
       </header>
 
       {/* Rest of the code remains unchanged */}

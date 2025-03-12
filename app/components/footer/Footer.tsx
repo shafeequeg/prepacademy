@@ -31,25 +31,24 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Social Icons */}
             <div className="flex space-x-4">
-  {/* WhatsApp */}
-              <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+             {/* WhatsApp */}
+              <a href="https://wa.me/9446056789" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
                 <FaWhatsapp className="w-6 h-6" />
               </a>
             
               {/* Facebook */}
-              <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+              <a href="https://www.facebook.com/prepacademy.in" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
                 <FaFacebook className="w-6 h-6" />
               </a>
 
               {/* Instagram */}
-              <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+              <a href="https://www.instagram.com/prepacademy.in/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
                 <FaInstagram className="w-6 h-6" />
               </a>
 
               {/* LinkedIn */}
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+              <a href="https://www.linkedin.com/company/prep-academy-india/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
                 <FaLinkedin className="w-6 h-6" />
               </a>
             </div>
@@ -59,7 +58,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-white font-medium text-lg mb-4">STUDY WITH US</h3>
             <ul className="space-y-3">
-              {["School Courses", "College Courses", "Study Abroad"].map((text, index) => (
+              {["School Courses", "College Courses", "Study Abroad","Career Counseling"].map((text, index) => (
                 <li key={index}>
                   <a href="#" className="text-gray-300 hover:text-white text-sm">
                     {text}
@@ -71,9 +70,9 @@ const Footer = () => {
 
           {/* ABOUT ME */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-medium text-lg mb-4">ABOUT ME</h3>
+            <h3 className="text-white font-medium text-lg mb-4">ABOUT PREPACADEMY</h3>
             <ul className="space-y-3">
-              {["Find a Centre", "Become a Franchise", "Become an Employee"].map((text, index) => (
+              {["About me ","Find a Centre", "Become a Franchise", "Become an Employee"].map((text, index) => (
                 <li key={index}>
                   <a href="#" className="text-gray-300 hover:text-white text-sm">
                     {text}

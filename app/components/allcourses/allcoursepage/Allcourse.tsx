@@ -12,6 +12,7 @@ interface CourseCardProps {
   className?: string; 
 }
 
+
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
   const cardContent = (
     <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>

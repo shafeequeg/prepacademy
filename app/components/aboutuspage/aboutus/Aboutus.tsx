@@ -7,7 +7,7 @@ const PrepAcademyTransform = () => {
   const gladiators = [
     {
       name: 'Hanna Susan Koshy ',
-      title: 'Founder',
+      title: 'Founder , Symbiosis (Economics, MBA)',
       image: '/gladiators/HannaSusanKoshy.png'
     },
     {
@@ -25,45 +25,8 @@ const PrepAcademyTransform = () => {
       title: 'Co-Founder ',
       image: '/gladiators/AnnieEapen.png'
     },
-    {
-      name: '	Ashutosh Mishra',
-      title: 'Mentor - IIM Ahmedabad',
-      image: '/gladiators/AshutoshMishra.png'
-    },
-    {
-      name: '	Deepak Kushwaha ',
-      title: 'Mentor - IIM Lucknow',
-      image: '/gladiators/deepakkushwah.png'
-    },
-    {
-      name: '	Raghav Shukla',
-      title: '',
-      image: '/gladiators/RaghavShukla.png'
-    },
-    {
-      name: '	Nikhil Bhalla',
-      title: '22 Years Experienced VARC Mentor',
-      image: '/gladiators/NikhilBhalla.png'
-    },
-    // {
-    //   name: 'Rahul',
-    //   title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
-    //   image: '/gladiators/gladiator9.jpg'
-    // },
-    // {
-    //   name: 'Ashutosh Mishra',
-    //   title: 'Master IIM Ahmedabad',
-    //   image: '/gladiators/gladiator10.png'
-    // },
-    // {
-    //   name: 'Deepak Kushwaha',
-    //   title: 'Master IIM Lucknow',
-    //   image: '/gladiators/gladiator11.png'
-    // }
+   
 
-  ];
-
-  const gladiatorssecond = [
     {
       name: 'Praveen J Nair ',
       title: 'Mentor, QA Expert',
@@ -84,6 +47,47 @@ const PrepAcademyTransform = () => {
       title: 'Mentor',
       image: '/gladiators/DrSwatiAMishra.png'
     },
+    // {
+    //   name: 'Rahul',
+    //   title: '15 Years Experience General Awareness and Innovation and Entrepreneurship Expert',
+    //   image: '/gladiators/gladiator9.jpg'
+    // },
+    // {
+    //   name: 'Ashutosh Mishra',
+    //   title: 'Master IIM Ahmedabad',
+    //   image: '/gladiators/gladiator10.png'
+    // },
+    // {
+    //   name: 'Deepak Kushwaha',
+    //   title: 'Master IIM Lucknow',
+    //   image: '/gladiators/gladiator11.png'
+    // }
+
+  ];
+
+  const gladiatorssecond = [
+   
+    {
+      name: '	Ashutosh Mishra',
+      title: 'Mentor - IIM Ahmedabad',
+      image: '/gladiators/AshutoshMishra.png'
+    },
+    {
+      name: '	Deepak Kushwaha ',
+      title: 'Mentor - IIM Lucknow',
+      image: '/gladiators/deepakkushwah.png'
+    },
+    {
+      name: '	Raghav Shukla',
+      title: 'Mentor IIM kozhikode',
+      image: '/gladiators/RaghavShukla.png'
+    },
+    {
+      name: '	Nikhil Bhalla',
+      title: '22 Years Experienced VARC Mentor',
+      image: '/gladiators/NikhilBhalla.png'
+    },
+
     {
       name: 'Taruna B. Khanna ',
       title: 'Mentor',
@@ -302,9 +306,18 @@ const PrepAcademyTransform = () => {
          </div>
      
          {/* Right Side - Description */}
-         <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
-           Behind every student&apos;s success are passionate, experienced educators who&apos;ve cracked the toughest exams.
-         </h4>
+         {/* <h4 className="text-gray-300 text-sm md:text-lg max-w-md md:max-w-lg md:text-right mt-4 md:mt-0 leading-tight whitespace-pre-line">
+           Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+           Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+           Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
+
+         </h4> */}
+      <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
+  <span className="text-2xl md:text-5xl text-gray-400  absolute -left-2 top-0">"</span>
+  <span>Behind every student&apos;s success are passionate, <br />
+  experienced educators who&apos;ve cracked the toughest exams.</span>
+  <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">”</span>
+</h4>
        </div>
      
        {/* Gladiators Carousel - Updated to show 4 in a row */}
@@ -591,7 +604,7 @@ const PrepAcademyTransform = () => {
                 style={{ backgroundImage: "url(/lightning.svg)" }} 
               ></span>
               <span className="whitespace-nowrap font-medium">
-                Brutal Honesty & Proven Strategies
+                Brutal Honesty & Proven Strategies  
               </span>
             </div>
           </div>

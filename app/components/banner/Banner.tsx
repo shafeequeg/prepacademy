@@ -198,15 +198,15 @@ export default function Banner() {
         `}</style>
         <div className="relative py-2 whitespace-nowrap">
           <div className="animate-marquee inline-block">
-            <span className="mx-4 text-sm text-white font-medium">CAT 2025 will likely be conducted on November 30, 2025</span>
-            <span className="mx-4 text-sm  text-white  font-medium">JIPAMT (2025) Registration Window is Extended till 17th March 11:50 PM</span>
+            <span className="mx-4 text-sm text-white font-medium"> CAT 2025 will likely be conducted on November 30, 2025</span>
+            <span className="mx-4 text-sm  text-white  font-medium">JIPMAT (2025) Registration Window is Extended till 17th March 11:50 PM</span>
             {/* <span className="mx-4 text-sm text-white  font-medium">🎓 Scholarship Test on 15th March</span>
             <span className="mx-4 text-sm  text-white font-medium">⭐ 95% Success Rate in Last Exams</span> */}
           </div>
           
           <div className="absolute top-2  animate-marquee2 inline-block">
             <span className="mx-4 text-sm  text-white font-medium">CAT 2025 will likely be conducted on November 30, 2025</span>
-            <span className="mx-4 text-sm  text-white font-medium">JIPAMT (2025) Registration Window is Extended till 17th March 11:50 PM</span>
+            <span className="mx-4 text-sm  text-white font-medium">JIPMAT (2025) Registration Window is Extended till 17th March 11:50 PM</span>
             {/* <span className="mx-4 text-sm  text-white font-medium">🎓 Scholarship Test on 15th March</span>
             <span className="mx-4 text-sm  text-white font-medium">⭐ 95% Success Rate in Last Exams</span> */}
           </div>

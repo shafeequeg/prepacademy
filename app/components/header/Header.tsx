@@ -57,10 +57,10 @@ export default function Header() {
   
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 items-center">
-          <Link href="/" className="text-gray-800 hover:text-white text-xl  font-semibold">
+          <Link href="/" className="text-white hover:text-white text-xl  font-semibold">
             Home
           </Link>
-          <Link href="/aboutus" className="text-gray-800 hover:text-white text-xl font-semibold">
+          <Link href="/aboutus" className="text-white hover:text-white text-xl font-semibold">
             About Us
           </Link>
   
@@ -72,7 +72,7 @@ export default function Header() {
             >
               <button
                 onClick={() => router.push("/allcourses")} // Redirects when clicked
-                className="text-gray-800 hover:text-white text-xl font-semibold flex items-center"
+                className="text-white hover:text-white text-xl font-semibold flex items-center"
               >
                 All Courses ▼
               </button>
@@ -96,10 +96,10 @@ export default function Header() {
               )}
             </div>
          
-          <Link href="/blogs" className="text-gray-800 hover:text-white text-xl font-semibold">
+          <Link href="/blogs" className="text-white hover:text-white text-xl font-semibold">
             Blogs
           </Link>
-          <a href="/contact" className="text-gray-800 hover:text-white text-xl font-semibold">
+          <a href="/contact" className="text-white hover:text-white text-xl font-semibold">
             Contact
           </a>
           <a href="https://test.prepacademy.in/" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-xl font-semibold">
