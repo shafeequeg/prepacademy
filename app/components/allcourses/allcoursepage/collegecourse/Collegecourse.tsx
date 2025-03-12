@@ -67,41 +67,29 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
 
 const offeringTypes = [
   { id: "online", label: "Online Class" },
-  { id: "offline", label: "Offline Class" },
-  { id: "test", label: "test Class" },
-  { id: "mock", label: "mock Class" },
-  { id: "Book materials", label: "Book materials" },
+  { id: "Classroom", label: "Classroom" },
+  { id: "test", label: "test Series" },
+  { id: "Bookmaterials", label: "Book materials" },
+  { id: "SelfBased", label: "Self Based" },
 
 ];
 
 const courseCards = [
   {
     id: "cat-online-1",
-    title: "CAT Online Classes ",
+    title: "Daily Class ",
     image: "/news1.png",
     type: "online",
     features: [
-      "Live & interactive sessions by IIM alumni",
-      "Ideal for first-time CAT takers",
-      "Focus on building a strong foundation",
-      "Day & Evening batches available",
+      "Personal mentoring",
+      "GDPI assistance",
+      "Live & interactive sessions",
+      "Live doubt-solving sessions",
     ],
   },
   {
     id: "cat-online-2",
-    title: "CAT Online Classes ",
-    image: "/news1.png",
-    type: "online",
-    features: [
-      "Live & interactive sessions by IIM alumni",
-      "Ideal for first-time CAT takers",
-      "Focus on building a strong foundation",
-      "Day & Evening batches available",
-    ],
-  },
-  {
-    id: "cat-online-3",
-    title: "CAT Online Night Classes",
+    title: "Night Class",
     image: "/news1.png",
     type: "online",
     features: [
@@ -112,17 +100,133 @@ const courseCards = [
     ],
   },
   {
-    id: "cat-night",
-    title: "CAT Night Classes",
+    id: "cat-online-3",
+    title: "Weekend Class",
     image: "/news1.png",
-    type: "offline1",
+    type: "online",
     features: [
-      "Advanced batches led by our Faculty",
-      "Ideal for those having conceptual clarity",
-      "Focus on a fast-paced study approach",
-      "Night sessions from 9:30 PM",
+      "Personal mentoring",
+      "GDPI assistance",
+      "Live & interactive sessions",
+      "Live doubt-solving sessions",
     ],
   },
+  {
+    id: "cat-Classroom-1",
+    title: " Day Classes",
+    image: "/news1.png",
+    type: "Classroom",
+    features: [
+      "Personal mentoring",
+      "GDPI assistance",
+      "Authentic Learning Experiences",
+      "Live & interactive sessions",
+      "Live doubt-solving sessions",
+    ],
+  },
+  {
+    id: "cat-Classroom-2",
+    title: " Night Classes",
+    image: "/news1.png",
+    type: "Classroom",
+    features: [
+      "Personal mentoring",
+      "GDPI assistance",
+      "Authentic Learning Experiences",
+      "Live & interactive sessions",
+      "Live doubt-solving sessions",
+    ],
+  },
+
+  {
+    id: "cat-Classroom-3",
+    title: " Weekend Classes",
+    image: "/news1.png",
+    type: "Classroom",
+    features: [
+      "Personal mentoring",
+      "GDPI assistance",
+      "Authentic Learning Experiences",
+      "Live & interactive sessions",
+      "Live doubt-solving sessions"
+    ],
+  },
+
+  {
+    id: "cat-test-1",
+    title: " Mock Test Only ",
+    image: "/news1.png",
+    type: "test",
+    features: [
+      "enhance exam preparation skill",
+      "10 Mocks test available",
+      "Personal mentoring",
+      "GDPI assistance",
+    ],
+  },
+
+  {
+    id: "cat-test-2",
+    title: " Test Series+ Mock:",
+    image: "/news1.png",
+    type: "test",
+    features: [
+      "Personal mentoring",
+      "GDPI assistance",
+      "Test Series",
+      "Mock Test",
+    ],
+  },
+
+  {
+    id: "cat-test-3",
+    title: " Mock +Test Series + Book Materials)",
+    image: "/news1.png",
+    type: "test",
+    features: [
+      "Personal mentoring",
+      "GDPI assistance",
+      "Test Series",
+      "Mock Test",
+      "Book Materials "
+    ],
+  },
+
+  {
+    id: "cat-Bookmaterials-1",
+    title: " Book Materials Only ",
+    image: "/news1.png",
+    type: "Bookmaterials",
+    features: [
+      "Complete Book Materils",
+     
+    ],
+  },
+
+  {
+    id: "cat-Bookmaterials-2",
+    title: " Test Series+ Mock Test + Book materials",
+    image: "/news1.png",
+    type: "Bookmaterials",
+    features: [
+      "Complete Book Materils",
+      "Mock Tests",
+      "Test Series",
+    ],
+  },
+
+  {
+    id: "cat-SelfBased-1",
+    title: " Self Based",
+    image: "/news1.png",
+    type: "SelfBased",
+    features: [
+      "Video lectures",
+      "Mock Test",
+      "Book Materials",
+    ],
+  },
+
 ];
 
 
@@ -208,7 +312,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
  
 
-  const demoVideos = [
+  const relatedVideos = [
     {
       title: "Preparing for the CAT 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
@@ -222,6 +326,23 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       videoId: "4g7cyj774_M", // Remove "&t=26s"
     }
   ];
+
+  
+  const demoVideos = [
+    {
+      title: "Preparing for the CAT 2025",
+      videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
+    },
+    {
+      title: "Strategies for CAT 2025",
+      videoId: "b2y5qz04RKk", // Remove "&t=11s"
+    },
+    {
+      title: "Best Coaching Centers",
+      videoId: "WaYzGw6qnQ8", // Remove "&t=26s"
+    }
+  ];
+  
   
 
   const [activeTab, setActiveTab] = useState("online");
@@ -242,10 +363,10 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
           {/* Left Content */}
           <div className="lg:w-[35%]">
             <div className="mb-6">
-              <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
+              {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
-              </p>
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Apply For CAT 2025</h2>
+              </p> */}
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CAT 2025 with Prep Academy </h2>
               <p className="text-gray-300 mb-8">
                 Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
               </p>
@@ -259,7 +380,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Minimum Grade Point Average Should Be 50%</p>
+    <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
   </div>
   <div className="flex items-center">
     <img 
@@ -267,7 +388,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Minimum Grade Point Average Should Be 50%</p>
+    <p className="text-white">Comprehensive CAT Online /Offline Course </p>
   </div>
 </div>
 
@@ -412,7 +533,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
     {/* Make videos full width */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-    {demoVideos.map((video, index) => (
+    {relatedVideos.map((video, index) => (
       <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
     ))}
   </div>

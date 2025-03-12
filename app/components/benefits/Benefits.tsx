@@ -168,7 +168,7 @@ const Benefits = () => {
           <div>
             <h2 className="text-4xl font-bold">
               <span className="text-[#F55D3E] font-dmserif italic">Why Study with</span>
-              <br />PrepAcademy?
+              <br /> <span className='text-[#ED1C24]'>Prep</span> <span className='text-[#15938F]'>Academy</span>?
             </h2>
           </div>
           <div>

@@ -107,7 +107,7 @@ const ExamPrepLowerSections: React.FC = () => {
           behavior: "smooth",
         });
       }
-    }, 3000); // Change slide every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [currentIndex, testimonials.length]);

@@ -88,21 +88,21 @@ export default function Banner() {
       title: "School",
       color: "#F55D3E",
       description: "Foundational learning for all ages.",
-      path: "/school-courses"
+      path: "/allcourses"
     },
     { 
       image: "/bannerbank.png", 
       title: "College",
       color: "#F55D3E",
       description: "Higher education, diverse disciplines.",
-      path: "/college-courses"
+      path: "/allcourses"
     },
     { 
       image: "/bannerglobal.png",
       title: "Study Abroad",
       color: "#F55D3E",
       description: "Global opportunities, endless horizons.",
-      path: "/study-abroad"
+      path: "/allcourses"
     },
   ];
 
@@ -144,6 +144,7 @@ export default function Banner() {
     </div>
   </div>
 </div>
+
 
       {/* Banner Section - reduced padding */}
       <section className="flex-grow bg-gradient-to-r text-white py-4 flex items-center mt-14">

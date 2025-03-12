@@ -4,22 +4,27 @@ import Image from 'next/image';
 const DrivesUsSection = () => {
   const features = [
     {
-      title: "Smarter Learning  With AI",
+      title: "Smarter Learning With AI",
+      icon: "/secretsauce1.png"
       // description: "Your study plan adapts to your needs and pace"
     },
     {
       title: "Gamified Test Prep",
+      icon: "/secretsauce2.png"
       // description: "Challenges, leaderboards & rewards to keep you hooked"
     },
     {
       title: "Mentors Who've Walked the Path",
+      icon: "/secretsauce3.jpg"
       // description: "Learn from top scorers and experienced guides"
     },
     {
       title: "Live Rapid Fire Stories",
+      icon: "/secretsauce4.avif"
       // description: "Connect, ask, stay sharp; succeed at every challenge"
     }
   ];
+
 
   return (
     <div className="bg-gray-900 min-h-screen p-8">
@@ -74,21 +79,25 @@ const DrivesUsSection = () => {
 
     {/* Features Grid */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
-  {features.map((feature, index) => (
-    <div
-      key={index}
-      className="p-6 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg border-l-4 border-[#F55D3E]"
-    >
-      <h3 className="text-[#FF5733] font-bold text-lg leading-tight">
-        {feature.title}
-      </h3>
-      {/* <p className="text-gray-400 text-lg  leading-relaxed opacity-90">
-        {feature.description}
-      </p> */}
+      {features.map((feature, index) => (
+        <div
+          key={index}
+          className="p-6 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg border-l-4 border-[#F55D3E] flex flex-col items-center text-center"
+        >
+          {/* Icon */}
+          <img 
+            src={feature.icon} 
+            alt={feature.title} 
+            className="w-16 h-16 mb-4 rounded-full object-cover" 
+          />
+          
+          {/* Title */}
+          <h3 className="text-[#FF5733] font-bold text-lg leading-tight">
+            {feature.title}
+          </h3>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-
   </div>
 </section>
 
