@@ -43,7 +43,7 @@ const AllCourses: React.FC = () => {
     {
       // code: "MGMT",
       title: "Management",
-      description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MAH CET",
+      description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
       path: "/collegecourse"
     },
     {
@@ -73,7 +73,7 @@ const AllCourses: React.FC = () => {
     {
       // code: "BANK",
       title: "Bank",
-      description: "SBT P O, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NAVAD, LIC AAO",
+      description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
       path: "/courses/bank"
     }
   ];
@@ -89,19 +89,19 @@ const AllCourses: React.FC = () => {
     {
       // code: "MEDICAL",
       title: "MEDICAL",
-      description: "NEET (UG), BSC NURSING, JIPMER",
+      description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
     },
     {
       // code: "MANAGEMENT",
       title: "MANAGEMENT",
-      description: "IPM, CHRIST, SET, NPAT",
+      description: "IPM, CHRIST, SET, NPAT,MHCET",
       classType: "CLASSES FOR 12TH & DROPPERS"
     },
     {
       // code: "LAW",
       title: "LAW",
-      description: "CLAT, SLAT, NLSAT",
+      description: "CLAT, SLAT, AILET, KLEE, CULEE",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
     },
     {
@@ -113,7 +113,7 @@ const AllCourses: React.FC = () => {
     {
       // code: "DEFENCE",
       title: "DEFENCE",
-      description: "NDA, NA",
+      description: "NDA, AFCAT",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
     },
     {
@@ -125,13 +125,13 @@ const AllCourses: React.FC = () => {
     {
       // code: "OTHERS",
       title: "OTHERS",
-      description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY",
+      description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
       classType: "CLASSES FOR 12TH & DROPPERS"
     },
     {
       // code: "TUITIONS",
       title: "TUITIONS",
-      description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS",
+      description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
       classType: "CLASSES FOR 11TH & 12TH"
     }
   ];

@@ -6,44 +6,75 @@ const StudentTestimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Amrutha Santhu",
+      name: "zayan Muhammed ZayanIbrahim",
       rating: 5,
-      comment: "Teaching Style (Great faculties. They provide comprehensive material and mock test that stimulated actual test experiences.",
+      comment: "Excellent faculties",
       avatar: "/api/placeholder/40/40",
     },
     {
       id: 2,
-      name: "Sreenath",
-      rating: 5,
-      comment: "Teaching Style is effective and easy",
+      name: "Salini C",
+      rating: 4,
+      comment: "Teaching style is effective and easy",
       avatar: "/api/placeholder/40/40",
     },
     {
       id: 3,
-      name: "Anupama Nair",
+      name: "Sreenath",
       rating: 5,
-      comment: "Best faculty training, excellent classes (Especially Arun sir)",
+      comment: "The aptitude sessions provided for me at DCSMAT Vagamon was very interesting and useful . Both the session was good.",
       avatar: "/api/placeholder/40/40",
     },
     {
       id: 4,
-      name: "John Doe",
-      rating: 4,
-      comment: "Great experience with the course. Highly recommended!",
+      name: "Anupama Nair",
+      rating: 5,
+      comment: "Best faculty training, excellent classes ( Especially Arun sir)",
       avatar: "/api/placeholder/40/40",
     },
+
     {
       id: 5,
-      name: "Jane Smith",
+      name: "Amrutha Santhu S",
       rating: 5,
-      comment: "The faculty is amazing and the study material is top-notch.",
+      comment: "Great faculties. They provide comprehensive material and mock test that stimulated actual test experience. They had in-depth knowledge of the subject matter and were able to break complex concept into understandable language.",
       avatar: "/api/placeholder/40/40",
     },
     {
       id: 6,
-      name: "Alice Johnson",
+      name: "navami vinod",
       rating: 5,
-      comment: "The mock tests were very helpful for my preparation.",
+      comment: "The mock tests & practice sessions at Prep Academy were very realistic . I felt well prepared on the exam day thanks to their rigorous training!!The supportive & encouraging atmosphere at Prep Academy made my IPM preparationjourney smooth & stress free. The teachers were always approachable & providedconstructive feedbackI highly recommend Prep Academy for CAT coaching. Their holistic approach, experiencedfaculty & supportive learning environment made a significant difference in my preparationjourney.",
+      avatar: "/api/placeholder/40/40",
+    },
+    {
+      id: 7,
+      name: "Sandra",
+      rating: 5,
+      comment: "The mock tests & practice sessions at Prep Academy were very realistic & helped me buildmy confidence.The supportive & encouraging atmosphere at Prep Academy made my IPM preparationjourney smooth & stress free. The teachers were always approachable & providedconstructive feedbackI highly recommend Prep Academy for the coaching classes",
+      avatar: "/api/placeholder/40/40",
+    },
+
+    {
+      id: 8,
+      name: "Alphons Roy",
+      rating: 5,
+      comment: "The coaching centre's teaching methodology was very effective in helping me grasp complex topics easily.The coaching centre's online resources and support were extremely helpful in my preparation for the entrance exam.The coaching centre's regular doubt-clearing sessions were very beneficial in clarifying concepts and improving my understanding.",
+      avatar: "/api/placeholder/40/40",
+    },
+
+    {
+      id: 9,
+      name: "DIVYA A.S",
+      rating: 5,
+      comment: "I attended the class of Arun sir... its too good and excellent.Thank you",
+      avatar: "/api/placeholder/40/40",
+    },
+    {
+      id: 10,
+      name: "sreelakshmi K",
+      rating: 5,
+      comment: "If you're looking for the best place to improve your aptitude skills, I highly recommend this academy under Arun Sir’s guidance. His teaching style is unmatched, breaking down complex problems into simple, understandable concepts.",
       avatar: "/api/placeholder/40/40",
     },
   ];
@@ -166,13 +197,13 @@ const StudentTestimonials = () => {
                       <div className="bg-[#2C2422] p-6 rounded-lg shadow-md h-full">
                         {/* Avatar and Name */}
                         <div className="flex items-center mb-3">
-                          <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
+                          {/* <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
                             <img
                               src={testimonial.avatar}
                               alt={testimonial.name}
                               className="w-full h-full object-cover"
                             />
-                          </div>
+                          </div> */}
                           <h3 className="text-lg font-medium">{testimonial.name}</h3>
                         </div>
 
@@ -180,7 +211,10 @@ const StudentTestimonials = () => {
                         <div className="flex mb-3">{renderStars(testimonial.rating)}</div>
 
                         {/* Comment */}
-                        <p className="text-sm text-gray-300">{testimonial.comment}</p>
+                        <p className="text-sm text-gray-300">
+  {testimonial.comment.split(" ").slice(0, 20).join(" ")}
+  {testimonial.comment.split(" ").length > 20 ? "..." : ""}
+</p>
                       </div>
                     </div>
                   ))}

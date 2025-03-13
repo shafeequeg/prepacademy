@@ -11,21 +11,18 @@ const SaveStudyTime = () => {
   const statsRef = useRef(null);
 
    useEffect(() => {
-      // Create an Intersection Observer to detect when stats section is visible
       const observer = new IntersectionObserver(
         (entries) => {
           const [entry] = entries;
           setIsStatsVisible(entry.isIntersecting);
         },
-        { threshold: 0.1 } // Trigger when at least 10% of the element is visible
+        { threshold: 0.1 } 
       );
     
-      // Start observing the stats section
       if (statsRef.current) {
         observer.observe(statsRef.current);
       }
     
-      // Cleanup observer on component unmount
       return () => {
         if (statsRef.current) {
           observer.unobserve(statsRef.current);
@@ -46,19 +43,19 @@ const SaveStudyTime = () => {
     
   const stats = [
     {
-      number: 2000000, // 2L+ (2 lakh)
+      number: 2000000, 
       label: "Users Worldwide",
     },
     {
-      number: 20000000, // 20L+ (20 lakh)
+      number: 20000000,
       label: "Hours of Classes",
     },
     {
-      number: 80000, // 80K+ (80 thousand)
+      number: 80000, 
       label: "Students Passed",
     },
     {
-      number: 10, // 10+ (10 years)
+      number: 15, 
       label: "Years Legacy",
     },
   ];

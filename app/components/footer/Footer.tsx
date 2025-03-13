@@ -68,21 +68,26 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* ABOUT ME */}
           <div className="text-center md:text-left">
             <h3 className="text-white font-medium text-lg mb-4">ABOUT PREPACADEMY</h3>
             <ul className="space-y-3">
-              {["About me ","Find a Centre", "Become a Franchise", "Become an Employee"].map((text, index) => (
+              {[
+                {text : "About me " , link :"/aboutus"},
+                {text : "Find a Centre" , link :"/fincdcenter"},
+                {text : "Become a Franchise" , link :"/franchise"},
+                {text :"Become an Employee" , link :"/employee"}
+
+                
+              ].map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white text-sm">
-                    {text}
+                  <a href={item.link} className="text-gray-300 hover:text-white text-sm">
+                    {item.text}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* GET IN TOUCH & ENROLL NOW */}
           <div className="flex flex-col">
             <div className="mb-8 text-center md:text-left">
               <h3 className="text-white font-medium text-lg mb-4">GET IN TOUCH</h3>

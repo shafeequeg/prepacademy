@@ -34,12 +34,9 @@ const StudyAbroadSection: React.FC = () => {
               <span className="text-[#F55D3E] font-serif italic">Study</span> Abroad
             </h2>
             <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
-              The Master of Business Administration (MBA) is a highly sought-after 
-              qualification, and entrance exams help secure admission competitively. 
-              These exams serve as gateways to participation in admissions for global 
-              universities, especially in Australia, Canada, the U.K., and U.S.A. Our 
-              faculty aids you in making decisions based on exam results, developing 
-              skills to increase scores, and setting a firm application goal.
+            Embarking on an educational journey abroad is a significant decision that requires
+             meticulous planning and preparation. Our comprehensive entrance coaching services are 
+             designed to equip you with the knowledge and skills necessary to excel in international academic environments.
             </p>
           </div>
 

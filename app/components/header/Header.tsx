@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // Import Next.js router
@@ -11,7 +11,27 @@ export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const router = useRouter();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent | any) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    // Add event listener when dropdown is open
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    
+    // Clean up
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +51,15 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
-  
+
+  const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent default navigation
+    if (isDropdownOpen) {
+      router.push("/allcourses"); // Navigate to /allcourses if dropdown is already open
+    } else {
+      setIsDropdownOpen(true); // Open the dropdown
+    }
+  };
   return (
     <header
       className={`w-[95%] fixed top-0 left-1/2 transform -translate-x-1/2 mx-auto text-center 
@@ -65,7 +93,7 @@ export default function Header() {
           </Link>
   
           {/* All Courses Dropdown */}
-         <div 
+         {/* <div 
               className="relative group" 
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
@@ -77,7 +105,6 @@ export default function Header() {
                 All Courses ▼
               </button>
 
-              {/* Dropdown Menu (visible on hover) */}
               {isDropdownOpen && (
                 <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
                   <Link href="/school-courses" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
@@ -94,8 +121,52 @@ export default function Header() {
                   </Link>
                 </div>
               )}
+            </div> */}
+       <div 
+              ref={dropdownRef}
+              className="relative group"
+            >
+              <button
+                onClick={toggleDropdown}
+                className="text-white hover:text-white text-xl font-semibold flex items-center cursor-pointer"
+              >
+                All Courses {isDropdownOpen ? '▲' : '▼'}
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48 z-50">
+                  <Link 
+                    href="/schoolcourse" 
+                    className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    School Courses
+                  </Link>
+                  <Link 
+                    href="/collegecourse" 
+                    className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    College Courses
+                  </Link>
+                  <Link 
+                    href="/studyabroad" 
+                    className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Study Abroad
+                  </Link>
+                  <Link 
+                    href="/careercounseling" 
+                    className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Career Counseling
+                  </Link>
+                </div>
+              )}
             </div>
-         
           <Link href="/blogs" className="text-white hover:text-white text-xl font-semibold">
             Blogs
           </Link>

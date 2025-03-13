@@ -451,9 +451,9 @@ console.log(formData);
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">COURSE</label>
+                  <label className="block text-white text-sm font-medium mb-2">Counselling</label>
                   <select className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none">
-                    <option>Select Course</option>
+                    <option>Select Counselling</option>
                   </select>
                 </div>
                 
@@ -586,9 +586,9 @@ console.log(formData);
              
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                <div>
-                 <label className="block text-white text-sm font-medium mb-2">COURSE</label>
+                 <label className="block text-white text-sm font-medium mb-2">Resources</label>
                  <select className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none">
-                   <option>Select Course</option>
+                   <option>Select Resources</option>
                  </select>
                </div>
                
@@ -721,9 +721,9 @@ console.log(formData);
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">COURSE</label>
+                  <label className="block text-white text-sm font-medium mb-2">Updates</label>
                   <select className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none">
-                    <option>Select Course</option>
+                    <option>Select Updates</option>
                   </select>
                 </div>
                 

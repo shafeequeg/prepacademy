@@ -307,6 +307,7 @@ const BlogSection = () => {
       <div className="mb-8">
         <h2 className="text-white text-2xl font-semibold ">
           <span className='font-dmserif italic'>Recent</span> <span className="text-[#FF5733]">Blogs</span>
+          <i className="fa-solid fa-arrows-rotate"></i>
         </h2>
       </div>
 
@@ -356,22 +357,26 @@ const BlogSection = () => {
       {/* Blog Grid - Will show default blogs initially, then tab-specific blogs when clicked */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
   {displayBlogs.map((blog: Blog) => (
-    <div key={blog.id} className="bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-      <div className="w-full h-48"> {/* Reduced image height */}
+    <div key={blog.id} className="bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full">
+      <div className="w-full h-48"> {/* Fixed image height */}
         <img
           src={blog.image}
           alt={blog.title}
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="p-4">
-        <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">{blog.title}</h3> {/* Limit title to 2 lines */}
-        <p className="text-gray-400 text-sm mb-4 line-clamp-3">{blog.description}</p> {/* Limit description to 3 lines */}
-        <Link href={`/blogdetails/${blog.id}`} passHref>
-          <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
-            Read More <span>→</span>
-          </button>
-        </Link>
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">{blog.title}</h3>
+        <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+          {blog.description.length > 120 ? `${blog.description.substring(0, 120)}...` : blog.description}
+        </p>
+        <div className="mt-auto pt-2 ">
+          <Link href={`/blogdetails/${blog.id}`} passHref>
+            <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
+              Read More <span>→</span>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   ))}

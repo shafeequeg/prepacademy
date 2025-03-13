@@ -7,8 +7,20 @@ import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import blogContent from '@/app/components/blogs/blogdetails/blogdata.json'; // Adjust the import path as needed
 
 
+interface CriteriaItem {
+  heading: string;
+  description: string;
+  Mainheading:string;
+  Maindescription:string;
+}
+
+interface BlogContent {
+  id: number;
+  criteria: CriteriaItem[];
+}
+
 interface BlogDetailsProps {
-  id: string; // Use string if coming from URL params
+  id: string;
 }
 
 export default function BlogDetails({ id }: BlogDetailsProps) {
@@ -84,10 +96,12 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
 
   // Find the blog with the matching ID
   const blog = blogsdetails.find((b) => b.id === Number(id));
+  
+  // Explicitly type the content as BlogContent or undefined
+  const content = blogContent.find((c) => c.id === Number(id)) as BlogContent | undefined;
 
-  const content = blogContent.find((c) => c.id === Number(id));
-console.log(blogContent);
-
+  console.log(content?.criteria);
+  
   if (!blog) {
     return <div>Blog not found</div>;
   }
@@ -110,9 +124,9 @@ console.log(blogContent);
           <div className="container mx-auto px-4 md:px-8 absolute top-0 left-0 right-0 pt-8">
             <div className="max-w-4xl mx-auto text-center">
               <div className="mb-4">
-                <span className="bg-orange-600 text-white px-2 py-1 text-xs uppercase font-medium">
+                {/* <span className="bg-orange-600 text-white px-2 py-1 text-xs uppercase font-medium">
                   CAT2025
-                </span>
+                </span> */}
               </div>
               
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -164,24 +178,56 @@ console.log(blogContent);
 
             {/* Main Content */}
             <div className="flex-1">
-              {/* <div className="mb-8">
-                <h2 className="text-xl font-bold mb-4">Based On Past Trends</h2>
-                <p className="text-gray-300 mb-4 text-sm">
-                  {blog.description}
-                </p>
-              </div> */}
+  {/* Section for Exams and Criteria */}
+  <div className="mb-8">
+    <h2 className="text-xl font-bold mb-4 text-blue-500">Exams and Criteria</h2>
+    <div className="space-y-6">
+      {content?.criteria.map((item, index) => (
+        <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600">
+        {/*Main Heading */ }
+         {item.Mainheading && (
+            
+            <h2 className="text-lg  font-bold text-white mb-3">
+              {item.Mainheading}
+            </h2>
+          )}
 
-              <div className="mb-8">
-                <h2 className="text-xl font-bold mb-4">Exams And Criteria</h2>
-                <div className="space-y-2 pl-0"> {/* Removed bullets */}
-                  {content?.criteria.map((item, index) => (
-                    <p key={index} className="text-gray-300 text-sm">
-                      {item}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
+           {/*Main Discription */ }
+         {item.Maindescription && (
+            
+            <p className="text-gray-300 text-base   font-bold leading-relaxed">
+            {item.Maindescription}
+          </p>
+          )}
+        
+          {/* Heading */}
+          {item.heading && (
+            
+            <h3 className="text-lg font-semibold text-white mb-3">
+              {item.heading}
+            </h3>
+          )}
+          {/* Description */}
+          {item.description && (
+            <p className="text-gray-300 text-sm leading-relaxed">
+              {item.description}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Optional: Display Blog Description if Available */}
+  {blog?.description && (
+    <div className="mb-8">
+      <h2 className="text-xl font-bold mb-4 text-orange-600">Based On Past Trends</h2>
+      <p className="text-gray-300 text-sm bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600">
+        {blog.description}
+      </p>
+    </div>
+  )}
+</div>
           </div>
         </div>
 
