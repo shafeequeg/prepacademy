@@ -312,12 +312,15 @@ const PrepAcademyTransform = () => {
            Behind every student&apos;s success are  passionate,  experienced educators who&apos;ve cracked the toughest exams.
 
          </h4> */}
-      <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
-  <span className="text-2xl md:text-5xl text-gray-400  absolute -left-2 top-0">"</span>
-  <span>Behind every student&apos;s success are passionate, <br />
-  experienced educators who&apos;ve cracked the toughest exams.</span>
-  <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">”</span>
+   <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
+  <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
+  <span>
+    Behind every student&apos;s success are passionate, <br />
+    experienced educators who&apos;ve cracked the toughest exams.
+  </span>
+  <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
 </h4>
+
        </div>
      
        {/* Gladiators Carousel - Updated to show 4 in a row */}

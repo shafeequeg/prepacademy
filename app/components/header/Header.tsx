@@ -16,22 +16,21 @@ export default function Header() {
 
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent | any) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     }
-
-    // Add event listener when dropdown is open
+  
     if (isDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-    
-    // Clean up
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isDropdownOpen]);
+  
 
   useEffect(() => {
     const handleScroll = () => {
