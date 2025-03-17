@@ -14,11 +14,12 @@ import Image from 'next/image'; // Correct import for Next.js Image component
 // }
 
 // interface TabProps {
-//   label: string;
-//   active: boolean;
-//   onClick: () => void;
-//   id: string;
-// }
+//     label: string;
+//     active: boolean;
+//     onClick: () => void;
+//     id: string;
+//     path: string;
+//   }
 
 interface CourseCardProps {
   // code: string;
@@ -60,32 +61,33 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
 };
 
 const tabs = [
-  { id: "IELTS", label: "IELTS" },
-  { id: "SAT", label: "SAT" },
-  { id: "ACT", label: "ACT" },
-  { id: "GRE", label: "GRE" },
-  { id: "GMAT", label: "GMAT" },
- 
-];
+    { id: "IPM", label: "IPM", path: "/schoolcourse/ipm" },
+    { id: "CHRIST", label: "CHRIST", path: "/slat" },
+    { id: "SET", label: "SET", path: "/ailet" },
+    { id: "NPAT", label: "NPAT", path: "/klee" },
+    { id: "MHCET", label: "MHCET", path: "/culee" },
+  ];
 
-// const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       id={`tab-${id}`}
-//       role="tab"
-//       aria-selected={active}
-//       aria-controls={`tabpanel-${id}`}
-//       className={`flex items-center justify-center px-6 py-2 min-w-[180px] rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${
-//         active
-//           ? "bg-[#FF6B3D] text-white font-medium"
-//           : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-//       }`}
-//     >
-//       {label}
-//     </button>
-//   );
-// };
+//   const Tab: React.FC<TabProps> = ({ label, active, onClick, id, path }) => {
+//     return (
+//       <Link href={path} passHref>
+//         <button
+//           onClick={onClick}
+//           id={`tab-${id}`}
+//           role="tab"
+//           aria-selected={active}
+//           aria-controls={`tabpanel-${id}`}
+//           className={`flex items-center justify-center px-6 py-2 min-w-[180px] rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${
+//             active
+//               ? "bg-[#FF6B3D] text-white font-medium"
+//               : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+//           }`}
+//         >
+//           {label}
+//         </button>
+//       </Link>
+//     );
+//   };
 
 // const TabsContainer: React.FC<{ activeTab: string; setActiveTab: (tab: string) => void }> = ({
 //   activeTab,
@@ -132,15 +134,15 @@ const offeringTypes = [
 ];
 
 // Add courseCards definition since it was referenced but missing
-const courseCards = [
-  { id: 1, type: "online", title: "Online CAT Course" },
-  { id: 2, type: "online", title: "Online MBA Entrance Course" },
-  { id: 3, type: "Classroom", title: "Classroom CAT Program" },
-  { id: 4, type: "Classroom", title: "Classroom MBA Prep" },
-  { id: 5, type: "test", title: "CAT Mock Tests" },
-  { id: 6, type: "Bookmaterials", title: "CAT Study Materials" },
-  { id: 7, type: "SelfBased", title: "Self-paced CAT Program" },
-];
+// const courseCards = [
+//   { id: 1, type: "online", title: "Online CAT Course" },
+//   { id: 2, type: "online", title: "Online MBA Entrance Course" },
+//   { id: 3, type: "Classroom", title: "Classroom CAT Program" },
+//   { id: 4, type: "Classroom", title: "Classroom MBA Prep" },
+//   { id: 5, type: "test", title: "CAT Mock Tests" },
+//   { id: 6, type: "Bookmaterials", title: "CAT Study Materials" },
+//   { id: 7, type: "SelfBased", title: "Self-paced CAT Program" },
+// ];
 
 const CatExamApplySection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -152,9 +154,9 @@ const CatExamApplySection: React.FC = () => {
   });
 
   const [activeMainTab, setActiveMainTab] = useState("engineering");
-  const [activeTab, setActiveTab] = useState("online");
+//   const [activeTab, setActiveTab] = useState("online");
 
-  const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+//   const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -189,11 +191,11 @@ const CatExamApplySection: React.FC = () => {
       });
   };
 
-  const relatedVideos = [
-    { title: "Preparing for the CAT 2025", videoId: "JNJOTlz8C2Y" },
-    { title: "Strategies for CAT 2025", videoId: "Kjjeb1v50C0" },
-    { title: "Best Coaching Centers", videoId: "4g7cyj774_M" },
-  ];
+//   const relatedVideos = [
+//     { title: "Preparing for the CAT 2025", videoId: "JNJOTlz8C2Y" },
+//     { title: "Strategies for CAT 2025", videoId: "Kjjeb1v50C0" },
+//     { title: "Best Coaching Centers", videoId: "4g7cyj774_M" },
+//   ];
 
   const studyAbroadCards: CourseCard[] = [
     { title: 'IELTS', description: 'English proficiency test for study, work, and migration' },
@@ -204,62 +206,62 @@ const CatExamApplySection: React.FC = () => {
   ];
 
 
-  // const schoolCourses = [
-  //   {
-  //     // code: "ENGINEERING",
-  //     title: "ENGINEERING",
-  //     description: "JEE, KEAM, BITSAT, VITEEE, KCET",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "MEDICAL",
-  //     title: "MEDICAL",
-  //     description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "MANAGEMENT",
-  //     title: "MANAGEMENT",
-  //     description: "IPM, CHRIST, SET, NPAT,MHCET",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "LAW",
-  //     title: "LAW",
-  //     description: "CLAT, SLAT, AILET, KLEE, CULEE",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "CUET",
-  //     title: "COMMON UNIVERSITY ENTRANCE TEST",
-  //       description: "COMMON UNIVERSITY ENTRANCE TEST",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "DEFENCE",
-  //     title: "DEFENCE",
-  //     description: "NDA, AFCAT",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "DESIGN",
-  //     title: "DESIGN & ARCHITECTURE",
-  //     description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "OTHERS",
-  //     title: "OTHERS",
-  //     description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "TUITIONS",
-  //     title: "TUITIONS",
-  //     description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
-  //     classType: "CLASSES FOR 11TH & 12TH"
-  //   }
-  // ];
+//   const schoolCourses = [
+//     {
+//       // code: "ENGINEERING",
+//       title: "ENGINEERING",
+//       description: "JEE, KEAM, BITSAT, VITEEE, KCET",
+//       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "MEDICAL",
+//       title: "MEDICAL",
+//       description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
+//       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "MANAGEMENT",
+//       title: "MANAGEMENT",
+//       description: "IPM, CHRIST, SET, NPAT,MHCET",
+//       classType: "CLASSES FOR 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "LAW",
+//       title: "LAW",
+//       description: "CLAT, SLAT, AILET, KLEE, CULEE",
+//       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "CUET",
+//       title: "COMMON UNIVERSITY ENTRANCE TEST",
+//         description: "COMMON UNIVERSITY ENTRANCE TEST",
+//       classType: "CLASSES FOR 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "DEFENCE",
+//       title: "DEFENCE",
+//       description: "NDA, AFCAT",
+//       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "DESIGN",
+//       title: "DESIGN & ARCHITECTURE",
+//       description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
+//       classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "OTHERS",
+//       title: "OTHERS",
+//       description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
+//       classType: "CLASSES FOR 12TH & DROPPERS"
+//     },
+//     {
+//       // code: "TUITIONS",
+//       title: "TUITIONS",
+//       description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+//       classType: "CLASSES FOR 11TH & 12TH"
+//     }
+//   ];
 
   const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
     if (e.key === 'ArrowRight') {
@@ -288,19 +290,19 @@ const CatExamApplySection: React.FC = () => {
   
   useEffect(() => {
     switch (activeMainTab) {
-      case "IELTS":
+      case "CLAT":
         scrollToRef(ieltsRef);
         break;
-      case "SAT":
+      case "SLAT":
         scrollToRef(satRef);
         break;
-      case "ACT":
+      case "AILET":
         scrollToRef(actRef);
         break;
-      case "GRE":
+      case "KLEE":
         scrollToRef(greRef);
         break;
-      case "GMAT":
+      case "CULEE":
         scrollToRef(gmatRef);
         break;
       default:
@@ -314,35 +316,36 @@ const CatExamApplySection: React.FC = () => {
       <div className="relative w-full z-10">
   {/* Main Tabs Section */}
   <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
-          <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              role="tablist"
-              aria-label="Study Abroad Programs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => setActiveMainTab(tab.id)}
-                  onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id
-                      ? "bg-[#FF6B3D] text-white font-medium"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          </div>
+  <div className="max-w-7xl mx-auto">
+    <div
+      className="flex items-center justify-between w-full no-scrollbar"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      role="tablist"
+      aria-label="Study Abroad Programs"
+    >
+      {tabs.map((tab, index) => (
+        <Link href={tab.path} key={tab.id} className="flex-1 mx-1">
+          <button
+            id={`tab-${tab.id}`}
+            role="tab"
+            aria-selected={activeMainTab === tab.id}
+            aria-controls={`tabpanel-${tab.id}`}
+            onClick={() => setActiveMainTab(tab.id)}
+            onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
+            tabIndex={activeMainTab === tab.id ? 0 : -1}
+            className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+              activeMainTab === tab.id
+                ? "bg-[#FF6B3D] text-white font-medium"
+                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            } rounded-full`}
+          >
+            {tab.label}
+          </button>
+        </Link>
+      ))}
+    </div>
+  </div>
+</div>
 
 
   {/* Apply Section with Mascot */}

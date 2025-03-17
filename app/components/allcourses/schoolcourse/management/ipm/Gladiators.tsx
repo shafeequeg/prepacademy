@@ -165,9 +165,6 @@ const ExamPrepHomepage: React.FC = () => {
    const totalSlides = Math.ceil(gladiators.length / 4);
    const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
 
-   console.log(activeIndexsecond);
-   console.log(totalSlidessecond);
-
     // Auto-scroll effect
     // useEffect(() => {
     //   const interval = setInterval(() => {
@@ -215,6 +212,30 @@ const ExamPrepHomepage: React.FC = () => {
       }
     };
   
+    // const scrollLeftsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond - 1 + totalSlidessecond) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
+  
+    // // Scroll right for the second carousel
+    // const scrollRightsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond + 1) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
     
 
   return (

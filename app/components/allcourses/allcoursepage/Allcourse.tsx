@@ -84,55 +84,74 @@ const AllCourses: React.FC = () => {
       // code: "ENGINEERING",
       title: "ENGINEERING",
       description: "JEE, KEAM, BITSAT, VITEEE, KCET",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "MEDICAL",
       title: "MEDICAL",
       description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "MANAGEMENT",
       title: "MANAGEMENT",
       description: "IPM, CHRIST, SET, NPAT,MHCET",
-      classType: "CLASSES FOR 12TH & DROPPERS"
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/schoolcourse/management"
+
     },
     {
       // code: "LAW",
       title: "LAW",
       description: "CLAT, SLAT, AILET, KLEE, CULEE",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/law"
+
+
     },
     {
       // code: "CUET",
       title: "COMMON UNIVERSITY ENTRANCE TEST",
         description: "COMMON UNIVERSITY ENTRANCE TEST",
-      classType: "CLASSES FOR 12TH & DROPPERS"
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "DEFENCE",
       title: "DEFENCE",
       description: "NDA, AFCAT",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "DESIGN",
       title: "DESIGN & ARCHITECTURE",
       description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "OTHERS",
       title: "OTHERS",
       description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
-      classType: "CLASSES FOR 12TH & DROPPERS"
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/courses/bank"
+
     },
     {
       // code: "TUITIONS",
       title: "TUITIONS",
       description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
-      classType: "CLASSES FOR 11TH & 12TH"
+      classType: "CLASSES FOR 11TH & 12TH",
+      path: "/courses/bank"
+
     }
   ];
   
@@ -165,7 +184,7 @@ const AllCourses: React.FC = () => {
   </div>
   <div className="w-full md:w-1/2">
     <Image 
-      src="/allcoursecollege.png" 
+      src="/collegecourse.jpeg" 
       alt="College Students" 
       width={600} 
       height={400}
@@ -207,7 +226,7 @@ const AllCourses: React.FC = () => {
             </div>
             <div className="w-full md:w-1/2">
               <Image 
-                src="/allcourseschoolcourse.png" 
+                src="/schoolcourse.jpeg" 
                 alt="School Students" 
                 width={600} 
                 height={300}
@@ -224,6 +243,8 @@ const AllCourses: React.FC = () => {
                 title={course.title}
                 description={course.description}
                 // classType={course.classType}
+                path={course.path}
+
                 className="border-l-4 border-[#F55D3E] p-4"
               />
             ))}

@@ -72,7 +72,7 @@ const tabs = [
   { id: "CMAT", label: "CMAT", path: "/klee" },
   { id: "MAT", label: "MAT ", path: "/culee" },
   { id: "NMAT", label: "NMAT ", path: "/culee" },
-  { id: "CUET", label: "CUET(PG)", path: "/collegecourse/management/cuet" },
+  { id: "CUET", label: "CUET(PG)", path: "/culee" },
   { id: "MICAT", label: "MICAT", path: "/culee" },
   { id: "MHCET", label: "MHCET", path: "/culee" },
 

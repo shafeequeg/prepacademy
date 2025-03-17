@@ -215,6 +215,30 @@ const ExamPrepHomepage: React.FC = () => {
       }
     };
   
+    // const scrollLeftsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond - 1 + totalSlidessecond) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
+  
+    // // Scroll right for the second carousel
+    // const scrollRightsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond + 1) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
     
 
   return (

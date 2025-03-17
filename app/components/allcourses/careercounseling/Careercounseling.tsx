@@ -1,441 +1,209 @@
-// CatExamApplySection.tsx
+"use client";
 
-"use client"
-
-import React from 'react';
-// import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight  } from 'lucide-react';
-import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com'; // Import EmailJS
+import emailjs from 'emailjs-com';
 
-
-// interface VideoCardProps {
+// interface CourseCardProps {
 //   title: string;
-//   thumbnail: string;
+//   description: string;
+//   classType?: string;
+//   path?: string;
+//   className?: string;
 // }
 
-interface DemoVideoCardProps {
-  title: string;
-  videoId: string;
-}
+// interface TabProps {
+//   label: string;
+//   active: boolean;
+//   onClick: () => void;
+//   id: string;
+// }
 
+// const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
+//   const cardContent = (
+//     <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
+//       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
+//       <p className="text-white text-base">{description}</p>
+//       {classType && <p className="text-white text-sm mt-2">{classType}</p>}
+//     </div>
+//   );
 
+//   return path ? <Link href={path} className="block h-full">{cardContent}</Link> : cardContent;
+// };
 
-// const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
+const tabs = [
+  { id: "ResumeBuilding", label: "Resume Building" },
+  { id: "InterviewPreparation", label: "Interview Preparation" },
+  { id: "CareerPlanning", label: "Career Planning" },
+  { id: "Skill Development", label: "Skill Development" },
+  { id: "Job Search Strategies", label: "Job Search Strategies" },
+];
+
+// const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
 //   return (
-//     <div className="relative group overflow-hidden rounded-lg w-full">
-//       <div className="relative w-full h-56 md:h-64 lg:h-72">
-//         <Image
-//           src={thumbnail}
-//           alt={title}
-//           fill
-//           className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-//         />
-//         {/* Play button overlay */}
-//         <div className="absolute inset-0 flex items-center justify-center">
-//           <div className="bg-black bg-opacity-30 rounded-full p-3 flex items-center justify-center">
-//             <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
-//           </div>
-//         </div>
+//     <button
+//       onClick={onClick}
+//       id={`tab-${id}`}
+//       role="tab"
+//       aria-selected={active}
+//       aria-controls={`tabpanel-${id}`}
+//       className={`flex items-center justify-center px-6 py-2 min-w-[180px] rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${
+//         active ? "bg-[#FF6B3D] text-white font-medium" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+//       }`}
+//     >
+//       {label}
+//     </button>
+//   );
+// };
+
+// const TabsContainer: React.FC<{ activeTab: string; setActiveTab: (tab: string) => void }> = ({
+//   activeTab,
+//   setActiveTab,
+// }) => {
+//   return (
+//     <div className="overflow-x-auto whitespace-nowrap scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+//       <div className="flex space-x-4 w-max px-4 py-2">
+//         {tabs.map((tab) => (
+//           <Tab
+//             key={tab.id}
+//             id={tab.id}
+//             label={tab.label}
+//             active={activeTab === tab.id}
+//             onClick={() => setActiveTab(tab.id)}
+//           />
+//         ))}
 //       </div>
-//       <p className="text-lg md:text-xl text-gray-300 mb-6">
-//       {title}</p>
 //     </div>
 //   );
 // };
 
-const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
-  return (
-    <div className="relative group cursor-pointer">
-      <div className="relative w-full h-56 md:h-64 lg:h-72">
-        {/* YouTube Embed */}
-        <iframe 
-          className="w-full h-full rounded-lg"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-      {/* <p className="text-lg md:text-xl text-gray-300 mt-3">{title}</p> */}
-    </div>
-  );
-};
-
-
-const offeringTypes = [
-  { id: "online", label: "Online Class" },
-  { id: "Classroom", label: "Classroom" },
-  { id: "test", label: "Test Series" },
-  { id: "Bookmaterials", label: "Book Materials" },
-  { id: "SelfBased", label: "Self Based" },
-
-];
-
-const courseCards = [
-  {
-    id: "cat-online-1",
-    title: "Daily Class ",
-    image: "/news1.png",
-    type: "online",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Live & interactive sessions",
-      "Live doubt-solving sessions",
-    ],
-  },
-  {
-    id: "cat-online-2",
-    title: "Night Class",
-    image: "/news1.png",
-    type: "online",
-    features: [
-      "Live doubt-solving sessions",
-      "Advanced problem-solving techniques",
-      "Mock test series with AI analysis",
-      "Best for repeat CAT takers",
-    ],
-  },
-  {
-    id: "cat-online-3",
-    title: "Weekend Class",
-    image: "/news1.png",
-    type: "online",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Live & interactive sessions",
-      "Live doubt-solving sessions",
-    ],
-  },
-  {
-    id: "cat-Classroom-1",
-    title: " Day Classes",
-    image: "/news1.png",
-    type: "Classroom",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Authentic Learning Experiences",
-      "Live & interactive sessions",
-      "Live doubt-solving sessions",
-    ],
-  },
-  {
-    id: "cat-Classroom-2",
-    title: " Night Classes",
-    image: "/news1.png",
-    type: "Classroom",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Authentic Learning Experiences",
-      "Live & interactive sessions",
-      "Live doubt-solving sessions",
-    ],
-  },
-
-  {
-    id: "cat-Classroom-3",
-    title: " Weekend Classes",
-    image: "/news1.png",
-    type: "Classroom",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Authentic Learning Experiences",
-      "Live & interactive sessions",
-      "Live doubt-solving sessions"
-    ],
-  },
-
-  {
-    id: "cat-test-1",
-    title: " Mock Test Only ",
-    image: "/news1.png",
-    type: "test",
-    features: [
-      "enhance exam preparation skill",
-      "10 Mocks test available",
-      "Personal mentoring",
-      "GDPI assistance",
-    ],
-  },
-
-  {
-    id: "cat-test-2",
-    title: " Test Series+ Mock:",
-    image: "/news1.png",
-    type: "test",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Test Series",
-      "Mock Test",
-    ],
-  },
-
-  {
-    id: "cat-test-3",
-    title: " Mock +Test Series + Book Materials)",
-    image: "/news1.png",
-    type: "test",
-    features: [
-      "Personal mentoring",
-      "GDPI assistance",
-      "Test Series",
-      "Mock Test",
-      "Book Materials "
-    ],
-  },
-
-  {
-    id: "cat-Bookmaterials-1",
-    title: " Book Materials Only ",
-    image: "/news1.png",
-    type: "Bookmaterials",
-    features: [
-      "Complete Book Materils",
-     
-    ],
-  },
-
-  {
-    id: "cat-Bookmaterials-2",
-    title: " Test Series+ Mock Test + Book materials",
-    image: "/news1.png",
-    type: "Bookmaterials",
-    features: [
-      "Complete Book Materils",
-      "Mock Tests",
-      "Test Series",
-    ],
-  },
-
-  {
-    id: "cat-SelfBased-1",
-    title: " Self Based",
-    image: "/news1.png",
-    type: "SelfBased",
-    features: [
-      "Video lectures",
-      "Mock Test",
-      "Book Materials",
-    ],
-  },
-
-];
-
-
-
-
-
-
 const CatExamApplySection: React.FC = () => {
+  const [formData, setFormData] = useState({
+    fullname: "",
+    phone: "",
+    email: "",
+    college: "",
+    program: "",
+  });
 
+  const [activeMainTab, setActiveMainTab] = useState("engineering");
 
-//   const [showIcons, setShowIcons] = useState(true);
-// const [lastScrollY, setLastScrollY] = useState(0);
-// const [isModalOpen, setIsModalOpen] = useState(false);
-  
-const [formData, setFormData] = useState({
-  fullname: "",
-  phone: "",
-  email: "",
-  college: "",
-  program: "",
-});
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const serviceID = "service_eb5cvhl";
+    const templateID = "template_lqeg482";
+    const userID = "nk7-kQzPEcwr5RxjW";
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  const { name, value } = e.target;
-  console.log(`Input changed: ${name} = ${value}`); // Debugging log
+    emailjs
+      .send(serviceID, templateID, formData, userID)
+      .then((response) => {
+        toast.success("Your message has been sent successfully!");
+        console.log(response);
+        
+        setFormData({ fullname: "", phone: "", email: "", college: "", program: "" });
+      })
+      .catch((error) => {
+        console.log(error);
+        
+        toast.error("Failed to send the message. Please try again.");
+      });
+  };
 
-  setFormData((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
-};
-
-  
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-  
-      // Replace with your EmailJS service ID, template ID, and user ID
-      const serviceID = "service_eb5cvhl";
-      const templateID = "template_lqeg482";
-      const userID = "nk7-kQzPEcwr5RxjW";
-  
-      // Send the form data via EmailJS
-      emailjs
-        .send(serviceID, templateID, formData, userID)
-        .then((response) => {
-          console.log("Email sent successfully!", response.status, response.text);
-          toast.success("Your message has been sent successfully!");
-          // Reset the form
-          setFormData({
-            fullname: "",
-            phone: "",
-            email: "",
-            college: "",
-            program: "",
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to send email:", error);
-          toast.error("Failed to send the message. Please try again.");
-        });
-    };
-  
-
-    // const openModal = () => setIsModalOpen(true);
-    // const closeModal = () => setIsModalOpen(false);
-
-  // const videoCards = [
-  //   {
-  //     title: "Explore About Courses",
-  //     thumbnail: "/news1.png",
-  //   },
-  //   {
-  //     title: "Explore About Courses",
-  //     thumbnail: "/new2.png",
-  //   },
-  //   {
-  //     title: "Explore About Courses",
-  //     thumbnail: "/news3.png",
-  //   },
-  // ];
-
-
- 
-
-  const relatedVideos = [
-    {
-      title: "Preparing for the CAT 2025",
-      videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
-    },
-    {
-      title: "Strategies for CAT 2025",
-      videoId: "Kjjeb1v50C0", // Remove "&t=11s"
-    },
-    {
-      title: "Best Coaching Centers",
-      videoId: "4g7cyj774_M", // Remove "&t=26s"
-    }
+  const careerCounselingCards = [
+    { title: 'Resume Building', description: 'Craft a professional resume tailored to your career goals.' },
+    { title: 'Interview Preparation', description: 'Get expert guidance to ace your job interviews with confidence.' },
+    { title: 'Career Planning', description: 'Personalized career counseling to align with your ambitions.' },
+    { title: 'Skill Development', description: 'Enhance your skills to stay competitive in the job market.' },
+    { title: 'Job Search Strategies', description: 'Effective techniques to land your dream job faster.' }
   ];
 
-  
-  const demoVideos = [
-    {
-      title: "Preparing for the CAT 2025",
-      videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
-    },
-    {
-      title: "Strategies for CAT 2025",
-      videoId: "b2y5qz04RKk", // Remove "&t=11s"
-    },
-    {
-      title: "Best Coaching Centers",
-      videoId: "WaYzGw6qnQ8", // Remove "&t=26s"
+  const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs, setTabFn: (id: string) => void) => {
+    if (e.key === 'ArrowRight') {
+      const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
+      setTabFn(tabArray[nextIndex].id);
+      document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
+    } else if (e.key === 'ArrowLeft') {
+      const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
+      setTabFn(tabArray[prevIndex].id);
+      document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
     }
-  ];
-  
-  
-
-  const [activeTab, setActiveTab] = useState("online");
-
-  const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+  };
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
-  {/* Background Image Between Sections */}
-  {/* Main Content */}
-  <div className="relative w-full z-10">
-    {/* Apply Section with Mascot */}
-    <div 
-      className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover "
-    >
-      <div className="w-full px-4 mt-24">
-        <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
-          {/* Left Content */}
-          <div className="lg:w-[35%]">
-            <div className="mb-6">
-              {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
-                Learn from the Experts
-              </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CAT 2025 with Prep Academy </h2>
-              <p className="text-gray-300 mb-8">
-                Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
-              </p>
+      <div className="relative w-full z-10">
+        <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
+          <div className="max-w-7xl mx-auto">
+            <div
+              className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              role="tablist"
+              aria-label="Career Counseling Programs"
+            >
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-selected={activeMainTab === tab.id}
+                  aria-controls={`tabpanel-${tab.id}`}
+                  onClick={() => setActiveMainTab(tab.id)}
+                  onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
+                  tabIndex={activeMainTab === tab.id ? 0 : -1}
+                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+                    activeMainTab === tab.id ? "bg-[#FF6B3D] text-white font-medium" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  } rounded-full`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
-
-            {/* Progress Items */}
-            <div className="space-y-3 mb-8">
-  <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
-    <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
-  </div>
-  <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
-    <p className="text-white">Comprehensive CAT Online /Offline Course </p>
-  </div>
-</div>
-
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
-                Enroll Now
-              </button>
-              <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
-                Get a FREE Trial
-              </button>
-            </div>
-
-            {/* Telegram Link with Underline */}
-            <div className="mt-4">
-  <a 
-    href="#" 
-    className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
-      >
-        <img 
-          src="/catexamtelegram.png" 
-          alt="Telegram Icon" 
-          className="w-5 h-5 mr-2"
-        />
-        Join Our Telegram Channel
-      </a>
-    </div>
-
           </div>
+        </div>
 
-          {/* Middle section with character background */}
-          <div className="hidden lg:block lg:w-[20%] relative">
-            <div 
-              className="absolute inset-0 bg-contain bg-no-repeat bg-center"
-              style={{ backgroundImage: "url('/charater2.png')" }}
-            ></div>
-          </div>
-
-          {/* Right Content - Form */}
-          <div className="lg:w-[45%] flex flex-col">
-            <div className="bg-[#0E1721] p-8 rounded-lg border border-[#1A2836] shadow-lg">
-              <h3 className="text-[#FF6B3D] text-xl font-semibold mb-3">NEED ASSISTANCE?</h3>
-              <p className="text-white mb-6">Get guidance and clear your doubts</p>
-              
-              {/* Form Fields */}
-              <form onSubmit={handleSubmit}>
+        <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
+          <div className="w-full px-4 mt-24">
+            <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
+              <div className="lg:w-[35%]">
+                <div className="mb-6">
+                  <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Shape Your Future with Expert Career Counseling</h2>
+                  <p className="text-gray-300 mb-8">
+                    Unlock your true potential with personalized career guidance from experienced professionals.
+                  </p>
+                </div>
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center">
+                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+                    <p className="text-white">One-on-One Career Counseling Sessions</p>
+                  </div>
+                  <div className="flex items-center">
+                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+                    <p className="text-white">Personalized Career Roadmap & Action Plan</p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                    Book a Counseling Session
+                  </button>
+                  <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
+                    Get a FREE Career Assessment
+                  </button>
+                </div>
+              </div>
+              <div className="hidden lg:block lg:w-[20%] relative">
+                <div className="absolute inset-0 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/career_character.png')" }}></div>
+              </div>
+              <div className="lg:w-[45%] flex flex-col">
+                <div className="bg-[#0E1721] p-8 rounded-lg border border-[#1A2836] shadow-lg">
+                  <h3 className="text-[#FF6B3D] text-xl font-semibold mb-3">NEED CAREER GUIDANCE?</h3>
+                  <p className="text-white mb-6">Connect with our experts to explore career opportunities.</p>
+                  <form onSubmit={handleSubmit}>
                     <div className="space-y-4 mb-6">
                       <input
                         type="text"
@@ -464,242 +232,61 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                         className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
                         required
                       />
-                      <input
-                        type="text"
-                        name="college"
-                        placeholder="College Studied"
-                        value={formData.college}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
                       <div className="relative">
                         <select
-                          name="program"
-                          value={formData.program}
+                          name="careerInterest"
+                          value={formData.phone}
                           onChange={handleInputChange}
                           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
                           required
                         >
-                          <option value="" disabled>
-                            Preferred Online Program
-                          </option>
-                          <option value="CAT Preparation">CAT Preparation</option>
-                          <option value="MBA Entrance">MBA Entrance</option>
-                          <option value="GMAT Preparation">GMAT Preparation</option>
+                          <option value="" disabled>Select Your Career Interest</option>
+                          <option value="Engineering">Engineering</option>
+                          <option value="Medicine">Medicine</option>
+                          <option value="Business">Business & Management</option>
+                          <option value="Arts">Arts & Humanities</option>
+                          <option value="Technology">IT & Technology</option>
                         </select>
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                          <svg
-                            width="14"
-                            height="8"
-                            viewBox="0 0 14 8"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1 1L7 7L13 1"
-                              stroke="#FF6B3D"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
                       </div>
                     </div>
-
-                    {/* Submit Button */}
                     <button
                       type="submit"
                       className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
                     >
-                      Submit
+                      Get Career Advice
                     </button>
                   </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    {/* Related Videos Section */}
-    <div className="bg-black text-white flex justify-center">
-  {/* Related Videos Section */}
-  <div className="px-6 py-10 max-w-7xl w-full">
-    <h2 className="text-4xl font-semibold text-left mb-6 ml-2">
-      <span className="font-serif italic font-normal">Related</span>{" "}
-      <span className="text-[#F55D3E] font-semibold">Videos</span>
-    </h2>
-
-    {/* Make videos full width */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-    {relatedVideos.map((video, index) => (
-      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
-    ))}
-  </div>
-
-  <div className="flex justify-center">
-    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
-      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
-      <ChevronRight size={16} />
-    </Link>
-  </div>
-  </div>
-</div>
-
-
-  </div>
-
-  <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
-    {/* Offerings Section */}
-    <div className="bg-[#1A0E0E] py-16">
-  <div className="max-w-6xl mx-auto px-4">
-    {/* Section Title */}
-    <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
-      <span className="text-[#F55D3E] font-serif italic">Our</span>{" "}
-      <span className="text-white">Offerings</span>
-    </h2>
-
-    {/* Tab Navigation - Made responsive */}
-    <div className="flex justify-center mb-12 overflow-x-auto pb-2 w-full">
-      <div className="inline-flex border-b border-[#2A1A1A] flex-nowrap min-w-0">
-        {offeringTypes.map((type) => (
-          <button
-            key={type.id}
-            onClick={() => setActiveTab(type.id)}
-            className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${
-              activeTab === type.id
-                ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
-                : "text-gray-500 hover:text-gray-400"
-            }`}
-          >
-            {type.label}
-          </button>
-        ))}
-      </div>
-    </div>
-
-    {/* Course Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredCourses.length > 0 ? (
-        filteredCourses.map((card) => (
-          <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
-            <div className="p-6">
-              <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
-              <ul className="space-y-2 mb-6">
-                {card.features.map((feature, idx) => (
-                  <li key={idx} className="flex text-gray-300 text-sm">
-                    <span className="text-[#F55D3E] mr-2">•</span>
-                    <span className="text-base md:text-lg text-gray-300 mb-6">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
-                Enroll Now <ChevronRight size={16} className="ml-1" />
-              </a>
-            </div>
+      <div className="w-full py-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="lg:w-1/2 text-start">
+            <h2 className="text-2xl mb-4">
+              <span className="text-[#F55D3E] font-serif italic">Career</span> Counseling
+            </h2>
+            <p className="text-white text-base md:text-lg mb-6 max-w-lg">
+              Our career counseling program is designed to help individuals make informed career decisions.
+            </p>
           </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-400 col-span-full">No courses available for this category.</p>
-      )}
-    </div>
-  </div>
-</div>
-
-    {/* Mascot Banner Section */}
-    <div className="bg-black py-8">
-  <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
-    {/* First CTA Section (Compact Width) */}
-    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 ml-24"> 
-      <div 
-        className="absolute top-0 left-0 right-0 h-1" 
-        style={{
-          background: 'linear-gradient(90deg, #F55D3E 0%, #F55D3E 50%, transparent 100%)'
-        }}
-      ></div>
-      
-      <div className="flex flex-col md:flex-row items-center justify-center w-full">
-        <div className="relative z-10 text-center md:text-left">
-          <h1 className="text-[#F55D3E] font-serif italic text-2xl md:text-3xl lg:text-4xl mb-2">
-            Serious About Your Exam?
-          </h1>
-          <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
-            Let&apos;s Make It Happen
-          </h2>
-          <a 
-            href="#" 
-            className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
-          >
-            Apply for DEMO Class →
-          </a>
         </div>
-
-        <div className="mx-auto my-auto">
-          <img
-            src="/charater2.png"
-            alt="Prep Mascot"
-            className="h-40 md:h-48"
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+          {careerCounselingCards.map((card, index) => (
+            <div
+              key={index}
+              className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
+            >
+              <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
+              <p className="text-white text-base md:text-lg">{card.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-
-    {/* Second CTA Section (Slightly Wider) */}
-    <div className="lg:col-span-1.5 rounded-lg overflow-hidden bg-[#1F1414] relative flex flex-col justify-center items-center">
-      <div 
-        className="absolute top-0 left-0 right-0 h-1" 
-        style={{
-          background: 'linear-gradient(90deg, #F55D3E 0%, #F55D3E 50%, transparent 100%)'
-        }}
-      ></div>
-      
-      <div className="p-8 flex flex-col items-center justify-center h-full">
-        <div className="flex items-center justify-center mb-4 text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-          </svg>
-        </div>
-        <h3 className="text-white text-center text-lg font-medium mb-5">CAT Master Class</h3>
-        <a 
-          href="#" 
-          className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
-        >
-          Book Free TRIAL
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-    {/* Demo Videos Section */}
-    <div className="container mx-auto px-4 py-10">
-  <div className="flex justify-between items-center mb-8">
-    <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
-      <span className="text-white font-serif italic">Demo</span> 
-      <span className="text-[#F55D3E]"> Videos</span>
-    </h2>
-  </div>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-    {demoVideos.map((video, index) => (
-      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
-    ))}
-  </div>
-
-  <div className="flex justify-center">
-    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
-      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
-      <ChevronRight size={16} />
-    </Link>
-  </div>
-</div>
-  </div>
-</div>
   );
 };
 

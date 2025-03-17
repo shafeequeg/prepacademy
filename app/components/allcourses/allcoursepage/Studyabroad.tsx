@@ -1,26 +1,29 @@
 import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
 
 interface CourseCard {
   title: string;
   description: string;
+  path?: string;
+
 }
 
 const StudyAbroadSection: React.FC = () => {
   const studyAbroadCards: CourseCard[] = [
-    { title: 'IELTS', description: 'English proficiency test for study, work, and migration' },
-    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.' },
-    { title: 'ACT', description: 'Entrance exam for admission into various universities' },
-    { title: 'GRE', description: 'Graduate school admission test for various disciplines' },
-    { title: 'GMAT', description: 'Global entrance exam for MBA and business programs' }
+    { title: 'IELTS', description: 'English proficiency test for study, work, and migration', path: '/courses/ielts' },
+    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.', path: '/courses/sat' },
+    { title: 'ACT', description: 'Entrance exam for admission into various universities', path: '/courses/act' },
+    { title: 'GRE', description: 'Graduate school admission test for various disciplines', path: '/studyabroad/gre' },
+    { title: 'GMAT', description: 'Global entrance exam for MBA and business programs', path: '/studyabroad/gmat' }
   ];
 
   const careerCounselingCards: CourseCard[] = [
-    { title: 'Resume Building', description: 'Craft a professional resume tailored to your career goals.' },
-    { title: 'Interview Preparation', description: 'Get expert guidance to ace your job interviews with confidence.' },
-    { title: 'Career Planning', description: 'Personalized career counseling to align with your ambitions.' },
-    { title: 'Skill Development', description: 'Enhance your skills to stay competitive in the job market.' },
-    { title: 'Job Search Strategies', description: 'Effective techniques to land your dream job faster.' }
+    { title: 'Resume Building', description: 'Craft a professional resume tailored to your career goals.', path: '/career/resume-building' },
+    { title: 'Interview Preparation', description: 'Get expert guidance to ace your job interviews with confidence.', path: '/career/interview-prep' },
+    { title: 'Career Planning', description: 'Personalized career counseling to align with your ambitions.', path: '/career/career-planning' },
+    { title: 'Skill Development', description: 'Enhance your skills to stay competitive in the job market.', path: '/career/skill-development' },
+    { title: 'Job Search Strategies', description: 'Effective techniques to land your dream job faster.', path: '/career/job-search' }
   ];
 
   return (
@@ -44,7 +47,7 @@ const StudyAbroadSection: React.FC = () => {
           <div className="lg:w-1/2">
             <div className="relative w-full h-48 lg:h-56">
               <Image
-                src="/allcoursestudyabroad.png"
+                src="/studyabroad.jpeg"
                 alt="Student studying abroad"
                 fill
                 className="object-cover rounded-lg"
@@ -56,15 +59,17 @@ const StudyAbroadSection: React.FC = () => {
 
         {/* Study Abroad Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-          {studyAbroadCards.map((card, index) => (
-            <div 
-              key={index} 
-              className="bg-[#1F1414] p-6 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 border-l-4 border-[#F55D3E]"
-            >
-              <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
-              <p className="text-gray-300 text-base md:text-lg">{card.description}</p>
-            </div>
-          ))}
+        {studyAbroadCards.map((card, index) => (
+  <Link key={index} href={card.path || "#"} passHref>
+    <div 
+      className="bg-[#1F1414] p-6 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 border-l-4 border-[#F55D3E] cursor-pointer"
+    >
+      <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
+      <p className="text-gray-300 text-base md:text-lg">{card.description}</p>
+    </div>
+  </Link>
+))}
+
         </div>
       </div>
 
@@ -88,6 +93,8 @@ const StudyAbroadSection: React.FC = () => {
         {/* Career Counseling Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
           {careerCounselingCards.map((card, index) => (
+              <Link key={index} href={card.path || "#"} passHref>
+
             <div 
               key={index} 
               className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
@@ -95,6 +102,7 @@ const StudyAbroadSection: React.FC = () => {
               <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
               <p className="text-white text-base md:text-lg">{card.description}</p>
             </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -65,22 +65,6 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
 };
 
 
-const tabs = [
-  { id: "CAT", label: "CAT", path: "/collegecourse" },
-  { id: "XAT", label: "XAT", path: "/slat" },
-  { id: "KMAT", label: "KMAT", path: "/ailet" },
-  { id: "CMAT", label: "CMAT", path: "/klee" },
-  { id: "MAT", label: "MAT ", path: "/culee" },
-  { id: "NMAT", label: "NMAT ", path: "/culee" },
-  { id: "CUET", label: "CUET(PG)", path: "/collegecourse/management/cuet" },
-  { id: "MICAT", label: "MICAT", path: "/culee" },
-  { id: "MHCET", label: "MHCET", path: "/culee" },
-
-
-
-];
-
-
 const offeringTypes = [
   { id: "online", label: "Online Class" },
   { id: "Classroom", label: "Classroom" },
@@ -330,11 +314,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   const relatedVideos = [
     {
-      title: "Preparing for the CAT 2025",
+      title: "Preparing for the CLAT 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CAT 2025",
+      title: "Strategies for CLAT 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -346,11 +330,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   
   const demoVideos = [
     {
-      title: "Preparing for the CAT 2025",
+      title: "Preparing for the CLAT 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CAT 2025",
+      title: "Strategies for CLAT 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -359,22 +343,9 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
     }
   ];
   
-   const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
-      if (e.key === 'ArrowRight') {
-        const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
-        setTabFn(tabArray[nextIndex].id);
-        document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
-      } else if (e.key === 'ArrowLeft') {
-        const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
-        setTabFn(tabArray[prevIndex].id);
-        document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
-      }
-    };
-  
   
 
   const [activeTab, setActiveTab] = useState("online");
-  const [activeMainTab, setActiveMainTab] = useState("CAT");
 
   const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
@@ -382,35 +353,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
   {/* Background Image Between Sections */}
   {/* Main Content */}
-  <div
-      className="flex items-center justify-between w-full no-scrollbar bg-black mt-32 p-3 "
-      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      role="tablist"
-      aria-label="Study Abroad Programs"
-    >
-      {tabs.map((tab, index) => (
-        <Link href={tab.path} key={tab.id} className="flex-1 mx-1">
-          <button
-            id={`tab-${tab.id}`}
-            role="tab"
-            aria-selected={activeMainTab === tab.id}
-            aria-controls={`tabpanel-${tab.id}`}
-            onClick={() => setActiveMainTab(tab.id)}
-            onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
-            tabIndex={activeMainTab === tab.id ? 0 : -1}
-            className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
-              activeMainTab === tab.id
-                ? "bg-[#FF6B3D] text-white font-medium"
-                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-            } rounded-full`}
-          >
-            {tab.label}
-          </button>
-        </Link>
-      ))}
-    </div>
-  <div className="relative w-full z-10  ">
- 
+  <div className="relative w-full z-10">
     {/* Apply Section with Mascot */}
     <div 
       className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover "
@@ -423,12 +366,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
               {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
               </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CAT 2025 with
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CLAT 2025 with
                  {/* Prep Academy  */}
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-                Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
+                Based on past trends, the CLAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
               </p>
             </div>
 
@@ -448,7 +391,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Comprehensive CAT Online /Offline Course </p>
+    <p className="text-white">Comprehensive CLAT Online /Offline Course </p>
   </div>
 </div>
 
@@ -544,7 +487,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                           <option value="" disabled>
                             Preferred Online Program
                           </option>
-                          <option value="CAT Preparation">CAT Preparation</option>
+                          <option value="CAT Preparation">Clat Preparation</option>
                           <option value="MBA Entrance">MBA Entrance</option>
                           <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>

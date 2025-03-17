@@ -167,7 +167,8 @@ const ExamPrepHomepage: React.FC = () => {
 
    console.log(activeIndexsecond);
    console.log(totalSlidessecond);
-
+   
+   
     // Auto-scroll effect
     // useEffect(() => {
     //   const interval = setInterval(() => {
@@ -215,7 +216,7 @@ const ExamPrepHomepage: React.FC = () => {
       }
     };
   
-    
+   
 
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">

@@ -323,38 +323,38 @@ export default function ContactPage() {
       <div className="bg-[#1E1615] px-4 sm:px-6 lg:px-8 py-12">
   <h2 className="text-center text-4xl font-semibold mb-8">
     <span className="text-[#E25B41] font-serif italic font-bold">Do More With</span>
-    {/* <span className="text-white"> */}
-    <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>       ?
+    <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>?
   </h2>
 
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E]">
+    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E] flex flex-col">
       <h3 className="text-[#E25B41] text-xl font-medium mb-2">Become A Franchise</h3>
-      <p className="text-gray-300 text-base md:text-lg  mb-4 leading-relaxed">
-      Partnering with Prep Academy as a franchisee offers a unique opportunity 
-      to contribute to educational excellence while fostering community development.      </p>
-      <a href="#" className="text-[#F55D3E] text-base md:text-lg  inline-flex items-center">
+      <p className="text-gray-300 text-base md:text-lg mb-4 leading-relaxed flex-grow">
+        Partnering with Prep Academy as a franchisee offers a unique opportunity 
+        to contribute to educational excellence while fostering community development.
+      </p>
+      <a href="#" className="text-[#F55D3E] text-base md:text-lg inline-flex items-center self-start">
         Lets Go <span className="ml-1">→</span>
       </a>
     </div>
 
-    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E]">
+    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E] flex flex-col">
       <h3 className="text-[#F55D3E] text-xl font-medium mb-2">Find A Centre</h3>
-      <p className="text-gray-300 text-base md:text-lg  mb-4 leading-relaxed">
-      Our career guidance experts help students discover and achieve their true potential.
-            </p>
-      <a href="#" className="text-[#F55D3E] text-base md:text-lg  inline-flex items-center">
+      <p className="text-gray-300 text-base md:text-lg mb-4 leading-relaxed flex-grow">
+        Our career guidance experts help students discover and achieve their true potential.
+      </p>
+      <a href="#" className="text-[#F55D3E] text-base md:text-lg inline-flex items-center self-start">
         Lets Go <span className="ml-1">→</span>
       </a>
     </div>
 
-    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E]">
+    <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E] flex flex-col">
       <h3 className="text-[#E25B41] text-xl font-medium mb-2">Become an Employee</h3>
-      <p className="text-gray-300 text-base md:text-lg  mb-4 leading-relaxed">
-      Partnering with Prep Academy as a franchisee offers a 
-      unique opportunity to contribute to educational excellence while fostering community development.
-            </p>
-      <a href="#" className="text-[#E25B41] text-base md:text-lg  inline-flex items-center">
+      <p className="text-gray-300 text-base md:text-lg mb-4 leading-relaxed flex-grow">
+        Partnering with Prep Academy as a franchisee offers a 
+        unique opportunity to contribute to educational excellence while fostering community development.
+      </p>
+      <a href="#" className="text-[#E25B41] text-base md:text-lg inline-flex items-center self-start">
         Lets Go <span className="ml-1">→</span>
       </a>
     </div>

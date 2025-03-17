@@ -59,7 +59,7 @@ const Benefits = () => {
     },
     {
       title: 'Hybrid Model Coaching Program',
-      icon: '/whystudyhybrid.png',
+      icon: '/whystudyhybridcoaching.png',
     },
     {
       title: 'Expert Educators',

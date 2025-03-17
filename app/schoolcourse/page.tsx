@@ -1,7 +1,7 @@
 
 import Schoolcousre from "@/app/components/allcourses/schoolcourse/Schoolcourse";
-import SchoolGladiator from "@/app/components/allcourses/schoolcourse/Gladiator";
-import SchoolAboutcourse from "@/app/components/allcourses/schoolcourse/Aboutcourse";
+// import SchoolGladiator from "@/app/components/allcourses/schoolcourse/Gladiator";
+// import SchoolAboutcourse from "@/app/components/allcourses/schoolcourse/Aboutcourse";
 
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <div >
       
      <Schoolcousre/>
-     <SchoolGladiator/>
-     <SchoolAboutcourse/>
+     {/* <SchoolGladiator/>
+     <SchoolAboutcourse/> */}
 
     </div>
   );
