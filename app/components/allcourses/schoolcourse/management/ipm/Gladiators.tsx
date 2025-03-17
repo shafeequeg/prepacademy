@@ -165,6 +165,9 @@ const ExamPrepHomepage: React.FC = () => {
    const totalSlides = Math.ceil(gladiators.length / 4);
    const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
 
+   console.log(activeIndexsecond);
+   console.log(totalSlidessecond);
+
     // Auto-scroll effect
     // useEffect(() => {
     //   const interval = setInterval(() => {

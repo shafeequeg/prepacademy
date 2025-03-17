@@ -133,6 +133,8 @@ const offeringTypes = [
   { id: "SelfBased", label: "Self Based" },
 ];
 
+console.log(offeringTypes);
+
 // Add courseCards definition since it was referenced but missing
 // const courseCards = [
 //   { id: 1, type: "online", title: "Online CAT Course" },

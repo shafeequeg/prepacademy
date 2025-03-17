@@ -131,16 +131,18 @@ const offeringTypes = [
   { id: "SelfBased", label: "Self Based" },
 ];
 
+console.log(offeringTypes);
+
 // Add courseCards definition since it was referenced but missing
-const courseCards = [
-  { id: 1, type: "online", title: "Online CAT Course" },
-  { id: 2, type: "online", title: "Online MBA Entrance Course" },
-  { id: 3, type: "Classroom", title: "Classroom CAT Program" },
-  { id: 4, type: "Classroom", title: "Classroom MBA Prep" },
-  { id: 5, type: "test", title: "CAT Mock Tests" },
-  { id: 6, type: "Bookmaterials", title: "CAT Study Materials" },
-  { id: 7, type: "SelfBased", title: "Self-paced CAT Program" },
-];
+// const courseCards = [
+//   { id: 1, type: "online", title: "Online CAT Course" },
+//   { id: 2, type: "online", title: "Online MBA Entrance Course" },
+//   { id: 3, type: "Classroom", title: "Classroom CAT Program" },
+//   { id: 4, type: "Classroom", title: "Classroom MBA Prep" },
+//   { id: 5, type: "test", title: "CAT Mock Tests" },
+//   { id: 6, type: "Bookmaterials", title: "CAT Study Materials" },
+//   { id: 7, type: "SelfBased", title: "Self-paced CAT Program" },
+// ];
 
 const CatExamApplySection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -152,9 +154,9 @@ const CatExamApplySection: React.FC = () => {
   });
 
   const [activeMainTab, setActiveMainTab] = useState("engineering");
-  const [activeTab, setActiveTab] = useState("online");
+  // const [activeTab, setActiveTab] = useState("online");
 
-  const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+  // const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -189,11 +191,11 @@ const CatExamApplySection: React.FC = () => {
       });
   };
 
-  const relatedVideos = [
-    { title: "Preparing for the CAT 2025", videoId: "JNJOTlz8C2Y" },
-    { title: "Strategies for CAT 2025", videoId: "Kjjeb1v50C0" },
-    { title: "Best Coaching Centers", videoId: "4g7cyj774_M" },
-  ];
+  // const relatedVideos = [
+  //   { title: "Preparing for the CAT 2025", videoId: "JNJOTlz8C2Y" },
+  //   { title: "Strategies for CAT 2025", videoId: "Kjjeb1v50C0" },
+  //   { title: "Best Coaching Centers", videoId: "4g7cyj774_M" },
+  // ];
 
   const studyAbroadCards: CourseCard[] = [
     { title: 'IELTS', description: 'English proficiency test for study, work, and migration' },
