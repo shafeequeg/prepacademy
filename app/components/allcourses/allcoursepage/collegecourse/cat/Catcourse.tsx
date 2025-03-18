@@ -2,7 +2,7 @@
 
 "use client"
 
-import React, { useEffect, useRef } from 'react';
+import React, {  useRef } from 'react';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight  } from 'lucide-react';
@@ -65,77 +65,77 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
 };
 
 
-const tabs = [
-  { 
-    id: "MANAGEMENT", 
-    label: "MANAGEMENT", 
-    path: "/collegecourse",
-    dropdownItems: [
-      { label: "CAT", path: "/collegecourse/mba" },
-      { label: "XAT", path: "/collegecourse/bba" },
-      { label: "KMAT", path: "/collegecourse/hr" },
-      { label: "CMAT", path: "/collegecourse/hr" },
-      { label: "MAT", path: "/collegecourse/hr" },
-      { label: "NMAT", path: "/collegecourse/hr" },
-      { label: "CUET(PG)", path: "/collegecourse/hr" },
-      { label: "MICAT", path: "/collegecourse/hr" },
-      { label: "MHCET", path: "/collegecourse/hr" },
+// const tabs = [
+//   { 
+//     id: "MANAGEMENT", 
+//     label: "MANAGEMENT", 
+//     path: "/collegecourse",
+//     dropdownItems: [
+//       { label: "CAT", path: "/collegecourse/mba" },
+//       { label: "XAT", path: "/collegecourse/bba" },
+//       { label: "KMAT", path: "/collegecourse/hr" },
+//       { label: "CMAT", path: "/collegecourse/hr" },
+//       { label: "MAT", path: "/collegecourse/hr" },
+//       { label: "NMAT", path: "/collegecourse/hr" },
+//       { label: "CUET(PG)", path: "/collegecourse/hr" },
+//       { label: "MICAT", path: "/collegecourse/hr" },
+//       { label: "MHCET", path: "/collegecourse/hr" },
 
-    ]
-  },
-  { 
-    id: "CEVILSERVICE", 
-    label: "CIVIL SERVICE", 
-    path: "/slat",
-    dropdownItems: [
-      { label: "UPSC", path: "/slat/ias" },
+//     ]
+//   },
+//   { 
+//     id: "CEVILSERVICE", 
+//     label: "CIVIL SERVICE", 
+//     path: "/slat",
+//     dropdownItems: [
+//       { label: "UPSC", path: "/slat/ias" },
     
-    ]
-  },
-  { 
-    id: "GOVERNMENT", 
-    label: "GOVERNMENT", 
-    path: "/ailet",
-    dropdownItems: [
-      { label: "RAILWAY ", path: "/ailet/state" },
-      { label: "SSC", path: "/ailet/central" }
-    ]
-  },
-  { 
-    id: "DEFENCE", 
-    label: "DEFENCE", 
-    path: "/klee",
-    dropdownItems: [
-      { label: "CDS", path: "/klee/nda" },
-      { label: "AFCAT", path: "/klee/cds" },
-    ]
-  },
-  { 
-    id: "MAT", 
-    label: "DESIGN & ARCHITECTURE", 
-    path: "/culee",
-    dropdownItems: [
-      { label: "NID PG ", path: "/culee/nata" },
-      { label: "NIFT PG", path: "/culee/nift" },
-    ]
-  },
-  { 
-    id: "BANK", 
-    label: "BANK", 
-    path: "/culee/bank",
-    dropdownItems: [
-      { label: "SBI ", path: "/culee/bank/sbi-po" },
-      { label: "IBPS P O", path: "/culee/bank/ibps" },
-      { label: "RBI GRADE B", path: "/culee/bank/rbi" },
-      { label: "IBPS RRB ", path: "/culee/bank/sbi-po" },
-      { label: "SBI CLERK ", path: "/culee/bank/sbi-po" },
-      { label: "IBPS CLERK ", path: "/culee/bank/sbi-po" },
-      { label: "NABARD ", path: "/culee/bank/sbi-po" },
-      { label: "LIC AAO ", path: "/culee/bank/sbi-po" },
+//     ]
+//   },
+//   { 
+//     id: "GOVERNMENT", 
+//     label: "GOVERNMENT", 
+//     path: "/ailet",
+//     dropdownItems: [
+//       { label: "RAILWAY ", path: "/ailet/state" },
+//       { label: "SSC", path: "/ailet/central" }
+//     ]
+//   },
+//   { 
+//     id: "DEFENCE", 
+//     label: "DEFENCE", 
+//     path: "/klee",
+//     dropdownItems: [
+//       { label: "CDS", path: "/klee/nda" },
+//       { label: "AFCAT", path: "/klee/cds" },
+//     ]
+//   },
+//   { 
+//     id: "MAT", 
+//     label: "DESIGN & ARCHITECTURE", 
+//     path: "/culee",
+//     dropdownItems: [
+//       { label: "NID PG ", path: "/culee/nata" },
+//       { label: "NIFT PG", path: "/culee/nift" },
+//     ]
+//   },
+//   { 
+//     id: "BANK", 
+//     label: "BANK", 
+//     path: "/culee/bank",
+//     dropdownItems: [
+//       { label: "SBI ", path: "/culee/bank/sbi-po" },
+//       { label: "IBPS P O", path: "/culee/bank/ibps" },
+//       { label: "RBI GRADE B", path: "/culee/bank/rbi" },
+//       { label: "IBPS RRB ", path: "/culee/bank/sbi-po" },
+//       { label: "SBI CLERK ", path: "/culee/bank/sbi-po" },
+//       { label: "IBPS CLERK ", path: "/culee/bank/sbi-po" },
+//       { label: "NABARD ", path: "/culee/bank/sbi-po" },
+//       { label: "LIC AAO ", path: "/culee/bank/sbi-po" },
 
-    ]
-  }
-];
+//     ]
+//   }
+// ];
 
 
 
@@ -324,11 +324,11 @@ const [formData, setFormData] = useState({
 });
 const [activeTab, setActiveTab] = useState("online");
 const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
-const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
 const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
 console.log(activeMainTab);
+console.log(setActiveMainTab);
 
 
 
