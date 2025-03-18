@@ -75,37 +75,38 @@ const StudyAbroadSection: React.FC = () => {
 
       {/* Career Counseling Section */}
       <div className="w-full py-6">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          {/* Left Content - Text Section (Aligned to Start) */}
-          <div className="lg:w-1/2 text-start">
-            <h2 className="text-2xl mb-4">
-              <span className="text-[#F55D3E] font-serif italic">Career</span> Counseling
-            </h2>
-            <p className="text-white text-base md:text-lg mb-6 max-w-lg">
-              Our career counseling program is designed to help individuals make 
-              informed career decisions. We provide professional guidance on resume 
-              building, interview preparation, and skill development to enhance 
-              employability and career growth.
-            </p>
-          </div>
-        </div>
+  <div className="max-w-7xl mx-auto px-6 md:px-10">
+    {/* Left Content - Text Section (Aligned to Start) */}
+    <div className="lg:w-1/2 text-start">
+      <h2 className="text-2xl mb-4">
+        <span className="text-[#F55D3E] font-serif italic">Career</span> Counseling
+      </h2>
+      <p className="text-white text-base md:text-lg mb-6 max-w-lg">
+        Our career counseling program is designed to help individuals make 
+        informed career decisions. We provide professional guidance on resume 
+        building, interview preparation, and skill development to enhance 
+        employability and career growth.
+      </p>
+    </div>
+  </div>
 
-        {/* Career Counseling Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-          {careerCounselingCards.map((card, index) => (
-              <Link key={index} href={card.path || "#"} passHref>
-
-            <div 
-              key={index} 
-              className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
-            >
-              <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
-              <p className="text-white text-base md:text-lg">{card.description}</p>
-            </div>
-            </Link>
-          ))}
+  {/* Career Counseling Cards Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+    {careerCounselingCards.map((card, index) => (
+      <Link key={index} href={card.path || "#"} passHref>
+        <div 
+          className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
+          style={{ height: '220px', width: '100%' }} // Fixed height and width
+        >
+          <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">{card.title}</h3>
+          <p className="text-white text-base md:text-lg line-clamp-4"> {/* Limit to 4 lines */}
+            {card.description}
+          </p>
         </div>
-      </div>
+      </Link>
+    ))}
+  </div>
+</div>
     </div>
   );
 };
