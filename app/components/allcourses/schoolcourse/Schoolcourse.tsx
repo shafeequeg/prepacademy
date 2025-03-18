@@ -139,12 +139,20 @@ const tabs = [
     ]
   },
 
-  
+  { 
+    id: "CUET", 
+    label: "CUET", 
+    path: "/cuet",
+    dropdownItems: [
+      { label: "CUET ", path: "/collegecourse/management/cuet" },
+
+    ]
+  },
  
 
  
   { 
-    id: "CUET", 
+    id: "DEFENCE", 
     label: "DEFENCE", 
     path: "/defence",
     dropdownItems: [
@@ -521,8 +529,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-                Based on past trends, School Courses exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
-              </p>
+              At Prep Academy, we are dedicated to empowering students with the knowledge and skills necessary for a brighter future. Our comprehensive coaching programs are designed to prepare students for a variety of entrance examinations, including CLAT, CUET,IPM, NDA, NID ,NIFT etc…Our tailored programs are designed to equip students with the knowledge and skills necessary to excel in these competitive tests.              </p>
             </div>
 
             {/* Progress Items */}
@@ -705,7 +712,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
     <h2 className="text-4xl mb-4">
       <span className="text-[#F55D3E] font-serif italic pl-4">School</span> Courses
     </h2>
-    <p className="text-white text-lg md:text-2xl mb-6 max-w-lg pl-4">
+    <p className="text-white text-lg md:text-lg mb-6 max-w-lg pl-4">
       The beauty of learning was never meant to be confined within the four walls of a classroom. Prep Academy goes above and beyond the traditional teaching methods, bringing together the most skilled faculty to create an unparalleled learning experience for our students. When others rely on textbooks, we rely on innovation. When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
     </p>
   </div>

@@ -231,11 +231,10 @@ const CatExamApplySection: React.FC = () => {
         {/* Left Content */}
         <div className="lg:w-[35%]">
           <div className="mb-6">
-            <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Study Abroad with <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
+            <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Study Abroad with <span className='text-[#ED1C24] '>Prep</span><span className='text-[#15938F]'>Academy</span>
             </h2>
             <p className="text-gray-300 mb-8">
-              Achieve your dream of studying abroad with expert guidance, personalized counseling, and comprehensive support for admissions, visas, and more.
-            </p>
+            At Prep Academy, we are dedicated to guiding aspiring students toward global academic success through our specialized study abroad entrance coaching programs. We offer comprehensive preparation for a range of standardized tests, including the GMAT, GRE, SAT, and IELTS, tailored to meet the diverse needs of our students            </p>
           </div>
 
           {/* Progress Items */}
@@ -347,7 +346,7 @@ const CatExamApplySection: React.FC = () => {
                  <h2 className="text-4xl mb-4">
                    <span className="text-[#F55D3E] font-serif italic">Study</span> Abroad
                  </h2>
-                 <p className="text-gray-300 text-base md:text-2xl mb-6 max-w-lg">
+                 <p className="text-gray-300 text-base md:text-xl mb-6 max-w-lg">
                  Embarking on an educational journey abroad is a significant decision that requires
                   meticulous planning and preparation. Our comprehensive entrance coaching services are 
                   designed to equip you with the knowledge and skills necessary to excel in international academic environments.

@@ -65,20 +65,20 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
 };
 
 
-const tabs = [
-  { id: "CAT", label: "CAT", path: "/collegecourse" },
-  { id: "XAT", label: "XAT", path: "/slat" },
-  { id: "KMAT", label: "KMAT", path: "/ailet" },
-  { id: "CMAT", label: "CMAT", path: "/klee" },
-  { id: "MAT", label: "MAT ", path: "/culee" },
-  { id: "NMAT", label: "NMAT ", path: "/culee" },
-  { id: "CUET", label: "CUET(PG)", path: "/culee" },
-  { id: "MICAT", label: "MICAT", path: "/culee" },
-  { id: "MHCET", label: "MHCET", path: "/culee" },
+// const tabs = [
+//   { id: "CAT", label: "CAT", path: "/collegecourse" },
+//   { id: "XAT", label: "XAT", path: "/slat" },
+//   { id: "KMAT", label: "KMAT", path: "/ailet" },
+//   { id: "CMAT", label: "CMAT", path: "/klee" },
+//   { id: "MAT", label: "MAT ", path: "/culee" },
+//   { id: "NMAT", label: "NMAT ", path: "/culee" },
+//   { id: "CUET", label: "CUET(PG)", path: "/culee" },
+//   { id: "MICAT", label: "MICAT", path: "/culee" },
+//   { id: "MHCET", label: "MHCET", path: "/culee" },
 
 
 
-];
+// ];
 
 
 const offeringTypes = [
@@ -359,22 +359,22 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
     }
   ];
   
-   const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
-      if (e.key === 'ArrowRight') {
-        const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
-        setTabFn(tabArray[nextIndex].id);
-        document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
-      } else if (e.key === 'ArrowLeft') {
-        const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
-        setTabFn(tabArray[prevIndex].id);
-        document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
-      }
-    };
+  //  const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
+  //     if (e.key === 'ArrowRight') {
+  //       const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
+  //       setTabFn(tabArray[nextIndex].id);
+  //       document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
+  //     } else if (e.key === 'ArrowLeft') {
+  //       const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
+  //       setTabFn(tabArray[prevIndex].id);
+  //       document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
+  //     }
+  //   };
   
   
 
   const [activeTab, setActiveTab] = useState("online");
-  const [activeMainTab, setActiveMainTab] = useState("CAT");
+  // const [activeMainTab, setActiveMainTab] = useState("CAT");
 
   const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
@@ -382,7 +382,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
   {/* Background Image Between Sections */}
   {/* Main Content */}
-  <div
+  {/* <div
       className="flex items-center justify-between w-full no-scrollbar bg-black mt-32 p-3 "
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       role="tablist"
@@ -408,7 +408,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
           </button>
         </Link>
       ))}
-    </div>
+    </div> */}
   <div className="relative w-full z-10  ">
  
     {/* Apply Section with Mascot */}
