@@ -731,7 +731,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                  title={course.title}
                  description={course.description}
                  // classType={course.classType}
-                 path={course.path}
+                //  path={course.path}
  
                  className="border-l-4 border-[#F55D3E] p-4"
                />
