@@ -621,31 +621,27 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
+          Latest Notification            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
+              IIM Indore IPMAT 2025 Registration Began on February 14, 2025, and will conclude on March 27, 2025.            </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
+          Latest Notification            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
-            <p className="text-gray-300 text-base md:text-lg  flex">
+               The Indian Institute of Management (IIM) Rohtak has announced that the registration for the Integrated Programme in Management Aptitude Test (IPMAT) 2025 is open until April 11, 2025.            </p>
+            {/* <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
               The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
+            </p> */}
           </div>
 
           {/* Third Notification */}
-          <div>
+          {/* <div>
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
               Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
             </div>
@@ -657,7 +653,7 @@ const ExamPrepHomepage: React.FC = () => {
               <span className="text-[#FF6347] mr-2">•</span>
               The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     

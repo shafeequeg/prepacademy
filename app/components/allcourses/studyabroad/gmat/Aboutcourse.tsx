@@ -22,21 +22,22 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
-      answer: "The CLAT 2026 exam is tentatively scheduled for December 6, 2025"
+      question: "How do I register for the GMAT?",
+      answer: "You can register for the GMAT through the official GMAT website (mba.com)"
     },
     {
-      question: "	When will the application process for CLAT 2026 begin?",
-      answer: "The application process for CLAT 2026 is anticipated to commence in July 2025."
+      question: "	How often can I take the GMAT?",
+      answer: "You can take the GMAT up to five times within a rolling 12-month period, but no more than eight times in total."
     },
+   
     {
-      question: "How can I apply for CLAT 2026?",
-      answer: "Once the application process begins, candidates can apply online through the official CLAT website."
+      question: "	How long are GMAT scores valid?",
+      answer: ". GMAT scores are valid for five years from the test date."
     },
-    {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
-      answer: "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026."
-    }
+    //  {
+    //   question: "	Is there negative marking in IPMAT?",
+    //   answer: "Yes, in both IIM Indore and IIM Rohtak exams, each correct answer awards 4 marks, and each incorrect answer results in a deduction of 1 mark."
+    // },
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (

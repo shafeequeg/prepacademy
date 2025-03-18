@@ -22,21 +22,22 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
-      answer: "The CLAT 2026 exam is tentatively scheduled for December 6, 2025"
+      question: "	What is the purpose of the GRE?",
+      answer: "The GRE is a standardized test used for admissions into graduate and business school programs."
     },
     {
-      question: "	When will the application process for CLAT 2026 begin?",
-      answer: "The application process for CLAT 2026 is anticipated to commence in July 2025."
+      question: "How many times is GRE conducted in a year?",
+      answer: "The GRE General Test is offered multiple times a year, allowing test-takers to take it once every 21 days"
     },
+   
     {
-      question: "How can I apply for CLAT 2026?",
-      answer: "Once the application process begins, candidates can apply online through the official CLAT website."
+      question: "How many attempts are allowed on the GRE?",
+      answer: "As specified on the ETS website, candidates are limited to attempting the GRE exam five times within a rolling year"
     },
-    {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
-      answer: "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026."
-    }
+    //  {
+    //   question: "	Is there negative marking in IPMAT?",
+    //   answer: "Yes, in both IIM Indore and IIM Rohtak exams, each correct answer awards 4 marks, and each incorrect answer results in a deduction of 1 mark."
+    // },
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (

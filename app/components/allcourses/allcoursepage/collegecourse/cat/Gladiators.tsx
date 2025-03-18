@@ -135,21 +135,21 @@ const ExamPrepHomepage: React.FC = () => {
     },
     {
       id: 2,
-      title: "CUET Exam Preparation: Ace the CUET ",
+      title: "CAT Exam Preparation: Ace the CAT ",
       description: "Essential Tips and Resources for Exam Preparation",
       image: "/blogs/blog2.png",
     },
     {
       id: 3,
-      title: "Important Study Hacks for CUET 2025 Students",
-      description: "Important Study Hacks for CUET 2025 Students",
+      title: "Important Study Hacks for CAT 2025 Students",
+      description: "Important Study Hacks for CAT 2025 Students",
       image: "/blogs/blog3.png",
     },
 
     {
       id: 4,
-      title: "CUET 2025 Course",
-      description: "CUET 2025 Courses: Which One is Right for You?",
+      title: "CAT 2025 Course",
+      description: "CAT 2025 Courses: Which One is Right for You?",
       image: "/blogs/blog4.png",
     },
   ];
@@ -167,8 +167,7 @@ const ExamPrepHomepage: React.FC = () => {
 
    console.log(activeIndexsecond);
    console.log(totalSlidessecond);
-   
-   
+
     // Auto-scroll effect
     // useEffect(() => {
     //   const interval = setInterval(() => {
@@ -216,7 +215,7 @@ const ExamPrepHomepage: React.FC = () => {
       }
     };
   
-   
+    
 
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
@@ -598,38 +597,43 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Latest Notification            </div>
+          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
+            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              NTA Declares the Result/NTA Scores of Common University Entrance Test (UG) – 2024            </p>
+              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
+            </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Latest Notification            </div>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              The National Testing Agency (NTA) has released the CUET UG 2025 application form            </p>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              The registration process for the Common University Entrance Test-Undergraduate (CUET UG) 2025 is set to close soon, with the deadline for submitting applications being March 22, 2025 (11:50 PM).            </p>
-          </div>
-
-          {/* Third Notification */}
-          {/* <div>
-            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-              Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CUET-2025</span>
+          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CUET, XAT, CMAT, and GMAT, with the CUET being especially challenging due to limited seats and a vast pool of applicants.
+              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
             </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
               The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
             </p>
-          </div> */}
+          </div>
+
+          {/* Third Notification */}
+          <div>
+            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
+              Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
+            </div>
+            <p className="text-gray-300 text-base md:text-lg  flex">
+              <span className="text-[#FF6347] mr-2">•</span>
+              These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT, and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.
+            </p>
+            <p className="text-gray-300 text-base md:text-lg  flex">
+              <span className="text-[#FF6347] mr-2">•</span>
+              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
+            </p>
+          </div>
         </div>
       </div>
     

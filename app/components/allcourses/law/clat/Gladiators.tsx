@@ -621,23 +621,19 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
+          Latest Notifications            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
+              CLAT 2026 is tentatively scheduled for December 6, 2025, which aligns with the traditional first Sunday of December examination date.            </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
+          Latest Notifications            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
+               The application forms are expected to be available online starting in July 2025.            </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
               The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
@@ -647,16 +643,13 @@ const ExamPrepHomepage: React.FC = () => {
           {/* Third Notification */}
           <div>
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-              Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
+            Eligibility Criteria:            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT, and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.
-            </p>
+              <span className='text-lg'>   Undergraduate Programs (UG):</span>  Candidates must have completed their 10+2 or equivalent examination with a minimum of 45% marks (40% for SC/ST candidates). There is no upper age limit for UG courses.            </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
+            <span className='text-lg'>Postgraduate Programs (PG):</span>   Applicants should hold an LL.B or equivalent degree with at least 50% marks (45% for SC/ST candidates). There is no upper age limit for PG courses.            </p>
           </div>
         </div>
       </div>

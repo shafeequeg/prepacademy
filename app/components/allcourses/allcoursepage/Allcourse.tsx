@@ -14,13 +14,18 @@ interface CourseCardProps {
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
+  // Limit the description to 15 words (adjust as needed)
+  const maxWords = 5;
+  const truncatedDescription = description.split(" ").length > maxWords
+    ? description.split(" ").slice(0, maxWords).join(" ") + "..."
+    : description;
+
   const cardContent = (
     <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
-      {/* <p className="text-[#F55D3E] text-sm font-medium mb-1">{code}</p> */}
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-white  text-base">{description}</p>
+      <p className="text-white text-base">{truncatedDescription}</p>
       {classType && (
-        <p className="text-white  text-sm mt-2">{classType}</p>
+        <p className="text-white text-sm mt-2">{classType}</p>
       )}
     </div>
   );
@@ -35,6 +40,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
 
   return cardContent;
 };
+
 
 
 const AllCourses: React.FC = () => {

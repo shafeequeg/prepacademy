@@ -33,13 +33,12 @@ import emailjs from 'emailjs-com';
 // };
 
 const tabs = [
-  { id: "ResumeBuilding", label: "Resume Building" },
-  { id: "InterviewPreparation", label: "Interview Preparation" },
-  { id: "CareerPlanning", label: "Career Planning" },
-  { id: "Skill Development", label: "Skill Development" },
-  { id: "Job Search Strategies", label: "Job Search Strategies" },
+  { id: "ResumeBuilding", label: "Resume Building", path: "/career-counseling/resume-building" },
+  { id: "InterviewPreparation", label: "Interview Preparation", path: "/career-counseling/interview-preparation" },
+  { id: "CareerPlanning", label: "Career Planning", path: "/career-counseling/career-planning" },
+  { id: "Skill Development", label: "Skill Development", path: "/career-counseling/skill-development" },
+  { id: "Job Search Strategies", label: "Job Search Strategies", path: "/career-counseling/job-search-strategies" },
 ];
-
 // const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
 //   return (
 //     <button
@@ -140,30 +139,35 @@ const CatExamApplySection: React.FC = () => {
       <div className="relative w-full z-10">
         <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              role="tablist"
-              aria-label="Career Counseling Programs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => setActiveMainTab(tab.id)}
-                  onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id ? "bg-[#FF6B3D] text-white font-medium" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+          <div
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
+  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+  role="tablist"
+  aria-label="Career Counseling Programs"
+>
+  {tabs.map((tab, index) => (
+    <button
+      key={tab.id}
+      id={`tab-${tab.id}`}
+      role="tab"
+      aria-selected={activeMainTab === tab.id}
+      aria-controls={`tabpanel-${tab.id}`}
+      onClick={() => {
+        setActiveMainTab(tab.id); // Set the active tab
+        window.location.href = tab.path; // Navigate to the path
+      }}
+      onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
+      tabIndex={activeMainTab === tab.id ? 0 : -1}
+      className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+        activeMainTab === tab.id
+          ? "bg-[#FF6B3D] text-white font-medium"
+          : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+      } rounded-full`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
           </div>
         </div>
 

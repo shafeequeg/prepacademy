@@ -92,7 +92,7 @@ const offeringTypes = [
 
 const courseCards = [
   {
-    id: "cat-online-1",
+    id: "CUET-online-1",
     title: "Daily Class ",
     image: "/catdailyclass.jpeg",
     type: "online",
@@ -104,7 +104,7 @@ const courseCards = [
     ],
   },
   {
-    id: "cat-online-2",
+    id: "CUET-online-2",
     title: "Night Class",
     image: "/catnightclass.jpeg",
     type: "online",
@@ -112,11 +112,11 @@ const courseCards = [
       "Live doubt-solving sessions",
       "Advanced problem-solving techniques",
       "Mock test series with AI analysis",
-      "Best for repeat CAT takers",
+      "Best for repeat CUET takers",
     ],
   },
   {
-    id: "cat-online-3",
+    id: "CUET-online-3",
     title: "Weekend Class",
     image: "/catweekendclass.jpeg",
     type: "online",
@@ -128,7 +128,7 @@ const courseCards = [
     ],
   },
   {
-    id: "cat-Classroom-1",
+    id: "CUET-Classroom-1",
     title: " Day Classes",
     image: "/news1.png",
     type: "Classroom",
@@ -141,7 +141,7 @@ const courseCards = [
     ],
   },
   {
-    id: "cat-Classroom-2",
+    id: "CUET-Classroom-2",
     title: " Night Classes",
     image: "/news1.png",
     type: "Classroom",
@@ -155,7 +155,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-Classroom-3",
+    id: "CUET-Classroom-3",
     title: " Weekend Classes",
     image: "/news1.png",
     type: "Classroom",
@@ -169,7 +169,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-test-1",
+    id: "CUET-test-1",
     title: " Mock Test Only ",
     image: "/news1.png",
     type: "test",
@@ -182,7 +182,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-test-2",
+    id: "CUET-test-2",
     title: " Test Series+ Mock:",
     image: "/news1.png",
     type: "test",
@@ -195,7 +195,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-test-3",
+    id: "CUET-test-3",
     title: " Mock +Test Series + Book Materials)",
     image: "/news1.png",
     type: "test",
@@ -209,7 +209,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-Bookmaterials-1",
+    id: "CUET-Bookmaterials-1",
     title: " Book Materials Only ",
     image: "/news1.png",
     type: "Bookmaterials",
@@ -220,7 +220,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-Bookmaterials-2",
+    id: "CUET-Bookmaterials-2",
     title: " Test Series+ Mock Test + Book materials",
     image: "/news1.png",
     type: "Bookmaterials",
@@ -232,7 +232,7 @@ const courseCards = [
   },
 
   {
-    id: "cat-SelfBased-1",
+    id: "CUET-SelfBased-1",
     title: " Self Based",
     image: "/news1.png",
     type: "SelfBased",
@@ -250,7 +250,7 @@ const courseCards = [
 
 
 
-const CatExamApplySection: React.FC = () => {
+const CUETExamApplySection: React.FC = () => {
 
 
 //   const [showIcons, setShowIcons] = useState(true);
@@ -330,11 +330,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   const relatedVideos = [
     {
-      title: "Preparing for the CAT 2025",
+      title: "Preparing for the CUET 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CAT 2025",
+      title: "Strategies for CUET 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -346,11 +346,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   
   const demoVideos = [
     {
-      title: "Preparing for the CAT 2025",
+      title: "Preparing for the CUET 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CAT 2025",
+      title: "Strategies for CUET 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -423,12 +423,13 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
               {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
               </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CAT 2025 with
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CUET 2025 with
                  {/* Prep Academy  */}
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-                Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
+              The Common University Entrance Test (CUET) is a national-level examination administered by the National Testing Agency (NTA) for admissions into undergraduate (UG) programs across various central and participating universities in India.
+CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to June 1, 2025.
               </p>
             </div>
 
@@ -448,7 +449,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Comprehensive CAT Online /Offline Course </p>
+    <p className="text-white">Comprehensive CUET Online /Offline Course </p>
   </div>
 </div>
 
@@ -544,7 +545,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                           <option value="" disabled>
                             Preferred Online Program
                           </option>
-                          <option value="CAT Preparation">CAT Preparation</option>
+                          <option value="CUET Preparation">CUET Preparation</option>
                           <option value="MBA Entrance">MBA Entrance</option>
                           <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>
@@ -722,7 +723,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
         </div>
-        <h3 className="text-white text-center text-lg font-medium mb-5">CAT Master Class</h3>
+        <h3 className="text-white text-center text-lg font-medium mb-5">CUET Master Class</h3>
         <a 
           href="#" 
           className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
@@ -763,4 +764,4 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   );
 };
 
-export default CatExamApplySection;
+export default CUETExamApplySection;

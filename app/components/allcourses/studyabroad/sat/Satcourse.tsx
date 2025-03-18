@@ -314,11 +314,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   const relatedVideos = [
     {
-      title: "Preparing for the GMAT 2025",
+      title: "Preparing for the SAT 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for GMAT 2025",
+      title: "Strategies for SAT 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -330,11 +330,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   
   const demoVideos = [
     {
-      title: "Preparing for the GMAT 2025",
+      title: "Preparing for the SAT 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for GMAT 2025",
+      title: "Strategies for SAT 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -366,12 +366,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
               {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
               </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack GMAT 2025 with
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack SAT 2025 with
                  {/* Prep Academy  */}
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-              GMAT (Graduate Management Admission Test) is a globally recognized exam used for admissions to business schools and graduate management programs worldwide.              </p>
+              The SAT is a standardized test widely used for college admissions in the United States. SAT is conducted multiple times each year, providing students with several opportunities to take the test.                          </p>
             </div>
 
             {/* Progress Items */}
@@ -390,7 +390,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Comprehensive GMAT Online /Offline Course </p>
+    <p className="text-white">Comprehensive SAT Online /Offline Course </p>
   </div>
 </div>
 
@@ -486,7 +486,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                           <option value="" disabled>
                             Preferred Online Program
                           </option>
-                          <option value="CAT Preparation">GMAT Preparation</option>
+                          <option value="CAT Preparation">SAT Preparation</option>
                           <option value="MBA Entrance">MBA Entrance</option>
                           <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>

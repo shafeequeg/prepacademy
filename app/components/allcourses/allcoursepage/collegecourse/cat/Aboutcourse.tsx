@@ -22,20 +22,20 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
-      answer: "The CLAT 2026 exam is tentatively scheduled for December 6, 2025"
+      question: "What is the last day for registering for CAT 2025?",
+      answer: "The last day for registering for CAT 2025 is September 20, 2025. Candidates must ensure they've completed all parts of their application by this deadline to avoid any disqualification or issues."
     },
     {
-      question: "	When will the application process for CLAT 2026 begin?",
-      answer: "The application process for CLAT 2026 is anticipated to commence in July 2025."
+      question: "What is the last day for registering for CAT 2024?",
+      answer: "The last day for registering for CAT 2024 has already passed."
     },
     {
-      question: "How can I apply for CLAT 2026?",
-      answer: "Once the application process begins, candidates can apply online through the official CLAT website."
+      question: "What is the last day for applying for CAP 2025?",
+      answer: "The last day for applying for CAP 2025 is October 15, 2025."
     },
     {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
-      answer: "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026."
+      question: "What is the last day for registering for XAT 2025?",
+      answer: "The last day for registering for XAT 2025 is November 30, 2025."
     }
   ];
   const renderStars = (rating: number) => {

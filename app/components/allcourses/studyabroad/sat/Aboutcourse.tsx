@@ -22,21 +22,22 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
-      answer: "The CLAT 2026 exam is tentatively scheduled for December 6, 2025"
+      question: "What is the SAT?",
+      answer: "The SAT is a standardized test designed to assess a high school student's readiness for college."
     },
     {
-      question: "	When will the application process for CLAT 2026 begin?",
-      answer: "The application process for CLAT 2026 is anticipated to commence in July 2025."
+      question: "How do I register for the SAT?",
+      answer: "Registration for the SAT is conducted through the College Board's official website."
     },
+   
     {
-      question: "How can I apply for CLAT 2026?",
-      answer: "Once the application process begins, candidates can apply online through the official CLAT website."
+      question: "Can I take the SAT more than once?",
+      answer: "Yes, students can take the SAT multiple times."
     },
-    {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
-      answer: "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026."
-    }
+     {
+      question: "When should I start preparing for the SAT? ",
+      answer: "It's advisable to begin SAT preparation at least 2–3 months before your scheduled test date."
+    },
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (

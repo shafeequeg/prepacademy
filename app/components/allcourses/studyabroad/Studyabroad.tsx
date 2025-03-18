@@ -8,17 +8,7 @@ import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com';
 import Image from 'next/image'; // Correct import for Next.js Image component
 
-// interface DemoVideoCardProps {
-//   title: string;
-//   videoId: string;
-// }
 
-// interface TabProps {
-//   label: string;
-//   active: boolean;
-//   onClick: () => void;
-//   id: string;
-// }
 
 interface CourseCardProps {
   // code: string;
@@ -32,6 +22,9 @@ interface CourseCardProps {
 interface CourseCard {
   title: string;
   description: string;
+  path?: string;
+
+
 }
 
 
@@ -60,68 +53,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
 };
 
 const tabs = [
-  { id: "IELTS", label: "IELTS" },
-  { id: "SAT", label: "SAT" },
-  { id: "ACT", label: "ACT" },
-  { id: "GRE", label: "GRE" },
-  { id: "GMAT", label: "GMAT" },
+  { id: "IELTS", label: "IELTS", path: '/courses/ielts' },
+  { id: "SAT", label: "SAT",path: '/studyabroad/sat'  },
+  { id: "ACT", label: "ACT", path: '/courses/act' },
+  { id: "GRE", label: "GRE", path: '/studyabroad/gre' },
+  { id: "GMAT", label: "GMAT", path: '/studyabroad/gmat' },
  
 ];
 
-// const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       id={`tab-${id}`}
-//       role="tab"
-//       aria-selected={active}
-//       aria-controls={`tabpanel-${id}`}
-//       className={`flex items-center justify-center px-6 py-2 min-w-[180px] rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${
-//         active
-//           ? "bg-[#FF6B3D] text-white font-medium"
-//           : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-//       }`}
-//     >
-//       {label}
-//     </button>
-//   );
-// };
 
-// const TabsContainer: React.FC<{ activeTab: string; setActiveTab: (tab: string) => void }> = ({
-//   activeTab,
-//   setActiveTab,
-// }) => {
-//   return (
-//     <div className="overflow-x-auto whitespace-nowrap scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-//       <div className="flex space-x-4 w-max px-4 py-2">
-//         {tabs.map((tab) => (
-//           <Tab
-//             key={tab.id}
-//             id={tab.id}
-//             label={tab.label}
-//             active={activeTab === tab.id}
-//             onClick={() => setActiveTab(tab.id)}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-// const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
-//   return (
-//     <div className="relative group cursor-pointer">
-//       <div className="relative w-full h-56 md:h-64 lg:h-72">
-//         <iframe
-//           className="w-full h-full rounded-lg"
-//           src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`}
-//           title={title}
-//           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//           allowFullScreen
-//         />
-//       </div>
-//     </div>
-//   );
-// };
+
 
 const offeringTypes = [
   { id: "online", label: "Online Class" },
@@ -133,16 +74,7 @@ const offeringTypes = [
 
 console.log(offeringTypes);
 
-// Add courseCards definition since it was referenced but missing
-// const courseCards = [
-//   { id: 1, type: "online", title: "Online CAT Course" },
-//   { id: 2, type: "online", title: "Online MBA Entrance Course" },
-//   { id: 3, type: "Classroom", title: "Classroom CAT Program" },
-//   { id: 4, type: "Classroom", title: "Classroom MBA Prep" },
-//   { id: 5, type: "test", title: "CAT Mock Tests" },
-//   { id: 6, type: "Bookmaterials", title: "CAT Study Materials" },
-//   { id: 7, type: "SelfBased", title: "Self-paced CAT Program" },
-// ];
+
 
 const CatExamApplySection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -191,77 +123,18 @@ const CatExamApplySection: React.FC = () => {
       });
   };
 
-  // const relatedVideos = [
-  //   { title: "Preparing for the CAT 2025", videoId: "JNJOTlz8C2Y" },
-  //   { title: "Strategies for CAT 2025", videoId: "Kjjeb1v50C0" },
-  //   { title: "Best Coaching Centers", videoId: "4g7cyj774_M" },
-  // ];
+ 
 
   const studyAbroadCards: CourseCard[] = [
-    { title: 'IELTS', description: 'English proficiency test for study, work, and migration' },
-    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.' },
+    { title: 'IELTS', description: 'English proficiency test for study, work, and migration'},
+    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.'},
     { title: 'ACT', description: 'Entrance exam for admission into various universities' },
     { title: 'GRE', description: 'Graduate school admission test for various disciplines' },
     { title: 'GMAT', description: 'Global entrance exam for MBA and business programs' }
   ];
 
 
-  // const schoolCourses = [
-  //   {
-  //     // code: "ENGINEERING",
-  //     title: "ENGINEERING",
-  //     description: "JEE, KEAM, BITSAT, VITEEE, KCET",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "MEDICAL",
-  //     title: "MEDICAL",
-  //     description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "MANAGEMENT",
-  //     title: "MANAGEMENT",
-  //     description: "IPM, CHRIST, SET, NPAT,MHCET",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "LAW",
-  //     title: "LAW",
-  //     description: "CLAT, SLAT, AILET, KLEE, CULEE",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "CUET",
-  //     title: "COMMON UNIVERSITY ENTRANCE TEST",
-  //       description: "COMMON UNIVERSITY ENTRANCE TEST",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "DEFENCE",
-  //     title: "DEFENCE",
-  //     description: "NDA, AFCAT",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "DESIGN",
-  //     title: "DESIGN & ARCHITECTURE",
-  //     description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
-  //     classType: "CLASSES FOR 11TH, 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "OTHERS",
-  //     title: "OTHERS",
-  //     description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
-  //     classType: "CLASSES FOR 12TH & DROPPERS"
-  //   },
-  //   {
-  //     // code: "TUITIONS",
-  //     title: "TUITIONS",
-  //     description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
-  //     classType: "CLASSES FOR 11TH & 12TH"
-  //   }
-  // ];
+  
 
   const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
     if (e.key === 'ArrowRight') {
@@ -317,32 +190,36 @@ const CatExamApplySection: React.FC = () => {
   {/* Main Tabs Section */}
   <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              role="tablist"
-              aria-label="Study Abroad Programs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => setActiveMainTab(tab.id)}
-                  onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id
-                      ? "bg-[#FF6B3D] text-white font-medium"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+          <div
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
+  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+  role="tablist"
+  aria-label="Study Abroad Programs"
+>
+  {tabs.map((tab, index) => (
+    <button
+      key={tab.id}
+      id={`tab-${tab.id}`}
+      role="tab"
+      aria-selected={activeMainTab === tab.id}
+      aria-controls={`tabpanel-${tab.id}`}
+      onClick={() => {
+        setActiveMainTab(tab.id);
+        // Navigate to the path associated with the tab
+        window.location.href = tab.path;
+      }}
+      onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
+      tabIndex={activeMainTab === tab.id ? 0 : -1}
+      className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+        activeMainTab === tab.id
+          ? "bg-[#FF6B3D] text-white font-medium"
+          : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+      } rounded-full`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
           </div>
           </div>
 
@@ -466,11 +343,11 @@ const CatExamApplySection: React.FC = () => {
       <div className="w-full bg-[#120B0B] px-6 md:px-10 py-6">
              <div className="flex flex-col lg:flex-row gap-8 mb-6 max-w-7xl mx-auto">
                {/* Left Content - Text Section */}
-               <div className="lg:w-1/2">
-                 <h2 className="text-2xl mb-4">
+               <div className="lg:w-1/2 mt-14 relative left-12">
+                 <h2 className="text-4xl mb-4">
                    <span className="text-[#F55D3E] font-serif italic">Study</span> Abroad
                  </h2>
-                 <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
+                 <p className="text-gray-300 text-base md:text-2xl mb-6 max-w-lg">
                  Embarking on an educational journey abroad is a significant decision that requires
                   meticulous planning and preparation. Our comprehensive entrance coaching services are 
                   designed to equip you with the knowledge and skills necessary to excel in international academic environments.
@@ -478,17 +355,16 @@ const CatExamApplySection: React.FC = () => {
                </div>
      
                {/* Right Content - Image */}
-               <div className="lg:w-1/2">
-                 <div className="relative w-full h-48 lg:h-56">
-                   <Image
-                     src="/allcoursestudyabroad.png"
-                     alt="Student studying abroad"
-                     fill
-                     className="object-cover rounded-lg"
-                     sizes="(max-width: 768px) 100vw, 50vw"
-                   />
-                 </div>
-               </div>
+               <div className="relative w-1/2 aspect-[4/3] min-h-[320px] overflow-hidden "> {/* Ensure no overflow */}
+                  <Image 
+                        src="/allcourse/studyabroad.jpeg" 
+                        alt="School Students" 
+                        fill 
+                        className="rounded-lg object-contain " 
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
+                      /> 
+                    </div> 
              </div>
      
              {/* Study Abroad Cards Grid */}

@@ -314,11 +314,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   const relatedVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the GRE 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for GRE 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -330,11 +330,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   
   const demoVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the GRE 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for GRE 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -366,13 +366,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
               {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
               </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CLAT 2025 with
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack GRE 2025 with
                  {/* Prep Academy  */}
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-                Based on past trends, the CLAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
-              </p>
+              Graduate Record Examination (GRE) is a worldwide accepted standard test for candidates planning to complete their post-graduation from abroad (MS or MBA). The Educational Testing Service (ETS) is the conducting body of the GRE.              </p>
             </div>
 
             {/* Progress Items */}
@@ -391,7 +390,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Comprehensive CLAT Online /Offline Course </p>
+    <p className="text-white">Comprehensive GRE Online /Offline Course </p>
   </div>
 </div>
 
@@ -487,7 +486,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                           <option value="" disabled>
                             Preferred Online Program
                           </option>
-                          <option value="CAT Preparation">Clat Preparation</option>
+                          <option value="CAT Preparation">GRE Preparation</option>
                           <option value="MBA Entrance">MBA Entrance</option>
                           <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>

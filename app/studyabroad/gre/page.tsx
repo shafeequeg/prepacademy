@@ -1,7 +1,7 @@
 
 import Grecourse from "@/app/components/allcourses/studyabroad/gre/Grecourse";
-// import StudyabroadGladiator from "@/app/components/allcourses/studyabroad/Gladiators";
-// import StudyabroadAboutcourse from "@/app/components/allcourses/studyabroad/Aboutcourse";
+import GreGladiator from "@/app/components/allcourses/studyabroad/gre/Gladiators";
+import GreAboutcourse from "@/app/components/allcourses/studyabroad/gre/Aboutcourse";
 
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <div >
       
      <Grecourse/>
-     {/* <StudyabroadGladiator/>
-     <StudyabroadAboutcourse/> */}
+     <GreGladiator/>
+     <GreAboutcourse/>
 
     </div>
   );

@@ -22,21 +22,22 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "What is the last day for registering for CAT 2025?",
-      answer: "The last day for registering for CAT 2025 is September 20, 2025. Candidates must ensure they've completed all parts of their application by this deadline to avoid any disqualification or issues."
+      question: "	What is IPMAT?",
+      answer: "IPMAT is an entrance exam designed for students aspiring to join the five-year Integrated Programme in Management offered by IIMs, notably IIM Indore and IIM Rohtak."
     },
     {
-      question: "What is the last day for registering for CAT 2024?",
-      answer: "The last day for registering for CAT 2024 has already passed."
+      question: " Who is eligible to apply for IPMAT?",
+      answer: "TCandidates must have completed their Class 12 or equivalent examination from a recognized board."
     },
+   
     {
-      question: "What is the last day for applying for CAP 2025?",
-      answer: "The last day for applying for CAP 2025 is October 15, 2025."
+      question: "	How can I apply for IPMAT 2025?",
+      answer: "Through the official website www.iimidr.ac.in"
     },
-    {
-      question: "What is the last day for registering for XAT 2025?",
-      answer: "The last day for registering for XAT 2025 is November 30, 2025."
-    }
+     {
+      question: "	Is there negative marking in IPMAT?",
+      answer: "Yes, in both IIM Indore and IIM Rohtak exams, each correct answer awards 4 marks, and each incorrect answer results in a deduction of 1 mark."
+    },
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (

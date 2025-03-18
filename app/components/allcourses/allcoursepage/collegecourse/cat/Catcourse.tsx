@@ -2,7 +2,7 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight  } from 'lucide-react';
@@ -63,6 +63,117 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
     </div>
   );
 };
+
+const collegeCourses = [
+  {
+    // code: "MGMT",
+    title: "Management",
+    description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
+    path: "/collegecourse"
+  },
+  {
+    // code: "CIVIL",
+    title: "Civil Services",
+    description: "UPSC",
+    path: "/courses/civil-services"
+  },
+  {
+    // code: "GOVT",
+    title: "Government",
+    description: "RAILWAY, SSC",
+    path: "/courses/government"
+  },
+  {
+    // code: "DEF",
+    title: "Defence",
+    description: "CDS, AFCAT ",
+    path: "/courses/defence"
+  },
+  {
+    // code: "DESIGN",
+    title: "Design & Architecture",
+    description: "NID PG, NIFT PG",
+    path: "/courses/design-architecture"
+  },
+  {
+    // code: "BANK",
+    title: "Bank",
+    description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
+    path: "/courses/bank"
+  }
+];
+const tabs = [
+  { 
+    id: "MANAGEMENT", 
+    label: "MANAGEMENT", 
+    path: "/collegecourse",
+    dropdownItems: [
+      { label: "CAT", path: "/collegecourse/mba" },
+      { label: "XAT", path: "/collegecourse/bba" },
+      { label: "KMAT", path: "/collegecourse/hr" },
+      { label: "CMAT", path: "/collegecourse/hr" },
+      { label: "MAT", path: "/collegecourse/hr" },
+      { label: "NMAT", path: "/collegecourse/hr" },
+      { label: "CUET(PG)", path: "/collegecourse/hr" },
+      { label: "MICAT", path: "/collegecourse/hr" },
+      { label: "MHCET", path: "/collegecourse/hr" },
+
+    ]
+  },
+  { 
+    id: "CEVILSERVICE", 
+    label: "CIVIL SERVICE", 
+    path: "/slat",
+    dropdownItems: [
+      { label: "UPSC", path: "/slat/ias" },
+    
+    ]
+  },
+  { 
+    id: "GOVERNMENT", 
+    label: "GOVERNMENT", 
+    path: "/ailet",
+    dropdownItems: [
+      { label: "RAILWAY ", path: "/ailet/state" },
+      { label: "SSC", path: "/ailet/central" }
+    ]
+  },
+  { 
+    id: "DEFENCE", 
+    label: "DEFENCE", 
+    path: "/klee",
+    dropdownItems: [
+      { label: "CDS", path: "/klee/nda" },
+      { label: "AFCAT", path: "/klee/cds" },
+    ]
+  },
+  { 
+    id: "MAT", 
+    label: "DESIGN & ARCHITECTURE", 
+    path: "/culee",
+    dropdownItems: [
+      { label: "NID PG ", path: "/culee/nata" },
+      { label: "NIFT PG", path: "/culee/nift" },
+    ]
+  },
+  { 
+    id: "BANK", 
+    label: "BANK", 
+    path: "/culee/bank",
+    dropdownItems: [
+      { label: "SBI ", path: "/culee/bank/sbi-po" },
+      { label: "IBPS P O", path: "/culee/bank/ibps" },
+      { label: "RBI GRADE B", path: "/culee/bank/rbi" },
+      { label: "IBPS RRB ", path: "/culee/bank/sbi-po" },
+      { label: "SBI CLERK ", path: "/culee/bank/sbi-po" },
+      { label: "IBPS CLERK ", path: "/culee/bank/sbi-po" },
+      { label: "NABARD ", path: "/culee/bank/sbi-po" },
+      { label: "LIC AAO ", path: "/culee/bank/sbi-po" },
+
+    ]
+  }
+];
+
 
 
 const offeringTypes = [
@@ -248,6 +359,14 @@ const [formData, setFormData] = useState({
   college: "",
   program: "",
 });
+const [activeTab, setActiveTab] = useState("online");
+const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+
+console.log(activeMainTab);
+
 
 
 const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -314,11 +433,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   const relatedVideos = [
     {
-      title: "Preparing for the GMAT 2025",
+      title: "Preparing for the CAT 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for GMAT 2025",
+      title: "Strategies for CAT 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -330,11 +449,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   
   const demoVideos = [
     {
-      title: "Preparing for the GMAT 2025",
+      title: "Preparing for the CAT 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for GMAT 2025",
+      title: "Strategies for CAT 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -342,18 +461,84 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       videoId: "WaYzGw6qnQ8", // Remove "&t=26s"
     }
   ];
+
+  
+  
+  const toggleDropdown = (tabId: string | null) => {
+    setOpenDropdown(openDropdown === tabId ? null : tabId);
+  };
+  
+  // Handle keyboard navigation for tabs
+  const handleTabKeyNav = (    e: React.KeyboardEvent<HTMLElement> , index: number) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIndex = (index + 1) % tabs.length;
+      setActiveMainTab(tabs[nextIndex].id);
+      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIndex = (index - 1 + tabs.length) % tabs.length;
+      setActiveMainTab(tabs[prevIndex].id);
+      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      toggleDropdown(tabs[index].id);
+    }
+  };
+  
+  // Handle keyboard navigation for dropdown items
+  const handleDropdownKeyNav = (
+    e: React.KeyboardEvent<HTMLElement>, 
+    tabId: string, 
+    itemIndex: number, 
+    items: any[]
+  ) => {
+  
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (itemIndex + 1) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (itemIndex - 1 + items.length) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenDropdown(null);
+      document.getElementById(`tab-${tabId}`)?.focus();
+    }
+  };
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!openDropdown) return; // Ensure openDropdown is not null
+  
+      const dropdownElement = dropdownRefs.current[openDropdown] as HTMLElement | null;
+  
+      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openDropdown]);
   
   
 
-  const [activeTab, setActiveTab] = useState("online");
 
-  const filteredCourses = courseCards.filter((course) => course.type === activeTab);
+ 
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
   {/* Background Image Between Sections */}
   {/* Main Content */}
-  <div className="relative w-full z-10">
+  
+  <div className="relative w-full z-10  ">
+ 
     {/* Apply Section with Mascot */}
     <div 
       className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover "
@@ -366,12 +551,13 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
               {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
               </p> */}
-              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack GMAT 2025 with
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Crack CAT 2025 with
                  {/* Prep Academy  */}
                  <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
                  </h2>
               <p className="text-gray-300 mb-8">
-              GMAT (Graduate Management Admission Test) is a globally recognized exam used for admissions to business schools and graduate management programs worldwide.              </p>
+                Based on past trends, the CAT 2025 exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
+              </p>
             </div>
 
             {/* Progress Items */}
@@ -390,7 +576,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       alt="Check Icon" 
       className="w-5 h-5 mr-3"
     />
-    <p className="text-white">Comprehensive GMAT Online /Offline Course </p>
+    <p className="text-white">Comprehensive CAT Online /Offline Course </p>
   </div>
 </div>
 
@@ -486,7 +672,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
                           <option value="" disabled>
                             Preferred Online Program
                           </option>
-                          <option value="CAT Preparation">GMAT Preparation</option>
+                          <option value="CAT Preparation">CAT Preparation</option>
                           <option value="MBA Entrance">MBA Entrance</option>
                           <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>
@@ -583,30 +769,37 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
     {/* Course Cards */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredCourses.length > 0 ? (
-        filteredCourses.map((card) => (
-          <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
-            <div className="p-6">
-              <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
-              <ul className="space-y-2 mb-6">
-                {card.features.map((feature, idx) => (
-                  <li key={idx} className="flex text-gray-300 text-sm">
-                    <span className="text-[#F55D3E] mr-2">•</span>
-                    <span className="text-base md:text-lg text-gray-300 mb-6">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
-                Enroll Now <ChevronRight size={16} className="ml-1" />
-              </a>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-400 col-span-full">No courses available for this category.</p>
-      )}
-    </div>
+  {filteredCourses.length > 0 ? (
+    filteredCourses.map((card) => (
+      <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
+        {/* Image Container */}
+        <div className="w-full h- flex items-center justify-center bg-gray-800"> {/* Added a wrapper for better control */}
+          <img
+            src={card.image}
+            alt={card.title}
+            className="w-full h-full object-contain" 
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
+          <ul className="space-y-2 mb-6">
+            {card.features.map((feature, idx) => (
+              <li key={idx} className="flex text-gray-300 text-sm">
+                <span className="text-[#F55D3E] mr-2">•</span>
+                <span className="text-base md:text-lg text-gray-300 mb-6">{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
+            Enroll Now <ChevronRight size={16} className="ml-1" />
+          </a>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-400 col-span-full">No courses available for this category.</p>
+  )}
+</div>
   </div>
 </div>
 

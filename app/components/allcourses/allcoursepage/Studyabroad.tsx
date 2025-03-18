@@ -12,7 +12,7 @@ interface CourseCard {
 const StudyAbroadSection: React.FC = () => {
   const studyAbroadCards: CourseCard[] = [
     { title: 'IELTS', description: 'English proficiency test for study, work, and migration', path: '/courses/ielts' },
-    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.', path: '/courses/sat' },
+    { title: 'SAT', description: 'Standardized test for college admissions, mainly in the U.S.', path: '/studyabroad/sat' },
     { title: 'ACT', description: 'Entrance exam for admission into various universities', path: '/courses/act' },
     { title: 'GRE', description: 'Graduate school admission test for various disciplines', path: '/studyabroad/gre' },
     { title: 'GMAT', description: 'Global entrance exam for MBA and business programs', path: '/studyabroad/gmat' }
@@ -45,16 +45,16 @@ const StudyAbroadSection: React.FC = () => {
 
           {/* Right Content - Image */}
           <div className="lg:w-1/2">
-            <div className="relative w-full h-48 lg:h-56">
-              <Image
-                src="/studyabroad.jpeg"
-                alt="Student studying abroad"
-                fill
-                className="object-cover rounded-lg"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-          </div>
+  <div className="relative w-full h-48 lg:h-56">
+    <Image
+      src="/studyabroad.jpeg"
+      alt="Student studying abroad"
+      fill
+      className="object-contain rounded-lg" 
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  </div>
+</div>
         </div>
 
         {/* Study Abroad Cards Grid */}

@@ -22,20 +22,20 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "What is the last day for registering for CAT 2025?",
-      answer: "The last day for registering for CAT 2025 is September 20, 2025. Candidates must ensure they've completed all parts of their application by this deadline to avoid any disqualification or issues."
+      question: "	 What is CUET UG exam?",
+      answer: "Common University Entrance Test (CUET) UG is an entrance examination conducted for admission to undergraduation programs offered by various central, state, private and deemed universities."
     },
     {
-      question: "What is the last day for registering for CAT 2024?",
-      answer: "The last day for registering for CAT 2024 has already passed."
+      question: "Is CUET compulsory for taking admission in central university?",
+      answer: "Yes, CUET (Common University Entrance Test) is compulsory for admissions to undergraduate programs in most Central Universities in India. "
     },
     {
-      question: "What is the last day for applying for CAP 2025?",
-      answer: "The last day for applying for CAP 2025 is October 15, 2025."
+      question: "	Where can I get the CUET UG syllabus?",
+      answer: " Aspirants are strongly advised to review the university-specific CUET eligibility criteria on cuet.nta.nic.in to ensure they meet the admission requirements of their target institutions and syllabus."
     },
     {
-      question: "What is the last day for registering for XAT 2025?",
-      answer: "The last day for registering for XAT 2025 is November 30, 2025."
+      question: "	Is the CUET exam tough?",
+      answer: "The CUET exam is generally considered moderately difficult, but the perceived difficulty can vary based on individual preparation and subject strengths"
     }
   ];
   const renderStars = (rating: number) => {
@@ -94,7 +94,7 @@ const ExamPrepLowerSections: React.FC = () => {
       id: 6,
       name: "navami vinod",
       rating: 5,
-      comment: "The mock tests & practice sessions at Prep Academy were very realistic . I felt well prepared on the exam day thanks to their rigorous training!!The supportive & encouraging atmosphere at Prep Academy made my IPM preparationjourney smooth & stress free. The teachers were always approachable & providedconstructive feedbackI highly recommend Prep Academy for CAT coaching. Their holistic approach, experiencedfaculty & supportive learning environment made a significant difference in my preparationjourney.",
+      comment: "The mock tests & practice sessions at Prep Academy were very realistic . I felt well prepared on the exam day thanks to their rigorous training!!The supportive & encouraging atmosphere at Prep Academy made my IPM preparationjourney smooth & stress free. The teachers were always approachable & providedconstructive feedbackI highly recommend Prep Academy for CUET coaching. Their holistic approach, experiencedfaculty & supportive learning environment made a significant difference in my preparationjourney.",
       avatar: "/api/placeholder/40/40",
     },
     {
@@ -273,7 +273,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your CUET 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 

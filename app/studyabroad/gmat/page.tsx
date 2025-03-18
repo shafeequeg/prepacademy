@@ -1,7 +1,7 @@
 
 import Gmatcourse from "@/app/components/allcourses/studyabroad/gmat/Gmat";
-// import StudyabroadGladiator from "@/app/components/allcourses/studyabroad/Gladiators";
-// import StudyabroadAboutcourse from "@/app/components/allcourses/studyabroad/Aboutcourse";
+import GmatGladiator from "@/app/components/allcourses/studyabroad/gmat/Gladiators";
+import GmatAboutcourse from "@/app/components/allcourses/studyabroad/gmat/Aboutcourse";
 
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <div >
       
      <Gmatcourse/>
-     {/* <StudyabroadGladiator/>
-     <StudyabroadAboutcourse/> */}
+     <GmatGladiator/>
+     <GmatAboutcourse/>
 
     </div>
   );

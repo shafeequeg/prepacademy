@@ -1,199 +1,636 @@
-"use client";
+// CatExamApplySection.tsx
 
-import React, { useState } from 'react';
+"use client"
+
+import React, { useEffect, useRef } from 'react';
+// import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com';
+import emailjs from 'emailjs-com'; // Import EmailJS
+
 import Image from 'next/image';
+// interface VideoCardProps {
+//   title: string;
+//   thumbnail: string;
+// }
+
+interface DemoVideoCardProps {
+  title: string;
+  videoId: string;
+}
 
 interface CourseCardProps {
+  // code: string;
   title: string;
   description: string;
   classType?: string;
   path?: string;
-  className?: string;
+  className?: string; 
 }
 
-// interface TabProps {
-//   label: string;
-//   active: boolean;
-//   onClick: () => void;
-//   id: string;
-// }
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
+  // Limit the description to 15 words (adjust as needed)
+  const maxWords = 5;
+  const truncatedDescription = description.split(" ").length > maxWords
+    ? description.split(" ").slice(0, maxWords).join(" ") + "..."
+    : description;
+
   const cardContent = (
     <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-white text-base">{description}</p>
-      {classType && <p className="text-white text-sm mt-2">{classType}</p>}
+      <p className="text-white text-base">{truncatedDescription}</p>
+      {classType && (
+        <p className="text-white text-sm mt-2">{classType}</p>
+      )}
     </div>
   );
 
-  return path ? <Link href={path} className="block h-full">{cardContent}</Link> : cardContent;
+  if (path) {
+    return (
+      <Link href={path} className="block h-full">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
 };
 
-const tabs = [
-  { id: "engineering", label: "ENGINEERING" },
-  { id: "medical", label: "MEDICAL" },
-  { id: "management", label: "MANAGEMENT" },
-  { id: "law", label: "LAW" },
-  { id: "cuet", label: "COMMON UNIVERSITY ENTRANCE TEST" },
-  { id: "defence", label: "DEFENCE" },
-  { id: "design_architecture", label: "DESIGN & ARCHITECTURE" },
-  { id: "others", label: "OTHERS" },
-  { id: "tuitions", label: "TUITIONS" },
-];
 
-// const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
+// const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
 //   return (
-//     <button
-//       onClick={onClick}
-//       id={`tab-${id}`}
-//       role="tab"
-//       aria-selected={active}
-//       aria-controls={`tabpanel-${id}`}
-//       className={`flex items-center justify-center px-6 py-2 min-w-[180px] rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${
-//         active ? "bg-[#FF6B3D] text-white font-medium" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-//       }`}
-//     >
-//       {label}
-//     </button>
+//     <div className="relative group overflow-hidden rounded-lg w-full">
+//       <div className="relative w-full h-56 md:h-64 lg:h-72">
+//         <Image
+//           src={thumbnail}
+//           alt={title}
+//           fill
+//           className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+//         />
+//         {/* Play button overlay */}
+//         <div className="absolute inset-0 flex items-center justify-center">
+//           <div className="bg-black bg-opacity-30 rounded-full p-3 flex items-center justify-center">
+//             <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
+//           </div>
+//         </div>
+//       </div>
+//       <p className="text-lg md:text-xl text-gray-300 mb-6">
+//       {title}</p>
+//     </div>
 //   );
 // };
 
+
+
+const collegeCourses = [
+  {
+    // code: "MGMT",
+    title: "Management",
+    description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
+    path: "/collegecourse"
+  },
+  {
+    // code: "CIVIL",
+    title: "Civil Services",
+    description: "UPSC",
+    path: "/courses/civil-services"
+  },
+  {
+    // code: "GOVT",
+    title: "Government",
+    description: "RAILWAY, SSC",
+    path: "/courses/government"
+  },
+  {
+    // code: "DEF",
+    title: "Defence",
+    description: "CDS, AFCAT ",
+    path: "/courses/defence"
+  },
+  {
+    // code: "DESIGN",
+    title: "Design & Architecture",
+    description: "NID PG, NIFT PG",
+    path: "/courses/design-architecture"
+  },
+  {
+    // code: "BANK",
+    title: "Bank",
+    description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
+    path: "/courses/bank"
+  }
+];
+const tabs = [
+  { 
+    id: "engineering", 
+    label: "ENGINEERING", 
+    path: "/engineering",
+    dropdownItems: [
+      { label: "JEE", path: "/schoolcourse/management/cat" },
+      { label: "KEAM", path: "/schoolcourse/bba" },
+      { label: "BITSAT", path: "/schoolcourse/hr" },
+      { label: "VITEEE", path: "/schoolcourse/hr" },
+      { label: "KCET", path: "/schoolcourse/hr" },
+     
+    ]
+   
+  },
+  { 
+    id: "MEDICAL", 
+    label: "MEDICAL", 
+    path: "/medical",
+    dropdownItems: [
+      { label: "NEET (UG)", path: "/medical/neet" },
+      { label: "PARAMEDICAL ENTRANCE", path: "/medical/neet" },
+      { label: "JIPMER", path: "/medical/neet" },
+
+    ]
+  },
+  
+  { 
+    id: "MANAGEMENT", 
+    label: "MANAGEMENT", 
+    path: "/management",
+    dropdownItems: [
+      { label: "IPM ", path: "/schoolcourse/ipm" },
+      { label: "CHRIST", path: "/schoolcourse/christ" },
+      { label: "SET", path: "/schoolcourse/set" },
+      { label: "NPAT", path: "/schoolcourse/npat" },
+      { label: "MHCET", path: "/schoolcourse/mhcet" },
+
+
+    ]
+  },
+  
+ 
+  { 
+    id: "LAW", 
+    label: "LAW", 
+    path: "/law",
+    dropdownItems: [
+      { label: "CLAT", path: "/schoolcourse-law/clat" },
+      { label: "SLAT", path: "/schoolcourse/slat" },
+      { label: "AILET", path: "/schoolcourse/ailet" },
+      { label: "KLEE", path: "/schoolcourse/klee" },
+      { label: "CULEE", path: "/schoolcourse/culee" },
+
+    ]
+  },
+
+  
+ 
+
+ 
+  { 
+    id: "CUET", 
+    label: "DEFENCE", 
+    path: "/defence",
+    dropdownItems: [
+      { label: "NDA ", path: "/schoolcourse/nda" },
+      { label: "AFCAT ", path: "/schoolcourse/afcat" },
+
+    ]
+  },
+
+  { 
+    id: "DESIGN", 
+    label: "DESIGN & ARCHITECTURE", 
+    path: "/design",
+    dropdownItems: [
+      { label: "NID ", path: "/schoolcourse/design/nid" },
+      { label: "NIFT ", path: "/schoolcourse/design/nift" },
+      { label: "UCEED ", path: "/schoolcourse/design/uceed" },
+      { label: "CEED ", path: "/schoolcourse/design/ceed" },
+      { label: "JEE MAIN ", path: "/schoolcourse/design/jee" },
+      { label: "NATA ", path: "/schoolcourse/design/nata" },
+
+    ]
+  },
+  { 
+    id: "OTHERS", 
+    label: "OTHERS", 
+    path: "/others",
+    dropdownItems: [
+      { label: "ASHOKA UNIVERSITY ", path: "/schoolcourse/others/ashoka" },
+      { label: "CHRIST UNIVERSITY ", path: "/schoolcourse/others/christ" },
+      { label: "SYMBIOSIS ", path: "/schoolcourse/others/symbiosis" },
+      { label: "NMIMS ", path: "/schoolcourse/others/nmims" },
+      { label: "ST. XAVIER'S ", path: "/schoolcourse/others/xaviers" },
+
+     
+
+    ]
+  },
+  
+  
+  { 
+    id: "TUITIONS", 
+    label: "TUITIONS", 
+    path: "/tuitions",
+    dropdownItems: [
+      { label: "PHYSICS ", path: "/schoolcourse/tuitions/physics" },
+      { label: "CHEMISTRY", path: "/schoolcourse/tuitions/chemistry" },
+      { label: "MATHS", path: "/schoolcourse/tuitions/maths" },
+      { label: "BIOLOGY ", path: "/schoolcourse/tuitions/biology" },
+      { label: "ACCOUNTING ", path: "/schoolcourse/tuitions/accounting" },
+      { label: "ECONOMICS", path: "/schoolcourse/tuitions/economics" },
+      { label: "ENGLISH ", path: "/schoolcourse/tuitions/english" },
+      { label: "COMMERCE", path: "/schoolcourse/tuitions/commerce" },
+      { label: "BUSINESS STUDIES", path: "/schoolcourse/tuitions/business" },
+
+
+    ]
+
+    // {
+    //   // code: "TUITIONS",
+    //   title: "TUITIONS",
+    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+    //   classType: "CLASSES FOR 11TH & 12TH",
+    //   path: "/courses/bank"
+
+    // }
+  }
+];
+
+
 const CatExamApplySection: React.FC = () => {
-  const [formData, setFormData] = useState({
-    fullname: "",
-    phone: "",
-    email: "",
-    college: "",
-    program: "",
-  });
 
-  const [activeMainTab, setActiveMainTab] = useState("engineering");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+//   const [showIcons, setShowIcons] = useState(true);
+// const [lastScrollY, setLastScrollY] = useState(0);
+// const [isModalOpen, setIsModalOpen] = useState(false);
+  
+const [formData, setFormData] = useState({
+  fullname: "",
+  phone: "",
+  email: "",
+  college: "",
+  program: "",
+});
+// const [activeTab, setActiveTab] = useState("online");
+const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+// const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const serviceID = "service_eb5cvhl";
-    const templateID = "template_lqeg482";
-    const userID = "nk7-kQzPEcwr5RxjW";
 
-    emailjs
-      .send(serviceID, templateID, formData, userID)
-      .then((response) => {
-        toast.success("Your message has been sent successfully!");
-        console.log(response);
-        
-        setFormData({ fullname: "", phone: "", email: "", college: "", program: "" });
-      })
-      .catch((error) => {
-        console.log(error);
-        
-        toast.error("Failed to send the message. Please try again.");
-      });
-  };
+
+
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const { name, value } = e.target;
+  console.log(`Input changed: ${name} = ${value}`); // Debugging log
+
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+  
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+  
+      // Replace with your EmailJS service ID, template ID, and user ID
+      const serviceID = "service_eb5cvhl";
+      const templateID = "template_lqeg482";
+      const userID = "nk7-kQzPEcwr5RxjW";
+  
+      // Send the form data via EmailJS
+      emailjs
+        .send(serviceID, templateID, formData, userID)
+        .then((response) => {
+          console.log("Email sent successfully!", response.status, response.text);
+          toast.success("Your message has been sent successfully!");
+          // Reset the form
+          setFormData({
+            fullname: "",
+            phone: "",
+            email: "",
+            college: "",
+            program: "",
+          });
+        })
+        .catch((error) => {
+          console.error("Failed to send email:", error);
+          toast.error("Failed to send the message. Please try again.");
+        });
+    };
+  
+
+    
 
   const schoolCourses = [
-    { title: "ENGINEERING", description: "JEE, KEAM, BITSAT, VITEEE, KCET", classType: "CLASSES FOR 11TH, 12TH & DROPPERS" },
-    { title: "MEDICAL", description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER", classType: "CLASSES FOR 11TH, 12TH & DROPPERS" },
-    { title: "MANAGEMENT", description: "IPM, CHRIST, SET, NPAT,MHCET", classType: "CLASSES FOR 12TH & DROPPERS" },
-    { title: "LAW", description: "CLAT, SLAT, AILET, KLEE, CULEE", classType: "CLASSES FOR 11TH, 12TH & DROPPERS" },
-    { title: "COMMON UNIVERSITY ENTRANCE TEST", description: "COMMON UNIVERSITY ENTRANCE TEST", classType: "CLASSES FOR 12TH & DROPPERS" },
-    { title: "DEFENCE", description: "NDA, AFCAT", classType: "CLASSES FOR 11TH, 12TH & DROPPERS" },
-    { title: "DESIGN & ARCHITECTURE", description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA", classType: "CLASSES FOR 11TH, 12TH & DROPPERS" },
-    { title: "OTHERS", description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S", classType: "CLASSES FOR 12TH & DROPPERS" },
-    { title: "TUITIONS", description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES", classType: "CLASSES FOR 11TH & 12TH" },
-  ];
+    {
+      // code: "ENGINEERING",
+      title: "ENGINEERING",
+      description: "JEE, KEAM, BITSAT, VITEEE, KCET",
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
 
-  const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs, setTabFn: (id: string) => void) => {
+    },
+    {
+      // code: "MEDICAL",
+      title: "MEDICAL",
+      description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
+    },
+    {
+      // code: "MANAGEMENT",
+      title: "MANAGEMENT",
+      description: "IPM, CHRIST, SET, NPAT,MHCET",
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/schoolcourse/management"
+
+    },
+    {
+      // code: "LAW",
+      title: "LAW",
+      description: "CLAT, SLAT, AILET, KLEE, CULEE",
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/law"
+
+
+    },
+    {
+      // code: "CUET",
+      title: "  CUET ",
+        description: "COMMON UNIVERSITY ENTRANCE TEST",
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/courses/bank"
+
+    },
+    {
+      // code: "DEFENCE",
+      title: "DEFENCE",
+      description: "NDA, AFCAT",
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
+    },
+    {
+      // code: "DESIGN",
+      title: "DESIGN & ARCHITECTURE",
+      description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
+      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+      path: "/courses/bank"
+
+    },
+    {
+      // code: "OTHERS",
+      title: "OTHERS",
+      description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
+      classType: "CLASSES FOR 12TH & DROPPERS",
+      path: "/courses/bank"
+
+    },
+    {
+      // code: "TUITIONS",
+      title: "TUITIONS",
+      description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+      classType: "CLASSES FOR 11TH & 12TH",
+      path: "/courses/bank"
+
+    }
+  ];
+ 
+
+ 
+
+  
+  
+  const toggleDropdown = (tabId: string | null) => {
+    setOpenDropdown(openDropdown === tabId ? null : tabId);
+  };
+  
+  // Handle keyboard navigation for tabs
+  const handleTabKeyNav = (    e: React.KeyboardEvent<HTMLElement> , index: number) => {
     if (e.key === 'ArrowRight') {
-      const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
-      setTabFn(tabArray[nextIndex].id);
-      document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
+      e.preventDefault();
+      const nextIndex = (index + 1) % tabs.length;
+      setActiveMainTab(tabs[nextIndex].id);
+      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
     } else if (e.key === 'ArrowLeft') {
-      const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
-      setTabFn(tabArray[prevIndex].id);
-      document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
+      e.preventDefault();
+      const prevIndex = (index - 1 + tabs.length) % tabs.length;
+      setActiveMainTab(tabs[prevIndex].id);
+      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      toggleDropdown(tabs[index].id);
     }
   };
+  
+  // Handle keyboard navigation for dropdown items
+  const handleDropdownKeyNav = (
+    e: React.KeyboardEvent<HTMLElement>, 
+    tabId: string, 
+    itemIndex: number, 
+    items: any[]
+  ) => {
+  
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (itemIndex + 1) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (itemIndex - 1 + items.length) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenDropdown(null);
+      document.getElementById(`tab-${tabId}`)?.focus();
+    }
+  };
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!openDropdown) return; // Ensure openDropdown is not null
+  
+      const dropdownElement = dropdownRefs.current[openDropdown] as HTMLElement | null;
+  
+      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openDropdown]);
+  
+  
+
+
+ 
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
-      <div className="relative w-full z-10">
-        <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
-          <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start overflow-x-auto gap-2 md:gap-4 pb-1 no-scrollbar"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              role="tablist"
-              aria-label="School Subjects"
+  {/* Background Image Between Sections */}
+  {/* Main Content */}
+  <div
+  className="flex items-center justify-between w-full no-scrollbar bg-black mt-32 p-3"
+  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+  role="tablist"
+  aria-label="Study Abroad Programs"
+>
+  {tabs.map((tab, index) => (
+  <div
+  key={tab.id}
+  className="flex-1 mx-1 relative"
+  ref={(el) => {
+    dropdownRefs.current[tab.id] = el; // Assign the element to the ref object
+  }}
+>      <button 
+        id={`tab-${tab.id}`}
+        role="tab"
+        aria-selected={activeMainTab === tab.id}
+        aria-controls={`tabpanel-${tab.id}`}
+        aria-expanded={openDropdown === tab.id}
+        onClick={() => {
+          setActiveMainTab(tab.id);
+          toggleDropdown(tab.id);
+        }}
+        onKeyDown={(e) => handleTabKeyNav(e, index)}
+        tabIndex={activeMainTab === tab.id ? 0 : -1}
+        className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+          activeMainTab === tab.id
+            ? "bg-[#FF6B3D] text-white font-medium"
+            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+        } rounded-full flex items-center justify-center`}
+      >
+        <span>{tab.label}</span>
+        <svg 
+          className={`ml-1 w-4 h-4 transition-transform ${openDropdown === tab.id ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      
+      {/* Dropdown menu */}
+      {openDropdown === tab.id && (
+          <div 
+          className="absolute z-[1000] mt-1 w-[110%] overflow-hidden bg-black border border-gray-700 rounded-md shadow-lg" // Increased width to 105%
+          role="menu"
+          aria-labelledby={`tab-${tab.id}`}
+        >
+      
+          {tab.dropdownItems.map((item, itemIndex) => (
+            <Link 
+              key={`${tab.id}-${itemIndex}`} 
+              href={item.path}
+              id={`dropdown-${tab.id}-item-${itemIndex}`}
+              className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md m-1"
+              role="menuitem"
+              tabIndex={openDropdown === tab.id ? 0 : -1}
+              onClick={() => setOpenDropdown(null)}
+              onKeyDown={(e) => handleDropdownKeyNav(e, tab.id, itemIndex, tab.dropdownItems)}
             >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => setActiveMainTab(tab.id)}
-                  onKeyDown={(e) => handleTabKeyNav(e, index, tabs, setActiveMainTab)}
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
-                    activeMainTab === tab.id ? "bg-[#FF6B3D] text-white font-medium" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
+              {item.label}
+            </Link>
+          ))}
         </div>
+      )}
+    </div>
+  ))}
+</div>
+  <div className="relative w-full z-10  ">
+ 
+    {/* Apply Section with Mascot */}
+    <div 
+      className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover "
+    >
+      <div className="w-full px-4 mt-24">
+        <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
+          {/* Left Content */}
+          <div className="lg:w-[35%]">
+            <div className="mb-6">
+              {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
+                Learn from the Experts
+              </p> */}
+              <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">School Courses with
+                 {/* Prep Academy  */}
+                 <span className='text-[#ED1C24] ml-2'>Prep</span><span className='text-[#15938F]'>Academy</span>
+                 </h2>
+              <p className="text-gray-300 mb-8">
+                Based on past trends, School Courses exam is expected to be held on the last Sunday of November 2025. The official notification is expected to be released towards the end of July 2025.
+              </p>
+            </div>
 
-        <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
-          <div className="w-full px-4 mt-24">
-            <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
-              <div className="lg:w-[35%]">
-                <div className="mb-6">
-                  <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">
-                    Excel in Your School Exams with <span className="text-[#ED1C24]">Prep</span><span className="text-[#15938F]">Academy</span>
-                  </h2>
-                  <p className="text-gray-300 mb-8">
-                    Prepare for your school exams with expert guidance, interactive learning, and comprehensive courses designed for students from Grade 6 to 12.
-                  </p>
-                </div>
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center">
-                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
-                    <p className="text-white">Experienced Faculty & Personalized Support</p>
-                  </div>
-                  <div className="flex items-center">
-                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
-                    <p className="text-white">Comprehensive Online & Offline School Courses</p>
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
-                    Enroll Now
-                  </button>
-                  <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
-                    Get a FREE Trial
-                  </button>
-                </div>
-              </div>
-              <div className="hidden lg:block lg:w-[20%] relative">
-                <div className="absolute inset-0 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/charater2.png')" }}></div>
-              </div>
-              <div className="lg:w-[45%] flex flex-col">
-                <div className="bg-[#0E1721] p-8 rounded-lg border border-[#1A2836] shadow-lg">
-                  <h3 className="text-[#FF6B3D] text-xl font-semibold mb-3">NEED ASSISTANCE?</h3>
-                  <p className="text-white mb-6">Get guidance and clear your doubts</p>
-                  <form onSubmit={handleSubmit}>
+            {/* Progress Items */}
+            <div className="space-y-3 mb-8">
+  <div className="flex items-center">
+    <img 
+      src="/aboutusverified.png" 
+      alt="Check Icon" 
+      className="w-5 h-5 mr-3"
+    />
+    <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
+  </div>
+  <div className="flex items-center">
+    <img 
+      src="/aboutusverified.png" 
+      alt="Check Icon" 
+      className="w-5 h-5 mr-3"
+    />
+    <p className="text-white">Comprehensive School  Online /Offline Course </p>
+  </div>
+</div>
+
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                Enroll Now
+              </button>
+              <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
+                Get a FREE Trial
+              </button>
+            </div>
+
+            {/* Telegram Link with Underline */}
+            <div className="mt-4">
+  <a 
+    href="#" 
+    className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
+      >
+        <img 
+          src="/catexamtelegram.png" 
+          alt="Telegram Icon" 
+          className="w-5 h-5 mr-2"
+        />
+        Join Our Telegram Channel
+      </a>
+    </div>
+
+          </div>
+
+          {/* Middle section with character background */}
+          <div className="hidden lg:block lg:w-[20%] relative">
+            <div 
+              className="absolute inset-0 bg-contain bg-no-repeat bg-center"
+              style={{ backgroundImage: "url('/charater2.png')" }}
+            ></div>
+          </div>
+
+          {/* Right Content - Form */}
+          <div className="lg:w-[45%] flex flex-col">
+            <div className="bg-[#0E1721] p-8 rounded-lg border border-[#1A2836] shadow-lg">
+              <h3 className="text-[#FF6B3D] text-xl font-semibold mb-3">NEED ASSISTANCE?</h3>
+              <p className="text-white mb-6">Get guidance and clear your doubts</p>
+              
+              {/* Form Fields */}
+              <form onSubmit={handleSubmit}>
                     <div className="space-y-4 mb-6">
                       <input
                         type="text"
@@ -222,6 +659,15 @@ const CatExamApplySection: React.FC = () => {
                         className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
                         required
                       />
+                      <input
+                        type="text"
+                        name="college"
+                        placeholder="College Studied"
+                        value={formData.college}
+                        onChange={handleInputChange}
+                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+                        required
+                      />
                       <div className="relative">
                         <select
                           name="program"
@@ -230,13 +676,34 @@ const CatExamApplySection: React.FC = () => {
                           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
                           required
                         >
-                          <option value="" disabled>Preferred School Program</option>
-                          <option value="Maths & Science">Maths & Science</option>
-                          <option value="Social Studies">Social Studies</option>
-                          <option value="English & Language Arts">English & Language Arts</option>
+                          <option value="" disabled>
+                            Preferred Online Program
+                          </option>
+                          <option value="CAT Preparation">CAT Preparation</option>
+                          <option value="MBA Entrance">MBA Entrance</option>
+                          <option value="GMAT Preparation">GMAT Preparation</option>
                         </select>
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                          <svg
+                            width="14"
+                            height="8"
+                            viewBox="0 0 14 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1 1L7 7L13 1"
+                              stroke="#FF6B3D"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Submit Button */}
                     <button
                       type="submit"
                       className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
@@ -244,47 +711,113 @@ const CatExamApplySection: React.FC = () => {
                       Submit
                     </button>
                   </form>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-8">
-        <div>
-          <div className="flex flex-col md:flex-row gap-6 mb-8">
-            <div className="w-full md:w-1/2 flex flex-col justify-center">
-              <h2 className="text-2xl mb-4">
-                <span className="text-[#F55D3E] font-serif italic pl-4">School</span> Courses
-              </h2>
-              <p className="text-white text-base md:text-lg mb-6 max-w-lg pl-4">
-                The beauty of learning was never meant to be confined within the four walls of a classroom. Prep Academy goes above and beyond the traditional teaching methods, bringing together the most skilled faculty to create an unparalleled learning experience for our students. When others rely on textbooks, we rely on innovation. When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
-              </p>
-            </div>
-            <div className="w-full md:w-1/2">
-              <Image
-                src="/allcourseschoolcourse.png"
-                alt="School Students"
-                width={600}
-                height={300}
-                className="rounded-lg object-cover w-full h-full max-h-72"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {schoolCourses.map((course, index) => (
-              <CourseCard
-                key={index}
-                title={course.title}
-                description={course.description}
-                className="border-l-4 border-[#F55D3E] p-4"
-              />
-            ))}
           </div>
         </div>
       </div>
     </div>
+
+    {/* Related Videos Section */}
+    <div className="bg-black text-white flex justify-center">
+  {/* Related Videos Section */}
+  {/* <div className="px-6 py-10 max-w-7xl w-full">
+    <h2 className="text-4xl font-semibold text-left mb-6 ml-2">
+      <span className="font-serif italic font-normal">Related</span>{" "}
+      <span className="text-[#F55D3E] font-semibold">Videos</span>
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    {relatedVideos.map((video, index) => (
+      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
+    ))}
+  </div>
+
+  <div className="flex justify-center">
+    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
+      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
+      <ChevronRight size={16} />
+    </Link>
+  </div>
+  </div> */}
+   <div className="container mx-auto px-4 py-8">
+         <div>
+         <div className="flex flex-col md:flex-row gap-6 mb-8">
+  {/* Left Section */}
+  <div className="w-full md:w-1/2 flex flex-col justify-center  relative left-20"> {/* Positive margin to push right */}
+    <h2 className="text-4xl mb-4">
+      <span className="text-[#F55D3E] font-serif italic pl-4">School</span> Courses
+    </h2>
+    <p className="text-white text-lg md:text-2xl mb-6 max-w-lg pl-4">
+      The beauty of learning was never meant to be confined within the four walls of a classroom. Prep Academy goes above and beyond the traditional teaching methods, bringing together the most skilled faculty to create an unparalleled learning experience for our students. When others rely on textbooks, we rely on innovation. When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
+    </p>
+  </div>
+
+  {/* Right Section */}
+  <div className="relative w-1/2 aspect-[4/3] min-h-[320px]"> {/* No margin change here */}
+    <Image 
+      src="/allcourse/schoolcourse.jpeg" 
+      alt="School Students" 
+      fill 
+      className="rounded-lg object-cover" 
+      sizes="(max-width: 768px) 100vw, 50vw"
+      priority
+    /> 
+  </div> 
+</div>
+ 
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+             {schoolCourses.map((course, index) => (
+               <CourseCard 
+                 key={index}
+                 // code={course.code}
+                 title={course.title}
+                 description={course.description}
+                 // classType={course.classType}
+                 path={course.path}
+ 
+                 className="border-l-4 border-[#F55D3E] p-4"
+               />
+             ))}
+           </div>
+         </div>
+       </div>
+</div>
+
+
+  </div>
+
+  <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+ 
+
+    {/* Mascot Banner Section */}
+  
+
+
+
+    {/* Demo Videos Section */}
+    {/* <div className="container mx-auto px-4 py-10">
+  <div className="flex justify-between items-center mb-8">
+    <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
+      <span className="text-white font-serif italic">Demo</span> 
+      <span className="text-[#F55D3E]"> Videos</span>
+    </h2>
+  </div>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    {demoVideos.map((video, index) => (
+      <DemoVideoCard key={index} title={video.title} videoId={video.videoId} />
+    ))}
+  </div>
+
+  <div className="flex justify-center">
+    <Link href="https://www.youtube.com/@PrepAcademy" target="_blank" rel="noopener noreferrer" className="text-[#F55D3E] flex items-center hover:underline">
+      <span className='text-lg md:text-xl text-[#F55D3E]'>View More</span>
+      <ChevronRight size={16} />
+    </Link>
+  </div>
+</div> */}
+  </div>
+</div>
   );
 };
 
