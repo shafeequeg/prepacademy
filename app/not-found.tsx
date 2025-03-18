@@ -111,7 +111,7 @@ export default function ComingSoon() {
       
       {/* Footer */}
       <div className="absolute bottom-4 text-xs text-gray-500">
-        <p>© 2025 by "Coming Soon". Proudly created with Pixelboho</p>
+        <p>© 2025 by &quot;Coming Soon&quot;. Proudly created with Pixelboho</p>
         
         <div className="flex justify-center mt-2 space-x-4">
           <a href="https://www.facebook.com/prepacademy.in" className="text-gray-400 hover:text-white">

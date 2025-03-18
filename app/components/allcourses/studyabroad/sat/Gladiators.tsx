@@ -624,7 +624,7 @@ const ExamPrepHomepage: React.FC = () => {
           Latest Notification            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              Registration for the SAT is currently open. To register, visit the College Board's official SAT registration page.                          </p>
+              Registration for the SAT is currently open. To register, visit the College Board&apos;s official SAT registration page.                          </p>
           </div>
 
           {/* Second Notification */}

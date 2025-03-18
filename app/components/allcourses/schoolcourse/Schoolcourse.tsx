@@ -15,10 +15,7 @@ import Image from 'next/image';
 //   thumbnail: string;
 // }
 
-interface DemoVideoCardProps {
-  title: string;
-  videoId: string;
-}
+
 
 interface CourseCardProps {
   // code: string;
@@ -84,44 +81,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
 
 
 
-const collegeCourses = [
-  {
-    // code: "MGMT",
-    title: "Management",
-    description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
-    path: "/collegecourse"
-  },
-  {
-    // code: "CIVIL",
-    title: "Civil Services",
-    description: "UPSC",
-    path: "/courses/civil-services"
-  },
-  {
-    // code: "GOVT",
-    title: "Government",
-    description: "RAILWAY, SSC",
-    path: "/courses/government"
-  },
-  {
-    // code: "DEF",
-    title: "Defence",
-    description: "CDS, AFCAT ",
-    path: "/courses/defence"
-  },
-  {
-    // code: "DESIGN",
-    title: "Design & Architecture",
-    description: "NID PG, NIFT PG",
-    path: "/courses/design-architecture"
-  },
-  {
-    // code: "BANK",
-    title: "Bank",
-    description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
-    path: "/courses/bank"
-  }
-];
+
 const tabs = [
   { 
     id: "engineering", 
@@ -425,13 +385,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   };
   
   // Handle keyboard navigation for dropdown items
-  const handleDropdownKeyNav = (
-    e: React.KeyboardEvent<HTMLElement>, 
-    tabId: string, 
-    itemIndex: number, 
-    items: any[]
+  const handleDropdownKeyNav = <T,>(
+    e: React.KeyboardEvent<HTMLElement>,
+    tabId: string,
+    itemIndex: number,
+    items: Array<T>
   ) => {
-  
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const nextIndex = (itemIndex + 1) % items.length;
@@ -446,7 +405,6 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
       document.getElementById(`tab-${tabId}`)?.focus();
     }
   };
-  
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

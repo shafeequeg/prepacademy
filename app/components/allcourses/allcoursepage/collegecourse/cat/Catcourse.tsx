@@ -64,44 +64,7 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   );
 };
 
-const collegeCourses = [
-  {
-    // code: "MGMT",
-    title: "Management",
-    description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
-    path: "/collegecourse"
-  },
-  {
-    // code: "CIVIL",
-    title: "Civil Services",
-    description: "UPSC",
-    path: "/courses/civil-services"
-  },
-  {
-    // code: "GOVT",
-    title: "Government",
-    description: "RAILWAY, SSC",
-    path: "/courses/government"
-  },
-  {
-    // code: "DEF",
-    title: "Defence",
-    description: "CDS, AFCAT ",
-    path: "/courses/defence"
-  },
-  {
-    // code: "DESIGN",
-    title: "Design & Architecture",
-    description: "NID PG, NIFT PG",
-    path: "/courses/design-architecture"
-  },
-  {
-    // code: "BANK",
-    title: "Bank",
-    description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
-    path: "/courses/bank"
-  }
-];
+
 const tabs = [
   { 
     id: "MANAGEMENT", 
@@ -464,70 +427,9 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
 
   
   
-  const toggleDropdown = (tabId: string | null) => {
-    setOpenDropdown(openDropdown === tabId ? null : tabId);
-  };
-  
-  // Handle keyboard navigation for tabs
-  const handleTabKeyNav = (    e: React.KeyboardEvent<HTMLElement> , index: number) => {
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      const nextIndex = (index + 1) % tabs.length;
-      setActiveMainTab(tabs[nextIndex].id);
-      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
-    } else if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      const prevIndex = (index - 1 + tabs.length) % tabs.length;
-      setActiveMainTab(tabs[prevIndex].id);
-      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      toggleDropdown(tabs[index].id);
-    }
-  };
-  
-  // Handle keyboard navigation for dropdown items
-  const handleDropdownKeyNav = (
-    e: React.KeyboardEvent<HTMLElement>, 
-    tabId: string, 
-    itemIndex: number, 
-    items: any[]
-  ) => {
-  
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const nextIndex = (itemIndex + 1) % items.length;
-      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const prevIndex = (itemIndex - 1 + items.length) % items.length;
-      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      setOpenDropdown(null);
-      document.getElementById(`tab-${tabId}`)?.focus();
-    }
-  };
-  
+ 
   // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!openDropdown) return; // Ensure openDropdown is not null
-  
-      const dropdownElement = dropdownRefs.current[openDropdown] as HTMLElement | null;
-  
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
-        setOpenDropdown(null);
-      }
-    };
-  
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [openDropdown]);
-  
-  
+
 
 
  

@@ -15,10 +15,10 @@ import Image from 'next/image';
 //   thumbnail: string;
 // }
 
-interface DemoVideoCardProps {
-  title: string;
-  videoId: string;
-}
+// interface DemoVideoCardProps {
+//   title: string;
+//   videoId: string;
+// }
 
 interface CourseCardProps {
   // code: string;
@@ -317,13 +317,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectEle
   };
   
   // Handle keyboard navigation for dropdown items
-  const handleDropdownKeyNav = (
-    e: React.KeyboardEvent<HTMLElement>, 
-    tabId: string, 
-    itemIndex: number, 
-    items: any[]
+  const handleDropdownKeyNav = <T,>(
+    e: React.KeyboardEvent<HTMLElement>,
+    tabId: string,
+    itemIndex: number,
+    items: Array<T>
   ) => {
-  
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const nextIndex = (itemIndex + 1) % items.length;
