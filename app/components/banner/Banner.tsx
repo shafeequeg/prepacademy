@@ -88,21 +88,21 @@ export default function Banner() {
       title: "School",
       color: "#F55D3E",
       description: "Foundational learning for all ages.",
-      path: "/allcourses"
+      path: "/schoolcourse"
     },
     { 
       image: "/bannerbank.png", 
       title: "College",
       color: "#F55D3E",
       description: "Higher education, diverse disciplines.",
-      path: "/allcourses"
+      path: "/collegecourse"
     },
     { 
       image: "/bannerglobal.png",
       title: "Study Abroad",
       color: "#F55D3E",
       description: "Global opportunities, endless horizons.",
-      path: "/allcourses"
+      path: "/studyabroad"
     },
   ];
 
@@ -121,7 +121,7 @@ export default function Banner() {
     <div className="absolute inset-0 bg-[#F55D3E]/20 rounded-full animate-ping group-hover:animate-none"></div>
     <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-12">
       <a
-        href="tel:+1234567890"
+        href="tel:+91-9446056789"
         className="text-[#F55D3E] text-2xl flex items-center justify-center"
         aria-label="Call us"
       >
@@ -134,7 +134,7 @@ export default function Banner() {
   <div className="group relative animate-bounce animation-delay-300">
     <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:-rotate-12">
       <a
-        href="https://wa.me/1234567890"
+        href="https://wa.me/9446056789"
         target="_blank"
         className="text-green-600 text-2xl flex items-center justify-center"
         aria-label="Chat on WhatsApp"
@@ -147,10 +147,10 @@ export default function Banner() {
 
 
       {/* Banner Section - reduced padding */}
-      <section className="flex-grow bg-gradient-to-r text-white py-4 flex items-center mt-14">
-  <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-8">
+      <section className="flex-grow bg-gradient-to-r text-white py-4 flex items-center mt-24">
+  <div className="container mx-auto px-4 flex flex-col  md:flex-row items-center justify-center gap-8">
     {/* Left Section - reduced text size and spacing */}
-    <div className="max-w-xl text-center  md:text-left md:w-2/5 mb-6 md:mb-0 custom-mt">
+    <div className="max-w-xl text-center w-3/4  md:text-left md:w-2/5 mb-6 md:mb-0 custom-mt">
    
       <h1 className="text-2xl md:text-3xl md:mt-12 lg:text-4xl font-bold mb-2">
         <span className="bg-none text-[#F55D3E]">Your Mentor <br /> And Guide <br /></span> For Brighter Future
@@ -245,41 +245,82 @@ export default function Banner() {
         />
       </div>
     </div>
+
+    
   </div>
 </section>
+
+
       {/* Cards Section - reduced padding and size */}
    {/* Cards Section - reduced padding and size */}
-   <section className="bg-[#130808] py-3 px-3 md:py- z-10 md:px- rounded-md mt-auto">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
-          {allcoursescard.map((item, index) => (
-            <Link 
-              href={item.path} 
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className="transition-transform duration-200 ease-in-out"
-            >
-              <div 
-                className={`bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md px-3 py-3 md:px-4 md:py-4 transform ${
-                  activeIndex === index ? "scale-105 shadow-lg shadow-[#F55D3E]" : "hover:scale-105"
-                } transition-all duration-300`}
-              >
-                <div className="flex flex-col items-center">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
-                  />
-                  
-                  <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold mb-2">{item.title}</h2>
-                  <p className="text-white text-base md:text-lg">{item.description}</p> 
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
+  {/* Cards Section - with responsive fixes */}
+<section className="bg-[#130808] py-3 px-3  md:py-4 md:px-4 rounded-md relative z-10" style={{overflowY:"scroll"}}>
+  <div className="container mx-auto ">
+    <div className="grid grid-cols-1 md:grid-cols-3  gap-2 md:gap-3">
+      {allcoursescard.map((item, index) => (
+        <Link 
+          href={item.path} 
+          key={index}
+          onClick={() => setActiveIndex(index)}
+          className="transition-transform duration-200 ease-in-out"
+        >
+          <div 
+            className={`bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md 
+              `}
+          >
+            <div className="flex flex-col items-center h-full ">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
+              />
+              
+              <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold  ">
+  {item.title}
+</h2>
+<p className="text-white text-base md:text-lg mb-3 md:mb-2">
+  {item.description}
+</p>
+
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* <section className="bg-[#130808] py-3 px-3 md:py-4 md:px-4 rounded-md relative z-10">
+  <div className="container mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
+      {allcoursescard.map((item, index) => (
+        <Link 
+          href={item.path} 
+          key={index}
+          onClick={() => setActiveIndex(index)}
+          className="transition-transform duration-200 ease-in-out"
+        >
+          <div 
+            className={`bg-[#1A0E0D] border-l-2 border-[#F55D3E] rounded-md px-3 py-3 md:px-4 md:py-4 transform ${
+              activeIndex === index ? "scale-105 shadow-lg shadow-[#F55D3E]" : "hover:scale-105"
+            } transition-all duration-300`}
+          >
+            <div className="flex flex-col items-center">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
+              />
+              
+              <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold mb-2">{item.title}</h2>
+              <p className="text-white text-base md:text-lg">{item.description}</p> 
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section> */}
 
 
 {isModalOpen && (

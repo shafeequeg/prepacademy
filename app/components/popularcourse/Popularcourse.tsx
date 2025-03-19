@@ -97,7 +97,7 @@ console.log(formData);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white">
+    <div className="w-full max-w-7xl mx-auto px-4  py-12 text-white">
       {/* Popular Courses Header */}
       {/* Popular Courses Header */}
       <div className="w-full bg-[#2B1615] px-4 sm:px-6 lg:px-8 py-12">

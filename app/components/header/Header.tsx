@@ -172,9 +172,15 @@ export default function Header() {
           <a href="/contact" className="text-white hover:text-white text-xl font-semibold">
             Contact
           </a>
-          <a href="https://test.prepacademy.in/" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-xl font-semibold">
-            Take A Quick Test
-          </a>
+          <a 
+  href="https://test.prepacademy.in/" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-xl font-semibold"
+>
+  Take A Quick Test
+</a>
+
         </nav>
   
         {/* Mobile Menu Button */}
@@ -192,47 +198,77 @@ export default function Header() {
           <Link href="/" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
             Home
           </Link>
-          <Link href="/about" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
+          <Link href="/aboutus" className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold">
             About Us
           </Link>
   
           {/* Mobile Dropdown for All Courses */}
-          <div className="relative">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold"
-            >
-              All Courses ▼
-            </button>
-  
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48">
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                 School Courses
-                </a>
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                College Courses
-                </a>
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Study Abroad
-                </a>
+        {/* Mobile Dropdown for All Courses */}
+{/* Mobile Dropdown for All Courses */}
+<div className="relative" ref={dropdownRef}>
+  {/* Button to toggle the dropdown */}
+  <button
+    onClick={(e) => {
+      e.preventDefault();
+      if (isDropdownOpen) {
+        router.push("/allcourses"); // Navigate to /allcourses if dropdown is already open
+      } else {
+        setIsDropdownOpen(!isDropdownOpen); // Toggle the dropdown state
+      }
+    }}
+    className="text-gray-800 hover:text-[#F55D3E] text-sm font-semibold flex items-center"
+  >
+    All Courses {isDropdownOpen ? '▲' : '▼'}
+  </button>
 
-                <a href="#" className="block text-white hover:text-[#F55D3E] px-4 py-2 text-sm">
-                  Career Counseling
-                </a>
-              </div>
-            )}
-          </div>
+  {/* Dropdown Menu */}
+  {isDropdownOpen && (
+    <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48 z-50">
+      <Link
+        href="/schoolcourse"
+        className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+        onClick={() => setIsDropdownOpen(false)} // Close dropdown on click
+      >
+        School Courses
+      </Link>
+      <Link
+        href="/collegecourse"
+        className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+        onClick={() => setIsDropdownOpen(false)} // Close dropdown on click
+      >
+        College Courses
+      </Link>
+      <Link
+        href="/studyabroad"
+        className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+        onClick={() => setIsDropdownOpen(false)} // Close dropdown on click
+      >
+        Study Abroad
+      </Link>
+      <Link
+        href="/careercounseling"
+        className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm"
+        onClick={() => setIsDropdownOpen(false)} // Close dropdown on click
+      >
+        Career Counseling
+      </Link>
+    </div>
+  )}
+</div>
          <Link href="/blogs" className="text-gray-800 hover:text-white text-sm font-semibold">
             Blogs
           </Link>
   <a href="/contact" className="text-gray-800 hover:text-white text-sm font-semibold">
             Contact
           </a>
-          <a href="https://test.prepacademy.in/" className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-sm font-semibold">
-            Take A Quick Test
-          </a>
+          <a 
+  href="https://test.prepacademy.in/" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="bg-[#F55D3E] text-white px-6 py-2 rounded-lg text-xl font-semibold"
+>
+  Take A Quick Test
+</a>
         </nav>
       )}
     </div>

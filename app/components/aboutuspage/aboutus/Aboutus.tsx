@@ -1,6 +1,6 @@
 "use client"
 
-import React, {  useRef, useState } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 const PrepAcademyTransform = () => {
@@ -64,6 +64,18 @@ const PrepAcademyTransform = () => {
     // }
 
   ];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkScreenSize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+  
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+  return () => window.removeEventListener('resize', checkScreenSize);
+}, []);
 
   const gladiatorssecond = [
    
@@ -300,11 +312,11 @@ const PrepAcademyTransform = () => {
 
 
       {/* Gladiators Section */}
-      <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
+      <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-4 md:px-8 relative">
   {/* Section Header - Updated for Responsive Layout */}
-  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-4 md:px-8">
     {/* Left Side - Title & Subtitle */}
-    <div className="flex items-center">
+    <div className="flex items-center mb-6 md:mb-0">
       <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
         Meet Your Exam <br />
         <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
@@ -315,7 +327,7 @@ const PrepAcademyTransform = () => {
     <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
       <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
       <span>
-        Behind every student&apos;s success are passionate, <br />
+        Behind every student&apos;s success are passionate, <br className="hidden md:block" />
         experienced educators who&apos;ve cracked the toughest exams.
       </span>
       <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
@@ -323,7 +335,7 @@ const PrepAcademyTransform = () => {
   </div>
 
   {/* Main Content Container with Side Controls */}
-  <div className="max-w-7xl mx-auto mt-20 relative">
+  <div className="max-w-7xl mx-auto mt-12 md:mt-20 relative">
     {/* Left Navigation Button - Positioned at the left edge, vertically centered */}
     <button
       onClick={() => {
@@ -331,12 +343,12 @@ const PrepAcademyTransform = () => {
         scrollLeft();
         scrollLeftsecond();
       }}
-      className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-[#FF6B45] text-white rounded-full p-3 shadow-lg hover:bg-[#E55A35] transition flex items-center justify-center"
+      className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-[#FF6B45] text-white rounded-full p-2 md:p-3 shadow-lg hover:bg-[#E55A35] transition flex items-center justify-center"
       aria-label="Scroll both carousels left"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
+        className="h-5 w-5 md:h-6 md:w-6"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -352,12 +364,12 @@ const PrepAcademyTransform = () => {
         scrollRight();
         scrollRightsecond();
       }}
-      className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-[#FF6B45] text-white rounded-full p-3 shadow-lg hover:bg-[#E55A35] transition flex items-center justify-center"
+      className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-[#FF6B45] text-white rounded-full p-2 md:p-3 shadow-lg hover:bg-[#E55A35] transition flex items-center justify-center"
       aria-label="Scroll both carousels right"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
+        className="h-5 w-5 md:h-6 md:w-6"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -367,7 +379,7 @@ const PrepAcademyTransform = () => {
     </button>
 
     {/* First Gladiators Carousel */}
-    <div className="overflow-hidden px-12">
+    <div className="overflow-hidden px-6 md:px-12">
       {/* Carousel Container */}
       <div
         ref={carouselRef}
@@ -385,18 +397,21 @@ const PrepAcademyTransform = () => {
           }
         `}</style>
 
-        {/* Group gladiators into sets of 4 */}
-        {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
+        {/* Group gladiators based on screen size */}
+        {Array.from({ length: Math.ceil(gladiators.length / (isMobile ? 2 : 4)) }).map((_, groupIndex) => (
           <div
             key={groupIndex}
-            className="min-w-full flex justify-center px-4 flex-nowrap"
+            className="min-w-full flex justify-center px-2 md:px-4 flex-nowrap"
             style={{ scrollSnapAlign: "start" }}
           >
-            {/* Display 4 gladiators per slide */}
-            {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-              <div key={index} className="w-1/4 px-2">
-                <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                  <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+            {/* Display 2 gladiators per slide on mobile, 4 on larger screens */}
+            {gladiators.slice(
+              groupIndex * (isMobile ? 2 : 4), 
+              groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
+            ).map((gladiator, index) => (
+              <div key={index} className={`${isMobile ? 'w-1/2' : 'w-1/4'} px-2 md:px-3`}>
+                <div className="flex flex-col items-center p-3 md:p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-3 md:mb-4">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Image
                         src={gladiator.image}
@@ -412,10 +427,8 @@ const PrepAcademyTransform = () => {
                       />
                     </div>
                   </div>
-                  <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                  <h4 className="font-semibold text-xs sm:text-sm md:text-lg text-white text-center">
                     {gladiator.name}
-
-
                   </h4>
                   <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
                 </div>
@@ -427,11 +440,11 @@ const PrepAcademyTransform = () => {
     </div>
 
     {/* Indicators - Centered between carousels */}
-    <div className="flex justify-center items-center my-8">
+    <div className="flex justify-center items-center my-6 md:my-8">
       <div className="flex space-x-2">
         {Array.from({ length: Math.max(
-          Math.ceil(gladiators.length / 4),
-          Math.ceil(gladiatorssecond.length / 4)
+          Math.ceil(gladiators.length / (isMobile ? 2 : 4)),
+          Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4))
         ) }).map((_, index) => (
           <button
             key={index}
@@ -457,9 +470,9 @@ const PrepAcademyTransform = () => {
                 });
               }
             }}
-            // className={`w-3 h-3 rounded-full ${
-            //   (activeIndex === index || activeIndexsecond === index) ? "bg-[#FF6B45]" : "bg-gray-500"
-            // }`}
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
+              (activeIndex === index || activeIndexsecond === index) ? "bg-[#FF6B45]" : "bg-gray-500"
+            }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -467,7 +480,7 @@ const PrepAcademyTransform = () => {
     </div>
 
     {/* Second Gladiators Carousel */}
-    <div className="overflow-hidden px-12">
+    <div className="overflow-hidden px-6 md:px-12">
       {/* Carousel Container */}
       <div
         ref={carouselRefsecond}
@@ -484,16 +497,19 @@ const PrepAcademyTransform = () => {
           }
         `}</style>
         
-        {Array.from({ length: Math.ceil(gladiatorssecond.length / 4) }).map((_, groupIndex) => (
+        {Array.from({ length: Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4)) }).map((_, groupIndex) => (
           <div
             key={groupIndex}
-            className="min-w-full flex justify-center px-4 flex-nowrap"
+            className="min-w-full flex justify-center px-2 md:px-4 flex-nowrap"
             style={{ scrollSnapAlign: "start" }}
           >
-            {gladiatorssecond.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-              <div key={index} className="w-1/4 px-2">
-                <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                  <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+            {gladiatorssecond.slice(
+              groupIndex * (isMobile ? 2 : 4), 
+              groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
+            ).map((gladiator, index) => (
+              <div key={index} className={`${isMobile ? 'w-1/2' : 'w-1/4'} px-2 md:px-3`}>
+                <div className="flex flex-col items-center p-3 md:p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-3 md:mb-4">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Image
                         src={gladiator.image}
@@ -509,7 +525,7 @@ const PrepAcademyTransform = () => {
                       />
                     </div>
                   </div>
-                  <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                  <h4 className="font-semibold text-xs sm:text-sm md:text-lg text-white text-center">
                     {gladiator.name}
                   </h4>
                   <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>

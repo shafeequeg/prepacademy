@@ -101,25 +101,26 @@ const SaveStudyTime = () => {
           ))} */}
 
 {stats.map((stat, index) => (
-    <div 
-      key={index} 
-      className="flex flex-col items-center justify-center text-center border-l-4 border-[#F55D3E] pl-4 rounded-l-md"
-    >
-      <span className="text-[#F55D3E] text-5xl font-bold mb-2">
-        {isStatsVisible && (
-          <CountUp 
-            start={0} 
-            end={stat.number} 
-            duration={8.5} 
-            separator="," 
-            useEasing={true}
-            redraw={false}
-            formattingFn={formatNumber} // Apply formatting here
-          />
-        )}
-      </span>
-      <span className="text-gray-300 text-lg">{stat.label}</span>
-    </div>
+ <div 
+ key={index} 
+ className="flex flex-col items-center justify-center text-center border-l-4 border-[#F55D3E] pl-3 md:pl-4 rounded-l-md"
+>
+ <span className="text-[#F55D3E] text-3xl md:text-5xl font-bold mb-1 md:mb-2">
+   {isStatsVisible && (
+     <CountUp 
+       start={0} 
+       end={stat.number} 
+       duration={8.5} 
+       separator="," 
+       useEasing={true}
+       redraw={false}
+       formattingFn={formatNumber} // Apply formatting here
+     />
+   )}
+ </span>
+ <span className="text-gray-300 text-base md:text-lg">{stat.label}</span>
+</div>
+
   ))}
         </div>
 

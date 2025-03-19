@@ -57,16 +57,17 @@ const DrivesUsSection = () => {
       </ul> 
     </div> 
       
-    <div className="relative w-full aspect-[4/3] min-h-[320px]"> 
-      <Image 
-        src="/driveus.jpeg" 
-        alt="Students studying together" 
-        fill 
-        className="rounded-lg object-cover" 
-        sizes="(max-width: 768px) 100vw, 50vw"
-        priority
-      /> 
-    </div> 
+    <div className="relative w-full aspect-[4/3] min-h-[200px] md:min-h-[320px]">
+  <Image 
+    src="/driveus.jpeg" 
+    alt="Students studying together" 
+    fill 
+    className="rounded-lg object-cover" 
+    sizes="(max-width: 768px) 100vw, 50vw"
+    priority
+  /> 
+</div> 
+
   </div> 
 </div>
       {/* Our Secret Sauce Section */}

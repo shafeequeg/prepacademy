@@ -7,6 +7,8 @@ import { useState } from "react";
 import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com';
 import Image from 'next/image'; // Correct import for Next.js Image component
+import axiosInstance from '../../apiconfig/axios';
+import { API_URLS } from '../../apiconfig/api_urls';
 
 
 
@@ -27,6 +29,10 @@ interface CourseCard {
 
 }
 
+interface Program {
+  id: string;
+  name: string;
+}
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
@@ -77,51 +83,73 @@ console.log(offeringTypes);
 
 
 const CatExamApplySection: React.FC = () => {
-  const [formData, setFormData] = useState({
-    fullname: "",
-    phone: "",
-    email: "",
-    college: "",
-    program: "",
-  });
-
+ const [formData, setFormData] = useState({
+     full_name: '',
+     mobile_number: '',
+     email: '',
+     college_studied:'',
+     preferred_program: '',
+     submitted_at:'',
+   });
+ 
   const [activeMainTab, setActiveMainTab] = useState("engineering");
   // const [activeTab, setActiveTab] = useState("online");
+const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
   // const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const serviceID = "service_eb5cvhl";
-    const templateID = "template_lqeg482";
-    const userID = "nk7-kQzPEcwr5RxjW";
+const fetchPrograms = async () => {
+try {
+  const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Replace with your API endpoint
+  setPrograms(response.data); // Assuming the response is an array of programs
+} catch (error) {
+  console.error("Failed to fetch programs:", error);
+  // toast.error("Failed to fetch programs. Please try again.");
+}
+};
 
-    emailjs
-      .send(serviceID, templateID, formData, userID)
-      .then((response) => {
-        console.log("Email sent successfully!", response.status, response.text);
-        toast.success("Your message has been sent successfully!");
-        setFormData({
-          fullname: "",
-          phone: "",
-          email: "",
-          college: "",
-          program: "",
-        });
-      })
-      .catch((error) => {
-        console.error("Failed to send email:", error);
-        toast.error("Failed to send the message. Please try again.");
-      });
-  };
+useEffect(() => {
+fetchPrograms();
+}, []);
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+e.preventDefault();
+
+try {
+  const response = await axiosInstance.post(API_URLS.ALLCOURSE.POST_COURSE, {
+    ...formData,
+    preferred_program: formData.preferred_program, // Ensure this is the ID of the selected program
+  });
+
+  if (response.status >= 200 && response.status < 300) {
+    console.log("Message sent successfully!", response.data);
+    toast.success("Your message has been sent successfully!");
+
+    // Reset form fields
+    setFormData({
+      full_name: "",
+      mobile_number: "",
+      email: "",
+      college_studied: "",
+      preferred_program: "",
+      submitted_at: "",
+    });
+  } else {
+    console.error("Unexpected status code:", response.status);
+    toast.error("Failed to send the message. Please try again.");
+  }
+} catch (error) {
+  console.error("Failed to send message:", error);
+  toast.error("Failed to send the message. Please try again.");
+}
+};
 
  
 
@@ -191,11 +219,12 @@ const CatExamApplySection: React.FC = () => {
   <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
           <div
-  className="flex items-center justify-start gap-2 md:gap-4 pb-1 no-scrollbar w-full"
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full"
   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
   role="tablist"
   aria-label="Study Abroad Programs"
 >
+  
   {tabs.map((tab, index) => (
     <button
       key={tab.id}
@@ -234,7 +263,7 @@ const CatExamApplySection: React.FC = () => {
             <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Study Abroad with <span className='text-[#ED1C24] '>Prep</span><span className='text-[#15938F]'>Academy</span>
             </h2>
             <p className="text-gray-300 mb-8">
-            At Prep Academy, we are dedicated to guiding aspiring students toward global academic success through our specialized study abroad entrance coaching programs. We offer comprehensive preparation for a range of standardized tests, including the GMAT, GRE, SAT, and IELTS, tailored to meet the diverse needs of our students            </p>
+            At Prep Academy, we are dedicated to guiding aspiring students toward global academic success through our specialized study abroad entrance coaching programs. We offer comprehensive preparation for a range of standardized tests, including the GMAT, GRE, SAT, and IELTS, tailored to meet the diverse needs of our students.            </p>
           </div>
 
           {/* Progress Items */}
@@ -276,62 +305,88 @@ const CatExamApplySection: React.FC = () => {
 
             {/* Form Fields */}
             <form onSubmit={handleSubmit}>
-              <div className="space-y-4 mb-6">
-                <input
-                  type="text"
-                  name="fullname"
-                  placeholder="Enter your Full Name"
-                  value={formData.fullname}
-                  onChange={handleInputChange}
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Mobile Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                  required
-                />
-                <div className="relative">
-                  <select
-                    name="program"
-                    value={formData.program}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
-                    required
-                  >
-                    <option value="" disabled>
-                      Preferred Study Destination
-                    </option>
-                    <option value="USA">USA</option>
-                    <option value="Canada">Canada</option>
-                    <option value="UK">UK</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Germany">Germany</option>
-                  </select>
-                </div>
-              </div>
+      <div className="space-y-4 mb-6">
+        <input
+          type="text"
+          name="full_name"
+          placeholder="Enter your Full Name"
+          value={formData.full_name}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="tel"
+          name="mobile_number"
+          placeholder="Mobile Number"
+          value={formData.mobile_number}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="text"
+          name="college_studied"
+          placeholder="College Studied"
+          value={formData.college_studied}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <div className="relative">
+          <select
+            name="preferred_program"
+            value={formData.preferred_program}
+            onChange={handleInputChange}
+            className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
+            required
+          >
+            <option value="" disabled>
+              Preferred Online Program
+            </option>
+            {programs.map((program) => (
+              <option key={program.id} value={program.id}>
+                {program.name}
+              </option>
+            ))}
+          </select>
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+            <svg
+              width="14"
+              height="8"
+              viewBox="0 0 14 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1L7 7L13 1"
+                stroke="#FF6B3D"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
-              >
-                Submit
-              </button>
-            </form>
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
+      >
+        Submit
+      </button>
+    </form>
           </div>
         </div>
       </div>
@@ -342,7 +397,7 @@ const CatExamApplySection: React.FC = () => {
       <div className="w-full bg-[#120B0B] px-6 md:px-10 py-6">
              <div className="flex flex-col lg:flex-row gap-8 mb-6 max-w-7xl mx-auto">
                {/* Left Content - Text Section */}
-               <div className="lg:w-1/2 mt-14 relative left-12">
+               <div className="lg:w-1/2 mt-14 relative ">
                  <h2 className="text-4xl mb-4">
                    <span className="text-[#F55D3E] font-serif italic">Study</span> Abroad
                  </h2>

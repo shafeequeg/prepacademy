@@ -5,9 +5,10 @@ import React, { useState } from 'react';
 // import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPlus, FaWhatsapp } from 'react-icons/fa';
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
-import emailjs from 'emailjs-com'; // Import EmailJS
+// import emailjs from 'emailjs-com'; // Import EmailJS
 import { toast } from 'react-toastify';
-
+import  AxiosInstance  from "../apiconfig/axios";
+import  {  API_URLS  }  from "../apiconfig/api_urls";
 
 type Location = {
   name: string;
@@ -32,8 +33,8 @@ export default function ContactPage() {
   };
 
   const [formData, setFormData] = useState({
-    fullname: '',
-    phone: '',
+    full_name: '',
+    phone_number: '',
     email: '',
     message: '',
   });
@@ -85,40 +86,72 @@ export default function ContactPage() {
     setIsOpen(false);
   };
 
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+//  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
 
-    // Replace with your EmailJS service ID, template ID, and user ID
-    const serviceID = 'service_eb5cvhl';
-    const templateID = 'template_lqeg482';
-    const userID = 'nk7-kQzPEcwr5RxjW';
+//     // Replace with your EmailJS service ID, template ID, and user ID
+//     const serviceID = 'service_eb5cvhl';
+//     const templateID = 'template_lqeg482';
+//     const userID = 'nk7-kQzPEcwr5RxjW';
 
-    // Send the form data via EmailJS
-    emailjs.send(serviceID, templateID, formData, userID)
-      .then((response) => {
-        console.log('Email sent successfully!', response.status, response.text);
-        toast.success('Your message has been sent successfully!');
-        // Reset the form
-        setFormData({
-          fullname: '',
-          phone: '',
-          email: '',
-          message: '',
-        });
-      })
-      .catch((error) => {
-        console.error('Failed to send email:', error);
-        toast.error('Failed to send the message. Please try again.');
+//     // Send the form data via EmailJS
+//     emailjs.send(serviceID, templateID, formData, userID)
+//       .then((response) => {
+//         console.log('Email sent successfully!', response.status, response.text);
+//         toast.success('Your message has been sent successfully!');
+//         // Reset the form
+//         setFormData({
+//           fullname: '',
+//           phone: '',
+//           email: '',
+//           message: '',
+//         });
+//       })
+//       .catch((error) => {
+//         console.error('Failed to send email:', error);
+//         toast.error('Failed to send the message. Please try again.');
+//       });
+//   };
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  try {
+    const response = await AxiosInstance.post(API_URLS.CONTACT.POST_CONTACT, formData);
+
+    // Check if the response status is in the range 200-299
+    if (response.status >= 200 && response.status < 300) {
+      console.log("Message sent successfully!", response.data);
+      toast.success("Your message has been sent successfully!");
+
+      // Reset form fields
+      setFormData({
+        full_name: "",
+        phone_number: "",
+        email: "",
+        message: "",
       });
-  };
+    } else {
+      // Handle other status codes
+      console.error("Unexpected status code:", response.status);
+      toast.error("Failed to send the message. Please try again.");
+    }
+  } catch (error) {
+    console.error("Failed to send message:", error);
+    toast.error("Failed to send the message. Please try again.");
+  }
+};
 
   return (
     <div className="bg-black text-white min-h-screen ">
@@ -247,58 +280,57 @@ export default function ContactPage() {
               </div>
 
               <form className="space-y-3" onSubmit={handleSubmit}>
-                <div>
-                  <input
-                    type="text"
-                    name="fullname"
-                    placeholder="Enter your fullname"
-                    value={formData.fullname}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
-                    required
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#F55D3E] text-white py-2.5 rounded-md text-base md:text-lg font-medium"
-                >
-                  Submit
-                </button>
-              </form>
+      <div>
+        <input
+          type="text"
+          name="full_name"
+          placeholder="Enter your fullname"
+          value={formData.full_name}
+          onChange={handleInputChange}
+          className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="tel"
+          name="phone_number"
+          placeholder="Phone Number"
+          value={formData.phone_number}
+          onChange={handleInputChange}
+          className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+          required
+        />
+      </div>
+      <div>
+        <textarea
+          name="message"
+          placeholder="Message"
+          rows={4}
+          value={formData.message}
+          onChange={handleInputChange}
+          className="w-full bg-[#2B1615] border border-gray-800 rounded-md p-2.5 text-base md:text-lg text-white"
+          required
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-[#F55D3E] text-white py-2.5 rounded-md text-base md:text-lg font-medium"
+      >
+        Submit
+      </button>
+    </form>
             </div>
           </div>
         </div>
@@ -363,7 +395,7 @@ export default function ContactPage() {
 
 
       {/* Talk To Our Mentors */}
-      <div className="max-w-5xl  mx-auto px-4 sm:px-6 lg:px-8 py-16"> {/* Decreased max-width */}
+      <div className="max-w-5xl  mx-auto px-4 sm:px-6 lg:px-8 py-16 "> {/* Decreased max-width */}
   <div className="bg-gradient-to-r bg-[#2B1615] rounded-lg overflow-hidden relative h-64"> {/* Increased height */}
     <div className="p-8 md:p-10 flex flex-col md:flex-row items-center justify-center mr-40 h-full"> {/* Centered content */}
       <div className="md:w-2/3 space-y-4 z-10 text-center md:text-left"> {/* Adjusted spacing and alignment */}

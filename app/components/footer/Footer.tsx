@@ -26,10 +26,10 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-white font-medium text-lg mb-4">STUDY WITH US</h3>
             <ul className="space-y-3">
-              {["School Courses", "College Courses", "Study Abroad", "Career Counseling"].map((text, index) => (
+              {[{text:"School Courses",link :'/schoolcourse'},{text:"College Courses",link:"/collegecourse"} , {text:"Study Abroad",link :"/studyabroad"}, {text:"Career Counseling",link:"/careercounseling"}].map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white text-sm">
-                    {text}
+                  <a href={item.link} className="text-gray-300 hover:text-white text-sm">
+                    {item.text}
                   </a>
                 </li>
               ))}
@@ -40,7 +40,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-white font-medium text-lg mb-4">ABOUT PREPACADEMY</h3>
             <ul className="space-y-3">
-              {[{text : "About me", link :"/aboutus"}, {text : "Team", link :"/team"}, {text : "Blog", link :"/blogs"}].map((item, index) => (
+              {[{text : "About me", link :"/aboutus"}, {text : "Team", link :"/aboutus"}, {text : "Blog", link :"/blogs"}].map((item, index) => (
                 <li key={index}>
                   <a href={item.link} className="text-gray-300 hover:text-white text-sm">
                     {item.text}
@@ -64,20 +64,21 @@ const Footer = () => {
 
               ))}
               </ul>
-              <div className="flex space-x-4 mt-4    ">
-              <a href="https://wa.me/9446056789" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                <FaWhatsapp className="w-6 h-6" />
-              </a>
-              <a href="https://www.facebook.com/prepacademy.in" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                <FaFacebook className="w-6 h-6" />
-              </a>
-              <a href="https://www.instagram.com/prepacademy.in/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                <FaInstagram className="w-6 h-6" />
-              </a>
-              <a href="https://www.linkedin.com/company/prep-academy-india/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                <FaLinkedin className="w-6 h-6" />
-              </a>
-            </div>
+              <div className="flex space-x-4 mt-4 justify-center md:justify-start">
+  <a href="https://wa.me/9446056789" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+    <FaWhatsapp className="w-6 h-6" />
+  </a>
+  <a href="https://www.facebook.com/prepacademy.in" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+    <FaFacebook className="w-6 h-6" />
+  </a>
+  <a href="https://www.instagram.com/prepacademy.in/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+    <FaInstagram className="w-6 h-6" />
+  </a>
+  <a href="https://www.linkedin.com/company/prep-academy-india/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+    <FaLinkedin className="w-6 h-6" />
+  </a>
+</div>
+
             </div>
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
               <h3 className="text-white font-medium text-lg mb-4">ENROLL NOW</h3>
@@ -89,13 +90,20 @@ const Footer = () => {
           </div>
 
           {/* LEGAL HELP */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left ">
             <h3 className="text-white font-medium text-lg mb-4">LEGAL HELP</h3>
             <ul className="space-y-3">
-              {["Terms and Condition", "Refund Policy", "Return Policy"].map((text, index) => (
+              {/* {["Terms and Condition", "Privacy Policy", "Refund Policy"].map((text, index) => (
                 <li key={index}>
                   <a href="#" className="text-gray-300 hover:text-white text-sm">
                     {text}
+                  </a>
+                </li>
+              ))} */}
+               {[{text : "Terms and Condition", link :"/terms-and-conditions"}, {text : "Privacy Policy", link :"/privacypolicy"}, {text : "Refund Policy", link :"/refundpolicy"}].map((item, index) => (
+                <li key={index}>
+                  <a href={item.link} className="text-gray-300 hover:text-white text-sm">
+                    {item.text}
                   </a>
                 </li>
               ))}
