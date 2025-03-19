@@ -5,7 +5,7 @@ import Link from 'next/link';
 // import { ChevronRight } from 'lucide-react';
 import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com';
+// import emailjs from 'emailjs-com';
 import Image from 'next/image'; // Correct import for Next.js Image component
 import axiosInstance from '../../apiconfig/axios';
 import { API_URLS } from '../../apiconfig/api_urls';

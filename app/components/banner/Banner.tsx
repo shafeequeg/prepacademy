@@ -23,6 +23,7 @@ export default function Banner() {
     class: '',
     school: '',
   });
+console.log(activeIndex);
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
