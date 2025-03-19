@@ -7,7 +7,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com'; // Import EmailJS
+// import emailjs from 'emailjs-com'; // Import EmailJS
 
 import Image from 'next/image';
 import axiosInstance from '../../apiconfig/axios';

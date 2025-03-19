@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { ChevronRight  } from 'lucide-react';
 import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com'; // Import EmailJS
+// import emailjs from 'emailjs-com'; // Import EmailJS
 import axiosInstance from '@/app/components/apiconfig/axios';
 import { API_URLS } from '@/app/components/apiconfig/api_urls';
 

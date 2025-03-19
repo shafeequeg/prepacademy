@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 // import Link from 'next/link';
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com';
+// import emailjs from 'emailjs-com';
 import axiosInstance from '../../apiconfig/axios';
 import { API_URLS } from '../../apiconfig/api_urls';
 
