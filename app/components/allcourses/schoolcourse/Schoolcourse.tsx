@@ -344,7 +344,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
       setPrograms(response.data); // Assuming the response is an array of programs
     } catch (error) {
       console.error("Failed to fetch programs:", error);
-      toast.error("Failed to fetch programs. Please try again.");
+      // toast.error("Failed to fetch programs. Please try again.");
     }
   };
 

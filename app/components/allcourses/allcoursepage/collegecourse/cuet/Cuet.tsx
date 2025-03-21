@@ -286,7 +286,7 @@ const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Repl
 setPrograms(response.data); // Assuming the response is an array of programs
 } catch (error) {
 console.error("Failed to fetch programs:", error);
-toast.error("Failed to fetch programs. Please try again.");
+// toast.error("Failed to fetch programs. Please try again.");
 }
 };
 

@@ -686,7 +686,7 @@ toast.error("Failed to send the message. Please try again.");
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
         </div>
-        <h3 className="text-white text-center text-lg font-medium mb-5">CAT Master Class</h3>
+        <h3 className="text-white text-center text-lg font-medium mb-5">IPM Master Class</h3>
         <a 
           href="#" 
           className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"

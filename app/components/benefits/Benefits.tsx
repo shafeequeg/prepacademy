@@ -146,7 +146,8 @@ const Benefits = () => {
         <span className="text-white block sm:inline"> and Get</span>
         <span className="text-white block sm:inline"> a Free Trial</span>
       </h2>
-      <button className="mt-2 px-3 sm:px-4 py-1 sm:py-2 bg-[#F55D3E] text-white rounded text-xs sm:text-sm font-medium hover:bg-[#E04D2E] flex items-center gap-1" onClick={openModal}>
+      <button className="mt-2 px-3 sm:px-4 py-1 sm:py-2 bg-[#F55D3E] text-white rounded text-xs sm:text-sm font-medium hover:bg-[#E04D2E] flex items-center gap-1" 
+      onClick={openModal}>
         JOIN NOW
         <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -105,14 +105,14 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
     setFormData({ ...formData, [name]: value });
   };
 
-const fetchPrograms = async () => {
-try {
+  const fetchPrograms = async () => {
+  try {
   const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Replace with your API endpoint
   setPrograms(response.data); // Assuming the response is an array of programs
-} catch (error) {
+  } catch (error) {
   console.error("Failed to fetch programs:", error);
   // toast.error("Failed to fetch programs. Please try again.");
-}
+  }
 };
 
 useEffect(() => {

@@ -79,7 +79,7 @@ const AllCourses: React.FC = () => {
     {
       // code: "BANK",
       title: "Bank",
-      description: "SBI, IBPS P O, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
+      description: "SBI, IBPS PO, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
       path: "/courses/bank"
     }
   ];
