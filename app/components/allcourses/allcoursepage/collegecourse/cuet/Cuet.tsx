@@ -2,13 +2,15 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight  } from 'lucide-react';
 import { useState } from "react";
 import { toast } from 'react-toastify';
-import emailjs from 'emailjs-com'; // Import EmailJS
+// import emailjs from 'emailjs-com'; // Import EmailJS
+import axiosInstance from '@/app/components/apiconfig/axios';
+import { API_URLS } from '@/app/components/apiconfig/api_urls';
 
 
 // interface VideoCardProps {
@@ -21,7 +23,10 @@ interface DemoVideoCardProps {
   videoId: string;
 }
 
-
+interface Program {
+  id: string;
+  name: string;
+}
 
 // const VideoCard: React.FC<VideoCardProps> = ({ title, thumbnail }) => {
 //   return (
@@ -256,56 +261,73 @@ const CUETExamApplySection: React.FC = () => {
 //   const [showIcons, setShowIcons] = useState(true);
 // const [lastScrollY, setLastScrollY] = useState(0);
 // const [isModalOpen, setIsModalOpen] = useState(false);
-  
+const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
+
 const [formData, setFormData] = useState({
-  fullname: "",
-  phone: "",
-  email: "",
-  college: "",
-  program: "",
+    full_name: '',
+    mobile_number: '',
+    email: '',
+    college_studied:'',
+    preferred_program: '',
+    submitted_at:'',
+  });
+
+
+const handleInputChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target;
+  setFormData({ ...formData, [name]: value });
+};
+
+const fetchPrograms = async () => {
+try {
+const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Replace with your API endpoint
+setPrograms(response.data); // Assuming the response is an array of programs
+} catch (error) {
+console.error("Failed to fetch programs:", error);
+// toast.error("Failed to fetch programs. Please try again.");
+}
+};
+
+useEffect(() => {
+fetchPrograms();
+}, []);
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+e.preventDefault();
+
+try {
+const response = await axiosInstance.post(API_URLS.ALLCOURSE.POST_COURSE, {
+  ...formData,
+  preferred_program: formData.preferred_program, // Ensure this is the ID of the selected program
 });
 
+if (response.status >= 200 && response.status < 300) {
+  console.log("Message sent successfully!", response.data);
+  toast.success("Your message has been sent successfully!");
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  const { name, value } = e.target;
-  console.log(`Input changed: ${name} = ${value}`); // Debugging log
-
-  setFormData((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
+  // Reset form fields
+  setFormData({
+    full_name: "",
+    mobile_number: "",
+    email: "",
+    college_studied: "",
+    preferred_program: "",
+    submitted_at: "",
+  });
+} else {
+  console.error("Unexpected status code:", response.status);
+  toast.error("Failed to send the message. Please try again.");
+}
+} catch (error) {
+console.error("Failed to send message:", error);
+toast.error("Failed to send the message. Please try again.");
+}
 };
 
   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-  
-      // Replace with your EmailJS service ID, template ID, and user ID
-      const serviceID = "service_eb5cvhl";
-      const templateID = "template_lqeg482";
-      const userID = "nk7-kQzPEcwr5RxjW";
-  
-      // Send the form data via EmailJS
-      emailjs
-        .send(serviceID, templateID, formData, userID)
-        .then((response) => {
-          console.log("Email sent successfully!", response.status, response.text);
-          toast.success("Your message has been sent successfully!");
-          // Reset the form
-          setFormData({
-            fullname: "",
-            phone: "",
-            email: "",
-            college: "",
-            program: "",
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to send email:", error);
-          toast.error("Failed to send the message. Please try again.");
-        });
-    };
-  
+console.log(programs);
 
     // const openModal = () => setIsModalOpen(true);
     // const closeModal = () => setIsModalOpen(false);
@@ -497,86 +519,88 @@ CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to
               
               {/* Form Fields */}
               <form onSubmit={handleSubmit}>
-                    <div className="space-y-4 mb-6">
-                      <input
-                        type="text"
-                        name="fullname"
-                        placeholder="Enter your Full Name"
-                        value={formData.fullname}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Mobile Number"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="text"
-                        name="college"
-                        placeholder="College Studied"
-                        value={formData.college}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <div className="relative">
-                        <select
-                          name="program"
-                          value={formData.program}
-                          onChange={handleInputChange}
-                          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
-                          required
-                        >
-                          <option value="" disabled>
-                            Preferred Online Program
-                          </option>
-                          <option value="CUET Preparation">CUET Preparation</option>
-                          <option value="MBA Entrance">MBA Entrance</option>
-                          <option value="GMAT Preparation">GMAT Preparation</option>
-                        </select>
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                          <svg
-                            width="14"
-                            height="8"
-                            viewBox="0 0 14 8"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1 1L7 7L13 1"
-                              stroke="#FF6B3D"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
+      <div className="space-y-4 mb-6">
+        <input
+          type="text"
+          name="full_name"
+          placeholder="Enter your Full Name"
+          value={formData.full_name}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="tel"
+          name="mobile_number"
+          placeholder="Mobile Number"
+          value={formData.mobile_number}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <input
+          type="text"
+          name="college_studied"
+          placeholder="College Studied"
+          value={formData.college_studied}
+          onChange={handleInputChange}
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          required
+        />
+        <div className="relative">
+          <select
+            name="preferred_program"
+            value={formData.preferred_program}
+            onChange={handleInputChange}
+            className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
+            required
+          >
+            <option value="" disabled>
+              Preferred Online Program
+            </option>
+            {programs.map((program) => (
+              <option key={program.id} value={program.id}>
+                {program.name}
+              </option>
+            ))}
+          </select>
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+            <svg
+              width="14"
+              height="8"
+              viewBox="0 0 14 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1L7 7L13 1"
+                stroke="#FF6B3D"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
-                    >
-                      Submit
-                    </button>
-                  </form>
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
+      >
+        Submit
+      </button>
+    </form>
             </div>
           </div>
         </div>

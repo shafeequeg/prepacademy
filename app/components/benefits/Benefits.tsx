@@ -131,38 +131,40 @@ const Benefits = () => {
     <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white ">
       {/* Header Section */}
       <div className="w-full bg-[#2B1615] px-4 md:px-8 lg:px-16 py-12 rounded-md">
-        <div 
-          className="rounded-md p-6 relative mx-auto mb-12 w-[80%] md:w-[70%]"
-          style={{
-            background: "radial-gradient(circle, #4E211B 0%, #3A1511 50%, #321310 100%)"
-          }}
-        >
-          <div className="flex items-center justify-between h-[100px] md:h-[130px] px-6 md:px-2 w-[90%] md:w-[80%] mx-auto">
-            
-            {/* Left Side (Heading & Button) */}
-            <div className="flex flex-col items-start text-left w-[60%]">
-              <h2 className="text-2xl md:text-2xl font-bold ">
-                <span className="text-[#F55D3E] italic font-medium">Register</span> 
-                <span className="text-white"> and Get a Free Trial</span>
-              </h2>
-              <button className="mt-3 px-4 py-2 bg-[#F55D3E] text-white rounded text-sm font-medium hover:bg-[#E04D2E] flex items-center gap-1" onClick={openModal}>
-                JOIN NOW
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </div>
+      <div 
+  className="rounded-md p-3 sm:p-4 relative mx-auto mb-8 w-[90%] sm:w-[80%] md:w-[70%]"
+  style={{
+    background: "radial-gradient(circle, #4E211B 0%, #3A1511 50%, #321310 100%)"
+  }}
+>
+  <div className="flex items-center justify-between px-2 w-full mx-auto">
+    
+    {/* Left Side (Heading & Button) */}
+    <div className="flex flex-col items-start text-left w-[65%] sm:w-[60%] py-2">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight">
+        <span className="text-[#F55D3E] italic font-medium block sm:inline">Register</span> 
+        <span className="text-white block sm:inline"> and Get</span>
+        <span className="text-white block sm:inline"> a Free Trial</span>
+      </h2>
+      <button className="mt-2 px-3 sm:px-4 py-1 sm:py-2 bg-[#F55D3E] text-white rounded text-xs sm:text-sm font-medium hover:bg-[#E04D2E] flex items-center gap-1" 
+      onClick={openModal}>
+        JOIN NOW
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+    </div>
 
-            {/* Right Side (Mascot Image) */}
-            <div className="w-28 h-40 md:w-32 md:h-48 ml-4 mr-[-10px] md:mr-[-20px] mt-9"> 
-              <img
-                src="/charater2.png"
-                alt="Prep Academy Mascot"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-        </div>
+    {/* Right Side (Mascot Image) */}
+    <div className="w-16 h-24 sm:w-20 sm:h-28 md:w-24 md:h-32 lg:w-28 lg:h-36 ml-2 sm:ml-4 mr-[-5px] sm:mr-[-10px] md:mr-[-15px]"> 
+      <img
+        src="/charater2.png"
+        alt="Prep Academy Mascot"
+        className="w-full h-full object-contain"
+      />
+    </div>
+  </div>
+</div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div>

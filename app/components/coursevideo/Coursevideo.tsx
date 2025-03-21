@@ -117,7 +117,7 @@ const CourseVideos = () => {
             </h2>
 
             {/* Carousel Container */}
-            <div className="w-[80%] relative mx-auto">
+            <div className="w-[70%] relative  mx-auto ">
               {/* Left Arrow */}
               <button
                 onClick={scrollLeft}
@@ -143,7 +143,7 @@ const CourseVideos = () => {
               {/* Carousel */}
               <div
                 ref={carouselRef}
-                className="flex overflow-x-hidden scroll-smooth relative z-10 ml-28"
+                className="flex overflow-x-hidden scroll-smooth relative z-10 ml-11"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 <div className="flex space-x-8">
