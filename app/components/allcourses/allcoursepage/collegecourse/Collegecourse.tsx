@@ -38,16 +38,12 @@ interface Program {
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
-  // Limit the description to 15 words (adjust as needed)
-  const maxWords = 5;
-  const truncatedDescription = description.split(" ").length > maxWords
-    ? description.split(" ").slice(0, maxWords).join(" ") + "..."
-    : description;
-
   const cardContent = (
-    <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
+    <div className={`bg-[#1F1414] p-5  rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] min-w-[250px] ${className}`}>
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-white text-base">{truncatedDescription}</p>
+      <p className="text-white text-base overflow-hidden overflow-ellipsis line-clamp-3">
+        {description}
+      </p>
       {classType && (
         <p className="text-white text-sm mt-2">{classType}</p>
       )}
@@ -262,7 +258,7 @@ const fetchPrograms = async () => {
     setPrograms(response.data); // Assuming the response is an array of programs
   } catch (error) {
     console.error("Failed to fetch programs:", error);
-    toast.error("Failed to fetch programs. Please try again.");
+    // toast.error("Failed to fetch programs. Please try again.");
   }
 };
 
@@ -497,19 +493,23 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             {/* Progress Items */}
             <div className="space-y-3 mb-8">
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  
+  height={20} 
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
   </div>
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">Comprehensive College  Online /Offline Course </p>
   </div>
 </div>
@@ -531,11 +531,15 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     href="#" 
     className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
       >
-        <img 
-          src="/catexamtelegram.png" 
-          alt="Telegram Icon" 
-          className="w-5 h-5 mr-2"
-        />
+      <div className="relative w-5 h-5 mr-2">
+  <Image 
+    src="/catexamtelegram.png" 
+    alt="Telegram Icon" 
+    fill
+    className="object-contain"
+  />
+</div>
+
         Join Our Telegram Channel
       </a>
     </div>
@@ -684,16 +688,29 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
       </p>
     </div>
-    <div className="relative w-1/2 aspect-[4/3] min-h-[320px] overflow-hidden "> {/* Ensure no overflow */}
-    <Image 
-          src="/allcourse/collegecourse.jpeg" 
+    <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+    
+        <Image 
+          src="/allcourse/college.jpg" 
           alt="School Students" 
           fill 
-          className="rounded-lg object-contain " 
-          sizes="(max-width: 768px) 100vw, 50vw"
+          className="rounded-lg object-cover" 
+          sizes="(max-width: 768px) 100vw, 33vw"
           priority
         /> 
       </div> 
+
+       {/* <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+        <Image 
+          src="/allcourse/school.jpg" 
+          alt="School Students" 
+          fill 
+          className="rounded-lg object-cover" 
+          sizes="(max-width: 768px) 100vw, 33vw"
+          priority
+        /> 
+      </div> */}
+      
   </div>
   
   

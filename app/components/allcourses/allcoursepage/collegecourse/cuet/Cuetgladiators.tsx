@@ -253,54 +253,91 @@ const ExamPrepHomepage: React.FC = () => {
                  </div>
                
                  {/* Gladiators Carousel - Updated to show 4 in a row */}
-                 <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
-                   {/* Left Scroll Button */}
-                   <button
-                     onClick={scrollLeft}
-                     className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                     aria-label="Scroll left"
-                   >
-                     <svg
-                       xmlns="http://www.w3.org/2000/svg"
-                       className="h-6 w-6"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke="currentColor"
-                     >
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                     </svg>
-                   </button>
-               
-                   {/* Carousel Container */}
-                   <div
-            ref={carouselRef}
-            className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
-            style={{
-              scrollSnapType: "x mandatory",
-              msOverflowStyle: "none", // Hide scrollbar in IE/Edge
-              scrollbarWidth: "none", // Hide scrollbar in Firefox
-            }}
-          >
-            {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
-            <style jsx>{`
-              div::-webkit-scrollbar {
-                display: none;
-              }
-            `}</style>
-          
-            {/* Group gladiators into sets of 4 */}
-            {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
-              <div
-                key={groupIndex}
-                className="min-w-full flex justify-center px-4 flex-nowrap"
-                style={{ scrollSnapAlign: "start" }}
-              >
-                {/* Display 4 gladiators per slide */}
-               {/* First Carousel - Update this code */}
-          {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
-            <div key={index} className="w-1/4 px-2">
-              <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+                 <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-4 sm:px-12">
+  {/* Left Scroll Button */}
+  <button
+    onClick={scrollLeft}
+    className="absolute left-0 sm:left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+    aria-label="Scroll left"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5 sm:h-6 sm:w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  {/* Carousel Container */}
+  <div
+    ref={carouselRef}
+    className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+    style={{
+      scrollSnapType: "x mandatory",
+      msOverflowStyle: "none", // Hide scrollbar in IE/Edge
+      scrollbarWidth: "none", // Hide scrollbar in Firefox
+    }}
+  >
+    {/* Hide scrollbar in WebKit browsers (Chrome, Safari) */}
+    <style jsx>{`
+      div::-webkit-scrollbar {
+        display: none;
+      }
+    `}</style>
+    
+    {/* Desktop View: 4 members per slide */}
+    {Array.from({ length: Math.ceil(gladiators.length / 4) }).map((_, groupIndex) => (
+      <div
+        key={`desktop-${groupIndex}`}
+        className="min-w-full hidden sm:flex justify-center px-4 flex-nowrap"
+        style={{ scrollSnapAlign: "start" }}
+      >
+        {/* Display 4 gladiators per slide for desktop */}
+        {gladiators.slice(groupIndex * 4, groupIndex * 4 + 4).map((gladiator, index) => (
+          <div key={index} className="w-1/4 px-2">
+            <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+              <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Image
+                    src={gladiator.image}
+                    alt={gladiator.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectPosition: "center"
+                    }}
+                  />
+                </div>
+              </div>
+              <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                {gladiator.name}
+              </h4>
+              <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))}
+
+    {/* Mobile View: 2 members per slide */}
+    {Array.from({ length: Math.ceil(gladiators.length / 2) }).map((_, groupIndex) => (
+      <div
+        key={`mobile-${groupIndex}`}
+        className="min-w-full flex sm:hidden justify-center px-1 flex-nowrap"
+        style={{ scrollSnapAlign: "start" }}
+      >
+        {/* Display 2 gladiators per slide for mobile */}
+        {gladiators.slice(groupIndex * 2, groupIndex * 2 + 2).map((gladiator, index) => (
+          gladiator && (
+            <div key={index} className="w-1/2 px-1">
+              <div className="flex flex-col items-center p-2 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                <div className="w-20 h-20 relative overflow-hidden rounded-full mb-2">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Image
                       src={gladiator.image}
@@ -316,35 +353,35 @@ const ExamPrepHomepage: React.FC = () => {
                     />
                   </div>
                 </div>
-                <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                <h4 className="font-semibold text-xs text-white text-center">
                   {gladiator.name}
                 </h4>
-                <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
+                <p className="text-[#FF6B45] text-xs text-center">{gladiator.title}</p>
               </div>
             </div>
-          ))}
-              </div>
-            ))}
-          </div>
-               
-                   {/* Right Scroll Button */}
-                   <button
-                     onClick={scrollRight}
-                     className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                     aria-label="Scroll right"
-                   >
-                     <svg
-                       xmlns="http://www.w3.org/2000/svg"
-                       className="h-6 w-6"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke="currentColor"
-          
-                     >
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                     </svg>
-                   </button>
-                 </div>
+          )
+        ))}
+      </div>
+    ))}
+  </div>
+
+  {/* Right Scroll Button */}
+  <button
+    onClick={scrollRight}
+    className="absolute right-0 sm:right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+    aria-label="Scroll right"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5 sm:h-6 sm:w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
           
                  {/* <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
                     <button
@@ -556,11 +593,13 @@ const ExamPrepHomepage: React.FC = () => {
       
       {/* Right side - Image */}
     <div className="flex-shrink-0 flex justify-center "> 
-  <img 
-    src="/allcoursecollegemaster.png" 
-    alt="Mascot" 
-    className="w-36 h-36 md:w-48 md:h-52 relative top-8"
-  />
+    <Image 
+  src="/allcoursecollegemaster.png" 
+  alt="Mascot" 
+  width={144} // w-36 = 144px
+  height={144} // h-36 = 144px
+  className="md:w-48 md:h-52 relative top-8 object-cover"
+/>
 </div>
 
 
@@ -653,11 +692,12 @@ const ExamPrepHomepage: React.FC = () => {
     >
       {/* Blog Image */}
       <div className="relative w-full aspect-video">
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      <Image
+  src={blog.image}
+  alt={blog.title}
+  fill
+  className="absolute inset-0 w-full h-full object-cover"
+/>
       </div>
 
       {/* Content */}

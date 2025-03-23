@@ -555,11 +555,13 @@ const ExamPrepHomepage: React.FC = () => {
       
       {/* Right side - Image */}
     <div className="flex-shrink-0 flex justify-center "> 
-  <img 
-    src="/allcoursecollegemaster.png" 
-    alt="Mascot" 
-    className="w-36 h-36 md:w-48 md:h-52 relative top-8"
-  />
+    <Image 
+  src="/allcoursecollegemaster.png" 
+  alt="Mascot" 
+  width={144}  // 36 * 4
+  height={144} // 36 * 4
+  className="w-36 h-36 md:w-48 md:h-52 relative top-8"
+/>
 </div>
 
 
@@ -657,11 +659,12 @@ const ExamPrepHomepage: React.FC = () => {
     >
       {/* Blog Image */}
       <div className="relative w-full aspect-video">
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      <Image
+  src={blog.image}
+  alt={blog.title}
+  fill
+  className="absolute inset-0 w-full h-full object-cover"
+/>
       </div>
 
       {/* Content */}

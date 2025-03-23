@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 // import emailjs from 'emailjs-com'; // Import EmailJS
 import axiosInstance from '@/app/components/apiconfig/axios';
 import { API_URLS } from '@/app/components/apiconfig/api_urls';
+import Image from "next/image";
 
 
 // interface VideoCardProps {
@@ -255,7 +256,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
       full_name: '',
       mobile_number: '',
       email: '',
-      college_studied:'',
+      school_studied:'',
       preferred_program: '',
       submitted_at:'',
     });
@@ -299,7 +300,7 @@ try {
       full_name: "",
       mobile_number: "",
       email: "",
-      college_studied: "",
+      school_studied: "",
       preferred_program: "",
       submitted_at: "",
     });
@@ -401,19 +402,23 @@ try {
             {/* Progress Items */}
             <div className="space-y-3 mb-8">
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
   </div>
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">Comprehensive CLAT Online /Offline Course </p>
   </div>
 </div>
@@ -435,11 +440,15 @@ try {
     href="#" 
     className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
       >
-        <img 
-          src="/catexamtelegram.png" 
-          alt="Telegram Icon" 
-          className="w-5 h-5 mr-2"
-        />
+       <div className="relative w-5 h-5 mr-2">
+  <Image 
+    src="/catexamtelegram.png" 
+    alt="Telegram Icon" 
+    fill
+    className="object-contain"
+  />
+</div>
+
         Join Our Telegram Channel
       </a>
     </div>
@@ -494,7 +503,7 @@ try {
           type="text"
           name="college_studied"
           placeholder="College Studied"
-          value={formData.college_studied}
+          value={formData.school_studied}
           onChange={handleInputChange}
           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
           required
@@ -612,7 +621,15 @@ try {
       {filteredCourses.length > 0 ? (
         filteredCourses.map((card) => (
           <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+<div className="relative w-full h-48">
+  <Image 
+    src={card.image} 
+    alt={card.title} 
+    fill
+    className="object-cover" 
+  />
+</div>
+
             <div className="p-6">
               <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
               <ul className="space-y-2 mb-6">
@@ -665,11 +682,13 @@ try {
         </div>
 
         <div className="mx-auto my-auto">
-          <img
-            src="/charater2.png"
-            alt="Prep Mascot"
-            className="h-40 md:h-48"
-          />
+        <Image 
+  src="/charater2.png" 
+  alt="Prep Mascot" 
+  width={200}  // Adjust as needed
+  height={160} // Adjust as needed (h-40 is ~160px)
+  className="h-40 md:h-48"
+/>
         </div>
       </div>
     </div>

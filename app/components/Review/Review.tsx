@@ -83,6 +83,8 @@ const StudentTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
 
+
+  
   // Function to render stars
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (

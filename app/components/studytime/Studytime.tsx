@@ -10,25 +10,28 @@ const SaveStudyTime = () => {
 
   const statsRef = useRef(null);
 
-   useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const [entry] = entries;
-          setIsStatsVisible(entry.isIntersecting);
-        },
-        { threshold: 0.1 } 
-      );
-    
-      if (statsRef.current) {
-        observer.observe(statsRef.current);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsStatsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+  
+    const currentRef = statsRef.current; // Store the current ref in a variable
+  
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+  
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
-    
-      return () => {
-        if (statsRef.current) {
-          observer.unobserve(statsRef.current);
-        }
-      };
-    }, []);
+    };
+  }, []);
+  
 
     const formatNumber = (number : number) : string => {
       if (number >= 10000000) {

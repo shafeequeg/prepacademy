@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from "next/image";
 
 
 const ExamPrepLowerSections: React.FC = () => {
@@ -205,7 +206,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your School Courses journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 
@@ -224,7 +225,7 @@ const ExamPrepLowerSections: React.FC = () => {
                 {/* Avatar and Name */}
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
-                    <img
+                  <Image
                       src={testimonial.avatar}
                       alt={testimonial.name}
                       className="w-full h-full object-cover"

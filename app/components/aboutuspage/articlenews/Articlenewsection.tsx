@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+
 
 interface ArticleCardProps {
   image: string;
@@ -10,7 +12,13 @@ interface ArticleCardProps {
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ id, image, title, description }) => (
   <div className="bg-[#1A1412] rounded-lg overflow-hidden flex flex-col h-full">
-    <img src={image} alt={title} className="w-full h-48 object-cover" />
+<Image 
+  src={image} 
+  alt={title} 
+  width={500} // Set appropriate width
+  height={192} // Set appropriate height (48 * 4)
+  className="w-full h-48 object-cover" 
+/>
     <div className="p-6 flex flex-col flex-grow">
       <h3 className="text-white text-xl font-semibold mb-3">{title}</h3>
       <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{description}</p>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Simple Search Icon Component
 const SearchIcon = () => (
@@ -359,11 +360,14 @@ const BlogSection = () => {
   {displayBlogs.map((blog: Blog) => (
     <div key={blog.id} className="bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full">
       <div className="w-full h-48"> {/* Fixed image height */}
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="w-full h-full object-cover"
-        />
+      <div className="relative w-full h-full"> 
+  <Image
+    src={blog.image}
+    alt={blog.title}
+    fill
+    className="object-cover"
+  />
+</div>
       </div>
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">{blog.title}</h3>
@@ -401,11 +405,13 @@ const BlogSection = () => {
 
           {/* Image Group */}
           <div className="relative mt-8 md:mt-0">
-            <img
-              src="/groupphotopopularcourse.png"
-              alt="Our Mentors"
-              className="w-full md:w-[500px] h-auto object-contain"
-            />
+          <Image
+  src="/groupphotopopularcourse.png"
+  alt="Our Mentors"
+  width={500}  // Adjust as needed
+  height={300} // Adjust as needed
+  className="w-full md:w-[500px] h-auto object-contain"
+/>
           </div>
         </div>
       </div>

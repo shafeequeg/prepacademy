@@ -170,6 +170,33 @@ const tabs = [
   },
 
   { 
+    id: "TUITIONS", 
+    label: "TUITIONS", 
+    path: "/tuitions",
+    dropdownItems: [
+      { label: "PHYSICS ", path: "/schoolcourse/tuitions/physics" },
+      { label: "CHEMISTRY", path: "/schoolcourse/tuitions/chemistry" },
+      { label: "MATHS", path: "/schoolcourse/tuitions/maths" },
+      { label: "BIOLOGY ", path: "/schoolcourse/tuitions/biology" },
+      { label: "ACCOUNTING ", path: "/schoolcourse/tuitions/accounting" },
+      { label: "ECONOMICS", path: "/schoolcourse/tuitions/economics" },
+      { label: "ENGLISH ", path: "/schoolcourse/tuitions/english" },
+      { label: "COMMERCE", path: "/schoolcourse/tuitions/commerce" },
+      { label: "BUSINESS STUDIES", path: "/schoolcourse/tuitions/business" },
+
+
+    ]
+//(6-12 Standards)
+    // {
+    //   // code: "TUITIONS",
+    //   title: "TUITIONS",
+    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+    //   classType: "CLASSES FOR 11TH & 12TH",
+    //   path: "/courses/bank"
+
+    // }
+  },
+  { 
     id: "DESIGN", 
     label: "DESIGN & ARCHITECTURE", 
     path: "/design",
@@ -200,33 +227,7 @@ const tabs = [
   },
   
   
-  { 
-    id: "TUITIONS", 
-    label: "TUITIONS", 
-    path: "/tuitions",
-    dropdownItems: [
-      { label: "PHYSICS ", path: "/schoolcourse/tuitions/physics" },
-      { label: "CHEMISTRY", path: "/schoolcourse/tuitions/chemistry" },
-      { label: "MATHS", path: "/schoolcourse/tuitions/maths" },
-      { label: "BIOLOGY ", path: "/schoolcourse/tuitions/biology" },
-      { label: "ACCOUNTING ", path: "/schoolcourse/tuitions/accounting" },
-      { label: "ECONOMICS", path: "/schoolcourse/tuitions/economics" },
-      { label: "ENGLISH ", path: "/schoolcourse/tuitions/english" },
-      { label: "COMMERCE", path: "/schoolcourse/tuitions/commerce" },
-      { label: "BUSINESS STUDIES", path: "/schoolcourse/tuitions/business" },
-
-
-    ]
-
-    // {
-    //   // code: "TUITIONS",
-    //   title: "TUITIONS",
-    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
-    //   classType: "CLASSES FOR 11TH & 12TH",
-    //   path: "/courses/bank"
-
-    // }
-  }
+  
 ];
 
 
@@ -249,7 +250,7 @@ const CatExamApplySection: React.FC = () => {
     full_name: '',
     mobile_number: '',
     email: '',
-    college_studied:'',
+    school_studied:'',
     preferred_program: '',
     submitted_at:'',
   });
@@ -371,7 +372,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
           full_name: "",
           mobile_number: "",
           email: "",
-          college_studied: "",
+          school_studied: "",
           preferred_program: "",
           submitted_at: "",
         });
@@ -547,14 +548,13 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
   aria-label="Study Abroad Programs"
 >
   {tabs.map((tab, index) => (
-    <div
-      key={tab.id}
-      className="flex-shrink-0 md:flex-1 mx-1 relative"
-      ref={(el) => {
-        dropdownRefs.current[tab.id] = el; // Assign the element to the ref object
-      }}
-    >      
-      <button 
+  <div
+  key={tab.id}
+  className="flex-1 mx-1 relative"
+  ref={(el) => {
+    dropdownRefs.current[tab.id] = el; // Assign the element to the ref object
+  }}
+>      <button 
         id={`tab-${tab.id}`}
         role="tab"
         aria-selected={activeMainTab === tab.id}
@@ -587,7 +587,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
       {/* Dropdown menu */}
       {openDropdown === tab.id && (
         <div 
-          className="absolute z-[1000] mt-1 w-[110%] overflow-hidden bg-black border border-gray-700 rounded-md shadow-lg"
+          className="absolute z-[1000] mt-1 w-full bg-black border border-gray-700 rounded-md shadow-lg"
           role="menu"
           aria-labelledby={`tab-${tab.id}`}
         >
@@ -635,19 +635,23 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
             {/* Progress Items */}
             <div className="space-y-3 mb-8">
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
   </div>
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">Comprehensive School  Online /Offline Course </p>
   </div>
 </div>
@@ -669,11 +673,15 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
     href="#" 
     className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
       >
-        <img 
-          src="/catexamtelegram.png" 
-          alt="Telegram Icon" 
-          className="w-5 h-5 mr-2"
-        />
+       <div className="relative w-5 h-5 mr-2">
+  <Image 
+    src="/catexamtelegram.png" 
+    alt="Telegram Icon" 
+    fill
+    className="object-contain"
+  />
+</div>
+
         Join Our Telegram Channel
       </a>
     </div>
@@ -726,9 +734,9 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
         />
         <input
           type="text"
-          name="college_studied"
-          placeholder="College Studied"
-          value={formData.college_studied}
+          name="school_studied"
+          placeholder="School Studied"
+          value={formData.school_studied}
           onChange={handleInputChange}
           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
           required
@@ -820,16 +828,19 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
   </div>
 
   {/* Right Section */}
-  <div className="relative w-1/2 aspect-[4/3] min-h-[320px]"> {/* No margin change here */}
-    <Image 
-      src="/allcourse/schoolcourse.jpeg" 
-      alt="School Students" 
-      fill 
-      className="rounded-lg object-cover" 
-      sizes="(max-width: 768px) 100vw, 50vw"
-      priority
-    /> 
-  </div> 
+  <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+  <Image 
+    src="/allcourse/school.jpg" 
+    alt="School Students" 
+    fill 
+    className="rounded-lg object-cover" 
+    sizes="(max-width: 768px) 100vw, 33vw"
+    priority
+  /> 
+</div>
+
+
+
 </div>
  
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

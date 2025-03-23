@@ -87,11 +87,13 @@ const DrivesUsSection = () => {
           className="p-6 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg border-l-4 border-[#F55D3E] flex flex-col items-center text-center"
         >
           {/* Icon */}
-          <img 
-            src={feature.icon} 
-            alt={feature.title} 
-            className="w-16 h-16 mb-4 rounded-full object-cover" 
-          />
+          <Image 
+  src={feature.icon} 
+  alt={feature.title} 
+  width={64}  // 16 * 4
+  height={64} // 16 * 4
+  className="w-16 h-16 mb-4 rounded-full object-cover" 
+/>
           
           {/* Title */}
           <h3 className="text-[#FF5733] font-bold text-lg leading-tight">

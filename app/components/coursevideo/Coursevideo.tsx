@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
+
 
 const CourseVideos = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -152,11 +154,14 @@ const CourseVideos = () => {
                       key={index}
                       className="flex-shrink-0 w-[25%] flex items-center justify-center"
                     >
-                      <img
-                        src={logo.src}
-                        alt={logo.alt}
-                        className="h-20 md:h-26 object-contain"
-                      />
+                    <Image
+  src={logo.src}
+  alt={logo.alt}
+  width={100}  // Adjust as needed
+  height={80}  // Adjust as needed
+  className="h-20 md:h-26 object-contain"
+/>
+
                     </div>
                   ))}
                 </div>

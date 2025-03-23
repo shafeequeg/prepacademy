@@ -87,7 +87,7 @@ const CatExamApplySection: React.FC = () => {
      full_name: '',
      mobile_number: '',
      email: '',
-     college_studied:'',
+     school_college_studied:'',
      preferred_program: '',
      submitted_at:'',
    });
@@ -115,6 +115,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
   }
 };
 
+
 useEffect(() => {
 fetchPrograms();
 }, []);
@@ -137,7 +138,7 @@ try {
       full_name: "",
       mobile_number: "",
       email: "",
-      college_studied: "",
+      school_college_studied: "",
       preferred_program: "",
       submitted_at: "",
     });
@@ -269,11 +270,22 @@ try {
           {/* Progress Items */}
           <div className="space-y-3 mb-8">
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
-              <p className="text-white">Expert Counseling for Top Universities</p>
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>              <p className="text-white">Expert Counseling for Top Universities</p>
             </div>
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
               <p className="text-white">Comprehensive Support for Admissions & Visas</p>
             </div>
           </div>
@@ -335,9 +347,9 @@ try {
         />
         <input
           type="text"
-          name="college_studied"
-          placeholder="College Studied"
-          value={formData.college_studied}
+          name="school_college_studied"
+          placeholder="College or School Studied"
+          value={formData.school_college_studied}
           onChange={handleInputChange}
           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
           required
@@ -409,16 +421,18 @@ try {
                </div>
      
                {/* Right Content - Image */}
-               <div className="relative w-1/2 aspect-[4/3] min-h-[320px] overflow-hidden "> {/* Ensure no overflow */}
-                  <Image 
-                        src="/allcourse/studyabroad.jpeg" 
+               <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+                     <Image 
+                        src="/allcourse/studyabroadcourse.jpg" 
                         alt="School Students" 
                         fill 
-                        className="rounded-lg object-contain " 
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="rounded-lg object-cover " 
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         priority
                       /> 
-                    </div> 
+                </div> 
+
+                    
              </div>
      
              {/* Study Abroad Cards Grid */}

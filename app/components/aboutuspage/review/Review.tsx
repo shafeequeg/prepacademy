@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com'; // Import EmailJS
+import Image from "next/image";
 
 // Custom SVG components
 const StarIcon = () => (
@@ -187,11 +188,13 @@ const TestimonialsAndCTA = () => {
     
     {/* Image Container */}
     <div className="w-28 md:w-36 lg:w-48 aspect-square flex-shrink-0">
-      <img 
-        src="/charater2.png" 
-        alt="Mascot" 
-        className="w-full h-full object-contain"
-      />
+    <Image 
+  src="/charater2.png" 
+  alt="Mascot" 
+  width={500} // Adjust as needed
+  height={500} // Adjust as needed
+  className="w-full h-full object-contain"
+/>
     </div>
 
   </div>
@@ -315,7 +318,7 @@ const TestimonialsAndCTA = () => {
                   </div>
                   <div className="flex flex-col items-end">
                     <div className="w-12 h-12">
-                      <img 
+                      <Image 
                         src="https://www.gstatic.com/recaptcha/api2/logo_48.png" 
                         alt="reCAPTCHA logo" 
                         className="w-full h-full object-contain"

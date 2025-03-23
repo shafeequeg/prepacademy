@@ -257,16 +257,17 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
               {/* Social Media Icons */}
               <div className="flex justify-center space-x-6 py-2 bg-[#2B1615] p-3 rounded-md mt-4">
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a   href="https://wa.me/9446056789" 
+ target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaWhatsapp className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.facebook.com/prepacademy.in" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaFacebookF className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.instagram.com/prepacademy.in/" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaInstagram className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.linkedin.com/company/prep-academy-india/?viewAsMember=true" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaLinkedinIn className="text-white text-2xl" />
                 </a>
               </div>

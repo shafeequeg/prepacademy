@@ -14,16 +14,12 @@ interface CourseCardProps {
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
-  // Limit the description to 15 words (adjust as needed)
-  const maxWords = 5;
-  const truncatedDescription = description.split(" ").length > maxWords
-    ? description.split(" ").slice(0, maxWords).join(" ") + "..."
-    : description;
-
   const cardContent = (
-    <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
+    <div className={`bg-[#1F1414] p-5  rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] min-w-[250px] ${className}`}>
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-white text-base">{truncatedDescription}</p>
+      <p className="text-white text-base overflow-hidden overflow-ellipsis line-clamp-3">
+        {description}
+      </p>
       {classType && (
         <p className="text-white text-sm mt-2">{classType}</p>
       )}
@@ -154,7 +150,7 @@ const AllCourses: React.FC = () => {
     {
       // code: "TUITIONS",
       title: "TUITIONS",
-      description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+      description: "PHYSICS, CHEMISTRY,BIOLOGY, MATHS,ENGLISH,COMMERCE,BUSINESS STUDIES,ACCOUNTING,ECONOMICS",
       classType: "CLASSES FOR 11TH & 12TH",
       path: "/courses/bank"
 

@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+
 
 const StudentTestimonials = () => {
   const testimonials = [
@@ -68,7 +70,7 @@ const StudentTestimonials = () => {
               {/* Avatar and Name */}
               <div className="flex items-center mb-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
-                  <img
+                  <Image
                     src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"

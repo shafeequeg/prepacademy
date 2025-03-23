@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 // import emailjs from 'emailjs-com';
 import axiosInstance from '../../apiconfig/axios';
 import { API_URLS } from '../../apiconfig/api_urls';
+import Image from "next/image";
 
 // interface CourseCardProps {
 //   title: string;
@@ -45,6 +46,8 @@ const tabs = [
   { id: "CareerPlanning", label: "Career Planning", path: "/career-counseling/career-planning" },
   { id: "Skill Development", label: "Skill Development", path: "/career-counseling/skill-development" },
   { id: "Job Search Strategies", label: "Job Search Strategies", path: "/career-counseling/job-search-strategies" },
+  { id: "Stream Selection ", label: "Stream Selection ", path: "/career-counseling/stream-selection-offer" },
+
 ];
 // const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
 //   return (
@@ -219,11 +222,22 @@ try {
                 </div>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center">
-                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
-                    <p className="text-white">One-on-One Career Counseling Sessions</p>
+                  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>                    <p className="text-white">One-on-One Career Counseling Sessions</p>
                   </div>
                   <div className="flex items-center">
-                    <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+                  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
                     <p className="text-white">Personalized Career Roadmap & Action Plan</p>
                   </div>
                 </div>

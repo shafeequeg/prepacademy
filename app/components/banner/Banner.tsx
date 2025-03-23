@@ -167,7 +167,7 @@ console.log(activeIndex);
               >
                 FREE Career Counseling
               </button>
-        <Link href="/collegecourse" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
+        <Link href="/careercounseling" className="border-2 border-[#F55D3E] text-[#F55D3E] px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-semibold hover:bg-[#F55D3E] hover:text-white transition">
           KNOW MORE
         </Link>
 
@@ -270,11 +270,14 @@ console.log(activeIndex);
               `}
           >
             <div className="flex flex-col items-center h-full ">
-              <img 
-                src={item.image} 
-                alt={item.title} 
-                className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
-              />
+            <Image
+  src={item.image}
+  alt={item.title}
+  width={40}  // w-10 = 40px
+  height={40} // h-10 = 40px
+  className="md:w-12 md:h-12 mb-1 md:mb-2 object-contain"
+/>
+
               
               <h2 className="text-[#F55D3E] text-xl md:text-xl lg:text-2xl font-bold  ">
   {item.title}
@@ -418,11 +421,13 @@ console.log(activeIndex);
                   </div>
                   <div className="flex flex-col items-end">
                     <div className="w-12 h-12">
-                      <img 
-                        src="https://www.gstatic.com/recaptcha/api2/logo_48.png" 
-                        alt="reCAPTCHA logo" 
-                        className="w-full h-full object-contain"
-                      />
+                    <Image
+  src="https://www.gstatic.com/recaptcha/api2/logo_48.png"
+  alt="reCAPTCHA logo"
+  width={48}  // Set fixed width (adjust if needed)
+  height={48} // Set fixed height (adjust if needed)
+  className="object-contain w-full h-full"
+/>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">Privacy - Terms</div>
                   </div>
