@@ -57,7 +57,7 @@ interface Program {
 const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   return (
     <div className="relative group cursor-pointer">
-      <div className="relative w-full h-56 md:h-64 lg:h-72">
+      <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]"> {/* Set static height */}
         {/* YouTube Embed */}
         <iframe 
           className="w-full h-full rounded-lg"
@@ -71,6 +71,7 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
     </div>
   );
 };
+
 
 
 const offeringTypes = [
@@ -122,7 +123,7 @@ const courseCards = [
   {
     id: "cat-Classroom-1",
     title: " Day Classes",
-    image: "/news1.png",
+    image: "/catdailyclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -135,7 +136,7 @@ const courseCards = [
   {
     id: "cat-Classroom-2",
     title: " Night Classes",
-    image: "/news1.png",
+    image: "/catnightclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -149,7 +150,7 @@ const courseCards = [
   {
     id: "cat-Classroom-3",
     title: " Weekend Classes",
-    image: "/news1.png",
+    image: "/catweekendclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -339,15 +340,15 @@ try {
   const relatedVideos = [
     {
       title: "Preparing for the CLAT 2025",
-      videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
+      videoId: "TCUxGkyrRp0", // Remove "&t=2s"
     },
     {
       title: "Strategies for CLAT 2025",
-      videoId: "Kjjeb1v50C0", // Remove "&t=11s"
+      videoId: "5OFuUbyxIo8", // Remove "&t=11s"
     },
     {
       title: "Best Coaching Centers",
-      videoId: "4g7cyj774_M", // Remove "&t=26s"
+      videoId: "828DtOz8-6g", // Remove "&t=26s"
     }
   ];
 

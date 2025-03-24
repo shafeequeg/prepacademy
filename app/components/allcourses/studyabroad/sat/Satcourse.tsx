@@ -120,7 +120,7 @@ const courseCards = [
   {
     id: "cat-Classroom-1",
     title: " Day Classes",
-    image: "/news1.png",
+    image: "/catdailyclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -133,7 +133,7 @@ const courseCards = [
   {
     id: "cat-Classroom-2",
     title: " Night Classes",
-    image: "/news1.png",
+    image: "/catnightclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -147,7 +147,7 @@ const courseCards = [
   {
     id: "cat-Classroom-3",
     title: " Weekend Classes",
-    image: "/news1.png",
+    image: "/catweekendclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",

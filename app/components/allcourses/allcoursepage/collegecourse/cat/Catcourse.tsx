@@ -195,7 +195,7 @@ const courseCards = [
   {
     id: "cat-Classroom-1",
     title: " Day Classes",
-    image: "/news1.png",
+    image: "/catdailyclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -208,7 +208,7 @@ const courseCards = [
   {
     id: "cat-Classroom-2",
     title: " Night Classes",
-    image: "/news1.png",
+    image: "/catnightclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -222,7 +222,7 @@ const courseCards = [
   {
     id: "cat-Classroom-3",
     title: " Weekend Classes",
-    image: "/news1.png",
+    image: "/catweekendclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -359,7 +359,7 @@ const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Repl
 setPrograms(response.data); // Assuming the response is an array of programs
 } catch (error) {
 console.error("Failed to fetch programs:", error);
-toast.error("Failed to fetch programs. Please try again.");
+// toast.error("Failed to fetch programs. Please try again.");
 }
 };
 
