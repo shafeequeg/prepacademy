@@ -220,7 +220,7 @@ try {
   <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
           <div
-  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full"
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
   role="tablist"
   aria-label="Study Abroad Programs"
@@ -421,16 +421,16 @@ try {
                </div>
      
                {/* Right Content - Image */}
-               <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
-                     <Image 
-                        src="/allcourse/studyabroadcourse.jpg" 
-                        alt="School Students" 
-                        fill 
-                        className="rounded-lg object-cover " 
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        priority
-                      /> 
-                </div> 
+               <div className="relative w-[100%] md:w-[40%]  aspect-[4/3] min-h-[250px]">
+  <Image 
+    src="/allcourse/studyabroadcourse.jpg" 
+    alt="School Students" 
+    fill 
+    className="rounded-lg object-cover" 
+    sizes="(max-width: 768px) 100vw, 33vw"
+    priority
+  /> 
+</div>
 
                     
              </div>

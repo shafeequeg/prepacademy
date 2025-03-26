@@ -330,7 +330,8 @@ const BlogSection = () => {
           {/* Categories Dropdowns */}
           <div className="flex gap-4 w-full md:w-auto">
             <select className="w-full md:w-auto bg-[#F55D3E1A] text-white rounded-md py-2 px-4">
-              <option>Categories</option>
+              <option className="">Categories</option>
+
             </select>
           </div>
         </div>

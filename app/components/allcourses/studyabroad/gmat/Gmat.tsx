@@ -654,7 +654,7 @@ toast.error("Failed to send the message. Please try again.");
     <div className="bg-black py-8">
   <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
     {/* First CTA Section (Compact Width) */}
-    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 ml-24"> 
+    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 md:ml-24"> 
       <div 
         className="absolute top-0 left-0 right-0 h-1" 
         style={{

@@ -192,20 +192,6 @@ const tabs = [
     // }
   },
   { 
-    id: "DESIGN", 
-    label: "DESIGN & ARCHITECTURE", 
-    path: "/design",
-    dropdownItems: [
-      { label: "NID ", path: "/schoolcourse/design/nid" },
-      { label: "NIFT ", path: "/schoolcourse/design/nift" },
-      { label: "UCEED ", path: "/schoolcourse/design/uceed" },
-      { label: "CEED ", path: "/schoolcourse/design/ceed" },
-      { label: "JEE MAIN ", path: "/schoolcourse/design/jee" },
-      { label: "NATA ", path: "/schoolcourse/design/nata" },
-
-    ]
-  },
-  { 
     id: "OTHERS", 
     label: "OTHERS", 
     path: "/others",
@@ -221,6 +207,21 @@ const tabs = [
     ]
   },
   
+  { 
+    id: "DESIGN", 
+    label: "DESIGN & ARCHITECTURE", 
+    path: "/design",
+    dropdownItems: [
+      { label: "NID ", path: "/schoolcourse/design/nid" },
+      { label: "NIFT ", path: "/schoolcourse/design/nift" },
+      { label: "UCEED ", path: "/schoolcourse/design/uceed" },
+      { label: "CEED ", path: "/schoolcourse/design/ceed" },
+      { label: "JEE MAIN ", path: "/schoolcourse/design/jee" },
+      { label: "NATA ", path: "/schoolcourse/design/nata" },
+
+    ]
+  },
+ 
   
   
 ];
@@ -531,25 +532,25 @@ const openModal = () => setIsModalOpen(true);
  
 
   return (
-    <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+    <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white  ">
   {/* Background Image Between Sections */}
   {/* Main Content */}
   <div
-  className="flex items-center md:justify-between w-full bg-black mt-32 p-3 overflow-x-auto md:overflow-visible"
+ className="flex items-center md:justify-between w-full bg-black mt-32  p-3 overflow-x-auto md:overflow-visible w820:overflow-x-scroll " 
   style={{
     scrollbarWidth: "none", 
     msOverflowStyle: "none",
-    WebkitOverflowScrolling: "touch" // For smooth scrolling on iOS
+    WebkitOverflowScrolling: "touch" 
   }}
   role="tablist"
   aria-label="Study Abroad Programs"
->
+>    
   {tabs.map((tab, index) => (
   <div
   key={tab.id}
-  className="flex-1 mx-1 relative"
+  className="flex-1  mx-1 relative w820:mt-8 "
   ref={(el) => {
-    dropdownRefs.current[tab.id] = el; // Assign the element to the ref object
+    dropdownRefs.current[tab.id] = el; 
   }}
 >      <button 
         id={`tab-${tab.id}`}
@@ -563,7 +564,7 @@ const openModal = () => setIsModalOpen(true);
         }}
         onKeyDown={(e) => handleTabKeyNav(e, index)}
         tabIndex={activeMainTab === tab.id ? 0 : -1}
-        className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+        className={`w-full px-4 py-2 text-sm md:text-base   whitespace-nowrap transition-colors ${
           activeMainTab === tab.id
             ? "bg-[#FF6B3D] text-white font-medium"
             : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -583,11 +584,11 @@ const openModal = () => setIsModalOpen(true);
       
       {/* Dropdown menu */}
       {openDropdown === tab.id && (
-        <div 
-          className="absolute z-[1000] mt-1 w-full bg-black border border-gray-700 rounded-md shadow-lg"
-          role="menu"
-          aria-labelledby={`tab-${tab.id}`}
-        >
+       <div 
+       className="md:absolute  w820:fixed md:z-[1000] fixed z-[1000]   mt-2 p-2 md:bg-black border border-gray-700 rounded-md shadow-lg"
+       role="menu"
+       aria-labelledby={`tab-${tab.id}`}
+     >
           {tab.dropdownItems.map((item, itemIndex) => (
             <Link 
               key={`${tab.id}-${itemIndex}`} 
@@ -603,10 +604,11 @@ const openModal = () => setIsModalOpen(true);
             </Link>
           ))}
         </div>
-      )}
+      )}  
     </div>
   ))}
 </div>
+
   <div className="relative w-full z-10  ">
  
     {/* Apply Section with Mascot */}
@@ -755,6 +757,8 @@ const openModal = () => setIsModalOpen(true);
                 {program.name}
               </option>
             ))}
+
+            
           </select>
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
             <svg
@@ -776,7 +780,6 @@ const openModal = () => setIsModalOpen(true);
         </div>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md w-full font-medium transition-colors"
@@ -816,7 +819,7 @@ const openModal = () => setIsModalOpen(true);
          <div>
          <div className="flex flex-col md:flex-row gap-6 mb-8">
   {/* Left Section */}
-  <div className="w-full md:w-1/2 flex flex-col justify-center  relative left-4"> {/* Positive margin to push right */}
+  <div className="w-full md:w-1/2 flex flex-col justify-center  relative left-4"> 
     <h2 className="text-4xl mb-4">
       <span className="text-[#F55D3E] font-serif italic pl-4">School</span> Courses
     </h2>
@@ -826,7 +829,7 @@ const openModal = () => setIsModalOpen(true);
   </div>
 
   {/* Right Section */}
-  <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+  <div className="relative w-[100%] md:w-[40%] aspect-[4/3] min-h-[250px]">
   <Image 
     src="/allcourse/school.jpg" 
     alt="School Students" 
@@ -935,7 +938,7 @@ const openModal = () => setIsModalOpen(true);
                   id="fullname"
                   name="fullname"
                   placeholder="Your Name" 
-                  value={formData.fullname}
+                  value={formData.full_name}
                   onChange={handleInputChange}
                   className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                   required
@@ -964,7 +967,7 @@ const openModal = () => setIsModalOpen(true);
                   id="class"
                   name="class"
                   placeholder="Your class" 
-                  value={formData.class}
+                  value={formData.preferred_program}
                   onChange={handleInputChange}
                   className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                   required
@@ -990,7 +993,7 @@ const openModal = () => setIsModalOpen(true);
                     id="phone"
                     name="phone"
                     placeholder="Your Phone Number" 
-                    value={formData.phone}
+                    value={formData.mobile_number}
                     onChange={handleInputChange}
                     className="w-full p-2 md:p-3 border border-gray-300 border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                     required
@@ -1005,7 +1008,7 @@ const openModal = () => setIsModalOpen(true);
                   id="school"
                   name="school"
                   placeholder="Your School/Institute" 
-                  value={formData.school}
+                  value={formData.school_studied}
                   onChange={handleInputChange}
                   className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                   required

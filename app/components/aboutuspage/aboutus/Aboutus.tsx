@@ -233,84 +233,88 @@ useEffect(() => {
   return (
     <div className="w-full bg-black text-white">
       {/* Transform Section */}
-      <section className="bg-gradient-to-b py-10 md:py-14 px-4 md:px-8">
-  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
-    
-    {/* Content */}
-    <div className="w-full md:w-3/5 mb-8 md:mb-0 md:pr-6 mt-10">
-      <h2 className="font-serif italic text-[#FF6B45] text-3xl md:text-4xl mb-2">
-        We Don&apos;t Just Teach
-      </h2>
+      <section className="bg-gradient-to-b  py-8 md:py-14 px-4 md:px-8 md:mt-16 mt-24">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0">
+        {/* Content Section */}
+        <div className="w-full md:w-3/5 md:pr-6 space-y-4">
+          <div>
+            <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl lg:text-4xl mb-2">
+              We Don't Just Teach
+            </h2>
+            <h3 className="font-serif italic text-3xl md:text-4xl lg:text-4xl font-bold mb-4">
+              We Transform!
+            </h3>
+          </div>
 
-      <h3 className="font-serif italic text-3xl md:text-4xl font-bold mb-5">
-        We Transform!
-      </h3> 
-
-      <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
-        At Prep Academy, we go beyond traditional teaching methods—we ignite curiosity, 
-        inspire excellence, and empower students to achieve their full potential. Our goal isn&apos;t 
-        just to help students pass exams but to transform their learning experience, sharpen their problem-solving skills,
-        and equip them with the confidence to excel in competitive exams like 
-        CAT, CLAT, CUET, IPM, XAT, MAT, CMAT, KMAT, KLEE, NID, NIFT, NATA, NDA, SAT, GRE, and GMAT etc…
-      </p>
-
-      <ul className="space-y-1">
-        {[
-          "No Boring Lectures",
-          "No One-Size-Fits-All Learning",
-          "No More Guesswork",
-        ].map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <div
-              className="w-4 h-4 rounded-full flex-shrink-0 mr-2"
-              style={{
-                backgroundImage: "url('/aboutusverified.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-            <span className="text-sm md:text-base">{feature}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Mascot Image */}
-    <div className="w-full md:w-1/2 flex justify-center mt-6 md:mt-8 relative bg-[url('/bannerround.png')] bg-cover bg-center bg-no-repeat">
-      <div className="relative w-72 h-[30rem] md:w-[30rem] md:h-[34rem]">
-        <Image
-          src="/prepbannerlogo.png"
-          alt="Prep Academy Mascot"
-          layout="fill"
-          objectFit="contain"
-          priority
-          className="mt-20"
-        />
-      </div>
-
-      {/* Text Overlay */}
-      <div className="absolute w-full top-full mb-0">
-        <div className="absolute w-full right-3/4 transform -translate-x-1/2 -translate-y-1/2 
-                        bg-gradient-to-r from-[#2A1810] to-[#3A2820] bg-opacity-90 text-center
-                        border-l-4 border-[#FF6B45] rounded-lg overflow-hidden
-                        shadow-lg px-6 py-4 mb-3">
-          <p className="relative z-10">
-            <span className="block text-[#FF6B45] font-bold text-xs md:text-base mb-1">
-              At Prep Academy, We Turn Preparation Into An Adventure.
-            </span>
-            <span className="inline-block text-amber-300 font-extrabold text-sm md:text-lg mt-1 animate-pulse">
-              Are You Ready?
-            </span>
+          <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
+            At Prep Academy, we go beyond traditional teaching methods we ignite curiosity, 
+            inspire excellence, and empower students to achieve their full potential. Our goal isn't 
+            just to help students pass exams but to transform their learning experience, sharpen their problem-solving skills, 
+            and equip them with the confidence to excel in competitive exams like 
+            CAT, CLAT, CUET, IPM, XAT, MAT, CMAT, KMAT, KLEE, NID, NIFT, NATA, NDA, SAT, GRE, and GMAT etc…
           </p>
-          <div className="absolute top-0 right-0 w-16 h-16 bg-[#FF6B45] opacity-10 rounded-full -mr-8 -mt-8"></div>
-          <div className="absolute bottom-0 left-0 w-12 h-12 bg-amber-300 opacity-10 rounded-full -ml-6 -mb-6"></div>
+
+          <ul className="space-y-2">
+            {[
+              "No Boring Lectures",
+              "No One-Size-Fits-All Learning", 
+              "No More Guesswork"
+            ].map((feature, index) => (
+              <li key={index} className="flex items-center">
+                <div 
+                  className="w-4 h-4 rounded-full flex-shrink-0 mr-3"
+                  style={{
+                    backgroundImage: "url('/aboutusverified.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <span className="text-sm md:text-base text-gray-200">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="w-full flex justify-start mt-4  md:mt-16 z-10">
+            <div className="w-full max-w-sm bg-gradient-to-r gradient-to-r from-[#2A1810] to-[#3A2820] 
+              bg-opacity-90 text-center border-l-4 border-[#FF6B45] 
+              rounded-lg overflow-hidden shadow-lg px-4 py-3">
+              <p className="relative z-10">
+                <span className="block text-[#FF6B45] font-bold text-xs md:text-base mb-1">
+                  At Prep Academy, We Turn Preparation Into An Adventure.
+                </span>
+                <span className="inline-block text-amber-300 font-extrabold text-sm md:text-lg mt-1 animate-pulse">
+                  Are You Ready?
+                </span>
+              </p>
+              {/* <div className="absolute top-0 right-0 w-16 h-16 bg-[#FF6B45] opacity-10 rounded-full -mr-8 -mt-8"></div> */}
+              {/* <div className="absolute bottom-0 left-0 w-12 h-12 bg-amber-300 opacity-10 rounded-full -ml-6 -mb-6"></div> */}
+            </div>
+          </div>
+        </div>
+
+        {/* Mascot Image Section */}
+        <div className="w-full md:w-1/2 flex flex-col items-center relative">
+          <div 
+            className="relative w-72 h-[24rem] md:w-[28rem] md:h-[32rem] lg:w-[30rem] lg:h-[34rem] bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('/bannerround.png')"
+            }}
+          >
+            <Image
+              src="/prepbannerlogo.png"
+              alt="Prep Academy Mascot"
+              layout="fill"
+              objectFit="contain"
+              priority
+              className="mt-12 md:mt-16 lg:mt-20"
+            />
+          </div>
+
+          {/* Text Overlay */}
+       
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
+    </section>
       {/* Gladiators Section */}
       <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-4 md:px-8 relative">
   {/* Section Header - Updated for Responsive Layout */}

@@ -170,9 +170,9 @@ const TestimonialsAndCTA = () => {
   <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
     
     {/* Text Content */}
-    <div className="w-full max-w-[60%] p-4">
+    <div className="w-full md:max-w-[60%] p-4">
       <h2 className="text-2xl lg:text-3xl font-bold">
-        <span className="text-[#FF5733] font-dmserif italic">Serious About Your Exam?</span>
+        <span className="text-[#FF5733] font-dmserif italic">Serious About Your Examss?</span>
         <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
       </h2>
 

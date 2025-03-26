@@ -396,19 +396,19 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   {/* Background Image Between Sections */}
   {/* Main Content */}
   <div
-  className="flex items-center md:justify-between w-full bg-black mt-32 p-3 overflow-x-auto md:overflow-visible"
+ className="flex items-center md:justify-between w-full bg-black mt-32 p-3 overflow-x-auto md:overflow-visible w820:overflow-x-scroll" 
   style={{
     scrollbarWidth: "none", 
     msOverflowStyle: "none",
-    WebkitOverflowScrolling: "touch" // For smooth scrolling on iOS
+    WebkitOverflowScrolling: "touch" 
   }}
   role="tablist"
   aria-label="Study Abroad Programs"
->
+>    
   {tabs.map((tab, index) => (
   <div
   key={tab.id}
-  className="flex-1 mx-1 relative"
+  className="flex-1 mx-1 relative min-w-max w820:min-w-0"
   ref={(el) => {
     dropdownRefs.current[tab.id] = el; // Assign the element to the ref object
   }}
@@ -444,11 +444,11 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       
       {/* Dropdown menu */}
       {openDropdown === tab.id && (
-        <div 
-          className="absolute z-[1000] mt-1 w-full bg-black border border-gray-700 rounded-md shadow-lg"
-          role="menu"
-          aria-labelledby={`tab-${tab.id}`}
-        >
+       <div 
+       className="md:absolute  w820:fixed z-[1000]  mt-2 p-2 bg-black border border-gray-700 rounded-md shadow-lg"
+       role="menu"
+       aria-labelledby={`tab-${tab.id}`}
+     >
           {tab.dropdownItems.map((item, itemIndex) => (
             <Link 
               key={`${tab.id}-${itemIndex}`} 
@@ -688,7 +688,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         When they focus on memorization, we focus on understanding. That&apos;s what sets us apart.
       </p>
     </div>
-    <div className="relative w-[40%] aspect-[4/3] min-h-[250px]">
+    <div className="relative w-full md:w-[40%] aspect-[4/3] min-h-[250px]">
     
         <Image 
           src="/allcourse/college.jpg" 

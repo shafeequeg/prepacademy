@@ -750,7 +750,7 @@ toast.error("Failed to send the message. Please try again.");
     <div className="bg-black py-8">
   <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
     {/* First CTA Section (Compact Width) */}
-    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 ml-24"> 
+    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 md:ml-24"> 
       <div 
         className="absolute top-0 left-0 right-0 h-1" 
         style={{
@@ -758,8 +758,8 @@ toast.error("Failed to send the message. Please try again.");
         }}
       ></div>
       
-      <div className="flex flex-col md:flex-row items-center justify-center w-full">
-        <div className="relative z-10 text-center md:text-left">
+      <div className="flex flex-col md:flex-row items-center justify-center ">
+        <div className="relative z-10 text-center md:text-left ">
           <h1 className="text-[#F55D3E] font-serif italic text-2xl md:text-3xl lg:text-4xl mb-2">
             Serious About Your Exam?
           </h1>

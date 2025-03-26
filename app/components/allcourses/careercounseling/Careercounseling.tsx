@@ -179,7 +179,7 @@ try {
         <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
           <div
-  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full"
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 lg:mt-2 overflow-x-auto md:overflow-visible w-full w768:overflow-x-scroll w768:mt-16 "
   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
   role="tablist"
   aria-label="Career Counseling Programs"
