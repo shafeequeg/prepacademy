@@ -239,7 +239,7 @@ useEffect(() => {
         <div className="w-full md:w-3/5 md:pr-6 space-y-4">
           <div>
             <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl lg:text-4xl mb-2">
-              We Don't Just Teach
+              We Don&apos;t Just Teach
             </h2>
             <h3 className="font-serif italic text-3xl md:text-4xl lg:text-4xl font-bold mb-4">
               We Transform!
@@ -248,7 +248,7 @@ useEffect(() => {
 
           <p className="text-gray-300 text-base md:text-lg mb-6 max-w-lg">
             At Prep Academy, we go beyond traditional teaching methods we ignite curiosity, 
-            inspire excellence, and empower students to achieve their full potential. Our goal isn't 
+            inspire excellence, and empower students to achieve their full potential. Our goal isn&apos;t 
             just to help students pass exams but to transform their learning experience, sharpen their problem-solving skills, 
             and equip them with the confidence to excel in competitive exams like 
             CAT, CLAT, CUET, IPM, XAT, MAT, CMAT, KMAT, KLEE, NID, NIFT, NATA, NDA, SAT, GRE, and GMAT etc…

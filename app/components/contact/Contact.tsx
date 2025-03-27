@@ -411,7 +411,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               href="#" 
               className="inline-block mt-4 md:mt-6 bg-[#F55D3E] hover:bg-[#F55D3E] text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-base md:text-lg font-medium"
             >
-              Let's Talk →
+              Let&apos;s Talk →
             </a>
           </div>
 

@@ -135,35 +135,32 @@ const ExamPrepHomepage: React.FC = () => {
     },
     {
       id: 2,
-      title: "CUET Exam Preparation: Ace the CUET ",
+      title: "CAT Exam Preparation: Ace the CAT ",
       description: "Essential Tips and Resources for Exam Preparation",
       image: "/blogs/blog2.png",
     },
     {
       id: 3,
-      title: "Important Study Hacks for CUET 2025 Students",
-      description: "Important Study Hacks for CUET 2025 Students",
+      title: "Important Study Hacks for CAT 2025 Students",
+      description: "Important Study Hacks for CAT 2025 Students",
       image: "/blogs/blog3.png",
     },
 
     {
       id: 4,
-      title: "CUET 2025 Course",
-      description: "CUET 2025 Courses: Which One is Right for You?",
+      title: "CAT 2025 Course",
+      description: "CAT 2025 Courses: Which One is Right for You?",
       image: "/blogs/blog4.png",
     },
   ];
 
   const carouselRef = useRef<HTMLDivElement>(null);
-  //  const carouselRefsecond = useRef<HTMLDivElement>(null);
+//    const carouselRefsecond = useRef<HTMLDivElement>(null);
  
    // Active indices for both carousels
   //  const [activeIndex, setActiveIndex] = useState(0);
    const [activeIndexsecond, setActiveIndexsecond] = useState(0);
- 
-   // Total slides for both carousels
-  //  const totalSlides = Math.ceil(gladiators.length / 4);
- const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
+  //  const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
    const [isMobile, setIsMobile] = useState(false);
 
    useEffect(() => {
@@ -180,12 +177,12 @@ const ExamPrepHomepage: React.FC = () => {
     // Cleanup listener
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+   // Total slides for both carousels
+  //  const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
 
-  
    console.log(activeIndexsecond);
-   console.log(totalSlidessecond);
-   
-   
+  //  console.log(totalSlidessecond);
+
     // Auto-scroll effect
     // useEffect(() => {
     //   const interval = setInterval(() => {
@@ -228,153 +225,177 @@ const ExamPrepHomepage: React.FC = () => {
       }
     };
     const totalSlides = Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4));
-   
+    // const scrollLeftsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond - 1 + totalSlidessecond) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
+  
+    // // Scroll right for the second carousel
+    // const scrollRightsecond = () => {
+    //   if (carouselRefsecond.current) {
+    //     const newIndex = (activeIndexsecond + 1) % totalSlidessecond;
+    //     setActiveIndexsecond(newIndex);
+    //     const slideWidth = carouselRefsecond.current.offsetWidth;
+    //     carouselRefsecond.current.scrollTo({
+    //       left: newIndex * slideWidth,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // };
+    
 
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
       {/* Header Section with Gladiators - Full Width */}
       <header className="bg-gradient-to-r from-gray-900 to-gray-800 ">
         {/* Remove container and max-width constraints */}
-               <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
-                   {/* Section Header */}
-                   <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
-                     {/* Left Side - Title */}
-                     <div className="flex items-center">
-                       <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
-                         Meet Your Exam <br />
-                         <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
-                       </h2>
-                     </div>
-                            
-                     {/* Quote */}
-                     <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
-                       <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
-                       <span>
-                         Behind every student&apos;s success are passionate, <br />
-                         experienced educators who&apos;ve cracked the toughest exams.
-                       </span>
-                       <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
-                     </h4>
-                   </div>
-                            
-                   {/* Gladiators Carousel */}
-                   <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
-                     {/* Left Scroll Button */}
-                     <button
-                       onClick={scrollLeft}
-                       className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                       aria-label="Scroll left"
-                     >
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         className="h-6 w-6"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                       >
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                       </svg>
-                     </button>
-             
-                     {/* Carousel Container */}
-                     <div
-                       ref={carouselRef}
-                       className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
-                       style={{
-                         scrollSnapType: "x mandatory",
-                         msOverflowStyle: "none", 
-                         scrollbarWidth: "none", 
-                       }}
-                     >
-                       <style jsx>{`
-                         div::-webkit-scrollbar {
-                           display: none;
-                         }
-                       `}</style>
-                     
-                       {Array.from({ length: totalSlides }).map((_, groupIndex) => (
-                         <div
-                           key={groupIndex}
-                           className="min-w-full flex justify-center px-4 flex-wrap sm:flex-nowrap"
-                           style={{ scrollSnapAlign: "start" }}
-                         >
-                           {gladiators.slice(
-                             groupIndex * (isMobile ? 2 : 4), 
-                             groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
-                           ).map((gladiator, index) => (
-                             <div 
-                               key={index} 
-                               className={`w-1/2 sm:w-1/4 px-2 mb-4 sm:mb-0`}
-                             >
-                               <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                                 <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
-                                   <div className="absolute inset-0 flex items-center justify-center">
-                                     <Image
-                                       src={gladiator.image}
-                                       alt={gladiator.name}
-                                       layout="fill"
-                                       objectFit="cover"
-                                       className="rounded-full"
-                                       style={{
-                                         width: "100%",
-                                         height: "100%",
-                                         objectPosition: "center"
-                                       }}
-                                     />
-                                   </div>
-                                 </div>
-                                 <h4 className="font-semibold text-sm md:text-lg text-white text-center">
-                                   {gladiator.name}
-                                 </h4>
-                                 <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
-                               </div>
-                             </div>
-                           ))}
-                         </div>
-                       ))}
-                     </div>
-                
-                     {/* Right Scroll Button */}
-                     <button
-                       onClick={scrollRight}
-                       className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-                       aria-label="Scroll right"
-                     >
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         className="h-6 w-6"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                       >
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                       </svg>
-                     </button>
-                   </div>
-                            
-                   {/* Carousel Indicators */}
-                   <div className="flex justify-center mt-8 space-x-2">
-                     {Array.from({ length: totalSlides }).map((_, index) => (
-                       <button
-                         key={index}
-                         className={`w-3 h-3 rounded-full ${
-                           activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-                         }`}
-                         onClick={() => {
-                           setActiveIndexsecond(index);
-                           if (carouselRef.current) {
-                             const slideWidth = carouselRef.current.offsetWidth;
-                             carouselRef.current.scrollTo({
-                               left: index * slideWidth,
-                               behavior: "smooth",
-                             });
-                           }
-                         }}
-                         aria-label={`Go to slide ${index + 1}`}
-                       />
-                     ))}
-                   </div>
-                 </section>
+        <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
+        {/* Left Side - Title */}
+        <div className="flex items-center">
+          <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
+            Meet Your Exam <br />
+            <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
+          </h2>
+        </div>
+               
+        {/* Quote */}
+        <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
+          <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
+          <span>
+            Behind every student&apos;s success are passionate, <br />
+            experienced educators who&apos;ve cracked the toughest exams.
+          </span>
+          <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
+        </h4>
+      </div>
+               
+      {/* Gladiators Carousel */}
+      <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
+        {/* Left Scroll Button */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+          aria-label="Scroll left"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Carousel Container */}
+        <div
+          ref={carouselRef}
+          className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+          style={{
+            scrollSnapType: "x mandatory",
+            msOverflowStyle: "none", 
+            scrollbarWidth: "none", 
+          }}
+        >
+          <style jsx>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+        
+          {Array.from({ length: totalSlides }).map((_, groupIndex) => (
+            <div
+              key={groupIndex}
+              className="min-w-full flex justify-center px-4 flex-wrap sm:flex-nowrap"
+              style={{ scrollSnapAlign: "start" }}
+            >
+              {gladiators.slice(
+                groupIndex * (isMobile ? 2 : 4), 
+                groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
+              ).map((gladiator, index) => (
+                <div 
+                  key={index} 
+                  className={`w-1/2 sm:w-1/4 px-2 mb-4 sm:mb-0`}
+                >
+                  <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
+                    <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Image
+                          src={gladiator.image}
+                          alt={gladiator.name}
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-full"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectPosition: "center"
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <h4 className="font-semibold text-sm md:text-lg text-white text-center">
+                      {gladiator.name}
+                    </h4>
+                    <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+   
+        {/* Right Scroll Button */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+          aria-label="Scroll right"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+               
+      {/* Carousel Indicators */}
+      <div className="flex justify-center mt-8 space-x-2">
+        {Array.from({ length: totalSlides }).map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full ${
+              activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+            }`}
+            onClick={() => {
+              setActiveIndexsecond(index);
+              if (carouselRef.current) {
+                const slideWidth = carouselRef.current.offsetWidth;
+                carouselRef.current.scrollTo({
+                  left: index * slideWidth,
+                  behavior: "smooth",
+                });
+              }
+            }}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </section>
       </header>
 
       {/* Rest of the code remains unchanged */}
@@ -500,38 +521,36 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Latest Notification            </div>
+          Latest Notifications            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              NTA Declares the Result/NTA Scores of Common University Entrance Test (UG) – 2024            </p>
+              CLAT 2026 is tentatively scheduled for December 6, 2025, which aligns with the traditional first Sunday of December examination date.            </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Latest Notification            </div>
+          Latest Notifications            </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The National Testing Agency (NTA) has released the CUET UG 2025 application form            </p>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              The registration process for the Common University Entrance Test-Undergraduate (CUET UG) 2025 is set to close soon, with the deadline for submitting applications being March 22, 2025 (11:50 PM).            </p>
-          </div>
-
-          {/* Third Notification */}
-          {/* <div>
-            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-              Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CUET-2025</span>
-            </div>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CUET, XAT, CMAT, and GMAT, with the CUET being especially challenging due to limited seats and a vast pool of applicants.
-            </p>
+               The application forms are expected to be available online starting in July 2025.            </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
               The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
             </p>
-          </div> */}
+          </div>
+
+          {/* Third Notification */}
+          <div>
+            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
+            Eligibility Criteria:            </div>
+            <p className="text-gray-300 text-base md:text-lg  flex">
+              <span className="text-[#FF6347] mr-2">•</span>
+              <span className='text-lg'>   Undergraduate Programs (UG):</span>  Candidates must have completed their 10+2 or equivalent examination with a minimum of 45% marks (40% for SC/ST candidates). There is no upper age limit for UG courses.            </p>
+            <p className="text-gray-300 text-base md:text-lg  flex">
+              <span className="text-[#FF6347] mr-2">•</span>
+            <span className='text-lg'>Postgraduate Programs (PG):</span>   Applicants should hold an LL.B or equivalent degree with at least 50% marks (45% for SC/ST candidates). There is no upper age limit for PG courses.            </p>
+          </div>
         </div>
       </div>
     

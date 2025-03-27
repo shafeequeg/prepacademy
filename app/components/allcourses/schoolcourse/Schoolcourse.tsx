@@ -90,11 +90,11 @@ const tabs = [
     label: "ENGINEERING", 
     path: "/engineering",
     dropdownItems: [
-      { label: "JEE", path: "/schoolcourse/management/cat" },
-      { label: "KEAM", path: "/schoolcourse/bba" },
-      { label: "BITSAT", path: "/schoolcourse/hr" },
-      { label: "VITEEE", path: "/schoolcourse/hr" },
-      { label: "KCET", path: "/schoolcourse/hr" },
+      { label: "JEE", path: "/schoolcourse/engineering/jee" },
+      { label: "KEAM", path: "/schoolcourse/engineering/keam" },
+      { label: "BITSAT", path: "/schoolcourse/engineering/bitsat" },
+      { label: "VITEEE", path: "/schoolcourse/engineering/vitee" },
+      { label: "KCET", path: "/schoolcourse/engineering/kcet" },
      
     ]
    
@@ -104,7 +104,7 @@ const tabs = [
     label: "MEDICAL", 
     path: "/medical",
     dropdownItems: [
-      { label: "NEET (UG)", path: "/medical/neet" },
+      { label: "NEET (UG)", path: "schoolcourse/medical/neet" },
       { label: "PARAMEDICAL ENTRANCE", path: "/medical/neet" },
       { label: "JIPMER", path: "/medical/neet" },
 
@@ -119,7 +119,7 @@ const tabs = [
       { label: "IPM ", path: "/schoolcourse/ipm" },
       { label: "CHRIST", path: "/schoolcourse/christ" },
       { label: "SET", path: "/schoolcourse/set" },
-      { label: "NPAT", path: "/schoolcourse/npat" },
+      { label: "NPAT", path: "/schoolcourse/management/npat" },
       { label: "MHCET", path: "/schoolcourse/mhcet" },
 
 
@@ -533,26 +533,26 @@ const openModal = () => setIsModalOpen(true);
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white  ">
-  {/* Background Image Between Sections */}
-  {/* Main Content */}
-  <div
- className="flex items-center md:justify-between w-full bg-black mt-32  p-3 overflow-x-auto md:overflow-visible w820:overflow-x-scroll " 
+ 
+ <div 
+  className="flex items-center overflow-x-auto w-full bg-black mt-32 p-3 space-x-2 scrollbar-hide"
   style={{
-    scrollbarWidth: "none", 
+    scrollbarWidth: "none",
     msOverflowStyle: "none",
-    WebkitOverflowScrolling: "touch" 
+    WebkitOverflowScrolling: "touch"
   }}
   role="tablist"
   aria-label="Study Abroad Programs"
->    
+>
   {tabs.map((tab, index) => (
-  <div
-  key={tab.id}
-  className="flex-1  mx-1 relative w820:mt-8 "
-  ref={(el) => {
-    dropdownRefs.current[tab.id] = el; 
-  }}
->      <button 
+    <div
+      key={tab.id}
+      className="relative flex-shrink-0 w-auto min-w-[150px]"
+      ref={(el) => {
+        dropdownRefs.current[tab.id] = el;
+      }}
+    >
+      <button
         id={`tab-${tab.id}`}
         role="tab"
         aria-selected={activeMainTab === tab.id}
@@ -564,47 +564,55 @@ const openModal = () => setIsModalOpen(true);
         }}
         onKeyDown={(e) => handleTabKeyNav(e, index)}
         tabIndex={activeMainTab === tab.id ? 0 : -1}
-        className={`w-full px-4 py-2 text-sm md:text-base   whitespace-nowrap transition-colors ${
+        className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
           activeMainTab === tab.id
             ? "bg-[#FF6B3D] text-white font-medium"
             : "bg-gray-700 text-gray-300 hover:bg-gray-600"
         } rounded-full flex items-center justify-center`}
       >
         <span>{tab.label}</span>
-        <svg 
-          className={`ml-1 w-4 h-4 transition-transform ${openDropdown === tab.id ? 'rotate-180' : ''}`} 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24" 
+        <svg
+          className={`ml-1 w-4 h-4 transition-transform ${openDropdown === tab.id ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
-      
-      {/* Dropdown menu */}
+
+      {/* Dropdown menu with fixed positioning */}
       {openDropdown === tab.id && (
-       <div 
-       className="md:absolute  w820:fixed md:z-[1000] fixed z-[1000]   mt-2 p-2 md:bg-black border border-gray-700 rounded-md shadow-lg"
-       role="menu"
-       aria-labelledby={`tab-${tab.id}`}
-     >
-          {tab.dropdownItems.map((item, itemIndex) => (
-            <Link 
-              key={`${tab.id}-${itemIndex}`} 
-              href={item.path}
-              id={`dropdown-${tab.id}-item-${itemIndex}`}
-              className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md m-1"
-              role="menuitem"
-              tabIndex={openDropdown === tab.id ? 0 : -1}
-              onClick={() => setOpenDropdown(null)}
-              onKeyDown={(e) => handleDropdownKeyNav(e, tab.id, itemIndex, tab.dropdownItems)}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div
+          className="fixed top-0 left-0 w-full h-full z-[9999] bg-black/50 flex items-start justify-center pt-32 "
+          onClick={() => setOpenDropdown(null)}
+        >
+          <div
+            className="w-[90%] max-w-md bg-black border border-gray-700 rounded-md shadow-lg mt-16"
+            onClick={(e) => e.stopPropagation()}
+            role="menu"
+            aria-labelledby={`tab-${tab.id}`}
+          >
+            <div className="flex flex-col space-y-2 p-2">
+              {tab.dropdownItems.map((item, itemIndex) => (
+                <Link
+                  key={`${tab.id}-${itemIndex}`}
+                  href={item.path}
+                  id={`dropdown-${tab.id}-item-${itemIndex}`}
+                  className="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md"
+                  role="menuitem"
+                  tabIndex={openDropdown === tab.id ? 0 : -1}
+                  onClick={() => setOpenDropdown(null)}
+                  onKeyDown={(e) => handleDropdownKeyNav(e, tab.id, itemIndex, tab.dropdownItems)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-      )}  
+      )}
     </div>
   ))}
 </div>
@@ -816,6 +824,7 @@ const openModal = () => setIsModalOpen(true);
   </div>
   </div> */}
    <div className="container mx-auto px-4 py-8">
+
          <div>
          <div className="flex flex-col md:flex-row gap-6 mb-8">
   {/* Left Section */}

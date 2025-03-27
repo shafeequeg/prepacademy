@@ -155,7 +155,7 @@ const ExamPrepHomepage: React.FC = () => {
   ];
 
   const carouselRef = useRef<HTMLDivElement>(null);
-   const carouselRefsecond = useRef<HTMLDivElement>(null);
+  //  const carouselRefsecond = useRef<HTMLDivElement>(null);
  
    // Active indices for both carousels
   //  const [activeIndex, setActiveIndex] = useState(0);
