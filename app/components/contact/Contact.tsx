@@ -415,6 +415,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </a>
           </div>
 
+
           {/* Image Container for Desktop */}
           <div className="hidden md:block md:absolute md:right-6 md:bottom-0 w-80 h-64">
             <div 

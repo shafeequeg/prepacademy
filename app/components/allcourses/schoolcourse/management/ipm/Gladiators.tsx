@@ -231,146 +231,146 @@ const ExamPrepHomepage: React.FC = () => {
       {/* Header Section with Gladiators - Full Width */}
       <header className="bg-gradient-to-r from-gray-900 to-gray-800 ">
         {/* Remove container and max-width constraints */}
-        <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
-      {/* Section Header */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
-        {/* Left Side - Title */}
-        <div className="flex items-center">
-          <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
-            Meet Your Exam <br />
-            <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
-          </h2>
-        </div>
-               
-        {/* Quote */}
-        <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
-          <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
-          <span>
-            Behind every student&apos;s success are passionate, <br />
-            experienced educators who&apos;ve cracked the toughest exams.
-          </span>
-          <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
-        </h4>
-      </div>
-               
-      {/* Gladiators Carousel */}
-      <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-12">
-        {/* Left Scroll Button */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-          aria-label="Scroll left"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Carousel Container */}
-        <div
-          ref={carouselRef}
-          className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
-          style={{
-            scrollSnapType: "x mandatory",
-            msOverflowStyle: "none", 
-            scrollbarWidth: "none", 
-          }}
-        >
-          <style jsx>{`
-            div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-        
-          {Array.from({ length: totalSlides }).map((_, groupIndex) => (
-            <div
-              key={groupIndex}
-              className="min-w-full flex justify-center px-4 flex-wrap sm:flex-nowrap"
-              style={{ scrollSnapAlign: "start" }}
+          <section className="w-full bg-gradient-to-b from-[#1a0e0e] to-[#241010] py-20 px-8 relative">
+          {/* Section Header */}
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left mt-8 px-8">
+            {/* Left Side - Title */}
+            <div className="flex items-center">
+              <h2 className="font-serif italic text-[#FF6B45] text-2xl md:text-3xl md:mr-3">
+                Meet Your Exam <br />
+                <span className="text-3xl md:text-5xl font-bold text-white">Gladiators</span>
+              </h2>
+            </div>
+                   
+            {/* Quote */}
+            <h4 className='text-gray-300 text-sm md:text-lg max-w-md leading-tight whitespace-pre-line relative px-6'>
+              <span className="text-2xl md:text-5xl text-gray-400 absolute -left-2 top-0">&ldquo;</span>
+              <span>
+                Behind every student&apos;s success are passionate, <br />
+                experienced educators who&apos;ve cracked the toughest exams.
+              </span>
+              <span className="text-2xl md:text-5xl text-gray-400 absolute -right-1 bottom-0">&rdquo;</span>
+            </h4>
+          </div>
+                   
+          {/* Gladiators Carousel */}
+          <div className="max-w-7xl mx-auto mt-20 overflow-hidden relative px-4 sm:px-12">
+            {/* Left Scroll Button */}
+            <button
+              onClick={scrollLeft}
+              className="absolute left-0 sm:left-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+              aria-label="Scroll left"
             >
-              {gladiators.slice(
-                groupIndex * (isMobile ? 2 : 4), 
-                groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
-              ).map((gladiator, index) => (
-                <div 
-                  key={index} 
-                  className={`w-1/2 sm:w-1/4 px-2 mb-4 sm:mb-0`}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+        
+            {/* Carousel Container */}
+            <div
+              ref={carouselRef}
+              className="flex transition-transform duration-300 ease-in-out overflow-x-hidden"
+              style={{
+                scrollSnapType: "x mandatory",
+                msOverflowStyle: "none", 
+                scrollbarWidth: "none", 
+              }}
+            >
+              <style jsx>{`
+                div::-webkit-scrollbar {
+                  display: none;
+                }
+              `}</style>
+            
+              {Array.from({ length: totalSlides }).map((_, groupIndex) => (
+                <div
+                  key={groupIndex}
+                  className="min-w-full flex justify-center px-4 flex-wrap sm:flex-nowrap gap-4"
+                  style={{ scrollSnapAlign: "start" }}
                 >
-                  <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full">
-                    <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 relative overflow-hidden rounded-full mb-4">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Image
-                          src={gladiator.image}
-                          alt={gladiator.name}
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-full"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectPosition: "center"
-                          }}
-                        />
+                  {gladiators.slice(
+                    groupIndex * (isMobile ? 2 : 4), 
+                    groupIndex * (isMobile ? 2 : 4) + (isMobile ? 2 : 4)
+                  ).map((gladiator, index) => (
+                    <div 
+                      key={index} 
+                      className="w-[calc(50%-8px)] sm:w-[calc(25%-16px)] min-w-[160px] flex-shrink-0"
+                    >
+                      <div className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-b from-[#1a0e0e] to-[#241010] shadow-lg w-full h-full">
+                        <div className="w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 relative overflow-hidden rounded-full mb-4 mx-auto">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Image
+                              src={gladiator.image}
+                              alt={gladiator.name}
+                              layout="fill"
+                              objectFit="cover"
+                              className="rounded-full"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectPosition: "center"
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <h4 className="font-semibold text-sm md:text-base text-white text-center">
+                          {gladiator.name}
+                        </h4>
+                        <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
                       </div>
                     </div>
-                    <h4 className="font-semibold text-sm md:text-lg text-white text-center">
-                      {gladiator.name}
-                    </h4>
-                    <p className="text-[#FF6B45] text-xs md:text-sm text-center">{gladiator.title}</p>
-                  </div>
+                  ))}
                 </div>
               ))}
             </div>
-          ))}
-        </div>
-   
-        {/* Right Scroll Button */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
-          aria-label="Scroll right"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-               
-      {/* Carousel Indicators */}
-      <div className="flex justify-center mt-8 space-x-2">
-        {Array.from({ length: totalSlides }).map((_, index) => (
-          <button
-            key={index}
-            className={`w-3 h-3 rounded-full ${
-              activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
-            }`}
-            onClick={() => {
-              setActiveIndexsecond(index);
-              if (carouselRef.current) {
-                const slideWidth = carouselRef.current.offsetWidth;
-                carouselRef.current.scrollTo({
-                  left: index * slideWidth,
-                  behavior: "smooth",
-                });
-              }
-            }}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-    </section>
+        
+            {/* Right Scroll Button */}
+            <button
+              onClick={scrollRight}
+              className="absolute right-0 sm:right-4 top-[40%] -translate-y-1/2 z-10 bg-[#FF6B45] text-white rounded-full p-2 shadow-lg hover:bg-[#E55A35] transition"
+              aria-label="Scroll right"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+                   
+          {/* Carousel Indicators */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  activeIndexsecond === index ? "bg-[#FF6B45]" : "bg-gray-500"
+                }`}
+                onClick={() => {
+                  setActiveIndexsecond(index);
+                  if (carouselRef.current) {
+                    const slideWidth = carouselRef.current.offsetWidth;
+                    carouselRef.current.scrollTo({
+                      left: index * slideWidth,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </section>
       </header>
 
       {/* Rest of the code remains unchanged */}
