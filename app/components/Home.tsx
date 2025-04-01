@@ -9,6 +9,7 @@ import Review from "@/app/components/Review/Review";
 export default function Home() {
   return (
     <div >
+      
       <Banner />
       <Popularcourse />
       <Benefits />

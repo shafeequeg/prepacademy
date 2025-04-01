@@ -367,11 +367,25 @@ const CatExamApplySection: React.FC = () => {
           {/* Progress Items */}
           <div className="space-y-3 mb-8">
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
+
               <p className="text-white">Expert Counseling for Top Universities</p>
             </div>
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
+
               <p className="text-white">Comprehensive Support for Admissions & Visas</p>
             </div>
           </div>

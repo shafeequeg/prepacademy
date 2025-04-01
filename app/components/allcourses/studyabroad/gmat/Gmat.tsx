@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 // import emailjs from 'emailjs-com'; // Import EmailJS
 import axiosInstance from '@/app/components/apiconfig/axios';
 import { API_URLS } from '@/app/components/apiconfig/api_urls';
+import Image from "next/image";
 
 
 // interface VideoCardProps {
@@ -119,7 +120,7 @@ const courseCards = [
   {
     id: "cat-Classroom-1",
     title: " Day Classes",
-    image: "/news1.png",
+    image: "/catdailyclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -132,7 +133,7 @@ const courseCards = [
   {
     id: "cat-Classroom-2",
     title: " Night Classes",
-    image: "/news1.png",
+    image: "/catnightclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -146,7 +147,7 @@ const courseCards = [
   {
     id: "cat-Classroom-3",
     title: " Weekend Classes",
-    image: "/news1.png",
+    image: "/catweekendclass.jpeg",
     type: "Classroom",
     features: [
       "Personal mentoring",
@@ -400,19 +401,23 @@ toast.error("Failed to send the message. Please try again.");
             {/* Progress Items */}
             <div className="space-y-3 mb-8">
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">	Expert Faculty & Personalized Mentorship </p>
   </div>
   <div className="flex items-center">
-    <img 
-      src="/aboutusverified.png" 
-      alt="Check Icon" 
-      className="w-5 h-5 mr-3"
-    />
+  <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
     <p className="text-white">Comprehensive GMAT Online /Offline Course </p>
   </div>
 </div>
@@ -434,11 +439,15 @@ toast.error("Failed to send the message. Please try again.");
     href="#" 
     className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
       >
-        <img 
-          src="/catexamtelegram.png" 
-          alt="Telegram Icon" 
-          className="w-5 h-5 mr-2"
-        />
+       <div className="relative w-5 h-5 mr-2">
+  <Image 
+    src="/catexamtelegram.png" 
+    alt="Telegram Icon" 
+    fill
+    className="object-contain"
+  />
+</div>
+
         Join Our Telegram Channel
       </a>
     </div>
@@ -611,7 +620,13 @@ toast.error("Failed to send the message. Please try again.");
       {filteredCourses.length > 0 ? (
         filteredCourses.map((card) => (
           <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+<Image 
+  src={card.image} 
+  alt={card.title} 
+  width={300}  // Adjust as needed
+  height={192} // Adjust as needed (h-48 = 192px)
+  className="object-cover w-full h-48" 
+/>
             <div className="p-6">
               <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
               <ul className="space-y-2 mb-6">
@@ -639,7 +654,7 @@ toast.error("Failed to send the message. Please try again.");
     <div className="bg-black py-8">
   <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
     {/* First CTA Section (Compact Width) */}
-    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 ml-24"> 
+    <div className="lg:col-span-4 rounded-lg overflow-hidden bg-[#1D1514] relative flex flex-col justify-center items-center p-6 md:p-10 md:ml-24"> 
       <div 
         className="absolute top-0 left-0 right-0 h-1" 
         style={{
@@ -664,11 +679,13 @@ toast.error("Failed to send the message. Please try again.");
         </div>
 
         <div className="mx-auto my-auto">
-          <img
-            src="/charater2.png"
-            alt="Prep Mascot"
-            className="h-40 md:h-48"
-          />
+        <Image 
+  src="/charater2.png" 
+  alt="Prep Mascot" 
+  width={200}  // Adjust as needed
+  height={160} // Adjust as needed (h-40 is ~160px)
+  className="h-40 md:h-48"
+/>
         </div>
       </div>
     </div>

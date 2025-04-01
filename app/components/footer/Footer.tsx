@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { FaWhatsapp, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
@@ -12,10 +13,12 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <div className="mb-6">
               <div className="flex items-center">
-                <img 
+              <Image 
                   src="/Headerlogo.png" 
                   alt="Prep Academy Logo" 
-                  className="h-11 w-auto" 
+                  width={150}  // Set width
+                  height={44}   // Set height
+                  priority      // Loads image faster
                 />
               </div>
             </div>

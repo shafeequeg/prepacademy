@@ -87,11 +87,21 @@ const CatExamApplySection: React.FC = () => {
      full_name: '',
      mobile_number: '',
      email: '',
-     college_studied:'',
+     school_college_studied:'',
      preferred_program: '',
      submitted_at:'',
    });
  
+   const [EnrollformData, setEnrollFormData] = useState({
+    full_name: "",
+     mobile_number: "",
+    email: "",
+  school_college: "",
+  class_type: "",
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [activeMainTab, setActiveMainTab] = useState("engineering");
   // const [activeTab, setActiveTab] = useState("online");
 const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
@@ -105,6 +115,14 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleenrollformInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setEnrollFormData({ ...EnrollformData, [name]: value });
+  };
+
+
   const fetchPrograms = async () => {
   try {
   const response = await axiosInstance.get(API_URLS.ALLCOURSE.GET_COURSE); // Replace with your API endpoint
@@ -114,6 +132,7 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
   // toast.error("Failed to fetch programs. Please try again.");
   }
 };
+
 
 useEffect(() => {
 fetchPrograms();
@@ -137,7 +156,7 @@ try {
       full_name: "",
       mobile_number: "",
       email: "",
-      college_studied: "",
+      school_college_studied: "",
       preferred_program: "",
       submitted_at: "",
     });
@@ -151,6 +170,36 @@ try {
 }
 };
 
+const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  
+  try {
+    const response = await axiosInstance.post(API_URLS.COMMONFORM.POST_FORM, {
+      ...EnrollformData,
+    });
+  
+    if (response.status >= 200 && response.status < 300) {
+      console.log("Message sent successfully!", response.data);
+      toast.success("Your message has been sent successfully!");
+           
+      // Reset form fields
+      setIsModalOpen(false);
+      setEnrollFormData({
+        full_name: "",
+        mobile_number: "",
+        email: "",
+        school_college: "",
+        class_type: "",
+      })
+    } else {
+      console.error("Unexpected status code:", response.status);
+      toast.error("Failed to send the message. Please try again.");
+    }
+  } catch (error) {
+    console.error("Failed to send message:", error);
+    toast.error("Failed to send the message. Please try again.");
+  }
+  };
  
 
   const studyAbroadCards: CourseCard[] = [
@@ -161,7 +210,7 @@ try {
     { title: 'GMAT', description: 'Global entrance exam for MBA and business programs' }
   ];
 
-
+ 
   
 
   const handleTabKeyNav = (e: React.KeyboardEvent, index: number, tabArray: typeof tabs | typeof offeringTypes, setTabFn: (id: string) => void) => {
@@ -210,6 +259,9 @@ try {
         break;
     }
   }, [activeMainTab]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
@@ -219,7 +271,7 @@ try {
   <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
           <div className="max-w-7xl mx-auto">
           <div
-  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full"
+  className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
   role="tablist"
   aria-label="Study Abroad Programs"
@@ -263,24 +315,37 @@ try {
             <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">Study Abroad with <span className='text-[#ED1C24] '>Prep</span><span className='text-[#15938F]'>Academy</span>
             </h2>
             <p className="text-gray-300 mb-8">
-            At Prep Academy, we are dedicated to guiding aspiring students toward global academic success through our specialized study abroad entrance coaching programs. We offer comprehensive preparation for a range of standardized tests, including the GMAT, GRE, SAT, and IELTS, tailored to meet the diverse needs of our students.            </p>
+            At Prep Academy, we are dedicated to guiding aspiring students toward global academic success through our specialized study abroad entrance coaching programs. 
+            We offer comprehensive preparation for a range of standardized tests, including the GMAT, GRE, SAT, and IELTS, tailored to meet the 
+            diverse needs of our students.            </p>
           </div>
 
           {/* Progress Items */}
           <div className="space-y-3 mb-8">
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
-              <p className="text-white">Expert Counseling for Top Universities</p>
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>              <p className="text-white">Expert Counseling for Top Universities</p>
             </div>
             <div className="flex items-center">
-              <img src="/aboutusverified.png" alt="Check Icon" className="w-5 h-5 mr-3" />
+            <Image 
+  src="/aboutusverified.png" 
+  alt="Check Icon" 
+  width={20}  // 5 * 4
+  height={20} // 5 * 4
+  className="w-5 h-5 mr-3"
+/>
               <p className="text-white">Comprehensive Support for Admissions & Visas</p>
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+            <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors" onClick={openModal}>
               Enroll Now
             </button>
             <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
@@ -335,9 +400,9 @@ try {
         />
         <input
           type="text"
-          name="college_studied"
-          placeholder="College Studied"
-          value={formData.college_studied}
+          name="school_college_studied"
+          placeholder="College or School Studied"
+          value={formData.school_college_studied}
           onChange={handleInputChange}
           className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
           required
@@ -409,16 +474,18 @@ try {
                </div>
      
                {/* Right Content - Image */}
-               <div className="relative w-1/2 aspect-[4/3] min-h-[320px] overflow-hidden "> {/* Ensure no overflow */}
-                  <Image 
-                        src="/allcourse/studyabroad.jpeg" 
-                        alt="School Students" 
-                        fill 
-                        className="rounded-lg object-contain " 
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        priority
-                      /> 
-                    </div> 
+               <div className="relative w-[100%] md:w-[40%]  aspect-[4/3] min-h-[250px]">
+  <Image 
+    src="/allcourse/studyabroadcourse.jpg" 
+    alt="School Students" 
+    fill 
+    className="rounded-lg object-cover" 
+    sizes="(max-width: 768px) 100vw, 33vw"
+    priority
+  /> 
+</div>
+
+                    
              </div>
      
              {/* Study Abroad Cards Grid */}
@@ -434,6 +501,141 @@ try {
                ))}
              </div>
            </div>
+           {isModalOpen && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg w-11/12 md:w-4/5 max-w-4xl relative overflow-hidden max-h-[90vh] md:max-h-none overflow-y-auto">
+          {/* Close button */}
+          <button 
+            onClick={closeModal} 
+            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
+            aria-label="Close"
+          >
+            <svg width="16" height="16" className="md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          
+          {/* Responsive layout - stack on mobile, side-by-side on larger screens */}
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Left section - Title and Image */}
+            <div className="bg-[#2B1615] p-3 md:p-6 md:w-2/5 flex flex-col items-center justify-center text-white">
+              <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-center">Upgrade Your Learning With Us</h2>
+              <div className="w-24 h-24 md:w-64 md:h-auto lg:w-80 mb-2 md:mb-4">
+                <Image 
+                  src="/commonformmascot.png" 
+                  alt="Learning Mascot" 
+                  width={300}
+                  height={200}
+                  className="w-full h-full object-contain max-w-full"
+                />
+              </div>
+            </div>
+            
+            {/* Right section - Form */}
+            <div className="p-3 md:p-6 md:w-3/5">
+              <h3 className="text-center text-lg md:text-xl font-medium text-gray-800 mb-3 md:mb-6">Fast Track Your Trial Class</h3>
+              <form className="space-y-2 md:space-y-4" onSubmit={handleenrollSubmit}>
+                {/* Name field */}
+                <div>
+                  <label htmlFor="full_name" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input 
+                    type="text" 
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Your Name" 
+                    value={EnrollformData.full_name}
+                    onChange={handleenrollformInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+                
+                {/* Email field */}
+                <div>
+                  <label htmlFor="email" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input 
+                    type="email" 
+                    id="email"
+                    name="email"
+                    placeholder="Enter Your Email" 
+                    value={EnrollformData.email}
+                    onChange={handleenrollformInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="class_type" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Class</label>
+                  <input 
+                    type="text" 
+                    id="class_type"
+                    name="class_type"
+                    placeholder="Your class" 
+                    value={EnrollformData.class_type}
+                    onChange={handleenrollformInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+                
+                {/* Phone Number field with country code */}
+                <div>
+                  <label htmlFor="mobile_number" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                  <div className="flex">
+                    <div className="flex items-center bg-gray-100 border border-gray-300 rounded-l-md px-2 md:px-3">
+                      <Image 
+                        src="/gladiators/formcommonindia.png" 
+                        alt="IN" 
+                        width={12}
+                        height={12}
+                        className="mr-1 md:w-4 md:h-4"
+                      />
+                      <span className="text-xs md:text-sm text-gray-700">+91</span>
+                    </div>
+                    <input 
+                      type="tel" 
+                      id="mobile_number"
+                      name="mobile_number"
+                      placeholder="Your Phone Number" 
+                      value={EnrollformData.mobile_number}
+                      onChange={handleenrollformInputChange}
+                      className="w-full p-2 md:p-3 border border-gray-300 border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="school_college" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">School/Institute</label>
+                  <input 
+                    type="text" 
+                    id="school_college"
+                    name="school_college"
+                    placeholder="Your School/Institute" 
+                    value={EnrollformData.school_college}
+                    onChange={handleenrollformInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+    
+                {/* Submit Button */}
+                <button 
+                  type="submit" 
+                  className="w-full bg-[#F55D3E] text-white py-2 md:py-3 px-4 rounded-md font-medium hover:bg-opacity-90 transition-colors flex items-center justify-center"
+                >
+                  Submit
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
 
     </div>
   );

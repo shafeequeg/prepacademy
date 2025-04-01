@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import Image from "next/image";
+
 
 const CourseVideos = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const logos = [
     { src: "/dailyhunt.png", alt: "DailyHunt logo" },
@@ -13,21 +16,31 @@ const CourseVideos = () => {
    
   ];
 
-  const scrollLeft = () => {
+  const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: -carouselRef.current.clientWidth, // Scroll by one viewport width
-        behavior: "smooth",
+      const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
+      const newIndex = Math.min(currentIndex + 1, logos.length - 1);
+      
+      carouselRef.current.scrollTo({
+        left: newIndex * itemWidth,
+        behavior: 'smooth'
       });
+      
+      setCurrentIndex(newIndex);
     }
   };
 
-  const scrollRight = () => {
+  const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: carouselRef.current.clientWidth, // Scroll by one viewport width
-        behavior: "smooth",
+      const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
+      const newIndex = Math.max(currentIndex - 1, 0);
+      
+      carouselRef.current.scrollTo({
+        left: newIndex * itemWidth,
+        behavior: 'smooth'
       });
+      
+      setCurrentIndex(newIndex);
     }
   };
 
@@ -107,86 +120,92 @@ const CourseVideos = () => {
       </div>
 
       {/* Read Features Section */}
-      <div className="relative w-full bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] bg-black mt-16 py-12">
-        <div className="relative container mx-auto px-4 md:px-8">
-          <div className="flex flex-col items-center">
-            {/* Heading */}
-            <h2 className="text-2xl md:text-3xl font-medium mb-12 relative z-10">
-              <span className="text-[#F55D3E] font-dmserif italic">Read Features</span>
-              <span className="text-white font-bold"> Online</span>
-            </h2>
+      <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] py-16 mt-7">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-medium">
+            <span className="text-[#F55D3E] font-dmserif italic">Read Features</span>
+            <span className="text-white font-bold"> Online</span>
+          </h2>
+        </div>
 
-            {/* Carousel Container */}
-            <div className="w-[70%] relative  mx-auto ">
-              {/* Left Arrow */}
-              <button
-                onClick={scrollLeft}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition"
-                aria-label="Scroll left"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+        <div className="relative max-w-4xl mx-auto">
+          {/* Left Navigation Button */}
+          <button
+            onClick={scrollLeft}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition ${currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={currentIndex === 0}
+            aria-label="Scroll left"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-6 w-6" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M15 19l-7-7 7-7" 
+              />
+            </svg>
+          </button>
+
+          {/* Carousel Container */}
+          <div 
+            ref={carouselRef}
+            className="flex overflow-x-hidden scroll-smooth space-x-8 justify-center items-center"
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            <div className="flex space-x-8 py-4">
+              {logos.map((logo, index) => (
+                <div 
+                  key={index} 
+                  className="flex-shrink-0 w-40 h-24 flex items-center justify-center"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={120}
+                    height={80}
+                    className="max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300"
                   />
-                </svg>
-              </button>
-
-              {/* Carousel */}
-              <div
-                ref={carouselRef}
-                className="flex overflow-x-hidden scroll-smooth relative z-10 ml-11"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <div className="flex space-x-8">
-                  {logos.map((logo, index) => (
-                    <div
-                      key={index}
-                      className="flex-shrink-0 w-[25%] flex items-center justify-center"
-                    >
-                      <img
-                        src={logo.src}
-                        alt={logo.alt}
-                        className="h-20 md:h-26 object-contain"
-                      />
-                    </div>
-                  ))}
                 </div>
-              </div>
-
-              {/* Right Arrow */}
-              <button
-                onClick={scrollRight}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition"
-                aria-label="Scroll right"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+              ))}
             </div>
           </div>
+
+          {/* Right Navigation Button */}
+          <button
+            onClick={scrollRight}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition ${currentIndex === logos.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={currentIndex === logos.length - 1}
+            aria-label="Scroll right"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-6 w-6" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M9 5l7 7-7 7" 
+              />
+            </svg>
+          </button>
         </div>
       </div>
+    </section>
     </section>
   );
 };

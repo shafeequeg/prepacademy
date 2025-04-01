@@ -257,16 +257,17 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
               {/* Social Media Icons */}
               <div className="flex justify-center space-x-6 py-2 bg-[#2B1615] p-3 rounded-md mt-4">
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a   href="https://wa.me/9446056789" 
+ target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaWhatsapp className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.facebook.com/prepacademy.in" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaFacebookF className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.instagram.com/prepacademy.in/" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaInstagram className="text-white text-2xl" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
+                <a href="https://www.linkedin.com/company/prep-academy-india/?viewAsMember=true" target='_blank' rel='noopener noreferrer' className="w-12 h-12 rounded-full bg-transparent flex items-center justify-center">
                   <FaLinkedinIn className="text-white text-2xl" />
                 </a>
               </div>
@@ -395,33 +396,44 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
 
       {/* Talk To Our Mentors */}
-      <div className="max-w-5xl  mx-auto px-4 sm:px-6 lg:px-8 py-16 "> {/* Decreased max-width */}
-  <div className="bg-gradient-to-r bg-[#2B1615] rounded-lg overflow-hidden relative h-64"> {/* Increased height */}
-    <div className="p-8 md:p-10 flex flex-col md:flex-row items-center justify-center mr-40 h-full"> {/* Centered content */}
-      <div className="md:w-2/3 space-y-4 z-10 text-center md:text-left"> {/* Adjusted spacing and alignment */}
-        <h3 className="text-3xl md:text-4xl text-[#F55D3E] font-bold font-serif italic ">Talk To Our Mentors</h3>
-        <p className="text-3xl md:text-4xl font-bold text-white font-serif italic">For Free Counselling</p>
-        <a 
-          href="#" 
-          className="inline-block mt-6 bg-[#F55D3E] hover:bg-[#F55D3E] text-white px-8 py-3 rounded-lg text-lg font-medium"
-        >
-          Let&apos;s Talk <span className="ml-2">→</span>
-        </a>
-      </div>
-      <div className="mt-8 md:mt-0 md:absolute md:right-6 md:bottom-0"> {/* Adjusted right position */}
-        <div className="w-80 h-96 mt-auto bg-contain bg-bottom bg-no-repeat"
-                    style={{ backgroundImage: "url('Ellipse.png')" }}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="bg-gradient-to-r bg-[#2B1615] rounded-lg overflow-hidden relative min-h-[16rem]">
+        <div className="md:p-10 flex flex-col md:flex-row items-center justify-center md:mr-40 h-full">
+          {/* Text Content */}
+          <div className="md:w-2/3 space-y-4 z-10 text-center md:text-left px-4 md:px-0">
+            <h3 className="text-2xl md:text-4xl text-[#F55D3E] font-bold font-serif italic">
+              Talk To Our Mentors
+            </h3>
+            <p className="text-2xl md:text-4xl font-bold text-white font-serif italic">
+              For Free Counselling
+            </p>
+            <a 
+              href="#" 
+              className="inline-block mt-4 md:mt-6 bg-[#F55D3E] hover:bg-[#F55D3E] text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-base md:text-lg font-medium"
+            >
+              Let&apos;s Talk →
+            </a>
+          </div>
 
-        > {/* Increased size */}
-          <div
-            className="w-full h-full bg-contain bg-bottom bg-no-repeat"
-            style={{ backgroundImage: "url('contactgroupphoto.png')" }}
-          ></div>
+
+          {/* Image Container for Desktop */}
+          <div className="hidden md:block md:absolute md:right-6 md:bottom-0 w-80 h-64">
+            <div 
+              className="w-full h-full bg-contain bg-bottom bg-no-repeat"
+              style={{ backgroundImage: "url('/contactgroupphoto.png')" }}
+            ></div>
+          </div>
+
+          {/* Image Container for Mobile */}
+          <div className="md:hidden w-full mt-6 flex justify-center">
+            <div 
+              className="w-64 h-48 bg-contain bg-center bg-no-repeat"
+              style={{ backgroundImage: "url('/contactgroupphoto.png')" }}
+            ></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 {/* Ellipse */}
       {/* FAQs Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -221,7 +221,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-sm">Beginner&apos;s Guide Volume 5</p>
+          <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 5</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">

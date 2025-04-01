@@ -14,7 +14,14 @@ export default {
       },
       fontFamily: {
         dmserif: ["DM Serif Display", "serif"],
+      }, 
+      screens: {
+        'w768': '768px',
+        'w820': '820px',
+        'w853': '853px',
+        'w912': '912px',
       },
+      
     },
   },
   plugins: [],

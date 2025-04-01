@@ -9,7 +9,30 @@ const ExamPrepLowerSections: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
 
+  const [activeTab, setActiveTab] = useState<string>("beginners-guide"); // Initial state is a string
+  
+  const tabs = [
+    { id: 'beginners-guide', label: 'Beginners Guide', className: 'text-orange-500' },
+    { id: 'study-plan', label: 'Study Plan', className: 'text-gray-400' },
+    { id: 'syllabus', label: 'Syllabus', className: 'text-gray-400' },
+    { id: 'top-college', label: 'Top College', className: 'text-gray-400' },
+    { id: 'free-resources', label: 'Free Resources', className: 'text-gray-400' }
+  ];
+  
+  const tabContent = [
+    { title: "Beginner's Guide Volume 1", id: 1 },
+    { title: "Beginner's Guide Volume 2", id: 2 },
+    { title: "Beginner's Guide Volume 3", id: 3 },
+    { title: "Beginner's Guide Volume 4", id: 4 },
+    { title: "Beginner's Guide Volume 5", id: 5 },
+    { title: "Beginner's Guide Volume 6", id: 6 }
+  ];
+  
+  const handleTabClick = (tabId: number | string) => {
+    setActiveTab(String(tabId)); // Convert to string
+  };
 
+  
   const toggleFaq = (index: number) => {
     if (openFaq === index) {
       setOpenFaq(null);
@@ -191,45 +214,51 @@ const ExamPrepLowerSections: React.FC = () => {
     </h2>
     
     <div className="flex flex-col md:flex-row">
-      {/* Left Sidebar */}
-      <div className="w-full md:w-1/5 border-r border-gray-800 pr-4">
-        <ul className="space-y-4">
-          <li className="text-orange-500  text-base md:text-lg py-1">Beginners Guide</li>
-          <li className="text-gray-400  text-base md:text-lg   py-1">Study Plan</li>
-          <li className="text-gray-400 text-base md:text-lg   py-1">Syllabus</li>
-          <li className="text-gray-400  text-base md:text-lg  py-1">Top College</li>
-          <li className="text-gray-400  text-base md:text-lg  py-1">Free Resources</li>
-        </ul>
+      {/* Left Sidebar - Accessible Tabs */}
+      <div className="w-full md:w-1/5 border-r border-gray-800  ">
+        <div role="tablist" aria-label="Content Categories">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-selected={activeTab === tab.id}
+              aria-controls={`panel-${tab.id}`}
+              className={`${activeTab === tab.id ? 'text-orange-500' : 'text-gray-400'} text-base md:text-lg py-1 w-full text-left `}
+              onClick={() => handleTabClick(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
       
-      {/* Main Content */}
+      {/* Main Content - Tab Panels */}
       <div className="w-full md:w-4/5 pl-0 md:pl-8 mt-4 md:mt-0">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 1</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            role="tabpanel"
+            id={`panel-${tab.id}`}
+            aria-labelledby={`tab-${tab.id}`}
+            className={`space-y-2 ${activeTab === tab.id ? 'block' : 'hidden'}`}
+          >
+            {tabContent.map((item) => (
+              <div key={item.id} className="flex items-center justify-between py-2 border-b border-gray-800">
+                <p className="text-white text-base md:text-lg">
+                  {tab.label} Volume {item.id}
+                </p>
+                <a 
+                  href="#" 
+                  className="text-orange-500 text-base md:text-lg"
+                  onClick={(e) => e.preventDefault()} 
+                >
+                  Download File
+                </a>
+              </div>
+            ))}
           </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 2</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
-          </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 3</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
-          </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 4</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
-          </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-sm">Beginner&apos;s Guide Volume 5</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
-          </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 6</p>
-            <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </div>
@@ -274,7 +303,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your Sat journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 

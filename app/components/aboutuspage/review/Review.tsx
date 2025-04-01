@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com'; // Import EmailJS
+import Image from "next/image";
 
 // Custom SVG components
 const StarIcon = () => (
@@ -169,9 +170,9 @@ const TestimonialsAndCTA = () => {
   <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
     
     {/* Text Content */}
-    <div className="w-full max-w-[60%] p-4">
+    <div className="w-full md:max-w-[60%] p-4">
       <h2 className="text-2xl lg:text-3xl font-bold">
-        <span className="text-[#FF5733] font-dmserif italic">Serious About Your Exam?</span>
+        <span className="text-[#FF5733] font-dmserif italic">Serious About Your Examss?</span>
         <span className="text-white block mt-2">Let&apos;s Make It Happen</span>
       </h2>
 
@@ -187,11 +188,13 @@ const TestimonialsAndCTA = () => {
     
     {/* Image Container */}
     <div className="w-28 md:w-36 lg:w-48 aspect-square flex-shrink-0">
-      <img 
-        src="/charater2.png" 
-        alt="Mascot" 
-        className="w-full h-full object-contain"
-      />
+    <Image 
+  src="/charater2.png" 
+  alt="Mascot" 
+  width={500} // Adjust as needed
+  height={500} // Adjust as needed
+  className="w-full h-full object-contain"
+/>
     </div>
 
   </div>
@@ -221,122 +224,141 @@ const TestimonialsAndCTA = () => {
 
 
 
-    {isModalOpen && (
-       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-       <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-lg relative">
-         {/* Close button */}
-         <button 
-           onClick={closeModal} 
-           className="absolute top-4 right-4 text-gray-700 hover:text-black"
-           aria-label="Close"
-         >
-           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-             <path d="M18 6L6 18M6 6l12 12" />
-           </svg>
-         </button>
-         
-         <div className="p-6 pt-5">
-           <h2 className="text-center text-2xl font-bold mb-6">Fast Track Your Trial Class</h2>
-           
-           <form className="space-y-4" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* First row */}
-                  <div>
-                    <input 
-                      type="text" 
-                      name="fullname"
-                      placeholder="Name" 
-                      value={formData.fullname}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input 
-                      type="tel" 
-                      name="phone"
-                      placeholder="Mobile" 
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
-                      required
-                    />
-                  </div>
-                  
-                  {/* Second row */}
-                  <div>
-                    <input 
-                      type="email" 
-                      name="email"
-                      placeholder="Email" 
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input 
-                      type="text" 
-                      name="class"
-                      placeholder="Class" 
-                      value={formData.class}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                {/* School/Institute - full width */}
+     {isModalOpen && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg w-11/12 md:w-4/5 max-w-4xl relative overflow-hidden max-h-[90vh] md:max-h-none overflow-y-auto">
+          {/* Close button */}
+          <button 
+            onClick={closeModal} 
+            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
+            aria-label="Close"
+          >
+            <svg width="16" height="16" className="md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          
+          {/* Responsive layout - stack on mobile, side-by-side on larger screens */}
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Left section - Title and Image */}
+            <div className="bg-[#2B1615] p-3 md:p-6 md:w-2/5 flex flex-col items-center justify-center text-white">
+              <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-center">Upgrade Your Learning With Us</h2>
+              <div className="w-24 h-24 md:w-64 md:h-auto lg:w-80 mb-2 md:mb-4">
+                <Image 
+                  src="/commonformmascot.png" 
+                  alt="Learning Mascot" 
+                  width={300}
+                  height={200}
+                  className="w-full h-full object-contain max-w-full"
+                />
+              </div>
+            </div>
+            
+            {/* Right section - Form */}
+            <div className="p-3 md:p-6 md:w-3/5">
+              <h3 className="text-center text-lg md:text-xl font-medium text-gray-800 mb-3 md:mb-6">Fast Track Your Trial Class</h3>
+              <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
+                {/* Name field */}
                 <div>
+                  <label htmlFor="fullname" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Name</label>
                   <input 
                     type="text" 
-                    name="school"
-                    placeholder="School/Institute" 
-                    value={formData.school}
+                    id="fullname"
+                    name="fullname"
+                    placeholder="Your Name" 
+                    value={formData.fullname}
                     onChange={handleInputChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400"
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                     required
                   />
                 </div>
                 
-                {/* reCAPTCHA */}
-                <div className="border border-gray-300 rounded-md p-4 flex items-center justify-between bg-gray-50">
-                  <div className="flex items-center">
+                {/* Email field */}
+                <div>
+                  <label htmlFor="email" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input 
+                    type="email" 
+                    id="email"
+                    name="email"
+                    placeholder="Enter Your Email" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="class" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Class</label>
+                  <input 
+                    type="text" 
+                    id="class"
+                    name="class"
+                    placeholder="Your class" 
+                    value={formData.class}
+                    onChange={handleInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+                
+                {/* Phone Number field with country code */}
+                <div>
+                  <label htmlFor="phone" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                  <div className="flex">
+                    <div className="flex items-center bg-gray-100 border border-gray-300 rounded-l-md px-2 md:px-3">
+                      <Image 
+                        src="/gladiators/formcommonindia.png" 
+                        alt="IN" 
+                        width={12}
+                        height={12}
+                        className="mr-1 md:w-4 md:h-4"
+                      />
+                      <span className="text-xs md:text-sm text-gray-700">+91</span>
+                    </div>
                     <input 
-                      type="checkbox" 
-                      id="recaptcha" 
-                      className="h-5 w-5 border-gray-300 mr-2 focus:ring-0 cursor-pointer"
+                      type="tel" 
+                      id="phone"
+                      name="phone"
+                      placeholder="Your Phone Number" 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full p-2 md:p-3 border border-gray-300 border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
                       required
                     />
-                    <label htmlFor="recaptcha" className="text-sm text-gray-700">I&apos;m not a robot</label>
-                  </div>
-                  <div className="flex flex-col items-end">
-                    <div className="w-12 h-12">
-                      <img 
-                        src="https://www.gstatic.com/recaptcha/api2/logo_48.png" 
-                        alt="reCAPTCHA logo" 
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <div className="text-xs text-gray-500 mt-1">Privacy - Terms</div>
                   </div>
                 </div>
                 
+                <div>
+                  <label htmlFor="school" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">School/Institute</label>
+                  <input 
+                    type="text" 
+                    id="school"
+                    name="school"
+                    placeholder="Your School/Institute" 
+                    value={formData.school}
+                    onChange={handleInputChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
+                    required
+                  />
+                </div>
+    
                 {/* Submit Button */}
                 <button 
                   type="submit" 
-                  className="w-full bg-red-600 text-white py-3 px-4 rounded-md font-medium hover:bg-red-700 transition-colors"
+                  className="w-full bg-[#F55D3E] text-white py-2 md:py-3 px-4 rounded-md font-medium hover:bg-opacity-90 transition-colors flex items-center justify-center"
                 >
                   Submit
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
                 </button>
               </form>
-         </div>
-       </div>
-     </div>
-      )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
 
     </div>
   );

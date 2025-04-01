@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from "next/image";
 
 
 const ExamPrepLowerSections: React.FC = () => {
@@ -153,7 +154,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
-            <p className="text-white text-sm">Beginner&apos;s Guide Volume 5</p>
+          <p className="text-white text-base md:text-lg ">Beginner&apos;s Guide Volume 5</p>
             <a href="#" className="text-orange-500 text-base md:text-lg ">Download File</a>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-gray-800">
@@ -205,7 +206,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your Careercounseling journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 
@@ -224,11 +225,15 @@ const ExamPrepLowerSections: React.FC = () => {
                 {/* Avatar and Name */}
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-500 mr-3">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="relative w-full h-full">
+  <Image
+    src={testimonial.avatar}
+    alt={testimonial.name}
+    fill
+    className="object-cover"
+  />
+</div>
+
                   </div>
                   <h3 className="text-lg font-medium">{testimonial.name}</h3>
                 </div>

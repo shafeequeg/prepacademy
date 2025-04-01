@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const BlogsSection = () => {
   const blogs = [
@@ -50,11 +51,14 @@ const BlogsSection = () => {
     >
       {/* Blog Image */}
       <div className="relative w-full aspect-video">
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      <div className="relative w-full h-full"> 
+  <Image
+    src={blog.image}
+    alt={blog.title}
+    fill
+    className="object-cover"
+  />
+</div>
       </div>
 
       {/* Content */}
