@@ -34,7 +34,7 @@ interface Program {
   name: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, className }) => {
   const cardContent = (
     <div className={`bg-[#1F1414] p-5  rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] min-w-[250px] ${className}`}>
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
@@ -47,13 +47,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
     </div>
   );
 
-  if (path) {
-    return (
-      <Link href={path} className="block h-full">
-        {cardContent}
-      </Link>
-    );
-  }
+  // if (path) {
+  //   return (
+  //     <Link href={path} className="block h-full">
+  //       {cardContent}
+  //     </Link>
+  //   );
+  // }
 
   return cardContent;
 };
@@ -251,14 +251,45 @@ const CatExamApplySection: React.FC = () => {
     submitted_at:'',
   });
 
-  const [EnrollformData, setEnrollFormData] = useState({
-    full_name: "",
-     mobile_number: "",
-    email: "",
-  school_college: "",
-  class_type: "",
-  });
+  // const [EnrollformData, setEnrollFormData] = useState({
+  //   full_name: "",
+  //    mobile_number: "",
+  //   email: "",
+  // school_college: "",
+  // class_type: "",
+  // });
 
+  const [screeningStep, setScreeningStep] = useState(1);
+   const questions = {
+    question1: "What is your learning goal?",
+    question2: "When would you prefer to schedule classes?", 
+    question3: "How did you hear about us?"
+  };
+  
+  // Options for each question
+  const questionOptions = {
+    question1: ['Improve grades', 'Exam preparation', 'Learn new skills', 'Homework help'],
+    question2: ['Weekday afternoons', 'Weekday evenings', 'Weekend mornings', 'Weekend afternoons'],
+    question3: ['Friend or family', 'Social media', 'Search engine', 'Advertisement', 'Other']
+  };
+  const [formStep, setFormStep] = useState(0);
+
+  // const [screeningStep, setScreeningStep] = useState(1);
+  
+  // Combined form data with questions and answers
+  const [EnrollformData, setEnrollFormData] = useState({
+    full_name: '',
+    email: '',
+    class_type: '',
+    mobile_number: '',
+    school_college: '',
+    question1: questions.question1,
+    question2: questions.question2,
+    question3: questions.question3,
+    answer1: '',
+    answer2: '',
+    answer3: ''
+  });
 // const [activeTab, setActiveTab] = useState("online");
 const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
 const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -319,45 +350,45 @@ const openModal = () => setIsModalOpen(true);
       setFormData({ ...formData, [name]: value });
     };
 
-    const handleenrollformInputChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-      const { name, value } = e.target;
-      setEnrollFormData({ ...EnrollformData, [name]: value });
-    };
+    // const handleenrollformInputChange = (
+    //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    // ) => {
+    //   const { name, value } = e.target;
+    //   setEnrollFormData({ ...EnrollformData, [name]: value });
+    // };
 
 
 
-    const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    // const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //   e.preventDefault();
       
-      try {
-        const response = await axiosInstance.post(API_URLS.COMMONFORM.POST_FORM, {
-          ...EnrollformData,
-        });
+    //   try {
+    //     const response = await axiosInstance.post(API_URLS.COMMONFORM.POST_FORM, {
+    //       ...EnrollformData,
+    //     });
       
-        if (response.status >= 200 && response.status < 300) {
-          console.log("Message sent successfully!", response.data);
-          toast.success("Your message has been sent successfully!");
+    //     if (response.status >= 200 && response.status < 300) {
+    //       console.log("Message sent successfully!", response.data);
+    //       toast.success("Your message has been sent successfully!");
                
-          // Reset form fields
-          setIsModalOpen(false);
-          setEnrollFormData({
-            full_name: "",
-           mobile_number: "",
-          email: "",
-        school_college: "",
-        class_type: "",
-          })
-        } else {
-          console.error("Unexpected status code:", response.status);
-          toast.error("Failed to send the message. Please try again.");
-        }
-      } catch (error) {
-        console.error("Failed to send message:", error);
-        toast.error("Failed to send the message. Please try again.");
-      }
-      };
+    //       // Reset form fields
+    //       setIsModalOpen(false);
+    //       setEnrollFormData({
+    //         full_name: "",
+    //        mobile_number: "",
+    //       email: "",
+    //     school_college: "",
+    //     class_type: "",
+    //       })
+    //     } else {
+    //       console.error("Unexpected status code:", response.status);
+    //       toast.error("Failed to send the message. Please try again.");
+    //     }
+    //   } catch (error) {
+    //     console.error("Failed to send message:", error);
+    //     toast.error("Failed to send the message. Please try again.");
+    //   }
+    //   };
   
   //  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   //     e.preventDefault();
@@ -385,6 +416,41 @@ const openModal = () => setIsModalOpen(true);
   //         toast.error('Failed to send the message. Please try again.');
   //       });
   //   };
+
+
+    const handleScreeningChange = (questionNum : number, answer : string) => {
+      setEnrollFormData(prev => ({
+        ...prev,
+        [`answer${questionNum}`]: answer
+      }));
+    };
+
+  const nextScreeningStep = () => {
+    setScreeningStep(prev => prev + 1);
+  };
+
+  // Handle main form changes
+  const handleFormChange = (e :React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEnrollFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Navigate through form steps
+  const nextStep = () => {
+    setFormStep(prev => prev + 1);
+  };
+
+  const prevStep = () => {
+    if (formStep > 0) {
+      setFormStep(prev => prev - 1);
+    } else if (screeningStep > 1) {
+      setScreeningStep(prev => prev - 1);
+    }
+  };
+
 
   const fetchPrograms = async () => {
     try {
@@ -432,6 +498,74 @@ const openModal = () => setIsModalOpen(true);
       toast.error("Failed to send the message. Please try again.");
     }
   };
+
+  const handleEnrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    try {
+      const response = await axiosInstance.post(API_URLS.COMMONFORM.POST_FORM, {
+        ...EnrollformData
+      });
+    
+      if (response.status >= 200 && response.status < 300) {
+        console.log("Form submitted successfully!", response.data);
+        toast.success("Your details have been submitted successfully!");
+             
+        // Reset form fields
+        closeModal();
+        setEnrollFormData({
+          full_name: "",
+          mobile_number: "",
+          email: "",
+          school_college: "",
+          class_type: "",
+          question1: questions.question1,
+          question2: questions.question2,
+          question3: questions.question3,
+          answer1: '',
+          answer2: '',
+          answer3: ''
+        });
+        setScreeningStep(1);
+        setFormStep(0);
+      } else {
+        console.error("Unexpected status code:", response.status);
+        toast.error("Failed to submit the form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Failed to submit form:", error);
+      toast.error("Failed to submit the form. Please try again.");
+    }
+  };
+
+
+  // Determine progress percentage
+  const calculateProgress = () => {
+    const totalSteps = 8; // 3 screening + 5 form fields
+    const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
+    return (currentStep / totalSteps) * 100;
+  };
+
+  // Reset the form when modal closes
+  useEffect(() => {
+    if (!isModalOpen) {
+      setScreeningStep(1);
+      setFormStep(0);
+      setEnrollFormData({
+        full_name: "",
+        mobile_number: "",
+        email: "",
+        school_college: "",
+        class_type: "",
+        question1: questions.question1,
+        question2: questions.question2,
+        question3: questions.question3,
+        answer1: '',
+        answer2: '',
+        answer3: ''
+      });
+    }
+  }, [isModalOpen]);
 
   const schoolCourses = [
     {
@@ -989,139 +1123,328 @@ useEffect(() => {
 </div> */}
   </div>
   {isModalOpen && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg w-11/12 md:w-4/5 max-w-4xl relative overflow-hidden max-h-[90vh] md:max-h-none overflow-y-auto">
-          {/* Close button */}
-          <button 
-            onClick={closeModal} 
-            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
-            aria-label="Close"
-          >
-            <svg width="16" height="16" className="md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
+     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+     <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
+       {/* Close button */}
+       <button 
+         onClick={closeModal} 
+         className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
+         aria-label="Close"
+       >
+         <svg width="16" height="16" className="md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+           <path d="M18 6L6 18M6 6l12 12" />
+         </svg>
+       </button>
+       
+       {/* Header section with image */}
+       <div className="bg-[#F55D3E] p-4 md:p-6 text-white">
+         <div className="flex flex-col md:flex-row items-center">
+           <div className="md:w-1/3 flex justify-center mb-3 md:mb-0">
+             <div className="w-20 h-20 md:w-32 md:h-32 relative">
+               <Image 
+                 src="/commonformmascot.png" 
+                 alt="Learning Mascot" 
+                 width={128}
+                 height={128}
+                 className="object-contain"
+               />
+             </div>
+           </div>
+           <div className="md:w-2/3">
+             <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">Fast Track Your Trial Class</h2>
+             <p className="text-center md:text-left mt-2 text-sm md:text-base">We are just a step away from finding the perfect tutor for your child</p>
+           </div>
+         </div>
+         
+         {/* Progress bar */}
+         <div className="w-full h-2 bg-white bg-opacity-30 rounded-full mt-4">
+           <div 
+             className="h-full bg-white rounded-full transition-all duration-300" 
+             style={{ width: `${calculateProgress()}%` }}
+           />
+         </div>
+       </div>
+       
+       <div className="p-4 md:p-6">
+         {/* Screening Questions */}
+         {screeningStep === 1 && (
+  <div className="flex flex-col items-center">
+    <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4">
+      {questions.question1}
+    </h3>
+    <div className="space-y-3 w-full max-w-md">
+      {questionOptions.question1.map((option) => (
+        <button
+          key={option}
+          onClick={() => {
+            handleScreeningChange(1, option);
+            nextScreeningStep();
+          }}
+          className={`w-full p-3 text-left border rounded-lg transition-colors ${
+            EnrollformData.answer1 === option
+              ? 'bg-[#F55D3E] bg-orange-50'
+              : 'border-gray-300 hover:bg-[#F55D3E]'
+          }`}
+        >
+          <span className="text-gray-800">{option}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+         
+         {screeningStep === 2 && (
+           <div className="flex flex-col items-center">
+             <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4">{questions.question2}</h3>
+             <div className="space-y-3 w-full max-w-md">
+               {questionOptions.question2.map(option => (
+                 <button
+                   key={option}
+                   onClick={() => {
+                     handleScreeningChange(2, option);
+                     nextScreeningStep();
+                   }}
+                   className={`w-full p-3 text-left border rounded-lg transition-colors ${
+                     EnrollformData.answer2 === option 
+                       ? 'bg-[#F55D3E] bg-orange-50' 
+                       : 'border-gray-300 hover:bg-[#F55D3E]'
+                   }`}
+                 >
+          <span className="text-gray-800">{option}</span>
           </button>
-          
-          {/* Responsive layout - stack on mobile, side-by-side on larger screens */}
-          <div className="flex flex-col md:flex-row h-full">
-            {/* Left section - Title and Image */}
-            <div className="bg-[#2B1615] p-3 md:p-6 md:w-2/5 flex flex-col items-center justify-center text-white">
-              <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-center">Upgrade Your Learning With Us</h2>
-              <div className="w-24 h-24 md:w-64 md:h-auto lg:w-80 mb-2 md:mb-4">
-                <Image 
-                  src="/commonformmascot.png" 
-                  alt="Learning Mascot" 
-                  width={300}
-                  height={200}
-                  className="w-full h-full object-contain max-w-full"
-                />
-              </div>
-            </div>
-            
-            {/* Right section - Form */}
-            <div className="p-3 md:p-6 md:w-3/5">
-              <h3 className="text-center text-lg md:text-xl font-medium text-gray-800 mb-3 md:mb-6">Fast Track Your Trial Class</h3>
-              <form className="space-y-2 md:space-y-4" onSubmit={handleenrollSubmit}>
-                {/* Name field */}
-                <div>
-                  <label htmlFor="full_name" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input 
-                    type="text" 
-                    id="full_name"
-                    name="full_name"
-                    placeholder="Your Name" 
-                    value={EnrollformData.full_name}
-                    onChange={handleenrollformInputChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
-                    required
-                  />
-                </div>
-                
-                {/* Email field */}
-                <div>
-                  <label htmlFor="email" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input 
-                    type="email" 
-                    id="email"
-                    name="email"
-                    placeholder="Enter Your Email" 
-                    value={EnrollformData.email}
-                    onChange={handleenrollformInputChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="class_type" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Class</label>
-                  <input 
-                    type="text" 
-                    id="class_type"
-                    name="class_type"
-                    placeholder="Your class" 
-                    value={EnrollformData.class_type}
-                    onChange={handleenrollformInputChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
-                    required
-                  />
-                </div>
-                
-                {/* Phone Number field with country code */}
-                <div>
-                  <label htmlFor="mobile_number" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                  <div className="flex">
-                    <div className="flex items-center bg-gray-100 border border-gray-300 rounded-l-md px-2 md:px-3">
-                      <Image 
-                        src="/gladiators/formcommonindia.png" 
-                        alt="IN" 
-                        width={12}
-                        height={12}
-                        className="mr-1 md:w-4 md:h-4"
-                      />
-                      <span className="text-xs md:text-sm text-gray-700">+91</span>
-                    </div>
-                    <input 
-                      type="tel" 
-                      id="mobile_number"
-                      name="mobile_number"
-                      placeholder="Your Phone Number" 
-                      value={EnrollformData.mobile_number}
-                      onChange={handleenrollformInputChange}
-                      className="w-full p-2 md:p-3 border border-gray-300 border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="school_college" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">School/Institute</label>
-                  <input 
-                    type="text" 
-                    id="school_college"
-                    name="school_college"
-                    placeholder="Your School/Institute" 
-                    value={EnrollformData.school_college}
-                    onChange={handleenrollformInputChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent text-black bg-white"
-                    required
-                  />
-                </div>
-    
-                {/* Submit Button */}
-                <button 
-                  type="submit" 
-                  className="w-full bg-[#F55D3E] text-white py-2 md:py-3 px-4 rounded-md font-medium hover:bg-opacity-90 transition-colors flex items-center justify-center"
-                >
-                  Submit
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+               ))}
+             </div>
+           </div>
+         )}
+         
+         {screeningStep === 3 && (
+           <div className="flex flex-col items-center">
+             <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4">{questions.question3}</h3>
+             <div className="space-y-3 w-full max-w-md">
+               {questionOptions.question3.map(option => (
+                 <button
+                   key={option}
+                   onClick={() => {
+                     handleScreeningChange(3, option);
+                     setScreeningStep(4); // Move to main form
+                   }}
+                   className={`w-full p-3 text-left border rounded-lg transition-colors ${
+                     EnrollformData.answer3 === option 
+                       ? 'bg-[#F55D3E] bg-orange-50' 
+                       : 'border-gray-300 hover:bg-[#F55D3E]'
+                   }`}
+                 >
+          <span className="text-gray-800">{option}</span>
+          </button>
+               ))}
+             </div>
+           </div>
+         )}
+         
+         {/* Main Form Steps */}
+         {screeningStep === 4 && (
+           <div className="w-full max-w-md mx-auto">
+             <form onSubmit={handleEnrollSubmit}>
+               {formStep === 0 && (
+               <div className="space-y-4">
+               <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your name?</h3>
+               <input 
+                 type="text" 
+                 id="full_name"
+                 name="full_name"
+                 placeholder="Your Full Name" 
+                 value={EnrollformData.full_name || ''}  // Added fallback empty string
+                 onChange={handleFormChange}
+                 className="w-full p-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent"
+                 required
+               />
+               <button 
+                 type="button"
+                 onClick={nextStep}
+                 className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors ${
+                   !EnrollformData.full_name ? 'opacity-50 cursor-not-allowed' : ''
+                 }`}
+                 disabled={!EnrollformData.full_name}
+               >
+                 Continue
+               </button>
+             </div>
+               )}
+               
+               {formStep === 1 && (
+                 <div className="space-y-4">
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your email address?</h3>
+                   <input 
+                     type="email" 
+                     id="email"
+                     name="email"
+                     placeholder="Your Email Address" 
+                     value={EnrollformData.email}
+                     onChange={handleFormChange}
+                     className="w-full p-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent"
+                     required
+                   />
+                   <div className="flex space-x-3">
+                     <button 
+                       type="button"
+                       onClick={prevStep}
+                       className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                     >
+                       Back
+                     </button>
+                     <button 
+                       type="button"
+                       onClick={nextStep}
+                       className="w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                       disabled={!EnrollformData.email}
+                     >
+                       Continue
+                     </button>
+                   </div>
+                 </div>
+               )}
+               
+               {formStep === 2 && (
+                 <div className="space-y-4">
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">Which class are you interested in?</h3>
+                   <input 
+                     type="text" 
+                     id="class_type"
+                     name="class_type"
+                     placeholder="e.g. Math, Science, English" 
+                     value={EnrollformData.class_type}
+                     onChange={handleFormChange}
+                     className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent"
+                     required
+                   />
+                   <div className="flex space-x-3">
+                     <button 
+                       type="button"
+                       onClick={prevStep}
+                       className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                     >
+                       Back
+                     </button>
+                     <button 
+                       type="button"
+                       onClick={nextStep}
+                       className="w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                       disabled={!EnrollformData.class_type}
+                     >
+                       Continue
+                     </button>
+                   </div>
+                 </div>
+               )}
+               
+               {formStep === 3 && (
+                 <div className="space-y-4">
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your phone number?</h3>
+                   <div className="flex">
+                     <div className="flex items-center bg-gray-100 border border-gray-300 rounded-l-lg px-3">
+                       <span className="text-sm text-gray-700">+91</span>
+                     </div>
+                     <input 
+                       type="tel" 
+                       id="mobile_number"
+                       name="mobile_number"
+                       placeholder="Your Phone Number" 
+                       value={EnrollformData.mobile_number}
+                       onChange={handleFormChange}
+                       className="w-full p-3 border text-black border-gray-300 border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent"
+                       required
+                     />
+                   </div>
+                   <p className="text-xs text-gray-500 flex items-center">
+                     <svg className="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                     </svg>
+                     No spam, we promise!
+                   </p>
+                   <div className="flex space-x-3">
+                     <button 
+                       type="button"
+                       onClick={prevStep}
+                       className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                     >
+                       Back
+                     </button>
+                     <button 
+                       type="button"
+                       onClick={nextStep}
+                       className="w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                       disabled={!EnrollformData.mobile_number}
+                     >
+                       Continue
+                     </button>
+                   </div>
+                 </div>
+               )}
+               
+               {formStep === 4 && (
+                 <div className="space-y-4">
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What school or institute do you attend?</h3>
+                   <input 
+                     type="text" 
+                     id="school_college"
+                     name="school_college"
+                     placeholder="Your School/Institute" 
+                     value={EnrollformData.school_college}
+                     onChange={handleFormChange}
+                     className="w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent"
+                     required
+                   />
+                   <div className="flex space-x-3">
+                     <button 
+                       type="button"
+                       onClick={prevStep}
+                       className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                     >
+                       Back
+                     </button>
+                     <button 
+                       type="submit"
+                       className="w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                       disabled={!EnrollformData.school_college}
+                     >
+                       Submit
+                     </button>
+                   </div>
+                 </div>
+               )}
+             </form>
+           </div>
+         )}
+       </div>
+       
+       {/* Summary section showing answers (visible at the bottom after questions are answered) */}
+       {/* {screeningStep === 4 && (
+         <div className="p-4 bg-gray-50 border-t border-gray-200">
+           <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
+           <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
+             {EnrollformData.answer1 && (
+               <div>
+                 <span className="font-medium block">Learning goal:</span>
+                 {EnrollformData.answer1}
+               </div>
+             )}
+             {EnrollformData.answer2 && (
+               <div>
+                 <span className="font-medium block">Schedule:</span>
+                 {EnrollformData.answer2}
+               </div>
+             )}
+             {EnrollformData.answer3 && (
+               <div>
+                 <span className="font-medium block">Found via:</span>
+                 {EnrollformData.answer3}
+               </div>
+             )}
+           </div>
+         </div>
+       )} */}
+     </div>
+   </div>
     )}
 </div>
   );

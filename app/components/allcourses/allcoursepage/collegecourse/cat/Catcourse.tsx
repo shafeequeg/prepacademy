@@ -712,20 +712,20 @@ toast.error("Failed to send the message. Please try again.");
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {filteredCourses.length > 0 ? (
     filteredCourses.map((card) => (
-      <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
+      <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden flex flex-col"> {/* Added flex and flex-col here */}
         {/* Image Container */}
-        <div className="w-full h- flex items-center justify-center bg-gray-800"> {/* Added a wrapper for better control */}
-        <Image 
-  src={card.image} 
-  alt={card.title} 
-  width={500}  // Adjust as needed
-  height={300} // Adjust as needed
-  className="w-full h-full object-contain" 
-/>
+        <div className="w-full flex items-center justify-center bg-gray-800">
+          <Image 
+            src={card.image} 
+            alt={card.title} 
+            width={500}
+            height={300}
+            className="w-full h-full object-contain" 
+          />
         </div>
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-grow"> {/* Added flex classes here */}
           <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
-          <ul className="space-y-2 mb-6">
+          <ul className="space-y-2 mb-6 flex-grow"> {/* Added flex-grow here */}
             {card.features.map((feature, idx) => (
               <li key={idx} className="flex text-gray-300 text-sm">
                 <span className="text-[#F55D3E] mr-2">•</span>
@@ -733,7 +733,7 @@ toast.error("Failed to send the message. Please try again.");
               </li>
             ))}
           </ul>
-          <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
+          <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline mt-auto"> {/* Added mt-auto here */}
             Enroll Now <ChevronRight size={16} className="ml-1" />
           </a>
         </div>
