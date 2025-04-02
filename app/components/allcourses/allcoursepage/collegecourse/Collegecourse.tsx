@@ -37,7 +37,7 @@ interface Program {
 }
 
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType,  className }) => {
   const cardContent = (
     <div className={`bg-[#1F1414] p-5  rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] min-w-[250px] ${className}`}>
       <h3 className="text-[#F55D3E] text-lg font-semibold mb-2">{title}</h3>
@@ -50,13 +50,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, 
     </div>
   );
 
-  if (path) {
-    return (
-      <Link href={path} className="block h-full">
-        {cardContent}
-      </Link>
-    );
-  }
+  // if (path) {
+  //   return (
+  //     <Link href={path} className="block h-full">
+  //       {cardContent}
+  //     </Link>
+  //   );
+  // }
 
   return cardContent;
 };
@@ -816,7 +816,7 @@ const closeModal = () => setIsModalOpen(false);
                     // code={course.code} 
                     title={course.title} 
                     description={course.description} 
-                    path={course.path}
+                    // path={course.path}
                     className="border-l-4 border-[#F55D3E] p-4"
                   />
                 ))}

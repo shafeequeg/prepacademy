@@ -386,7 +386,7 @@ const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           placeholder="Mobile Number"
           value={formData.mobile_number}
           onChange={handleInputChange}
-          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
+          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white "
           required
         />
         <input
@@ -424,7 +424,7 @@ const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               </option>
             ))}
           </select>
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none  ">
             <svg
               width="14"
               height="8"
@@ -500,6 +500,7 @@ const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                  </div>
                ))}
              </div>
+
            </div>
            {isModalOpen && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -531,11 +532,9 @@ const handleenrollSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               </div>
             </div>
             
-            {/* Right section - Form */}
             <div className="p-3 md:p-6 md:w-3/5">
               <h3 className="text-center text-lg md:text-xl font-medium text-gray-800 mb-3 md:mb-6">Fast Track Your Trial Class</h3>
               <form className="space-y-2 md:space-y-4" onSubmit={handleenrollSubmit}>
-                {/* Name field */}
                 <div>
                   <label htmlFor="full_name" className="block text-xs md:text-sm font-medium text-gray-700 mb-1">Name</label>
                   <input 

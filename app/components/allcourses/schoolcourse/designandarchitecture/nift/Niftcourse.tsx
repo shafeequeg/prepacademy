@@ -657,68 +657,69 @@ try {
   <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
     {/* Offerings Section */}
     <div className="bg-[#1A0E0E] py-16">
-  <div className="max-w-6xl mx-auto px-4">
-    {/* Section Title */}
-    <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
-      <span className="text-[#F55D3E] font-serif italic">Our</span>{" "}
-      <span className="text-white">Offerings</span>
-    </h2>
-
-    {/* Tab Navigation - Made responsive */}
-    <div className="flex justify-center mb-12 overflow-x-auto pb-2 w-full">
-      <div className="inline-flex border-b border-[#2A1A1A] flex-nowrap min-w-0">
-        {offeringTypes.map((type) => (
-          <button
-            key={type.id}
-            onClick={() => setActiveTab(type.id)}
-            className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${
-              activeTab === type.id
-                ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
-                : "text-gray-500 hover:text-gray-400"
-            }`}
-          >
-            {type.label}
-          </button>
-        ))}
-      </div>
-    </div>
-
-    {/* Course Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredCourses.length > 0 ? (
-        filteredCourses.map((card) => (
-          <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden">
-<div className="relative w-full h-48">
-  <Image 
-    src={card.image} 
-    alt={card.title} 
-    fill
-    className="object-cover" 
-  />
-</div>
-
-            <div className="p-6">
-              <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
-              <ul className="space-y-2 mb-6">
-                {card.features.map((feature, idx) => (
-                  <li key={idx} className="flex text-gray-300 text-sm">
-                    <span className="text-[#F55D3E] mr-2">•</span>
-                    <span className="text-base md:text-lg text-gray-300 mb-6">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline">
-                Enroll Now <ChevronRight size={16} className="ml-1" />
-              </a>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-400 col-span-full">No courses available for this category.</p>
-      )}
-    </div>
-  </div>
-</div>
+     <div className="max-w-6xl mx-auto px-4">
+       {/* Section Title */}
+       <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
+         <span className="text-[#F55D3E] font-serif italic">Our</span>{" "}
+         <span className="text-white">Offerings</span>
+       </h2>
+   
+       {/* Tab Navigation - Made responsive */}
+       <div className="flex justify-center mb-12 overflow-x-auto pb-2 w-full">
+         <div className="inline-flex border-b border-[#2A1A1A] flex-nowrap min-w-0">
+           {offeringTypes.map((type) => (
+             <button
+               key={type.id}
+               onClick={() => setActiveTab(type.id)}
+               className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${
+                 activeTab === type.id
+                   ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
+                   : "text-gray-500 hover:text-gray-400"
+               }`}
+             >
+               {type.label}
+             </button>
+           ))}
+         </div>
+       </div>
+   
+       {/* Course Cards */}
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     {filteredCourses.length > 0 ? (
+       filteredCourses.map((card) => (
+         <div key={card.id} className="bg-[#220F0F] rounded-lg overflow-hidden flex flex-col"> {/* Added flex and flex-col here */}
+           {/* Image Container */}
+           <div className="w-full flex items-center justify-center bg-gray-800">
+             <Image 
+               src={card.image} 
+               alt={card.title} 
+               width={500}
+               height={300}
+               className="w-full h-full object-contain" 
+             />
+           </div>
+           <div className="p-6 flex flex-col flex-grow"> {/* Added flex classes here */}
+             <h3 className="text-white text-lg font-medium mb-4">{card.title}</h3>
+             <ul className="space-y-2 mb-6 flex-grow"> {/* Added flex-grow here */}
+               {card.features.map((feature, idx) => (
+                 <li key={idx} className="flex text-gray-300 text-sm">
+                   <span className="text-[#F55D3E] mr-2">•</span>
+                   <span className="text-base md:text-lg text-gray-300 mb-6">{feature}</span>
+                 </li>
+               ))}
+             </ul>
+             <a href="#" className="inline-flex items-center text-[#F55D3E] text-lg hover:underline mt-auto"> {/* Added mt-auto here */}
+               Enroll Now <ChevronRight size={16} className="ml-1" />
+             </a>
+           </div>
+         </div>
+       ))
+     ) : (
+       <p className="text-center text-gray-400 col-span-full">No courses available for this category.</p>
+     )}
+   </div>
+     </div>
+   </div>
 
     {/* Mascot Banner Section */}
     <div className="bg-black py-8">
@@ -776,7 +777,7 @@ try {
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
         </div>
-        <h3 className="text-white text-center text-lg font-medium mb-5">CAT Master Class</h3>
+        <h3 className="text-white text-center text-lg font-medium mb-5">NIFT Master Class</h3>
         <a 
           href="#" 
           className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
