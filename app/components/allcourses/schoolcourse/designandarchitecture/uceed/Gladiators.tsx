@@ -521,20 +521,20 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          NIFT 2025 Exam Conducted     </div>
+          Result Date    </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-         The NTA held the NIFT Entrance Exam 2025 on February 9, 2025, across 82 cities in India. The GAT was computer-based, while the CAT was offline for B.Des and M.Des candidates.   
+              	UCEED 2025 Result Declared on March 7, 2025
              </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
           <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Provisional Answer Key Released   </div>
+          Application form   </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-            The NTA released the provisional answer key and recorded response sheets on February 15, 2025, with the objection window open until February 17, 2025 (11:00 PM) at a fee of ₹200 per objection. Results are delayed beyond initial expectations (late February/early March) and are now anticipated soon, as per posts on X and web updates.   
+              The Indian Institute of Technology (IIT) Bombay has released the UCEED 2025 application form.
              </p>
             
           </div>
@@ -545,7 +545,8 @@ const ExamPrepHomepage: React.FC = () => {
           Registration Details   </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-             The application window opened on November 22, 2024, and closed on January 6, 2025, with a late fee period from January 7 to 9, 2025. The correction window was available from January 10 to 12, 2025.
+              	The registration process for the Undergraduate Common Entrance 
+              Examination for Design (UCEED) 2025 closed on November 18, 2024 (5:00 PM) with a late fee.
              </p>
             
           </div>

@@ -115,6 +115,8 @@ const BlogSection = () => {
     },
   ];
 
+
+
   // Tab-specific blog data
   const blogData: { [key: string]: Blog[] } = {
     "Success Stories": [
@@ -122,37 +124,37 @@ const BlogSection = () => {
         id: 1,
         title: "John's Journey to IIT",
         description: "How John overcame obstacles to achieve his IIT dream.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 2,
         title: "MBA Success: Real Stories",
         description: "Inspirational stories from top B-School graduates.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 3,
         title: "From Average to AIR 5: My CAT Success Story",
         description: "A motivational journey of persistence and smart work.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 4,
         title: "Breaking Barriers: First Generation College Graduate",
         description: "How determination led to success against all odds.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 5,
         title: "My Path to IIM Ahmedabad",
         description: "A detailed account of preparation strategies that worked.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 6,
         title: "From Failed Attempts to Top Percentile",
         description: "How changing your approach can lead to breakthrough results.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
     ],
     "Exam Strategies": [
@@ -160,37 +162,37 @@ const BlogSection = () => {
         id: 1,
         title: "Time Management for JEE",
         description: "A complete guide on managing time effectively for JEE exams.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 2,
         title: "NEET Last-Minute Tips",
         description: "What to focus on in the final 30 days before the NEET exam.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 3,
         title: "CAT VARC: Mastering Reading Comprehension",
         description: "Techniques to improve your verbal ability and reading comprehension score.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 4,
         title: "Data Interpretation Shortcuts for CAT",
         description: "Quick calculation methods to solve DI problems faster.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 5,
         title: "Logical Reasoning Frameworks",
         description: "Systematic approaches to tackle any logical reasoning problem.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 6,
         title: "Mock Test Strategies: How to Maximize Learning",
         description: "Getting the most value from your practice tests and analysis.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
     ],
     "Popular Articles": [
@@ -198,37 +200,37 @@ const BlogSection = () => {
         id: 1,
         title: "Top 10 Study Hacks",
         description: "A list of 10 scientifically proven study hacks to improve retention.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 2,
         title: "Mistakes to Avoid in Exams",
         description: "Common exam mistakes and how to avoid them.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 3,
         title: "How to Build Mental Resilience for Competitive Exams",
         description: "Psychological techniques to stay motivated during long preparation.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 4,
         title: "The Pomodoro Technique for Exam Preparation",
         description: "Using time-blocking to enhance productivity and reduce burnout.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 5,
         title: "Memory Techniques for Quantitative Formulas",
         description: "Mnemonic devices to remember complex mathematical concepts.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 6,
         title: "Digital vs. Physical Study Materials: What Works Best?",
         description: "A comparison of different study mediums and their effectiveness.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
     ],
     "Latest Updates & Notification": [
@@ -236,37 +238,37 @@ const BlogSection = () => {
         id: 1,
         title: "JEE 2025 Exam Dates Announced",
         description: "Check out the official dates for JEE 2025 and key deadlines.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 2,
         title: "NEET 2025 Registration Opens",
         description: "Important information about the NEET 2025 registration process.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 3,
         title: "CAT 2025 Pattern Changes Explained",
         description: "Detailed analysis of the new exam pattern and what it means for aspirants.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 4,
         title: "IIM Shortlist Criteria for 2025 Admissions",
         description: "Updated selection parameters announced by different IIMs.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 5,
         title: "UPSC 2025 Calendar Released",
         description: "Important dates for all UPSC examinations in the coming year.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
       {
         id: 6,
         title: "New Digital Initiatives for Online Exam Preparation",
         description: "Government launches new resources for competitive exam aspirants.",
-        image: "https://via.placeholder.com/300",
+        image: "",
       },
     ],
     "Study Plans & Tips": [
@@ -363,7 +365,7 @@ const BlogSection = () => {
       <div className="w-full h-48"> {/* Fixed image height */}
       <div className="relative w-full h-full"> 
   <Image
-    src={blog.image}
+    src={blog.image }
     alt={blog.title}
     fill
     className="object-cover"

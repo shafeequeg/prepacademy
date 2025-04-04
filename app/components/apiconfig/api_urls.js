@@ -14,5 +14,20 @@ export const API_URLS = {
         POST_FORM:"api/trialclass/",
         GET_FORM :"api/trialclass/",
 
-       }   
+       },
+       QUESTIONS :{
+        POST_QUESTION:"api/questions/",
+        GET_QUESTIONS :"api/questions/",
+
+       },
+       FREETRAIL :{
+        POST_FREETRAIL:"api/submit-response/",
+        GET_FREETRAIL :"api/submit-response/",
+
+       },
+       USER_DATA:{
+        GET_USERDATA:"api/user-responses/"
+       }         
+
+
 }

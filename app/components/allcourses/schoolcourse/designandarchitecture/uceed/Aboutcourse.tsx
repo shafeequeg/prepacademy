@@ -46,29 +46,22 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "What is the NIFT Entrance Exam?",
-      answer: "The NIFT Entrance Exam is a national-level test conducted by the NTA for admission to UG and PG programs in fashion design, technology, and management at NIFT campuses. It includes the General Ability Test (GAT) for all programs and the Creative Ability Test (CAT) for B.Des and M.Des, followed by a Situation Test (B.Des) or Personal Interview (PG programs)."
+      question: "	What is UCEED exam?",
+      answer: "The Undergraduate Common Entrance Examination for Design (UCEED) is an entrance examination conducted for admission to undergraduate programs, specifically the Bachelor of Design (B.Des), offered by various IITs and other participating institutes across India."
     },
     {
-      question: "	Is the NIFT Entrance Exam compulsory for admission to NIFT?",
-      answer: "Yes, the NIFT Entrance Exam is mandatory for admission to all UG and PG programs at NIFT campuses. It replaced institute-specific processes and is now standardized under the NTA."
+      question: "Is UCEED compulsory for taking admission in IITs for B.Des?",
+      answer: "Yes, UCEED is compulsory for admissions to the B.Des program in participating IITs such as IIT Bombay, IIT Delhi, IIT Guwahati, IIT Hyderabad, IIT Indore, IIT Roorkee, and IIITDM Jabalpur, as it is the primary selection process conducted by IIT Bombay."
     },
     {
-      question: "Where can I get the NIFT Entrance Exam syllabus?",
-      answer: "The syllabus is available on the official website exams.nta.ac.in/NIFT or nift.ac.in. GAT covers Quantitative Ability, Communication Ability, English Comprehension, Analytical Ability, and General Knowledge/Current Affairs. CAT assesses creativity, sketching, and design skills. Check program-specific details in the NIFT prospectus."
+      question: "	Where can I get the UCEED syllabus?",
+      answer: " Aspirants are strongly advised to review the UCEED syllabus and eligibility criteria on uceed.iitb.ac.in to ensure they meet the admission requirements and prepare effectively."
     },
     {
-      question: "Is the NIFT Entrance Exam tough?",
-      answer: "The exam is considered moderately difficult.  GAT tests general aptitude (moderate, with a reportedly tough GK section in 2025), while CAT and the Situation Test evaluate creativity and practical skills, varying in difficulty based on preparation and artistic ability."
+      question: "	Is the UCEED exam tough?",
+      answer: "The UCEED exam is generally considered moderately to highly difficult, depending on individual preparation, creativity, design aptitude, and drawing skills."
     },
-    {
-        question: "How can I apply for NIFT 2025?",
-        answer: "Applications were submitted online at exams.nta.ac.in/NIFT from November 22, 2024, to January 6, 2025 (late fee until January 9). Candidates registered, filled details, uploaded documents (photo, signature), and paid fees (₹3,000 for Open/EWS, ₹1,500 for SC/ST/PwD)."
-      },
-      {
-        question: "When will NIFT 2025 results be declared?",
-        answer: "Results were expected in late February or early March 2025 but are delayed. As of March 26, 2025, the NTA has not announced a specific date, though posts on X suggest an imminent release. Check exams.nta.ac.in/NIFT for updates."
-      },
+   
 
    
 
@@ -301,52 +294,7 @@ const ExamPrepLowerSections: React.FC = () => {
         </div>
       ))}
 
-      {/* Manually added FAQ with points */}
-      <div className="border-b border-gray-700">
-  <button
-    className="w-full flex items-center justify-between py-3 text-left"
-    onClick={() => setOpenManualFaq((prev) => !prev)}
-  >
-    <span className="text-base md:text-lg">What is the exam pattern for NIFT 2025?</span>
-    <span className="text-orange-500 text-xl">
-      {openManualFaq ? '−' : '+'}
-    </span>
-  </button>
-
-  {openManualFaq && (
-    <div className="pb-4 text-sm text-gray-400">
-      <ul className="list-disc pl-5">
-        <li>GAT: CBT, 2 hours (B.Des/M.Des) or 3 hours (B.F.Tech/M.F.Tech/MFM), with 100–150 MCQs (no negative marking).</li>
-        <li>CAT: Offline, 3 hours, for B.Des/M.Des, testing sketching and creativity.</li>
-        <li>Situation Test (B.Des): Hands-on, post-written exams, assessing material handling.</li>
-        <li>Personal Interview (PG): For M.Des, MFM, M.F.Tech, evaluating communication and aptitude.</li>
-      </ul>
-    </div>
-  )}
-</div>
-
-<div className="border-b border-gray-700">
-  <button
-    className="w-full flex items-center justify-between py-3 text-left"
-    onClick={() => setOpenManualFaqs((prev) => !prev)}
-  >
-    <span className="text-base md:text-lg">What are the eligibility criteria for NIFT 2025?</span>
-    <span className="text-orange-500 text-xl">
-      {openManualFaqs ? '−' : '+'}
-    </span>
-  </button>
-
-  {openManualFaqs && (
-    <div className="pb-4 text-sm text-gray-400">
-      <ul className="list-disc pl-5">
-        <li>B.Des/B.F.Tech: Passed/appearing in Class 12 (B.F.Tech requires Physics, Chemistry, Mathematics); max age 24 as of August 1, 2025 (5-year relaxation for SC/ST/PwD).</li>
-        <li>M.Des/MFM: Bachelor’s degree, no age limit.</li>
-        <li>M.F.Tech: B.F.Tech or equivalent, no age limit. Check nift.ac.in for specifics.</li>
-      </ul>
-    </div>
-  )}
-</div>
-
+     
     </div>
   </div>
 </section>
