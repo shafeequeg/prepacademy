@@ -10,6 +10,4 @@ const axiosInstance = axios.create({
   withCredentials: true, // If you need to handle cookies or sessions
 });
 
-
-
 export default axiosInstance;
