@@ -752,16 +752,18 @@ useEffect(() => {
     WebkitOverflowScrolling: "touch"
   }}
   role="tablist"
-  aria-label="Study Abroad Programs"
+  aria-label="Study Abroad Programs "
 >
   {tabs.map((tab, index) => (
     <div
       key={tab.id}
-      className="relative flex-shrink-0 w-auto min-w-[150px]"
+      className="relative  flex-shrink-0 w-auto min-w-[150px]"
       ref={(el) => {
         dropdownRefs.current[tab.id] = el;
       }}
     >
+    
+
       <button
         id={`tab-${tab.id}`}
         role="tab"
@@ -780,6 +782,7 @@ useEffect(() => {
             : "bg-gray-700 text-gray-300 hover:bg-gray-600"
         } rounded-full flex items-center justify-center`}
       >
+
         <span>{tab.label}</span>
         <svg
           className={`ml-1 w-4 h-4 transition-transform ${openDropdown === tab.id ? 'rotate-180' : ''}`}
@@ -883,18 +886,20 @@ useEffect(() => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors" 
-               onClick={openModal}
+              
               >
                 Enroll Now
               </button>
-              <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
+              <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors"
+               onClick={openModal}
+              >
                 Get a FREE Trial
               </button>
             </div>
 
             {/* Telegram Link with Underline */}
             <div className="mt-4">
-  <a 
+   <a 
     href="#" 
     className="flex items-center text-gray-300 hover:text-[#FF6B3D] text-sm border-b border-transparent hover:border-[#FF6B3D] transition duration-300"
       >
@@ -1247,7 +1252,7 @@ useEffect(() => {
              <form onSubmit={handleEnrollSubmit}>
                {formStep === 0 && (
                <div className="space-y-4">
-               <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your name?</h3>
+               <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What&apos;s your name?</h3>
                <input 
                  type="text" 
                  id="full_name"
@@ -1273,7 +1278,7 @@ useEffect(() => {
                
                {formStep === 1 && (
                  <div className="space-y-4">
-                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your email address?</h3>
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What&apos;s your email address?</h3>
                    <input 
                      type="email" 
                      id="email"
@@ -1339,7 +1344,7 @@ useEffect(() => {
                
                {formStep === 3 && (
                  <div className="space-y-4">
-                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What's your phone number?</h3>
+                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">What&apos;s your phone number?</h3>
                    <div className="flex">
                      <div className="flex items-center bg-gray-100 border border-gray-300 rounded-l-lg px-3">
                        <span className="text-sm text-gray-700">+91</span>

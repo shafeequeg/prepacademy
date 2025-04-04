@@ -7,9 +7,15 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 
 
-interface CourseDataType {
-  [key: string]: string;
-}
+type CourseDataType = {
+  [key: string]: {
+    description: string;
+    path: string;
+    exams: string[];
+    criteria: string[];
+  };
+};
+
 
 
 const PopularCourses = () => {
@@ -24,17 +30,107 @@ const PopularCourses = () => {
   console.log(activeTab);
   
   const courseData: CourseDataType = {
-    MBA: `The Master of Business Administration (MBA) is a highly sought-after qualification, with entrance exams in India being extremely competitive. These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT,
-     and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.`,
-    NID: "The National Institute of Design (NID) entrance exam is a crucial step for students aspiring for a career in design. The exam tests creativity, problem-solving, and design aptitude.",
-    NIFT: "The National Institute of Fashion Technology (NIFT) entrance exam assesses students' aptitude in design, creativity, and fashion-related skills for admission to top fashion institutes.",
-    NATA: "The National Aptitude Test in Architecture (NATA) is an entrance exam for students seeking admission to architecture programs in India, testing drawing and observation skills.",
-    CLAT: "The Common Law Admission Test (CLAT) is the gateway to prestigious law universities in India. It assesses logical reasoning, legal aptitude, and English proficiency.",
-    KLEE: "The Kerala Law Entrance Exam (KLEE) is conducted for admission to law colleges in Kerala, testing candidates' knowledge in legal aptitude, general English, and general knowledge.",
-    CUET: "The Common University Entrance Test (CUET) is conducted for undergraduate admissions in central universities, covering subjects like mathematics, science, and general knowledge.",
-    SAT: "The Scholastic Assessment Test (SAT) is a standardized test widely used for college admissions in the United States, assessing reading, writing, and mathematical skills.",
-    NDA: "The National Defence Academy (NDA) entrance exam is conducted for candidates aspiring to join the Indian Army, Navy, and Air Force, testing mathematics, general knowledge, and aptitude."
+    MBA: {
+      description: `The Master of Business Administration (MBA) is a highly sought-after qualification, with entrance exams in India being extremely competitive. These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT, and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.`,
+      path: "/collegecourse/management/cat",
+      exams: ["CAT", "XAT", "CMAT", "GMAT"],
+      criteria: [
+        "Bachelor's degree with a minimum percentage requirement (varies by institute).",
+        "Entrance exam scores are mandatory.",
+        "Work experience is preferred for some programs.",
+        "Group discussion and personal interview rounds are conducted."
+      ]
+    },
+    NID: {
+      description: "The National Institute of Design (NID) entrance exam is a crucial step for students aspiring for a career in design. The exam tests creativity, problem-solving, and design aptitude.",
+      path: "/schoolcourse/designandarchitecture/nid",
+      exams: ["NID DAT Prelims", "NID DAT Mains"],
+      criteria: [
+        "The entrance exams for the National Institute of Design (NID) are highly competitive, with the NID Design Aptitude Test (DAT) being the primary test for admission to B.Des and M.Des programs.",
+        "Candidates must meet the eligibility criteria, such as completing Class 12 for B.Des (with a maximum age of 20 years as of June 30, 2025; 3-year relaxation for OBC-NCL/SC/ST) or a bachelor’s degree for M.Des (no age limit).",
+        "Registration deadlines must be followed strictly, with the NID DAT 2025 application window having closed on December 3, 2024 (late fee until December 5, 2024). The exam was held on January 5, 2025.",
+        "Proper preparation with mock tests, previous years’ papers, and sketching practice increases the chances of success, especially for the DAT Prelims (written) and DAT Mains (studio test and interview)."
+      ]
+    },
+    NIFT: {
+      description: "The National Institute of Fashion Technology (NIFT) entrance exam assesses students' aptitude in design, creativity, and fashion-related skills for admission to top fashion institutes.",
+      path: "/schoolcourse/designandarchitecture/nift",
+      exams: ["NIFT Entrance Exam"],
+      criteria: [
+        "The entrance exam for the National Institute of Fashion Technology (NIFT) is conducted by the NTA, with the GAT (General Ability Test) and CAT (Creative Ability Test) being key components for B.Des and M.Des programs.",
+        "Candidates must meet the eligibility criteria, such as passing Class 12 for B.Des/B.F.Tech (max age 24 as of August 1, 2025; 5-year relaxation for SC/ST/PwD) or a bachelor’s degree for PG programs (no age limit).",
+        "Registration deadlines must be followed strictly, with the NIFT 2025 application window having closed on January 6, 2025 (late fee until January 9, 2025). The exam was conducted on February 9, 2025.",
+        "Proper preparation with mock tests, sketching practice, and study materials for GAT (quantitative, verbal, GK) and CAT (creativity) increases the chances of success."
+      ]
+    },
+    NATA: {
+      description: "The National Aptitude Test in Architecture (NATA) is an entrance exam for students seeking admission to architecture programs in India, testing drawing and observation skills.",
+      path: "/schoolcourse/designandarchitecture/nata",
+      exams: ["NATA"],
+      criteria: [
+        "The National Aptitude Test in Architecture (NATA) is conducted by the Council of Architecture (CoA) for admission to B.Arch programs, with multiple attempts allowed (three in 2025).",
+        "	Candidates must meet the eligibility criteria, such as passing Class 12 with Physics, Chemistry, and Mathematics, securing at least 50% aggregate (45% for reserved categories).",
+        "Registration deadlines must be followed strictly, with NATA 2025 Test 1 applications closing on March 15, 2025, and the exam scheduled for April 5, 2025 (Tests 2 and 3 in June and July).",
+        "Proper preparation with mock tests, drawing practice, and study materials for mathematics, general aptitude, and architectural awareness increases the chances of success."
+      ]
+    },
+    CLAT: {
+      description: "The Common Law Admission Test (CLAT) is the gateway to prestigious law universities in India. It assesses logical reasoning, legal aptitude, and English proficiency.",
+      path: "/schoolcourse-law/clat",
+      exams: ["CLAT"],
+      criteria: [
+        "The Common Law Admission Test (CLAT) is a highly competitive exam for admission to undergraduate (LLB) and postgraduate (LLM) programs at 24 National Law Universities (NLUs) and other institutions.",
+        "Candidates must meet the eligibility criteria, such as passing Class 12 with at least 45% marks for UG (40% for SC/ST) or a bachelor’s degree in law for PG (no age limit).",
+        "Registration deadlines must be followed strictly, with CLAT 2025 applications having closed on October 15, 2024, and the exam conducted on December 1, 2024.",
+        "Proper preparation with mock tests and study materials for English, GK, legal reasoning, logical reasoning, and quantitative techniques increases the chances of success."
+      ]
+    },
+    KLEE: {
+      description: "The Kerala Law Entrance Exam (KLEE) is conducted for admission to law colleges in Kerala, testing candidates' knowledge in legal aptitude, general English, and general knowledge.",
+      path: "/schoolcourse/klee",
+      exams: ["KLEE"],
+      criteria: [
+        "The Kerala Law Entrance Exam (KLEE) is conducted by the Commissioner for Entrance Examinations (CEE), Kerala, for admission to 5-year integrated LLB, 3-year LLB, and LLM programs in Kerala.",
+        "Candidates must meet the eligibility criteria, such as passing Class 12 with at least 45% marks for 5-year LLB (40% for SC/ST) or a bachelor’s degree for 3-year LLB/LLM (no age limit).",
+        "Registration deadlines must be followed strictly, with KLEE 2025 applications for 5-year LLB closing on March 10, 2025, and the exam scheduled for April 20, 2025.",
+        "Proper preparation with mock tests and study materials for English, GK, aptitude for legal studies, and arithmetic increases the chances of success."
+      ]
+    },
+    CUET: {
+      description: "The Common University Entrance Test (CUET) is conducted for undergraduate admissions in central universities, covering subjects like mathematics, science, and general knowledge.",
+      path: "/collegecourse/management/cuet",
+      exams: ["CUET"],
+      criteria: [
+        "The Common University Entrance Test (CUET) is conducted by the NTA for admission to UG and PG programs across central, state, and other participating universities in India.",
+        "Candidates must meet the eligibility criteria, such as passing Class 12 for UG (specific subject requirements vary by program) or a bachelor’s degree for PG (age limits may apply for some universities).",
+        "Registration deadlines must be followed strictly, with CUET-UG 2025 applications having closed on March 24, 2025, and the exam scheduled from May 8 to June 1, 2025.",
+        "Proper preparation with mock tests and study materials for language, domain-specific subjects, and the general test (GK, reasoning) increases the chances of success."
+      ]
+    },
+    SAT: {
+      description: "The Scholastic Assessment Test (SAT) is a standardized test widely used for college admissions in the United States, assessing reading, writing, and mathematical skills.",
+      path: "/studyabroad/sat",
+      exams: ["SAT"],
+      criteria: [
+        "The Scholastic Assessment Test (SAT) is a standardized test for admission to undergraduate programs, primarily in the US, Canada, and some Indian universities (e.g., Ashoka, OP Jindal).",
+        "Candidates must meet the eligibility criteria, such as being in or having completed Class 12 (no strict age limit, but typically for high school students).",
+        "Registration deadlines must be followed strictly, with the SAT May 2025 test registration closing on April 18, 2025, and the exam scheduled for May 3, 2025 (digital format).",
+        "Proper preparation with mock tests and study materials for Reading, Writing & Language, and Math (with optional Essay) increases the chances of success."
+      ]
+    },
+    NDA: {
+      description: "The National Defence Academy (NDA) entrance exam is conducted for candidates aspiring to join the Indian Army, Navy, and Air Force, testing mathematics, general knowledge, and aptitude.",
+      path: "/schoolcourse/defence/nda",
+      exams: ["NDA Exam"],
+      criteria: [
+        "The National Defence Academy (NDA) exam is conducted by the UPSC for admission to the Army, Navy, and Air Force wings of NDA and the Indian Naval Academy Course (INAC).",
+        "Candidates must meet the eligibility criteria, such as passing/appearing in Class 12 (Physics, Chemistry, Mathematics for Air Force/Navy), aged 16.5–19.5 years as of July 1, 2025, and being unmarried.",
+        "Registration deadlines must be followed strictly, with NDA I 2025 applications having closed on January 28, 2025, and the exam conducted on April 13, 2025 (NDA II on September 7, 2025).",
+        "Proper preparation with mock tests and study materials for Mathematics and General Ability Test (English, GK, Science) increases the chances of success."
+      ]
+    }
   };
+  
 
   const [formData, setFormData] = useState({
     fullname: '',
@@ -98,6 +194,7 @@ console.log(formData);
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  
   return (
     <div className="w-full max-w-7xl mx-auto px-4  py-12 text-white">
       {/* Popular Courses Header */}
@@ -122,35 +219,29 @@ console.log(formData);
 
         {/* Course Info Section */}
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <p className="text-gray-300">{courseData[activeCourse]}</p>
-            <div className="flex gap-4">
-              <Link href={'/collegecourse'} >
+  <div className="space-y-4">
+    <p className="text-gray-300">{courseData[activeCourse]?.description}</p>
+    <div className="flex gap-4">
+      <Link href={courseData[activeCourse]?.path || '/collegecourse'}>
+        <button className="px-6 py-2 bg-[#F55D3E] hover:bg-[#a52a1a] rounded-md transition-colors">
+          Know More
+        </button>
+      </Link>
+    </div>
+  </div>
 
-              <button className="px-6 py-2 bg-[#F55D3E] hover:bg-[#a52a1a] rounded-md transition-colors">
-              Know More
-              </button>
-              </Link>
-             {/* <Link href={'/collegecourse'}>
-             <button className="px-6 py-2 border border-[#F55D3E] text-[#F55D3E] hover:bg-[#F55D3E] hover:text-white rounded-md transition-colors">
-                Know More
-              </button>
-             </Link> */}
-            
-            </div>
-          </div>
-          
+  <div className="space-y-4">
+    <h3 className="text-[#F55D3E] text-xl font-semibold">Exams and Criteria</h3>
+    <ul className="space-y-3 text-gray-300">
+      {/* <li><strong>Exams:</strong> {courseData[activeCourse]?.exams?.join(", ") || "N/A"}</li>
+      <li><strong>Eligibility Criteria:</strong></li> */}
+      {courseData[activeCourse]?.criteria?.map((criterion, index) => (
+        <li key={index}>• {criterion}</li>
+      ))}
+    </ul>
+  </div>
+</div>
 
-          <div className="space-y-4">
-            <h3 className="text-[#F55D3E] text-xl font-semibold">Exams and Criteria</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li>• The entrance exams vary depending on the course, with some being highly competitive.</li>
-              <li>• Candidates must meet the eligibility criteria, such as educational qualifications and minimum scores.</li>
-              <li>• Registration deadlines must be followed strictly to avoid disqualification.</li>
-              <li>• Proper preparation with mock tests and study materials increases the chances of success.</li>
-            </ul>
-          </div>
-        </div>
 
       {/* Team Section */}
       <div className="bg-gradient-to-r  rounded-lg mt-12 p-5 md:p-6 lg:p-8 relative flex justify-center items-center">
