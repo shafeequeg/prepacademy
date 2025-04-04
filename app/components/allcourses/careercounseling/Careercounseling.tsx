@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 // import Link from 'next/link';
 import { toast } from "react-toastify";
 // import emailjs from 'emailjs-com';
-import axiosInstance from "../../apiconfig/axios";
-import { API_URLS } from "../../apiconfig/api_urls";
+// import axiosInstance from "../../apiconfig/axios";
+// import { API_URLS } from "../../apiconfig/api_urls";
 import Image from "next/image";
 import AssistanceForm from "../../assistanceForm/AssistanceForm";
 
@@ -24,10 +24,6 @@ import AssistanceForm from "../../assistanceForm/AssistanceForm";
 //   id: string;
 // }
 
-interface Program {
-  id: string;
-  name: string;
-}
 
 // const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
 //   const cardContent = (

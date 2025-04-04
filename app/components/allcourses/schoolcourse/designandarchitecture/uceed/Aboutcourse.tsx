@@ -8,8 +8,8 @@ const ExamPrepLowerSections: React.FC = () => {
  const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
-  const [openManualFaq, setOpenManualFaq] = useState(false);
-  const [openManualFaqs, setOpenManualFaqs] = useState(false);
+  // const [openManualFaq, setOpenManualFaq] = useState(false);
+  // const [openManualFaqs, setOpenManualFaqs] = useState(false);
 
   const [activeTab, setActiveTab] = useState<string>("beginners-guide"); // Initial state is a string
   
