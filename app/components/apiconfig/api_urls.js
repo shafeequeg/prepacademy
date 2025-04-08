@@ -22,4 +22,14 @@ export const API_URLS = {
   USER_DATA: {
     GET_USERDATA: "api/user-responses/",
   },
+  SEO: {
+    ABOUTMETA: "api/aboutmeta/",
+    BLOGMETA: "api/blogmeta/",
+    CONTACTMETA: "api/contactmeta/",
+    COURSEMETA: "api/coursemeta/",
+    HOMEMETA: "api/homemeta/",
+  },
+  BLOG: {
+    GET_BLOG: "api/blogcard/"
+  }
 };
