@@ -339,14 +339,14 @@ const CatExamApplySection: React.FC = () => {
 
 const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
-const [formData, setFormData] = useState({
-    full_name: '',
-    mobile_number: '',
-    email: '',
-    college_studied:'',
-    preferred_program: '',
-    submitted_at:'',
-  });
+// const [formData, setFormData] = useState({
+//     full_name: '',
+//     mobile_number: '',
+//     email: '',
+//     college_studied:'',
+//     preferred_program: '',
+//     submitted_at:'',
+//   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

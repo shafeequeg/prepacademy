@@ -322,6 +322,9 @@ console.error("Failed to fetch programs:", error);
 }
 };
 
+console.log(programs);
+
+
 const handleInputChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 ) => {

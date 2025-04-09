@@ -255,14 +255,14 @@ const CatExamApplySection: React.FC = () => {
 
   const [programs, setPrograms] = useState<Program[]>([]);
 
-  const [formData, setFormData] = useState({
-    full_name: "",
-    mobile_number: "",
-    email: "",
-    school_studied: "",
-    preferred_program: "",
-    submitted_at: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   full_name: "",
+  //   mobile_number: "",
+  //   email: "",
+  //   school_studied: "",
+  //   preferred_program: "",
+  //   submitted_at: "",
+  // });
 
   // const questions = {
   //  question1: "What is your learning goal?",

@@ -148,6 +148,7 @@ const CatExamApplySection: React.FC = () => {
   // const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
   
+  console.log(programs);
   
 
   const fetchPrograms = async () => {

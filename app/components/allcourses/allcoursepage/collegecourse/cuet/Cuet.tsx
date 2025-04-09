@@ -271,14 +271,16 @@ const CUETExamApplySection: React.FC = () => {
 // const [isModalOpen, setIsModalOpen] = useState(false);
 const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
-const [formData, setFormData] = useState({
-    full_name: '',
-    mobile_number: '',
-    email: '',
-    school_studied:'',
-    preferred_program: '',
-    submitted_at:'',
-  });
+console.log(programs);
+
+// const [formData, setFormData] = useState({
+//     full_name: '',
+//     mobile_number: '',
+//     email: '',
+//     school_studied:'',
+//     preferred_program: '',
+//     submitted_at:'',
+//   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -318,12 +320,12 @@ console.error("Failed to fetch programs:", error);
 }
 };
 
-const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-) => {
-  const { name, value } = e.target;
-  setFormData({ ...formData, [name]: value });
-};
+// const handleInputChange = (
+//   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+// ) => {
+//   const { name, value } = e.target;
+//   setFormData({ ...formData, [name]: value });
+// };
 const validateFullName = (name: string): string => {
   if (!name || name.trim() === '') {
     return "Full name is required";
