@@ -9,7 +9,6 @@ export default function ComingSoon() {
   useEffect(() => {
     setMounted(true);
     
-    // Animation for confetti elements
     const confettiElements = document.querySelectorAll('.confetti');
     confettiElements.forEach((element) => {
       const delay = Math.random() * 2;
@@ -45,19 +44,18 @@ export default function ComingSoon() {
         }
       `}</style>
 
-      {/* Confetti elements */}
       {Array.from({ length: 30 }).map((_, index) => {
         const size = Math.floor(Math.random() * 20) + 10;
         const top = Math.random() * 100;
         const left = Math.random() * 100;
-        const type = Math.floor(Math.random() * 4); // 0: line, 1: plus, 2: dot, 3: cross
+        const type = Math.floor(Math.random() * 4); 
         const color = [
-          '#F55D3E', // orange
-          '#00E6E6', // cyan
-          '#FF47D2', // pink
-          '#FFFF00', // yellow
-          '#50E991', // green
-          '#FFFFFF', // white
+          '#F55D3E', 
+          '#00E6E6', 
+          '#FF47D2', 
+          '#FFFF00', 
+          '#50E991', 
+          '#FFFFFF', 
         ][Math.floor(Math.random() * 6)];
 
         return (
@@ -69,7 +67,7 @@ export default function ComingSoon() {
               left: `${left}%`,
               color,
               width: `${size}px`,
-              height: `${size / (type === 0 ? 3 : 1)}px`, // Lines are thinner
+              height: `${size / (type === 0 ? 3 : 1)}px`, 
               transform: `rotate(${Math.random() * 360}deg)`,
             }}
           >

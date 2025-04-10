@@ -37,6 +37,10 @@ export default function Banner() {
     }
   };
 
+  console.log(activeIndex);
+  console.log(seo);
+  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     console.log(`Input changed: ${name} = ${value}`); // Debugging log

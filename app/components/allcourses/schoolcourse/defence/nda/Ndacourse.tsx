@@ -263,14 +263,14 @@ const [programs, setPrograms] = useState<Program[]>([]); // State to store fetch
 
 console.log(programs)
 // const [formStep, setFormStep] = useState(0);
- const [formData, setFormData] = useState({
-      full_name: '',
-      mobile_number: '',
-      email: '',
-      school_studied:'',
-      preferred_program: '',
-      submitted_at:'',
-    });
+//  const [formData, setFormData] = useState({
+//       full_name: '',
+//       mobile_number: '',
+//       email: '',
+//       school_studied:'',
+//       preferred_program: '',
+//       submitted_at:'',
+//     });
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

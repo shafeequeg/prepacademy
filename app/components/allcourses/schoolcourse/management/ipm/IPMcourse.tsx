@@ -253,18 +253,19 @@ const CatExamApplySection: React.FC = () => {
   // const [lastScrollY, setLastScrollY] = useState(0);
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [formData, setFormData] = useState({
-    full_name: "",
-    mobile_number: "",
-    email: "",
-    school_studied: "",
-    preferred_program: "",
-    submitted_at: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   full_name: "",
+  //   mobile_number: "",
+  //   email: "",
+  //   school_studied: "",
+  //   preferred_program: "",
+  //   submitted_at: "",
+  // });
 
 const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
 const [isModalOpen, setIsModalOpen] = useState(false);
+console.log(programs);
 
 const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 const [screeningStep, setScreeningStep] = useState(1);
@@ -300,12 +301,12 @@ console.error("Failed to fetch programs:", error);
 }
 };
 
-const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-) => {
-  const { name, value } = e.target;
-  setFormData({ ...formData, [name]: value });
-};
+// const handleInputChange = (
+//   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+// ) => {
+//   const { name, value } = e.target;
+//   setFormData({ ...formData, [name]: value });
+// };
 const validateFullName = (name: string): string => {
   if (!name || name.trim() === '') {
     return "Full name is required";
@@ -480,37 +481,37 @@ useEffect(() => {
   fetchUser();
   }, []);
   
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // e.preventDefault();
   
-  try {
-    const response = await axiosInstance.post(API_URLS.ALLCOURSE.POST_COURSE, {
-      ...formData,
-      preferred_program: formData.preferred_program, // Ensure this is the ID of the selected program
-    });
+  // try {
+  //   const response = await axiosInstance.post(API_URLS.ALLCOURSE.POST_COURSE, {
+  //     ...formData,
+  //     preferred_program: formData.preferred_program, // Ensure this is the ID of the selected program
+  //   });
   
-    if (response.status >= 200 && response.status < 300) {
-      console.log("Message sent successfully!", response.data);
-      toast.success("Your message has been sent successfully!");
+  //   if (response.status >= 200 && response.status < 300) {
+  //     console.log("Message sent successfully!", response.data);
+  //     toast.success("Your message has been sent successfully!");
   
-      // Reset form fields
-      setFormData({
-        full_name: "",
-        mobile_number: "",
-        email: "",
-        school_studied: "",
-        preferred_program: "",
-        submitted_at: "",
-      });
-    } else {
-      console.error("Unexpected status code:", response.status);
-      toast.error("Failed to send the message. Please try again.");
-    }
-  } catch (error) {
-    console.error("Failed to send message:", error);
-    toast.error("Failed to send the message. Please try again.");
-  }
-  };
+  //     // Reset form fields
+  //     setFormData({
+  //       full_name: "",
+  //       mobile_number: "",
+  //       email: "",
+  //       school_studied: "",
+  //       preferred_program: "",
+  //       submitted_at: "",
+  //     });
+  //   } else {
+  //     console.error("Unexpected status code:", response.status);
+  //     toast.error("Failed to send the message. Please try again.");
+  //   }
+  // } catch (error) {
+  //   console.error("Failed to send message:", error);
+  //   toast.error("Failed to send the message. Please try again.");
+  // }
+  // };
     
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {

@@ -295,6 +295,8 @@ const [validationErrors, setValidationErrors] = useState({
 
 const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
+console.log(programs);
+
 
 const fetchPrograms = async () => {
 try {
