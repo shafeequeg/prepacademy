@@ -140,7 +140,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
   },[])
 
   // Find the blog with the matching ID
-  const blog = allBlog.length > 0 ? allBlog.find((b) => b.id == Number(id)) : blogsdetails.find((b) => b.id === Number(id));
+  const blog = allBlog.length > 0 ? allBlog.find((b) => b.id === Number(id)) : blogsdetails.find((b) => b.id === Number(id));
 
   // Explicitly type the content as BlogContent or undefined
   const content = blogContent.find((c) => c.id === Number(id)) as

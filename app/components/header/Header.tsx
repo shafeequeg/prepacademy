@@ -431,7 +431,7 @@ export default function Header() {
     { label: "Contact Us", path: "/contact" },
     { label: "Find a Center", path: "/findcenter" },
     { label: "Become a Franchise", path: "/refund" },
-    { label: "Become a Employee", path: "/refund" },
+    { label: "Become a Employee", path: "/employee" },
 
   ].map(({ label, path }) => (
     <div key={path} 
