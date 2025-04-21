@@ -25,6 +25,7 @@ export default function Header() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  console.log(isOpen);
   
   useEffect(() => {
     const style = document.createElement('style');
