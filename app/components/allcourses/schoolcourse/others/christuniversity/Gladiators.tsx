@@ -515,28 +515,28 @@ const ExamPrepHomepage: React.FC = () => {
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              Start Date:  December 2024 
+              Start Date: December 2024
             </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-             Deadline : April 2025 (varies by course & round)
+              Deadline : April 2025 (varies by course & round)
             </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            CUET Exam Dates
+              CUET Exam Dates
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-               Multiple slots from January to May 2025
+              Multiple slots from January to May 2025
             </p>
           </div>
 
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Mode of Exam
+              Mode of Exam
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
@@ -546,7 +546,7 @@ const ExamPrepHomepage: React.FC = () => {
 
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Application Mode
+              Application Mode
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
@@ -571,7 +571,6 @@ const ExamPrepHomepage: React.FC = () => {
                 key={blog.id}
                 className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                {/* Blog Image */}
                 <div className="relative w-full aspect-video">
                   <Image
                     src={blog.image}
@@ -581,19 +580,15 @@ const ExamPrepHomepage: React.FC = () => {
                   />
                 </div>
 
-                {/* Content */}
                 <div className="p-6">
-                  {/* Title */}
                   <h3 className="text-xl font-bold mb-3 text-white">
                     {blog.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="text-gray-300 text-sm mb-4 line-clamp-2">
                     {blog.description}
                   </p>
 
-                  {/* Read Full Button */}
                   <a
                     href={`/blogdetails/${blog.id}`}
                     className="inline-flex items-center text-[#F55D3E] hover:text-[#FF7D5E] font-medium"
@@ -619,7 +614,6 @@ const ExamPrepHomepage: React.FC = () => {
             ))}
           </div>
 
-          {/* View More Button */}
           <div className="text-center">
             <a
               href="/blogs"

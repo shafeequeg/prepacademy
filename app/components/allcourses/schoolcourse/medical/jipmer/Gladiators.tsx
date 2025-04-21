@@ -511,27 +511,28 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            JIPMER MBBS 2025 Application  Date
+              JIPMER MBBS 2025 Application Date
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              Expected May 2025,  Last Date to Apply June 2025 (tentative)           </p>
+              Expected May 2025, Last Date to Apply June 2025 (tentative){" "}
+            </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Admit Card Release
+              Admit Card Release
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-                July 2025
+              July 2025
             </p>
           </div>
 
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            JIPMER Entrance Exam 2025
+              JIPMER Entrance Exam 2025
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>

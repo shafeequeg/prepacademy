@@ -1,6 +1,6 @@
 "use client";
 
-import React, {  useState } from "react";
+import React, { useState } from "react";
 // import Link from 'next/link';
 // import { toast } from "react-toastify";
 // import emailjs from 'emailjs-com';
@@ -23,7 +23,6 @@ import AssistanceForm from "../../assistanceForm/AssistanceForm";
 //   onClick: () => void;
 //   id: string;
 // }
-
 
 // const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
 //   const cardContent = (
@@ -108,7 +107,6 @@ const tabs = [
 // };
 
 const CatExamApplySection: React.FC = () => {
-
   const [activeMainTab, setActiveMainTab] = useState("engineering");
   // const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
@@ -254,8 +252,7 @@ const CatExamApplySection: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button
-                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
                     Book a Counseling Session
                   </button>
                   <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">

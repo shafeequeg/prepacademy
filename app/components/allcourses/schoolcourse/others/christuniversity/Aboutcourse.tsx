@@ -65,8 +65,6 @@ const ExamPrepLowerSections: React.FC = () => {
       answer:
         "For most UG programs, the candidate must have passed Class 12 or be appearing in the current academic year. Course-specific cutoffs may apply.",
     },
-
-  
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -355,10 +353,10 @@ const ExamPrepLowerSections: React.FC = () => {
               <span className="text-[#F55D3E] font-bold">Students Say</span>
             </h2>
             <p className="text-gray-300 leading-relaxed">
-              Are you ready to conquer the world? Your Christ University 2025 journey
-              might seem daunting, but remember, every great achievement starts
-              with a single step. Believe in yourself, because you hold the
-              power to make your dreams a reality!
+              Are you ready to conquer the world? Your Christ University 2025
+              journey might seem daunting, but remember, every great achievement
+              starts with a single step. Believe in yourself, because you hold
+              the power to make your dreams a reality!
             </p>
           </div>
 

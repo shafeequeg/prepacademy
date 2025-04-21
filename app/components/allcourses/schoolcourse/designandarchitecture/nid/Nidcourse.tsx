@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 // import Image from 'next/image';
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -469,7 +469,7 @@ const CatExamApplySection: React.FC = () => {
       setScreeningStep((prev) => prev - 1);
     }
   };
-console.log(programs);
+  console.log(programs);
 
   // const handleInputChange = (
   //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -863,7 +863,7 @@ console.log(programs);
               </div>
 
               {/* Right Content - Form */}
-              <AssistanceForm course="nid(architecture)"/>
+              <AssistanceForm course="nid(architecture)" />
             </div>
           </div>
         </div>

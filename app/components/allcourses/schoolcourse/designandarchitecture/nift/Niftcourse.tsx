@@ -584,7 +584,7 @@ const CatExamApplySection: React.FC = () => {
   // };
 
   console.log(programs);
-  
+
   const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
