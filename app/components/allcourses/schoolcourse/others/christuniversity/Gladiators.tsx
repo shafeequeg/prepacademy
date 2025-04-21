@@ -550,7 +550,7 @@ const ExamPrepHomepage: React.FC = () => {
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              Online through Christ University's official website
+              Online through Christ University&apos;s official website
             </p>
           </div>
         </div>
