@@ -14,7 +14,7 @@ import axiosInstance from "./apiconfig/axios";
 
 interface SeoData {
   meta_description: string;
-  // other fields like title, description, etc.
+ 
 }
 
 export default function Home() {

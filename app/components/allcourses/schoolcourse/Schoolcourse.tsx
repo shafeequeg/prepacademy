@@ -130,8 +130,8 @@ const tabs = [
     path: "/medical",
     dropdownItems: [
       { label: "NEET (UG)", path: "schoolcourse/medical/neet" },
-      { label: "PARAMEDICAL ENTRANCE", path: "/medical/neet" },
-      { label: "JIPMER", path: "/medical/neet" },
+      { label: "PARAMEDICAL ENTRANCE", path: "schoolcourse/medical/paramedical" },
+      { label: "JIPMER", path: "schoolcourse/medical/jipmer" },
     ],
   },
 
@@ -209,7 +209,7 @@ const tabs = [
     path: "/others",
     dropdownItems: [
       { label: "ASHOKA UNIVERSITY ", path: "/schoolcourse/others/ashoka" },
-      { label: "CHRIST UNIVERSITY ", path: "/schoolcourse/others/christ" },
+      { label: "CHRIST UNIVERSITY ", path: "/schoolcourse/others/christuniversity" },
       { label: "SYMBIOSIS ", path: "/schoolcourse/others/symbiosis" },
       { label: "NMIMS ", path: "/schoolcourse/others/nmims" },
       { label: "ST. XAVIER'S ", path: "/schoolcourse/others/xaviers" },

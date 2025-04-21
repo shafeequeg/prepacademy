@@ -649,11 +649,11 @@ const CatExamApplySection: React.FC = () => {
 
   const relatedVideos = [
     {
-      title: "Preparing for the Neet 2025",
+      title: "Preparing for the Jipmer 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for Neet 2025",
+      title: "Strategies for Jipmer 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -664,11 +664,11 @@ const CatExamApplySection: React.FC = () => {
 
   const demoVideos = [
     {
-      title: "Preparing for the Neet 2025",
+      title: "Preparing for the Jipmer 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for Neet 2025",
+      title: "Strategies for Jipmer 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -699,19 +699,18 @@ const CatExamApplySection: React.FC = () => {
                 Learn from the Experts
               </p> */}
                   <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">
-                    Crack NEET(UG) 2025 with
+                    Crack JIPMER Entrance 2025 with
                     {/* Prep Academy  */}
                     <span className="text-[#ED1C24] ml-2">Prep</span>
                     <span className="text-[#15938F]">Academy</span>
                   </h2>
                   <p className="text-gray-300 mb-8">
-                    At Prep Academy, we provide comprehensive NEET UG coaching
-                    to help aspiring medical students achieve their dreams. Our
-                    expert faculty, well-structured curriculum, and rigorous
-                    practice sessions ensure that students are fully prepared to
-                    excel in the NEET UG exam. We focus on concept clarity, time
-                    management, and problem-solving skills, making learning both
-                    effective and engaging.
+                    At Prep Academy, we specialize in JIPMER entrance exam
+                    coaching, equipping students with the tools, techniques, and
+                    confidence needed to excel. With expert mentors,
+                    personalized study plans, and result-driven strategies, we
+                    ensure you stay ahead in one of India&pos;s most competitive
+                    medical entrance tests.
                   </p>
                 </div>
 
@@ -995,12 +994,12 @@ const CatExamApplySection: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-white text-center text-lg font-medium mb-5">
-                  Neet Master Class
+                  JIPMER Master Class
                 </h3>
                 <a
                   href="#"
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
-                 
+                
                 >
                   Book Free TRIAL
                 </a>

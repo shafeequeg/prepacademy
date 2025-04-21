@@ -45,23 +45,20 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "Who conducts NEET UG?",
-      answer: "NEET UG is conducted by the National Testing Agency (NTA) for admissions into MBBS, BDS, AYUSH, and other medical courses in India."
+      question: "What is JIPMER?",
+      answer: "JIPMER (Jawaharlal Institute of Postgraduate Medical Education & Research) conducts entrance exams for admission into MBBS and other health science programs in Puducherry and Karaikal."
     },
     {
-      question: "	What is the eligibility for NEET UG 2025?",
-      answer: "Candidates must have completed 10+2 with Physics, Chemistry, Biology, and English as mandatory subjects and must meet the required age and percentage criteria."
+      question: "Is JIPMER still a separate exam from NEET?",
+      answer: "Since 2020, JIPMER MBBS admissions are conducted via NEET-UG. However, we offer specialized prep for the JIPMER-based structure including subject focus and mock series."
     },
    
     {
-      question: "How many times can I attempt NEET?",
-      answer: " There is no limit on the number of attempts for NEET UG.. There is no limit on the number of attempts for NEET UG."
+      question: "What subjects are covered in your JIPMER course?",
+      answer: "Our course covers Biology, Chemistry, Physics, Logical Reasoning, and English Comprehension – the key components of the JIPMER pattern."
     },
 
-    {
-        question: "What is the best way to prepare for NEET UG?",
-        answer: " Enroll in Prep Academy's NEET coaching for expert guidance, structured study plans, mock tests, and personalized mentoring"
-      },
+  
     
 
   ];
@@ -306,7 +303,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your Neet 2025 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your JIPMER  2025 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 

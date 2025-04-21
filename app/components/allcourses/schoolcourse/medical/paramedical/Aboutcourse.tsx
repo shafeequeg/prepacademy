@@ -45,23 +45,20 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "Who conducts NEET UG?",
-      answer: "NEET UG is conducted by the National Testing Agency (NTA) for admissions into MBBS, BDS, AYUSH, and other medical courses in India."
+      question: "Which exams do you prepare students for",
+      answer: "We cover national and state-level paramedical entrance exams, including NEET (Allied Health), IPU CET, AIIMS Paramedical, and various state-specific exams."
     },
     {
-      question: "	What is the eligibility for NEET UG 2025?",
-      answer: "Candidates must have completed 10+2 with Physics, Chemistry, Biology, and English as mandatory subjects and must meet the required age and percentage criteria."
+      question: "Is there an online course available?",
+      answer: "Yes! We offer live online classes, recorded sessions, e-books, and doubt-clearing through chat support for remote students."
     },
    
     {
-      question: "How many times can I attempt NEET?",
-      answer: " There is no limit on the number of attempts for NEET UG.. There is no limit on the number of attempts for NEET UG."
+      question: "Do you provide study materials and mock tests?",
+      answer: " Absolutely. All enrolled students get updated notes, chapter-wise practice sheets, and full-length mock exams with analysis."
     },
 
-    {
-        question: "What is the best way to prepare for NEET UG?",
-        answer: " Enroll in Prep Academy's NEET coaching for expert guidance, structured study plans, mock tests, and personalized mentoring"
-      },
+  
     
 
   ];
@@ -306,7 +303,7 @@ const ExamPrepLowerSections: React.FC = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your Neet 2025 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your Paramedical 2025 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 

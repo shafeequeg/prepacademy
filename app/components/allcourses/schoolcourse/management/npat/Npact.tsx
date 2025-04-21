@@ -1026,6 +1026,7 @@ useEffect(() => {
                 <a
                   href="#"
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
+                
                 >
                   Book Free TRIAL
                 </a>

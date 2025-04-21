@@ -17,6 +17,7 @@ type CourseDataType = {
   };
 };
 
+
 interface SeoData {
   image_alt_text: string;
   // other fields like title, description, etc.
@@ -1326,8 +1327,9 @@ const PopularCourses = () => {
           <div className="absolute right-0 top-0 h-full w-[1px] bg-[#3A1F1D]"></div>
         </div>
 
+
         {/* Right Section - with gap */}
-        <div className="bg-[#F55D3E] p-6 flex flex-col items-center justify-center rounded-md text-center relative ml-4">
+        <div className="bg-[#F55D3E] p-6 flex flex-col items-center justify-center rounded-md text-center relative md:ml-4 ">
           <h3 className="text-2xl font-bold mb-4 font-dmserif italic text-white">
             Join the
             <br />

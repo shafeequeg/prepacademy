@@ -436,26 +436,26 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     </div>
 {/* Ellipse */}
       {/* FAQs Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4   sm:px-6 lg:px-8 py-8">
         <h2 className="text-center text-[#F55D3E] text-4xl font-semibold font-serif italic mb-6">FAQs</h2>
 
         <div className="space-y-2">
     {[
       {
-        question: "What is the eligibility criteria for CAT 2025?",
-        answer: "Candidates must hold a bachelor's degree with at least 50% marks (45% for SC, ST, and PWD categories). Final-year undergraduate students are also eligible to apply."
+        question: "Where is your learning center located?",
+        answer: "You can find our location, along with a map, on the Contact page. If we are an online-only platform, we’ll specify that all support is provided digitally."
       },
       {
-        question: "What is the exam pattern for CAT 2025?",
-        answer: "The CAT 2025 exam is expected to be a computer-based test comprising three sections: VARC, DILR, and Quantitative Aptitude"
+        question: "Can I request a callback or speak with an advisor?",
+        answer: " Yes,  simply fill out the contact form and select Request a Callback. One of our advisors will reach out to you within 24 hours."
       },
       {
-        question: "When will the CAT 2025 exam be conducted?",
-        answer: "The CAT 2025 exam is tentatively scheduled for November 30, 2025"
+        question: "How do I report a technical issue with the website or course videos?",
+        answer: " For technical issues, please use the contact form and select “Technical Support” as the subject, or email prepacademy@gmail.com directly."
       },
       {
-        question: "Is there any age limit to appear for CAT 2025?",
-        answer: "No, there is no age limit for appearing in the CAT exam."
+        question: "what  should I do if I made a mistake in my course registration?",
+        answer: "Please reach out through the Contact page as soon as possible. Our team can help you correct any errors in your registration  details."
       },
     ].map((faq, index) => (
       <div key={index} className="border-b border-gray-800 bg-gradient-to-b from-[#3A1E1D] to-[#2B1615] p-2 rounded-lg">
