@@ -1,4 +1,3 @@
-// CatExamApplySection.tsx
 
 "use client";
 
@@ -7,16 +6,11 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
-// import emailjs from 'emailjs-com'; // Import EmailJS
 
 import Image from "next/image";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 import AssistanceForm from "../../assistanceForm/AssistanceForm";
-// interface VideoCardProps {
-//   title: string;
-//   thumbnail: string;
-// }
 
 interface CourseCardProps {
   // code: string;
@@ -108,6 +102,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 //   );
 // };
 
+//schoocourse
 const tabs = [
   {
     id: "engineering",
@@ -142,9 +137,9 @@ const tabs = [
     dropdownItems: [
       { label: "IPM ", path: "/schoolcourse/ipm" },
       { label: "CHRIST", path: "/schoolcourse/christ" },
-      { label: "SET", path: "/schoolcourse/set" },
+      { label: "SET", path: "/schoolcourse/management/set" },
       { label: "NPAT", path: "/schoolcourse/management/npat" },
-      { label: "MHCET", path: "/schoolcourse/mhcet" },
+      { label: "MHCET", path: "/schoolcourse/management/mhcet" },
     ],
   },
 
@@ -218,6 +213,7 @@ const tabs = [
       { label: "ST. XAVIER'S ", path: "/schoolcourse/others/xaviers" },
     ],
   },
+ 
 
   {
     id: "DESIGN",

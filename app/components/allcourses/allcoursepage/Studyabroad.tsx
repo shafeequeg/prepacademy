@@ -13,28 +13,28 @@ const StudyAbroadSection: React.FC = () => {
     {
       title: "IELTS",
       description: "English proficiency test for study, work, and migration",
-      path: "/courses/ielts",
+      path: "/studyabroad",
     },
     {
       title: "SAT",
       description:
         "Standardized test for college admissions, mainly in the U.S.",
-      path: "/studyabroad/sat",
+      path: "/studyabroad",
     },
     {
       title: "ACT",
       description: "Entrance exam for admission into various universities",
-      path: "/courses/act",
+      path: "/studyabroad",
     },
     {
       title: "GRE",
       description: "Graduate school admission test for various disciplines",
-      path: "/studyabroad/gre",
+      path: "/studyabroad",
     },
     {
       title: "GMAT",
       description: "Global entrance exam for MBA and business programs",
-      path: "/studyabroad/gmat",
+      path: "/studyabroad",
     },
   ];
 
@@ -42,29 +42,29 @@ const StudyAbroadSection: React.FC = () => {
     {
       title: "Resume Building",
       description: "Craft a professional resume tailored to your career goals.",
-      path: "/career/resume-building",
+      path: "/careercounseling",
     },
     {
       title: "Interview Preparation",
       description:
         "Get expert guidance to ace your job interviews with confidence.",
-      path: "/career/interview-prep",
-    },
+        path: "/careercounseling",
+      },
     {
       title: "Career Planning",
       description:
         "Personalized career counseling to align with your ambitions.",
-      path: "/career/career-planning",
-    },
+        path: "/careercounseling",
+      },
     {
       title: "Skill Development",
       description: "Enhance your skills to stay competitive in the job market.",
-      path: "/career/skill-development",
+      path: "/careercounseling",
     },
     {
       title: "Job Search Strategies",
       description: "Effective techniques to land your dream job faster.",
-      path: "/career/job-search",
+      path: "/careercounseling",
     },
   ];
 

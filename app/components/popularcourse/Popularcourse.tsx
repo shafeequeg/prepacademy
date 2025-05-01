@@ -221,6 +221,7 @@ const PopularCourses = () => {
   //   { image: "/aboutusverified.png", text: "Personalized Learning Path" }
   // ];
 
+ 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 

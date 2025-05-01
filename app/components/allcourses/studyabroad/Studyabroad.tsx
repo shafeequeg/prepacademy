@@ -84,6 +84,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   return cardContent;
 };
 
+
+//studyabroad
 const tabs = [
   { id: "IELTS", label: "IELTS", path: "/courses/ielts" },
   { id: "SAT", label: "SAT", path: "/studyabroad/sat" },

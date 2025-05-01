@@ -9,17 +9,24 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
+export default function ClientLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   console.log(pathname);
-  
+
+  const hideHeaderFooter =
+    ["/blogdetails", "/CourseEnrollmentPortal"].includes(pathname) ||
+    pathname.startsWith("/payment/");
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
-      {pathname !== "/blogdetails" && <Header />}
+      {!hideHeaderFooter && <Header />}
       <main className="w-full flex-1">{children}</main>
-      <Footer />
+      {!hideHeaderFooter && <Footer />}
     </>
   );
 }

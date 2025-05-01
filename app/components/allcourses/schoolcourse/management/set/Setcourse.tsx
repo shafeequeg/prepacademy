@@ -28,7 +28,6 @@ interface Program {
   id: string;
   name: string;
 }
-
 interface Userdata {
   id: string;
   full_name: string;
@@ -80,9 +79,7 @@ interface Question {
 const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   return (
     <div className="relative group cursor-pointer">
-      <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">
-        {" "}
-        {/* Set static height */}
+      <div className="relative w-full h-56 md:h-64 lg:h-72">
         {/* YouTube Embed */}
         <iframe
           className="w-full h-full rounded-lg"
@@ -253,18 +250,19 @@ const CatExamApplySection: React.FC = () => {
   // const [lastScrollY, setLastScrollY] = useState(0);
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // const [formData, setFormData] = useState({
+  //   full_name: "",
+  //   mobile_number: "",
+  //   email: "",
+  //   school_studied: "",
+  //   preferred_program: "",
+  //   submitted_at: "",
+  // });
+
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
   console.log(programs);
-  // const [formStep, setFormStep] = useState(0);
-  //  const [formData, setFormData] = useState({
-  //       full_name: '',
-  //       mobile_number: '',
-  //       email: '',
-  //       school_studied:'',
-  //       preferred_program: '',
-  //       submitted_at:'',
-  //     });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -277,7 +275,6 @@ const CatExamApplySection: React.FC = () => {
     class_type: "",
     phone_number: "",
     school_name: "",
-    // location:"",
     question: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
@@ -373,6 +370,9 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const nextStep = () => {
     let error = "";
 
@@ -445,7 +445,6 @@ const CatExamApplySection: React.FC = () => {
   //  console.log(question);
   console.log(user);
 
-  // Determine progress percentage
   const calculateProgress = () => {
     const totalSteps = 8; // 3 screening + 5 form fields
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
@@ -681,31 +680,28 @@ const CatExamApplySection: React.FC = () => {
   //   },
   // ];
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   const relatedVideos = [
     {
-      title: "Preparing for the CLAT 2025",
-      videoId: "TCUxGkyrRp0", // Remove "&t=2s"
+      title: "Preparing for the SET 2025",
+      videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
-      videoId: "5OFuUbyxIo8", // Remove "&t=11s"
+      title: "Strategies for SET 2025",
+      videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
       title: "Best Coaching Centers",
-      videoId: "828DtOz8-6g", // Remove "&t=26s"
+      videoId: "4g7cyj774_M", // Remove "&t=26s"
     },
   ];
 
   const demoVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the SET 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for SET 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -736,21 +732,21 @@ const CatExamApplySection: React.FC = () => {
                 Learn from the Experts
               </p> */}
                   <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">
-                    Crack NDA & NA Exam 2025 with
+                    Crack SET 2025 with
                     {/* Prep Academy  */}
                     <span className="text-[#ED1C24] ml-2">Prep</span>
                     <span className="text-[#15938F]">Academy</span>
                   </h2>
                   <p className="text-gray-300 mb-8">
-                    The National Defence Academy and Naval Academy Examination
-                    (NDA & NA) is a national-level examination conducted by the
-                    Union Public Service Commission (UPSC) twice a year for
-                    admissions into the Army, Navy, and Air Force wings of the
-                    National Defence Academy (NDA) and the Indian Naval Academy
-                    (INA) courses across India. NDA & NA (I) 2025 will be
-                    conducted in Pen-and-Paper mode on April 13, 2025, and NDA &
-                    NA (II) 2025 is scheduled for September 14, 2025. Ace the
-                    NDA & NA Exam with our expert coaching and study materials!
+                    Prep Academy offers a specialized coaching program designed
+                    to prepare students for the Symbiosis Entrance Test (SET),
+                    the gateway to undergraduate programs at Symbiosis
+                    International .The program focuses on enhancing proficiency
+                    in English, Quantitative Aptitude, General Awareness, and
+                    Analytical & Logical Reasoning. With experienced faculty,
+                    comprehensive study materials, regular mock tests, and
+                    personalized mentorship, Prep Academy aims to equip students
+                    with the skills and confidence required to excel in the SET.
                   </p>
                 </div>
 
@@ -765,8 +761,7 @@ const CatExamApplySection: React.FC = () => {
                       className="w-5 h-5 mr-3"
                     />
                     <p className="text-white">
-                      {" "}
-                      Mentoring & Teaching by experts{" "}
+                      Mentoring & Teaching by Experts{" "}
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -777,7 +772,7 @@ const CatExamApplySection: React.FC = () => {
                       height={20} // 5 * 4
                       className="w-5 h-5 mr-3"
                     />
-                    <p className="text-white"> Regular Testing & Analysis</p>
+                    <p className="text-white">Regular Testing & Analysis </p>
                   </div>
 
                   <div className="flex items-center">
@@ -789,7 +784,8 @@ const CatExamApplySection: React.FC = () => {
                       className="w-5 h-5 mr-3"
                     />
                     <p className="text-white">
-                      Support for SSB Interview Preparation
+                      {" "}
+                      Support for School/Board Exams{" "}
                     </p>
                   </div>
                 </div>
@@ -835,7 +831,7 @@ const CatExamApplySection: React.FC = () => {
               </div>
 
               {/* Right Content - Form */}
-              <AssistanceForm course="nda(defence)" />
+              <AssistanceForm course="set(management)" />
             </div>
           </div>
         </div>
@@ -1033,7 +1029,7 @@ const CatExamApplySection: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-white text-center text-lg font-medium mb-5">
-                  NDA Master Class
+                  SET Master Class
                 </h3>
                 <a
                   href="#"
@@ -1472,30 +1468,30 @@ const CatExamApplySection: React.FC = () => {
 
             {/* Summary section showing answers (visible at the bottom after questions are answered) */}
             {/* {screeningStep === 4 && (
-              <div className="p-4 bg-gray-50 border-t border-gray-200">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
-                <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
-                  {EnrollformData.answer1 && (
-                    <div>
-                      <span className="font-medium block">Learning goal:</span>
-                      {EnrollformData.answer1}
-                    </div>
-                  )}
-                  {EnrollformData.answer2 && (
-                    <div>
-                      <span className="font-medium block">Schedule:</span>
-                      {EnrollformData.answer2}
-                    </div>
-                  )}
-                  {EnrollformData.answer3 && (
-                    <div>
-                      <span className="font-medium block">Found via:</span>
-                      {EnrollformData.answer3}
-                    </div>
-                  )}
-                </div>
+            <div className="p-4 bg-gray-50 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
+              <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
+                {EnrollformData.answer1 && (
+                  <div>
+                    <span className="font-medium block">Learning goal:</span>
+                    {EnrollformData.answer1}
+                  </div>
+                )}
+                {EnrollformData.answer2 && (
+                  <div>
+                    <span className="font-medium block">Schedule:</span>
+                    {EnrollformData.answer2}
+                  </div>
+                )}
+                {EnrollformData.answer3 && (
+                  <div>
+                    <span className="font-medium block">Found via:</span>
+                    {EnrollformData.answer3}
+                  </div>
+                )}
               </div>
-            )} */}
+            </div>
+          )} */}
           </div>
         </div>
       )}

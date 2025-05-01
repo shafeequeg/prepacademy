@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-import blogContent from "@/app/components/blogs/blogdetails/blogdata.json"; // Adjust the import path as needed
+import blogContent from "@/app/components/blogs/blogdetails/blogdata.json"; 
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 
@@ -14,6 +14,7 @@ interface CriteriaItem {
   Mainheading: string;
   Maindescription: string;
 }
+
 
 interface BlogContent {
   id: number;
@@ -128,6 +129,8 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
   const fetchBlogs = async ()=>{
     try{
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG)
+      console.log(response);
+      
       // const matchedBlog = response.data.find((blog:any) => blog.id == id )
       setAllBlog(response.data)
     }catch(error){
@@ -139,10 +142,11 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     fetchBlogs();
   },[])
 
-  // Find the blog with the matching ID
+  console.log("blog details");
+  
+
   const blog = allBlog.length > 0 ? allBlog.find((b) => b.id == Number(id)) : blogsdetails.find((b) => b.id === Number(id));
 
-  // Explicitly type the content as BlogContent or undefined
   const content = blogContent.find((c) => c.id === Number(id)) as
     | BlogContent
     | undefined;
@@ -156,8 +160,8 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
   return (
     <div className="bg-gray-900 text-white h-fit mt-24 ">
       {" "}
-      {/* Added margin-top here */}
-      {/* Header Section */}
+     
+      
       <div className="">
         <div className="relative ">
           <div className="w-3/4 h-80 relative mx-auto text-center  ">

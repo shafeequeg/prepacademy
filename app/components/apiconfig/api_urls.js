@@ -31,5 +31,17 @@ export const API_URLS = {
   },
   BLOG: {
     GET_BLOG: "api/blogcard/"
+  },
+
+  BLOG_CATEGORY: {
+    GET_BLOG_CATEGORY: "api/categories"
+  },
+
+  REGISTRATION :{
+    POST_REGISTRATION : "api/form/"
+  },
+
+  FIREBASE_NUMBER :{
+    POST_FIREBASE_NUMBER : "api/phone-number/"
   }
 };

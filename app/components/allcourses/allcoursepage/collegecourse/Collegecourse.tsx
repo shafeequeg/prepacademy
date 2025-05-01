@@ -153,6 +153,8 @@ const collegeCourses = [
     path: "/courses/bank",
   },
 ];
+
+//collegecourses
 const tabs = [
   {
     id: "MANAGEMENT",

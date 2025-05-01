@@ -48,50 +48,27 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "What is the NPAT exam?",
+      question: "What courses does Prep Academy's SET coaching cover?",
       answer:
-        "The NMIMS Programs After Twelfth (NPAT) is an entrance examination conducted by NMIMS for admission to undergraduate programs such as BBA, B.Sc. (Finance), B.Sc. (Economics), B.Com (Hons.), BBA (FinTech), BBA (Branding & Advertising), B.A. (Hons.) Liberal Arts, and integrated programs like BBA+MBA, offered across various NMIMS campuses.",
+        "Prep Academy's SET coaching is tailored for undergraduate programs at Symbiosis International (Deemed University), including BBA, BCA, BA (Mass Communication), BA (Liberal Arts), and B.Sc. (Economics).",
     },
     {
       question:
-        "Is NPAT compulsory for admission to NMIMS undergraduate programs?",
+        "What is the duration of the coaching program?",
       answer:
-        "Yes, NPAT is mandatory for admission to most undergraduate and integrated degree programs offered by NMIMS, as it is the primary entrance test for these courses.",
+        "The duration varies based on the batch selected. Typically, programs range from 3 to  1 Year, aligning with the SET exam schedule.",
     },
 
     {
-      question: "Where can I get the NPAT syllabus?",
+      question: "Are there any mock tests included in the program?",
       answer:
-        "Candidates can find the official NPAT syllabus on the NMIMS website (nmimsnpat.in). It includes three sections: Quantitative Reasoning, Verbal Reasoning, and Logical Reasoning. Aspirants should also review program-specific eligibility criteria on the website.",
+        "Yes, the program includes a series of mock tests that simulate the actual SET exam environment, helping students assess their preparation levels.",
     },
-    {
-      question: "Is the NPAT exam tough?",
-      answer:
-        "The NPAT exam is generally considered moderately difficult. The difficulty level varies depending on a candidate’s preparation, familiarity with the exam pattern (120 MCQs in 100 minutes), and strengths in quantitative, verbal, and logical reasoning skills. It is comparable to exams like SAT in terms of question types.",
-    },
-    {
-      question: "How many attempts are allowed in NPAT 2025?",
-      answer:
-        "Candidates can attempt NPAT 2025 up to three times (one main attempt and two retakes) within the testing window from March 1 to May 31, 2025. The highest score among the attempts will be considered for the merit list.",
-    },
+   
 
-    {
-      question: "What is the eligibility criteria for NPAT 2025?",
-      answer:
-        "Candidates must have passed Class 12 or an equivalent examination (e.g., IB Diploma) with a minimum aggregate of 50% (some programs like BBA require 60%) from a recognized board. Mathematics/Statistics is compulsory for certain programs (e.g., BBA, B.Sc. Finance). The maximum age limit is 25 years.",
-    },
+  
 
-    {
-      question: "How can I apply for NPAT 2025?",
-      answer:
-        "Visit nmimsnpat.in, click “Apply Now,” register with your details, select your test category and campus preferences, upload required documents (photo, signature), and pay the application fee online (via credit/debit card or net banking). The fee varies based on the number of programs and attempts.",
-    },
-
-    {
-      question: "What is the exam pattern for NPAT 2025?",
-      answer:
-        "NPAT 2025 consists of 120 multiple-choice questions (MCQs) across three sections: Quantitative Reasoning (40 questions), Verbal Reasoning (40 questions), and Logical Reasoning (40 questions). The total duration is 100 minutes, with no negative marking.",
-    },
+    
   ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -355,7 +332,7 @@ const ExamPrepLowerSections: React.FC = () => {
               <span className="text-[#F55D3E] font-bold">Students Say</span>
             </h2>
             <p className="text-gray-300 leading-relaxed">
-              Are you ready to conquer the world? Your NPAT 2025 journey might
+              Are you ready to conquer the world? Your SET 2025 journey might
               seem daunting, but remember, every great achievement starts with a
               single step. Believe in yourself, because you hold the power to
               make your dreams a reality!

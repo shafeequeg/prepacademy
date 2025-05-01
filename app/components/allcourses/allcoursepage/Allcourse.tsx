@@ -55,32 +55,32 @@ const AllCourses: React.FC = () => {
       // code: "CIVIL",
       title: "Civil Services",
       description: "UPSC",
-      path: "/courses/civil-services",
+      path: "/collegecourse",
     },
     {
       // code: "GOVT",
       title: "Government",
       description: "RAILWAY, SSC",
-      path: "/courses/government",
+      path: "/collegecourse",
     },
     {
       // code: "DEF",
       title: "Defence",
       description: "CDS, AFCAT ",
-      path: "/courses/defence",
+      path: "/collegecourse",
     },
     {
       // code: "DESIGN",
       title: "Design & Architecture",
       description: "NID PG, NIFT PG",
-      path: "/courses/design-architecture",
+      path: "/collegecourse",
     },
     {
       // code: "BANK",
       title: "Bank",
       description:
         "SBI, IBPS PO, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
-      path: "/courses/bank",
+      path: "/collegecourse",
     },
   ];
 
@@ -91,49 +91,49 @@ const AllCourses: React.FC = () => {
       title: "ENGINEERING",
       description: "JEE, KEAM, BITSAT, VITEEE, KCET",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "MEDICAL",
       title: "MEDICAL",
       description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "MANAGEMENT",
       title: "MANAGEMENT",
       description: "IPM, CHRIST, SET, NPAT,MHCET",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/schoolcourse/management",
+      path: "/schoolcourse",
     },
     {
       // code: "LAW",
       title: "LAW",
       description: "CLAT, SLAT, AILET, KLEE, CULEE",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/law",
+      path: "/schoolcourse",
     },
     {
       // code: "CUET",
       title: "COMMON UNIVERSITY ENTRANCE TEST",
       description: "COMMON UNIVERSITY ENTRANCE TEST",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "DEFENCE",
       title: "DEFENCE",
       description: "NDA, AFCAT",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "DESIGN",
       title: "DESIGN & ARCHITECTURE",
       description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "OTHERS",
@@ -141,7 +141,7 @@ const AllCourses: React.FC = () => {
       description:
         "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
     {
       // code: "TUITIONS",
@@ -149,7 +149,7 @@ const AllCourses: React.FC = () => {
       description:
         "PHYSICS, CHEMISTRY,BIOLOGY, MATHS,ENGLISH,COMMERCE,BUSINESS STUDIES,ACCOUNTING,ECONOMICS",
       classType: "CLASSES FOR 11TH & 12TH",
-      path: "/courses/bank",
+      path: "/schoolcourse",
     },
   ];
 

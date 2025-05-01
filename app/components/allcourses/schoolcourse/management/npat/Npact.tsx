@@ -682,11 +682,11 @@ const CatExamApplySection: React.FC = () => {
 
   const relatedVideos = [
     {
-      title: "Preparing for the IPM 2025",
+      title: "Preparing for the NPAT 2025",
       videoId: "JNJOTlz8C2Y", // Remove "&t=2s"
     },
     {
-      title: "Strategies for IPM 2025",
+      title: "Strategies for NPAT 2025",
       videoId: "Kjjeb1v50C0", // Remove "&t=11s"
     },
     {
@@ -697,11 +697,11 @@ const CatExamApplySection: React.FC = () => {
 
   const demoVideos = [
     {
-      title: "Preparing for the IPM 2025",
+      title: "Preparing for the NPAT 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for IPM 2025",
+      title: "Strategies for NPAT 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -1028,7 +1028,7 @@ const CatExamApplySection: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-white text-center text-lg font-medium mb-5">
-                  IPM Master Class
+                NPAT Master Class
                 </h3>
                 <a
                   href="#"
