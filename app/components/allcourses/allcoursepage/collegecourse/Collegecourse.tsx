@@ -13,6 +13,7 @@ import Image from "next/image";
 import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import AssistanceForm from "@/app/components/assistanceForm/AssistanceForm";
+import { useRouter } from "next/navigation";
 // interface VideoCardProps {
 //   title: string;
 //   thumbnail: string;
@@ -162,29 +163,29 @@ const tabs = [
     path: "/collegecourse",
     dropdownItems: [
       { label: "CAT", path: "/collegecourse/management/cat" },
-      { label: "XAT", path: "/collegecourse/bba" },
-      { label: "KMAT", path: "/collegecourse/hr" },
-      { label: "CMAT", path: "/collegecourse/hr" },
-      { label: "MAT", path: "/collegecourse/hr" },
-      { label: "NMAT", path: "/collegecourse/hr" },
-      { label: "CUET(PG)", path: "/collegecourse/hr" },
-      { label: "MICAT", path: "/collegecourse/hr" },
-      { label: "MHCET", path: "/collegecourse/hr" },
+      { label: "XAT", path: "/" },
+      { label: "KMAT", path: "/" },
+      { label: "CMAT", path: "/" },
+      { label: "MAT", path: "/" },
+      { label: "NMAT", path: "/" },
+      { label: "CUET(PG)", path: "/" },
+      { label: "MICAT", path: "/" },
+      { label: "MHCET", path: "/" },
     ],
   },
   {
     id: "CEVILSERVICE",
     label: "CIVIL SERVICE",
     path: "/slat",
-    dropdownItems: [{ label: "UPSC", path: "/slat/ias" }],
+    dropdownItems: [{ label: "UPSC", path: "/" }],
   },
   {
     id: "GOVERNMENT",
     label: "GOVERNMENT",
     path: "/ailet",
     dropdownItems: [
-      { label: "RAILWAY ", path: "/ailet/state" },
-      { label: "SSC", path: "/ailet/central" },
+      { label: "RAILWAY ", path: "/" },
+      { label: "SSC", path: "/" },
     ],
   },
   {
@@ -192,8 +193,8 @@ const tabs = [
     label: "DEFENCE",
     path: "/klee",
     dropdownItems: [
-      { label: "CDS", path: "/klee/nda" },
-      { label: "AFCAT", path: "/klee/cds" },
+      { label: "CDS", path: "/" },
+      { label: "AFCAT", path: "/" },
     ],
   },
   {
@@ -201,8 +202,8 @@ const tabs = [
     label: "DESIGN & ARCHITECTURE",
     path: "/culee",
     dropdownItems: [
-      { label: "NID PG ", path: "/culee/nata" },
-      { label: "NIFT PG", path: "/culee/nift" },
+      { label: "NID PG ", path: "/" },
+      { label: "NIFT PG", path: "/" },
     ],
   },
   {
@@ -210,14 +211,14 @@ const tabs = [
     label: "BANK",
     path: "/culee/bank",
     dropdownItems: [
-      { label: "SBI ", path: "/culee/bank/sbi-po" },
-      { label: "IBPS P O", path: "/culee/bank/ibps" },
-      { label: "RBI GRADE B", path: "/culee/bank/rbi" },
-      { label: "IBPS RRB ", path: "/culee/bank/sbi-po" },
-      { label: "SBI CLERK ", path: "/culee/bank/sbi-po" },
-      { label: "IBPS CLERK ", path: "/culee/bank/sbi-po" },
-      { label: "NABARD ", path: "/culee/bank/sbi-po" },
-      { label: "LIC AAO ", path: "/culee/bank/sbi-po" },
+      { label: "SBI ", path: "/" },
+      { label: "IBPS P O", path: "/" },
+      { label: "RBI GRADE B", path: "/" },
+      { label: "IBPS RRB ", path: "/" },
+      { label: "SBI CLERK ", path: "/ " },
+      { label: "IBPS CLERK ", path: "/" },
+      { label: "NABARD ", path: "/" },
+      { label: "LIC AAO ", path: "/" },
     ],
   },
 ];
@@ -260,6 +261,9 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
   });
+
+  const router = useRouter();
+
 
   // const [activeTab, setActiveTab] = useState("online");
   const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
@@ -312,6 +316,10 @@ const CatExamApplySection: React.FC = () => {
       return "Class type is required";
     }
     return "";
+  };
+
+  const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
   };
 
   const validateMobileNumber = (mobile: string): string => {
@@ -913,7 +921,10 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                    
+                  >
                     Enroll Now
                   </button>
                   <button

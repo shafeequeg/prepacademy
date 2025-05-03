@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import Image from "next/image"; // Correct import for Next.js Image component
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
+// import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface CourseCardProps {
   // code: string;
@@ -84,12 +86,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
   return cardContent;
 };
 
-
 //studyabroad
 const tabs = [
-  { id: "IELTS", label: "IELTS", path: "/courses/ielts" },
+  { id: "IELTS", label: "IELTS", path: "/" },
   { id: "SAT", label: "SAT", path: "/studyabroad/sat" },
-  { id: "ACT", label: "ACT", path: "/courses/act" },
+  { id: "ACT", label: "ACT", path: "/" },
   { id: "GRE", label: "GRE", path: "/studyabroad/gre" },
   { id: "GMAT", label: "GMAT", path: "/studyabroad/gmat" },
 ];
@@ -139,6 +140,9 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const [activeMainTab, setActiveMainTab] = useState("engineering");
   // const [activeTab, setActiveTab] = useState("online");
@@ -147,6 +151,7 @@ const CatExamApplySection: React.FC = () => {
   // const filteredCourses = courseCards.filter((course) => course.type === activeTab);
 
   console.log(programs);
+console.log(setIsLoading);
 
   const fetchPrograms = async () => {
     try {
@@ -493,6 +498,10 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
+  const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
+  };
+
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEnrollFormData((prev) => ({
@@ -701,7 +710,12 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                    disabled={isLoading}
+
+                  >
                     Enroll Now
                   </button>
                   <button

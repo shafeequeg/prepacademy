@@ -11,6 +11,7 @@ import Image from "next/image";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 import AssistanceForm from "../../assistanceForm/AssistanceForm";
+import { useRouter } from "next/navigation";
 
 interface CourseCardProps {
   // code: string;
@@ -136,7 +137,7 @@ const tabs = [
     path: "/management",
     dropdownItems: [
       { label: "IPM ", path: "/schoolcourse/ipm" },
-      { label: "CHRIST", path: "/schoolcourse/christ" },
+      { label: "CHRIST", path: "/" },
       { label: "SET", path: "/schoolcourse/management/set" },
       { label: "NPAT", path: "/schoolcourse/management/npat" },
       { label: "MHCET", path: "/schoolcourse/management/mhcet" },
@@ -149,10 +150,10 @@ const tabs = [
     path: "/law",
     dropdownItems: [
       { label: "CLAT", path: "/schoolcourse-law/clat" },
-      { label: "SLAT", path: "/schoolcourse/slat" },
-      { label: "AILET", path: "/schoolcourse/ailet" },
-      { label: "KLEE", path: "/schoolcourse/klee" },
-      { label: "CULEE", path: "/schoolcourse/culee" },
+      { label: "SLAT", path: "/" },
+      { label: "AILET", path: "/" },
+      { label: "KLEE", path: "/" },
+      { label: "CULEE", path: "/" },
     ],
   },
 
@@ -169,7 +170,7 @@ const tabs = [
     path: "/defence",
     dropdownItems: [
       { label: "NDA ", path: "/schoolcourse/defence/nda" },
-      { label: "AFCAT ", path: "/schoolcourse/afcat" },
+      { label: "AFCAT ", path: "/" },
     ],
   },
 
@@ -178,15 +179,15 @@ const tabs = [
     label: "TUITIONS",
     path: "/tuitions",
     dropdownItems: [
-      { label: "PHYSICS ", path: "/schoolcourse/tuitions/physics" },
-      { label: "CHEMISTRY", path: "/schoolcourse/tuitions/chemistry" },
-      { label: "MATHS", path: "/schoolcourse/tuitions/maths" },
-      { label: "BIOLOGY ", path: "/schoolcourse/tuitions/biology" },
-      { label: "ACCOUNTING ", path: "/schoolcourse/tuitions/accounting" },
-      { label: "ECONOMICS", path: "/schoolcourse/tuitions/economics" },
-      { label: "ENGLISH ", path: "/schoolcourse/tuitions/english" },
-      { label: "COMMERCE", path: "/schoolcourse/tuitions/commerce" },
-      { label: "BUSINESS STUDIES", path: "/schoolcourse/tuitions/business" },
+      { label: "PHYSICS ", path: "/" },
+      { label: "CHEMISTRY", path: "/" },
+      { label: "MATHS", path: "/" },
+      { label: "BIOLOGY ", path: "/" },
+      { label: "ACCOUNTING ", path: "/" },
+      { label: "ECONOMICS", path: "/" },
+      { label: "ENGLISH ", path: "/" },
+      { label: "COMMERCE", path: "/" },
+      { label: "BUSINESS STUDIES", path: "/" },
     ],
     //(6-12 Standards)
     // {
@@ -203,14 +204,14 @@ const tabs = [
     label: "OTHERS",
     path: "/others",
     dropdownItems: [
-      { label: "ASHOKA UNIVERSITY ", path: "/schoolcourse/others/ashoka" },
+      { label: "ASHOKA UNIVERSITY ", path: "/" },
       {
         label: "CHRIST UNIVERSITY ",
         path: "/schoolcourse/others/christuniversity",
       },
-      { label: "SYMBIOSIS ", path: "/schoolcourse/others/symbiosis" },
-      { label: "NMIMS ", path: "/schoolcourse/others/nmims" },
-      { label: "ST. XAVIER'S ", path: "/schoolcourse/others/xaviers" },
+      { label: "SYMBIOSIS ", path: "/" },
+      { label: "NMIMS ", path: "/" },
+      { label: "ST. XAVIER'S ", path: "/" },
     ],
   },
  
@@ -223,8 +224,8 @@ const tabs = [
       { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
       { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
       { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
-      { label: "CEED ", path: "/schoolcourse/designandarchitecture/ceed" },
-      { label: "JEE MAIN ", path: "/schoolcourse/designandarchitecture/jee" },
+      { label: "CEED ", path: "/" },
+      { label: "JEE MAIN ", path: "/" },
       { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
     ],
   },
@@ -284,6 +285,8 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
   });
+
+  const router = useRouter();
 
   // const [activeTab, setActiveTab] = useState("online");
   const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
@@ -402,6 +405,12 @@ const CatExamApplySection: React.FC = () => {
   //         toast.error('Failed to send the message. Please try again.');
   //       });
   //   };
+
+
+  const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
+  };
+
 
   const fetchPrograms = async () => {
     try {
@@ -1062,7 +1071,10 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                  
+                  >
                     Enroll Now
                   </button>
                   <button

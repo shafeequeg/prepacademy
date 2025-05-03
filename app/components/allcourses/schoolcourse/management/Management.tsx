@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import emailjs from "emailjs-com";
 import Image from "next/image"; // Correct import for Next.js Image component
+import { useRouter } from "next/navigation";
 
 // interface DemoVideoCardProps {
 //   title: string;
@@ -338,6 +339,13 @@ const CatExamApplySection: React.FC = () => {
     }
   }, [activeMainTab]);
 
+  const router = useRouter();
+
+  const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
+  };
+  
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Main Content */}
@@ -428,7 +436,10 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                    
+                  >
                     Enroll Now
                   </button>
                   <button className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors">
