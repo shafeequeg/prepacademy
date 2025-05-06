@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 // import Image from 'next/image';
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -13,6 +13,7 @@ import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import Image from "next/image";
 import AssistanceForm from "@/app/components/assistanceForm/AssistanceForm";
+import { useRouter } from "next/navigation";
 
 // interface VideoCardProps {
 //   title: string;
@@ -297,6 +298,8 @@ const CatExamApplySection: React.FC = () => {
     school_name: "",
   });
 
+  const router = useRouter();
+
   const [formStep, setFormStep] = useState(0);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -377,6 +380,10 @@ const CatExamApplySection: React.FC = () => {
         [questionId]: String(optionId), // Convert to string to ensure type safety
       },
     }));
+  };
+
+  const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
   };
 
   const nextScreeningStep = () => {
@@ -469,7 +476,7 @@ const CatExamApplySection: React.FC = () => {
       setScreeningStep((prev) => prev - 1);
     }
   };
-console.log(programs);
+  console.log(programs);
 
   // const handleInputChange = (
   //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -824,7 +831,9 @@ console.log(programs);
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                  >
                     Enroll Now
                   </button>
                   <button
@@ -863,7 +872,7 @@ console.log(programs);
               </div>
 
               {/* Right Content - Form */}
-              <AssistanceForm course="nid(architecture)"/>
+              <AssistanceForm course="nid(architecture)" />
             </div>
           </div>
         </div>

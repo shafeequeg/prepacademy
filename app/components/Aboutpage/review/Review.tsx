@@ -3,14 +3,14 @@
 import React from "react";
 import Image from "next/image";
 
-
 const StudentTestimonials = () => {
   const testimonials = [
     {
       id: 1,
       name: "Amrutha Santhu",
       rating: 5,
-      comment: "Teaching Style (Great faculties. They provide comprehensive material and mock test that stimulated actual test experiences.",
+      comment:
+        "Teaching Style (Great faculties. They provide comprehensive material and mock test that stimulated actual test experiences.",
       avatar: "/api/placeholder/40/40",
     },
     {
@@ -34,7 +34,9 @@ const StudentTestimonials = () => {
       <svg
         key={index}
         className={`w-4 h-4 ${
-          index < rating ? "fill-current text-[#F55D3E]" : "fill-current text-gray-400"
+          index < rating
+            ? "fill-current text-[#F55D3E]"
+            : "fill-current text-gray-400"
         }`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -43,8 +45,6 @@ const StudentTestimonials = () => {
       </svg>
     ));
   };
-  
-  
 
   return (
     <section className="py-16 bg-[#231815] text-white">
@@ -56,7 +56,10 @@ const StudentTestimonials = () => {
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your CAT 2024 journey might seem
+            daunting, but remember, every great achievement starts with a single
+            step. Believe in yourself, because you hold the power to make your
+            dreams a reality!
           </p>
         </div>
 

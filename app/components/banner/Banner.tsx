@@ -131,7 +131,7 @@ export default function Banner() {
      lg:h-auto lg:max-h-[800px] w912:h-auto
      w912:max-h-[600px] w820:h-auto w820:max-h-[700px] w768:h-auto w768:max-h-[800px] w768:mt-9"
     >
-      {/* Fixed Contact Icons */}
+          
       <div
         className={`fixed right-5 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50
     ${showIcons ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
@@ -282,12 +282,10 @@ export default function Banner() {
         </div>
       </section>
 
-      {/* Cards Section - reduced padding and size */}
-      {/* Cards Section - reduced padding and size */}
-      {/* Cards Section - with responsive fixes */}
+     
       <section
-        className="bg-[#130808] py-3 px-3  md:py-4 md:px-4 rounded-md relative z-10   "
-        style={{ overflowY: "scroll" }}
+        className="bg-[#130808] py-3 px-3  md:py-4 md:px-4 rounded-md  z-10  "
+        style={{ overflowY: "scroll"}}
       >
         <div className="container mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-3  gap-2 md:gap-3">
