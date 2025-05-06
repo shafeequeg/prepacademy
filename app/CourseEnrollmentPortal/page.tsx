@@ -625,59 +625,6 @@ const CourseEnrollmentPortal: React.FC = () => {
                           </div>
                         );
                       })}
-                  {(activeMainTab === "schoolcourse" ||
-                    activeMainTab === "collegecourse") &&
-                    activeMainCategory?.tabs
-                      .find((tab) => tab.id === activeSubTab)
-                      ?.dropdownItems?.map((course) => {
-                        const courseData =
-                          courseMockData[
-                            course.label as keyof typeof courseMockData
-                          ];
-                        return (
-                          <div
-                            key={course.path}
-                            className="border border-[#FF8C42] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-[#4D291F]"
-                            onClick={() => handleCourseClick(course.label)}
-                          >
-                            <div className="relative h-40 w-full overflow-hidden rounded-lg">
-                              <Image
-                                src={courseData?.image || "/default-course.jpg"}
-                                alt={course.label}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                            <div className="p-4">
-                              <h3 className="font-medium text-[#F9C784]">
-                                {course.label}
-                              </h3>
-                              <p className="text-sm text-[#FFAE75] mt-1">
-                                {courseData?.description ||
-                                  "Comprehensive preparation course"}
-                              </p>
-                              <div className="flex justify-between items-center mt-4">
-                                <span className="font-semibold text-[#F9C784]">
-                                  {courseData?.price || "₹12,999"}
-                                </span>
-                                <button className="bg-[#E25822] hover:bg-[#FF8C42] text-white px-3 py-1 rounded-md text-sm">
-                                  Details
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  <div className="md:w-2/5">
-                    <div className="relative h-64 w-full rounded-lg overflow-hidden">
-                      <Image
-                        src={currentCourseData.image || "/default-course.jpg"}
-                        alt={currentCourseData.label || activeCourse}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
             ) : (
