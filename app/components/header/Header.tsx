@@ -9,6 +9,7 @@ import {
   FaInstagram,
   FaFacebookF,
 } from "react-icons/fa";
+import LoginModal from "../login/Login";
 
 const Loader = () => {
   return (
@@ -29,6 +30,8 @@ export default function Header() {
   // const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loginSource, setLoginSource] = useState<'chatbot' | 'percentage-calculator' | null>(null);
 
   console.log(isOpen);
 
@@ -312,20 +315,22 @@ export default function Header() {
                 {toolsDropdownOpen && (
                   <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48 z-50">
                     <div
-                      onClick={() => handleNavigation("/chatBot")}
+                      onClick={() => { setShowLoginModal(true); setLoginSource('chatbot'); }}
                       className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
                     >
                       Chatbot
                     </div>
                     <div
-                      onClick={() => handleNavigation("/percentile-calculator")}
+                      onClick={() => { setShowLoginModal(true); setLoginSource('percentage-calculator'); }}
                       className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
                     >
-                      Percentile Calculator
+                      Percentage Calculator
                     </div>
                   </div>
                 )}
               </div>
+
+              
 
               <div
                 onClick={() => handleNavigation("/blogs")}
@@ -675,6 +680,22 @@ export default function Header() {
           <div className="h-[2px] w-16 bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
         </div>
       </div>
+
+      {showLoginModal && loginSource && (
+        <LoginModal
+          closeModal={() => { setShowLoginModal(false); setLoginSource(null); }}
+          source={loginSource}
+          onSuccess={() => {
+            setShowLoginModal(false);
+            setLoginSource(null);
+            if (loginSource === 'chatbot') {
+              router.push('/chatBot');
+            } else if (loginSource === 'percentage-calculator') {
+              router.push('/percentage-calculator');
+            }
+          }}
+        />
+      )}
     </>
   );
 }
