@@ -20,7 +20,8 @@ const Loader = () => {
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);  
+  const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);  
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const router = useRouter();
@@ -142,6 +143,7 @@ export default function Header() {
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setIsDropdownOpen(false);
+        setToolsDropdownOpen(false);
       }
     }
 
@@ -175,6 +177,7 @@ export default function Header() {
     setIsLoading(true);
     setIsOpen(false);
     setIsDropdownOpen(false);
+    setToolsDropdownOpen(false);
     setIsSidebarOpen(false);
 
     setTimeout(() => {
@@ -223,9 +226,9 @@ export default function Header() {
                   width={150}
                   height={50}
                   className="h-12 w-auto"
-                  priority 
-                  quality={75} 
-                  loading="eager" 
+                  priority
+                  quality={75}
+                  loading="eager"
                   onLoadingComplete={() =>
                     console.log("Logo loaded successfully")
                   }
@@ -293,6 +296,32 @@ export default function Header() {
                       className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
                     >
                       Career Counseling
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="relative group">
+                <button
+                  onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
+                  className="text-white hover:text-white text-xl font-semibold cursor-pointer flex items-center"
+                >
+                  Tools
+                  <FiChevronDown className="mt-2 ms-3" size={18} />
+                </button>
+                {toolsDropdownOpen && (
+                  <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48 z-50">
+                    <div
+                      onClick={() => handleNavigation("/chatBot")}
+                      className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
+                    >
+                      Chatbot
+                    </div>
+                    <div
+                      onClick={() => handleNavigation("/percentile-calculator")}
+                      className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
+                    >
+                      Percentile Calculator
                     </div>
                   </div>
                 )}
