@@ -3,9 +3,11 @@ import { X, ArrowRight, UserCircle, Mail, Phone, Lock } from 'lucide-react';
 
 interface LoginFormProps {
   closeModal: () => void;
+  onSuccess: () => void;
+  source: 'chatbot' | 'percentage-calculator';
 }
 
-const LoginModal: React.FC<LoginFormProps> = ({ closeModal }) => {
+const LoginModal: React.FC<LoginFormProps> = ({ closeModal, onSuccess, source }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,8 +27,9 @@ const LoginModal: React.FC<LoginFormProps> = ({ closeModal }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // Simulate login, then call onSuccess
     setTimeout(() => {
+      onSuccess();
       closeModal();
     }, 1000);
   };
