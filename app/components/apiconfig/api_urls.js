@@ -43,5 +43,9 @@ export const API_URLS = {
 
   FIREBASE_NUMBER :{
     POST_FIREBASE_NUMBER : "api/phone-number/"
+  },
+
+  CHATBOT :{
+    POST_CHATBOT : "api/ask/"
   }
 };
