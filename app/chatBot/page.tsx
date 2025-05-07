@@ -5,7 +5,7 @@ import { FiSend, FiMessageSquare } from "react-icons/fi";
 import { BsRobot } from "react-icons/bs";
 import axiosInstance from "../components/apiconfig/axios";
 import { API_URLS } from "../components/apiconfig/api_urls";
-
+import Image from "next/image";
 
 interface Message {
   id: string;
@@ -56,9 +56,9 @@ export default function ChatBotPage() {
         text: response.data.answer,
         sender: "bot",
         timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, botMessage]);
-    setIsTyping(false);
+      };
+      setMessages((prev) => [...prev, botMessage]);
+      setIsTyping(false);
     }, 1000);
   };
 
@@ -70,9 +70,7 @@ export default function ChatBotPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/20 mb-4">
             <BsRobot className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            AI Chat Bot
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-100 mb-2">AI Chat Bot</h1>
           <p className="text-gray-400">
             Ask me anything about your career path and interests
           </p>
@@ -95,6 +93,15 @@ export default function ChatBotPage() {
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
+                  {message.sender !== "user" && (
+                    <Image
+                      src="/charater2.png"
+                      className="me-2"
+                      alt="Chatbot Image"
+                      width={60}
+                      height={50}
+                    />
+                  )}
                   <div
                     className={`max-w-[80%] rounded-2xl p-4 ${
                       message.sender === "user"
