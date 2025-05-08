@@ -313,7 +313,7 @@ export default function Header() {
                   <FiChevronDown className="mt-2 ms-3" size={18} />
                 </button>
                 {toolsDropdownOpen && (
-                  <div className="absolute left-0 mt-2 bg-black shadow-lg rounded-lg w-48 z-50">
+                  <div className="absolute -left-14 mt-4 bg-black shadow-lg rounded-lg w-48 z-50">
                     <div
                       onClick={() => { setShowLoginModal(true); setLoginSource('chatbot'); }}
                       className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
