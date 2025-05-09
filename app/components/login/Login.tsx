@@ -25,6 +25,9 @@ const LoginModal: React.FC<LoginFormProps> = ({ closeModal, onSuccess, source })
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  console.log(source);
+  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Simulate login, then call onSuccess

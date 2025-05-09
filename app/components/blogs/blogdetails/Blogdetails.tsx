@@ -317,7 +317,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
                   href="#"
                   className="hover:text-white"
                 >
-                  What's on 2025
+                  What&apos;s on 2025
                 </Link>
                 <Link
                   href="#"
