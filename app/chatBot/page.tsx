@@ -93,15 +93,6 @@ export default function ChatBotPage() {
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  {message.sender !== "user" && (
-                    <Image
-                      src="/charater2.png"
-                      className="me-2"
-                      alt="Chatbot Image"
-                      width={60}
-                      height={50}
-                    />
-                  )}
                   <div
                     className={`max-w-[80%] rounded-2xl p-4 ${
                       message.sender === "user"
@@ -117,6 +108,15 @@ export default function ChatBotPage() {
                       })}
                     </span>
                   </div>
+                  {message.sender !== "user" && (
+                    <Image
+                      src="/charater2.png"
+                      className="ms-2 size-[90px]"
+                      alt="Chatbot Image"
+                      width={60}
+                      height={50}
+                    />
+                  )}
                 </div>
               ))
             )}
