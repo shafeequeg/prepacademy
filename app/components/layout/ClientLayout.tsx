@@ -17,16 +17,20 @@ export default function ClientLayout({
   const pathname = usePathname();
   console.log(pathname);
 
-  const hideHeaderFooter =
+  const hideHeader =
     ["/blogdetails", "/CourseEnrollmentPortal"].includes(pathname) ||
     pathname.startsWith("/payment/");
+
+  const hideFooter =
+    ["/blogdetails"].includes(pathname) || pathname.startsWith("/payment/");
+
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
-      {!hideHeaderFooter && <Header />}
+      {!hideHeader && <Header />}
       <main className="w-full flex-1">{children}</main>
-      {!hideHeaderFooter && <Footer />}
+      {!hideFooter && <Footer />}
     </>
   );
 }

@@ -19,7 +19,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["api-web.prepacademy.in"],
+    domains: ["api-web.prepacademy.in", "localhost"],
   },
   // Add other config options here
   // output: "export", // Uncomment if you're using static export

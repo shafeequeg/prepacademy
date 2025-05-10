@@ -17,6 +17,8 @@ import { API_URLS } from "../apiconfig/api_urls";
 import { initializeRecaptcha, sendOTP, verifyOTP } from "./firebase";
 // import axios from "axios";
 import { Eye, EyeOff } from "lucide-react"; // For password visibility toggle
+import LoginModal from "./Login";
+import { CheckCircle } from "lucide-react";
 
 // Define the types
 interface RegistrationModalProps {
@@ -24,6 +26,20 @@ interface RegistrationModalProps {
 }
 
 interface FormData {
+  full_name: string;
+  email: string;
+  phone_number: string;
+  location: string;
+  dateOfBirth: string;
+  gender: string;
+  targetExamYear: string;
+  programs: string[];
+  firebase_user_id: string;
+  password: string;
+  confirm_password: string;
+}
+
+interface User {
   full_name: string;
   email: string;
   phone_number: string;
@@ -58,7 +74,8 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
     password: "", // Add password field
     confirm_password: "", // Add confirm password field
   });
-
+  const [showlogin, setshowlogin] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -67,7 +84,8 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
   //   phone_number: "",
 
   // });
-
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [activeField, setActiveField] = useState<string | null>(null);
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [otp, setOtp] = useState<string>("");
@@ -82,6 +100,7 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
   //   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   //   return otp;
   // };
+console.log(showSuccess);
 
   const handleSendOTP = async () => {
     if (!formData.phone_number) {
@@ -150,6 +169,8 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
 
       if (result.success) {
         setIsVerified(true);
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
 
         // Store the Firebase user ID directly in formData
         if (result.user?.uid) {
@@ -250,8 +271,10 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       );
 
       if (response.status >= 200 && response.status < 300) {
-        toast.success("Registration successful!");
-        setTimeout(() => closeModal(), 1000);
+        setLoginSuccess(true);
+
+        setCurrentUser(response.data.user);
+        setTimeout(() => closeModal(), 3000);
       } else {
         throw new Error("Registration failed");
       }
@@ -263,6 +286,9 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       setIsSubmitting(false);
     }
   };
+
+  console.log(loginSuccess);
+  
 
   // Helper function to get or create Firebase user
   // const getOrCreateFirebaseUser = async (phoneNumber: string) => {
@@ -390,6 +416,92 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
     return true;
   };
 
+ // Replace this section in your code
+
+if (showlogin) {
+  return (
+    <LoginModal 
+      closeModal={() => setshowlogin(false)} 
+      onSuccess={() => {
+        setLoginSuccess(true);
+        closeModal();
+      }}
+      source="chatbot" // Using one of the allowed values: "chatbot" or "percentage-calculator"
+    />
+  );
+}
+  console.log(loginSuccess);
+
+  if (loginSuccess && currentUser) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-md transform transition-all animate-bounce-in">
+          <div className="bg-gradient-to-br from-orange-500 to-amber-600 p-6 relative">
+            <div className="absolute top-3 right-3">
+              <button
+                onClick={closeModal}
+                className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="flex justify-center mb-4">
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <CheckCircle className="text-green-500" size={48} />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-white text-center mb-2">
+              Registration Successful!
+            </h2>
+            <p className="text-white text-opacity-90 text-center">
+              Welcome, {currentUser.full_name}
+            </p>
+          </div>
+
+          <div className="p-6">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-1 bg-gray-200 rounded-full"></div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="animate-float-delay-1">
+                  <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                </div>
+                <div className="animate-float-delay-2">
+                  <div className="w-4 h-4 bg-amber-400 rounded-full"></div>
+                </div>
+                <div className="animate-float-delay-3">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div className="animate-float-delay-4">
+                  <div className="w-4 h-4 bg-blue-400 rounded-full"></div>
+                </div>
+                <div className="animate-float-delay-5">
+                  <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                </div>
+              </div>
+
+              <p className="text-gray-600 text-center">
+                Your account has been successfully created.
+              </p>
+
+              <div className="text-center text-gray-500 text-sm">
+                <p>Redirecting you to dashboard...</p>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="animate-spin w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // In the form section, replace the OTP success toast with this:
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl">
@@ -415,7 +527,7 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
           <div className="hidden md:block bg-orange-500 p-4 md:w-1/3 md:rounded-bl-2xl">
             <div className="w-full flex flex-col items-center justify-center h-full">
               <Image
-                src="/api/placeholder/320/200"
+                src="/commonformmascot.png"
                 alt="Student studying"
                 width={320}
                 height={200}
@@ -709,6 +821,14 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
                           ? "Resend OTP"
                           : "Send OTP"}
                       </button>
+                      {otpSent && !isVerified && (
+                        <div className=" w-full bg-green-50 border border-green-200 rounded-lg flex items-center justify-center  animate-fade-in">
+                          <CheckCircle className="text-green-500" size={20} />
+                          <p className="text-green-600  text-sm font-medium">
+                            OTP sent successfully to your mobile!
+                          </p>
+                        </div>
+                      )}
                     </div>
 
                     {otpSent && !isVerified && (
@@ -958,17 +1078,81 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
             <div className="mt-4 text-center">
               <p className="text-gray-600 text-sm">
                 Already have an account?{" "}
-                <a
-                  href="#"
+                <button
                   className="text-orange-600 hover:underline font-medium"
+                  onClick={() => setshowlogin(true)}
                 >
                   Login
-                </a>
+                </button>
               </p>
             </div>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes bounce-in {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          70% {
+            transform: scale(1.05);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes float {
+          0% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
+
+        .animate-bounce-in {
+          animation: bounce-in 0.6s ease-out;
+        }
+
+        .animate-float-delay-1 {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-float-delay-2 {
+          animation: float 3.2s ease-in-out 0.2s infinite;
+        }
+
+        .animate-float-delay-3 {
+          animation: float 3.4s ease-in-out 0.4s infinite;
+        }
+
+        .animate-float-delay-4 {
+          animation: float 3.3s ease-in-out 0.6s infinite;
+        }
+
+        .animate-float-delay-5 {
+          animation: float 3.5s ease-in-out 0.8s infinite;
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 };

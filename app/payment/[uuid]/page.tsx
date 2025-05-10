@@ -1,16 +1,883 @@
+// "use client";
+
+// import React, { useState, useEffect } from "react";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { CheckCircle, Lock, X, AlertCircle } from "lucide-react";
+// import axiosInstance from "@/app/components/apiconfig/axios";
+// import { API_URLS } from "@/app/components/apiconfig/api_urls";
+// import Script from "next/script";
+// // import { toast } from "react-toastify";
+
+// interface CourseType {
+//   title: string;
+//   price: string;
+//   originalPrice: string;
+//   discount: string;
+//   duration: string;
+//   items?: number;
+//   uuid?: string;
+// }
+
+// declare global {
+//   interface Window {
+//     Razorpay: new (options: RazorpayOptions) => {
+//       open: () => void;
+//     };
+//   }
+// }
+
+// interface RazorpayOptions {
+//   key: string;
+//   amount: number;
+//   currency: string;
+//   name: string;
+//   description: string;
+//   order_id: string;
+//   handler: (response: RazorpayResponse) => Promise<void>;
+//   prefill: {
+//     name: string;
+//     email: string;
+//   };
+//   theme: {
+//     color: string;
+//   };
+// }
+
+// interface RazorpayResponse {
+//   razorpay_payment_id: string;
+//   razorpay_order_id: string;
+//   razorpay_signature: string;
+// }
+
+// interface UserType {
+//   id?: number;
+//   uuid?: string;
+//   full_name: string;
+//   email: string;
+//   password: string;
+//   phone_number?: string;
+//   dob?: string;
+//   gender: "Male" | "Female";
+//   location?: string;
+//   exam_target?: string;
+//   program?: string;
+//   firebase_user_id: string;
+// }
+
+// export default function PaymentPage() {
+//   const router = useRouter();
+//   const searchParams = useSearchParams();
+//   const [step, setStep] = useState<number>(1);
+//   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+//   const [course, setCourse] = useState<CourseType>({
+//     title: "Loading...",
+//     price: "₹0",
+//     originalPrice: "₹0",
+//     discount: "₹0",
+//     duration: "0 months",
+//     items: 1,
+//     uuid: "",
+//   });
+//   const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+//   const [gstAmount, setGstAmount] = useState<string>("₹0");
+//   const [totalAmount, setTotalAmount] = useState<string>("₹0");
+//   const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+//   const [alertMessage, setAlertMessage] = useState<string>("");
+//   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+
+//   const user_uuid = searchParams.get("user_uuid");
+//   const [users, setUsers] = useState<UserType[]>([]);
+
+//   console.log(users);
+//   console.log(setIsProcessing);
+
+//   useEffect(() => {
+//     const title = searchParams.get("title") || "Unknown Course";
+//     const price = searchParams.get("price") || "₹0";
+//     const originalPrice = searchParams.get("originalPrice") || "₹0";
+//     const discount = searchParams.get("discount") || "₹0";
+//     const duration = searchParams.get("duration") || "0 months";
+//     const items = parseInt(searchParams.get("items") || "1");
+//     const uuid = searchParams.get("uuid") || "";
+
+//     setCourse({
+//       title: decodeURIComponent(title),
+//       price,
+//       originalPrice,
+//       discount,
+//       duration,
+//       items,
+//       uuid,
+//     });
+
+//     const priceValue = parseFloat(price.replace(/[^0-9.]/g, ""));
+//     const gst = priceValue * 0.18;
+//     const total = priceValue + gst;
+
+//     setGstAmount(`₹${gst.toFixed(2)}`);
+//     setTotalAmount(`₹${total.toFixed(2)}`);
+//   }, [searchParams]);
+
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const response = await axiosInstance.get(
+//           API_URLS.REGISTRATION.GET_REGISTRATION
+//         );
+//         setUsers(response.data);
+
+//         if (user_uuid) {
+//           const user = response.data.find(
+//             (u: UserType) => u.uuid === user_uuid
+//           );
+//           if (user) {
+//             setCurrentUser(user);
+//           }
+//         }
+//       } catch (error) {
+//         console.error("Error fetching users:", error);
+//       }
+//     };
+
+//     fetchUsers();
+//   }, [user_uuid]);
+
+//   // Handle payment initiation with Razorpay
+//   // Updated handlePayment function
+//   // Replace your handlePayment function with this implementation
+//   // const handlePayment = async (): Promise<void> => {
+//   //   if (!user_uuid || !course.uuid) {
+//   //     alert("Required information is missing. Please try again.");
+//   //     return;
+//   //   }
+
+//   //   setIsProcessing(true);
+
+//   //   try {
+//   //     // First, create an order on your server
+//   //     const orderResponse = await axiosInstance.post(API_URLS.PAYMENT.POST_PAYMENT_COURSE, {
+//   //       user_uuid: user_uuid,
+//   //       course_uuid: course.uuid
+//   //     });
+
+//   //     console.log("Order response:", orderResponse.data);
+
+//   //     // Load Razorpay script dynamically
+//   //     if (!(window as any).Razorpay) {
+//   //       const script = document.createElement('script');
+//   //       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+//   //       script.async = true;
+//   //       document.body.appendChild(script);
+
+//   //       // Wait for script to load
+//   //       await new Promise((resolve) => {
+//   //         script.onload = resolve;
+//   //       });
+//   //     }
+
+//   //     // Extract price for Razorpay (remove currency symbol and convert to paise)
+//   //     const priceValue = Math.round(parseFloat(totalAmount.replace(/[^0-9.]/g, "")) * 100);
+
+//   //     // Get order_id from your backend response
+//   //     const orderId = orderResponse.data.order_id;
+
+//   //     if (!orderId) {
+//   //       throw new Error("Order ID not received from server");
+//   //     }
+
+//   //     // Create Razorpay options
+//   //     const options = {
+//   //       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Make sure this env variable is correctly set
+//   //       amount: priceValue,
+//   //       currency: "INR",
+//   //       name: "Exam Preparation",  // Your company/site name
+//   //       description: course.title,
+//   //       order_id: orderId,
+//   //       handler: async function(response: any) {
+//   //         try {
+//   //           // Verify payment on your server
+//   //           const verifyResponse = await axiosInstance.post(API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE, {
+//   //             razorpay_payment_id: response.razorpay_payment_id,
+//   //             razorpay_order_id: response.razorpay_order_id,
+//   //             razorpay_signature: response.razorpay_signature,
+//   //           });
+
+//   //           if (verifyResponse.data.status === "success") {
+//   //             setStep(2);
+//   //             setShowSuccessAlert(true);
+//   //           } else {
+//   //             alert("Payment verification failed. Please contact support.");
+//   //           }
+//   //         } catch (error) {
+//   //           console.error("Payment verification error:", error);
+//   //           alert("Payment verification failed. Please contact support.");
+//   //         }
+//   //       },
+//   //       prefill: {
+//   //         name: currentUser?.full_name || '',
+//   //         email: currentUser?.email || '',
+//   //         contact: currentUser?.phone_number || ''
+//   //       },
+//   //       theme: {
+//   //         color: "#E45016" // Match your orange theme
+//   //       },
+//   //       modal: {
+//   //         ondismiss: function() {
+//   //           setIsProcessing(false);
+//   //         }
+//   //       }
+//   //     };
+
+//   //     // Open Razorpay checkout
+//   //     const razorpay = new (window as any).Razorpay(options);
+//   //     razorpay.open();
+
+//   //   } catch (error) {
+//   //     console.error("Payment initiation error:", error);
+//   //     alert(
+//   //       `Payment initiation failed: ${
+//   //         error instanceof Error ? error.message : "Unknown error"
+//   //       }`
+//   //     );
+//   //     setIsProcessing(false);
+//   //   }
+//   // };
+//   // UPDATED handlePayment function with comprehensive error handling
+//   const handlePayment = async () => {
+//     if (!currentUser) {
+//       alert("User details not found");
+//       return;
+//     }
+
+//     console.log("currentUser", currentUser);
+
+//     // ✅ Ensure Razorpay SDK is loaded
+//     if (
+//       typeof window === "undefined" ||
+//       !(window as { Razorpay?: unknown }).Razorpay
+//     ) {
+//       alert("Razorpay SDK not loaded. Please refresh and try again.");
+//       return;
+//     }
+
+//     try {
+//       const res = await axiosInstance.post(
+//         API_URLS.PAYMENT.POST_PAYMENT_COURSE,
+//         {
+//           user_uuid: currentUser.uuid,
+//           course_uuid: course.uuid,
+//           term_condition: true,
+//         }
+//       );
+
+//       const order = res.data;
+
+//       console.log("order", order);
+
+//       const options: RazorpayOptions = {
+//         key:
+//           order.razorpay_key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
+//         amount: order.payment.amount * 100, // ensure amount is in paisa
+//         currency: "INR",
+//         name: "Prepacademy",
+//         description: "Premium Personality Report",
+//         order_id: order.order_id,
+//         handler: async function (response: RazorpayResponse) {
+//           await axiosInstance.post(
+//             API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE,
+//             {
+//               razorpay_payment_id: response.razorpay_payment_id,
+//               razorpay_order_id: response.razorpay_order_id,
+//               razorpay_signature: response.razorpay_signature,
+//             }
+//           );
+//           // toast.success("Payment Successful!");
+//           setShowSuccessAlert(true);
+//         },
+//         prefill: {
+//           name: currentUser.full_name,
+//           email: currentUser.email,
+//         },
+//         theme: {
+//           color: "#3399cc",
+//         },
+//       };
+
+//       console.log("options", options);
+//       // const rzp = new window.Razorpay(options);
+//       const rzp = new window.Razorpay(options);
+
+//       rzp.open();
+//     } catch (error) {
+//       console.error("Payment error:", error);
+//       // toast.error("Payment failed. Please try again.");
+//       setAlertMessage("Payment verification failed. Please try again.");
+//       setShowErrorAlert(true);
+//     }
+//   };
+
+//   // Separate function to handle successful Razorpay responses
+//   // const handleRazorpayResponse = async (response: any) => {
+//   //   try {
+//   //     console.log("Verifying payment with server:", response);
+
+//   //     const verifyResponse = await axiosInstance.post(
+//   //       API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE,
+//   //       {
+//   //         razorpay_payment_id: response.razorpay_payment_id,
+//   //         razorpay_order_id: response.razorpay_order_id,
+//   //         razorpay_signature: response.razorpay_signature,
+//   //         user_uuid: user_uuid,
+//   //         course_uuid: course.uuid,
+//   //       }
+//   //     );
+
+//   //     console.log("Verification response:", verifyResponse.data);
+
+//   //     if (verifyResponse.data.status === "success") {
+//   //       setStep(2);
+//   //       setShowSuccessAlert(true);
+//   //     } else {
+//   //       alert("Payment verification failed. Please contact support.");
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Payment verification error:", error);
+//   //     alert("Payment verification failed. Please contact support.");
+//   //   } finally {
+//   //     setIsProcessing(false);
+//   //   }
+//   // };
+//   // const handlePaymentsubmit = async () => {
+//   //   if (!student) {
+//   //     alert("Student details not found");
+//   //     return;
+//   //   }
+
+//   //   // ✅ Ensure Razorpay SDK is loaded
+//   //   if (typeof window === "undefined" || !(window as any).Razorpay) {
+//   //     alert("Razorpay SDK not loaded. Please refresh and try again.");
+//   //     return;
+//   //   }
+
+//   //   try {
+//   //     const res = await api.post(API_URL.PAYMENT.CREATE_ORDER, {
+//   //       student_uuid: student.student_uuid,
+//   //       name: student.name,
+//   //       email: student.email,
+//   //       term_condition: true,
+//   //     });
+
+//   //     const order = res.data;
+
+//   //     const options: any = {
+//   //       key: order.razorpay_key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+//   //       amount: order.amount * 100, // ensure amount is in paisa
+//   //       currency: "INR",
+//   //       name: "Prepacademy",
+//   //       description: "Premium Personality Report",
+//   //       order_id: order.order_id,
+//   //       handler: async function (response: any) {
+//   //         await axiosInstance.post(API_URLS.PAYMENT.VERIFY_ORDER, {
+//   //           razorpay_payment_id: response.razorpay_payment_id,
+//   //           razorpay_order_id: response.razorpay_order_id,
+//   //           razorpay_signature: response.razorpay_signature,
+//   //         });
+
+//   //         alert("Payment Successful!");
+//   //       },
+//   //       prefill: {
+//   //         name: student.name,
+//   //         email: student.email,
+//   //       },
+//   //       theme: {
+//   //         color: "#3399cc",
+//   //       },
+//   //     };
+
+//   //     const rzp = new (window as any).Razorpay(options);
+//   //     rzp.open();
+//   //   } catch (error) {
+//   //     console.error("Payment error:", error);
+//   //     alert("Payment failed. Please try again.");
+//   //   }
+//   // };
+
+//   // Handle payment verification after redirect from Razorpay
+//   useEffect(() => {
+//     const verifyPayment = async () => {
+//       const paymentId = searchParams.get("razorpay_payment_id");
+//       const orderId = searchParams.get("razorpay_order_id");
+//       const signature = searchParams.get("razorpay_signature");
+
+//       if (paymentId && orderId && signature) {
+//         try {
+//           const response = await axiosInstance.post(
+//             API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE,
+//             {
+//               razorpay_payment_id: paymentId,
+//               razorpay_order_id: orderId,
+//               razorpay_signature: signature,
+//             }
+//           );
+
+//           if (response.data.status === "success") {
+//             setStep(2); // Move to confirmation step
+//             setShowSuccessAlert(true); // Show success alert
+//           } else {
+//             // alert("Payment verification failed. Please contact support.");
+//             setAlertMessage(
+//               "Payment verification failed. Please contact support."
+//             );
+//             setShowErrorAlert(true);
+//           }
+//         } catch (error) {
+//           console.error("Payment verification error:", error);
+//           // alert("Payment verification failed. Please contact support.");
+//           setAlertMessage(
+//             "Payment verification failed. Please contact support."
+//           );
+//           setShowErrorAlert(true);
+//         }
+//       }
+//     };
+
+//     verifyPayment();
+//   }, [searchParams]);
+
+//   // const handleSuccess = (): void => {
+//   //   router.push("/my-courses");
+//   // };
+
+//   const handleSuccess = (): void => {
+//     router.push("/allcourses");
+//   };
+
+//   const closeSuccessAlert = (): void => {
+//     setShowSuccessAlert(false);
+//     router.push("/allcourses");
+//   };
+
+//   const closeErrorAlert = (): void => {
+//     setShowErrorAlert(false);
+//   };
+//   return (
+//     <div className="min-h-screen bg-[#2B1615] text-orange-50 flex flex-col">
+//       <Script
+//         src="https://checkout.razorpay.com/v1/checkout.js"
+//         strategy="afterInteractive"
+//       />
+//       <header className="border-b border-orange-900 bg-[#1F100F] p-4">
+//         <div className="container mx-auto flex justify-between items-center">
+//           <h1 className="text-xl md:text-2xl font-bold text-orange-100">
+//             Secure Checkout
+//           </h1>
+//           <button
+//             onClick={() => router.back()}
+//             className="text-orange-400 hover:text-orange-300"
+//           >
+//             <X size={24} />
+//           </button>
+//         </div>
+//       </header>
+
+//       <div className="flex-grow container mx-auto py-6 px-4 md:px-6 lg:py-8">
+//         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+//           <div className="lg:col-span-2">
+//             {step < 2 && (
+//               <div className="mb-6">
+//                 <div className="flex items-center">
+//                   <div
+//                     className={`flex items-center justify-center w-8 h-8 rounded-full ${
+//                       step >= 1
+//                         ? "bg-orange-500 text-white"
+//                         : "bg-orange-900 text-orange-400"
+//                     }`}
+//                   >
+//                     1
+//                   </div>
+//                   <div
+//                     className={`flex-1 h-1 mx-2 ${
+//                       step >= 2 ? "bg-orange-500" : "bg-orange-900"
+//                     }`}
+//                   ></div>
+//                   <div
+//                     className={`flex items-center justify-center w-8 h-8 rounded-full ${
+//                       step >= 2
+//                         ? "bg-orange-500 text-white"
+//                         : "bg-orange-900 text-orange-400"
+//                     }`}
+//                   >
+//                     2
+//                   </div>
+//                 </div>
+//                 <div className="flex justify-between mt-2 text-sm text-orange-400">
+//                   <div className="text-center">Account Details</div>
+//                   <div className="text-center">Confirmation</div>
+//                 </div>
+//               </div>
+//             )}
+
+//             {step === 1 && (
+//               <div className="bg-[#3B211F] rounded-lg p-4 md:p-6 shadow-xl">
+//                 <h2 className="text-xl font-semibold text-orange-200 mb-6">
+//                   Account Information
+//                 </h2>
+
+//                 <div className="mb-4">
+//                   <div className="flex items-center mb-4">
+//                     <CheckCircle className="text-green-500 mr-2" size={18} />
+//                     <label className="text-orange-200 font-medium">
+//                       1. Account Details
+//                     </label>
+//                   </div>
+//                   {currentUser && (
+//                     <div className="ml-6 mt-2 space-y-4 text-orange-300 text-sm">
+//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Full Name
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                             {currentUser.full_name}
+//                           </div>
+//                         </div>
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Email
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                             {currentUser.email}
+//                           </div>
+//                         </div>
+//                       </div>
+//                       {(currentUser.phone_number || currentUser.gender) && (
+//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                           {currentUser.phone_number && (
+//                             <div className="flex flex-col">
+//                               <p className="font-medium text-orange-200 mb-1">
+//                                 Phone
+//                               </p>
+//                               <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                                 {currentUser.phone_number}
+//                               </div>
+//                             </div>
+//                           )}
+//                           {currentUser.gender && (
+//                             <div className="flex flex-col">
+//                               <p className="font-medium text-orange-200 mb-1">
+//                                 Gender
+//                               </p>
+//                               <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                                 {currentUser.gender}
+//                               </div>
+//                             </div>
+//                           )}
+//                         </div>
+//                       )}
+//                       {currentUser.location && (
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Location
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                             {currentUser.location}
+//                           </div>
+//                         </div>
+//                       )}
+//                       {currentUser.dob && (
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Date of Birth
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                             {currentUser.dob}
+//                           </div>
+//                         </div>
+//                       )}
+//                       {currentUser.exam_target && (
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Exam Target
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-sky-400">
+//                             {currentUser.exam_target}
+//                           </div>
+//                         </div>
+//                       )}
+//                       {currentUser.program && (
+//                         <div className="flex flex-col">
+//                           <p className="font-medium text-orange-200 mb-1">
+//                             Program
+//                           </p>
+//                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+//                             {currentUser.program}
+//                           </div>
+//                         </div>
+//                       )}
+//                     </div>
+//                   )}
+//                 </div>
+
+//                 <div className="text-xs text-orange-400 mt-6">
+//                   If any of these details are incorrect, please update your
+//                   profile before proceeding.
+//                 </div>
+//               </div>
+//             )}
+
+//             {step === 2 && showSuccessAlert && (
+//               <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+//                 <div className="bg-[#2B1615] rounded-lg p-6 max-w-md w-full shadow-xl">
+//                   <div className="flex items-center justify-center mb-4">
+//                     <CheckCircle size={48} className="text-orange-500" />
+//                   </div>
+//                   <h3 className="text-xl font-bold text-orange-200 text-center mb-4">
+//                     Payment Successful!
+//                   </h3>
+//                   <p className="text-orange-100 text-center mb-6">
+//                     Thank you for your purchase. Your course access will be
+//                     activated within 15 minutes.
+//                   </p>
+//                   <button
+//                     onClick={handleSuccess}
+//                     className="w-full bg-orange-900 hover:bg-orange-800 text-white py-3 rounded-md"
+//                   >
+//                     Go to My Courses
+//                   </button>
+//                 </div>
+//               </div>
+//             )}
+
+//             {step === 2 && !showSuccessAlert && (
+//               <div className="bg-[#3B211F] rounded-lg p-4 md:p-8 shadow-xl text-center">
+//                 <div className="bg-green-800 w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6">
+//                   <CheckCircle size={48} className="text-green-300" />
+//                 </div>
+
+//                 <h3 className="text-2xl font-bold text-green-300 mb-4">
+//                   Payment Successful!
+//                 </h3>
+//                 <p className="text-orange-200 mb-6">
+//                   Thank you for enrolling in{" "}
+//                   {course.items && course.items > 1
+//                     ? "your courses"
+//                     : "your course"}
+//                   . You will receive a confirmation email shortly.
+//                 </p>
+
+//                 <div className="bg-[#341A18] p-4 md:p-6 rounded-md border border-orange-900 text-left max-w-md mx-auto">
+//                   <h4 className="font-medium text-orange-200 mb-3">
+//                     Order Details
+//                   </h4>
+//                   <div className="flex justify-between text-orange-300 mb-2">
+//                     <span>
+//                       Course{course.items && course.items > 1 ? "s" : ""}:
+//                     </span>
+//                     <span className="font-medium text-orange-100">
+//                       {course.title}
+//                     </span>
+//                   </div>
+//                   <div className="flex justify-between text-orange-300 mb-2">
+//                     <span>Order ID:</span>
+//                     <span className="font-medium text-orange-100">
+//                       ORD{Math.floor(Math.random() * 1000000)}
+//                     </span>
+//                   </div>
+//                   <div className="flex justify-between text-orange-300 mb-2">
+//                     <span>Date:</span>
+//                     <span className="font-medium text-orange-100">
+//                       {new Date().toLocaleDateString()}
+//                     </span>
+//                   </div>
+//                   <div className="flex justify-between text-orange-300 mb-2">
+//                     <span>Amount Paid:</span>
+//                     <span className="font-medium text-orange-100">
+//                       {totalAmount}
+//                     </span>
+//                   </div>
+//                 </div>
+
+//                 <p className="mt-6 text-orange-300">
+//                   Your course access will be activated within the next 15
+//                   minutes. Happy learning!
+//                 </p>
+//               </div>
+//             )}
+
+//             {step < 2 && (
+//               <div className="mt-8 flex justify-between">
+//                 <button
+//                   onClick={() => router.back()}
+//                   className="px-4 md:px-6 py-3 border border-orange-600 text-orange-400 hover:bg-[#341A18] rounded-md"
+//                 >
+//                   Cancel
+//                 </button>
+//                 <button
+//                   onClick={handlePayment}
+//                   disabled={isProcessing}
+//                   className={`px-6 md:px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md flex items-center ${
+//                     isProcessing ? "opacity-75 cursor-not-allowed" : ""
+//                   }`}
+//                 >
+//                   {isProcessing ? (
+//                     <>Processing...</>
+//                   ) : (
+//                     <>
+//                       Continue <Lock size={16} className="ml-2" />
+//                     </>
+//                   )}
+//                 </button>
+//               </div>
+//             )}
+
+//             {step === 2 && !showSuccessAlert && (
+//               <div className="mt-8 flex justify-center">
+//                 <button
+//                   onClick={handleSuccess}
+//                   className="px-6 md:px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
+//                 >
+//                   Go to My Courses
+//                 </button>
+//               </div>
+//             )}
+
+//             {step < 2 && (
+//               <div className="mt-6 py-3 flex justify-center items-center text-xs text-orange-400">
+//                 <Lock size={14} className="mr-2" /> Secure payment processed by
+//                 Razorpay
+//               </div>
+//             )}
+//           </div>
+
+//           <div className="lg:col-span-1">
+//             <div className="bg-[#3B211F] rounded-lg p-4 md:p-6 shadow-xl">
+//               <h2 className="text-xl font-semibold text-orange-200 mb-6">
+//                 Order summary
+//               </h2>
+
+//               <div className="space-y-4">
+//                 <div className="flex justify-between items-center">
+//                   <span className="text-orange-300">Original Price:</span>
+//                   <span className="text-orange-100">{course.price}</span>
+//                 </div>
+
+//                 <div className="flex justify-between items-center">
+//                   <span className="text-orange-300">GST (18%):</span>
+//                   <span className="text-orange-100">{gstAmount}</span>
+//                 </div>
+
+//                 <div className="border-t border-orange-900 pt-4 flex justify-between items-center font-medium">
+//                   <span className="text-orange-200">
+//                     Total ({course.items} course
+//                     {course.items && course.items > 1 ? "s" : ""}):
+//                   </span>
+//                   <span className="text-orange-100 text-xl">{totalAmount}</span>
+//                 </div>
+
+//                 <div className="text-xs text-orange-400 mt-2">
+//                   By completing your purchase, you agree to these{" "}
+//                   <a href="#" className="text-orange-300 hover:underline">
+//                     Terms of Use
+//                   </a>
+//                   .
+//                 </div>
+//               </div>
+//             </div>
+
+//             <div className="mt-6 bg-[#341A18] border border-orange-900 rounded-lg p-4">
+//               <h3 className="text-lg font-medium text-orange-200 mb-3">
+//                 Course Information
+//               </h3>
+//               <h4 className="font-medium text-orange-100 mb-2">
+//                 {course.title}
+//               </h4>
+//               <p className="text-orange-300 text-sm mb-4">
+//                 Duration: {course.duration}
+//               </p>
+
+//               <div className="flex items-center text-xs text-orange-400">
+//                 <AlertCircle size={14} className="mr-1" />
+//                 <span>
+//                   This course access will be available for {course.duration}{" "}
+//                   from the date of purchase.
+//                 </span>
+//               </div>
+//             </div>
+
+//             <div className="mt-6 bg-[#341A18] border border-orange-900 rounded-lg p-4">
+//               <h3 className="text-lg font-medium text-orange-200 mb-3">
+//                 30-Day Money-Back Guarantee
+//               </h3>
+//               <p className="text-orange-300 text-sm">
+//                 Not satisfied? Get a full refund within 30 days. Simple and
+//                 straightforward!
+//               </p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//       {showSuccessAlert && (
+//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+//           <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-1 rounded-lg w-full max-w-md mx-4">
+//             <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+//               <div className="bg-green-100 p-3 rounded-full mb-4">
+//                 <CheckCircle className="text-green-500 w-10 h-10" />
+//               </div>
+//               <h2 className="text-gray-800 text-xl font-bold mb-2">
+//                 Your payment has been received
+//               </h2>
+//               <p className="text-gray-600 text-center mb-4">
+//                 Thank you for your payment. Your plan has been upgraded to
+//                 premium! Please check your email for payment confirmation &
+//                 invoice.
+//               </p>
+//               <button
+//                 onClick={closeSuccessAlert}
+//                 className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-full w-full max-w-xs"
+//               >
+//                 Go to your dashboard
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Error Alert Modal */}
+//       {showErrorAlert && (
+//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+//           <div className="bg-gradient-to-r from-red-600 to-orange-500 p-1 rounded-lg w-full max-w-md mx-4">
+//             <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+//               <div className="bg-red-100 p-3 rounded-full mb-4">
+//                 <AlertCircle className="text-red-500 w-10 h-10" />
+//               </div>
+//               <h2 className="text-gray-800 text-xl font-bold mb-2">
+//                 Payment Failed
+//               </h2>
+//               <p className="text-gray-600 text-center mb-4">
+//                 {alertMessage ||
+//                   "Your payment could not be processed. Please try again or contact support."}
+//               </p>
+//               <button
+//                 onClick={closeErrorAlert}
+//                 className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-full w-full max-w-xs"
+//               >
+//                 Try Again
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import {
-  CreditCard,
-  Lock,
-  CheckCircle,
-  Wallet,
-  X,
-  AlertCircle,
-  Building,
-} from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { CheckCircle, Lock, X, AlertCircle } from "lucide-react";
+import axiosInstance from "@/app/components/apiconfig/axios";
+import { API_URLS } from "@/app/components/apiconfig/api_urls";
+import Script from "next/script";
 
 interface CourseType {
   title: string;
@@ -18,195 +885,313 @@ interface CourseType {
   originalPrice: string;
   discount: string;
   duration: string;
+  items?: number;
+  uuid?: string;
 }
 
-interface FormDataType {
-  cardNumber: string;
-  cardHolder: string;
-  expiryDate: string;
-  cvv: string;
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => {
+      open: () => void;
+    };
+  }
+}
+
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => Promise<void>;
+  prefill: {
+    name: string;
+    email: string;
+  };
+  theme: {
+    color: string;
+  };
+}
+
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
+interface UserType {
+  id?: number;
+  uuid?: string;
+  full_name: string;
   email: string;
-  address: string;
-  city: string;
-  state: string;
-  pincode: string;
-  upiId: string;
-  walletNumber: string;
-  country: string;
+  password: string;
+  phone_number?: string;
+  dob?: string;
+  gender: "Male" | "Female";
+  location?: string;
+  exam_target?: string;
+  program?: string;
+  firebase_user_id: string;
 }
-
-interface ErrorsType {
-  [key: string]: string;
-}
-
-type PaymentMethodType = "card" | "upi" | "wallet" | "netbanking";
-
-// Sample course data
-const sampleCourse: CourseType = {
-  title: "Advanced Web Development",
-  price: "₹649",
-  originalPrice: "₹2,999",
-  discount: "₹2,350 (78% Off)",
-  duration: "12 months",
-};
 
 export default function PaymentPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState<number>(1);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodType>("upi");
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [course, setCourse] = useState<CourseType>(sampleCourse);
-  const [formData, setFormData] = useState<FormDataType>({
-    cardNumber: "",
-    cardHolder: "",
-    expiryDate: "",
-    cvv: "",
-    email: "basil@gmail.com",
-    address: "",
-    city: "",
-    state: "Kerala",
-    pincode: "",
-    upiId: "",
-    walletNumber: "",
-    country: "India",
+  const [course, setCourse] = useState<CourseType>({
+    title: "Loading...",
+    price: "₹0",
+    originalPrice: "₹0",
+    discount: "₹0",
+    duration: "0 months",
+    items: 1,
+    uuid: "",
   });
-  const [errors, setErrors] = useState<ErrorsType>({});
+  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+  const [gstAmount, setGstAmount] = useState<string>("₹0");
+  const [totalAmount, setTotalAmount] = useState<string>("₹0");
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
 
-  // We would typically fetch course details based on UUID
-  // useEffect(() => {
-  //   console.log("User UUID:", params.uuid);
-  //   // Here you would fetch course details using the UUID
-  //   // setCourse(fetchedCourse);
-  // }, [params.uuid]);
-  // console.log(params.uuid);
+  const user_uuid = searchParams.get("user_uuid");
+  const [users, setUsers] = useState<UserType[]>([]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  console.log(users);
+  console.log(setIsProcessing);
+
+  useEffect(() => {
+    const title = searchParams.get("title") || "Unknown Course";
+    const price = searchParams.get("price") || "₹0";
+    const originalPrice = searchParams.get("originalPrice") || "₹0";
+    const discount = searchParams.get("discount") || "₹0";
+    const duration = searchParams.get("duration") || "0 months";
+    const items = parseInt(searchParams.get("items") || "1");
+    const uuid = searchParams.get("uuid") || "";
+
+    setCourse({
+      title: decodeURIComponent(title),
+      price,
+      originalPrice,
+      discount,
+      duration,
+      items,
+      uuid,
     });
 
-    console.log(setCourse);
+    const priceValue = parseFloat(price.replace(/[^0-9.]/g, ""));
+    const gst = priceValue * 0.18;
+    const total = priceValue + gst;
 
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: "",
-      });
+    setGstAmount(`₹${gst.toFixed(2)}`);
+    setTotalAmount(`₹${total.toFixed(2)}`);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosInstance.get(
+          API_URLS.REGISTRATION.GET_REGISTRATION
+        );
+        setUsers(response.data);
+
+        if (user_uuid) {
+          const user = response.data.find(
+            (u: UserType) => u.uuid === user_uuid
+          );
+          if (user) {
+            setCurrentUser(user);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, [user_uuid]);
+
+  // Function to store payment data in localStorage
+  const storePaymentData = (status: string, paymentDetails?: RazorpayResponse) => {
+    const paymentData = {
+      course_uuid: course.uuid,
+      user_uuid: currentUser?.uuid,
+      course_details: {
+        title: course.title,
+        price: course.price,
+        duration: course.duration,
+        items: course.items,
+      },
+      payment_status: status,
+      payment_id: paymentDetails?.razorpay_payment_id || null,
+      order_id: paymentDetails?.razorpay_order_id || null,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Retrieve existing payments from localStorage or initialize empty array
+    const existingPayments = JSON.parse(localStorage.getItem("course_payments") || "[]");
+    // Add new payment data
+    existingPayments.push(paymentData);
+    // Save back to localStorage
+    localStorage.setItem("course_payments", JSON.stringify(existingPayments));
+  };
+
+  const handlePayment = async () => {
+    if (!currentUser) {
+      alert("User details not found");
+      storePaymentData("failed"); // Store failed attempt due to missing user
+      return;
+    }
+
+    console.log("currentUser", currentUser);
+
+    if (
+      typeof window === "undefined" ||
+      !(window as { Razorpay?: unknown }).Razorpay
+    ) {
+      alert("Razorpay SDK not loaded. Please refresh and try again.");
+      storePaymentData("failed"); // Store failed attempt due to SDK not loaded
+      return;
+    }
+
+    try {
+      const res = await axiosInstance.post(
+        API_URLS.PAYMENT.POST_PAYMENT_COURSE,
+        {
+          user_uuid: currentUser.uuid,
+          course_uuid: course.uuid,
+          term_condition: true,
+        }
+      );
+
+      const order = res.data;
+
+      console.log("order", order);
+
+      storePaymentData("pending"); // Store pending status before initiating payment
+
+      const options: RazorpayOptions = {
+        key:
+          order.razorpay_key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
+        amount: order.payment.amount * 100,
+        currency: "INR",
+        name: "Prepacademy",
+        description: "Premium Personality Report",
+        order_id: order.order_id,
+        handler: async function (response: RazorpayResponse) {
+          try {
+            await axiosInstance.post(
+              API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE,
+              {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              }
+            );
+            storePaymentData("success", response); // Store success status
+            setShowSuccessAlert(true);
+          } catch (error) {
+            console.error("Payment verification error:", error);
+            storePaymentData("failed", response); // Store failed status on verification error
+            setAlertMessage("Payment verification failed. Please try again.");
+            setShowErrorAlert(true);
+          }
+        },
+        prefill: {
+          name: currentUser.full_name,
+          email: currentUser.email,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      console.log("options", options);
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Payment error:", error);
+      storePaymentData("failed"); // Store failed status on payment initiation error
+      setAlertMessage("Payment verification failed. Please try again.");
+      setShowErrorAlert(true);
     }
   };
 
-  const validateForm = (): boolean => {
-    const newErrors: ErrorsType = {};
+  useEffect(() => {
+    const verifyPayment = async () => {
+      const paymentId = searchParams.get("razorpay_payment_id");
+      const orderId = searchParams.get("razorpay_order_id");
+      const signature = searchParams.get("razorpay_signature");
 
-    if (step === 1) {
-      if (!formData.email) newErrors.email = "Email is required";
-      else if (!/\S+@\S+\.\S+/.test(formData.email))
-        newErrors.email = "Email is invalid";
+      if (paymentId && orderId && signature) {
+        try {
+          const response = await axiosInstance.post(
+            API_URLS.VERIFY_PAYMENT.POST_VERIFY_PAYMENT_COURSE,
+            {
+              razorpay_payment_id: paymentId,
+              razorpay_order_id: orderId,
+              razorpay_signature: signature,
+            }
+          );
 
-      if (!formData.address) newErrors.address = "Address is required";
-      if (!formData.city) newErrors.city = "City is required";
-      if (!formData.state) newErrors.state = "State is required";
-      if (!formData.pincode) newErrors.pincode = "Pincode is required";
-      else if (!/^\d{6}$/.test(formData.pincode))
-        newErrors.pincode = "Pincode must be 6 digits";
-    } else if (step === 2 && paymentMethod === "card") {
-      if (!formData.cardNumber)
-        newErrors.cardNumber = "Card number is required";
-      else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s/g, "")))
-        newErrors.cardNumber = "Card number must be 16 digits";
+          if (response.data.status === "success") {
+            storePaymentData("success", {
+              razorpay_payment_id: paymentId,
+              razorpay_order_id: orderId,
+              razorpay_signature: signature,
+            }); // Store success status
+            setStep(2);
+            setShowSuccessAlert(true);
+          } else {
+            storePaymentData("failed", {
+              razorpay_payment_id: paymentId,
+              razorpay_order_id: orderId,
+              razorpay_signature: signature,
+            }); // Store failed status
+            setAlertMessage(
+              "Payment verification failed. Please contact support."
+            );
+            setShowErrorAlert(true);
+          }
+        } catch (error) {
+          console.error("Payment verification error:", error);
+          storePaymentData("failed", {
+            razorpay_payment_id: paymentId,
+            razorpay_order_id: orderId,
+            razorpay_signature: signature,
+          }); // Store failed status on error
+          setAlertMessage(
+            "Payment verification failed. Please contact support."
+          );
+          setShowErrorAlert(true);
+        }
+      }
+    };
 
-      if (!formData.cardHolder)
-        newErrors.cardHolder = "Card holder name is required";
-
-      if (!formData.expiryDate)
-        newErrors.expiryDate = "Expiry date is required";
-      else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate))
-        newErrors.expiryDate = "Format must be MM/YY";
-
-      if (!formData.cvv) newErrors.cvv = "CVV is required";
-      else if (!/^\d{3,4}$/.test(formData.cvv))
-        newErrors.cvv = "CVV must be 3 or 4 digits";
-    } else if (step === 2 && paymentMethod === "upi") {
-      if (!formData.upiId) newErrors.upiId = "UPI ID is required";
-      else if (!formData.upiId.includes("@"))
-        newErrors.upiId = "Invalid UPI ID format";
-    } else if (step === 2 && paymentMethod === "wallet") {
-      if (!formData.walletNumber)
-        newErrors.walletNumber = "Mobile number is required";
-      else if (!/^\d{10}$/.test(formData.walletNumber))
-        newErrors.walletNumber = "Mobile number must be 10 digits";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleNext = (): void => {
-    if (validateForm()) {
-      setStep(step + 1);
-    }
-  };
-
-  const handleBack = (): void => {
-    setStep(step - 1);
-  };
-
-  const formatCardNumber = (value: string): string => {
-    const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-    const matches = v.match(/\d{4,16}/g);
-    const match = (matches && matches[0]) || "";
-    const parts = [];
-
-    for (let i = 0; i < match.length; i += 4) {
-      parts.push(match.substring(i, i + 4));
-    }
-
-    if (parts.length) {
-      return parts.join(" ");
-    } else {
-      return value;
-    }
-  };
-
-  const handleCardNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const formattedValue = formatCardNumber(e.target.value);
-    setFormData({
-      ...formData,
-      cardNumber: formattedValue,
-    });
-
-    if (errors.cardNumber) {
-      setErrors({
-        ...errors,
-        cardNumber: "",
-      });
-    }
-  };
-
-  const handlePayment = (): void => {
-    if (validateForm()) {
-      setIsProcessing(true);
-
-      // Simulate payment processing
-      setTimeout(() => {
-        setIsProcessing(false);
-        setStep(3); // Move to success step
-      }, 2000);
-    }
-  };
+    verifyPayment();
+  }, [searchParams]);
 
   const handleSuccess = (): void => {
-    router.push("/my-courses");
+    router.push("/allcourses");
+  };
+
+  const closeSuccessAlert = (): void => {
+    setShowSuccessAlert(false);
+    router.push("/allcourses");
+  };
+
+  const closeErrorAlert = (): void => {
+    setShowErrorAlert(false);
   };
 
   return (
     <div className="min-h-screen bg-[#2B1615] text-orange-50 flex flex-col">
-      {/* Header */}
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive"
+      />
       <header className="border-b border-orange-900 bg-[#1F100F] p-4">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl md:text-2xl font-bold text-orange-100">
@@ -221,12 +1206,10 @@ export default function PaymentPage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <div className="flex-grow container mx-auto py-6 px-4 md:px-6 lg:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Section: Payment Form */}
           <div className="lg:col-span-2">
-            {step < 3 && (
+            {step < 2 && (
               <div className="mb-6">
                 <div className="flex items-center">
                   <div
@@ -252,417 +1235,146 @@ export default function PaymentPage() {
                   >
                     2
                   </div>
-                  <div className="flex-1 h-1 mx-2 bg-orange-900"></div>
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-900 text-orange-400">
-                    3
-                  </div>
                 </div>
                 <div className="flex justify-between mt-2 text-sm text-orange-400">
                   <div className="text-center">Account Details</div>
-                  <div className="text-center">Payment Method</div>
                   <div className="text-center">Confirmation</div>
                 </div>
               </div>
             )}
 
-            {/* Step 1: Billing Info */}
             {step === 1 && (
               <div className="bg-[#3B211F] rounded-lg p-4 md:p-6 shadow-xl">
                 <h2 className="text-xl font-semibold text-orange-200 mb-6">
-                  Billing Information
+                  Account Information
                 </h2>
 
                 <div className="mb-4">
-                  <div className="flex items-center mb-2">
+                  <div className="flex items-center mb-4">
                     <CheckCircle className="text-green-500 mr-2" size={18} />
-                    <label className="text-orange-200">
-                      1. Account details (user@gmail.com)
+                    <label className="text-orange-200 font-medium">
+                      1. Account Details
                     </label>
                   </div>
+                  {currentUser && (
+                    <div className="ml-6 mt-2 space-y-4 because text-orange-300 text-sm">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Full Name
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                            {currentUser.full_name}
+                          </div>
+                        </div>
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Email
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                            {currentUser.email}
+                          </div>
+                        </div>
+                      </div>
+                      {(currentUser.phone_number || currentUser.gender) && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {currentUser.phone_number && (
+                            <div className="flex flex-col">
+                              <p className="font-medium text-orange-200 mb-1">
+                                Phone
+                              </p>
+                              <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                                {currentUser.phone_number}
+                              </div>
+                            </div>
+                          )}
+                          {currentUser.gender && (
+                            <div className="flex flex-col">
+                              <p className="font-medium text-orange-200 mb-1">
+                                Gender
+                              </p>
+                              <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                                {currentUser.gender}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {currentUser.location && (
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Location
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                            {currentUser.location}
+                          </div>
+                        </div>
+                      )}
+                      {currentUser.dob && (
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Date of Birth
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                            {currentUser.dob}
+                          </div>
+                        </div>
+                      )}
+                      {currentUser.exam_target && (
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Exam Target
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-sky-400">
+                            {currentUser.exam_target}
+                          </div>
+                        </div>
+                      )}
+                      {currentUser.program && (
+                        <div className="flex flex-col">
+                          <p className="font-medium text-orange-200 mb-1">
+                            Program
+                          </p>
+                          <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-orange-300">
+                            {currentUser.program}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
-                <h3 className="text-lg font-medium text-orange-200 mt-6 mb-4">
-                  2. Billing address & Payment method
-                </h3>
-
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        Country
-                      </label>
-                      <div className="relative">
-                        <select
-                          name="country"
-                          value={formData.country}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              country: e.target.value,
-                            })
-                          }
-                          className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                        >
-                          <option value="India">India</option>
-                          <option value="United States">United States</option>
-                          <option value="United Kingdom">United Kingdom</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        State / Union Territory
-                      </label>
-                      <div className="relative">
-                        <select
-                          name="state"
-                          value={formData.state}
-                          onChange={(e) =>
-                            setFormData({ ...formData, state: e.target.value })
-                          }
-                          className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                        >
-                          <option value="Kerala">Kerala</option>
-                          <option value="Tamil Nadu">Tamil Nadu</option>
-                          <option value="Karnataka">Karnataka</option>
-                          <option value="Maharashtra">Maharashtra</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-xs text-orange-400 mb-4">
-                    Udemy is required by law to collect applicable transaction
-                    taxes for purchases made in certain tax jurisdictions.
-                  </div>
-
-                  <div className="mt-8">
-                    <h3 className="text-lg font-medium text-orange-200 mb-4">
-                      Payment Method
-                    </h3>
-
-                    <div className="space-y-4">
-                      <div className="bg-[#341A18] border border-orange-900 rounded-md p-4 flex items-center relative">
-                        <input
-                          type="radio"
-                          id="upi"
-                          name="paymentMethod"
-                          checked={paymentMethod === "upi"}
-                          onChange={() => setPaymentMethod("upi")}
-                          className="mr-3 text-orange-500 focus:ring-orange-500"
-                        />
-                        <div className="flex items-center">
-                          <div className="bg-white p-1 rounded">
-                            <span className="font-bold text-sm text-blue-700">
-                              UPI
-                            </span>
-                          </div>
-                          <label htmlFor="upi" className="ml-2 text-orange-200">
-                            UPI
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#341A18] border border-orange-900 rounded-md p-4 flex items-center">
-                        <input
-                          type="radio"
-                          id="card"
-                          name="paymentMethod"
-                          checked={paymentMethod === "card"}
-                          onChange={() => setPaymentMethod("card")}
-                          className="mr-3 text-orange-500 focus:ring-orange-500"
-                        />
-                        <div className="flex items-center">
-                          <CreditCard
-                            className="text-orange-300 mr-2"
-                            size={20}
-                          />
-                          <label htmlFor="card" className="text-orange-200">
-                            Cards
-                          </label>
-                        </div>
-                        <div className="ml-auto flex space-x-2">
-                          <div className="w-8 h-5 bg-white rounded flex items-center justify-center">
-                            <span className="text-xs font-bold text-blue-800">
-                              VISA
-                            </span>
-                          </div>
-                          <div className="w-8 h-5 bg-orange-500 rounded"></div>
-                          <div className="w-8 h-5 bg-blue-500 rounded"></div>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#341A18] border border-orange-900 rounded-md p-4 flex items-center">
-                        <input
-                          type="radio"
-                          id="netbanking"
-                          name="paymentMethod"
-                          checked={paymentMethod === "netbanking"}
-                          onChange={() => setPaymentMethod("netbanking")}
-                          className="mr-3 text-orange-500 focus:ring-orange-500"
-                        />
-                        <div className="flex items-center">
-                          <Building
-                            className="text-orange-300 mr-2"
-                            size={20}
-                          />
-                          <label
-                            htmlFor="netbanking"
-                            className="text-orange-200"
-                          >
-                            Net Banking
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#341A18] border border-orange-900 rounded-md p-4 flex items-center">
-                        <input
-                          type="radio"
-                          id="wallet"
-                          name="paymentMethod"
-                          checked={paymentMethod === "wallet"}
-                          onChange={() => setPaymentMethod("wallet")}
-                          className="mr-3 text-orange-500 focus:ring-orange-500"
-                        />
-                        <div className="flex items-center">
-                          <Wallet className="text-orange-300 mr-2" size={20} />
-                          <label htmlFor="wallet" className="text-orange-200">
-                            Mobile Wallets
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="text-xs text-orange-400 mt-6">
+                  If any of these details are incorrect, please update your
+                  profile before proceeding.
                 </div>
               </div>
             )}
 
-           
-
-            {step === 2 && (
-              <div className="bg-[#3B211F] rounded-lg p-4 md:p-6 shadow-xl">
-                <h2 className="text-xl font-semibold text-orange-200 mb-6">
-                  {paymentMethod === "upi" && "UPI Payment"}
-                  {paymentMethod === "card" && "Card Payment"}
-                  {paymentMethod === "netbanking" && "Net Banking"}
-                  {paymentMethod === "wallet" && "Mobile Wallet"}
-                </h2>
-
-                {paymentMethod === "upi" && (
-                  <div className="space-y-6">
-                    <div className="text-orange-200 mb-4">
-                      <p>How would you like to use UPI?</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <button className="bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-md flex justify-center">
-                        QR code
-                      </button>
-
-                      <button className="bg-[#341A18] border border-orange-700 text-orange-200 hover:bg-[#3D201E] py-3 px-4 rounded-md flex justify-center">
-                        Enter UPI ID
-                      </button>
-                    </div>
-
-                    <div className="border-t border-orange-900 my-6 pt-6 text-center text-orange-300">
-                      Complete your payment
-                    </div>
-
-                    <div className="text-center mb-6">
-                      <p className="text-orange-200">
-                        Click the &quot;Proceed&quot; button to generate a QR code for UPI
-                        payment.
-                      </p>
-                    </div>
+            {step === 2 && showSuccessAlert && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-[#2B1615] rounded-lg p-6 max-w-md w-full shadow-xl">
+                  <div className="flex items-center justify-center mb-4">
+                    <CheckCircle size={48} className="text-orange-500" />
                   </div>
-                )}
-
-               
-                {paymentMethod === "card" && (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        Card Number
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          name="cardNumber"
-                          value={formData.cardNumber}
-                          onChange={handleCardNumberChange}
-                          className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100 pr-10"
-                          placeholder="0000 0000 0000 0000"
-                          maxLength={19}
-                        />
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                          <CreditCard className="text-orange-500" size={20} />
-                        </div>
-                      </div>
-                      {errors.cardNumber && (
-                        <p className="text-red-400 text-xs mt-1">
-                          {errors.cardNumber}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        Cardholder Name
-                      </label>
-                      <input
-                        type="text"
-                        name="cardHolder"
-                        value={formData.cardHolder}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                        placeholder="Name on card"
-                      />
-                      {errors.cardHolder && (
-                        <p className="text-red-400 text-xs mt-1">
-                          {errors.cardHolder}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-orange-300 text-sm font-medium mb-2">
-                          Expiry Date
-                        </label>
-                        <input
-                          type="text"
-                          name="expiryDate"
-                          value={formData.expiryDate}
-                          onChange={handleInputChange}
-                          placeholder="MM/YY"
-                          className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                          maxLength={5}
-                        />
-                        {errors.expiryDate && (
-                          <p className="text-red-400 text-xs mt-1">
-                            {errors.expiryDate}
-                          </p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-orange-300 text-sm font-medium mb-2">
-                          CVV
-                        </label>
-                        <input
-                          type="password"
-                          name="cvv"
-                          value={formData.cvv}
-                          onChange={handleInputChange}
-                          placeholder="123"
-                          className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                          maxLength={4}
-                        />
-                        {errors.cvv && (
-                          <p className="text-red-400 text-xs mt-1">
-                            {errors.cvv}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-               
-                {paymentMethod === "netbanking" && (
-                  <div className="space-y-4">
-                    <p className="text-orange-200 mb-4">Select your bank:</p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {[
-                        "State Bank of India",
-                        "HDFC Bank",
-                        "ICICI Bank",
-                        "Axis Bank",
-                      ].map((bank) => (
-                        <div
-                          key={bank}
-                          className="bg-[#341A18] border border-orange-900 rounded-md p-3 cursor-pointer hover:bg-[#3D201E]"
-                        >
-                          <label className="flex items-center cursor-pointer">
-                            <input
-                              type="radio"
-                              name="bank"
-                              className="mr-2 text-orange-500"
-                            />
-                            <span className="text-orange-200">{bank}</span>
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-4">
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        Or select from other banks
-                      </label>
-                      <select className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100">
-                        <option value="">-- Select Bank --</option>
-                        <option>Bank of Baroda</option>
-                        <option>Canara Bank</option>
-                        <option>Punjab National Bank</option>
-                        <option>Kotak Mahindra Bank</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-              
-                {paymentMethod === "wallet" && (
-                  <div className="space-y-4">
-                    <p className="text-orange-200 mb-4">Select your wallet:</p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {["Paytm", "PhonePe", "Google Pay", "Amazon Pay"].map(
-                        (wallet) => (
-                          <div
-                            key={wallet}
-                            className="bg-[#341A18] border border-orange-900 rounded-md p-3 cursor-pointer hover:bg-[#3D201E]"
-                          >
-                            <label className="flex items-center cursor-pointer">
-                              <input
-                                type="radio"
-                                name="wallet"
-                                className="mr-2 text-orange-500"
-                              />
-                              <span className="text-orange-200">{wallet}</span>
-                            </label>
-                          </div>
-                        )
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-orange-300 text-sm font-medium mb-2">
-                        Mobile Number
-                      </label>
-                      <input
-                        type="text"
-                        name="walletNumber"
-                        value={formData.walletNumber}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-orange-900 bg-[#2B1615] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-orange-100"
-                        placeholder="10-digit mobile number"
-                        maxLength={10}
-                      />
-                      {errors.walletNumber && (
-                        <p className="text-red-400 text-xs mt-1">
-                          {errors.walletNumber}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
+                  <h3 className="text-xl font-bold text-orange-200 text-center mb-4">
+                    Payment Successful!
+                  </h3>
+                  <p className="text-orange-100 text-center mb-6">
+                    Thank you for your purchase. Your course access will be
+                    activated within 15 minutes.
+                  </p>
+                  <button
+                    onClick={handleSuccess}
+                    className="w-full bg-orange-900 hover:bg-orange-800 text-white py-3 rounded-md"
+                  >
+                    Go to My Courses
+                  </button>
+                </div>
               </div>
             )}
 
-          
-            {step === 3 && (
+            {step === 2 && !showSuccessAlert && (
               <div className="bg-[#3B211F] rounded-lg p-4 md:p-8 shadow-xl text-center">
                 <div className="bg-green-800 w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6">
                   <CheckCircle size={48} className="text-green-300" />
@@ -672,8 +1384,11 @@ export default function PaymentPage() {
                   Payment Successful!
                 </h3>
                 <p className="text-orange-200 mb-6">
-                  Thank you for enrolling in our course. You will receive a
-                  confirmation email shortly.
+                  Thank you for enrolling in{" "}
+                  {course.items && course.items > 1
+                    ? "your courses"
+                    : "your course"}
+                  . You will receive a confirmation email shortly.
                 </p>
 
                 <div className="bg-[#341A18] p-4 md:p-6 rounded-md border border-orange-900 text-left max-w-md mx-auto">
@@ -681,7 +1396,9 @@ export default function PaymentPage() {
                     Order Details
                   </h4>
                   <div className="flex justify-between text-orange-300 mb-2">
-                    <span>Course:</span>
+                    <span>
+                      Course{course.items && course.items > 1 ? "s" : ""}:
+                    </span>
                     <span className="font-medium text-orange-100">
                       {course.title}
                     </span>
@@ -701,13 +1418,7 @@ export default function PaymentPage() {
                   <div className="flex justify-between text-orange-300 mb-2">
                     <span>Amount Paid:</span>
                     <span className="font-medium text-orange-100">
-                      {course.price}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-orange-300">
-                    <span>Payment Method:</span>
-                    <span className="font-medium text-orange-100 capitalize">
-                      {paymentMethod}
+                      {totalAmount}
                     </span>
                   </div>
                 </div>
@@ -719,17 +1430,16 @@ export default function PaymentPage() {
               </div>
             )}
 
-          
-            {step < 3 && (
+            {step < 2 && (
               <div className="mt-8 flex justify-between">
                 <button
-                  onClick={step === 1 ? () => router.back() : handleBack}
+                  onClick={() => router.back()}
                   className="px-4 md:px-6 py-3 border border-orange-600 text-orange-400 hover:bg-[#341A18] rounded-md"
                 >
-                  {step === 1 ? "Cancel" : "Back"}
+                  Cancel
                 </button>
                 <button
-                  onClick={step === 1 ? handleNext : handlePayment}
+                  onClick={handlePayment}
                   disabled={isProcessing}
                   className={`px-6 md:px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md flex items-center ${
                     isProcessing ? "opacity-75 cursor-not-allowed" : ""
@@ -737,19 +1447,17 @@ export default function PaymentPage() {
                 >
                   {isProcessing ? (
                     <>Processing...</>
-                  ) : step === 1 ? (
-                    <>Continue</>
                   ) : (
                     <>
-                      Proceed <Lock size={16} className="ml-2" />
+                      Continue <Lock size={16} className="ml-2" />
                     </>
                   )}
                 </button>
               </div>
             )}
 
-            {step === 3 && (
-              <div className="mt-8 flex justify-center">
+            {step === 2 && !showSuccessAlert && (
+              <div className="mt-８ flex justify-center">
                 <button
                   onClick={handleSuccess}
                   className="px-6 md:px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
@@ -759,16 +1467,14 @@ export default function PaymentPage() {
               </div>
             )}
 
-            {/* Security Badge */}
-            {step < 3 && (
+            {step < 2 && (
               <div className="mt-6 py-3 flex justify-center items-center text-xs text-orange-400">
-                <Lock size={14} className="mr-2" /> Secure payment processed
-                using SSL encryption
+                <Lock size={14} className="mr-2" /> Secure payment processed by
+                Razorpay
               </div>
             )}
           </div>
 
-          {/* Right Section: Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-[#3B211F] rounded-lg p-4 md:p-6 shadow-xl">
               <h2 className="text-xl font-semibold text-orange-200 mb-6">
@@ -778,23 +1484,20 @@ export default function PaymentPage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-orange-300">Original Price:</span>
-                  <span className="text-orange-100">
-                    {course.originalPrice}
-                  </span>
+                  <span className="text-orange-100">{course.price}</span>
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <span className="text-orange-300">Discounts:</span>
-                  <span className="text-orange-100">
-                    -{course.discount.split(" ")[0]}
-                  </span>
+                  <span className="text-orange-300">GST (18%):</span>
+                  <span className="text-orange-100">{gstAmount}</span>
                 </div>
 
                 <div className="border-t border-orange-900 pt-4 flex justify-between items-center font-medium">
-                  <span className="text-orange-200">Total (1 course):</span>
-                  <span className="text-orange-100 text-xl">
-                    {course.price}
+                  <span className="text-orange-200">
+                    Total ({course.items} course
+                    {course.items && course.items > 1 ? "s" : ""}):
                   </span>
+                  <span className="text-orange-100 text-xl">{totalAmount}</span>
                 </div>
 
                 <div className="text-xs text-orange-400 mt-2">
@@ -836,23 +1539,59 @@ export default function PaymentPage() {
                 straightforward!
               </p>
             </div>
-
-            <div className="mt-6 bg-[#341A18] border border-orange-900 rounded-lg p-4">
-              <div className="flex items-center mb-2">
-                <span className="text-amber-500 text-lg font-bold mr-2">★</span>
-                <h3 className="text-lg font-medium text-orange-200">
-                  Tap into Success Now
-                </h3>
-              </div>
-              <p className="text-orange-300 text-sm">
-                Join 50+ people in your country who&apos;ve recently enrolled in this
-                course within last 24 hours.
-              </p>
-            </div>
           </div>
         </div>
       </div>
+      {showSuccessAlert && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-1 rounded-lg w-full max-w-md mx-4">
+            <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+              <div className="bg-green-100 p-3 rounded-full mb-4">
+                <CheckCircle className="text-green-500 w-10 h-10" />
+              </div>
+              <h2 className="text-gray-800 text-xl font-bold mb-2">
+                Your payment has been received
+              </h2>
+              <p className="text-gray-600 text-center mb-4">
+                Thank you for your payment. Your plan has been upgraded to
+                premium! Please check your email for payment confirmation &
+                invoice.
+              </p>
+              <button
+                onClick={closeSuccessAlert}
+                className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-full w-full max-w-xs"
+              >
+                Go to your dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showErrorAlert && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gradient-to-r from-red-600 to-orange-500 p-1 rounded-lg w-full max-w-md mx-4">
+            <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+              <div className="bg-red-100 p-3 rounded-full mb-4">
+                <AlertCircle className="text-red-500 w-10 h-10" />
+              </div>
+              <h2 className="text-gray-800 text-xl font-bold mb-2">
+                Payment Failed
+              </h2>
+              <p className="text-gray-600 text-center mb-4">
+                {alertMessage ||
+                  "Your payment could not be processed. Please try again or contact support."}
+              </p>
+              <button
+                onClick={closeErrorAlert}
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-full w-full max-w-xs"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-    // </div>
   );
 }

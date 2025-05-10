@@ -4,21 +4,21 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-import blogContent from "@/app/components/blogs/blogdetails/blogdata.json"; 
+// import blogContent from "@/app/components/blogs/blogdetails/blogdata.json"; 
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 
-interface CriteriaItem {
-  heading: string;
-  description: string;
-  Mainheading: string;
-  Maindescription: string;
-}
+// interface CriteriaItem {
+//   heading: string;
+//   description: string;
+//   Mainheading: string;
+//   Maindescription: string;
+// }
 
-interface BlogContent {
-  id: number;
-  criteria: CriteriaItem[];
-}
+// interface BlogContent {
+//   id: number;
+//   criteria: CriteriaItem[];
+// }
 
 interface BlogDetailsProps {
   id: string;
@@ -181,9 +181,9 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     ? allBlog.find((b) => b.id == Number(id)) 
     : blogsdetails.find((b) => b.id === Number(id));
 
-  const content = blogContent.find((c) => c.id === Number(id)) as
-    | BlogContent
-    | undefined;
+  // const content = blogContent.find((c) => c.id === Number(id)) as
+  //   | BlogContent
+  //   | undefined;
 
   if (!blog) {
     return <div>Blog not found</div>;
@@ -338,37 +338,37 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
             <div className="flex-1">
               {/* Section for Exams and Criteria */}
               <div className="mb-6 md:mb-8">
-                <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-500">
+                {/* <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-500">
                   Exams and Criteria
-                </h2>
-                <div className="space-y-4 md:space-y-6">
+                </h2> */}
+                {/* <div className="space-y-4 md:space-y-6">
                   {content?.criteria.map((item, index) => (
                     <div
                       key={index}
                       className="bg-gray-800 p-3 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600"
                     >
-                      {/*Main Heading */}
+                      
                       {item.Mainheading && (
                         <h2 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">
                           {item.Mainheading}
                         </h2>
                       )}
 
-                      {/*Main Description */}
+                     
                       {item.Maindescription && (
                         <p className="text-gray-300 text-sm md:text-base font-bold leading-relaxed">
                           {item.Maindescription}
                         </p>
                       )}
 
-                      {/* Heading */}
+                     
                       {item.heading && (
                         <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3 mt-2">
                           {item.heading}
                         </h3>
                       )}
                       
-                      {/* Description */}
+                     
                       {item.description && (
                         <p className="text-gray-300 text-xs md:text-sm leading-relaxed">
                           {item.description}
@@ -376,7 +376,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
                       )}
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
 
               {/* Blog Description with HTML Rendering */}

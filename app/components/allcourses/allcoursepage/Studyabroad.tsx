@@ -88,6 +88,8 @@ const StudyAbroadSection: React.FC = () => {
             </p>
           </div>
 
+
+
           {/* Right Content - Image */}
           <div className="lg:w-1/2">
             <div className="relative w-full h-48 lg:h-56">

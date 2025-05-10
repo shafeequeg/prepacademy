@@ -46,6 +46,26 @@ interface Blogs {
   alt_img_text: string;
 }
 
+const stripHtmlAndTruncate = (
+  html: string | null | undefined,
+  maxLength: number = 120
+): string => {
+  if (!html) return "No description available";
+
+  // Create a temporary div element to parse the HTML
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
+
+  // Get the text content and trim whitespace
+  const text = tempDiv.textContent || tempDiv.innerText || "";
+  const cleanedText = text.trim();
+
+  // Truncate if needed
+  return cleanedText.length > maxLength
+    ? `${cleanedText.substring(0, maxLength)}...`
+    : cleanedText;
+};
+
 const BlogSection = () => {
   const [activeTab, setActiveTab] = useState("");
   const [allBlog, setAllBlog] = useState<Blogs[]>([]);
@@ -479,9 +499,9 @@ const BlogSection = () => {
                   {blog.title}
                 </h3>
                 <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
-                  {blog.description.length > 120
-                    ? `${blog.description.substring(0, 120)}...`
-                    : blog.description}
+                  <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+                    {stripHtmlAndTruncate(blog.description)}
+                  </p>
                 </p>
                 <div className="mt-auto pt-2 ">
                   <Link href={`/blogdetails/${blog.id}`} passHref>

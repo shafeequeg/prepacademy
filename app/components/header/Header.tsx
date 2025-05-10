@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { FiX, FiChevronDown } from "react-icons/fi";
+import { FiX, FiChevronDown, FiUser, FiLogOut, FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import {
   FaLinkedinIn,
@@ -11,6 +11,8 @@ import {
 } from "react-icons/fa";
 import LoginModal from "../login/Login";
 import Link from "next/link";
+import axiosInstance from "../apiconfig/axios";
+import { API_URLS } from "../apiconfig/api_urls";
 
 const Loader = () => {
   return (
@@ -20,23 +22,77 @@ const Loader = () => {
   );
 };
 
+interface LoginFormProps {
+  closeModal: () => void;
+  onSuccess: () => void;
+  source: "chatbot" | "percentage-calculator" | "account";
+}
+
+interface User {
+  id: number;
+  uuid: string;
+  full_name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  dob?: string | null;
+  gender: "Male" | "Female";
+  location?: string | null;
+  exam_target?: string | null;
+  program?: string | null;
+  firebase_user_id: string;
+}
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const router = useRouter();
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  // const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginSource, setLoginSource] = useState<
-    "chatbot" | "percentage-calculator" | null
+    "chatbot" | "percentage-calculator" | "account" | null
   >(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [showLogoutSuccess, setShowLogoutSuccess] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+
+  const router = useRouter();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const accountDropdownRef = useRef<HTMLDivElement | null>(null);
 
   console.log(isOpen);
+  console.log(user);
+
+  useEffect(() => {
+    const fetchUserData = () => {
+      const currentUser = localStorage.getItem("currentUser");
+      if (currentUser) {
+        try {
+          const parsedUser = JSON.parse(currentUser);
+          setUser(parsedUser);
+          localStorage.setItem("user", currentUser);
+        } catch (error) {
+          console.error("Error parsing currentUser:", error);
+        }
+      } else {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+          try {
+            setUser(JSON.parse(userData));
+          } catch (error) {
+            console.error("Error parsing user:", error);
+          }
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -93,9 +149,6 @@ export default function Header() {
         margin-bottom: 4px;
       }
 
-      
-
-
       .sidebar-header {
         display: flex;
         justify-content: space-between;
@@ -127,13 +180,102 @@ export default function Header() {
         margin-top: 10px;
       }
 
-      /* Split dropdown styles */
       .split-dropdown {
         position: relative;
         display: inline-flex;
       }
-      
-    
+
+      .account-dropdown {
+        position: relative;
+        display: inline-flex;
+      }
+
+      .logout-confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #a52a1a, #F55D3E);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 200;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .logout-success-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #15938F, #FFE4B5);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 200;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translate(-50%, -60%);
+          opacity: 0;
+        }
+        to {
+          transform: translate(-50%, -50%);
+          opacity: 1;
+        }
+      }
+
+      .confirm-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        justify-content: center;
+      }
+
+      .confirm-button {
+        padding: 0.5rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .confirm-button-ok {
+        background: #FFE4B5;
+        color: #a52a1a;
+      }
+
+      .confirm-button-ok:hover {
+        background: #fff;
+        transform: scale(1.05);
+      }
+
+      .confirm-button-cancel {
+        background: transparent;
+        border: 2px solid #FFE4B5;
+        color: #FFE4B5;
+      }
+
+      .confirm-button-cancel:hover {
+        background: #FFE4B5;
+        color: #a52a1a;
+        transform: scale(1.05);
+      }
+
+      .success-button {
+        padding: 0.5rem 1.5rem;
+        border-radius: 10px;
+        background: #a52a1a;
+        color: #FFE4B5;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .success-button:hover {
+        background: #F55D3E;
+        transform: scale(1.05);
+      }
     `;
     document.head.appendChild(style);
 
@@ -142,25 +284,37 @@ export default function Header() {
     };
   }, []);
 
+  const fetchUsers = async () => {
+    try {
+      const response = await axiosInstance.get(API_URLS.USERS.GET_USERS);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  console.log(users);
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        accountDropdownRef.current &&
+        !accountDropdownRef.current.contains(event.target as Node)
       ) {
-        setIsDropdownOpen(false);
-        setToolsDropdownOpen(false);
+        setAccountDropdownOpen(false);
       }
     }
 
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -184,6 +338,7 @@ export default function Header() {
     setIsOpen(false);
     setIsDropdownOpen(false);
     setToolsDropdownOpen(false);
+    setAccountDropdownOpen(false);
     setIsSidebarOpen(false);
 
     setTimeout(() => {
@@ -195,6 +350,8 @@ export default function Header() {
     }, 200);
   };
 
+  console.log(user);
+
   const toggleDropdown = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -203,15 +360,77 @@ export default function Header() {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const toggleAccountDropdown = () => {
+    setAccountDropdownOpen((prev) => !prev);
+  };
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLoginClick = () => {
+    setLoginSource("account");
+    setShowLoginModal(true);
+    setAccountDropdownOpen(false);
+    setIsSidebarOpen(false);
+  };
+
+  const handleLogout = () => {
+    setShowLogoutConfirm(true);
+    setAccountDropdownOpen(false);
+    setIsSidebarOpen(false);
+  };
+
+  const confirmLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    setShowLogoutConfirm(false);
+    setShowLogoutSuccess(true);
   };
 
   return (
     <>
       {isLoading && <Loader />}
 
-      {/* Main header - visible on all screens */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[200]">
+          <div className="logout-confirm-box">
+            <div className="text-white text-xl font-serif italic text-center mb-4">
+              Are you sure you want to logout?
+            </div>
+            <div className="confirm-buttons">
+              <button
+                className="confirm-button confirm-button-ok"
+                onClick={confirmLogout}
+              >
+                Yes, Logout
+              </button>
+              <button
+                className="confirm-button confirm-button-cancel"
+                onClick={() => setShowLogoutConfirm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showLogoutSuccess && (
+        <div className="logout-success-box">
+          <div className="text-white text-lg font-serif italic text-center">
+            Successfully Logged Out!
+          </div>
+          <div className="confirm-buttons">
+            <button
+              className="success-button"
+              onClick={() => setShowLogoutSuccess(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <header
         className={`w-[95%] fixed top-0 left-1/2 transform -translate-x-1/2 mx-auto text-center 
         bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl z-50 
@@ -243,7 +462,6 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Desktop Navigation - Hidden on smaller screens, visible on large screens */}
             <nav className="hidden lg:flex space-x-8 items-center">
               <div
                 onClick={() => handleNavigation("/")}
@@ -258,7 +476,6 @@ export default function Header() {
                 About Us
               </div>
 
-              {/* Split Dropdown Implementation */}
               <div ref={dropdownRef} className="split-dropdown relative">
                 <div className="flex">
                   <button
@@ -276,7 +493,6 @@ export default function Header() {
                   </button>
                 </div>
 
-                {/* Dropdown Menu */}
                 {isDropdownOpen && (
                   <div className="absolute left-0 mt-14 bg-black shadow-lg rounded-lg w-48 z-50">
                     <div
@@ -335,7 +551,8 @@ export default function Header() {
 
               <div
                 onClick={() => handleNavigation("/blogs")}
-                className="text-white hover:text-white text-xl font-semibold cursor-pointer"
+                className="text-white
+                hover:text-white text-xl font-semibold cursor-pointer"
               >
                 Blogs
               </div>
@@ -353,21 +570,74 @@ export default function Header() {
               >
                 Take A Quick Test
               </a>
-            </nav>
 
-            {/* Mobile and Specific Tablet Menu Button (only for smaller screens and tab screens, hidden on desktop) */}
-            {/* <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden block text-gray-800"
-            >
-              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-            </button> */}
+              <div
+                ref={accountDropdownRef}
+                className="account-dropdown relative group"
+              >
+                {user ? (
+                  <>
+                    <div
+                      className="text-white hover:text-white text-xl font-semibold cursor-pointer flex items-center group-hover:bg-black/20 px-3 py-2 rounded-lg transition-all duration-300"
+                      onMouseEnter={() => setAccountDropdownOpen(true)}
+                    >
+                      <FiUser className="mr-2" size={18} />
+                      <span className="truncate max-w-[120px]">
+                        {user.full_name}
+                      </span>
+                    </div>
+                    {accountDropdownOpen && (
+                      <div
+                        className="absolute right-0 mt-20 bg-black shadow-lg rounded-lg w-56 z-50 overflow-hidden transition-all duration-300 border border-[#F55D3E]/30"
+                        onMouseLeave={() => setAccountDropdownOpen(false)}
+                      >
+                        <div
+                          onClick={() => handleNavigation("/profile")}
+                          className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
+                        >
+                          Profile
+                        </div>
+                        <div
+                          onClick={() => handleNavigation("/my-courses")}
+                          className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
+                        >
+                          My Courses
+                        </div>
+                        {user.program && (
+                          <div className="block text-white px-4 py-2 text-xs cursor-default border-t border-[#F55D3E]/10">
+                            Program: {user.program}
+                          </div>
+                        )}
+                        {user.exam_target && (
+                          <div className="block text-white px-4 py-2 text-xs cursor-default">
+                            Target: {user.exam_target}
+                          </div>
+                        )}
+                        <div
+                          onClick={handleLogout}
+                          className="flex items-center text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200"
+                        >
+                          <FiLogOut className="mr-2 h-4 w-4" />
+                          Logout
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <button
+                    onClick={handleLoginClick}
+                    className="bg-white text-[#a52a1a] hover:bg-[#FFE4B5] px-5 py-2 rounded-lg text-lg font-semibold flex items-center transition-all duration-300 shadow-md hover:shadow-xl"
+                  >
+                    <FiLogIn className="mr-2" /> Login
+                  </button>
+                )}
+              </div>
+            </nav>
           </div>
         </div>
       </header>
 
-      {/* Mobile Bottom Navigation Bar (visible only on small screens) */}
-      <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-gradient-to-r from-[#F55D3E] to-[#a52a1a]  flex justify-around items-center py-2 px-1 shadow-lg z-50 bg-opacity-95 backdrop-blur-md">
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-gradient-to-r from-[#F55D3E] to-[#a52a1a] flex justify-around items-center py-2 px-1 shadow-lg z-50 bg-opacity-95 backdrop-blur-md">
         <div
           className="nav-item relative group flex flex-col items-center"
           onClick={() => handleNavigation("/")}
@@ -483,7 +753,7 @@ export default function Header() {
           <span className="text-xs text-white font-medium mt-1">More</span>
         </div>
       </div>
-      {/* Overlay */}
+
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-[99] ${
           isSidebarOpen ? "block" : "hidden"
@@ -491,13 +761,11 @@ export default function Header() {
         onClick={toggleSidebar}
       />
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-screen w-[80%] max-w-[320px] bg-gradient-to-br from-[#a52a1a] to-[#5D1A0F] z-[100] transform transition-transform duration-500 ease-in-out overflow-y-auto shadow-xl ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Elegant Header with Serif Font */}
         <div className="flex justify-between items-center px-6 py-5 border-b border-[#F55D3E]/30">
           <div className="text-[#FFE4B5] text-2xl font-serif italic font-bold tracking-wider">
             <span className="text-[#F55D3E] ml-2">Prep</span>
@@ -511,16 +779,12 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Main Navigation Links with Decorative Elements */}
         <div className="mt-4">
           {[
             { label: "Home", path: "/", icon: "✦" },
             { label: "About Us", path: "/aboutus", icon: "✦" },
             { label: "Blogs", path: "/blogs", icon: "✦" },
-            // { label: "Careers", path: "/careers", icon: "✦" },
-            // { label: "Contact Us", path: "/contact", icon: "✦" },
             { label: "All Courses", path: "/allcourses", icon: "✦" },
-            // { label: "Franchises", path: "/franchises", icon: "✦" }
           ].map(({ label, path, icon }) => (
             <div
               key={path}
@@ -558,6 +822,26 @@ export default function Header() {
         <div className="mt-6 relative">
           <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
           <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
+            AI TOOLS
+          </div>
+        </div>
+
+        {[
+          { label: "DOUBT PAD", path: "/chatBot" },
+          { label: "PERCENTAGE CALCULATOR", path: "/percentage-calculator" },
+        ].map(({ label, path }) => (
+          <div
+            key={path}
+            className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+            onClick={() => handleNavigation(path)}
+          >
+            <span className="ml-4">{label}</span>
+          </div>
+        ))}
+
+        <div className="mt-6 relative">
+          <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
+          <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
             Get in Touch
           </div>
         </div>
@@ -577,7 +861,6 @@ export default function Header() {
           </div>
         ))}
 
-        {/* Terms Section with Decorative Divider */}
         <div className="mt-6 relative">
           <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
           <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
@@ -599,7 +882,43 @@ export default function Header() {
           </div>
         ))}
 
-        {/* Contact Section with Ornate Design */}
+        <div className="mt-6 relative">
+          <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
+          <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
+            ACCOUNT
+          </div>
+        </div>
+
+        {user ? (
+          <>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={() => handleNavigation("/profile")}
+            >
+              <span className="ml-4">Profile</span>
+            </div>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={() => handleNavigation("/my-courses")}
+            >
+              <span className="ml-4">My Courses</span>
+            </div>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={handleLogout}
+            >
+              <span className="ml-4">Logout</span>
+            </div>
+          </>
+        ) : (
+          <div
+            className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+            onClick={handleLoginClick}
+          >
+            <span className="ml-4">Login</span>
+          </div>
+        )}
+
         <div className="mt-6 relative">
           <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
           <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
@@ -611,7 +930,7 @@ export default function Header() {
           Get your questions answered about learning with Prep Academy
         </div>
 
-        <div className="px-6 py-3 my-2 mx-4 bg-[#F55D3E]/10 rounded-lg border border-[#F55D3E]/30 text-[#FFE4B5] text-sm   flex items-center">
+        <div className="px-6 py-3 my-2 mx-4 bg-[#F55D3E]/10 rounded-lg border border-[#F55D3E]/30 text-[#FFE4B5] text-sm flex items-center">
           <svg
             className="w-4 h-4 mr-3 text-[#F55D3E]"
             xmlns="http://www.w3.org/2000/svg"
@@ -634,7 +953,6 @@ export default function Header() {
           TK Road, Thiruvalla, Kerala 689101
         </div>
 
-        {/* Social Media with Stylized Icons */}
         <div className="px-6 py-4 mt-4 text-[#FFE4B5] text-sm font-serif italic">
           Follow us at:
           <div className="flex gap-6 mt-3 justify-center">
@@ -676,7 +994,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Decorative Footer Element */}
         <div className="mt-6 mb-4 px-6 py-2 flex justify-center">
           <div className="h-[2px] w-16 bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
         </div>
@@ -688,10 +1005,20 @@ export default function Header() {
             setShowLoginModal(false);
             setLoginSource(null);
           }}
-          source={loginSource}
+          source={loginSource === "account" ? "chatbot" : loginSource}
           onSuccess={() => {
             setShowLoginModal(false);
             setLoginSource(null);
+
+            const currentUser = localStorage.getItem("currentUser");
+            const userData = localStorage.getItem("user");
+
+            if (currentUser) {
+              setUser(JSON.parse(currentUser));
+            } else if (userData) {
+              setUser(JSON.parse(userData));
+            }
+
             if (loginSource === "chatbot") {
               router.push("/chatBot");
             } else if (loginSource === "percentage-calculator") {

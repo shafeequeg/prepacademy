@@ -9,12 +9,18 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import RegisterForm from "@/app/components/login/Register";
+import LoginForm from "@/app/components/login/Login";
 
 const Footer = () => {
   const [RegisterModal, SetRegisterModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   const toggleregistermodal = (value: boolean) => {
     SetRegisterModal(value);
+  };
+
+  const toggleLoginModal = (value: boolean) => {
+    setLoginModal(value);
   };
 
   return (
@@ -142,7 +148,10 @@ const Footer = () => {
                 ENROLL NOW
               </h3>
               <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                <button className="bg-[#F1291F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm">
+                <button
+                  className="bg-[#F1291F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm"
+                  onClick={() => toggleLoginModal(true)}
+                >
                   Login
                 </button>
                 <button
@@ -192,6 +201,14 @@ const Footer = () => {
       {RegisterModal && (
         <RegisterForm closeModal={() => toggleregistermodal(false)} />
       )}
+
+{loginModal && (
+  <LoginForm 
+    closeModal={() => toggleLoginModal(false)}
+    onSuccess={() => {}}
+    source="chatbot" // or "percentage-calculator" depending on your needs
+  />
+)}
     </footer>
   );
 };
