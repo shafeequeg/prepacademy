@@ -684,37 +684,37 @@ const CourseEnrollmentPortal: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#2B1615] text-white">
-      <header className="bg-[#FF8C42] shadow-md">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-[#2B1615] font-serif">
+       <header className="bg-[#FF8C42] shadow-md">
+        <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-center md:text-left">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#2B1615] font-serif">
               Course Enrollment Portal
             </h1>
             <p className="text-[#4D291F] font-serif italic">
-              Find and enroll in the best courses for your academic journey
+              Find and enroll in the best courses
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4">
             <button
               onClick={openWishlistModal}
-              className="relative flex items-center gap-2 bg-[#F9C784] hover:bg-[#FFAE75] text-[#2B1615] px-4 py-2 rounded-md transition-colors"
+              className="relative flex items-center gap-1 md:gap-2 bg-[#F9C784] hover:bg-[#FFAE75] text-[#2B1615] px-2 md:px-4 py-1 md:py-2 rounded-md transition-colors text-sm md:text-base"
             >
-              <Heart size={20} className="text-[#E25822]" />
+              <Heart size={18} className="text-[#E25822]" />
               <span className="font-medium">Wishlist</span>
               {wishlistItems.length > 0 && (
-                <span className="absolute -top-2 -right trove -2 bg-[#E25822] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span className="absolute -top-1 -right-1 bg-[#E25822] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                   {wishlistItems.length}
                 </span>
               )}
             </button>
             <button
               onClick={openCartModal}
-              className="relative flex items-center gap-2 bg-[#F9C784] hover:bg-[#FFAE75] text-[#2B1615] px-4 py-2 rounded-md transition-colors"
+              className="relative flex items-center gap-1 md:gap-2 bg-[#F9C784] hover:bg-[#FFAE75] text-[#2B1615] px-2 md:px-4 py-1 md:py-2 rounded-md transition-colors text-sm md:text-base"
             >
-              <ShoppingCart size={20} className="text-[#E25822]" />
+              <ShoppingCart size={18} className="text-[#E25822]" />
               <span className="font-medium">Cart</span>
               {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#E25822] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span className="absolute -top-1 -right-1 bg-[#E25822] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                   {cartItems.length}
                 </span>
               )}
@@ -905,14 +905,14 @@ const CourseEnrollmentPortal: React.FC = () => {
                       <div className="bg-[#E25822] text-white px-2 py-1 rounded text-sm font-medium">
                         Bestseller
                       </div>
-                      <div className="ml-3 text-[#FF8C42] flex">
+                      {/* <div className="ml-3 text-[#FF8C42] flex">
                         {[...Array(5)].map((_, i) => (
                           <span key={i}>★</span>
                         ))}
-                      </div>
-                      <span className="ml-2 text-[#FFAE75] text-sm">
+                      </div> */}
+                      {/* <span className="ml-2 text-[#FFAE75] text-sm">
                         (240 reviews)
-                      </span>
+                      </span> */}
                     </div>
 
                     <div className="mt-6">
@@ -997,9 +997,9 @@ const CourseEnrollmentPortal: React.FC = () => {
         <LoginModal
           closeModal={() => setShowLoginModal(false)}
           onSuccess={() => {
-            /* handle success */
+          
           }}
-          source="chatbot" // or "percentage-calculator" depending on your use case
+          source="chatbot" 
         />
       )}
     </div>

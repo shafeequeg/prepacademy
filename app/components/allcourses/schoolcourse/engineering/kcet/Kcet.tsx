@@ -689,11 +689,11 @@ const CatExamApplySection: React.FC = () => {
 
   const relatedVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the KCET 2025",
       videoId: "TCUxGkyrRp0", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for KCET 2025",
       videoId: "5OFuUbyxIo8", // Remove "&t=11s"
     },
     {
@@ -704,11 +704,11 @@ const CatExamApplySection: React.FC = () => {
 
   const demoVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the KCET 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for KCET 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {
@@ -739,7 +739,7 @@ const CatExamApplySection: React.FC = () => {
                 Learn from the Experts
               </p> */}
                   <h2 className="text-[#FF6B3D] text-4xl font-bold mb-4">
-                    Crack CLAT 2025 with
+                    Crack KCET 2025 with
                     {/* Prep Academy  */}
                     <span className="text-[#ED1C24] ml-2">Prep</span>
                     <span className="text-[#15938F]">Academy</span>

@@ -10,9 +10,11 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import LoginModal from "../login/Login";
-import Link from "next/link";
+// import Link from "next/link";
 import axiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
+
+
 
 const Loader = () => {
   return (
@@ -22,11 +24,11 @@ const Loader = () => {
   );
 };
 
-interface LoginFormProps {
-  closeModal: () => void;
-  onSuccess: () => void;
-  source: "chatbot" | "percentage-calculator" | "account";
-}
+// interface LoginFormProps {
+//   closeModal: () => void;
+//   onSuccess: () => void;
+//   source: "chatbot" | "percentage-calculator" | "account";
+// }
 
 interface User {
   id: number;
@@ -67,6 +69,7 @@ export default function Header() {
 
   console.log(isOpen);
   console.log(user);
+console.log(toolsDropdownOpen);
 
   useEffect(() => {
     const fetchUserData = () => {
@@ -360,9 +363,9 @@ export default function Header() {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  const toggleAccountDropdown = () => {
-    setAccountDropdownOpen((prev) => !prev);
-  };
+  // const toggleAccountDropdown = () => {
+  //   setAccountDropdownOpen((prev) => !prev);
+  // };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -523,7 +526,8 @@ export default function Header() {
                 )}
               </div>
 
-              <div className="relative group">
+              {/* chatbot and percetagle calculator */}
+              {/* <div className="relative group">
                 <button
                   onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
                   className="text-white hover:text-white text-xl font-semibold cursor-pointer flex items-center"
@@ -547,7 +551,7 @@ export default function Header() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div
                 onClick={() => handleNavigation("/blogs")}
@@ -626,7 +630,7 @@ export default function Header() {
                 ) : (
                   <button
                     onClick={handleLoginClick}
-                    className="bg-white text-[#a52a1a] hover:bg-[#FFE4B5] px-5 py-2 rounded-lg text-lg font-semibold flex items-center transition-all duration-300 shadow-md hover:shadow-xl"
+                    className="bg-orange-200 text-[#F55D3E] hover:bg-[#FFE4B5] px-5 py-2 rounded-lg text-lg font-semibold flex items-center transition-all duration-300 shadow-md hover:shadow-xl"
                   >
                     <FiLogIn className="mr-2" /> Login
                   </button>
@@ -819,7 +823,8 @@ export default function Header() {
           </div>
         ))}
 
-        <div className="mt-6 relative">
+        {/* mobile view chabot and percentagle calculator */}
+        {/* <div className="mt-6 relative">
           <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>
           <div className="px-6 py-3 text-[#FFE4B5] text-base font-serif italic font-bold tracking-wide">
             AI TOOLS
@@ -837,7 +842,7 @@ export default function Header() {
           >
             <span className="ml-4">{label}</span>
           </div>
-        ))}
+        ))} */}
 
         <div className="mt-6 relative">
           <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#F55D3E] to-transparent"></div>

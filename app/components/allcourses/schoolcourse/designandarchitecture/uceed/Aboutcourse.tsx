@@ -333,7 +333,7 @@ const ExamPrepLowerSections: React.FC = () => {
               <span className="text-[#F55D3E] font-bold">Students Say</span>
             </h2>
             <p className="text-gray-300 leading-relaxed">
-              Are you ready to conquer the world? Your Clat journey might seem
+              Are you ready to conquer the world? Your UCEED journey might seem
               daunting, but remember, every great achievement starts with a
               single step. Believe in yourself, because you hold the power to
               make your dreams a reality!

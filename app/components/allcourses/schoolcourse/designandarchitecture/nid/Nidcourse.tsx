@@ -720,11 +720,11 @@ const CatExamApplySection: React.FC = () => {
 
   const relatedVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the NID 2025",
       videoId: "TCUxGkyrRp0", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for NID 2025",
       videoId: "5OFuUbyxIo8", // Remove "&t=11s"
     },
     {
@@ -735,11 +735,11 @@ const CatExamApplySection: React.FC = () => {
 
   const demoVideos = [
     {
-      title: "Preparing for the CLAT 2025",
+      title: "Preparing for the NID 2025",
       videoId: "XhXxA_AA3IQ", // Remove "&t=2s"
     },
     {
-      title: "Strategies for CLAT 2025",
+      title: "Strategies for NID 2025",
       videoId: "b2y5qz04RKk", // Remove "&t=11s"
     },
     {

@@ -4,8 +4,23 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 // import Link from 'next/link';
 import { ArrowRight } from "lucide-react";
+import axiosInstance from "@/app/components/apiconfig/axios";
+import { API_URLS } from "@/app/components/apiconfig/api_urls";
+
+
+interface Blog {
+  id: number;
+  title: string;
+  category: number;
+  category_name: string;
+  description: string;
+  image: string;
+  alt_img_text: string;
+}
 
 const ExamPrepHomepage: React.FC = () => {
+
+
   const gladiators = [
     {
       name: "Hanna Susan Koshy ",
@@ -159,6 +174,8 @@ const ExamPrepHomepage: React.FC = () => {
   const [activeIndexsecond, setActiveIndexsecond] = useState(0);
   //  const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
   const [isMobile, setIsMobile] = useState(false);
+  const [allBlog, setAllBlog] = useState<Blog[]>([]);
+
 
   useEffect(() => {
     const checkMobile = () => {
@@ -201,6 +218,41 @@ const ExamPrepHomepage: React.FC = () => {
 
   //   return () => clearInterval(interval);
   // }, [gladiators.length]);
+
+   const fetchBlogs = async () => {
+    try {
+      const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
+      console.log(response);
+      setAllBlog(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const stripHtmlAndTruncate = (
+    html: string | null | undefined,
+    maxLength: number = 120
+  ): string => {
+    if (!html) return "No description available";
+
+    // Create a temporary div element to parse the HTML
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    // Get the text content and trim whitespace
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.trim();
+
+    // Truncate if needed
+    return cleanedText.length > maxLength
+      ? `${cleanedText.substring(0, maxLength)}...`
+      : cleanedText;
+  };
+
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -577,19 +629,19 @@ const ExamPrepHomepage: React.FC = () => {
       </div>
 
       {/* Blogs Section */}
-      <section className="p-6 bg-gray-900">
+        <section className="p-6 bg-gray-900">
         <div className="container mx-auto px-4 md:px-8">
           {/* Heading */}
           <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-medium  text-center md:text-left">
-              <span className="font-dmserif italic"> Know More With</span>{" "}
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic">Know More With</span>{" "}
               <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
             </h2>
           </div>
 
           {/* Blog Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
-            {blogs.map((blog) => (
+            {allBlog.map((blog) => (
               <div
                 key={blog.id}
                 className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
@@ -597,10 +649,11 @@ const ExamPrepHomepage: React.FC = () => {
                 {/* Blog Image */}
                 <div className="relative w-full aspect-video">
                   <Image
-                    src={blog.image}
-                    alt={blog.title}
+                    src={blog.image || "/default-blog.jpg"} // Add a fallback image
+                    alt={blog.alt_img_text || blog.title}
                     fill
                     className="absolute inset-0 w-full h-full object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
 
@@ -613,7 +666,7 @@ const ExamPrepHomepage: React.FC = () => {
 
                   {/* Description */}
                   <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                    {blog.description}
+                    {stripHtmlAndTruncate(blog.description)}
                   </p>
 
                   {/* Read Full Button */}
@@ -643,28 +696,30 @@ const ExamPrepHomepage: React.FC = () => {
           </div>
 
           {/* View More Button */}
-          <div className="text-center">
-            <a
-              href="/blogs"
-              className="inline-flex items-center text-white hover:text-gray-200 font-medium"
-            >
-              View More
-              <svg
-                className="w-5 h-5 ml-2"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          {blogs.length > 0 && (
+            <div className="text-center">
+              <a
+                href="/blogs"
+                className="inline-flex items-center text-white hover:text-gray-200 font-medium"
               >
-                <path
-                  d="M5 12H19M19 12L12 5M19 12L12 19"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
+                View More
+                <svg
+                  className="w-5 h-5 ml-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 12H19M19 12L12 5M19 12L12 19"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </div>

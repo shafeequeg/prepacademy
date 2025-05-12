@@ -49,24 +49,24 @@ const ExamPrepLowerSections: React.FC = () => {
 
   const faqs = [
     {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
+      question: "	When is the JEE 2026 exam expected to be conducted?",
       answer:
-        "The CLAT 2026 exam is tentatively scheduled for December 6, 2025",
+        "The JEE 2026 exam is tentatively scheduled for December 6, 2025",
     },
     {
-      question: "	When will the application process for CLAT 2026 begin?",
+      question: "	When will the application process for JEE 2026 begin?",
       answer:
-        "The application process for CLAT 2026 is anticipated to commence in July 2025.",
+        "The application process for JEE 2026 is anticipated to commence in July 2025.",
     },
     {
-      question: "How can I apply for CLAT 2026?",
+      question: "How can I apply for JEE 2026?",
       answer:
-        "Once the application process begins, candidates can apply online through the official CLAT website.",
+        "Once the application process begins, candidates can apply online through the official JEE website.",
     },
     {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
+      question: "	Is there an age limit for appearing in JEE 2026?",
       answer:
-        "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026.",
+        "There is no upper age limit for both undergraduate and postgraduate programs in JEE 2026.",
     },
   ];
   const renderStars = (rating: number) => {
@@ -331,7 +331,7 @@ const ExamPrepLowerSections: React.FC = () => {
               <span className="text-[#F55D3E] font-bold">Students Say</span>
             </h2>
             <p className="text-gray-300 leading-relaxed">
-              Are you ready to conquer the world? Your Clat journey might seem
+              Are you ready to conquer the world? Your JEE journey might seem
               daunting, but remember, every great achievement starts with a
               single step. Believe in yourself, because you hold the power to
               make your dreams a reality!
