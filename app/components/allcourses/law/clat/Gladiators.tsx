@@ -175,6 +175,7 @@ const ExamPrepHomepage: React.FC = () => {
   const [activeIndexsecond, setActiveIndexsecond] = useState(0);
   //  const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
   const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -195,18 +196,36 @@ const ExamPrepHomepage: React.FC = () => {
 
 
    const fetchBlogs = async () => {
-    try {
-      const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
-      setAllBlog(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  try {
+    setLoading(true);
+    const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
+    setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
     fetchBlogs();
   }, []);
+
+   const stripHtmlAndTruncate = (
+    html: string | null | undefined,
+    maxLength: number = 120
+  ): string => {
+    if (!html) return "No description available";
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.trim();
+
+    return cleanedText.length > maxLength
+      ? `${cleanedText.substring(0, maxLength)}...`
+      : cleanedText;
+  };
   console.log(activeIndexsecond);
   //  console.log(totalSlidessecond);
 
@@ -231,6 +250,22 @@ const ExamPrepHomepage: React.FC = () => {
 
   //   return () => clearInterval(interval);
   // }, [gladiators.length]);
+
+  if (loading) {
+    return (
+      <section className="py-16 text-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic"> Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
+          </div>
+          <div className="text-center text-gray-300">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -656,8 +691,8 @@ const ExamPrepHomepage: React.FC = () => {
 
                 {/* Description */}
                 <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                  {blog.description}
-                </p>
+                      {stripHtmlAndTruncate(blog.description)}
+                    </p>
 
                 {/* Read Full Button */}
                 <a

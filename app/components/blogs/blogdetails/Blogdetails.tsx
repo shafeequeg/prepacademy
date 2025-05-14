@@ -2,23 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-// import blogContent from "@/app/components/blogs/blogdetails/blogdata.json";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
-
-// interface CriteriaItem {
-//   heading: string;
-//   description: string;
-//   Mainheading: string;
-//   Maindescription: string;
-// }
-
-// interface BlogContent {
-//   id: number;
-//   criteria: CriteriaItem[];
-// }
 
 interface BlogDetailsProps {
   id: string;
@@ -32,20 +17,46 @@ interface Blog {
   description: string;
   image: string;
   alt_img_text: string;
-  
 }
 
-// Helper function to safely render HTML content
+// Helper function to safely render HTML content and add section dividers
 const createMarkup = (htmlContent: string) => {
-  return { __html: htmlContent };
+  // Add image container divs around images for better responsive behavior
+  let modifiedHtml = htmlContent
+    .replace(/<img/g, '<div class="image-container"><img')
+    .replace(/<\/img>/g, "</img></div>");
+
+  // Add table container divs around tables
+  modifiedHtml = modifiedHtml
+    .replace(/<table/g, '<div class="table-container"><table')
+    .replace(/<\/table>/g, "</table></div>");
+
+  // Add section dividers after each heading
+  modifiedHtml = modifiedHtml
+    .replace(
+      /<h1([^>]*)>(.*?)<\/h1>/g,
+      '<div class="section-container"><h1$1>$2</h1>'
+    )
+    .replace(
+      /<h2([^>]*)>(.*?)<\/h2>/g,
+      '<div class="section-container"><h2$1>$2</h2>'
+    )
+    .replace(
+      /<h3([^>]*)>(.*?)<\/h3>/g,
+      '<div class="section-container"><h3$1>$2</h3>'
+    );
+
+  // Close section divs
+  modifiedHtml = modifiedHtml.replace(
+    /(<div class="section-container">.*?)(?=<div class="section-container">|$)/,
+    "$1</div>"
+  );
+
+  return { __html: modifiedHtml };
 };
 
 export default function BlogDetails({ id }: BlogDetailsProps) {
   // Add CSS for responsive tables to handle overflow issues
-  // Replace the .blog-content and table CSS in your useEffect style block with this:
-
-  // Replace the .blog-content and table CSS in your useEffect style block with this:
-
   useEffect(() => {
     // Add custom CSS to make tables responsive and style blog content
     const style = document.createElement("style");
@@ -53,43 +64,109 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
   .blog-content {
     color: #d1d5db; /* text-gray-300 */
     font-size: 0.75rem; /* text-xs */
-    background-color: #1f2937; /* bg-gray-800 */
-    padding: 0.75rem; /* p-3 */
+    background-color: #1f2937; 
+    padding: 1.5rem; /* increased padding */
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
     transition: box-shadow 0.3s ease; /* transition-shadow duration-300 */
     border-left: 4px solid #ea580c; /* border-l-4 border-orange-600 */
     max-width: 100%;
     overflow-x: hidden;
+    width: 90%; /* Increased width to 90% */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: contain;
+  }
+
+  /* For large images - limit their maximum width */
+  .blog-content img {
+    max-width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    .blog-content img {
+      max-width: 100%;
+    }
   }
 
   .blog-content:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
   }
 
+  /* New section container styles */
+  .blog-content .section-container {
+    position: relative;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #4b5563;
+  }
+
+  .blog-content .section-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  /* Content alignment and text formatting */
+  .blog-content * {
+    max-width: 100%;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   @media (min-width: 768px) {
     .blog-content {
       font-size: 0.875rem; 
-      padding: 1.5rem;
+      padding: 2rem;
     }
   }
 
-  .blog-content table {
+  /* Responsive table container with dynamic height based on content */
+  .blog-content div.table-container {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    display: block;
+    max-width: 100%;
+    margin: 1.5rem auto;
     overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overflow-y: auto;
+    display: block;
+    text-align: center;
+    position: relative;
+    /* Using max-height instead of fixed height */
+    max-height: 80vh; /* Maximum height relative to viewport */
+    min-height: 150px; /* Minimum height for very small tables */
   }
 
+  
+  .blog-content table {
+    width: 100px; 
+    height: auto;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    table-layout: auto; /* Auto table layout for content-based sizing */
+    overflow: visible;
+  }
+
+  /* Table cells adapt to content */
   .blog-content table td,
   .blog-content table th {
     border: 1px solid #4b5563;
     padding: 0.5rem;
-    min-width: 100px;
+    word-wrap: break-word; /* Allow words to break and wrap */
+    overflow-wrap: break-word;
+    vertical-align: top;
+    text-align: left;
+        width: 100%; 
+
   }
   
   .blog-content table th {
@@ -99,39 +176,53 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     z-index: 1;
   }
   
-  @media (max-width: 640px) {
+  /* Medium screen adaptations */
+  @media (max-width: 1024px) and (min-width: 641px) {
     .blog-content table {
-      font-size: 0.7rem;
-      max-width: 100%;
-      /* Remove transform that was shifting alignment */
-      /* transform: scale(0.85); */
-      /* transform-origin: left top; */
-      /* margin-right: -15%; */
-      
-      /* Center the table container */
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
+      font-size: 0.8rem;
     }
     
-    /* Make the table scrollable horizontally and centered */
+    .blog-content table td,
+    .blog-content table th {
+      padding: 0.4rem;
+    }
+  }
+  
+  /* Mobile screen adaptations */
+  @media (max-width: 640px) {
+    .blog-content div.table-container {
+      max-height: 60vh; /* Smaller max height on mobile */
+    }
+    
     .blog-content table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-      margin-left: auto;
-      margin-right: auto;
+      width: 450px; /* Fixed width on mobile screens */
+      font-size: 0.7rem;
     }
     
     .blog-content table td,
     .blog-content table th {
       padding: 0.25rem;
-      min-width: 70px;
+      max-width: 100px; /* Smaller cell width on mobile */
+    }
+  }
+
+  /* Very small screens */
+  @media (max-width: 380px) {
+    .blog-content table {
+      font-size: 0.65rem;
+    }
+    
+    .blog-content table td,
+    .blog-content table th {
+      padding: 0.2rem;
+      max-width: 100px;
     }
   }
 
   .blog-content p {
     margin-bottom: 1rem;
+    line-height: 1.6;
+    text-indent: 0; /* Ensure no indentation */
   }
 
   .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
@@ -139,6 +230,8 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     color: #f9fafb;
+    border-left: 4px solid #ea580c; /* Same orange border as the main container */
+    padding-left: 0.75rem;
   }
 
   .blog-content h1 {
@@ -156,6 +249,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
   .blog-content ul, .blog-content ol {
     margin-left: 1.5rem;
     margin-bottom: 1rem;
+    padding-left: 0; /* Reset any default padding */
   }
 
   .blog-content ul {
@@ -170,14 +264,36 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     color: #3b82f6;
     text-decoration: underline;
   }
+
+  /* Ensure consistent spacing and alignment */
+  .blog-content > *:first-child {
+    margin-top: 0;
+  }
+
+  .blog-content > *:last-child {
+    margin-bottom: 0;
+  }
   `;
     document.head.appendChild(style);
+
+    // Optional: Add JavaScript to detect large tables and add a class
+    const detectLargeTables = () => {
+      const tables = document.querySelectorAll(".blog-content table");
+      tables.forEach((table) => {
+        // If table has more than 5 columns, consider it a large table
+        if (table.querySelectorAll("th, tr:first-child td").length > 5) {
+          table.classList.add("large-table");
+        }
+      });
+    };
+
+    // Run after DOM is fully loaded
+    setTimeout(detectLargeTables, 500);
 
     return () => {
       document.head.removeChild(style);
     };
   }, []);
-  const [allBlog, setAllBlog] = useState<Blog[]>([]);
 
   const blogsdetails = [
     {
@@ -263,6 +379,8 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     },
   ];
 
+  const [allBlog, setAllBlog] = useState<Blog[]>([]);
+
   const fetchBlogs = async () => {
     try {
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
@@ -277,275 +395,46 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
     fetchBlogs();
   }, []);
 
-  console.log(allBlog);
-
   const blog =
     allBlog.length > 0
       ? allBlog.find((b) => b.id == Number(id))
       : blogsdetails.find((b) => b.id === Number(id));
-
-  // const content = blogContent.find((c) => c.id === Number(id)) as
-  //   | BlogContent
-  //   | undefined;
 
   if (!blog) {
     return <div>Blog not found</div>;
   }
 
   return (
-    <div className="bg-gray-900 text-white h-fit mt-16 md:mt-32">
-      <div className="">
+    <div className="bg-gray-900 text-white h-fit">
+      <div className="px-4 md:px-8">
         <div className="relative">
-       <div className="relative w-full aspect-[21/9] md:aspect-[16/6]">
-  <Image
-    src={blog.image}
-    alt={blog.alt_img_text || "Blog Image"}
-    fill
-    className="object-cover opacity-50"
-    priority
-  />
-</div>
-
+          <div className="relative w-90 mx-auto aspect-[21/9] md:aspect-[16/6]">
+            <Image
+              src={blog.image}
+              alt={blog.alt_img_text || "Blog Image"}
+              fill
+              className="object-cover opacity-50 rounded-lg mt-32 md:mt-32"
+              priority
+            />
+          </div>
           <div className="container mx-auto px-4 md:px-8 absolute top-0 left-0 right-0 pt-4 md:pt-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-2 md:mb-4">
-                {/* <span className="bg-orange-600 text-white px-2 py-1 text-xs uppercase font-medium">
-                  CAT2025
-                </span> */}
-              </div>
-
-              <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2 px-2">
-                {blog.title}
-              </h1>
-
-              {/* <div className="text-gray-300 text-sm mb-4">
-                Posted on 10 February 2025 | 2:05 PM
-                <br />
-                By: Ashwani Nair
-              </div> */}
-            </div>
+            <div className="max-w-4xl mx-auto text-center"></div>
           </div>
         </div>
-
-        {/* Main Content */}
-        <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8 max-w-4xl mx-auto">
-            {/* Sidebar - Only visible on md screens and up */}
-            <div className="hidden md:block w-52 md:flex-shrink-0">
-              <div className="border-l-2 border-orange-600 pl-4 mb-6">
-                <h3 className="text-lg font-medium text-orange-600 mb-2">
-                  Online Class
-                </h3>
-                <Link
-                  href="#"
-                  className="block text-gray-300 text-base mb-2 hover:text-white font-semibold"
-                >
-                  What&apos;s on 2025
-                </Link>
-                <Link
-                  href="#"
-                  className="block text-gray-300 text-base mb-2 hover:text-white font-semibold"
-                >
-                  Special Classes
-                </Link>
-                <Link
-                  href="#"
-                  className="block text-gray-300 text-base mb-2 hover:text-white font-semibold"
-                >
-                  Session Timings
-                </Link>
-              </div>
-
-              <div className="mb-6">
-                <p className="text-sm mb-2">Share this on</p>
-                <div className="flex gap-2">
-                  <Link
-                    href="#"
-                    className="bg-blue-800 p-2 rounded-full hover:bg-blue-700"
-                    aria-label="Share on Facebook"
-                  >
-                    <FaFacebook />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="bg-blue-400 p-2 rounded-full hover:bg-blue-500"
-                    aria-label="Share on Twitter"
-                  >
-                    <FaTwitter />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="bg-blue-600 p-2 rounded-full hover:bg-blue-500"
-                    aria-label="Share on LinkedIn"
-                  >
-                    <FaLinkedin />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Sidebar - Only visible on small screens */}
-            <div className="md:hidden w-full mb-4">
-              <div className="flex justify-between items-center mb-3">
-                <div className="border-l-2 border-orange-600 pl-2">
-                  <h3 className="text-sm font-medium text-orange-600">
-                    Online Class
-                  </h3>
-                </div>
-                <div className="flex space-x-2">
-                  <Link
-                    href="#"
-                    className="bg-blue-800 p-1 rounded-full hover:bg-blue-700 text-sm"
-                    aria-label="Share on Facebook"
-                  >
-                    <FaFacebook />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="bg-blue-400 p-1 rounded-full hover:bg-blue-500 text-sm"
-                    aria-label="Share on Twitter"
-                  >
-                    <FaTwitter />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="bg-blue-600 p-1 rounded-full hover:bg-blue-500 text-sm"
-                    aria-label="Share on LinkedIn"
-                  >
-                    <FaLinkedin />
-                  </Link>
-                </div>
-              </div>
-              <div className="flex justify-between text-xs text-gray-300">
-                <Link href="#" className="hover:text-white">
-                  What&apos;s on 2025
-                </Link>
-                <Link href="#" className="hover:text-white">
-                  Special Classes
-                </Link>
-                <Link href="#" className="hover:text-white">
-                  Session Timings
-                </Link>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="flex-1">
-              {/* Section for Exams and Criteria */}
+        <div className="container mx-auto md:px-8 py-4 md:py-8 mt-32 md:mt-32">
+          <div className="w-[100%]">
+            {blog?.description && (
               <div className="mb-6 md:mb-8">
-                {/* <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-500">
-                  Exams and Criteria
-                </h2> */}
-                {/* <div className="space-y-4 md:space-y-6">
-                  {content?.criteria.map((item, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-800 p-3 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600"
-                    >
-                      
-                      {item.Mainheading && (
-                        <h2 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">
-                          {item.Mainheading}
-                        </h2>
-                      )}
-
-                     
-                      {item.Maindescription && (
-                        <p className="text-gray-300 text-sm md:text-base font-bold leading-relaxed">
-                          {item.Maindescription}
-                        </p>
-                      )}
-
-                     
-                      {item.heading && (
-                        <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3 mt-2">
-                          {item.heading}
-                        </h3>
-                      )}
-                      
-                     
-                      {item.description && (
-                        <p className="text-gray-300 text-xs md:text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div> */}
-              </div>
-
-              {/* Blog Description with HTML Rendering */}
-              {blog?.description && (
-                <div className="mb-6 md:mb-8">
-                  <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-orange-600">
-                    Based On Past Trends
-                  </h2>
-                  <div className="">
-                    <div
-                      className="blog-content"
-                      dangerouslySetInnerHTML={createMarkup(blog.description)}
-                    />
-                  </div>
+                <div>
+                  <div
+                    className="blog-content"
+                    dangerouslySetInnerHTML={createMarkup(blog.description)}
+                  />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Other Blogs Section */}
-        {/* <div className="bg-gray-950 py-6 md:py-8">
-  <div className="container mx-auto px-4 md:px-8">
-    <div className="max-w-4xl mx-auto">
-      <h2 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
-        <span className="text-white">Other</span>
-        <span className="text-orange-600">Blogs</span>
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-        {(allBlog.length > 0 
-          ? allBlog.filter(b => b.id !== Number(id)) 
-          : blogsdetails.filter(b => b.id !== Number(id))
-        ).slice(0, 3).map(blog => (
-          <div key={blog.id} className="bg-gray-900 rounded overflow-hidden">
-            <div className="relative h-32 md:h-40">
-              <Image
-                src={blog.image || "/blogcommonimage.png"}
-                alt={blog.alt_img_text || "Blog Thumbnail"}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-3 md:p-4">
-              <h3 className="font-medium text-xs md:text-sm mb-1 md:mb-2 line-clamp-2">
-                {blog.title}
-              </h3>
-              <p className="text-gray-400 text-xs mb-2 md:mb-3 line-clamp-2">
-                {typeof blog.description === 'string' 
-                  ? blog.description.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'
-                  : 'Blog description...'}
-              </p>
-              <Link
-                href={`/blogs/${blog.id}`}
-                className="text-orange-600 text-xs hover:underline"
-              >
-                Read More →
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-4 md:mt-6 text-center">
-        <Link
-          href="/blogs"
-          className="text-gray-300 hover:text-white inline-flex items-center gap-1"
-        >
-          View More <span className="text-xs">→</span>
-        </Link>
-      </div>
-    </div>
-  </div>
-</div> */}
       </div>
     </div>
   );

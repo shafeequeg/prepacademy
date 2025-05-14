@@ -475,6 +475,7 @@ const BlogSection = () => {
       </div>
 
       {/* Blog Grid - Will show default blogs initially, then tab-specific blogs when clicked */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {(displayBlogs.length > 0 ? displayBlogs : allBlog).map(
           (blog: Blogs) => (

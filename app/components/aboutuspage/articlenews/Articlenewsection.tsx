@@ -6,6 +6,26 @@ import Image from "next/image";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 
+
+
+const stripHtmlAndTruncate = (
+    html: string | null | undefined,
+    maxLength: number = 120
+  ): string => {
+    if (!html) return "No description available";
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.trim();
+
+    return cleanedText.length > maxLength
+      ? `${cleanedText.substring(0, maxLength)}...`
+      : cleanedText;
+  };
+
+  
 interface ArticleCardProps {
   image: string;
   title: string;
@@ -39,9 +59,10 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     />
     <div className="p-6 flex flex-col flex-grow">
       <h3 className="text-white text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
-        {description.replace(/<[^>]*>?/gm, '')} {/* Remove HTML tags from description */}
-      </p>
+    <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+  {stripHtmlAndTruncate(description)}
+</p>
+
       <div className="mt-auto">
         <Link href={`/blogdetails/${id}`}>
           <button className="text-[#FF5733] flex items-center gap-2 text-sm hover:text-[#FF6B4A] transition-colors">
@@ -79,6 +100,8 @@ const NewsAndArticles: React.FC = () => {
       setLoading(false);
     }
   };
+
+   
 
   useEffect(() => {
     fetchBlogs();

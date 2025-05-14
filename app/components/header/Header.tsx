@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { FiX, FiChevronDown, FiUser, FiLogOut, FiLogIn } from "react-icons/fi";
+import { FiX, FiChevronDown, FiUser, FiLogOut } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import {
   FaLinkedinIn,
@@ -13,8 +13,6 @@ import LoginModal from "../login/Login";
 // import Link from "next/link";
 import axiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
-
-
 
 const Loader = () => {
   return (
@@ -69,7 +67,7 @@ export default function Header() {
 
   console.log(isOpen);
   console.log(user);
-console.log(toolsDropdownOpen);
+  console.log(toolsDropdownOpen);
 
   useEffect(() => {
     const fetchUserData = () => {
@@ -582,13 +580,16 @@ console.log(toolsDropdownOpen);
                 {user ? (
                   <>
                     <div
-                      className="text-white hover:text-white text-xl font-semibold cursor-pointer flex items-center group-hover:bg-black/20 px-3 py-2 rounded-lg transition-all duration-300"
+                      className="flex items-center space-x-2 text-white hover:text-white text-lg font-medium cursor-pointer rounded-full bg-black/20 px-4 py-2 transition-all duration-300"
                       onMouseEnter={() => setAccountDropdownOpen(true)}
                     >
-                      <FiUser className="mr-2" size={18} />
+                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                        <FiUser className="text-white" size={16} />
+                      </div>
                       <span className="truncate max-w-[120px]">
                         {user.full_name}
                       </span>
+                      <FiChevronDown size={16} />
                     </div>
                     {accountDropdownOpen && (
                       <div
@@ -630,9 +631,13 @@ console.log(toolsDropdownOpen);
                 ) : (
                   <button
                     onClick={handleLoginClick}
-                    className="bg-orange-200 text-[#F55D3E] hover:bg-[#FFE4B5] px-5 py-2 rounded-lg text-lg font-semibold flex items-center transition-all duration-300 shadow-md hover:shadow-xl"
+                    className="flex items-center space-x-2 bg-black/20 text-white hover:bg-black/30 px-4 py-2 rounded-full text-lg font-medium transition-all duration-300"
                   >
-                    <FiLogIn className="mr-2" /> Login
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                      <FiUser className="text-white" size={16} />
+                    </div>
+                    <span>Login</span>
+                    <FiChevronDown size={16} />
                   </button>
                 )}
               </div>
@@ -893,6 +898,45 @@ console.log(toolsDropdownOpen);
             ACCOUNT
           </div>
         </div>
+
+        {user ? (
+          <>
+            <div className="px-6 py-3 text-[#FFE4B5] text-sm font-serif italic flex items-center">
+              <div className="w-8 h-8 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
+                <FiUser className="text-[#FFE4B5]" size={16} />
+              </div>
+              <span className="truncate max-w-[180px]">{user.full_name}</span>
+            </div>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={() => handleNavigation("/profile")}
+            >
+              <span className="ml-11">Profile</span>
+            </div>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={() => handleNavigation("/my-courses")}
+            >
+              <span className="ml-11">My Courses</span>
+            </div>
+            <div
+              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+              onClick={handleLogout}
+            >
+              <span className="ml-11">Logout</span>
+            </div>
+          </>
+        ) : (
+          <div
+            className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
+            onClick={handleLoginClick}
+          >
+            <div className="w-7 h-7 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
+              <FiUser className="text-[#FFE4B5]" size={14} />
+            </div>
+            <span>Login</span>
+          </div>
+        )}
 
         {user ? (
           <>

@@ -169,6 +169,7 @@ const ExamPrepHomepage: React.FC = () => {
   //  const [activeIndex, setActiveIndex] = useState(0);
   const [activeIndexsecond, setActiveIndexsecond] = useState(0);
   const [allBlog, setAllBlog] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // Total slides for both carousels
   const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
@@ -202,14 +203,16 @@ const ExamPrepHomepage: React.FC = () => {
   };
 
   const fetchBlogs = async () => {
-    try {
-      const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
-      setAllBlog(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  try {
+    setLoading(true);
+    const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
+    setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchBlogs();
@@ -246,6 +249,22 @@ const ExamPrepHomepage: React.FC = () => {
   };
   const totalSlides = Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4));
 
+
+  if (loading) {
+    return (
+      <section className="py-16 text-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic"> Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
+          </div>
+          <div className="text-center text-gray-300">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
       {/* Header Section with Gladiators - Full Width */}

@@ -956,6 +956,7 @@ export default function PaymentPage() {
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
 
+
   const user_uuid = searchParams.get("user_uuid");
   const [users, setUsers] = useState<UserType[]>([]);
 
@@ -981,6 +982,7 @@ export default function PaymentPage() {
       uuid,
     });
 
+    
     const priceValue = parseFloat(price.replace(/[^0-9.]/g, ""));
     const gst = priceValue * 0.18;
     const total = priceValue + gst;

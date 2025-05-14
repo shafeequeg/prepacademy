@@ -17,7 +17,6 @@ interface Blog {
   alt_img_text: string;
 }
 
-
 const ExamPrepHomepage: React.FC = () => {
   const gladiators = [
     {
@@ -166,6 +165,7 @@ const ExamPrepHomepage: React.FC = () => {
 
   const carouselRef = useRef<HTMLDivElement>(null);
   //  const carouselRefsecond = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
 
   // Active indices for both carousels
   //  const [activeIndex, setActiveIndex] = useState(0);
@@ -194,13 +194,15 @@ const ExamPrepHomepage: React.FC = () => {
   console.log(activeIndexsecond);
   console.log(totalSlidessecond);
 
-   const fetchBlogs = async () => {
+  const fetchBlogs = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
-      setAllBlog(response.data);
+      setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -227,7 +229,6 @@ const ExamPrepHomepage: React.FC = () => {
       ? `${cleanedText.substring(0, maxLength)}...`
       : cleanedText;
   };
-
 
   // Auto-scroll effect
   // useEffect(() => {
@@ -271,6 +272,22 @@ const ExamPrepHomepage: React.FC = () => {
     }
   };
   const totalSlides = Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4));
+
+  if (loading) {
+    return (
+      <section className="py-16 text-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic"> Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
+          </div>
+          <div className="text-center text-gray-300">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
@@ -560,33 +577,33 @@ const ExamPrepHomepage: React.FC = () => {
           {/* First Notification */}
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Application Process{" "}
+              Application Process{" "}
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              The application window for MHT CET 2025 is open. Interested candidates can apply online at the official website: 
-             
+              The application window for MHT CET 2025 is open. Interested
+              candidates can apply online at the official website:
             </p>
           </div>
 
           {/* Second Notification */}
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Application Deadlines{" "}
+              Application Deadlines{" "}
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              	Last date to apply without late fee: February 15, 2025
+              Last date to apply without late fee: February 15, 2025
             </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              	Last date to apply with late fee of ₹500: February 22, 2025 
+              Last date to apply with late fee of ₹500: February 22, 2025
             </p>
           </div>
 
           <div className="mb-4  pb-4">
             <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-            Exam Dates:{" "}
+              Exam Dates:{" "}
             </div>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
@@ -594,7 +611,7 @@ const ExamPrepHomepage: React.FC = () => {
             </p>
             <p className="text-gray-300 text-base md:text-lg  flex">
               <span className="text-[#FF6347] mr-2">•</span>
-              	PCM Group: April 19 to 27, 2025 (excluding April 24)
+              PCM Group: April 19 to 27, 2025 (excluding April 24)
             </p>
           </div>
 
@@ -616,7 +633,7 @@ const ExamPrepHomepage: React.FC = () => {
       </div>
 
       {/* Blogs Section */}
-       <section className="p-6 bg-gray-900">
+      <section className="p-6 bg-gray-900">
         <div className="container mx-auto px-4 md:px-8">
           {/* Heading */}
           <div className="mb-12">

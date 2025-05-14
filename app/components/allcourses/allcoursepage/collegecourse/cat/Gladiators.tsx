@@ -7,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 
-
 interface Blog {
   id: number;
   title: string;
@@ -16,12 +15,9 @@ interface Blog {
   description: string;
   image: string;
   alt_img_text: string;
-  
 }
 const ExamPrepHomepage: React.FC = () => {
-
-    const [allBlog, setAllBlog] = useState<Blog[]>([]);
-
+  const [allBlog, setAllBlog] = useState<Blog[]>([]);
 
   const gladiators = [
     {
@@ -179,6 +175,7 @@ const ExamPrepHomepage: React.FC = () => {
   //  const totalSlides = Math.ceil(gladiators.length / 4);
   const totalSlidessecond = Math.ceil(gladiatorssecond.length / 4);
   const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -198,17 +195,17 @@ const ExamPrepHomepage: React.FC = () => {
   console.log(activeIndexsecond);
   console.log(totalSlidessecond);
 
-
-   const fetchBlogs = async () => {
+  const fetchBlogs = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
-      setAllBlog(response.data);
+      setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -234,6 +231,23 @@ const ExamPrepHomepage: React.FC = () => {
   //   return () => clearInterval(interval);
   // }, [gladiators.length]);
 
+  const stripHtmlAndTruncate = (
+    html: string | null | undefined,
+    maxLength: number = 120
+  ): string => {
+    if (!html) return "No description available";
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.trim();
+
+    return cleanedText.length > maxLength
+      ? `${cleanedText.substring(0, maxLength)}...`
+      : cleanedText;
+  };
+
   const scrollLeft = () => {
     if (carouselRef.current) {
       const slideWidth = carouselRef.current.offsetWidth;
@@ -255,6 +269,21 @@ const ExamPrepHomepage: React.FC = () => {
   };
   const totalSlides = Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4));
 
+  if (loading) {
+    return (
+      <section className="py-16 text-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic"> Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
+          </div>
+          <div className="text-center text-gray-300">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
       {/* Header Section with Gladiators - Full Width */}
@@ -595,98 +624,98 @@ const ExamPrepHomepage: React.FC = () => {
 
       {/* Blogs Section */}
       <section className="p-6 bg-gray-900">
-      <div className="container mx-auto px-4 md:px-8">
-        {/* Heading */}
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
-            <span className="font-dmserif italic">Know More With</span>{" "}
-            <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
-          </h2>
-        </div>
-
-        {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
-          {allBlog.map((blog) => (
-            <div
-              key={blog.id}
-              className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              {/* Blog Image */}
-              <div className="relative w-full aspect-video">
-                <Image
-                  src={blog.image || '/default-blog.jpg'} // Add a fallback image
-                  alt={blog.alt_img_text || blog.title}
-                  fill
-                  className="absolute inset-0 w-full h-full object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                {/* Title */}
-                <h3 className="text-xl font-bold mb-3 text-white">
-                  {blog.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                  {blog.description}
-                </p>
-
-                {/* Read Full Button */}
-                <a
-                  href={`/blogdetails/${blog.id}`}
-                  className="inline-flex items-center text-[#F55D3E] hover:text-[#FF7D5E] font-medium"
-                >
-                  Read Full
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* View More Button */}
-        {blogs.length > 0 && (
-          <div className="text-center">
-            <a
-              href="/blogs"
-              className="inline-flex items-center text-white hover:text-gray-200 font-medium"
-            >
-              View More
-              <svg
-                className="w-5 h-5 ml-2"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 12H19M19 12L12 5M19 12L12 19"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+        <div className="container mx-auto px-4 md:px-8">
+          {/* Heading */}
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic">Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
           </div>
-        )}
-      </div>
-    </section>
+
+          {/* Blog Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+            {allBlog.map((blog) => (
+              <div
+                key={blog.id}
+                className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* Blog Image */}
+                <div className="relative w-full aspect-video">
+                  <Image
+                    src={blog.image || "/default-blog.jpg"} // Add a fallback image
+                    alt={blog.alt_img_text || blog.title}
+                    fill
+                    className="absolute inset-0 w-full h-full object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  {/* Title */}
+                  <h3 className="text-xl font-bold mb-3 text-white">
+                    {blog.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                    {stripHtmlAndTruncate(blog.description)}
+                  </p>
+
+                  {/* Read Full Button */}
+                  <a
+                    href={`/blogdetails/${blog.id}`}
+                    className="inline-flex items-center text-[#F55D3E] hover:text-[#FF7D5E] font-medium"
+                  >
+                    Read Full
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 12H19M19 12L12 5M19 12L12 19"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View More Button */}
+          {blogs.length > 0 && (
+            <div className="text-center">
+              <a
+                href="/blogs"
+                className="inline-flex items-center text-white hover:text-gray-200 font-medium"
+              >
+                View More
+                <svg
+                  className="w-5 h-5 ml-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 12H19M19 12L12 5M19 12L12 19"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };

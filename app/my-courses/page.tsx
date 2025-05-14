@@ -87,9 +87,9 @@ const MyCourses = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100">
       {/* Header with gradient background similar to the image */}
-      <div className="bg-gradient-to-r from-orange-400 via-orange-500 to-[#F55D3E] text-white p-8 shadow-lg">
+      <div className="bg-gradient-to-r from-orange-400 via-orange-500 to-[#F55D3E] text-white p-8 shadow-lg ">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold tracking-wider">My Learning Journey</h1>
+          <h1 className="text-3xl font-bold tracking-wider mt-28">My Learning Journey</h1>
           <p className="mt-2 text-red-100">Continue where you left off and build your skills</p>
         </div>
       </div>
@@ -170,7 +170,7 @@ const MyCourses = () => {
             </div>
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Your Learning Library is Empty</h3>
             <p className="text-gray-600 mb-8">Discover and enroll in courses that align with your career goals and interests.</p>
-            <Link href="/courses">
+            <Link href="/allcourses">
               <span className="px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all font-medium">
                 Explore Courses
               </span>

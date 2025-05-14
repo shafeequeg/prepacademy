@@ -17,7 +17,6 @@ interface Blog {
   alt_img_text: string;
 }
 
-
 const ExamPrepHomepage: React.FC = () => {
   const gladiators = [
     {
@@ -193,15 +192,17 @@ const ExamPrepHomepage: React.FC = () => {
 
   console.log(activeIndexsecond);
   console.log(totalSlidessecond);
+  const [loading, setLoading] = useState(true);
 
-
-   const fetchBlogs = async () => {
+  const fetchBlogs = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
-      setAllBlog(response.data);
+      setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -228,7 +229,6 @@ const ExamPrepHomepage: React.FC = () => {
       ? `${cleanedText.substring(0, maxLength)}...`
       : cleanedText;
   };
-
 
   // Auto-scroll effect
   // useEffect(() => {
@@ -273,6 +273,22 @@ const ExamPrepHomepage: React.FC = () => {
   };
   const totalSlides = Math.ceil(gladiatorssecond.length / (isMobile ? 2 : 4));
 
+
+  if (loading) {
+    return (
+      <section className="py-16 text-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-medium text-center md:text-left">
+              <span className="font-dmserif italic"> Know More With</span>{" "}
+              <span className="text-[#F55D3E] font-bold not-italic">Blogs</span>
+            </h2>
+          </div>
+          <div className="text-center text-gray-300">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
   return (
     <div className="flex flex-col min-h-screen  bg-gray-900 text-white">
       {/* Header Section with Gladiators - Full Width */}
@@ -605,7 +621,7 @@ const ExamPrepHomepage: React.FC = () => {
       </div>
 
       {/* Blogs Section */}
-       <section className="p-6 bg-gray-900">
+      <section className="p-6 bg-gray-900">
         <div className="container mx-auto px-4 md:px-8">
           {/* Heading */}
           <div className="mb-12">

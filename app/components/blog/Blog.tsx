@@ -13,7 +13,6 @@ interface Blog {
   description: string;
   image: string;
   alt_img_text: string;
-  // etc.
 }
 
 const BlogsSection = () => {
@@ -21,20 +20,37 @@ const BlogsSection = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchBlogs = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      setAllBlog(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
+    setAllBlog(response.data.slice(0, 4)); // Get only the first 3 blogs
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchBlogs();
   }, []);
+
+  const stripHtmlAndTruncate = (
+    html: string | null | undefined,
+    maxLength: number = 120
+  ): string => {
+    if (!html) return "No description available";
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.trim();
+
+    return cleanedText.length > maxLength
+      ? `${cleanedText.substring(0, maxLength)}...`
+      : cleanedText;
+  };
 
   if (loading) {
     return (
@@ -93,7 +109,7 @@ const BlogsSection = () => {
 
                     {/* Description */}
                     <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                      {blog.description}
+                      {stripHtmlAndTruncate(blog.description)}
                     </p>
 
                     {/* Read Full Button */}

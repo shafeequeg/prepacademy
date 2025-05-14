@@ -45,7 +45,7 @@ interface Userdata {
 
 interface Option {
   id: string | number;
-  question: string | number; // question ID this option belongs to
+  question: string | number; 
   text: string;
 }
 
