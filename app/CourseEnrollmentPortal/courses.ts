@@ -18,6 +18,8 @@ export type DropdownItem = {
     };
   };
 
+
+
   type CourseData = {
     label?: string;
     title?: string;
@@ -34,6 +36,7 @@ export type DropdownItem = {
     tabs: Tab[];
   };
 
+  
 
   type CourseKey = 
   | "JEE" | "KEAM" | "BITSAT" | "VITEEE" | "KCET" 

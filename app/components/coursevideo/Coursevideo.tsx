@@ -3,7 +3,6 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 
-
 const CourseVideos = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,36 +13,74 @@ const CourseVideos = () => {
     { src: "/asianetnews.png", alt: "AsiaNet News logo" },
     { src: "/mint.png", alt: "Mint logo" },
    
+
+
   ];
 
+  // const scrollRight = () => {
+  //   if (carouselRef.current) {
+  //     const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
+  //     const newIndex = Math.min(currentIndex + 1, logos.length - 1);
+
+  //     carouselRef.current.scrollTo({
+  //       left: newIndex * itemWidth,
+  //       behavior: 'smooth'
+  //     });
+
+  //     setCurrentIndex(newIndex);
+  //   }
+  // };
+
+  // const scrollLeft = () => {
+  //   if (carouselRef.current) {
+  //     const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
+  //     const newIndex = Math.max(currentIndex - 1, 0);
+
+  //     carouselRef.current.scrollTo({
+  //       left: newIndex * itemWidth,
+  //       behavior: 'smooth'
+  //     });
+
+  //     setCurrentIndex(newIndex);
+  //   }
+  // };
+
+  const logosPerRow = 4;
+  const totalRows = Math.ceil(logos.length / logosPerRow);
+  const hasMultipleRows = totalRows > 1;
+
   const scrollRight = () => {
-    if (carouselRef.current) {
-      const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
-      const newIndex = Math.min(currentIndex + 1, logos.length - 1);
-      
+    if (carouselRef.current && hasMultipleRows) {
+      const containerWidth = carouselRef.current.scrollWidth / totalRows;
+      const newIndex = Math.min(currentIndex + 1, totalRows - 1);
+
       carouselRef.current.scrollTo({
-        left: newIndex * itemWidth,
-        behavior: 'smooth'
+        left: newIndex * containerWidth,
+        behavior: "smooth",
       });
-      
+
       setCurrentIndex(newIndex);
     }
   };
 
   const scrollLeft = () => {
-    if (carouselRef.current) {
-      const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
+    if (carouselRef.current && hasMultipleRows) {
+      const containerWidth = carouselRef.current.scrollWidth / totalRows;
       const newIndex = Math.max(currentIndex - 1, 0);
-      
+
       carouselRef.current.scrollTo({
-        left: newIndex * itemWidth,
-        behavior: 'smooth'
+        left: newIndex * containerWidth,
+        behavior: "smooth",
       });
-      
+
       setCurrentIndex(newIndex);
     }
   };
 
+  const logoRows = [];
+  for (let i = 0; i < logos.length; i += logosPerRow) {
+    logoRows.push(logos.slice(i, i + logosPerRow));
+  }
   const videos = [
     {
       title: "Preparing for the CAT 2025",
@@ -120,92 +157,135 @@ const CourseVideos = () => {
       </div>
 
       {/* Read Features Section */}
-      <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] py-16 mt-7">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-medium">
-            <span className="text-[#F55D3E] font-dmserif italic">Read Features</span>
-            <span className="text-white font-bold"> Online</span>
-          </h2>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto">
-          {/* Left Navigation Button */}
-          <button
-            onClick={scrollLeft}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition ${currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={currentIndex === 0}
-            aria-label="Scroll left"
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-6 w-6" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M15 19l-7-7 7-7" 
-              />
-            </svg>
-          </button>
-
-          {/* Carousel Container */}
-          <div 
-            ref={carouselRef}
-            className="flex overflow-x-hidden scroll-smooth space-x-8 justify-center items-center"
-            style={{ 
-              scrollbarWidth: 'none', 
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}
-          >
-            <div className="flex space-x-8 py-4">
-              {logos.map((logo, index) => (
-                <div 
-                  key={index} 
-                  className="flex-shrink-0 w-40 h-24 flex items-center justify-center"
-                >
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={120}
-                    height={80}
-                    className="max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              ))}
-            </div>
+    <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] py-16 mt-7">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-medium">
+              <span className="text-[#F55D3E] font-dmserif italic">
+                Read Features
+              </span>
+              <span className="text-white font-bold"> Online</span>
+            </h2>
           </div>
 
-          {/* Right Navigation Button */}
-          <button
-            onClick={scrollRight}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg hover:bg-[#a52a1a] transition ${currentIndex === logos.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={currentIndex === logos.length - 1}
-            aria-label="Scroll right"
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-6 w-6" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
+          <div className="relative max-w-6xl mx-auto">
+            {/* Left Navigation Button */}
+            <button
+              onClick={scrollLeft}
+              className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg transition ${
+                !hasMultipleRows || currentIndex === 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-[#a52a1a]"
+              }`}
+              disabled={!hasMultipleRows || currentIndex === 0}
+              aria-label="Scroll left"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M9 5l7 7-7 7" 
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 sm:h-6 sm:w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Carousel Container */}
+            <div
+              ref={carouselRef}
+              className={`mx-8 sm:mx-12 ${hasMultipleRows ? "overflow-x-hidden" : ""}`}
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <div className="flex space-x-4 sm:space-x-8">
+                {logoRows.map((row, rowIndex) => (
+                  <div
+                    key={rowIndex}
+                    className="flex-shrink-0 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8 py-4 min-w-full"
+                  >
+                    {row.map((logo, logoIndex) => (
+                      <div
+                        key={logoIndex}
+                        className="flex items-center justify-center p-2 sm:p-4"
+                      >
+                        <Image
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={120}
+                          height={80}
+                          className="max-h-12 xs:max-h-14 sm:max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Navigation Button */}
+            <button
+              onClick={scrollRight}
+              className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg transition ${
+                !hasMultipleRows || currentIndex === totalRows - 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-[#a52a1a]"
+              }`}
+              disabled={!hasMultipleRows || currentIndex === totalRows - 1}
+              aria-label="Scroll right"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 sm:h-6 sm:w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Row Indicators (optional) */}
+          {hasMultipleRows && (
+            <div className="flex justify-center mt-6 space-x-2">
+              {Array.from({ length: totalRows }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    if (carouselRef.current) {
+                      const containerWidth =
+                        carouselRef.current.scrollWidth / totalRows;
+                      carouselRef.current.scrollTo({
+                        left: index * containerWidth,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    currentIndex === index ? "bg-[#F55D3E]" : "bg-gray-400"
+                  }`}
+                  aria-label={`Go to row ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
-      </div>
-    </section>
+      </section>
     </section>
   );
 };

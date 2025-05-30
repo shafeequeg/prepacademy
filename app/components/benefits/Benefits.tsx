@@ -461,7 +461,8 @@ const Benefits = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white ">
+        // <div className="w-full max-w-7xl mx-auto px-4 py-12 text-white ">
+    <div className="w-full max-w-8xl mx-auto px-4 py-12 text-white ">
       {/* Header Section */}
       <div className="w-full bg-[#2B1615] px-4 md:px-8 lg:px-16 py-12 rounded-md">
         <div

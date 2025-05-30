@@ -957,7 +957,7 @@ const CatExamApplySection: React.FC = () => {
                         ))}
                       </ul>
                       <a
-                        href="#"
+                        href="/CourseEnrollmentPortal"
                         className="inline-flex items-center text-[#F55D3E] text-lg hover:underline mt-auto"
                       >
                         {" "}

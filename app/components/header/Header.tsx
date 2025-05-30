@@ -433,8 +433,8 @@ export default function Header() {
       )}
 
       <header
-        className={`w-[95%] fixed top-0 left-1/2 transform -translate-x-1/2 mx-auto text-center 
-        bg-gradient-to-r mt-4 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-6 px-4 md:px-12 rounded-xl z-50 
+        className={`w-[97%] fixed top-0 left-1/2 transform -translate-x-1/2 mx-auto text-center 
+        bg-gradient-to-r mt-1 md:mt-1 from-white via-[#F55D3E] to-[#a52a1a] shadow-lg py-2 md:py-6 px-2 md:px-12 rounded-xl z-50 
         transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
@@ -451,7 +451,7 @@ export default function Header() {
                   alt="Prep Academy Logo"
                   width={150}
                   height={50}
-                  className="h-12 w-auto"
+                  className="h-6 md:h-12 w-auto"
                   priority
                   quality={75}
                   loading="eager"
@@ -524,37 +524,9 @@ export default function Header() {
                 )}
               </div>
 
-              {/* chatbot and percetagle calculator */}
-              {/* <div className="relative group">
-                <button
-                  onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
-                  className="text-white hover:text-white text-xl font-semibold cursor-pointer flex items-center"
-                >
-                  Tools
-                  <FiChevronDown className="mt-2 ms-3" size={18} />
-                </button>
-                {toolsDropdownOpen && (
-                  <div className="absolute -left-14 mt-4 bg-black shadow-lg rounded-lg w-48 z-50">
-                    <Link
-                      href="/chatBot"
-                      className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
-                    >
-                      Chatbot
-                    </Link>
-                    <Link
-                      href="/percentage-calculator"
-                      className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-2 text-sm cursor-pointer"
-                    >
-                      Percentage Calculator
-                    </Link>
-                  </div>
-                )}
-              </div> */}
-
               <div
                 onClick={() => handleNavigation("/blogs")}
-                className="text-white
-                hover:text-white text-xl font-semibold cursor-pointer"
+                className="text-white hover:text-white text-xl font-semibold cursor-pointer"
               >
                 Blogs
               </div>
@@ -564,6 +536,8 @@ export default function Header() {
               >
                 Contact
               </div>
+
+              {/* Enhanced Take A Quick Test Button */}
               <a
                 href="https://test.prepacademy.in/"
                 target="_blank"
@@ -580,7 +554,7 @@ export default function Header() {
                 {user ? (
                   <>
                     <div
-                      className="flex items-center space-x-2 text-white hover:text-white text-lg font-medium cursor-pointer rounded-full bg-black/20 px-4 py-2 transition-all duration-300"
+                      className="flex items-center space-x-2 text-white hover:text-white text-xl font-semibold cursor-pointer rounded-full bg-black/20 px-4 py-2 transition-all duration-300"
                       onMouseEnter={() => setAccountDropdownOpen(true)}
                     >
                       <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -631,7 +605,7 @@ export default function Header() {
                 ) : (
                   <button
                     onClick={handleLoginClick}
-                    className="flex items-center space-x-2 bg-black/20 text-white hover:bg-black/30 px-4 py-2 rounded-full text-lg font-medium transition-all duration-300"
+                    className="flex items-center space-x-2 bg-black/20 text-white hover:bg-black/30 px-4 py-2 rounded-full text-xl font-semibold transition-all duration-300"
                   >
                     <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                       <FiUser className="text-white" size={16} />

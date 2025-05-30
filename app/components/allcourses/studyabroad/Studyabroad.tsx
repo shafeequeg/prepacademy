@@ -862,8 +862,8 @@ console.log(setIsLoading);
           {/* Right Content - Image */}
           <div className="relative w-[100%] md:w-[40%]  aspect-[4/3] min-h-[250px]">
             <Image
-              src="/allcourse/studyabroad.jpg"
-              alt="School Students"
+              src="/allcourse/studyabroadcourse.jpg"
+              alt="Study Aborad Students"
               fill
               className="rounded-lg object-cover"
               sizes="(max-width: 768px) 100vw, 33vw"

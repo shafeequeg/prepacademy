@@ -563,7 +563,7 @@ const CatExamApplySection: React.FC = () => {
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       <div className="relative w-full z-10">
-        <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
+        <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-14  md:mt-32">
           <div className="max-w-7xl mx-auto">
             <div
               className="flex items-center justify-start gap-2 md:gap-4 pb-1 lg:mt-2 overflow-x-auto md:overflow-visible w-full w768:overflow-x-scroll w768:mt-16 "
@@ -600,7 +600,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
 
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               <div className="lg:w-[35%]">
                 <div className="mb-6">
@@ -640,13 +640,13 @@ const CatExamApplySection: React.FC = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
                   <button
-                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors whitespace-nowrap"
                     onClick={handleEnrollClick}
                   >
                     Book a Counseling Session
                   </button>
                   <button
-                    className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors"
+                    className="border border-[#FF6B3D] text-[#FF6B3D] py-3 px-6 rounded-md font-medium hover:bg-[#FF6B3D] hover:text-white transition-colors whitespace-nowrap"
                     onClick={openModal}
                   >
                     Get a FREE Career Assessment
@@ -665,7 +665,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full py-6">
+      <div className="w-full py-6 p-3">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="lg:w-1/2 text-start">
             <h2 className="text-2xl mb-4">

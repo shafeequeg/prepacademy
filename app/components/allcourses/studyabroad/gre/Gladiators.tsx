@@ -566,49 +566,40 @@ const ExamPrepHomepage: React.FC = () => {
         </div>
       </div>
       {/* Notifications Section */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
-          <span className="text-[#FF6347] font-serif italic">Latest</span>{" "}
-          <span className="text-white font-normal text-4xl">Notifications</span>
-        </h2>
+      <div className="w-full bg-[#1a0a0a] py-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-semibold mb-8">
+            <span className="text-[#FF6347] font-serif italic">Latest</span>{" "}
+            <span className="text-white font-normal">Notifications</span>
+          </h2>
 
-        <div className="bg-[#231515] rounded-lg p-8">
-          {/* First Notification */}
-          <div className="mb-4  pb-4">
-            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-              Latest Notification{" "}
+          <div className="bg-[#231515] rounded-lg p-8 border-l-4 border-[#FF6347]">
+            {/* Empty State */}
+            <div className="flex flex-col items-start">
+              <div className="text-white bg-[#FF6347] text-sm inline-block px-3 py-1 rounded mb-4 font-medium">
+                Latest Notification
+              </div>
+              <div className="flex items-center">
+                <svg
+                  className="w-6 h-6 text-[#FF6347] mr-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <p className="text-gray-300 text-lg md:text-xl font-light">
+                  Nothing to display at the moment. Please check back later.
+                </p>
+              </div>
             </div>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              Nothing to display
-            </p>
           </div>
-
-          {/* Second Notification */}
-          <div className="mb-4  pb-4">
-            {/* <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-          Latest Notification
-                      </div> */}
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              {/* <span className="text-[#FF6347] mr-2">•</span> */}
-              {/* The Indian Institute of Management (IIM) Rohtak has announced that the registration for the Integrated Programme in Management Aptitude Test (IPMAT) 2025 is open until April 11, 2025.       */}
-            </p>
-          </div>
-
-          {/* Third Notification */}
-          {/* <div>
-            <div className="text-white bg-[#FF6347] text-sm inline-block px-2 py-1 rounded mb-3">
-              Updated on 10 February 2025 | 2:30 PM | <span className="font-bold">CAT-2025</span>
-            </div>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              These exams serve as gateways to prestigious B-Schools across the country and internationally. Popular exams include CAT, XAT, CMAT, and GMAT, with the CAT being especially challenging due to limited seats and a vast pool of applicants.
-            </p>
-            <p className="text-gray-300 text-base md:text-lg  flex">
-              <span className="text-[#FF6347] mr-2">•</span>
-              The Common Admission Test is the gateway for admissions to the MBA programs at top B-schools in India.
-            </p>
-          </div> */}
         </div>
       </div>
 

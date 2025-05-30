@@ -455,41 +455,40 @@ export default function Banner() {
   ];
 
   return (
-    <div className="w-full flex flex-col overflow-hidden mt-10 md:mt-20">
+    <div className="w-full flex flex-col overflow-hidden mt-1 md:mt-20">
       {/* Floating Contact Icons */}
-      <div
-        className={`fixed right-5 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50
-        ${showIcons ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
-        transition-all duration-500 ease-in-out`}
+    <div
+  className={`fixed right-5 top-1/2 transform -translate-y-1/2 flex flex-col gap-6 z-50
+  ${showIcons ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
+  transition-all duration-500 ease-in-out`}
+>
+  {/* Phone Icon with pulse animation */}
+  <div className="group relative">
+    <div className="absolute inset-0 bg-[#F55D3E]/20 rounded-full animate-ping group-hover:animate-none"></div>
+    <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-12">
+      <a
+        href="tel:+91-9446056789"
+        className="text-[#F55D3E] text-2xl flex items-center justify-center"
+        aria-label="Call us"
       >
-        {/* Phone Icon with pulse animation */}
-        <div className="group relative">
-          <div className="absolute inset-0 bg-[#F55D3E]/20 rounded-full animate-ping group-hover:animate-none"></div>
-          <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-12">
-            <a
-              href="tel:+91-9446056789"
-              className="text-[#F55D3E] text-2xl flex items-center justify-center"
-              aria-label="Call us"
-            >
-              <FaPhoneAlt />
-            </a>
-          </div>
-        </div>
-
-        {/* WhatsApp Icon with floating animation */}
-        <div className="group relative animate-bounce animation-delay-300">
-          <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:-rotate-12">
-            <a
-              href="https://wa.me/9446056789"
-              target="_blank"
-              className="text-green-600 text-2xl flex items-center justify-center"
-              aria-label="Chat on WhatsApp"
-            >
-              <FaWhatsapp />
-            </a>
-          </div>
-        </div>
-      </div>
+        <FaPhoneAlt />
+      </a>
+    </div>
+  </div>
+  {/* WhatsApp Icon with floating animation */}
+  <div className="group relative animate-bounce animation-delay-300">
+    <div className="relative bg-gradient-to-br from-white to-gray-100 p-3 rounded-full shadow-lg border border-gray-200 backdrop-blur-sm transform transition-transform duration-300 hover:scale-110 hover:-rotate-12">
+      <a
+        href="https://wa.me/9446056789"
+        target="_blank"
+        className="text-green-600 text-2xl flex items-center justify-center"
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp />
+      </a>
+    </div>
+  </div>
+</div>
 
       {/* Main Banner Section */}
       <section className="bg-black text-white py-6 w-full mt-16">
@@ -606,7 +605,9 @@ export default function Banner() {
       </section>
 
       {/* Course Cards Section */}
-      <section className="bg-[#130808] py-4 px-4 w-full">
+            {/* <section className="bg-[#130808] py-4 px-4 w-full"> */}
+
+      <section className=" py-4 px-4 w-full">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {allcoursescard.map((item, index) => (
