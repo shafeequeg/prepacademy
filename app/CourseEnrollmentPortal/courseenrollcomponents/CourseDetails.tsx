@@ -138,4 +138,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
   }
 );
 
+CourseDetails.displayName = 'CourseDetails';
+
 export default CourseDetails;

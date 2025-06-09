@@ -162,30 +162,30 @@ const tabs = [
     label: "MANAGEMENT",
     path: "/collegecourse",
     dropdownItems: [
-      { label: "CAT", path: "/collegecourse/management/cat" },
-      { label: "XAT", path: "/" },
-      { label: "KMAT", path: "/" },
-      { label: "CMAT", path: "/" },
-      { label: "MAT", path: "/" },
-      { label: "NMAT", path: "/" },
-      { label: "CUET(PG)", path: "/" },
-      { label: "MICAT", path: "/" },
-      { label: "MHCET", path: "/" },
+      { label: "CAT", path: "/collegecoursespage/management/cat" },
+      { label: "XAT", path: "/collegecoursespage/management/xat" },
+      { label: "KMAT", path: "/collegecourse/management/kmat" },
+      { label: "CMAT", path: "/collegecoursespage/management/cmat" },
+      { label: "MAT", path: "/collegecoursespage/management/mat" },
+      { label: "NMAT", path: "/collegecoursespage/management/nmat" },
+      { label: "CUET(PG)", path: "/collegecoursespage/management/cuetpg" },
+      { label: "MICAT", path: "/collegecoursespage/management/micat" },
+      { label: "MHCET", path: "/collegecoursespage/management/mhcet" },
     ],
   },
   {
     id: "CEVILSERVICE",
     label: "CIVIL SERVICE",
     path: "/slat",
-    dropdownItems: [{ label: "UPSC", path: "/" }],
+    dropdownItems: [{ label: "UPSC", path: "/collegecoursespage/civilservice/upsc" }],
   },
   {
     id: "GOVERNMENT",
     label: "GOVERNMENT",
     path: "/ailet",
     dropdownItems: [
-      { label: "RAILWAY ", path: "/" },
-      { label: "SSC", path: "/" },
+      { label: "RAILWAY ", path: "/collegecoursespage/government/railway" },
+      { label: "SSC", path: "/collegecoursespage/government/ssc" },
     ],
   },
   {
@@ -193,8 +193,8 @@ const tabs = [
     label: "DEFENCE",
     path: "/klee",
     dropdownItems: [
-      { label: "CDS", path: "/" },
-      { label: "AFCAT", path: "/" },
+      { label: "CDS", path: "/collegecoursespage/defence/cds" },
+      { label: "AFCAT", path: "/collegecoursespage/defence/afcat" },
     ],
   },
   {
@@ -202,8 +202,8 @@ const tabs = [
     label: "DESIGN & ARCHITECTURE",
     path: "/culee",
     dropdownItems: [
-      { label: "NID PG ", path: "/" },
-      { label: "NIFT PG", path: "/" },
+      { label: "NID PG ", path: "/collegecoursespage/designandarchictecture/nidpg" },
+      { label: "NIFT PG", path: "/collegecoursespage/designandarchictecture/niftpg" },
     ],
   },
   {
@@ -211,14 +211,14 @@ const tabs = [
     label: "BANK",
     path: "/culee/bank",
     dropdownItems: [
-      { label: "SBI ", path: "/" },
-      { label: "IBPS P O", path: "/" },
-      { label: "RBI GRADE B", path: "/" },
-      { label: "IBPS RRB ", path: "/" },
-      { label: "SBI CLERK ", path: "/ " },
-      { label: "IBPS CLERK ", path: "/" },
-      { label: "NABARD ", path: "/" },
-      { label: "LIC AAO ", path: "/" },
+      { label: "SBI ", path: "/collegecoursespage/bank/sbi" },
+      { label: "IBPS P O", path: "/collegecoursespage/bank/ibpspo" },
+      { label: "RBI GRADE B", path: "/collegecoursespage/bank/rbigradeb" },
+      { label: "IBPS RRB ", path: "/collegecoursespage/bank/ibpsrrb" },
+      { label: "SBI CLERK ", path: "/collegecoursespage/bank/sbiclerk" },
+      { label: "IBPS CLERK ", path: "/collegecoursespage/bank/ibpsclerk" },
+      { label: "NABARD ", path: "/collegecoursespage/bank/nabard" },
+      { label: "LIC AAO ", path: "/collegecoursespage/bank/licaao" },
     ],
   },
 ];
@@ -263,7 +263,6 @@ const CatExamApplySection: React.FC = () => {
   });
 
   const router = useRouter();
-
 
   // const [activeTab, setActiveTab] = useState("online");
   const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
@@ -921,9 +920,9 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
                     onClick={handleEnrollClick}
-                    
                   >
                     Enroll Now
                   </button>

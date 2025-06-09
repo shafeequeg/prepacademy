@@ -2,38 +2,89 @@ import React from "react";
 import Image from "next/image";
 import { SalesSubjects, CourseData } from "./types";
 
+interface SalesSection {
+  id?: number | string;
+  section_name?: string;
+subject?: number | string;  // Add other properties that exist in your sales section data
+}
+
 interface CourseListProps {
   activeMainTab: string;
   activeSubTab: string;
+  activeCourse: string;
   salesCourses: CourseData[];
   salesSubjects: SalesSubjects[];
+  salesCoursessection?: SalesSection[]; // Changed from any[] to SalesSection[]
   handleCourseClick: (courseId: string, isSection: boolean) => void;
 }
 
 const CourseList: React.FC<CourseListProps> = React.memo(
   ({
-    activeMainTab,
+    // activeMainTab,
     activeSubTab,
+    activeCourse,
     salesCourses,
     salesSubjects,
+    salesCoursessection = [],
     handleCourseClick,
   }) => {
-    // Filter courses based on activeMainTab and activeSubTab
-    const filteredCourses = salesCourses.filter((course) => {
-      const courseMainTab = course.course?.toString() || "";
-      const courseSubTab = course.section?.toString() || "";
-      return courseMainTab === activeMainTab && courseSubTab === activeSubTab;
-    });
+    // Function to get filtered courses based on the current selection
+    const getFilteredCourses = () => {
+      if (!activeSubTab) {
+        return [];
+      }
 
-    console.log(salesCourses);
+      if (activeCourse) {
+        // If a specific section is selected, show courses for that section
+        const matchingCourseSection = salesCoursessection.find(
+          (courseSection) => courseSection.id?.toString() === activeCourse
+        );
 
+        if (!matchingCourseSection) {
+          return [];
+        }
+
+        return salesCourses.filter(
+          (course) =>
+            course.section?.toString() === matchingCourseSection.id?.toString()
+        );
+      } else {
+        // If no specific section is selected, show all courses for the subject
+        const matchingCourseSections = salesCoursessection.filter(
+          (courseSection) => courseSection.subject?.toString() === activeSubTab
+        );
+
+        const sectionIds = matchingCourseSections.map((section) =>
+          section.id?.toString()
+        );
+
+        return salesCourses.filter((course) =>
+          sectionIds.includes(course.section?.toString())
+        );
+      }
+    };
+
+    const filteredCourses = getFilteredCourses();
+
+    console.log("Active Course:", activeCourse);
+    console.log("Sales Courses:", salesCourses);
+    console.log("Sales Course Section:", salesCoursessection);
+    console.log("Filtered Courses:", filteredCourses);
+
+    // Get subject name for display
     const subjectName =
       salesSubjects.find((sub) => sub.id?.toString() === activeSubTab)
         ?.subject_name || "Courses";
 
-        
-    console.log(subjectName);
-    console.log(activeSubTab);
+    // Get section name for display
+    const sectionName =
+      salesCoursessection.find(
+        (courseSection) => courseSection.id?.toString() === activeCourse
+      )?.section_name || "";
+
+    console.log("Subject Name:", subjectName);
+    console.log("Section Name:", sectionName);
+    console.log("Active Sub Tab:", activeSubTab);
 
     // Render message if no activeSubTab is selected
     if (!activeSubTab) {
@@ -52,18 +103,39 @@ const CourseList: React.FC<CourseListProps> = React.memo(
       );
     }
 
+    // Determine the header text based on whether a section is selected
+    const headerText = activeCourse
+      ? `${subjectName} - ${sectionName}`
+      : subjectName;
+
+    // Function to handle view details click
+    const handleViewDetailsClick = (course: CourseData) => {
+      // Pass the course UUID/ID to show course details
+      // The second parameter should be false since this is a course, not a section
+      handleCourseClick(course.uuid?.toString() || course.id?.toString() || "", false);
+    };
+
     return (
       <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600">
-        <h2 className="text-xl font-semibold text-orange-400 mb-6">
-          {subjectName} ({filteredCourses.length})
-        </h2>
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-orange-400">
+            {headerText}
+          </h2>
+          <p className="text-sm text-orange-300 mt-1">
+            {filteredCourses.length} course
+            {filteredCourses.length !== 1 ? "s" : ""} available
+            {!activeCourse && " (All sections)"}
+          </p>
+        </div>
+
         {filteredCourses.length === 0 ? (
           <div className="text-center py-12">
             <h3 className="text-lg font-medium text-orange-400 mb-2">
               No courses available
             </h3>
             <p className="text-orange-300">
-              There are currently no courses available for this subject.
+              There are currently no courses available for this{" "}
+              {activeCourse ? "section" : "subject"}.
             </p>
           </div>
         ) : (
@@ -71,12 +143,9 @@ const CourseList: React.FC<CourseListProps> = React.memo(
             {filteredCourses.map((course) => (
               <div
                 key={course.id}
-                className="border border-orange-600 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer bg-gray-800 hover:border-orange-500 transform hover:scale-105"
-                onClick={() =>
-                  handleCourseClick(course.id?.toString() || "", false)
-                }
+                className="border border-orange-600 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer bg-gray-800 hover:border-orange-500 transform hover:scale-105 flex flex-col h-full"
               >
-                <div className="relative h-40 w-full overflow-hidden rounded-t-lg">
+                <div className="relative h-40 w-full overflow-hidden rounded-t-lg flex-shrink-0">
                   <Image
                     src={course.image || "/default-course.jpg"}
                     alt={course.title || "Course image"}
@@ -84,14 +153,14 @@ const CourseList: React.FC<CourseListProps> = React.memo(
                     className="object-cover transition-transform duration-300 hover:scale-110"
                   />
                 </div>
-                <div className="p-4">
+                <div className="p-4 flex flex-col flex-grow">
                   <h3 className="font-medium text-orange-400 mb-2 line-clamp-2">
                     {course.title}
                   </h3>
-                  <p className="text-sm text-orange-300 mt-1 line-clamp-3 mb-4">
+                  <p className="text-sm text-orange-300 mt-1 line-clamp-3 mb-4 flex-grow">
                     {course.course_description}
                   </p>
-                  <div className="flex justify-between items-center mt-4">
+                  <div className="flex justify-between items-center mt-auto mb-3">
                     <span className="font-semibold text-orange-400">
                       ₹{course.amount}
                     </span>
@@ -99,7 +168,13 @@ const CourseList: React.FC<CourseListProps> = React.memo(
                       {course.duration}
                     </span>
                   </div>
-                  <button className="mt-3 w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg font-medium">
+                  <button 
+                    className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg font-medium"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent event bubbling
+                      handleViewDetailsClick(course);
+                    }}
+                  >
                     View Details
                   </button>
                 </div>
@@ -111,5 +186,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     );
   }
 );
+
+CourseList.displayName = "CourseList";
 
 export default CourseList;

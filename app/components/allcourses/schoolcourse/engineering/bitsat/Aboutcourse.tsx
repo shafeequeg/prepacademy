@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const ExamPrepLowerSections: React.FC = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  // const [openFaq, setOpenFaq] = useState<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
@@ -39,36 +39,36 @@ const ExamPrepLowerSections: React.FC = () => {
     setActiveTab(String(tabId)); // Convert to string
   };
 
-  const toggleFaq = (index: number) => {
-    if (openFaq === index) {
-      setOpenFaq(null);
-    } else {
-      setOpenFaq(index);
-    }
-  };
+  // const toggleFaq = (index: number) => {
+  //   if (openFaq === index) {
+  //     setOpenFaq(null);
+  //   } else {
+  //     setOpenFaq(index);
+  //   }
+  // };
 
-  const faqs = [
-    {
-      question: "	When is the CLAT 2026 exam expected to be conducted?",
-      answer:
-        "The CLAT 2026 exam is tentatively scheduled for December 6, 2025",
-    },
-    {
-      question: "	When will the application process for CLAT 2026 begin?",
-      answer:
-        "The application process for CLAT 2026 is anticipated to commence in July 2025.",
-    },
-    {
-      question: "How can I apply for CLAT 2026?",
-      answer:
-        "Once the application process begins, candidates can apply online through the official CLAT website.",
-    },
-    {
-      question: "	Is there an age limit for appearing in CLAT 2026?",
-      answer:
-        "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026.",
-    },
-  ];
+  // const faqs = [
+  //   {
+  //     question: "	When is the BITSAT 2026 exam expected to be conducted?",
+  //     answer:
+  //       "The CLAT 2026 exam is tentatively scheduled for December 6, 2025",
+  //   },
+  //   {
+  //     question: "	When will the application process for CLAT 2026 begin?",
+  //     answer:
+  //       "The application process for CLAT 2026 is anticipated to commence in July 2025.",
+  //   },
+  //   {
+  //     question: "How can I apply for CLAT 2026?",
+  //     answer:
+  //       "Once the application process begins, candidates can apply online through the official CLAT website.",
+  //   },
+  //   {
+  //     question: "	Is there an age limit for appearing in CLAT 2026?",
+  //     answer:
+  //       "There is no upper age limit for both undergraduate and postgraduate programs in CLAT 2026.",
+  //   },
+  // ];
   
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -292,7 +292,7 @@ const ExamPrepLowerSections: React.FC = () => {
       </section>
 
       {/* FAQs Section */}
-      <section className="p-6 bg-gray-900 bg-opacity-70">
+      {/* <section className="p-6 bg-gray-900 bg-opacity-70">
         <div className="container mx-auto">
           <h2 className="mb-6 text-4xl font-semibold text-center italic text-orange-500">
             FAQs
@@ -320,7 +320,7 @@ const ExamPrepLowerSections: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials Section */}
       <section className="py-16 bg-[#231815] text-white mt-5">
@@ -332,7 +332,7 @@ const ExamPrepLowerSections: React.FC = () => {
               <span className="text-[#F55D3E] font-bold">Students Say</span>
             </h2>
             <p className="text-gray-300 leading-relaxed">
-              Are you ready to conquer the world? Your Clat journey might seem
+              Are you ready to conquer the world? Your BITSAT journey might seem
               daunting, but remember, every great achievement starts with a
               single step. Believe in yourself, because you hold the power to
               make your dreams a reality!

@@ -107,4 +107,7 @@ const WishlistModal: React.FC<WishlistModalProps> = React.memo(({ isOpen, closeM
   );
 });
 
+WishlistModal.displayName = 'WishlistModal';
+
+
 export default WishlistModal;

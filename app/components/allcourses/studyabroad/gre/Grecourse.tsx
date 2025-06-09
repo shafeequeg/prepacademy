@@ -183,7 +183,7 @@ const courseCards = [
   {
     id: "cat-test-1",
     title: " Mock Test Only ",
-    image: "/news1.png",
+    image: "/allcourse/mocktest.jpeg",
     type: "test",
     features: [
       "enhance exam preparation skill",
@@ -196,7 +196,7 @@ const courseCards = [
   {
     id: "cat-test-2",
     title: " Test Series+ Mock:",
-    image: "/news1.png",
+    image: "/allcourse/mockandtest.jpeg",
     type: "test",
     features: [
       "Personal mentoring",
@@ -209,7 +209,7 @@ const courseCards = [
   {
     id: "cat-test-3",
     title: " Mock +Test Series + Book Materials)",
-    image: "/news1.png",
+    image: "/allcourse/testmockandbook.jpeg",
     type: "test",
     features: [
       "Personal mentoring",
@@ -223,7 +223,7 @@ const courseCards = [
   {
     id: "cat-Bookmaterials-1",
     title: " Book Materials Only ",
-    image: "/news1.png",
+    image: "/allcourse/bookmaterials.jpeg",
     type: "Bookmaterials",
     features: ["Complete Book Materils"],
   },
@@ -231,7 +231,7 @@ const courseCards = [
   {
     id: "cat-Bookmaterials-2",
     title: " Test Series+ Mock Test + Book materials",
-    image: "/news1.png",
+    image: "/allcourse/testmockandbook.jpeg",
     type: "Bookmaterials",
     features: ["Complete Book Materils", "Mock Tests", "Test Series"],
   },
@@ -239,7 +239,7 @@ const courseCards = [
   {
     id: "cat-SelfBased-1",
     title: " Self Based",
-    image: "/news1.png",
+    image: "/allcourse/selfbased.jpeg",
     type: "SelfBased",
     features: ["Video lectures", "Mock Test", "Book Materials"],
   },

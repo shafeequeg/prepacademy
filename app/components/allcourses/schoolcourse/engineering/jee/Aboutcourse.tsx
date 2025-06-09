@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const ExamPrepLowerSections: React.FC = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  // const [openFaq, setOpenFaq] = useState<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
@@ -39,36 +39,36 @@ const ExamPrepLowerSections: React.FC = () => {
     setActiveTab(String(tabId)); // Convert to string
   };
 
-  const toggleFaq = (index: number) => {
-    if (openFaq === index) {
-      setOpenFaq(null);
-    } else {
-      setOpenFaq(index);
-    }
-  };
+  // const toggleFaq = (index: number) => {
+  //   if (openFaq === index) {
+  //     setOpenFaq(null);
+  //   } else {
+  //     setOpenFaq(index);
+  //   }
+  // };
 
-  const faqs = [
-    {
-      question: "	When is the JEE 2026 exam expected to be conducted?",
-      answer:
-        "The JEE 2026 exam is tentatively scheduled for December 6, 2025",
-    },
-    {
-      question: "	When will the application process for JEE 2026 begin?",
-      answer:
-        "The application process for JEE 2026 is anticipated to commence in July 2025.",
-    },
-    {
-      question: "How can I apply for JEE 2026?",
-      answer:
-        "Once the application process begins, candidates can apply online through the official JEE website.",
-    },
-    {
-      question: "	Is there an age limit for appearing in JEE 2026?",
-      answer:
-        "There is no upper age limit for both undergraduate and postgraduate programs in JEE 2026.",
-    },
-  ];
+  // const faqs = [
+  //   {
+  //     question: "	When is the JEE 2026 exam expected to be conducted?",
+  //     answer:
+  //       "The JEE 2026 exam is tentatively scheduled for December 6, 2025",
+  //   },
+  //   {
+  //     question: "	When will the application process for JEE 2026 begin?",
+  //     answer:
+  //       "The application process for JEE 2026 is anticipated to commence in July 2025.",
+  //   },
+  //   {
+  //     question: "How can I apply for JEE 2026?",
+  //     answer:
+  //       "Once the application process begins, candidates can apply online through the official JEE website.",
+  //   },
+  //   {
+  //     question: "	Is there an age limit for appearing in JEE 2026?",
+  //     answer:
+  //       "There is no upper age limit for both undergraduate and postgraduate programs in JEE 2026.",
+  //   },
+  // ];
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
@@ -291,7 +291,7 @@ const ExamPrepLowerSections: React.FC = () => {
       </section>
 
       {/* FAQs Section */}
-      <section className="p-6 bg-gray-900 bg-opacity-70">
+      {/* <section className="p-6 bg-gray-900 bg-opacity-70">
         <div className="container mx-auto">
           <h2 className="mb-6 text-4xl font-semibold text-center italic text-orange-500">
             FAQs
@@ -319,7 +319,7 @@ const ExamPrepLowerSections: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials Section */}
       <section className="py-16 bg-[#231815] text-white mt-5">

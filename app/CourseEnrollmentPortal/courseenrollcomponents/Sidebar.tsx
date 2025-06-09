@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { SalesSubjects, SalesSection } from "./types";
+import axiosInstance from "@/app/components/apiconfig/axios";
+import { API_URLS } from "@/app/components/apiconfig/api_urls";
 
 interface SidebarProps {
   activeMainTab: string;
@@ -10,6 +12,30 @@ interface SidebarProps {
   salesSection: SalesSection[];
   handleSubTabClick: (tabId: string) => void;
   handleCourseClick: (courseId: string, isSection: boolean) => void;
+}
+
+interface CourseData {
+  id?: number;
+  subject?: number;
+  subject_name: string;
+  section_name: string;
+}
+
+interface CourseSectionData {
+  id?: number;
+  uuid?: string;
+  subject_name: string;
+  section_name: string;
+  course: number;
+  course_name: string;
+  section: number;
+  title: string;
+  description: string;
+  course_features: string;
+  image: string;
+  course_description: string;
+  duration: string;
+  amount: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = React.memo(
@@ -26,6 +52,46 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
       (subject) => subject.course?.toString() === activeMainTab?.toString()
     );
 
+    console.log(salesSubjects);
+    console.log(activeCourse);
+    console.log(salesSection);
+    console.log(activeMainTab);
+
+    const [salesCourses, setSalesCourses] = useState<CourseSectionData[]>([]);
+    const [salesCoursessection, setsalesCoursessection] = useState<
+      CourseData[]
+    >([]);
+
+    const fetchSaleCourse = async () => {
+      try {
+        const response = await axiosInstance.get(
+          API_URLS.SALEPAGE_COURSE.GET_SALEPAGE_COURSE
+        );
+        setSalesCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    const fetchSaleCoursesection = async () => {
+      try {
+        const response = await axiosInstance.get(
+          API_URLS.SALEPAGE_COURSE_SECTION.GET_SALEPAGE_COURSE_SECTION
+        );
+        setsalesCoursessection(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    console.log(salesCourses);
+    console.log(salesCoursessection);
+
+    useEffect(() => {
+      fetchSaleCourse();
+      fetchSaleCoursesection();
+    }, []);
+
     const handleToggleSubTab = (subjectId: string) => {
       // Toggle functionality: if clicking on already active tab, close it
       if (activeSubTab === subjectId) {
@@ -36,9 +102,40 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
       }
     };
 
+    // Function to get filtered sections for a subject
+    const getFilteredSections = (subjectId: string) => {
+      // First, find matching sections from salesCoursessection where subject matches subjectId
+      const matchingSections = salesCoursessection.filter(
+        (courseSection) => courseSection.subject?.toString() === subjectId
+      );
+
+      // Then filter salesSection based on the matching section IDs
+      return salesSection.filter((section) => {
+        return matchingSections.some(
+          (courseSection) =>
+            courseSection.id?.toString() === section.id?.toString()
+        );
+      });
+    };
+
+    // Function to get course count for a section
+    const getCourseCountForSection = (sectionId: string) => {
+      // Find the corresponding section in salesCoursessection
+      const matchingCourseSection = salesCoursessection.find(
+        (courseSection) => courseSection.id?.toString() === sectionId
+      );
+
+      if (!matchingCourseSection) return 0;
+
+      // Count courses in salesCourses that match this section
+      return salesCourses.filter(
+        (course) =>
+          course.section?.toString() === matchingCourseSection.id?.toString()
+      ).length;
+    };
+
     console.log(activeCategorySubjects);
     console.log(activeSubTab);
-    
 
     return (
       <div className="bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-orange-600">
@@ -47,6 +144,16 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
           {activeCategorySubjects.map((subject) => {
             const subjectId = subject.id?.toString() || "";
             const isActive = activeSubTab === subjectId;
+            const filteredSections = getFilteredSections(subjectId);
+
+            console.log(subject);
+            console.log(subjectId);
+            console.log(isActive);
+            console.log(
+              "Filtered sections for subject:",
+              subjectId,
+              filteredSections
+            );
 
             return (
               <div key={subject.id} className="border-b border-orange-600 pb-2">
@@ -72,33 +179,39 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
                 </div>
                 {isActive && (
                   <div className="pl-4 mt-1 space-y-1 animate-fadeIn">
-                    {salesSection
-                      .filter((section) => {
-                        const sectionSubjectId = section.subject?.toString();
-                        const subjectIdStr = subject.id?.toString();
-                        return sectionSubjectId === subjectIdStr;
-                      })
-                      .map((section) => {
-                        const sectionId = section.id?.toString() || "";
-                        const sectionName = section.section_name || "";
+                    {filteredSections.map((section) => {
+                      const sectionId = section.id?.toString() || "";
+                      const sectionName = section.section_name || "";
+                      const courseCount = getCourseCountForSection(sectionId);
+console.log(courseCount);
 
-                        return (
-                          <div
-                            key={`${section.id}-${section.section_name}`}
-                            className={`py-1 px-3 text-sm rounded-md cursor-pointer ${
-                              activeCourse === sectionId
-                                ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
-                                : "text-orange-300 hover:bg-gradient-to-r from-orange-700 to-orange-600"
-                            } transition-all duration-300`}
-                            onClick={(e) => {
-                              e.stopPropagation(); // Prevent parent click
-                              handleCourseClick(sectionId, true);
-                            }}
-                          >
-                            {sectionName}
+                      return (
+                        <div
+                          key={`${section.id}-${section.section_name}`}
+                          className={`py-1 px-3 text-sm rounded-md cursor-pointer ${
+                            activeCourse === sectionId
+                              ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
+                              : "text-orange-300 hover:bg-gradient-to-r from-orange-700 to-orange-600"
+                          } transition-all duration-300`}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent parent click
+                            handleCourseClick(sectionId, true);
+                          }}
+                        >
+                          <div className="flex justify-between items-center">
+                            <span>{sectionName}</span>
+                            {/* <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded-full">
+                              {courseCount}
+                            </span> */}
                           </div>
-                        );
-                      })}
+                        </div>
+                      );
+                    })}
+                    {filteredSections.length === 0 && (
+                      <div className="py-1 px-3 text-sm text-orange-300 opacity-60">
+                        No sections available
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -126,5 +239,7 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
     );
   }
 );
+
+Sidebar.displayName = "Sidebar";
 
 export default Sidebar;

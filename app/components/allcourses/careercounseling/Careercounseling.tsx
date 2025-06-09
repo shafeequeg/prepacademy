@@ -28,6 +28,10 @@ import { API_URLS } from "../../apiconfig/api_urls";
 //   id: string;
 // }
 
+interface CatExamApplySectionProps {
+  slug?: string;
+}
+
 // const CourseCard: React.FC<CourseCardProps> = ({ title, description, classType, path, className }) => {
 //   const cardContent = (
 //     <div className={`bg-[#1F1414] p-5 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 flex flex-col items-center text-center min-h-[150px] ${className}`}>
@@ -44,34 +48,35 @@ const tabs = [
   {
     id: "ResumeBuilding",
     label: "Resume Building",
-    path: "/",
+    path: "/careercounseling/ResumeBuilding",
   },
   {
     id: "InterviewPreparation",
     label: "Interview Preparation",
-    path: "/",
+    path: "/careercounseling/InterviewPreparation",
   },
   {
     id: "CareerPlanning",
     label: "Career Planning",
-    path: "/",
+    path: "/careercounseling/CareerPlanning",
   },
   {
-    id: "Skill Development",
+    id: "SkillDevelopment", // Remove space from "Skill Development"
     label: "Skill Development",
-    path: "/",
+    path: "/careercounseling/SkillDevelopment",
   },
   {
-    id: "Job Search Strategies",
+    id: "JobSearchStrategies", // Remove spaces from "Job Search Strategies"
     label: "Job Search Strategies",
-    path: "/",
+    path: "/careercounseling/JobSearchStrategies",
   },
   {
-    id: "Stream Selection ",
-    label: "Stream Selection ",
-    path: "/",
+    id: "StreamSelection", // Remove space from "Stream Selection "
+    label: "Stream Selection",
+    path: "/careercounseling/StreamSelection",
   },
 ];
+
 // const Tab: React.FC<TabProps> = ({ label, active, onClick, id }) => {
 //   return (
 //     <button
@@ -134,7 +139,7 @@ interface Question {
   options?: Option[];
 }
 
-const CatExamApplySection: React.FC = () => {
+const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
   const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
@@ -161,7 +166,7 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
   });
-  const [activeMainTab, setActiveMainTab] = useState("engineering");
+  const [activeMainTab, setActiveMainTab] = useState(slug || "");
   // const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
   // const handleInputChange = (
@@ -579,8 +584,8 @@ const CatExamApplySection: React.FC = () => {
                   aria-selected={activeMainTab === tab.id}
                   aria-controls={`tabpanel-${tab.id}`}
                   onClick={() => {
-                    setActiveMainTab(tab.id); // Set the active tab
-                    window.location.href = tab.path; // Navigate to the path
+                    setActiveMainTab(tab.id);
+                    router.push(tab.path); // Navigate to the dynamic path
                   }}
                   onKeyDown={(e) =>
                     handleTabKeyNav(e, index, tabs, setActiveMainTab)

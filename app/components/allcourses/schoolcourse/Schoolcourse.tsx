@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -137,7 +136,7 @@ const tabs = [
     path: "/management",
     dropdownItems: [
       { label: "IPM ", path: "/schoolcourse/ipm" },
-      { label: "CHRIST", path: "/" },
+      // { label: "CHRIST", path: "/schoolcoursepage/MANAGEMENT/CHRIST" },
       { label: "SET", path: "/schoolcourse/management/set" },
       { label: "NPAT", path: "/schoolcourse/management/npat" },
       { label: "MHCET", path: "/schoolcourse/management/mhcet" },
@@ -150,10 +149,10 @@ const tabs = [
     path: "/law",
     dropdownItems: [
       { label: "CLAT", path: "/schoolcourse-law/clat" },
-      { label: "SLAT", path: "/" },
-      { label: "AILET", path: "/" },
-      { label: "KLEE", path: "/" },
-      { label: "CULEE", path: "/" },
+      { label: "SLAT", path: "/schoolcourse/law/SLAT" },
+      { label: "AILET", path: "/schoolcourse/law/AILET" },
+      { label: "KLEE", path: "/schoolcourse/law/KLEE" },
+      { label: "CULEE", path: "/schoolcourse/law/CULEE" },
     ],
   },
 
@@ -170,7 +169,7 @@ const tabs = [
     path: "/defence",
     dropdownItems: [
       { label: "NDA ", path: "/schoolcourse/defence/nda" },
-      { label: "AFCAT ", path: "/" },
+      { label: "AFCAT", path: "/schoolcoursepage/DEFENCE/AFCAT" },
     ],
   },
 
@@ -179,15 +178,15 @@ const tabs = [
     label: "TUITIONS",
     path: "/tuitions",
     dropdownItems: [
-      { label: "PHYSICS ", path: "/" },
-      { label: "CHEMISTRY", path: "/" },
-      { label: "MATHS", path: "/" },
-      { label: "BIOLOGY ", path: "/" },
-      { label: "ACCOUNTING ", path: "/" },
-      { label: "ECONOMICS", path: "/" },
-      { label: "ENGLISH ", path: "/" },
-      { label: "COMMERCE", path: "/" },
-      { label: "BUSINESS STUDIES", path: "/" },
+      { label: "TUITIONS", path: "/schoolcoursepage/TUITIONS/TUITIONS" },
+      // { label: "CHEMISTRY", path: "/" },
+      // { label: "MATHS", path: "/" },
+      // { label: "BIOLOGY ", path: "/" },
+      // { label: "ACCOUNTING ", path: "/" },
+      // { label: "ECONOMICS", path: "/" },
+      // { label: "ENGLISH ", path: "/" },
+      // { label: "COMMERCE", path: "/" },
+      // { label: "BUSINESS STUDIES", path: "/" },
     ],
     //(6-12 Standards)
     // {
@@ -204,17 +203,19 @@ const tabs = [
     label: "OTHERS",
     path: "/others",
     dropdownItems: [
-      { label: "ASHOKA UNIVERSITY ", path: "/" },
+      {
+        label: "ASHOKA UNIVERSITY",
+        path: "/schoolcoursepage/OTHERS/ASHOKAUNIVERSITY",
+      },
       {
         label: "CHRIST UNIVERSITY ",
         path: "/schoolcourse/others/christuniversity",
       },
-      { label: "SYMBIOSIS ", path: "/" },
-      { label: "NMIMS ", path: "/" },
-      { label: "ST. XAVIER'S ", path: "/" },
+      { label: "SYMBIOSIS", path: "/schoolcoursepage/OTHERS/SYMBIOSIS" },
+      { label: "NMIMS", path: "/schoolcoursepage/OTHERS/NMIMS" },
+      { label: "ST. XAVIER'S", path: "/schoolcoursepage/OTHERS/STXAVIERS" },
     ],
   },
- 
 
   {
     id: "DESIGN",
@@ -224,8 +225,8 @@ const tabs = [
       { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
       { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
       { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
-      { label: "CEED ", path: "/" },
-      { label: "JEE MAIN ", path: "/" },
+      { label: "CEED", path: "/schoolcoursepage/DESIGN/CEED" },
+      { label: "JEE MAIN", path: "/schoolcoursepage/DESIGN/JEEMAIN" },
       { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
     ],
   },
@@ -406,11 +407,9 @@ const CatExamApplySection: React.FC = () => {
   //       });
   //   };
 
-
   const handleEnrollClick = () => {
     router.push("/CourseEnrollmentPortal");
   };
-
 
   const fetchPrograms = async () => {
     try {
@@ -1071,9 +1070,9 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
                     onClick={handleEnrollClick}
-                  
                   >
                     Enroll Now
                   </button>

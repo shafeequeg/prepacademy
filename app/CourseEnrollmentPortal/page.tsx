@@ -1128,11 +1128,18 @@ const CourseEnrollmentPortal: React.FC = () => {
     return parseInt(priceString.replace(/[^\d]/g, "") || "0");
   };
 
+  // Replace the getCurrentCourseData method in CourseEnrollmentPortal with this fixed version:
+
   const getCurrentCourseData = (): CourseData => {
     if (activeCourse) {
+      // First try to find by UUID, then by ID, then by title
       const courseData = salesCourses.find(
-        (course) => course.title === activeCourse
+        (course) =>
+          course.uuid === activeCourse ||
+          course.id?.toString() === activeCourse ||
+          course.title === activeCourse
       );
+
       if (courseData) {
         return {
           ...courseData,
@@ -1482,8 +1489,10 @@ const CourseEnrollmentPortal: React.FC = () => {
             <CourseList
               activeMainTab={activeMainTab}
               activeSubTab={activeSubTab}
+              activeCourse={activeCourse}
               salesCourses={salesCourses}
               salesSubjects={salesSubjects}
+              salesCoursessection={salesSection}
               handleCourseClick={handleCourseClick}
             />
           )}

@@ -3,85 +3,28 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 
-const CourseVideos = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface Logo {
+  src: string;
+  alt: string;
+}
 
-  const logos = [
+interface Video {
+  title: string;
+  url: string;
+}
+
+const CourseVideos: React.FC = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const logos: Logo[] = [
     { src: "/dailyhunt.png", alt: "DailyHunt logo" },
     { src: "/businessstandard.png", alt: "Business Standard logo" },
     { src: "/asianetnews.png", alt: "AsiaNet News logo" },
     { src: "/mint.png", alt: "Mint logo" },
-   
-
-
   ];
 
-  // const scrollRight = () => {
-  //   if (carouselRef.current) {
-  //     const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
-  //     const newIndex = Math.min(currentIndex + 1, logos.length - 1);
-
-  //     carouselRef.current.scrollTo({
-  //       left: newIndex * itemWidth,
-  //       behavior: 'smooth'
-  //     });
-
-  //     setCurrentIndex(newIndex);
-  //   }
-  // };
-
-  // const scrollLeft = () => {
-  //   if (carouselRef.current) {
-  //     const itemWidth = carouselRef.current.children[0].children[0].clientWidth;
-  //     const newIndex = Math.max(currentIndex - 1, 0);
-
-  //     carouselRef.current.scrollTo({
-  //       left: newIndex * itemWidth,
-  //       behavior: 'smooth'
-  //     });
-
-  //     setCurrentIndex(newIndex);
-  //   }
-  // };
-
-  const logosPerRow = 4;
-  const totalRows = Math.ceil(logos.length / logosPerRow);
-  const hasMultipleRows = totalRows > 1;
-
-  const scrollRight = () => {
-    if (carouselRef.current && hasMultipleRows) {
-      const containerWidth = carouselRef.current.scrollWidth / totalRows;
-      const newIndex = Math.min(currentIndex + 1, totalRows - 1);
-
-      carouselRef.current.scrollTo({
-        left: newIndex * containerWidth,
-        behavior: "smooth",
-      });
-
-      setCurrentIndex(newIndex);
-    }
-  };
-
-  const scrollLeft = () => {
-    if (carouselRef.current && hasMultipleRows) {
-      const containerWidth = carouselRef.current.scrollWidth / totalRows;
-      const newIndex = Math.max(currentIndex - 1, 0);
-
-      carouselRef.current.scrollTo({
-        left: newIndex * containerWidth,
-        behavior: "smooth",
-      });
-
-      setCurrentIndex(newIndex);
-    }
-  };
-
-  const logoRows = [];
-  for (let i = 0; i < logos.length; i += logosPerRow) {
-    logoRows.push(logos.slice(i, i + logosPerRow));
-  }
-  const videos = [
+  const videos: Video[] = [
     {
       title: "Preparing for the CAT 2025",
       url: "https://www.youtube.com/embed/Qiy4xihD_kM",
@@ -95,6 +38,35 @@ const CourseVideos = () => {
       url: "https://www.youtube.com/embed/4g7cyj774_M",
     },
   ];
+
+  // Calculate carousel logic
+  const logosPerRow = 4;
+  const totalRows = Math.ceil(logos.length / logosPerRow);
+  const hasMultipleRows = totalRows > 1;
+
+  const scrollRight = () => {
+    if (carouselRef.current && hasMultipleRows) {
+      const newIndex = Math.min(currentIndex + 1, totalRows - 1);
+      setCurrentIndex(newIndex);
+      // Use CSS transform to slide
+      carouselRef.current.style.transform = `translateX(-${newIndex * 100}%)`;
+    }
+  };
+
+  const scrollLeft = () => {
+    if (carouselRef.current && hasMultipleRows) {
+      const newIndex = Math.max(currentIndex - 1, 0);
+      setCurrentIndex(newIndex);
+      carouselRef.current.style.transform = `translateX(-${newIndex * 100}%)`;
+    }
+  };
+
+  const handleIndicatorClick = (index: number) => {
+    if (carouselRef.current) {
+      setCurrentIndex(index);
+      carouselRef.current.style.transform = `translateX(-${index * 100}%)`;
+    }
+  };
 
   return (
     <section className="py-16">
@@ -157,7 +129,7 @@ const CourseVideos = () => {
       </div>
 
       {/* Read Features Section */}
-    <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] py-16 mt-7">
+      <section className="bg-gradient-to-r from-[#2B1615] to-[#1A0F0E] py-16 mt-7">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-medium">
@@ -169,7 +141,6 @@ const CourseVideos = () => {
           </div>
 
           <div className="relative max-w-6xl mx-auto">
-            {/* Left Navigation Button */}
             <button
               onClick={scrollLeft}
               className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-[#F55D3E] text-white rounded-full p-2 shadow-lg transition ${
@@ -198,36 +169,34 @@ const CourseVideos = () => {
 
             {/* Carousel Container */}
             <div
-              ref={carouselRef}
-              className={`mx-8 sm:mx-12 ${hasMultipleRows ? "overflow-x-hidden" : ""}`}
+              className="mx-8 sm:mx-12 overflow-x-hidden"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
                 WebkitOverflowScrolling: "touch",
               }}
             >
-              <div className="flex space-x-4 sm:space-x-8">
-                {logoRows.map((row, rowIndex) => (
-                  <div
-                    key={rowIndex}
-                    className="flex-shrink-0 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8 py-4 min-w-full"
-                  >
-                    {row.map((logo, logoIndex) => (
-                      <div
-                        key={logoIndex}
-                        className="flex items-center justify-center p-2 sm:p-4"
-                      >
-                        <Image
-                          src={logo.src}
-                          alt={logo.alt}
-                          width={120}
-                          height={80}
-                          className="max-h-12 xs:max-h-14 sm:max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ))}
+              <div
+                ref={carouselRef}
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ width: `${totalRows * 100}%` }}
+              >
+                <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8 py-4 w-full">
+                  {logos.map((logo, logoIndex) => (
+                    <div
+                      key={logoIndex}
+                      className="flex items-center justify-center p-2 sm:p-4"
+                    >
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={120}
+                        height={80}
+                        className="max-h-12 xs:max-h-14 sm:max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -259,23 +228,13 @@ const CourseVideos = () => {
             </button>
           </div>
 
-          {/* Row Indicators (optional) */}
+          {/* Row Indicators */}
           {hasMultipleRows && (
             <div className="flex justify-center mt-6 space-x-2">
               {Array.from({ length: totalRows }).map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => {
-                    setCurrentIndex(index);
-                    if (carouselRef.current) {
-                      const containerWidth =
-                        carouselRef.current.scrollWidth / totalRows;
-                      carouselRef.current.scrollTo({
-                        left: index * containerWidth,
-                        behavior: "smooth",
-                      });
-                    }
-                  }}
+                  onClick={() => handleIndicatorClick(index)}
                   className={`w-2 h-2 rounded-full transition-colors ${
                     currentIndex === index ? "bg-[#F55D3E]" : "bg-gray-400"
                   }`}

@@ -60,4 +60,7 @@ const AuthAlertModal: React.FC<AuthAlertModalProps> = React.memo(({ isOpen, clos
   );
 });
 
+AuthAlertModal.displayName = 'AuthAlertModal'; 
+
+
 export default AuthAlertModal;

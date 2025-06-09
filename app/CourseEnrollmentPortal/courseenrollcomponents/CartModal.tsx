@@ -142,4 +142,7 @@ const CartModal: React.FC<CartModalProps> = React.memo(
   }
 );
 
+CartModal.displayName = 'CartModal';
+
+
 export default CartModal;

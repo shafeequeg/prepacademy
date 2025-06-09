@@ -60,7 +60,7 @@ const ExamPrepLowerSections: React.FC = () => {
 
     {
       question: "	How long are GMAT scores valid?",
-      answer: ". GMAT scores are valid for five years from the test date.",
+      answer: "GMAT scores are valid for five years from the test date.",
     },
     //  {
     //   question: "	Is there negative marking in IPMAT?",

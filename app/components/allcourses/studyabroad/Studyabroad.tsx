@@ -88,9 +88,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
 //studyabroad
 const tabs = [
-  { id: "IELTS", label: "IELTS", path: "/" },
+  { id: "IELTS", label: "IELTS", path: "/studyabroad/ielts" },
   { id: "SAT", label: "SAT", path: "/studyabroad/sat" },
-  { id: "ACT", label: "ACT", path: "/" },
+  { id: "ACT", label: "ACT", path: "/studyabroad/act" },
   { id: "GRE", label: "GRE", path: "/studyabroad/gre" },
   { id: "GMAT", label: "GMAT", path: "/studyabroad/gmat" },
 ];

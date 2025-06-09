@@ -33,4 +33,7 @@ const CategoryTabs: React.FC<CategoryTabsProps> = React.memo(({ salesCategories,
   );
 });
 
+CategoryTabs.displayName = 'CategoryTabs';
+
+
 export default CategoryTabs;
