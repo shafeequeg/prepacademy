@@ -94,9 +94,9 @@ const Footer = () => {
               <ul className="space-y-3">
                 {[
                   { text: "Contact us", link: "/contact" },
-                  { text: "Find a Centre", link: "/" },
-                  { text: "Become a Franchise", link: "/" },
-                  { text: "Become an Employee", link: "/" },
+                  { text: "Find a Centre", link: "/findacenter" },
+                  { text: "Become a Franchise", link: "/becomeafranchise" },
+                  { text: "Become an Employee", link: "/becomeanemployee" },
                 ].map((item, index) => (
                   <li key={index}>
                     <a

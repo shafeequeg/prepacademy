@@ -522,50 +522,7 @@ const ExamPrepHomepage: React.FC = () => {
         </div>
       </div>
 
-      {/* Bootcamp Banner */}
-      <div className="bg-black text-white">
-        {/* Summer Bootcamp Banner */}
-        <div className="bg-[#FF6347] relative overflow-hidden">
-          <div className="bg-black text-white">
-            {/* Summer Bootcamp Banner */}
-            <div className="bg-[#FF6347] relative overflow-hidden">
-              <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row-reverse items-center justify-center gap-6 md:gap-12">
-                {/* Right side - Image */}
-                <div className="flex-shrink-0 flex justify-center ">
-                  <Image
-                    src="/allcoursecollegemaster.png"
-                    alt="Mascot"
-                    width={144} // w-36 = 144px
-                    height={144} // h-36 = 144px
-                    className="md:w-48 md:h-52 relative top-8 object-cover"
-                  />
-                </div>
-
-                {/* Left side - Content */}
-                <div className="z-10 w-full max-w-lg text-center md:text-left">
-                  <h2 className="text-white text-4xl md:text-5xl font-bold mb-1">
-                    Be The Master
-                  </h2>
-                  <h2 className="text-white text-4xl mb-4 font-bold md:mb-2">
-                    #SummerBootcamp2025
-                  </h2>
-                  <button className="bg-white text-[#FF6347] px-6 py-2 rounded font-medium hover:bg-gray-100 transition-colors flex items-center mx-auto md:mx-0">
-                    GET EARLY ACCESS <ArrowRight size={16} className="ml-2" />
-                  </button>
-                </div>
-
-                {/* Background pattern - subtle lines and shapes */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 left-8 w-12 h-12 border-2 border-white rounded-md"></div>
-                  <div className="absolute bottom-4 left-1/4 w-8 h-8 border-2 border-white"></div>
-                  <div className="absolute top-1/2 left-1/3 w-16 h-1 bg-white"></div>
-                  <div className="absolute top-1/3 right-1/4 w-4 h-4 bg-white rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+   
       {/* Notifications Section */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h2 className="text-4xl font-semibold text-center mb-6 ml-2">

@@ -415,6 +415,9 @@ const BlogSection = () => {
           return category?.category === activeTab;
         });
 
+        console.log(displayBlogs);
+        
+
   useEffect(() => {
     fetchBlogs();
     fetchBlogsCategories();
@@ -475,7 +478,7 @@ const BlogSection = () => {
       </div>
 
       {/* Blog Grid - Will show default blogs initially, then tab-specific blogs when clicked */}
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {(displayBlogs.length > 0 ? displayBlogs : allBlog).map(
           (blog: Blogs) => (
@@ -532,10 +535,12 @@ const BlogSection = () => {
                 For Free Counselling
               </span>
             </h2>
-            <button className="bg-[#FF5733] text-white px-6 py-2 rounded flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
-              Lets Talk
-              <span className="text-lg">→</span>
-            </button>
+            <Link href="/careercounseling" passHref>
+              <button className="bg-[#FF5733] text-white px-6 py-2 rounded flex items-center gap-2 hover:bg-[#E64A2E] transition-colors mt-4">
+                Lets Talk
+                <span className="text-lg">→</span>
+              </button>
+            </Link>
           </div>
 
           {/* Image Group */}

@@ -162,7 +162,7 @@ const tabs = [
     label: "MANAGEMENT",
     path: "/collegecourse",
     dropdownItems: [
-      { label: "CAT", path: "/collegecoursespage/management/cat" },
+      { label: "CAT", path: "/collegecourse/management/cat" },
       { label: "XAT", path: "/collegecoursespage/management/xat" },
       { label: "KMAT", path: "/collegecourse/management/kmat" },
       { label: "CMAT", path: "/collegecoursespage/management/cmat" },

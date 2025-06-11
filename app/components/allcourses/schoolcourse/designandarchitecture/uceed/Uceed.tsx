@@ -294,7 +294,6 @@ const CatExamApplySection: React.FC = () => {
     router.push("/CourseEnrollmentPortal");
   };
 
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -804,9 +803,9 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
                     onClick={handleEnrollClick}
-                   
                   >
                     Enroll Now
                   </button>
@@ -1046,12 +1045,12 @@ const CatExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   NIFT Master Class
                 </h3>
-                <a
-                  href="#"
+                <button
+                  onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >
                   Book Free TRIAL
-                </a>
+                </button>
               </div>
             </div>
           </div>
