@@ -55,11 +55,3082 @@ export interface Course {
 
 export const courses: Course[] = [
   {
-    slug: "ResumeBuilding",
-    title: "ResumeBuilding",
-    courseTitle: "Crack Resume Building 2025 with ",
+    slug: "management/xat",
+    title: "XAT Preparation",
+    courseTitle: "Master XAT 2025 with ",
     description: `
-Resume Building is the process of creating a structured and professional summary of an individual's academic background, work experience, skills, and achievements. It plays a crucial role in job applications, internships, college admissions, and other career-related opportunities. A well-crafted resume effectively showcases your strengths and helps you stand out to employers or academic institutions. The goal of resume building is to communicate your value clearly and concisely, tailored to the specific role or field you     `,
+The Xavier Aptitude Test (XAT) is a national-level MBA entrance examination conducted annually by XLRI Jamshedpur on behalf of Xavier Association of Management Institutes (XAMI). It is used for admission into management programs at XLRI and over 160 other B-schools across India. 
+XAT 2025 will be conducted in Computer-Based Test (CBT) mode on January 5, 2025 (Sunday). 
+    `,
+    points: [
+      "Mentoring & Teaching by Experts ",
+      "Regular Testing & Analysis ",
+      "GD/PI & Essay Writing Support ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "XAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "XAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "XAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "XAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "XAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "XAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "XAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "XAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "XAT-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "XAT-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "XAT-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "XAT-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Notification",
+        description: "	XLRI has released the official notification for XAT 2025 on the official website xatonline.in. ",
+      },
+      {
+        category: "Registration",
+        description: "	Registration for XAT 2025 is now open and will close on November 30, 2024. ",
+      },
+
+         {
+        category: "XAT 2025 Exam Date: ",
+        description: "Scheduled for January 5, 2025 (Sunday). ",
+      },
+
+         {
+        category: "Admit cards",
+        description: "The admit cards will be available for download from December 20, 2024. ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top B-Schools" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "XAT Beginner's Guide Volume 1", id: 1 },
+      { title: "XAT Beginner's Guide Volume 2", id: 2 },
+      { title: "XAT Beginner's Guide Volume 3", id: 3 },
+      { title: "XAT Beginner's Guide Volume 4", id: 4 },
+      { title: "XAT Beginner's Guide Volume 5", id: 5 },
+      { title: "XAT Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the XAT exam? ",
+        answer: "The Xavier Aptitude Test (XAT) is a national-level MBA entrance exam conducted by XLRI Jamshedpur for admission into its management programs and other top B-schools in India. ",
+      },
+      {
+        question: "Is XAT only for XLRI admission? ",
+        answer: " No, while XLRI uses XAT scores, over 160 management institutes across India also accept XAT scores for their MBA/PGDM programs. ",
+      },
+      {
+        question: "Where can I find the XAT syllabus? ",
+        answer: "The XAT syllabus includes sections on Verbal & Logical Ability, Decision Making, Quantitative Ability & Data Interpretation, and General Knowledge. Essay writing may also be a component depending on the year. ",
+      },
+        {
+        question: "Is the XAT exam tough? ",
+        answer: "Yes, XAT is generally considered tougher than other MBA entrance exams like CAT, especially due to the Decision Making and Essay Writing sections. Strategic preparation is crucial. ",
+      },
+
+    ],
+  },
+  {
+    slug: "management/cmat",
+    title: "CMAT Preparation",
+    courseTitle: "Ace CMAT 2025 with ",
+    description: `
+The Common Management Admission Test (CMAT) is a national-level examination administered by the National Testing Agency (NTA) for admissions into MBA and other postgraduate management programs offered by AICTE-approved institutions across India. 
+CMAT 2025 will be conducted in Computer-Based Test (CBT) mode, tentatively in April 2025. 
+Ace the CMAT with our expert coaching and study materials! 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular  ",
+      "Testing & Analysis",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "CMAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CMAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "CMAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CMAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CMAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CMAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CMAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "CMAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock test",
+        ],
+      },
+      {
+        id: "CMAT-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "CMAT-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "CMAT-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "CMAT-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for Strategies JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching for Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Admission Test ",
+        description: "NTA Declares the Result/NTA Scores of Common Management Admission Test (CMAT) – 2024 ",
+      },
+      {
+        category: "Application Form",
+        description: "The National Testing Agency (NTA) has released the CMAT 2025 application form ",
+      },
+       {
+        category: "Registration",
+        description: "The registration process for the Common Management Admission Test (CMAT) 2025 is set to close soon, with the deadline for submitting applications expected by March 2025 ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top B-Schools" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "CMAT Beginner's Guide Volume 1", id: 1 },
+      { title: "CMAT Beginner's Guide Volume 2", id: 2 },
+      { title: "CMAT Beginner's Guide Volume 3", id: 3 },
+      { title: "CMAT Beginner's Guide Volume 4", id: 4 },
+      { title: "CMAT Beginner's Guide Volume 5", id: 5 },
+      { title: "CMAT Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is CMAT exam? ",
+        answer: "Common Management Admission Test (CMAT) is an entrance examination conducted for admission to MBA and other postgraduate management programs in AICTE-approved institutions across India. ",
+      },
+      {
+        question: "Is CMAT accepted for MBA admissions across India? ",
+        answer: "Yes, CMAT scores are accepted by hundreds of AICTE-approved management institutions throughout India for MBA, PGDM, and similar programs. ",
+      },
+      {
+        question: "Where can I get the CMAT syllabus? ",
+        answer: "The CMAT syllabus includes sections on Quantitative Techniques, Logical Reasoning, Language Comprehension, General Awareness, and Innovation & Entrepreneurship. The detailed syllabus is available on cmat.nta.nic.in. ",
+      },
+
+        {
+        question: "Is the CMAT exam tough? ",
+        answer: "CMAT is considered moderately difficult and is generally easier compared to CAT or XAT. With proper preparation, many candidates are able to achieve a good score. ",
+      },
+
+    ],
+  },
+  {
+    slug: "management/mat",
+    title: "MAT",
+    courseTitle: "Excel in MAT 2025 with ",
+    description: `
+The Management Aptitude Test (MAT) is a national-level examination administered by the All India Management Association (AIMA) for admissions into MBA and allied programs in various business schools across India. 
+MAT 2025 will be conducted in Computer-Based Test (CBT), Paper-Based Test (PBT), and Internet-Based Test (IBT) modes in multiple sessions throughout the year. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "MAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "MAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "MAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "MAT-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "MAT-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "MAT-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "MAT-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Aptitude Test ",
+        description: "	AIMA Declares the Result/Scores of Management Aptitude Test (MAT) – February 2025 ",
+      },
+      {
+        category: "Application Form",
+        description: " The All India Management Association (AIMA) has released the MAT May 2025 session application form ",
+      },
+       {
+        category: "Registration Process",
+        description: " The registration process for the MAT 2025 May session is currently ongoing, with the final application deadline varying by test mode (PBT, CBT, IBT) – check mat.aima.in for detailed schedule ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top B-Schools" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "MAT Beginner's Guide Volume 1", id: 1 },
+      { title: "MAT Beginner's Guide Volume 2", id: 2 },
+      { title: "MAT Beginner's Guide Volume 3", id: 3 },
+      { title: "MAT Beginner's Guide Volume 4", id: 4 },
+      { title: "MAT Beginner's Guide Volume 5", id: 5 },
+      { title: "MAT Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is MAT exam? ",
+        answer: "Management Aptitude Test (MAT) is a national-level entrance exam conducted by AIMA for admission to MBA and related programs in over 600 B-Schools across India. ",
+      },
+      {
+        question: "Can I take MAT multiple times a year? ",
+        answer: "Yes, MAT is conducted multiple times a year (typically in February, May, September, and December). You can appear for more than one session to improve your score. ",
+      },
+      {
+        question: "Where can I get the MAT syllabus? ",
+        answer: "The MAT syllabus generally includes Language Comprehension, Intelligence & Critical Reasoning, Mathematical Skills, Data Analysis & Sufficiency, and Indian & Global Environment. Visit mat.aima.in for official updates. ",
+      },
+
+        {
+        question: "Is the MAT exam tough? ",
+        answer: "MAT is considered to be of moderate difficulty and is suitable for candidates with basic aptitude skills. With the right preparation, it is manageable for most aspirants. ",
+      },
+    ],
+  },
+  {
+    slug: "management/nmat",
+    title: "NMAT Preparation",
+    courseTitle: "Crack NMAT 2025 with ",
+    description: `
+The NMAT by GMAC is a national-level entrance examination administered by the Graduate Management Admission Council (GMAC) for admissions into MBA and other graduate management programs offered by NMIMS and other top B-schools in India and globally. 
+NMAT 2025 will be conducted in Computer-Based Test (CBT) mode at test centers and through Online Proctored Exam from Home, tentatively between October and December 2025. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "NMAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NMAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "NMAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NMAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NMAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NMAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NMAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance test scores",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "NMAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "SelfBased-1",
+        title: "Self Based",
+        image: "/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Result/Scores",
+        description: "GMAC Declares the Result/Scores of NMAT by GMAC – 2024 ",
+      },
+      {
+        category: "Application Form",
+        description: "The Graduate Management Admission Council (GMAC) has released the NMAT 2025 application form ",
+      },
+
+        {
+        category: "Registration Process",
+        description: "The registration process for the NMAT 2025 exam is set to begin in August 2025 and will remain open until October 2025 ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top B-Schools" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "NMAT Beginner's Guide Volume 1", id: 1 },
+      { title: "NMAT Beginner's Guide Volume 2", id: 2 },
+      { title: "NMAT Beginner's Guide Volume 3", id: 3 },
+      { title: "NMAT Beginner's Guide Volume 4", id: 4 },
+      { title: "NMAT Beginner's Guide Volume 5", id: 5 },
+      { title: "NMAT Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is NMAT exam? ",
+        answer: "NMAT by GMAC is a national-level MBA entrance test accepted by NMIMS and other top management institutes in India and abroad for admission into MBA and related programs. ",
+      },
+      {
+        question: "Can I retake the NMAT exam? ",
+        answer: "Yes, you can take the NMAT up to three times (one main attempt and two retakes) within the testing window, and you can choose your best score to send to schools. ",
+      },
+      {
+        question: "Where can I get the NMAT syllabus? ",
+        answer: "The NMAT syllabus typically includes Language Skills, Quantitative Skills, and Logical Reasoning. The detailed content is available on the official website mba.com/nmat. ",
+      },
+
+        {
+        question: "Is the NMAT exam tough? ",
+        answer: ". NMAT is considered to be moderately difficult with a candidate-friendly format (no negative marking, flexible scheduling). Consistent practice and mock tests are key to a good score. ",
+      },
+    ],
+  },
+  {
+    slug: "management/cuetpg",
+    title: "CUET PG Preparation",
+    courseTitle: "Succeed in CUET PG 2025 with Expert Prep",
+    description: `
+The Common University Entrance Test (CUET) is a national-level examination administered by the National Testing Agency (NTA) for admissions into undergraduate (UG) programs across various central and participating universities in India. 
+CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to June 1, 2025. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts ",
+      " Regular Testing & Analysis ",
+      " Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "CUETPG-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CUETPG-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "CUETPG-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CUETPG-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CUETPG-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CUETPG-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CUETPG-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "CUETPG-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "CUETPG-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "CUETPG-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "CUETPG-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "CUETPG-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Result/NTA Scores ",
+        description: "NTA Declares the Result/NTA Scores of Common University Entrance Test (PG) – 2024 ",
+      },
+      {
+        category: "Application form",
+        description: "The National Testing Agency (NTA) has released the CUET PG 2025 application form ",
+      },
+
+       {
+        category: "Registration Process",
+        description: "The registration process for the Common University Entrance Test-Postgraduate (CUET PG) 2025 is set to close soon, with the deadline for submitting applications expected in January 2025 ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top Universities" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "CUET PG Beginner's Guide Volume 1", id: 1 },
+      { title: "CUET PG Beginner's Guide Volume 2", id: 2 },
+      { title: "CUET PG Beginner's Guide Volume 3", id: 3 },
+      { title: "CUET PG Beginner's Guide Volume 4", id: 4 },
+      { title: "CUET PG Beginner's Guide Volume 5", id: 5 },
+      { title: "CUET PG Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is CUET PG exam? ",
+        answer: "Common University Entrance Test (CUET) PG is an entrance examination conducted by NTA for admission to postgraduate programs in central, state, deemed, and private universities across India. ",
+      },
+      {
+        question: "Is CUET PG mandatory for all PG admissions in central universities? ",
+        answer: "Yes, most central universities require CUET PG scores for admission into their postgraduate programs. However, candidates are advised to check university-specific requirements. ",
+      },
+      {
+        question: "Where can I get the CUET PG syllabus? ",
+        answer: "The CUET PG syllabus is available on the official website cuet.nta.nic.in. It varies by subject, so candidates must refer to their applied course for accurate details. ",
+      },
+
+       {
+        question: "Is the CUET PG exam difficult? ",
+        answer: "CUET PG is moderately challenging. The difficulty level can vary depending on the subject and the candidate's preparation. Understanding the exam pattern and practicing past papers can be very helpful. ",
+      },
+    ],
+  },
+  {
+    slug: "management/micat",
+    title: "MICAT Preparation",
+    courseTitle: "Master MICAT 2025 for MICA Admission",
+    description: `
+The Mudra Institute of Communications Admission Test (MICAT) is a national-level entrance exam conducted by MICA, Ahmedabad, for admission to its flagship 2-year Post Graduate Diploma in Management – Communications (PGDM-C) and Post Graduate Diploma in Management (PGDM) programs, held twice a year—MICAT I and MICAT II—and includes both objective and subjective questions that assess analytical ability, verbal ability, logical reasoning, divergent thinking, written communication skills, and general awareness; MICAT 2025 will be conducted in Computer-Based Test (CBT) mode in two phases: MICAT I on December 7, 2024, and MICAT II on January 25, 2025.    `,
+    points: [
+      "	Mentoring & Teaching by experts ",
+      "Regular Testing & Analysis ",
+      "Support for GD-PI preparation ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "MICAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MICAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "MICAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MICAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MICAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MICAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MICAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "MICAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "MICAT-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "MICAT-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "MICAT-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "MICAT-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "MICA has announced the exam dates for MICAT 2025: ",
+        description: "MICAT I will be held on December 7, 2024, and MICAT II on January 25, 2025. ",
+      },
+      {
+        category: "MICAT I Registration",
+        description: "	Registration for MICAT I 2025 is open from August 23 to November 20, 2024. ",
+      },
+
+         {
+        category: "MICAT II Registration",
+        description: "	MICAT II registration will begin on November 23, 2024, and close on January 15, 2025.  ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "MICA Programs" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "MICAT Beginner's Guide Volume 1", id: 1 },
+      { title: "MICAT Beginner's Guide Volume 2", id: 2 },
+      { title: "MICAT Beginner's Guide Volume 3", id: 3 },
+      { title: "MICAT Beginner's Guide Volume 4", id: 4 },
+      { title: "MICAT Beginner's Guide Volume 5", id: 5 },
+      { title: "MICAT Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the MICAT exam? ",
+        answer: "MICAT is an entrance test conducted by MICA, Ahmedabad, for its PGDM-C and PGDM programs. It evaluates candidates across multiple dimensions like creative writing, general awareness, verbal and analytical abilities. ",
+      },
+      {
+        question: "How many times is MICAT conducted? ",
+        answer: "MICAT is conducted twice a year – MICAT I and MICAT II. Candidates can appear for both, and the better of the two scores is considered. ",
+      },
+      {
+        question: "Is it mandatory to take both MICAT I and II? ",
+        answer: "No, it is not mandatory. You can appear for either MICAT I or MICAT II or both. The higher of the two scores will be used for further selection. ",
+      },
+
+        {
+        question: "Is there a separate application for MICAT? ",
+        answer: "Yes, candidates must apply separately for MICAT through the official MICA website (mica.ac.in). ",
+      },
+
+        {
+        question: "Is MICAT a difficult exam?  ",
+        answer: "MICAT is considered moderately difficult. It includes a mix of aptitude and psychometric assessments, which can be challenging but manageable with proper preparation. ",
+      },
+    ],
+  },
+  {
+    slug: "management/mhcet",
+    title: "MH-CET Preparation",
+    courseTitle: "Crack MH-CET 2025 for Top MBA Colleges",
+    description: `
+The Maharashtra Common Entrance Test (MHCET or MHT CET) is a state-level entrance exam conducted by the State Common Entrance Test Cell, Maharashtra, for admission into undergraduate courses in Engineering, Pharmacy, and Agriculture offered by colleges across Maharashtra. 
+MHCET 2025 will be conducted in Computer-Based Test (CBT) mode between April and May 2025 across multiple sessions. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts ",
+      "Regular Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "MHCET-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MHCET-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "MHCET-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MHCET-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MHCET-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MHCET-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "MHCET-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "MHCET-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "MHCET-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "MHCET-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "MHCET-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "MHCET-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "	State CET Cell has released the tentative schedule for MHT CET 2025. ",
+        description: "MHT CET 2025 for PCM group is likely to be held from April 16 to April 30, 2025, and for PCB group from May 2 to May 17, 2025. ",
+      },
+      {
+        category: "Online application",
+        description: "Online application for MHT CET 2025 is expected to begin in January 2025 on the official website cetcell.mahacet.org. ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top B-Schools" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "MH-CET Beginner's Guide Volume 1", id: 1 },
+      { title: "MH-CET Beginner's Guide Volume 2", id: 2 },
+      { title: "MH-CET Beginner's Guide Volume 3", id: 3 },
+      { title: "MH-CET Beginner's Guide Volume 4", id: 4 },
+      { title: "MH-CET Beginner's Guide Volume 5", id: 5 },
+      { title: "MH-CET Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is MHCET exam? ",
+        answer: "MHCET (MHT CET) is a state-level entrance test conducted for admissions to undergraduate courses in Engineering, Pharmacy, and Agriculture offered by institutions in Maharashtra. ",
+      },
+      {
+        question: "Is MHT CET compulsory for engineering admission in Maharashtra? ",
+        answer: "Yes, MHT CET is mandatory for admission into B.E./B.Tech programs in government, government-aided, and private engineering colleges in Maharashtra. ",
+      },
+      {
+        question: "How can I apply for MHCET? ",
+        answer: "You can apply online through the official CET Cell website at cetcell.mahacet.org once the application window opens. ",
+      },
+
+        {
+        question: "Is MHT CET tough? ",
+        answer: "MHT CET is considered moderately difficult. With regular practice and good understanding of the Class 11 and 12 syllabus, it is manageable. ",
+      },
+
+         {
+        question: "What is the syllabus for MHT CET? ",
+        answer: ". The syllabus is primarily based on the Maharashtra State Board curriculum for Physics, Chemistry, Mathematics/Biology of Class 11 and 12. ",
+      },
+    ],
+  },
+  {
+    slug: "civilservice/upsc",
+    title: "UPSC Preparation",
+    courseTitle: "Conquer UPSC 2025 with ",
+    description: `
+The Union Public Service Commission (UPSC) conducts the Civil Services Examination (CSE), a national-level competitive exam, for recruitment into prestigious services like IAS, IPS, IFS, and other Central Government Group A & B services. 
+UPSC CSE is conducted in three stages: Preliminary, Mains, and Personality Test (Interview). 
+UPSC Civil Services (Prelims) 2025 is scheduled to be conducted on May 25, 2025. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts ",
+      "Regular Testing & Analysis ",
+      "Support for Optional Subjects & Essay Writing ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "UPSC-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "UPSC-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "UPSC-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "UPSC-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "UPSC-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "UPSC-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "UPSC-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "UPSC-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "UPSC-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "UPSC-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "UPSC-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "UPSC-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "	Prelims notification  ",
+        description: "UPSC 2025 Prelims notification will be released in February 2025.",
+      },
+      {
+        category: "Civil Services Examination (Prelims)",
+        description: "	The notification for Civil Services Examination (Prelims) 2025 will be released on February 12, 2025. ",
+      },
+
+       {
+        category: "Last Date of Civil Services Examination (Prelims)",
+        description: "The last date to apply for the UPSC Prelims 2025 is March 4, 2025. ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top Resources" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "UPSC Beginner's Guide Volume 1", id: 1 },
+      { title: "UPSC Beginner's Guide Volume 2", id: 2 },
+      { title: "UPSC Beginner's Guide Volume 3", id: 3 },
+      { title: "UPSC Beginner's Guide Volume 4", id: 4 },
+      { title: "UPSC Beginner's Guide Volume 5", id: 5 },
+      { title: "UPSC Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is UPSC exam? ",
+        answer: "The UPSC Civil Services Exam is conducted for recruitment to various civil services like IAS, IPS, IFS, IRS, and others. It is one of the most prestigious competitive exams in India. ",
+      },
+      {
+        question: "How many stages are there in the UPSC exam?  ",
+        answer: "The UPSC exam has three stages: Preliminary Examination (objective type), Mains Examination (descriptive type), and Personality Test (Interview).",
+      },
+      {
+        question: "Is UPSC exam very difficult? ",
+        answer: "Yes, UPSC is considered one of the toughest exams in India due to its vast syllabus, intense competition, and multi-stage format. However, consistent preparation and the right strategy can lead to success. ",
+      },
+
+       {
+        question: "Who can apply for the UPSC exam? ",
+        answer: "Any Indian citizen who holds a graduate degree from a recognized university and meets the age and eligibility criteria can apply for the UPSC CSE. ",
+      },
+
+         {
+        question: "How many attempts are allowed for UPSC? ",
+        answer: "General category candidates are allowed 6 attempts up to 32 years of age. OBC candidates have 9 attempts up to 35 years, and SC/ST candidates have unlimited attempts up to 37 years, subject to other conditions. ",
+      },
+    ],
+  },
+  {
+    slug: "government/railway",
+    title: "Railway Exam Preparation with ",
+    courseTitle: "Ace Railway Exams 2025 with Confidence",
+    description: `
+The Railway Recruitment Board (RRB) exams are national-level competitive examinations conducted to recruit candidates for various technical and non-technical posts in Indian Railways. 
+RRB exams 2025 will be conducted in Computer-Based Test (CBT) mode, with notifications released post-wise throughout the year. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "Railway-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "Railway-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeaters",
+        ],
+      },
+      {
+        id: "Railway-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "Railway-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "Railway-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "Railway-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "Railway-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "Railway-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "Railway-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "Railway-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "Railway-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "Railway-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "RRB released the notification for ALP",
+        description: "	RRB released the notification for ALP (Assistant Loco Pilot) 2025 recruitment. ",
+      },
+      {
+        category: "Online Application",
+        description: "The online application window for RRB ALP 2025 is now open from January 20, 2025. ",
+      },
+
+       {
+        category: "Deadline",
+        description: "The deadline for submitting applications is February 19, 2025 (11:59 PM). ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-college", label: "Top Resources" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Railway Beginner's Guide Volume 1", id: 1 },
+      { title: "Railway Beginner's Guide Volume 2", id: 2 },
+      { title: "Railway Beginner's Guide Volume 3", id: 3 },
+      { title: "Railway Beginner's Guide Volume 4", id: 4 },
+      { title: "Railway Beginner's Guide Volume 5", id: 5 },
+      { title: "Railway Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the RRB exam? ",
+        answer: "RRB exams are conducted by the Railway Recruitment Board to fill various posts in Indian Railways, such as ALP, Technician, NTPC, Group D, etc. ",
+      },
+      {
+        question: "Is there any negative marking in RRB exams? ",
+        answer: "Yes, for most RRB exams, 1/3 mark is deducted for each incorrect answer in the CBT stage. ",
+      },
+      {
+        question: "How can I apply for the RRB exam? ",
+        answer: "Candidates can apply through the official RRB website of their respective region when the notification is released. ",
+      },
+
+        {
+        question: "What is the difficulty level of the RRB exam? ",
+        answer: "The difficulty level is usually moderate; however, competition is high due to the large number of applicants. ",
+      },
+    ],
+  },
+
+  {
+    slug: "government/ssc",
+    title: "SSC",
+    courseTitle: "Master SSC Exams 2025 with",
+    description: `
+The Staff Selection Commission (SSC) conducts various national-level exams to recruit candidates for government jobs in ministries, departments, and organizations of the Government of India. 
+SSC exams 2025 will be conducted in Computer-Based Test (CBT) mode, with schedules and notifications released for different posts throughout the year. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "SSC-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "SSC-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced SSC exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeat aspirants",
+        ],
+      },
+      {
+        id: "SSC-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "SSC-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "SSC-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "SSC-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "SSC-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "SSC-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "SSC-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "SSC-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "SSC-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "SSC-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Combined Graduate Level (CGL) Examination 2025",
+        description:
+          "SSC released the notification for the Combined Graduate Level (CGL) Examination 2025. ",
+      },
+      {
+        category: "Application Process",
+        description:
+          "The SSC CGL 2025 application process started on March 26, 2025. ",
+      },
+      {
+        category: "Deadline",
+        description:
+          "	The last date to apply online for SSC CGL 2025 is April 24, 2025 (11:00 PM). ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-jobs", label: "Top Jobs" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the SSC exam? ",
+        answer:
+          "The SSC exam is conducted by the Staff Selection Commission to recruit staff for various posts in the Government of India’s departments and ministries through exams like SSC CGL, CHSL, MTS, JE, etc. ",
+      },
+      {
+        question: "Is SSC CGL a tough exam? ",
+        answer:
+          "The SSC CGL exam is considered moderately difficult. With consistent preparation, candidates can crack it even on the first attempt. ",
+      },
+      {
+        question: "How many stages are there in the SSC CGL exam? ",
+        answer:
+          "The SSC CGL exam has two stages: Tier I (Prelims) and Tier II (Mains), both conducted in online mode. ",
+      },
+      {
+        question: "Where can I find the SSC syllabus and notifications? ",
+        answer:
+          "All official updates, notifications, and syllabi are available on the SSC official website:ssc.nic.in. ",
+      },
+    ],
+  },
+  {
+    slug: "defence/cds",
+    title: "CDS",
+    courseTitle: "Excel in CDS Exam 2025 with",
+    description: `
+The Combined Defence Services (CDS) Examination is conducted by the Union Public Service Commission (UPSC) for recruitment into the Indian Military Academy, Indian Naval Academy, Air Force Academy, and Officers’ Training Academy. 
+CDS 2025 will be conducted in offline (pen and paper) mode. The exam is held twice a year – CDS I and CDS II. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "CDS-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CDS-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced CDS exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeat aspirants",
+        ],
+      },
+      {
+        id: "CDS-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CDS-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CDS-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CDS-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "CDS-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "CDS-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "CDS-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "CDS-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "CDS-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "CDS-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "UPSC released the notification",
+        description:
+          "	UPSC released the notification for CDS II 2025 on May 15, 2025. ",
+      },
+      {
+        category: "Application Process",
+        description:
+          "	The application process for CDS II 2025 began on May 15, 2025. ",
+      },
+      {
+        category: "Deadline",
+        description:
+          "	The last date to apply for CDS II 2025 is June 4, 2025 (6:00 PM). ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-academies", label: "Top Academies" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the CDS exam? ",
+        answer:
+          "The Combined Defence Services (CDS) exam is a national-level entrance exam conducted by UPSC for candidates who wish to join the Indian Armed Forces",
+      },
+      {
+        question: "How many times is the CDS exam conducted in a year? ",
+        answer:
+          "The CDS exam is conducted twice a year: CDS I (February) and CDS II (September). ",
+      },
+      {
+        question: "Who is eligible to apply for the CDS exam? ",
+        answer:
+          "Unmarried male and female graduates can apply. Specific academies have age and qualification requirements. Candidates must check the official UPSC notification for detailed eligibility. ",
+      },
+      {
+        question: "Is there negative marking in the CDS exam? ",
+        answer:
+          "Yes, 1/3rd of the marks are deducted for every incorrect answer in the objective-type papers. ",
+      },
+    ],
+  },
+  {
+    slug: "defence/afcat",
+    title: "AFCAT",
+    courseTitle: "Succeed in AFCAT 2025 with",
+    description: `
+The Air Force Common Admission Test (AFCAT) is a national-level competitive exam conducted by the Indian Air Force for recruitment into Flying Branch, Ground Duty (Technical), and Ground Duty (Non-Technical) branches. 
+AFCAT 2025 will be conducted in Computer-Based Test (CBT) mode, held twice a year — AFCAT I and AFCAT II. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "AFCAT-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "AFCAT-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced AFCAT exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeat aspirants",
+        ],
+      },
+      {
+        id: "AFCAT-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "AFCAT-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "AFCAT-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "AFCAT-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "AFCAT-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "AFCAT-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "AFCAT-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "AFCAT-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "AFCAT-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "AFCAT-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Indian Air Force has released the notification",
+        description:
+          "	Indian Air Force has released the notification for AFCAT II 2025. ",
+      },
+      {
+        category: "Application Form",
+        description:
+          "	The online application process for AFCAT II 2025 starts from June 1, 2025. ",
+      },
+      {
+        category: "Deadline",
+        description:
+          "The last date to apply for AFCAT II 2025 is June 30, 2025 (5:00 PM). ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-branches", label: "Top Branches" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the AFCAT exam? ",
+        answer:
+          "AFCAT (Air Force Common Admission Test) is conducted by the Indian Air Force to recruit candidates for Flying Branch and Ground Duty (Technical and Non-Technical) positions. ",
+      },
+      {
+        question: "How many times is the AFCAT exam conducted in a year? ",
+        answer:
+          "The AFCAT exam is conducted twice a year — in February (AFCAT I) and August (AFCAT II). ",
+      },
+      {
+        question: "Is there negative marking in AFCAT? ",
+        answer:
+          "Yes, 1 mark is deducted for every incorrect answer in the objective-type questions. ",
+      },
+      {
+        question: "Who is eligible for the AFCAT exam? ",
+        answer:
+          "Both male and female graduates (with specified qualifications and age limits) can apply. Detailed eligibility is provided in the official notification on afcat.cdac.in. ",
+      },
+    ],
+  },
+  {
+    slug: "designandarchictecture/nidpg",
+    title: "NID PG",
+    courseTitle: "Ace NID PG Entrance 2025 with",
+    description: `
+The National Institute of Design (NID) conducts the Design Aptitude Test (DAT) for admission to its postgraduate (M.Des) programs offered across various campuses in India. 
+NID DAT (M.Des) 2025 will be conducted in a two-stage process: Prelims (pen-and-paper mode) and Mains (Studio Test & Interview). 
+    `,
+    points: [
+      "Mentoring & Teaching by experts Regular ",
+      "Testing & Analysis ",
+      "Support for School/Board Exams ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "NIDPG-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIDPG-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced design aptitude strategies",
+          "Mock test series with AI analysis",
+          "Best for repeat aspirants",
+        ],
+      },
+      {
+        id: "NIDPG-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIDPG-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIDPG-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIDPG-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIDPG-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "NIDPG-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "NIDPG-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "NIDPG-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "NIDPG-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "NIDPG-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Admission Cycle",
+        description:
+          "NID has announced the dates for the NID DAT M.Des 2025 admission cycle. ",
+      },
+      {
+        category: "Application Form",
+        description:
+          "	The application form for NID PG 2025 will be available from September 15, 2024. ",
+      },
+      {
+        category: "Deadline",
+        description:
+          "	The last date to apply online for NID PG 2025 is November 30, 2024 (without late fee). ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-programs", label: "Top Programs" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is the NID PG exam? ",
+        answer:
+          "The NID PG exam refers to the Design Aptitude Test (DAT) conducted for admission to the Master of Design (M.Des) programs at National Institutes of Design. ",
+      },
+      {
+        question: "What are the stages of the NID PG exam? ",
+        answer:
+          "The exam consists of two stages: DAT Prelims (written test) and DAT Mains (Studio Test + Interview). ",
+      },
+      {
+        question: "Is there a specific syllabus for NID DAT PG? ",
+        answer:
+          "No fixed syllabus is provided. The test evaluates design aptitude, creativity, analytical skills, visual perception, and knowledge of design principles. ",
+      },
+      {
+        question: "Can graduates from any stream apply for NID M.Des? ",
+        answer:
+          "Yes, candidates from any discipline with a bachelor’s degree (10+2+3 or 4) are eligible to apply, depending on the specific specialization. ",
+      },
+    ],
+  },
+  {
+    slug: "designandarchictecture/niftpg",
+    title: "NIFT PG",
+    courseTitle: "Excel in NIFT PG Entrance 2025 with",
+    description: `
+The National Institute of Fashion Technology Postgraduate (NIFT PG) entrance exam is a national-level test conducted for admission into PG programs like M.Des, M.F.M, and M.F.Tech across various NIFT campuses in India. 
+NIFT PG 2025 will be conducted in a Computer-Based Test (CBT) mode in early 2025, as per the official schedule announced by NIFT. 
+    `,
+    points: [
+      "Mentoring & Teaching by experts ",
+      "Regular Testing & Analysis ",
+      "Support for Graduation/Design Backgrounds ",
+    ],
+    telegramLink: "#",
+    relatedVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
+    ],
+    offeringTypes: [
+      { id: "online", label: "Online Class" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
+    ],
+    offerings: [
+      {
+        id: "NIFTPG-online-1",
+        title: "Daily Class",
+        image: "/catdailyclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIFTPG-online-2",
+        title: "Night Class",
+        image: "/catnightclass.jpeg",
+        type: "online",
+        features: [
+          "Live doubt-solving sessions",
+          "Advanced NIFT exam strategies",
+          "Mock test series with AI analysis",
+          "Best for repeat aspirants",
+        ],
+      },
+      {
+        id: "NIFTPG-online-3",
+        title: "Weekend Class",
+        image: "/catweekendclass.jpeg",
+        type: "online",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIFTPG-Classroom-1",
+        title: "Day Classes",
+        image: "/catdailyclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIFTPG-Classroom-2",
+        title: "Night Classes",
+        image: "/catnightclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIFTPG-Classroom-3",
+        title: "Weekend Classes",
+        image: "/catweekendclass.jpeg",
+        type: "Classroom",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Authentic Learning Experiences",
+          "Live & interactive sessions",
+          "Live doubt-solving sessions",
+        ],
+      },
+      {
+        id: "NIFTPG-test-1",
+        title: "Mock Test Only",
+        image: "/allcourse/mocktest.jpeg",
+        type: "test",
+        features: [
+          "Enhance exam preparation skill",
+          "10 Mock tests available",
+          "Personal mentoring",
+          "Interview guidance",
+        ],
+      },
+      {
+        id: "NIFTPG-test-2",
+        title: "Test Series + Mock",
+        image: "/allcourse/mockandtest.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+        ],
+      },
+      {
+        id: "NIFTPG-test-3",
+        title: "Mock + Test Series + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "test",
+        features: [
+          "Personal mentoring",
+          "Interview guidance",
+          "Test Series",
+          "Mock Test",
+          "Book Materials",
+        ],
+      },
+      {
+        id: "NIFTPG-Bookmaterials-1",
+        title: "Book Materials Only",
+        image: "/allcourse/bookmaterials.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials"],
+      },
+      {
+        id: "NIFTPG-Bookmaterials-2",
+        title: "Test Series + Mock Test + Book Materials",
+        image: "/allcourse/testmockandbook.jpeg",
+        type: "Bookmaterials",
+        features: ["Complete Book Materials", "Mock Tests", "Test Series"],
+      },
+      {
+        id: "NIFTPG-SelfBased-1",
+        title: "Self Based",
+        image: "/allcourse/selfbased.jpeg",
+        type: "SelfBased",
+        features: ["Video lectures", "Mock Test", "Book Materials"],
+      },
+    ],
+    demoVideos: [
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
+    ],
+    notifications: [
+      {
+        category: "Entrance Exam ",
+        description:
+          "	NIFT has released the official schedule for the NIFT PG Entrance Exam 2025 on its website. ",
+      },
+      {
+        category: "Application Form",
+        description:
+          "The application form for NIFT PG 2025 is expected to be available from October 2024. ",
+      },
+      {
+        category: "Deadline",
+        description:
+          "The last date to apply for NIFT PG 2025 is tentatively December 2024, and the written entrance exam (GAT & CAT) will likely be held in February 2025. ",
+      },
+    ],
+    courseTabs: [
+      { id: "beginners-guide", label: "Beginners Guide" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-programs", label: "Top Programs" },
+      { id: "free-resources", label: "Free Resources" },
+    ],
+    courseContent: [
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
+    ],
+    faqs: [
+      {
+        question: "What is NIFT PG exam? ",
+        answer:
+          "The NIFT PG entrance exam is conducted for admission into postgraduate courses such as Master of Design (M.Des), Master of Fashion Management (M.F.M), and Master of Fashion Technology (M.F.Tech) at various NIFT campuses",
+      },
+      {
+        question: "Is there any age limit for NIFT PG courses? ",
+        answer:
+          "No, there is no age limit for applying to postgraduate programs at NIFT. ",
+      },
+      {
+        question: "What is the selection process for NIFT PG 2025? ",
+        answer:
+          "The selection process involves a written test (GAT/CAT) followed by a Group Discussion (GD) and Personal Interview (PI) for shortlisted candidates. ",
+      },
+      {
+        question: "Is work experience required for NIFT PG courses? ",
+        answer:
+          "Work experience is not mandatory for M.Des and M.F.Tech, but may be considered an added advantage for M.F.M candidates. ",
+      },
+
+        {
+        question: "Where can I apply for NIFT PG 2025? ",
+        answer:
+          "You can apply online through the official website of NIFT: www.nift.ac.in ",
+      },
+    ],
+  },
+  {
+    slug: "bank/sbi",
+    title: "SBI",
+    courseTitle: "Crack SBI Exams 2025 with",
+    description: `
+The State Bank of India (SBI) conducts exams like SBI PO, SBI Clerk, and SBI SO to recruit candidates for various banking positions. These exams test reasoning, quantitative aptitude, English, and general awareness, requiring a focused preparation strategy.
+    `,
     points: [
       "Expert Faculty & Personalized Mentorship",
       "Comprehensive Study Materials & Mock Tests",
@@ -80,7 +3151,7 @@ Resume Building is the process of creating a structured and professional summary
     ],
     offerings: [
       {
-        id: "ResumeBuilding-online-1",
+        id: "SBI-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -92,19 +3163,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-online-2",
+        id: "SBI-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced resume-building concepts",
+          "Advanced SBI exam strategies",
           "Mock test series with AI analysis",
-          "Best for repeat resume builders",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "ResumeBuilding-online-3",
+        id: "SBI-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -116,7 +3187,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-Classroom-1",
+        id: "SBI-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
         type: "Classroom",
@@ -129,7 +3200,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-Classroom-2",
+        id: "SBI-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
         type: "Classroom",
@@ -142,7 +3213,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-Classroom-3",
+        id: "SBI-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
         type: "Classroom",
@@ -155,7 +3226,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-test-1",
+        id: "SBI-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -167,7 +3238,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-test-2",
+        id: "SBI-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -179,7 +3250,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-test-3",
+        id: "SBI-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -192,21 +3263,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "ResumeBuilding-Bookmaterials-1",
+        id: "SBI-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "ResumeBuilding-Bookmaterials-2",
+        id: "SBI-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "ResumeBuilding-SelfBased-1",
+        id: "SBI-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -222,24 +3293,24 @@ Resume Building is the process of creating a structured and professional summary
       {
         category: "Result",
         description:
-          "NTA has declared the Result/Scores of Joint Entrance Examination (JEE) Main – 2025.",
+          "SBI has declared the results for SBI PO 2025 Prelims.",
       },
       {
         category: "Application Form",
         description:
-          "The National Testing Agency (NTA) has released the JEE Main 2025 application form.",
+          "The State Bank of India has released the SBI PO 2025 application form.",
       },
       {
         category: "Registration Process",
         description:
-          "The registration process for the Joint Entrance Examination (JEE) 2025 is set to close soon, with the deadline for submitting applications expected by January 2025.",
+          "The registration process for SBI exams 2025 is set to close soon, with the deadline expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
       { id: "study-plan", label: "Study Plan" },
       { id: "syllabus", label: "Syllabus" },
-      { id: "top-college", label: "Top College" },
+      { id: "top-jobs", label: "Top Jobs" },
       { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
@@ -252,43 +3323,43 @@ Resume Building is the process of creating a structured and professional summary
     ],
     faqs: [
       {
-        question: "What is the JEE exam?",
+        question: "What is the SBI exam?",
         answer:
-          "The Joint Entrance Examination (JEE) is animm an entrance examination conducted for admission to engineering programs in premier institutes like IITs, NITs, and other top colleges in India. It consists of JEE Main and JEE Advanced.",
+          "The State Bank of India conducts exams like SBI PO, SBI Clerk, and SBI SO for recruitment to various banking positions, testing reasoning, quantitative aptitude, English, and general awareness.",
       },
       {
-        question: "Is JEE open potentials non-Indian students?",
+        question: "Is SBI exam open to non-Indian students?",
         answer:
-          "Yes, JEE is open to candidates from all over the world, including non-Indian students, provided they meet the eligibility criteria set by the National Testing Agency (NTA).",
+          "SBI exams are primarily for Indian citizens. Check the official SBI website for eligibility details.",
       },
       {
-        question: "Where can I get the JEE syllabus?",
+        question: "Where can I get the SBI syllabus?",
         answer:
-          "The JEE syllabus includes Physics, Chemistry, and Mathematics. It is recommended to visit the official website jeemain.nta.nic.in for detailed information.",
+          "The SBI syllabus includes reasoning, quantitative aptitude, English, and general awareness. Visit the official SBI website (sbi.co.in) for details.",
       },
       {
-        question: "Is the JEE exam tough?",
+        question: "Is the SBI exam tough?",
         answer:
-          "JEE is considered highly competitive and challenging due to its vast syllabus and limited seats. However, with consistent preparation and practice, candidates can perform well.",
+          "SBI exams are competitive due to a large number of applicants and a comprehensive syllabus. Consistent preparation is key to success.",
       },
     ],
   },
   {
-    slug: "kmat",
-    title: "KMAT",
-    courseTitle: "Crack KMAT 2025 with ",
+    slug: "bank/ibpspo",
+    title: "IBPS PO",
+    courseTitle: "Crack IBPS PO 2025 with",
     description: `
-      The Karnataka Management Aptitude Test (KMAT) is a state-level examination administered by the Karnataka Private Post Graduate Colleges Association (KPPGCA) for admissions into MBA, PGDM, and MCA programs in Karnataka. KMAT 2025 will be conducted in Remote Proctored Internet-Based Test (IBT) mode, tentatively in October 2025.
+The Institute of Banking Personnel Selection (IBPS) Probationary Officer (PO) exam is conducted to recruit candidates for managerial posts in public sector banks. It tests reasoning, quantitative aptitude, English, and general awareness, followed by an interview process.
     `,
     points: [
-      "Mentoring & Teaching by experts",
-      "Testing & Analysis",
-      "Support for School/Board Exams",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Preparing for the KMAT 2025", videoId: "M33APKoNOqE" },
-      { title: "Strategies for KMAT 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
       { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
@@ -300,7 +3371,7 @@ Resume Building is the process of creating a structured and professional summary
     ],
     offerings: [
       {
-        id: "kmat-online-1",
+        id: "IBPSPO-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -312,19 +3383,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-online-2",
+        id: "IBPSPO-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced KMAT concepts",
+          "Advanced IBPS PO strategies",
           "Mock test series with AI analysis",
-          "Best for repeat KMAT takers",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "kmat-online-3",
+        id: "IBPSPO-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -336,7 +3407,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-Classroom-1",
+        id: "IBPSPO-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
         type: "Classroom",
@@ -349,7 +3420,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-Classroom-2",
+        id: "IBPSPO-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
         type: "Classroom",
@@ -362,7 +3433,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-Classroom-3",
+        id: "IBPSPO-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
         type: "Classroom",
@@ -375,7 +3446,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-test-1",
+        id: "IBPSPO-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -387,7 +3458,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-test-2",
+        id: "IBPSPO-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -399,7 +3470,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-test-3",
+        id: "IBPSPO-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -412,21 +3483,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "kmat-Bookmaterials-1",
+        id: "IBPSPO-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "kmat-Bookmaterials-2",
+        id: "IBPSPO-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "kmat-SelfBased-1",
+        id: "IBPSPO-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -434,32 +3505,32 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Preparing for the KMAT 2025", videoId: "5qws0gIHpuY" },
-      { title: "Strategies for KMAT 2025", videoId: "wfIq-nqvByY" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
       { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
         category: "Result",
         description:
-          "KPPGCA has declared the Result/Scores of Karnataka Management Aptitude Test (KMAT) – 2024.",
+          "IBPS has declared the results for IBPS PO 2025 Prelims.",
       },
       {
         category: "Application Form",
         description:
-          "The Karnataka Private Post Graduate Colleges Association (KPPGCA) has released the KMAT 2025 application form.",
+          "The Institute of Banking Personnel Selection has released the IBPS PO 2025 application form.",
       },
       {
         category: "Registration Process",
         description:
-          "The registration process for the Karnataka Management Aptitude Test (KMAT) 2025 is set to close soon, with the deadline for submitting applications expected by September 2025.",
+          "The registration process for IBPS PO 2025 is set to close soon, with the deadline expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
       { id: "study-plan", label: "Study Plan" },
       { id: "syllabus", label: "Syllabus" },
-      { id: "top-college", label: "Top College" },
+      { id: "top-jobs", label: "Top Jobs" },
       { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
@@ -471,55 +3542,56 @@ Resume Building is the process of creating a structured and professional summary
       { title: "Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
-      
-        {
-        question: "What is KMAT exam?",
+      {
+        question: "What is the IBPS PO exam?",
         answer:
-          "Karnataka Management Aptitude Test (KMAT) is an entrance examination conducted for admission to MBA, PGDM, and MCA programs in private postgraduate colleges across Karnataka.",
+          "The IBPS Probationary Officer (PO) exam is conducted for recruitment to managerial posts in public sector banks, testing reasoning, quantitative aptitude, English, and general awareness.",
       },
       {
-        question: "Is KMAT open for non-Karnataka students?",
+        question: "Is IBPS PO open to non-Indian students?",
         answer:
-          "Yes, KMAT is open to candidates from all over India, not just those from Karnataka.",
+          "IBPS PO exams are primarily for Indian citizens. Check the official IBPS website for eligibility details.",
       },
       {
-        question: "Where can I get the KMAT syllabus?",
+        question: "Where can I get the IBPS PO syllabus?",
         answer:
-          "The KMAT syllabus includes Verbal Ability and Reading Comprehension, Quantitative Ability, and Logical Reasoning. It is recommended to visit the official website kmatindia.com for detailed information.",
+          "The IBPS PO syllabus includes reasoning, quantitative aptitude, English, and general awareness. Visit the official IBPS website (ibps.in) for details.",
       },
       {
-        question: "Is the KMAT exam tough?",
+        question: "Is the IBPS PO exam tough?",
         answer:
-          "KMAT is considered to be moderately difficult and is designed to test basic aptitude and reasoning skills. Good preparation and practice can help you score well.",
+          "IBPS PO is competitive due to a large number of applicants and a comprehensive syllabus. Consistent preparation is key to success.",
       },
     ],
   },
   {
-    slug: "resume-building",
-    title: "Resume Building",
-    courseTitle: "Master Resume Building with ",
+    slug: "bank/rbigradeb",
+    title: "RBI Grade B",
+    courseTitle: "Crack RBI Grade B 2025 with",
     description: `
-      Learn how to craft a professional resume that stands out to recruiters and hiring managers. Our Resume Building course provides step-by-step guidance on creating impactful resumes tailored to your career goals.
+The Reserve Bank of India (RBI) Grade B exam is conducted to recruit officers for various roles in the RBI. It tests economic and social issues, finance, management, reasoning, quantitative aptitude, and English, followed by an interview process.
     `,
     points: [
-      "Expert Guidance on Resume Structure",
-      "Personalized Feedback on Your Resume",
-      "Tips to Optimize for ATS (Applicant Tracking Systems)",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Crafting a Winning Resume", videoId: "M33APKoNOqE" },
-      { title: "Resume Tips for Freshers", videoId: "_lgTHGKC7Oc" },
-      { title: "Common Resume Mistakes", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "workshop", label: "Workshop" },
-      { id: "resources", label: "Resources" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "resume-building-online-1",
+        id: "RBIGradeB-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -531,19 +3603,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-online-2",
+        id: "RBIGradeB-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced resume-building concepts",
+          "Advanced RBI Grade B strategies",
           "Mock test series with AI analysis",
-          "Best for repeat resume builders",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "resume-building-online-3",
+        id: "RBIGradeB-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -555,10 +3627,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-workshop-1",
+        id: "RBIGradeB-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -568,10 +3640,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-workshop-2",
+        id: "RBIGradeB-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -581,10 +3653,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-workshop-3",
+        id: "RBIGradeB-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -594,7 +3666,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-test-1",
+        id: "RBIGradeB-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -606,7 +3678,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-test-2",
+        id: "RBIGradeB-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -618,7 +3690,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-test-3",
+        id: "RBIGradeB-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -631,21 +3703,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "resume-building-Bookmaterials-1",
+        id: "RBIGradeB-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "resume-building-Bookmaterials-2",
+        id: "RBIGradeB-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "resume-building-SelfBased-1",
+        id: "RBIGradeB-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -653,76 +3725,93 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Resume Building Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Resume Strategies", videoId: "wfIq-nqvByY" },
-      { title: "Resume Review Session", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Workshop Announcement",
+        category: "Result",
         description:
-          "New Resume Building workshops scheduled for November 2025.",
+          "RBI has declared the results for RBI Grade B 2025 Phase I.",
       },
       {
-        category: "Resource Update",
-        description: "Updated ATS-optimized resume templates released.",
+        category: "Application Form",
+        description:
+          "The Reserve Bank of India has released the RBI Grade B 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for RBI Grade B 2025 is set to close soon, with the deadline expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "templates", label: "Templates" },
-      { id: "tips", label: "Tips & Tricks" },
-      { id: "examples", label: "Examples" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-jobs", label: "Top Jobs" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Resume Guide Volume 1", id: 1 },
-      { title: "Resume Guide Volume 2", id: 2 },
-      { title: "Resume Guide Volume 3", id: 3 },
-      { title: "Resume Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "What makes a good resume?",
+        question: "What is the RBI Grade B exam?",
         answer:
-          "A good resume is clear, concise, and tailored to the job. It highlights relevant skills, experiences, and achievements while being ATS-friendly.",
+          "The RBI Grade B exam is conducted for recruitment to officer positions in the Reserve Bank of India, testing economic and social issues, finance, management, reasoning, quantitative aptitude, and English.",
       },
       {
-        question: "How long should a resume be?",
+        question: "Is RBI Grade B open to non-Indian students?",
         answer:
-          "A resume should typically be one page for freshers and up to two pages for experienced professionals.",
+          "RBI Grade B exams are primarily for Indian citizens. Check the official RBI website for eligibility details.",
       },
       {
-        question: "What is ATS optimization?",
+        question: "Where can I get the RBI Grade B syllabus?",
         answer:
-          "ATS optimization involves formatting and using keywords to ensure your resume passes through Applicant Tracking Systems used by employers.",
+          "The RBI Grade B syllabus includes economic and social issues, finance, management, reasoning, quantitative aptitude, and English. Visit the official RBI website (rbi.org.in) for details.",
+      },
+      {
+        question: "Is the RBI Grade B exam tough?",
+        answer:
+          "RBI Grade B is highly competitive due to its specialized syllabus and limited vacancies. Consistent preparation is essential for success.",
       },
     ],
   },
   {
-    slug: "InterviewPreparation",
-    title: "Interview Preparation",
-    courseTitle: "Master Interview Preparation with ",
+    slug: "bank/ibpsrrb",
+    title: "IBPS RRB",
+    courseTitle: "Crack IBPS RRB 2025 with",
     description: `
-      Our Interview Preparation course equips you with the skills and confidence to excel in job interviews. Learn how to answer common questions, handle behavioral interviews, and present yourself professionally to impress recruiters.
+The Institute of Banking Personnel Selection (IBPS) Regional Rural Banks (RRB) exam is conducted to recruit candidates for various posts in regional rural banks, such as Officer Scale I, II, III, and Office Assistant. It tests reasoning, quantitative aptitude, English, and general awareness.
     `,
     points: [
-      "Mock Interview Practice with Feedback",
-      "Techniques for Behavioral and Technical Interviews",
-      "Personalized Coaching for Confidence Building",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Acing Your Job Interview", videoId: "M33APKoNOqE" },
-      { title: "Common Interview Questions", videoId: "_lgTHGKC7Oc" },
-      { title: "Interview Do's and Don'ts", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "workshop", label: "Workshop" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "InterviewPreparation-online-1",
+        id: "IBPSRRB-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -734,19 +3823,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-online-2",
+        id: "IBPSRRB-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced interview preparation concepts",
+          "Advanced IBPS RRB strategies",
           "Mock test series with AI analysis",
-          "Best for repeat interview candidates",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "InterviewPreparation-online-3",
+        id: "IBPSRRB-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -758,10 +3847,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-workshop-1",
+        id: "IBPSRRB-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -771,10 +3860,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-workshop-2",
+        id: "IBPSRRB-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -784,10 +3873,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-workshop-3",
+        id: "IBPSRRB-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -797,7 +3886,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-test-1",
+        id: "IBPSRRB-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -809,7 +3898,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-test-2",
+        id: "IBPSRRB-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -821,7 +3910,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-test-3",
+        id: "IBPSRRB-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -834,21 +3923,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "InterviewPreparation-Bookmaterials-1",
+        id: "IBPSRRB-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "InterviewPreparation-Bookmaterials-2",
+        id: "IBPSRRB-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "InterviewPreparation-SelfBased-1",
+        id: "IBPSRRB-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -856,76 +3945,92 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Interview Prep Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Interview Strategies", videoId: "wfIq-nqvByY" },
-      { title: "Mock Interview Session", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Workshop Announcement",
+        category: "Result",
         description:
-          "New Interview Preparation workshops scheduled for November 2025.",
+          "IBPS has declared the results for IBPS RRB 2025 Prelims.",
       },
       {
-        category: "Resource Update",
-        description: "Updated interview question bank released.",
+        category: "Application Form",
+        description:
+          "The Institute of Banking Personnel Selection has released the IBPS RRB 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for IBPS RRB 2025 is set to close soon, with the deadline expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "question-bank", label: "Question Bank" },
-      { id: "tips", label: "Tips & Tricks" },
-      { id: "mock-interviews", label: "Mock Interviews" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "top-jobs", label: "Top Jobs" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Interview Guide Volume 1", id: 1 },
-      { title: "Interview Guide Volume 2", id: 2 },
-      { title: "Interview Guide Volume 3", id: 3 },
-      { title: "Interview Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 1", id: 1 },
+      { title: "Beginner's Guide Volume 2", id: 2 },
+      { title: "Beginner's Guide Volume 3", id: 3 },
+      { title: "Beginner's Guide Volume 4", id: 4 },
+      { title: "Beginner's Guide Volume 5", id: 5 },
+      { title: "Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "How do I prepare for a job interview?",
+        question: "What is the IBPS RRB exam?",
         answer:
-          "Prepare by researching the company, practicing common questions, and conducting mock interviews to build confidence.",
+          "The IBPS Regional Rural Banks (RRB) exam is conducted for recruitment to posts like Officer Scale I, II, III, and Office Assistant in regional rural banks, testing reasoning, quantitative aptitude, English, and general awareness.",
       },
       {
-        question: "What are behavioral interview questions?",
+        question: "Is IBPS RRB open to non-Indian students?",
         answer:
-          "Behavioral questions ask about past experiences to predict future performance, e.g., 'Tell me about a time you faced a challenge.'",
+          "IBPS RRB exams are primarily for Indian citizens. Check the official IBPS website for eligibility details.",
       },
       {
-        question: "How can I stand out in an interview?",
+        question: "Where can I get the IBPS RRB syllabus?",
         answer:
-          "Stand out by showcasing relevant skills, asking thoughtful questions, and demonstrating enthusiasm for the role.",
+          "The IBPS RRB syllabus includes reasoning, quantitative aptitude, English, and general awareness. Visit the official IBPS website (ibps.in) for details.",
+      },
+      {
+        question: "Is the IBPS RRB exam tough?",
+        answer:
+          "IBPS RRB is competitive due to a large number of applicants and a comprehensive syllabus. Consistent preparation is key to success.",
       },
     ],
   },
   {
-    slug: "CareerPlanning",
-    title: "Career Planning",
-    courseTitle: "Master Career Planning with ",
-    description: `
-      Our Career Planning course helps you identify your strengths, set career goals, and create a roadmap to achieve them. Learn how to explore career options, make informed decisions, and build a fulfilling career.
-    `,
+    slug: "bank/sbiclerk",
+    title: "SBI Clerk",
+    courseTitle: "Crack SBI Clerk 2025 with ",
+    description:
+      "SBI Clerk preparation involves mastering the syllabus for the State Bank of India Clerk exam, which includes Reasoning, Quantitative Aptitude, English Language, General Awareness, and Computer Knowledge. This course is designed to help candidates excel in both Prelims and Mains exams through structured learning, practice, and expert guidance. A strong preparation strategy will enhance your chances of securing a clerical position in one of India's leading banks.",
     points: [
-      "Personalized Career Assessments",
-      "Guidance on Setting Career Goals",
-      "Strategies for Long-Term Career Success",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Planning Your Career Path", videoId: "M33APKoNOqE" },
-      { title: "Choosing the Right Career", videoId: "_lgTHGKC7Oc" },
-      { title: "Career Goal Setting", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "workshop", label: "Workshop" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "CareerPlanning-online-1",
+        id: "SBIClerk-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -937,19 +4042,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-online-2",
+        id: "SBIClerk-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced career planning concepts",
+          "Advanced banking exam concepts",
           "Mock test series with AI analysis",
-          "Best for career switchers",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "CareerPlanning-online-3",
+        id: "SBIClerk-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -961,10 +4066,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-workshop-1",
+        id: "SBIClerk-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -974,10 +4079,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-workshop-2",
+        id: "SBIClerk-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -987,10 +4092,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-workshop-3",
+        id: "SBIClerk-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1000,7 +4105,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-test-1",
+        id: "SBIClerk-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -1012,7 +4117,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-test-2",
+        id: "SBIClerk-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -1024,7 +4129,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-test-3",
+        id: "SBIClerk-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -1037,21 +4142,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "CareerPlanning-Bookmaterials-1",
+        id: "SBIClerk-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "CareerPlanning-Bookmaterials-2",
+        id: "SBIClerk-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "CareerPlanning-SelfBased-1",
+        id: "SBIClerk-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -1059,76 +4164,92 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Career Planning Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Career Strategies", videoId: "wfIq-nqvByY" },
-      { title: "Career Assessment Session", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Workshop Announcement",
+        category: "Result",
         description:
-          "New Career Planning workshops scheduled for November 2025.",
+          "SBI has declared the Result/Scores of Clerk Exam 2025.",
       },
       {
-        category: "Resource Update",
-        description: "Updated career assessment tools released.",
+        category: "Application Form",
+        description:
+          "The State Bank of India has released the SBI Clerk 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for the SBI Clerk 2025 exam is set to close soon, with the deadline for submitting applications expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "assessments", label: "Assessments" },
-      { id: "goal-setting", label: "Goal Setting" },
-      { id: "career-paths", label: "Career Paths" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "exam-pattern", label: "Exam Pattern" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Career Guide Volume 1", id: 1 },
-      { title: "Career Guide Volume 2", id: 2 },
-      { title: "Career Guide Volume 3", id: 3 },
-      { title: "Career Guide Volume 4", id: 4 },
+      { title: "SBI Clerk Beginner's Guide Volume 1", id: 1 },
+      { title: "SBI Clerk Beginner's Guide Volume 2", id: 2 },
+      { title: "SBI Clerk Beginner's Guide Volume 3", id: 3 },
+      { title: "SBI Clerk Beginner's Guide Volume 4", id: 4 },
+      { title: "SBI Clerk Beginner's Guide Volume 5", id: 5 },
+      { title: "SBI Clerk Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "What is career planning?",
+        question: "What is the SBI Clerk exam?",
         answer:
-          "Career planning is the process of identifying your strengths, interests, and goals to create a roadmap for your professional future.",
+          "The SBI Clerk exam is conducted by the State Bank of India for recruitment of Junior Associates (Clerical Cadre) in its branches across India. It consists of Prelims and Mains exams.",
       },
       {
-        question: "How do I choose the right career?",
+        question: "Is the SBI Clerk exam open to non-Indian students?",
         answer:
-          "Choose a career by assessing your skills, exploring industries, and aligning your interests with market opportunities.",
+          "No, the SBI Clerk exam is typically open only to Indian citizens who meet the eligibility criteria set by the State Bank of India.",
       },
       {
-        question: "Can I change careers later in life?",
+        question: "Where can I get the SBI Clerk syllabus?",
         answer:
-          "Yes, with proper planning and skill development, you can successfully transition to a new career at any stage.",
+          "The SBI Clerk syllabus includes Reasoning, Quantitative Aptitude, English Language, General Awareness, and Computer Knowledge. Visit the official website www.sbi.co.in for details.",
+      },
+      {
+        question: "Is the SBI Clerk exam tough?",
+        answer:
+          "The SBI Clerk exam is moderately challenging due to its competitive nature and vast syllabus. Consistent preparation and practice can lead to success.",
       },
     ],
   },
   {
-    slug: "SkillDevelopment",
-    title: "Skill Development",
-    courseTitle: "Master Skill Development with ",
-    description: `
-      Our Skill Development course helps you acquire in-demand skills to boost your employability. From technical skills to soft skills, learn what employers value and how to stand out in the job market.
-    `,
+    slug: "bank/ibpsclerk",
+    title: "IBPS Clerk",
+    courseTitle: "Crack IBPS Clerk 2025 with ",
+    description:
+      "IBPS Clerk preparation equips candidates for the Institute of Banking Personnel Selection Clerk exam, covering Reasoning, Quantitative Aptitude, English Language, General Awareness, and Computer Knowledge. This course offers comprehensive training for Prelims and Mains, helping aspirants secure clerical roles in public sector banks in India.",
     points: [
-      "Training in In-Demand Skills",
-      "Practical Projects and Assignments",
-      "Certification for Skill Mastery",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Top Skills for 2025", videoId: "M33APKoNOqE" },
-      { title: "Developing Soft Skills", videoId: "_lgTHGKC7Oc" },
-      { title: "Technical Skills Mastery", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "workshop", label: "Workshop" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "SkillDevelopment-online-1",
+        id: "IBPSClerk-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -1140,19 +4261,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-online-2",
+        id: "IBPSClerk-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced skill development concepts",
+          "Advanced banking exam concepts",
           "Mock test series with AI analysis",
-          "Best for upskilling professionals",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "SkillDevelopment-online-3",
+        id: "IBPSClerk-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -1164,10 +4285,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-workshop-1",
+        id: "IBPSClerk-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1177,10 +4298,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-workshop-2",
+        id: "IBPSClerk-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1190,10 +4311,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-workshop-3",
+        id: "IBPSClerk-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1203,7 +4324,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-test-1",
+        id: "IBPSClerk-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -1215,7 +4336,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-test-2",
+        id: "IBPSClerk-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -1227,7 +4348,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-test-3",
+        id: "IBPSClerk-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -1240,21 +4361,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "SkillDevelopment-Bookmaterials-1",
+        id: "IBPSClerk-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "SkillDevelopment-Bookmaterials-2",
+        id: "IBPSClerk-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "SkillDevelopment-SelfBased-1",
+        id: "IBPSClerk-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -1262,76 +4383,92 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Skill Development Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Skill Strategies", videoId: "wfIq-nqvByY" },
-      { title: "Skill Workshop Demo", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Workshop Announcement",
+        category: "Result",
         description:
-          "New Skill Development workshops scheduled for November 2025.",
+          "IBPS has declared the Result/Scores of Clerk Exam 2025.",
       },
       {
-        category: "Resource Update",
-        description: "Updated skill development resources released.",
+        category: "Application Form",
+        description:
+          "The Institute of Banking Personnel Selection has released the IBPS Clerk 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for the IBPS Clerk 2025 exam is set to close soon, with the deadline for submitting applications expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "technical-skills", label: "Technical Skills" },
-      { id: "soft-skills", label: "Soft Skills" },
-      { id: "projects", label: "Projects" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "exam-pattern", label: "Exam Pattern" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Skills Guide Volume 1", id: 1 },
-      { title: "Skills Guide Volume 2", id: 2 },
-      { title: "Skills Guide Volume 3", id: 3 },
-      { title: "Skills Guide Volume 4", id: 4 },
+      { title: "IBPS Clerk Beginner's Guide Volume 1", id: 1 },
+      { title: "IBPS Clerk Beginner's Guide Volume 2", id: 2 },
+      { title: "IBPS Clerk Beginner's Guide Volume 3", id: 3 },
+      { title: "IBPS Clerk Beginner's Guide Volume 4", id: 4 },
+      { title: "IBPS Clerk Beginner's Guide Volume 5", id: 5 },
+      { title: "IBPS Clerk Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "What skills are in demand?",
+        question: "What is the IBPS Clerk exam?",
         answer:
-          "In-demand skills include coding, data analysis, communication, and leadership, depending on the industry.",
+          "The IBPS Clerk exam is conducted by the Institute of Banking Personnel Selection for recruitment of clerical staff in public sector banks in India. It includes Prelims and Mains exams.",
       },
       {
-        question: "How long does it take to learn a new skill?",
+        question: "Is the IBPS Clerk exam open to non-Indian students?",
         answer:
-          "It varies, but with consistent practice, you can gain proficiency in 3-6 months for most skills.",
+          "No, the IBPS Clerk exam is generally open only to Indian citizens who meet the eligibility criteria set by IBPS.",
       },
       {
-        question: "Do certificates help in job applications?",
+        question: "Where can I get the IBPS Clerk syllabus?",
         answer:
-          "Yes, certificates validate your skills and can make your application stand out to employers.",
+          "The IBPS Clerk syllabus includes Reasoning, Quantitative Aptitude, English Language, General Awareness, and Computer Knowledge. Visit www.ibps.in for details.",
+      },
+      {
+        question: "Is the IBPS Clerk exam tough?",
+        answer:
+          "The IBPS Clerk exam is moderately challenging due to its competitive nature and broad syllabus. Regular practice and preparation can lead to success.",
       },
     ],
   },
   {
-    slug: "JobSearchStrategies",
-    title: "Job Search Strategies",
-    courseTitle: "Master Job Search Strategies with ",
-    description: `
-      Our Job Search Strategies course teaches you how to navigate the job market effectively. Learn how to leverage job boards, network strategically, and optimize your applications to land your ideal job.
-    `,
+    slug: "bank/nabard",
+    title: "NABARD Grade A",
+    courseTitle: "Crack NABARD Grade A 2025 with ",
+    description:
+      "NABARD Grade A preparation focuses on the National Bank for Agriculture and Rural Development's exam for Assistant Manager roles. The course covers Reasoning, Quantitative Aptitude, English, General Awareness, Computer Knowledge, and specialized subjects like Agriculture and Rural Development. It equips candidates for Prelims, Mains, and Interview stages to secure a prestigious banking role.",
     points: [
-      "Proven Job Search Techniques",
-      "Networking and LinkedIn Optimization",
-      "Application Tracking and Follow-Up Strategies",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Effective Job Search Tips", videoId: "M33APKoNOqE" },
-      { title: "Networking for Jobs", videoId: "_lgTHGKC7Oc" },
-      { title: "Optimizing LinkedIn", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "workshop", label: "Workshop" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "JobSearchStrategies-online-1",
+        id: "NABARD-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -1343,19 +4480,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-online-2",
+        id: "NABARD-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced job search concepts",
+          "Advanced banking exam concepts",
           "Mock test series with AI analysis",
-          "Best for career changers",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "JobSearchStrategies-online-3",
+        id: "NABARD-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -1367,10 +4504,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-workshop-1",
+        id: "NABARD-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1380,10 +4517,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-workshop-2",
+        id: "NABARD-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1393,10 +4530,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-workshop-3",
+        id: "NABARD-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "workshop",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1406,7 +4543,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-test-1",
+        id: "NABARD-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -1418,7 +4555,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-test-2",
+        id: "NABARD-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -1430,7 +4567,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-test-3",
+        id: "NABARD-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -1443,21 +4580,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "JobSearchStrategies-Bookmaterials-1",
+        id: "NABARD-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "JobSearchStrategies-Bookmaterials-2",
+        id: "NABARD-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "JobSearchStrategies-SelfBased-1",
+        id: "NABARD-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -1465,76 +4602,92 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Job Search Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Job Search Strategies", videoId: "wfIq-nqvByY" },
-      { title: "Networking Demo", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Workshop Announcement",
+        category: "Result",
         description:
-          "New Job Search Strategies workshops scheduled for November 2025.",
+          "NABARD has declared the Result/Scores of Grade A Exam 2025.",
       },
       {
-        category: "Resource Update",
-        description: "Updated job search templates released.",
+        category: "Application Form",
+        description:
+          "The National Bank for Agriculture and Rural Development has released the NABARD Grade A 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for the NABARD Grade A 2025 exam is set to close soon, with the deadline for submitting applications expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "job-boards", label: "Job Boards" },
-      { id: "networking", label: "Networking" },
-      { id: "applications", label: "Applications" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "exam-pattern", label: "Exam Pattern" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Job Search Guide Volume 1", id: 1 },
-      { title: "Job Search Guide Volume 2", id: 2 },
-      { title: "Job Search Guide Volume 3", id: 4 },
-      { title: "Job Search Guide Volume 4", id: 4 },
+      { title: "NABARD Grade A Beginner's Guide Volume 1", id: 1 },
+      { title: "NABARD Grade A Beginner's Guide Volume 2", id: 2 },
+      { title: "NABARD Grade A Beginner's Guide Volume 3", id: 3 },
+      { title: "NABARD Grade A Beginner's Guide Volume 4", id: 4 },
+      { title: "NABARD Grade A Beginner's Guide Volume 5", id: 5 },
+      { title: "NABARD Grade A Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "How do I find job openings?",
+        question: "What is the NABARD Grade A exam?",
         answer:
-          "Use job boards, company websites, and networking to discover opportunities in your field.",
+          "The NABARD Grade A exam is conducted by the National Bank for Agriculture and Rural Development for recruitment of Assistant Managers. It includes Prelims, Mains, and Interview stages.",
       },
       {
-        question: "How important is networking?",
+        question: "Is the NABARD Grade A exam open to non-Indian students?",
         answer:
-          "Networking is crucial, as many jobs are filled through referrals and personal connections.",
+          "No, the NABARD Grade A exam is typically open only to Indian citizens who meet the eligibility criteria set by NABARD.",
       },
       {
-        question: "How do I optimize my LinkedIn profile?",
+        question: "Where can I get the NABARD Grade A syllabus?",
         answer:
-          "Use a professional photo, write a compelling summary, and include relevant skills and experiences.",
+          "The NABARD Grade A syllabus includes Reasoning, Quantitative Aptitude, English, General Awareness, Computer Knowledge, and Agriculture and Rural Development. Visit www.nabard.org for details.",
+      },
+      {
+        question: "Is the NABARD Grade A exam tough?",
+        answer:
+          "The NABARD Grade A exam is challenging due to its specialized syllabus and competitive nature. Focused preparation can lead to success.",
       },
     ],
   },
   {
-    slug: "StreamSelection",
-    title: "Stream Selection",
-    courseTitle: "Master Stream Selection with ",
-    description: `
-      Our Stream Selection course guides students in choosing the right academic stream after 10th grade. Learn how to assess your interests, strengths, and career aspirations to make informed decisions.
-    `,
+    slug: "bank/licaao",
+    title: "LIC AAO",
+    courseTitle: "Crack LIC AAO 2025 with ",
+    description:
+      "LIC AAO preparation is designed for the Life Insurance Corporation of India's Assistant Administrative Officer exam. The course covers Reasoning, Quantitative Aptitude, English Language, General Knowledge, and Professional Knowledge, preparing candidates for Prelims, Mains, and Interview stages to secure a prestigious role in LIC.",
     points: [
-      "Personalized Stream Assessments",
-      "Guidance on Career Paths for Each Stream",
-      "Counseling for Informed Decision-Making",
+      "Expert Faculty & Personalized Mentorship",
+      "Comprehensive Study Materials & Mock Tests",
+      "Live & Interactive Sessions with Doubt-Solving",
     ],
     telegramLink: "#",
     relatedVideos: [
-      { title: "Choosing Your Stream", videoId: "M33APKoNOqE" },
-      { title: "Science vs. Commerce", videoId: "_lgTHGKC7Oc" },
-      { title: "Arts Stream Opportunities", videoId: "RyLsKV6z2tw" },
+      { title: "Preparing for the JEE 2025", videoId: "M33APKoNOqE" },
+      { title: "Strategies for JEE 2025", videoId: "_lgTHGKC7Oc" },
+      { title: "Best Coaching Centers", videoId: "RyLsKV6z2tw" },
     ],
     offeringTypes: [
       { id: "online", label: "Online Class" },
-      { id: "counseling", label: "Counseling" },
+      { id: "Classroom", label: "Classroom" },
+      { id: "test", label: "Test Series" },
+      { id: "Bookmaterials", label: "Book Materials" },
+      { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
-        id: "StreamSelection-online-1",
+        id: "LICAAO-online-1",
         title: "Daily Class",
         image: "/catdailyclass.jpeg",
         type: "online",
@@ -1546,19 +4699,19 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-online-2",
+        id: "LICAAO-online-2",
         title: "Night Class",
         image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
-          "Advanced stream selection concepts",
+          "Advanced banking exam concepts",
           "Mock test series with AI analysis",
-          "Best for undecided students",
+          "Best for repeat aspirants",
         ],
       },
       {
-        id: "StreamSelection-online-3",
+        id: "LICAAO-online-3",
         title: "Weekend Class",
         image: "/catweekendclass.jpeg",
         type: "online",
@@ -1570,10 +4723,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-counseling-1",
+        id: "LICAAO-Classroom-1",
         title: "Day Classes",
         image: "/catdailyclass.jpeg",
-        type: "counseling",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1583,10 +4736,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-counseling-2",
+        id: "LICAAO-Classroom-2",
         title: "Night Classes",
         image: "/catnightclass.jpeg",
-        type: "counseling",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1596,10 +4749,10 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-counseling-3",
+        id: "LICAAO-Classroom-3",
         title: "Weekend Classes",
         image: "/catweekendclass.jpeg",
-        type: "counseling",
+        type: "Classroom",
         features: [
           "Personal mentoring",
           "Interview guidance",
@@ -1609,7 +4762,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-test-1",
+        id: "LICAAO-test-1",
         title: "Mock Test Only",
         image: "/allcourse/mocktest.jpeg",
         type: "test",
@@ -1621,7 +4774,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-test-2",
+        id: "LICAAO-test-2",
         title: "Test Series + Mock",
         image: "/allcourse/mockandtest.jpeg",
         type: "test",
@@ -1633,7 +4786,7 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-test-3",
+        id: "LICAAO-test-3",
         title: "Mock + Test Series + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "test",
@@ -1646,21 +4799,21 @@ Resume Building is the process of creating a structured and professional summary
         ],
       },
       {
-        id: "StreamSelection-Bookmaterials-1",
+        id: "LICAAO-Bookmaterials-1",
         title: "Book Materials Only",
         image: "/allcourse/bookmaterials.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials"],
       },
       {
-        id: "StreamSelection-Bookmaterials-2",
+        id: "LICAAO-Bookmaterials-2",
         title: "Test Series + Mock Test + Book Materials",
         image: "/allcourse/testmockandbook.jpeg",
         type: "Bookmaterials",
         features: ["Complete Book Materials", "Mock Tests", "Test Series"],
       },
       {
-        id: "StreamSelection-SelfBased-1",
+        id: "LICAAO-SelfBased-1",
         title: "Self Based",
         image: "/allcourse/selfbased.jpeg",
         type: "SelfBased",
@@ -1668,48 +4821,62 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Stream Selection Basics", videoId: "5qws0gIHpuY" },
-      { title: "Advanced Stream Guidance", videoId: "wfIq-nqvByY" },
-      { title: "Counseling Demo", videoId: "nQfvbJjl-XE" },
+      { title: "Preparing for the JEE 2025", videoId: "5qws0gIHpuY" },
+      { title: "Strategies for JEE 2025", videoId: "wfIq-nqvByY" },
+      { title: "Best Coaching Centers", videoId: "nQfvbJjl-XE" },
     ],
     notifications: [
       {
-        category: "Counseling Announcement",
+        category: "Result",
         description:
-          "New Stream Selection counseling sessions scheduled for November 2025.",
+          "LIC has declared the Result/Scores of AAO Exam 2025.",
       },
       {
-        category: "Resource Update",
-        description: "Updated stream selection guides released.",
+        category: "Application Form",
+        description:
+          "The Life Insurance Corporation of India has released the LIC AAO 2025 application form.",
+      },
+      {
+        category: "Registration Process",
+        description:
+          "The registration process for the LIC AAO 2025 exam is set to close soon, with the deadline for submitting applications expected by January 2025.",
       },
     ],
     courseTabs: [
       { id: "beginners-guide", label: "Beginners Guide" },
-      { id: "assessments", label: "Assessments" },
-      { id: "streams", label: "Stream Options" },
-      { id: "careers", label: "Career Paths" },
+      { id: "study-plan", label: "Study Plan" },
+      { id: "syllabus", label: "Syllabus" },
+      { id: "exam-pattern", label: "Exam Pattern" },
+      { id: "free-resources", label: "Free Resources" },
     ],
     courseContent: [
-      { title: "Stream Guide Volume 1", id: 1 },
-      { title: "Stream Guide Volume 2", id: 2 },
-      { title: "Stream Guide Volume 3", id: 3 },
-      { title: "Stream Guide Volume 4", id: 4 },
+      { title: "LIC AAO Beginner's Guide Volume 1", id: 1 },
+      { title: "LIC AAO Beginner's Guide Volume 2", id: 2 },
+      { title: "LIC AAO Beginner's Guide Volume 3", id: 3 },
+      { title: "LIC AAO Beginner's Guide Volume 4", id: 4 },
+      { title: "LIC AAO Beginner's Guide Volume 5", id: 5 },
+      { title: "LIC AAO Beginner's Guide Volume 6", id: 6 },
     ],
     faqs: [
       {
-        question: "How do I choose the right stream?",
+        question: "What is the LIC AAO exam?",
         answer:
-          "Assess your interests, strengths, and career goals, and research the career opportunities each stream offers.",
+          "The LIC AAO exam is conducted by the Life Insurance Corporation of India for recruitment of Assistant Administrative Officers. It includes Prelims, Mains, and Interview stages.",
       },
       {
-        question: "What are the main streams after 10th?",
+        question: "Is the LIC AAO exam open to non-Indian students?",
         answer:
-          "The main streams are Science, Commerce, and Arts, each leading to different career paths.",
+          "No, the LIC AAO exam is typically open only to Indian citizens who meet the eligibility criteria set by LIC.",
       },
       {
-        question: "Can I change my stream later?",
+        question: "Where can I get the LIC AAO syllabus?",
         answer:
-          "Yes, but it may require additional effort. Early guidance helps make the right choice.",
+          "The LIC AAO syllabus includes Reasoning, Quantitative Aptitude, English Language, General Knowledge, and Professional Knowledge. Visit www.licindia.in for details.",
+      },
+      {
+        question: "Is the LIC AAO exam tough?",
+        answer:
+          "The LIC AAO exam is challenging due to its competitive nature and comprehensive syllabus. Strategic preparation can lead to success.",
       },
     ],
   },

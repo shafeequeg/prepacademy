@@ -16,12 +16,13 @@ import { IoCallOutline, IoMailOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import AxiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
+import Link from "next/link";
 
 type Location = {
   name: string;
   address: string;
   phone: string;
-  mapUrl: string; 
+  mapUrl: string;
 };
 
 export default function ContactPage() {
@@ -431,12 +432,12 @@ export default function ContactPage() {
               opportunity to contribute to educational excellence while
               fostering community development.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/becomeafranchise"
               className="text-[#F55D3E] text-base md:text-lg inline-flex items-center self-start"
             >
               Lets Go <span className="ml-1">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E] flex flex-col">
@@ -447,12 +448,12 @@ export default function ContactPage() {
               Our career guidance experts help students discover and achieve
               their true potential.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/findacenter"
               className="text-[#F55D3E] text-base md:text-lg inline-flex items-center self-start"
             >
               Lets Go <span className="ml-1">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="bg-[#231917] p-6 rounded-md border-l-4 border-[#F55D3E] flex flex-col">
@@ -464,12 +465,12 @@ export default function ContactPage() {
               opportunity to contribute to educational excellence while
               fostering community development.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/becomeanemployee"
               className="text-[#E25B41] text-base md:text-lg inline-flex items-center self-start"
             >
               Lets Go <span className="ml-1">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -486,12 +487,12 @@ export default function ContactPage() {
               <p className="text-2xl md:text-4xl font-bold text-white font-serif italic">
                 For Free Counselling
               </p>
-              <a
+              <Link
                 href="/careercounseling"
                 className="inline-block mt-4 md:mt-6 bg-[#F55D3E] hover:bg-[#F55D3E] text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-base md:text-lg font-medium"
               >
                 Let&apos;s Talk →
-              </a>
+              </Link>
             </div>
 
             {/* Image Container for Desktop */}

@@ -91,7 +91,10 @@ const CartModal: React.FC<CartModalProps> = React.memo(
                       <div className="flex justify-between items-center mt-4">
                         <div>
                           <span className="text-lg font-semibold text-orange-300">
-                            {item.price}
+                            ₹
+                            {parsePriceToNumber(item.price).toLocaleString(
+                              "en-IN"
+                            )}
                           </span>
                           <p className="text-xs text-orange-400">
                             Duration: {item.duration}
@@ -112,10 +115,12 @@ const CartModal: React.FC<CartModalProps> = React.memo(
                 </h3>
                 <span className="text-2xl font-bold text-orange-300">
                   ₹
-                  {cartItems.reduce(
-                    (total, item) => total + parsePriceToNumber(item.price),
-                    0
-                  )}
+                  {cartItems
+                    .reduce(
+                      (total, item) => total + parsePriceToNumber(item.price),
+                      0
+                    )
+                    .toLocaleString("en-IN")}
                 </span>
               </div>
             )}
@@ -142,7 +147,6 @@ const CartModal: React.FC<CartModalProps> = React.memo(
   }
 );
 
-CartModal.displayName = 'CartModal';
-
+CartModal.displayName = "CartModal";
 
 export default CartModal;

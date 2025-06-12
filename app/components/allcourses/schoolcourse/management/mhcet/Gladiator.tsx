@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 // import Link from 'next/link';
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import axiosInstance from "@/app/components/apiconfig/axios";
 

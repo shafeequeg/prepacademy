@@ -11,6 +11,7 @@ export type FormData = {
     programs: string[];
   };
   
+  
   export interface RegistrationModalProps {
     closeModal: () => void;
   }

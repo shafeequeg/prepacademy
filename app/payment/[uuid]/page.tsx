@@ -956,6 +956,8 @@ export default function PaymentPage() {
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
 
+  const [isDonationChecked, setIsDonationChecked] = useState<boolean>(true);
+  const DONATION_AMOUNT = 10;
 
   const user_uuid = searchParams.get("user_uuid");
   const [users, setUsers] = useState<UserType[]>([]);
@@ -982,14 +984,15 @@ export default function PaymentPage() {
       uuid,
     });
 
-    
     const priceValue = parseFloat(price.replace(/[^0-9.]/g, ""));
-    const gst = priceValue * 0.18;
-    const total = priceValue + gst;
+    const donationValue = isDonationChecked ? DONATION_AMOUNT : 0;
+    const subtotal = priceValue + donationValue;
+    const gst = subtotal * 0.18;
+    const total = subtotal + gst;
 
     setGstAmount(`₹${gst.toFixed(2)}`);
     setTotalAmount(`₹${total.toFixed(2)}`);
-  }, [searchParams]);
+  }, [searchParams, isDonationChecked]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -1016,7 +1019,10 @@ export default function PaymentPage() {
   }, [user_uuid]);
 
   // Function to store payment data in localStorage
-  const storePaymentData = (status: string, paymentDetails?: RazorpayResponse) => {
+  const storePaymentData = (
+    status: string,
+    paymentDetails?: RazorpayResponse
+  ) => {
     const paymentData = {
       course_uuid: course.uuid,
       user_uuid: currentUser?.uuid,
@@ -1033,7 +1039,9 @@ export default function PaymentPage() {
     };
 
     // Retrieve existing payments from localStorage or initialize empty array
-    const existingPayments = JSON.parse(localStorage.getItem("course_payments") || "[]");
+    const existingPayments = JSON.parse(
+      localStorage.getItem("course_payments") || "[]"
+    );
     // Add new payment data
     existingPayments.push(paymentData);
     // Save back to localStorage
@@ -1059,12 +1067,18 @@ export default function PaymentPage() {
     }
 
     try {
+      const priceValue = parseFloat(course.price.replace(/[^0-9.]/g, ""));
+      const donationValue = isDonationChecked ? DONATION_AMOUNT : 0;
+      const totalPaymentAmount = priceValue + donationValue;
+      console.log(totalPaymentAmount);
+
       const res = await axiosInstance.post(
         API_URLS.PAYMENT.POST_PAYMENT_COURSE,
         {
           user_uuid: currentUser.uuid,
           course_uuid: course.uuid,
           term_condition: true,
+          donation_amount: donationValue,
         }
       );
 
@@ -1077,7 +1091,7 @@ export default function PaymentPage() {
       const options: RazorpayOptions = {
         key:
           order.razorpay_key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
-        amount: order.payment.amount * 100,
+        amount: order.payment.amount + donationValue * 100,
         currency: "INR",
         name: "Prepacademy",
         description: "Premium Personality Report",
@@ -1325,7 +1339,7 @@ export default function PaymentPage() {
                       {currentUser.exam_target && (
                         <div className="flex flex-col">
                           <p className="font-medium text-orange-200 mb-1">
-                            Exam Target
+                            Exam Targetsss
                           </p>
                           <div className="bg-[#2B1615] p-3 rounded border border-orange-900 text-sky-400">
                             {currentUser.exam_target}
@@ -1487,6 +1501,27 @@ export default function PaymentPage() {
                 <div className="flex justify-between items-center">
                   <span className="text-orange-300">Original Price:</span>
                   <span className="text-orange-100">{course.price}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="donation"
+                      checked={isDonationChecked}
+                      onChange={(e) => setIsDonationChecked(e.target.checked)}
+                      className="mr-2 w-4 h-4 text-orange-600 bg-[#2B1615] border-orange-900 rounded focus:ring-orange-500 focus:ring-2"
+                    />
+                    <label
+                      htmlFor="donation"
+                      className="text-orange-300 cursor-pointer"
+                    >
+                      Support us (Donation):
+                    </label>
+                  </div>
+                  <span className="text-orange-100">
+                    {isDonationChecked ? `₹${DONATION_AMOUNT}` : "₹0"}
+                  </span>
                 </div>
 
                 <div className="flex justify-between items-center">

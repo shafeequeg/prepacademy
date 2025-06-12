@@ -1039,6 +1039,7 @@ const CourseEnrollmentPortal: React.FC = () => {
   const [isWishlistModalOpen, setIsWishlistModalOpen] =
     useState<boolean>(false);
   const [cartItems, setCartItems] = useState<WishlistItem[]>([]);
+  const [isEnrolling, setIsEnrolling] = useState<boolean>(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState<boolean>(false);
   const [salesCategories, setSalesCategories] = useState<SalesCategory[]>([]);
   const [salesSubjects, setSalesSubjects] = useState<SalesSubjects[]>([]);
@@ -1117,6 +1118,47 @@ const CourseEnrollmentPortal: React.FC = () => {
   };
 
   useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      try {
+        const parsedCartItems = JSON.parse(storedCartItems);
+        if (Array.isArray(parsedCartItems)) {
+          setCartItems(parsedCartItems);
+        }
+      } catch (error) {
+        console.error("Failed to parse cart items from localStorage", error);
+        localStorage.removeItem("cartItems"); // Clear invalid data
+      }
+    }
+
+    const storedWishlistItems = localStorage.getItem("wishlistItems");
+    if (storedWishlistItems) {
+      try {
+        const parsedWishlistItems = JSON.parse(storedWishlistItems);
+        if (Array.isArray(parsedWishlistItems)) {
+          setWishlistItems(parsedWishlistItems);
+        }
+      } catch (error) {
+        console.error(
+          "Failed to parse wishlist items from localStorage",
+          error
+        );
+        localStorage.removeItem("wishlistItems"); // Clear invalid data
+      }
+    }
+  }, []); // Empty dependency array ensures this runs only on mount
+
+  // 2. Add useEffect to save cart items to localStorage whenever cartItems changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // 3. Add useEffect to save wishlist items to localStorage whenever wishlistItems changes
+  useEffect(() => {
+    localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
+
+  useEffect(() => {
     fetchSaleCategory();
     fetchSaleSubjects();
     fetchSaleCourse();
@@ -1125,9 +1167,11 @@ const CourseEnrollmentPortal: React.FC = () => {
 
   const parsePriceToNumber = (priceString: string | undefined): number => {
     if (!priceString) return 0;
-    return parseInt(priceString.replace(/[^\d]/g, "") || "0");
+    // Remove currency symbol (₹), commas, and any non-numeric characters except decimal point
+    const cleanedPrice = priceString.replace(/[^\d.]/g, "");
+    // Parse as float and round to nearest integer to avoid decimal issues
+    return Math.round(parseFloat(cleanedPrice) || 0);
   };
-
   // Replace the getCurrentCourseData method in CourseEnrollmentPortal with this fixed version:
 
   const getCurrentCourseData = (): CourseData => {
@@ -1186,8 +1230,10 @@ const CourseEnrollmentPortal: React.FC = () => {
 
   const handleCartCheckout = () => {
     if (cartItems.length === 0) return;
+
     const userData = localStorage.getItem("user");
     let user_uuid = "";
+
     if (userData) {
       try {
         const parsedData = JSON.parse(userData);
@@ -1205,37 +1251,47 @@ const CourseEnrollmentPortal: React.FC = () => {
       setShowAuthAlert(true);
       return;
     }
+
     const courseUuid = cartItems[0].uuid || crypto.randomUUID();
     const totalPrice = cartItems.reduce(
       (total, item) => total + parsePriceToNumber(item.price),
       0
     );
-    const originalPrice = totalPrice * 1.2;
+    const originalPrice = Math.round(totalPrice * 1.25);
+    const discount = originalPrice - totalPrice;
+
     const courseTitles = cartItems
-      .map((item) => encodeURIComponent(item.title))
-      .join(",");
+      .map((item) => item.title.replace(" Course", ""))
+      .join(", ");
+    const duration = cartItems[0].duration;
+
     router.push(
-      `/payment/${courseUuid}?title=${courseTitles}&price=₹${totalPrice}&items=${
+      `/payment/${courseUuid}?title=${encodeURIComponent(
+        courseTitles
+      )}&price=₹${totalPrice.toLocaleString("en-IN")}&items=${
         cartItems.length
       }&duration=${encodeURIComponent(
-        cartItems[0].duration
-      )}&originalPrice=₹${originalPrice}&discount=₹${(
-        originalPrice - totalPrice
-      ).toFixed(2)}&user_uuid=${encodeURIComponent(
-        user_uuid
-      )}&uuid=${encodeURIComponent(courseUuid)}`
+        duration
+      )}&originalPrice=₹${originalPrice.toLocaleString(
+        "en-IN"
+      )}&discount=₹${discount.toLocaleString(
+        "en-IN"
+      )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
+        courseUuid
+      )}`
     );
+
     closeCartModal();
   };
-
   const addToWishlist = () => {
     const currentCategory =
       salesCategories.find((cat) => cat.id?.toString() === activeMainTab)
         ?.category || "";
     const currentCourseData = getCurrentCourseData();
+
     const courseToAdd: WishlistItem = {
       id: `${activeMainTab}-${activeSubTab}-${activeCourse}`,
-      title: `${activeCourse} Course`,
+      title: activeCourse, // Remove ' Course' suffix here
       price: currentCourseData.amount,
       duration: currentCourseData.duration,
       category: currentCategory,
@@ -1267,9 +1323,10 @@ const CourseEnrollmentPortal: React.FC = () => {
       salesCategories.find((cat) => cat.id?.toString() === activeMainTab)
         ?.category || "";
     const currentCourseData = getCurrentCourseData();
+
     const courseToAdd: WishlistItem = {
       id: `${activeMainTab}-${activeSubTab}-${activeCourse}`,
-      title: `${activeCourse} Course`,
+      title: activeCourse, // Remove ' Course' suffix here
       price: currentCourseData.amount,
       duration: currentCourseData.duration,
       category: currentCategory,
@@ -1296,31 +1353,35 @@ const CourseEnrollmentPortal: React.FC = () => {
     setTimeout(() => setAlertMessage(null), 3000);
   };
 
-  const handleEnrollNow = () => {
-    const currentCourseData = getCurrentCourseData();
-    if (!currentCourseData.uuid) {
-      setShowAuthAlert(true);
-      return;
-    }
-    const userData = localStorage.getItem("user");
-    let user_uuid = "";
-    if (userData) {
-      try {
-        const parsedData = JSON.parse(userData);
-        user_uuid = parsedData.uuid || "";
-        if (!user_uuid) {
-          setShowAuthAlert(true);
-          return;
-        }
-      } catch (error) {
-        console.error("Error parsing user data from localStorage:", error);
+ const handleEnrollNow = async () => {
+  const currentCourseData = getCurrentCourseData();
+  if (!currentCourseData.uuid) {
+    setShowAuthAlert(true);
+    return;
+  }
+  const userData = localStorage.getItem("user");
+  let user_uuid = "";
+  if (userData) {
+    try {
+      const parsedData = JSON.parse(userData);
+      user_uuid = parsedData.uuid || "";
+      if (!user_uuid) {
         setShowAuthAlert(true);
         return;
       }
-    } else {
+    } catch (error) {
+      console.error("Error parsing user data from localStorage:", error);
       setShowAuthAlert(true);
       return;
     }
+  } else {
+    setShowAuthAlert(true);
+    return;
+  }
+  
+  setIsEnrolling(true); // Start loading
+  
+  try {
     const originalPrice = parsePriceToNumber(currentCourseData.amount) * 1.2;
     router.push(
       `/payment/${currentCourseData.uuid}?title=${encodeURIComponent(
@@ -1335,7 +1396,11 @@ const CourseEnrollmentPortal: React.FC = () => {
         user_uuid
       )}&uuid=${encodeURIComponent(currentCourseData.uuid)}`
     );
-  };
+  } finally {
+    // Reset loading state after navigation
+    setTimeout(() => setIsEnrolling(false), 1000);
+  }
+};
 
   const removeFromWishlist = (id: string) => {
     setWishlistItems(wishlistItems.filter((item) => item.id !== id));
@@ -1353,6 +1418,7 @@ const CourseEnrollmentPortal: React.FC = () => {
   const handleWishlistEnroll = (item: WishlistItem) => {
     const userData = localStorage.getItem("user");
     let user_uuid = "";
+
     if (userData) {
       try {
         const parsedData = JSON.parse(userData);
@@ -1370,19 +1436,28 @@ const CourseEnrollmentPortal: React.FC = () => {
       setShowAuthAlert(true);
       return;
     }
+
     const courseUuid = item.uuid || crypto.randomUUID();
-    const originalPrice = parsePriceToNumber(item.price) * 1.2;
+    const itemPrice = parsePriceToNumber(item.price);
+    const originalPrice = Math.round(itemPrice * 1.25);
+    const discount = originalPrice - itemPrice;
+
     router.push(
       `/payment/${courseUuid}?title=${encodeURIComponent(
         item.title
-      )}&price=${encodeURIComponent(item.price)}&duration=${encodeURIComponent(
+      )}&price=₹${itemPrice.toLocaleString(
+        "en-IN"
+      )}&duration=${encodeURIComponent(
         item.duration
-      )}&originalPrice=₹${originalPrice}&discount=₹${(
-        originalPrice - parsePriceToNumber(item.price)
-      ).toFixed(2)}&user_uuid=${encodeURIComponent(
-        user_uuid
-      )}&uuid=${encodeURIComponent(courseUuid)}`
+      )}&originalPrice=₹${originalPrice.toLocaleString(
+        "en-IN"
+      )}&discount=₹${discount.toLocaleString(
+        "en-IN"
+      )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
+        courseUuid
+      )}`
     );
+
     closeWishlistModal();
   };
 
@@ -1484,6 +1559,8 @@ const CourseEnrollmentPortal: React.FC = () => {
               addToCart={addToCart}
               addToWishlist={addToWishlist}
               parsePriceToNumber={parsePriceToNumber}
+                isEnrolling={isEnrolling}
+
             />
           ) : (
             <CourseList
@@ -1504,6 +1581,7 @@ const CourseEnrollmentPortal: React.FC = () => {
         wishlistItems={wishlistItems}
         removeFromWishlist={removeFromWishlist}
         handleWishlistEnroll={handleWishlistEnroll}
+        parsePriceToNumber={parsePriceToNumber}
       />
       <CartModal
         isOpen={isCartModalOpen}

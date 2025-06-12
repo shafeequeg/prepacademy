@@ -935,12 +935,13 @@ const CatExamApplySection: React.FC = () => {
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                  <a
-                    href="#"
+                  <button
+                    type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
+                    onClick={openModal}
                   >
                     Apply for DEMO Class →
-                  </a>
+                  </button>
                 </div>
 
                 <div className="mx-auto my-auto">
@@ -985,7 +986,7 @@ const CatExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   CLAT Master Class
                 </h3>
-                   <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >

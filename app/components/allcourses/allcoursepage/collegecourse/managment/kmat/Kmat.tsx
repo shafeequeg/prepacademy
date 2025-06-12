@@ -819,7 +819,7 @@ const CUETExamApplySection: React.FC = () => {
                     />
                     <p className="text-white">
                       {" "}
-                     Mentoring & Teaching by experts Regular {" "}
+                      Mentoring & Teaching by experts Regular{" "}
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -830,12 +830,10 @@ const CUETExamApplySection: React.FC = () => {
                       height={20} // 5 * 4
                       className="w-5 h-5 mr-3"
                     />
-                    <p className="text-white">
-                     Testing & Analysis {" "}
-                    </p>
+                    <p className="text-white">Testing & Analysis </p>
                   </div>
 
-                   <div className="flex items-center">
+                  <div className="flex items-center">
                     <Image
                       src="/aboutusverified.png"
                       alt="Check Icon"
@@ -844,7 +842,7 @@ const CUETExamApplySection: React.FC = () => {
                       className="w-5 h-5 mr-3"
                     />
                     <p className="text-white">
-                     Support for School/Board Exams {" "}
+                      Support for School/Board Exams{" "}
                     </p>
                   </div>
                 </div>
@@ -1043,12 +1041,13 @@ const CUETExamApplySection: React.FC = () => {
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                  <a
-                    href="#"
+                  <button
+                    type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
+                    onClick={openModal}
                   >
                     Apply for DEMO Class →
-                  </a>
+                  </button>
                 </div>
 
                 <div className="mx-auto my-auto">
@@ -1093,7 +1092,7 @@ const CUETExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   KMAT Master Class
                 </h3>
-                  <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >

@@ -760,7 +760,7 @@ const CatExamApplySection: React.FC = () => {
       {/* Background Image Between Sections */}
       {/* Main Content */}
       <div
-        className="flex items-center overflow-x-auto w-full bg-black mt-32 p-3 space-x-2 scrollbar-hide"
+        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36 mt-10 p-3 space-x-2 scrollbar-hide"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -864,7 +864,7 @@ const CatExamApplySection: React.FC = () => {
       <div className="relative w-full z-10  ">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 ">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">

@@ -23,12 +23,11 @@ import RegisterForm from "./Register";
 import { initializeRecaptcha, sendOTP, verifyOTP } from "./firebase";
 import Image from "next/image";
 
-interface LoginFormProps {
+interface LoginModalProps {
   closeModal: () => void;
+  source: 'chatbot' | 'percentage-calculator' | 'account';
   onSuccess: () => void;
-  source: "chatbot" | "percentage-calculator";
 }
-
 interface ApiError {
   message: string;
 }
@@ -48,7 +47,7 @@ interface User {
   firebase_user_id: string;
 }
 
-const LoginModal: React.FC<LoginFormProps> = ({
+const LoginModal: React.FC<LoginModalProps> = ({
   closeModal,
   onSuccess,
   source,
@@ -83,7 +82,7 @@ const LoginModal: React.FC<LoginFormProps> = ({
   });
 
   console.log(onSuccess);
-  
+
   const fetchUsers = async () => {
     try {
       const response = await axiosInstance.get(API_URLS.USERS.GET_USERS);
@@ -232,12 +231,14 @@ const LoginModal: React.FC<LoginFormProps> = ({
     }
   };
 
+
   const handleSendOTP = async () => {
     const phoneError = validatePhoneNumber(formData.phone_number);
     if (phoneError) {
       setValidationErrors({ ...validationErrors, phone_number: phoneError });
       return;
     }
+    setLoading(true); // Set loading to true at the start
     setIsVerifying(true);
     setOtpError(null);
 
@@ -259,6 +260,7 @@ const LoginModal: React.FC<LoginFormProps> = ({
       setOtpError("Failed to send OTP. Please try again.");
     } finally {
       setIsVerifying(false);
+      setLoading(false);
     }
   };
 
@@ -325,10 +327,11 @@ const LoginModal: React.FC<LoginFormProps> = ({
             <div className="absolute top-3 right-3">
               <button
                 onClick={closeModal}
-                className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full"
+                className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full md:text-gray-500 md:hover:text-orange-500"
               >
                 <X size={20} />
               </button>
+              
             </div>
             <div className="flex justify-center mb-4">
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg">

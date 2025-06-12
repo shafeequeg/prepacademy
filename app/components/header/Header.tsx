@@ -72,28 +72,30 @@ export default function Header() {
   useEffect(() => {
     const fetchUserData = () => {
       const currentUser = localStorage.getItem("currentUser");
+      const userData = localStorage.getItem("user");
+
       if (currentUser) {
         try {
           const parsedUser = JSON.parse(currentUser);
           setUser(parsedUser);
-          localStorage.setItem("user", currentUser);
         } catch (error) {
           console.error("Error parsing currentUser:", error);
+          localStorage.removeItem("currentUser"); // Clean up corrupted data
         }
-      } else {
-        const userData = localStorage.getItem("user");
-        if (userData) {
-          try {
-            setUser(JSON.parse(userData));
-          } catch (error) {
-            console.error("Error parsing user:", error);
-          }
+      } else if (userData) {
+        try {
+          const parsedUser = JSON.parse(userData);
+          setUser(parsedUser);
+        } catch (error) {
+          console.error("Error parsing user:", error);
+          localStorage.removeItem("user"); // Clean up corrupted data
         }
       }
     };
 
     fetchUserData();
   }, []);
+
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -384,6 +386,7 @@ export default function Header() {
 
   const confirmLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("currentUser"); // Add this line
     setUser(null);
     setShowLogoutConfirm(false);
     setShowLogoutSuccess(true);
@@ -576,12 +579,14 @@ export default function Header() {
                         >
                           Profile
                         </div>
+                        
                         <div
                           onClick={() => handleNavigation("/my-courses")}
                           className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
                         >
                           My Courses
                         </div>
+                        
                         {user.program && (
                           <div className="block text-white px-4 py-2 text-xs cursor-default border-t border-[#F55D3E]/10">
                             Program: {user.program}
@@ -905,10 +910,10 @@ export default function Header() {
             className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
             onClick={handleLoginClick}
           >
-            <div className="w-7 h-7 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
+            {/* <div className="w-7 h-7 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
               <FiUser className="text-[#FFE4B5]" size={14} />
             </div>
-            <span>Login</span>
+            <span>Login</span> */}
           </div>
         )}
 

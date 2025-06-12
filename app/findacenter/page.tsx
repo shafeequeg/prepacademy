@@ -7,8 +7,8 @@ import {
   Navigation,
   Search,
   Star,
-  Clock,
-  Users,
+  // Clock,
+  // Users,
 } from "lucide-react";
 
 type Location = {

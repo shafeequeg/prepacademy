@@ -45,7 +45,7 @@ interface Userdata {
 
 interface Option {
   id: string | number;
-  question: string | number; 
+  question: string | number;
   text: string;
 }
 
@@ -297,7 +297,6 @@ const CatExamApplySection: React.FC = () => {
   const handleEnrollClick = () => {
     router.push("/CourseEnrollmentPortal");
   };
-
 
   const fetchPrograms = async () => {
     try {
@@ -804,7 +803,8 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
                     onClick={handleEnrollClick}
                   >
                     Enroll Now
@@ -995,12 +995,13 @@ const CatExamApplySection: React.FC = () => {
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                  <a
-                    href="#"
+                  <button
+                    type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
+                    onClick={openModal}
                   >
                     Apply for DEMO Class →
-                  </a>
+                  </button>
                 </div>
 
                 <div className="mx-auto my-auto">
@@ -1045,7 +1046,7 @@ const CatExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   NDA Master Class
                 </h3>
-                  <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >

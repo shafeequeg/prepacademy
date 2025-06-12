@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   X,
   ArrowRight,
@@ -24,6 +24,8 @@ import { CheckCircle } from "lucide-react";
 interface RegistrationModalProps {
   closeModal: () => void;
 }
+
+
 
 interface FormData {
   full_name: string;
@@ -59,20 +61,35 @@ interface User {
 
 // }
 
+interface UserData {
+  id: number;
+  uuid: string;
+  full_name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  dob?: string | null;
+  gender: "Male" | "Female";
+  location?: string | null;
+  exam_target?: string | null;
+  program?: string | null;
+  firebase_user_id: string;
+}
+
 const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<FormData>({
-    full_name: "", // Add this field to match backend expectations
+    full_name: "",
     email: "",
     phone_number: "",
     location: "",
     dateOfBirth: "",
-    gender: "", // Will be set to "male" or "female" as a string
+    gender: "",
     targetExamYear: "2024",
     programs: [],
     firebase_user_id: "",
-    password: "", // Add password field
-    confirm_password: "", // Add confirm password field
+    password: "",
+    confirm_password: "",
   });
   const [showlogin, setshowlogin] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
@@ -100,7 +117,18 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
   //   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   //   return otp;
   // };
-console.log(showSuccess);
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  // const [validationErrors, setValidationErrors] = useState({
+  //   email: "",
+  //   phone: "",
+  //   password: "",
+  // });
+
+  const [users, setUsers] = useState<UserData[]>([]);
+
+  console.log(showSuccess);
 
   const handleSendOTP = async () => {
     if (!formData.phone_number) {
@@ -192,6 +220,47 @@ console.log(showSuccess);
     }
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhoneNumber = (phone: string): boolean => {
+    const mobilePattern = /^(\+91|91)?[6-9]\d{9}$/;
+    let mobileToCheck = phone;
+
+    if (mobileToCheck.startsWith("+91")) {
+      mobileToCheck = mobileToCheck.substring(3);
+    } else if (mobileToCheck.startsWith("91")) {
+      mobileToCheck = mobileToCheck.substring(2);
+    }
+
+    return mobilePattern.test(
+      "+91" + mobileToCheck.replace(/\D/g, "").slice(-10)
+    );
+  };
+
+  const checkDuplicateEmail = (email: string): boolean => {
+    return users.some(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+  };
+
+  const checkDuplicatePhone = (phone: string): boolean => {
+    // Normalize phone number for comparison
+    let normalizedPhone = phone.replace(/\D/g, "");
+    if (normalizedPhone.startsWith("91")) {
+      normalizedPhone = normalizedPhone.substring(2);
+    }
+
+    return users.some((user) => {
+      let userPhone = user.phone_number.replace(/\D/g, "");
+      if (userPhone.startsWith("91")) {
+        userPhone = userPhone.substring(2);
+      }
+      return userPhone === normalizedPhone;
+    });
+  };
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -215,6 +284,52 @@ console.log(showSuccess);
 
       return { ...prev, [name]: value };
     });
+
+    // Real-time validation
+    if (name === "email") {
+      if (value && !validateEmail(value)) {
+        setEmailError("Please enter a valid email address");
+      } else if (value && checkDuplicateEmail(value)) {
+        setEmailError("This email is already registered");
+      } else {
+        setEmailError("");
+      }
+    }
+
+    if (name === "phone_number") {
+      if (value && !validatePhoneNumber(value)) {
+        setPhoneError("Please enter a valid Indian mobile number");
+      } else if (value && checkDuplicatePhone(value)) {
+        setPhoneError("This mobile number is already registered");
+      } else {
+        setPhoneError("");
+      }
+    }
+
+    if (name === "password") {
+      if (value && value.length < 8) {
+        setPasswordError("Password must be at least 8 characters long");
+      } else if (
+        formData.confirm_password &&
+        value !== formData.confirm_password
+      ) {
+        setPasswordError("Passwords do not match");
+      } else {
+        setPasswordError("");
+      }
+    }
+
+    if (name === "confirm_password") {
+      if (value && formData.password && value !== formData.password) {
+        setPasswordError("Passwords do not match");
+      } else if (
+        formData.password &&
+        formData.password.length >= 8 &&
+        value === formData.password
+      ) {
+        setPasswordError("");
+      }
+    }
   };
 
   const handleProgramSelect = (programId: string) => {
@@ -229,6 +344,19 @@ console.log(showSuccess);
       }
     });
   };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axiosInstance.get(API_URLS.USERS.GET_USERS);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -274,7 +402,10 @@ console.log(showSuccess);
         setLoginSuccess(true);
 
         setCurrentUser(response.data.user);
-        setTimeout(() => closeModal(), 3000);
+        setTimeout(() => {
+          closeModal();
+          window.location.reload();
+        }, 3000);
       } else {
         throw new Error("Registration failed");
       }
@@ -288,7 +419,6 @@ console.log(showSuccess);
   };
 
   console.log(loginSuccess);
-  
 
   // Helper function to get or create Firebase user
   // const getOrCreateFirebaseUser = async (phoneNumber: string) => {
@@ -377,14 +507,48 @@ console.log(showSuccess);
 
   const goToNextStep = () => {
     if (currentStep === 1) {
-      if (!formData.full_name || !formData.email || !isVerified) {
-        setOtpError(
-          "Please complete all required fields and verify your phone number"
-        );
+      let hasErrors = false;
+
+      if (
+        !formData.full_name ||
+        !formData.email ||
+        !formData.phone_number ||
+        !formData.password ||
+        !formData.confirm_password
+      ) {
+        setOtpError("Please complete all required fields");
         return;
       }
 
+      if (!validateEmail(formData.email)) {
+        setEmailError("Please enter a valid email address");
+        hasErrors = true;
+      } else if (checkDuplicateEmail(formData.email)) {
+        setEmailError("This email is already registered");
+        hasErrors = true;
+      }
+
+      // Check phone validation
+      if (!validatePhoneNumber(formData.phone_number)) {
+        setPhoneError("Please enter a valid Indian mobile number");
+        hasErrors = true;
+      } else if (checkDuplicatePhone(formData.phone_number)) {
+        setPhoneError("This mobile number is already registered");
+        hasErrors = true;
+      }
+
+      // Check if phone is verified
+      if (!isVerified) {
+        setOtpError("Please verify your phone number");
+        hasErrors = true;
+      }
+
+      // Check password validation
       if (!validatePasswords()) {
+        hasErrors = true;
+      }
+
+      if (hasErrors) {
         return;
       }
     }
@@ -416,20 +580,20 @@ console.log(showSuccess);
     return true;
   };
 
- // Replace this section in your code
+  // Replace this section in your code
 
-if (showlogin) {
-  return (
-    <LoginModal 
-      closeModal={() => setshowlogin(false)} 
-      onSuccess={() => {
-        setLoginSuccess(true);
-        closeModal();
-      }}
-      source="chatbot" // Using one of the allowed values: "chatbot" or "percentage-calculator"
-    />
-  );
-}
+  if (showlogin) {
+    return (
+      <LoginModal
+        closeModal={() => setshowlogin(false)}
+        onSuccess={() => {
+          setLoginSuccess(true);
+          closeModal();
+        }}
+        source="chatbot" // Using one of the allowed values: "chatbot" or "percentage-calculator"
+      />
+    );
+  }
   console.log(loginSuccess);
 
   if (loginSuccess && currentUser) {
@@ -441,6 +605,7 @@ if (showlogin) {
               <button
                 onClick={closeModal}
                 className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full"
+                aria-label="Close modal"
               >
                 <X size={20} />
               </button>
@@ -626,6 +791,11 @@ if (showlogin) {
                           : "border-gray-300"
                       } rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 text-gray-900 transition-all text-sm`}
                     />
+                    {emailError && (
+                      <p className="text-red-500 text-xs font-medium mt-1">
+                        {emailError}
+                      </p>
+                    )}
                   </div>
 
                   {/* Password fields - Added here */}
@@ -802,6 +972,12 @@ if (showlogin) {
                               Verified
                             </span>
                           </div>
+                        )}
+
+                        {phoneError && !isVerified && (
+                          <p className="text-red-500 text-xs font-medium mt-1">
+                            {phoneError}
+                          </p>
                         )}
                       </div>
 

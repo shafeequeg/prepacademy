@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
-import { IoMailOutline, IoCallOutline } from "react-icons/io5";
+// import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+// import { IoMailOutline, IoCallOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 

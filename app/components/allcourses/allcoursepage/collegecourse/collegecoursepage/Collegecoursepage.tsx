@@ -615,12 +615,13 @@ console.log(programs);
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                  <a
-                    href="#"
+                 <button
+                    type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
+                    onClick={openModal}
                   >
                     Apply for DEMO Class →
-                  </a>
+                  </button>
                 </div>
                 <div className="mx-auto my-auto">
                   <Image
