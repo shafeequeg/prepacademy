@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import { courses } from "@/app/schoolcourse/law/Data";
@@ -325,7 +325,7 @@ const ExamPrepHomepage: React.FC<ExamPrepHomepageProps> = ({ slug }) => {
         </div>
       </div>
 
-      <div className="bg-black text-white">
+      {/* <div className="bg-black text-white">
         <div className="bg-[#FF6347] relative overflow-hidden">
           <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row-reverse items-center justify-center gap-6 md:gap-12">
             <div className="flex-shrink-0 flex justify-center">
@@ -354,7 +354,7 @@ const ExamPrepHomepage: React.FC<ExamPrepHomepageProps> = ({ slug }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h2 className="text-4xl font-semibold text-center mb-6 ml-2">

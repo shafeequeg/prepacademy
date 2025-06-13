@@ -8,6 +8,8 @@ interface ExamPrepLowerSectionsProps {
   slug: string;
 }
 
+
+
 const ExamPrepLowerSections: React.FC<ExamPrepLowerSectionsProps> = ({ slug }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);

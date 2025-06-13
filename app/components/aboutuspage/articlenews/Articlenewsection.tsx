@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -6,26 +6,23 @@ import Image from "next/image";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 
-
-
 const stripHtmlAndTruncate = (
-    html: string | null | undefined,
-    maxLength: number = 120
-  ): string => {
-    if (!html) return "No description available";
+  html: string | null | undefined,
+  maxLength: number = 120
+): string => {
+  if (!html) return "No description available";
 
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html;
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
 
-    const text = tempDiv.textContent || tempDiv.innerText || "";
-    const cleanedText = text.trim();
+  const text = tempDiv.textContent || tempDiv.innerText || "";
+  const cleanedText = text.trim();
 
-    return cleanedText.length > maxLength
-      ? `${cleanedText.substring(0, maxLength)}...`
-      : cleanedText;
-  };
+  return cleanedText.length > maxLength
+    ? `${cleanedText.substring(0, maxLength)}...`
+    : cleanedText;
+};
 
-  
 interface ArticleCardProps {
   image: string;
   title: string;
@@ -59,9 +56,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     />
     <div className="p-6 flex flex-col flex-grow">
       <h3 className="text-white text-xl font-semibold mb-3">{title}</h3>
-    <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-  {stripHtmlAndTruncate(description)}
-</p>
+      <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+        {stripHtmlAndTruncate(description)}
+      </p>
 
       <div className="mt-auto">
         <Link href={`/blogdetails/${id}`}>
@@ -101,8 +98,6 @@ const NewsAndArticles: React.FC = () => {
     }
   };
 
-   
-
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -116,7 +111,7 @@ const NewsAndArticles: React.FC = () => {
   }
 
   return (
-    <div className="bg-[#0F0F0F] min-h-screen p-8">
+    <div className="bg-[#0F0F0F] p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-baseline gap-3 mb-10">
           <h2 className="text-3xl font-bold italic text-white">Latest</h2>
@@ -141,7 +136,7 @@ const NewsAndArticles: React.FC = () => {
 
             <div className="text-center">
               <Link href={"/blogs"}>
-                <button className="text-white flex items-center gap-2 mx-auto hover:text-gray-300 transition-colors">
+                <button className="text-white flex items-center gap-2 mx-auto hover:text-gray-300 hover:underline transition-colors">
                   View More
                   <svg
                     className="w-5 h-5"

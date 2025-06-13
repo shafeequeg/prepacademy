@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../components/apiconfig/axios";
 import { API_URLS } from "../components/apiconfig/api_urls";
+// import LoginModal from "../../app/components/login/Login";
+
 
 interface User {
   id: string;
@@ -90,6 +92,7 @@ const ProfilePage = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+
   const fetchUsers = async () => {
     try {
       const response = await axiosInstance.get(API_URLS.USERS.GET_USERS);
@@ -105,6 +108,8 @@ const ProfilePage = () => {
     fetchUsers();
   }, []);
 
+
+  
   useEffect(() => {
     if (users.length > 0) {
       try {
@@ -166,7 +171,7 @@ const ProfilePage = () => {
           </p>
           <button
             className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
-            onClick={() => (window.location.href = "/login")}
+            onClick={() => (window.location.href = "/")}
           >
             Sign In
           </button>
@@ -189,12 +194,12 @@ const ProfilePage = () => {
 
   return (
     <div className="h-screen bg-[#2B1615] overflow-y-auto">
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="max-w-4xl mx-auto px-4 py-6 mt-9">
         {/* Header */}
-        <div className="text-center mb-6">
+        {/* <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-orange-100">PrepAcademy</h1>
           <p className="text-orange-300 text-sm">Your Learning Profile</p>
-        </div>
+        </div> */}
 
         {/* Main Profile Card */}
         <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 backdrop-blur-xl border border-orange-700/30 rounded-2xl overflow-hidden shadow-xl">

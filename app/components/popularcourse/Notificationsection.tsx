@@ -1,34 +1,161 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
+import axiosInstance from "../apiconfig/axios";
+import { API_URLS } from "../apiconfig/api_urls";
 
 interface NotificationTabProps {
   title: string;
   formLabel: string;
 }
 
-const NotificationTab: React.FC<NotificationTabProps> = ({ title, formLabel }) => {
+interface Courses {
+  id: string;
+  subject: number;
+  subject_name: string;
+  section_name: string;
+}
+
+const NotificationTab: React.FC<NotificationTabProps> = ({
+  title,
+  formLabel,
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     number: "",
     email: "",
     selection: "",
+    subcourse: "",
     targetYear: "",
     timeSlot: "",
   });
+  const [course, setcourse] = useState<Courses[]>([]);
+  const [uniqueSubjects, setUniqueSubjects] = useState<string[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<Courses[]>([]);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  // Get tomorrow's date in YYYY-MM-DD format
+  const getTomorrowDate = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    // Clear error when user starts typing/selecting
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+
+    // When subject is selected, filter courses for that subject and reset subcourse
+    if (name === "selection" && value) {
+      const coursesForSubject = course.filter((c) => c.subject_name === value);
+      setFilteredCourses(coursesForSubject);
+      // Reset subcourse when main course changes
+      setFormData((prev) => ({
+        ...prev,
+        subcourse: "",
+      }));
+    }
+  };
+
+  const fetchCourses = async () => {
+    try {
+      const response = await axiosInstance.get(
+        API_URLS.SALEPAGE_COURSE_SECTION.GET_SALEPAGE_COURSE_SECTION
+      );
+      setcourse(response.data);
+
+      // Extract unique subject names
+      const subjects = [
+        ...new Set(response.data.map((course: Courses) => course.subject_name)),
+      ] as string[];
+      setUniqueSubjects(subjects);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch courses. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long";
+    }
+
+    // Number validation
+    if (!formData.number.trim()) {
+      newErrors.number = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.number.replace(/\s/g, ""))) {
+      newErrors.number = "Please enter a valid 10-digit phone number";
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Selection validation
+    if (!formData.selection) {
+      newErrors.selection = `${formLabel} is required`;
+    }
+
+    // Subcourse validation
+    if (!formData.subcourse) {
+      newErrors.subcourse = "Subcourse is required";
+    }
+
+    // Target year validation
+    if (!formData.targetYear) {
+      newErrors.targetYear = "Target year is required";
+    }
+
+    // Time slot validation
+    if (!formData.timeSlot) {
+      newErrors.timeSlot = "Please select a date";
+    } else {
+      const selectedDate = new Date(formData.timeSlot);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate <= today) {
+        newErrors.timeSlot = "Please select a future date";
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Please fix the errors in the form");
+      return;
+    }
 
     // EmailJS configuration with dummy tokens
     const serviceID = "service_dummy123";
@@ -44,9 +171,12 @@ const NotificationTab: React.FC<NotificationTabProps> = ({ title, formLabel }) =
           number: "",
           email: "",
           selection: "",
+          subcourse: "",
           targetYear: "",
           timeSlot: "",
         });
+        setFilteredCourses([]);
+        setErrors({});
       },
       (error) => {
         console.error("EmailJS error:", error);
@@ -71,7 +201,11 @@ const NotificationTab: React.FC<NotificationTabProps> = ({ title, formLabel }) =
             >
               Join Now
             </a>
-            <a href="https://www.facebook.com/prepacademy.in" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/prepacademy.in"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 320 512"
@@ -86,7 +220,12 @@ const NotificationTab: React.FC<NotificationTabProps> = ({ title, formLabel }) =
           {/* Telegram */}
           <div className="bg-[#220F0F] rounded-lg p-3 flex items-center justify-center w-[20%] sm:p-5 sm:flex-col sm:items-center sm:justify-center sm:w-auto">
             <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-[#C69881] sm:mb-3">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#F55D3E]">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F55D3E]"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -200,76 +339,160 @@ const NotificationTab: React.FC<NotificationTabProps> = ({ title, formLabel }) =
       <div className="bg-[#140A0A] rounded-lg p-6">
         <h3 className="text-xl font-medium text-white mb-6">{title}</h3>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          {/* Name and Number in one row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-white text-sm font-medium mb-2">NAME</label>
+              <label className="block text-white text-sm font-medium mb-2">
+                NAME <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 name="name"
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]"
+                className={`w-full bg-[#220F0F] border ${
+                  errors.name ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
               />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
             <div>
-              <label className="block text-white text-sm font-medium mb-2">NUMBER</label>
+              <label className="block text-white text-sm font-medium mb-2">
+                NUMBER <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 name="number"
                 placeholder="Enter your number"
                 value={formData.number}
                 onChange={handleChange}
-                className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]"
+                className={`w-full bg-[#220F0F] border ${
+                  errors.number ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
               />
+              {errors.number && (
+                <p className="text-red-500 text-xs mt-1">{errors.number}</p>
+              )}
             </div>
           </div>
+
+          {/* Email in full width */}
           <div className="mb-4">
-            <label className="block text-white text-sm font-medium mb-2">EMAIL</label>
+            <label className="block text-white text-sm font-medium mb-2">
+              EMAIL <span className="text-red-500">*</span>
+            </label>
             <input
               type="email"
               name="email"
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]"
+              className={`w-full bg-[#220F0F] border ${
+                errors.email ? "border-red-500" : "border-gray-800"
+              } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+
+          {/* Course and Subcourse in one row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-white text-sm font-medium mb-2">{formLabel}</label>
+              <label className="block text-white text-sm font-medium mb-2">
+                {formLabel} <span className="text-red-500">*</span>
+              </label>
               <select
                 name="selection"
                 value={formData.selection}
                 onChange={handleChange}
-                className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none"
+                className={`w-full bg-[#220F0F] border ${
+                  errors.selection ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer`}
               >
-                <option>Select {formLabel}</option>
+                <option value="">Select {formLabel}</option>
+                {uniqueSubjects.map((subject, index) => (
+                  <option key={index} value={subject}>
+                    {subject}
+                  </option>
+                ))}
               </select>
+              {errors.selection && (
+                <p className="text-red-500 text-xs mt-1">{errors.selection}</p>
+              )}
             </div>
             <div>
-              <label className="block text-white text-sm font-medium mb-2">TARGET YEAR</label>
+              <label className="block text-white text-sm font-medium mb-2">
+                SUBCOURSE <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="subcourse"
+                value={formData.subcourse}
+                onChange={handleChange}
+                disabled={!formData.selection}
+                className={`w-full bg-[#220F0F] border ${
+                  errors.subcourse ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                <option value="">Select Subcourse</option>
+                {filteredCourses.map((subcourse) => (
+                  <option key={subcourse.id} value={subcourse.section_name}>
+                    {subcourse.section_name}
+                  </option>
+                ))}
+              </select>
+              {errors.subcourse && (
+                <p className="text-red-500 text-xs mt-1">{errors.subcourse}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Target Year and Time Slot in one row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <label className="block text-white text-sm font-medium mb-2">
+                TARGET YEAR <span className="text-red-500">*</span>
+              </label>
               <select
                 name="targetYear"
                 value={formData.targetYear}
                 onChange={handleChange}
-                className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none"
+                className={`w-full bg-[#220F0F] border ${
+                  errors.targetYear ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer`}
               >
-                <option>Select Target year</option>
+                <option value="">Select Target year</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
               </select>
+              {errors.targetYear && (
+                <p className="text-red-500 text-xs mt-1">{errors.targetYear}</p>
+              )}
+            </div>
+            <div>
+              <label className="block text-white text-sm font-medium mb-2">
+                SELECT SLOT <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="date"
+                name="timeSlot"
+                value={formData.timeSlot}
+                onChange={handleChange}
+                min={getTomorrowDate()}
+                className={`w-full bg-[#220F0F] border ${
+                  errors.timeSlot ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none`}
+              />
+              {errors.timeSlot && (
+                <p className="text-red-500 text-xs mt-1">{errors.timeSlot}</p>
+              )}
             </div>
           </div>
-          <div className="mb-6">
-            <label className="block text-white text-sm font-medium mb-2">TIME SLOT</label>
-            <select
-              name="timeSlot"
-              value={formData.timeSlot}
-              onChange={handleChange}
-              className="w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none"
-            >
-              <option>Select Time slot</option>
-            </select>
-          </div>
+
           <button
             type="submit"
             className="flex items-center justify-between bg-gradient-to-r from-[#F55D3E] to-[#E85D3E] text-white font-medium rounded-md px-5 py-3 hover:opacity-90 transition-opacity w-full"

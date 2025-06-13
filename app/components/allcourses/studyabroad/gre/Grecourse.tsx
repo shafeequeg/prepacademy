@@ -260,6 +260,15 @@ const CatExamApplySection: React.FC = () => {
     course: "",
   });
 
+   const [mainFormErrors, setMainFormErrors] = useState({
+    full_name: "",
+    mobile_number: "",
+    email: "",
+    college_studied: "",
+    program_type: "",
+    location: "",
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -299,12 +308,112 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+
+   const validateMainFullName = (name: string) => {
+    if (!name || name.trim() === "") {
+      return "Full name is required";
+    }
+    if (name.trim().length < 2) {
+      return "Name must be at least 2 characters";
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      return "Name should only contain letters and spaces";
+    }
+    return "";
+  };
+
+  const validateMainEmail = (email: string) => {
+    if (!email || email.trim() === "") {
+      return "Email address is required";
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return "Please enter a valid email address";
+    }
+    return "";
+  };
+
+  const validateMainMobile = (mobile: string) => {
+    if (!mobile || mobile.trim() === "") {
+      return "Mobile number is required";
+    }
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(mobile)) {
+      return "Please enter a valid 10-digit mobile number ";
+    }
+    return "";
+  };
+
+  const validateMainCollege = (college: string) => {
+    if (!college || college.trim() === "") {
+      return "College or School name is required";
+    }
+    if (college.trim().length < 2) {
+      return "Please enter a valid college/school name";
+    }
+    return "";
+  };
+
+  const validateMainLocation = (location: string) => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Please enter a valid location";
+    }
+    return "";
+  };
+
+  const validateMainProgramType = (programType: string) => {
+    if (!programType || programType.trim() === "") {
+      return "Please select a program type";
+    }
+    return "";
+  };
+
+   const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
+
+    // For mobile number, only allow digits and limit to 10 characters
+    if (name === "mobile_number") {
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
+      setFormData({ ...formData, [name]: numericValue });
+
+      // Validate mobile number
+      const error = validateMainMobile(numericValue);
+      setMainFormErrors((prev) => ({ ...prev, [name]: error }));
+      return;
+    }
+
     setFormData({ ...formData, [name]: value });
+
+    // Validate the changed field
+    let errorMessage = "";
+    switch (name) {
+      case "full_name":
+        errorMessage = validateMainFullName(value);
+        break;
+      case "email":
+        errorMessage = validateMainEmail(value);
+        break;
+      case "college_studied":
+        errorMessage = validateMainCollege(value);
+        break;
+      case "location":
+        errorMessage = validateMainLocation(value);
+        break;
+      case "program_type":
+        errorMessage = validateMainProgramType(value);
+        break;
+    }
+
+    setMainFormErrors((prev) => ({ ...prev, [name]: errorMessage }));
   };
+
   const validateFullName = (name: string): string => {
     if (!name || name.trim() === "") {
       return "Full name is required";
@@ -477,6 +586,26 @@ const CatExamApplySection: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+     const errors = {
+      full_name: validateMainFullName(formData.full_name),
+      mobile_number: validateMainMobile(formData.mobile_number),
+      email: validateMainEmail(formData.email),
+      college_studied: validateMainCollege(formData.college_studied),
+      location: validateMainLocation(formData.location),
+      program_type: validateMainProgramType(formData.program_type),
+    };
+
+    setMainFormErrors(errors);
+
+    // Check if there are any errors
+    const hasErrors = Object.values(errors).some((error) => error !== "");
+    if (hasErrors) {
+      toast.error("Please fix all validation errors before submitting");
+      return;
+    }
+
+
 
     try {
       const response = await axiosInstance.post(
@@ -831,84 +960,156 @@ const CatExamApplySection: React.FC = () => {
                   </p>
 
                   {/* Form Fields */}
-                  <form onSubmit={handleSubmit}>
+                   <form onSubmit={handleSubmit}>
                     <div className="space-y-4 mb-6">
-                      <input
-                        type="text"
-                        name="full_name"
-                        placeholder="Enter your Full Name"
-                        value={formData.full_name}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="tel"
-                        name="mobile_number"
-                        placeholder="Mobile Number"
-                        value={formData.mobile_number}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white "
-                        required
-                      />
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="text"
-                        name="college_studied"
-                        placeholder="College or School Studied"
-                        value={formData.college_studied}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <input
-                        type="text"
-                        name="location"
-                        placeholder="Location"
-                        value={formData.location}
-                        onChange={handleInputChange}
-                        className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white"
-                        required
-                      />
-                      <div className="relative">
-                        <select
-                          name="program_type"
-                          value={formData.program_type}
+                      <div>
+                        <input
+                          type="text"
+                          name="full_name"
+                          placeholder="Enter your Full Name"
+                          value={formData.full_name}
                           onChange={handleInputChange}
-                          className="w-full bg-[#131F2C] border border-[#1A2836] rounded-md p-3 text-white appearance-none"
+                          className={`w-full bg-[#131F2C] border ${
+                            mainFormErrors.full_name
+                              ? "border-red-500"
+                              : "border-[#1A2836]"
+                          } rounded-md p-3 text-white`}
                           required
-                        >
-                          <option value="" disabled>
-                            Preferred Online Program
-                          </option>
-                          <option value="online">Online</option>
-                          <option value="offline">Offline</option>
-                        </select>
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none  ">
-                          <svg
-                            width="14"
-                            height="8"
-                            viewBox="0 0 14 8"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                        />
+                        {mainFormErrors.full_name && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.full_name}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          type="tel"
+                          name="mobile_number"
+                          placeholder="Mobile Number"
+                          value={formData.mobile_number}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#131F2C] border ${
+                            mainFormErrors.mobile_number
+                              ? "border-red-500"
+                              : "border-[#1A2836]"
+                          } rounded-md p-3 text-white`}
+                          maxLength={10}
+                          required
+                        />
+                        {mainFormErrors.mobile_number && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.mobile_number}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#131F2C] border ${
+                            mainFormErrors.email
+                              ? "border-red-500"
+                              : "border-[#1A2836]"
+                          } rounded-md p-3 text-white`}
+                          required
+                        />
+                        {mainFormErrors.email && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.email}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          name="college_studied"
+                          placeholder="College or School Studied"
+                          value={formData.college_studied}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#131F2C] border ${
+                            mainFormErrors.college_studied
+                              ? "border-red-500"
+                              : "border-[#1A2836]"
+                          } rounded-md p-3 text-white`}
+                          required
+                        />
+                        {mainFormErrors.college_studied && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.college_studied}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          name="location"
+                          placeholder="Location"
+                          value={formData.location}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#131F2C] border ${
+                            mainFormErrors.location
+                              ? "border-red-500"
+                              : "border-[#1A2836]"
+                          } rounded-md p-3 text-white`}
+                          required
+                        />
+                        {mainFormErrors.location && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.location}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <div className="relative">
+                          <select
+                            name="program_type"
+                            value={formData.program_type}
+                            onChange={handleInputChange}
+                            className={`w-full bg-[#131F2C] border ${
+                              mainFormErrors.program_type
+                                ? "border-red-500"
+                                : "border-[#1A2836]"
+                            } rounded-md p-3 text-white appearance-none`}
+                            required
                           >
-                            <path
-                              d="M1 1L7 7L13 1"
-                              stroke="#FF6B3D"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
+                            <option value="" disabled>
+                              Preferred Online Program
+                            </option>
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                          </select>
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <svg
+                              width="14"
+                              height="8"
+                              viewBox="0 0 14 8"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M1 1L7 7L13 1"
+                                stroke="#FF6B3D"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
                         </div>
+                        {mainFormErrors.program_type && (
+                          <p className="text-red-400 text-sm mt-1">
+                            {mainFormErrors.program_type}
+                          </p>
+                        )}
                       </div>
                     </div>
 

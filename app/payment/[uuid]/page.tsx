@@ -1079,6 +1079,7 @@ export default function PaymentPage() {
           course_uuid: course.uuid,
           term_condition: true,
           donation_amount: donationValue,
+           donation: isDonationChecked, 
         }
       );
 

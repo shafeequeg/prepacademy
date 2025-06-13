@@ -191,7 +191,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-12 mb-12 pt-6 border-t border-gray-700 text-center">
+        <div className="md:mt-5 md:mb-2 mb-10 mt-3 pt-6 border-t border-gray-700 text-center">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} KANNATTUSERVICESLLP. All rights
             reserved.

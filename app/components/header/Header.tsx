@@ -80,7 +80,7 @@ export default function Header() {
           setUser(parsedUser);
         } catch (error) {
           console.error("Error parsing currentUser:", error);
-          localStorage.removeItem("currentUser"); // Clean up corrupted data
+          localStorage.removeItem("currentUser"); 
         }
       } else if (userData) {
         try {
@@ -88,7 +88,7 @@ export default function Header() {
           setUser(parsedUser);
         } catch (error) {
           console.error("Error parsing user:", error);
-          localStorage.removeItem("user"); // Clean up corrupted data
+          localStorage.removeItem("user"); 
         }
       }
     };
@@ -387,6 +387,7 @@ export default function Header() {
   const confirmLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("currentUser"); // Add this line
+    localStorage.setItem("isLoggedIn", "false");
     setUser(null);
     setShowLogoutConfirm(false);
     setShowLogoutSuccess(true);
@@ -466,7 +467,7 @@ export default function Header() {
               </div>
             </div>
 
-            <nav className="hidden lg:flex space-x-8 items-center">
+            <nav className="hidden lg:flex space-x-4 items-center">
               <div
                 onClick={() => handleNavigation("/")}
                 className="text-white hover:text-white text-xl font-semibold cursor-pointer"
@@ -878,44 +879,7 @@ export default function Header() {
           </div>
         </div>
 
-        {user ? (
-          <>
-            <div className="px-6 py-3 text-[#FFE4B5] text-sm font-serif italic flex items-center">
-              <div className="w-8 h-8 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
-                <FiUser className="text-[#FFE4B5]" size={16} />
-              </div>
-              <span className="truncate max-w-[180px]">{user.full_name}</span>
-            </div>
-            <div
-              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
-              onClick={() => handleNavigation("/profile")}
-            >
-              <span className="ml-11">Profile</span>
-            </div>
-            <div
-              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
-              onClick={() => handleNavigation("/my-courses")}
-            >
-              <span className="ml-11">My Courses</span>
-            </div>
-            <div
-              className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
-              onClick={handleLogout}
-            >
-              <span className="ml-11">Logout</span>
-            </div>
-          </>
-        ) : (
-          <div
-            className="px-6 py-2 text-[#FFE4B5]/80 text-sm font-serif italic flex items-center hover:bg-[#F55D3E]/20 hover:text-[#FFE4B5] cursor-pointer transition-all duration-300"
-            onClick={handleLoginClick}
-          >
-            {/* <div className="w-7 h-7 rounded-full bg-[#F55D3E]/20 flex items-center justify-center mr-3">
-              <FiUser className="text-[#FFE4B5]" size={14} />
-            </div>
-            <span>Login</span> */}
-          </div>
-        )}
+       
 
         {user ? (
           <>

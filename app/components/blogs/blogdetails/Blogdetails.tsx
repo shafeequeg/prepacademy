@@ -65,6 +65,8 @@ const createMarkup = (htmlContent: string) => {
   return { __html: modifiedHtml };
 };
 
+
+
 // Helper function to extract only tables from HTML content
 const extractTables = (htmlContent: string) => {
   const tableRegex = /<table[^>]*>[\s\S]*?<\/table>/g;
@@ -754,7 +756,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
           </div>
         </div>
 
-        {/* Background decoration */}
+       
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-600/10 rounded-full blur-3xl"></div>
@@ -764,7 +766,7 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
       {/* Main content with sidebar */}
       <div className="container mx-auto px-4 md:px-8 py-12 bg-gray-900">
         <div className="main-container">
-          {/* Sidebar */}
+        
           <div className="sidebar-container">
             <button
               className={`tab-button ${activeTab === "all" ? "active" : ""}`}

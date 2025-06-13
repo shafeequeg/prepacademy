@@ -121,6 +121,7 @@ const BlogSection = () => {
       });
     }
 
+    
     // Filter by search term if searchTerm is not empty
     if (searchTerm.trim() !== "") {
       filteredBlogs = filteredBlogs.filter((blog) =>
@@ -139,7 +140,7 @@ const BlogSection = () => {
   }, []);
 
   return (
-    <div className="w-full bg-[#1A1A1A] min-h-screen mt-28 p-6 md:p-8">
+    <div className="w-full bg-[#1A1A1A] min-h-screen mt-16 md:mt-28 p-6 md:p-8">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-white text-2xl font-semibold ">

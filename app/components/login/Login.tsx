@@ -8,6 +8,8 @@ import {
   AlertCircle,
   CheckCircle,
   Loader2,
+  EyeOff,
+  Eye,
 } from "lucide-react";
 import axiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
@@ -25,7 +27,7 @@ import Image from "next/image";
 
 interface LoginModalProps {
   closeModal: () => void;
-  source: 'chatbot' | 'percentage-calculator' | 'account';
+  source: "chatbot" | "percentage-calculator" | "account";
   onSuccess: () => void;
 }
 interface ApiError {
@@ -80,6 +82,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
     phone_number: "",
     otp: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   console.log(onSuccess);
 
@@ -188,6 +191,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
     localStorage.setItem("isLoggedIn", "true");
   };
 
+  
+
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const emailError = validateEmail(formData.email);
@@ -219,8 +224,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
       setCurrentUser(user);
       setLoading(false);
       setLoginSuccess(true);
-
-      // Close the modal after 3 seconds of showing success
+       if (typeof window !== 'undefined') {
+      window.location.href = "/"; 
+    }
+     
       setTimeout(() => {
         closeModal();
       }, 3000);
@@ -230,7 +237,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
       setLoading(false);
     }
   };
-
 
   const handleSendOTP = async () => {
     const phoneError = validatePhoneNumber(formData.phone_number);
@@ -331,7 +337,13 @@ const LoginModal: React.FC<LoginModalProps> = ({
               >
                 <X size={20} />
               </button>
-              
+
+              <button
+                onClick={closeModal}
+                className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full md:text-gray-500 md:hover:text-orange-500"
+              >
+                <X size={20} />
+              </button>
             </div>
             <div className="flex justify-center mb-4">
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg">
@@ -403,14 +415,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
               }}
             ></div>
           </div>
-          <div className="absolute top-3 right-3 md:hidden">
+          {/* <div className="absolute top-3 right-3 md:hidden">
             <button
               onClick={closeModal}
               className="text-white hover:text-gray-200 transition-colors p-1 bg-orange-600 bg-opacity-30 rounded-full"
             >
               <X size={20} />
             </button>
-          </div>
+
+            
+          </div> */}
+
           <div className="relative w-full h-full flex items-center justify-center p-6">
             <div className="w-full max-w-xs relative aspect-square">
               <Image
@@ -421,14 +436,19 @@ const LoginModal: React.FC<LoginModalProps> = ({
               />
             </div>
           </div>
-          <div className="absolute bottom-6 w-full flex justify-center">
+          <div className="absolute bottom-4 w-full flex justify-center ">
             <div className="bg-white px-6 py-2 rounded-full shadow-lg">
-              <h2 className="text-xl font-bold text-orange-600">PrepAcademy</h2>
+              <h2
+                className="text-xl font-bold text-orange-600 "
+                onClick={closeModal}
+              >
+                PrepAcademy
+              </h2>
             </div>
           </div>
         </div>
         <div className="p-6 md:w-1/2">
-          <div className="absolute top-3 right-3 hidden md:block">
+          <div className="absolute top-3 right-3  md:block">
             <button
               onClick={closeModal}
               className="text-gray-500 hover:text-orange-500 transition-colors"
@@ -511,6 +531,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     validationErrors.email ? "border-red-500" : ""
                   }`}
                 />
+
                 {validationErrors.email && (
                   <p className="text-red-500 text-xs mt-1">
                     {validationErrors.email}
@@ -529,7 +550,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
                   />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password"
                   value={formData.password}
@@ -537,7 +558,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
                   onFocus={() => handleFocus("password")}
                   onBlur={handleBlur}
                   required
-                  className={`pl-10 w-full p-3 border ${
+                  className={`pl-10 pr-10 w-full p-3 border ${
                     activeField === "password"
                       ? "border-orange-500 ring-2 ring-orange-500"
                       : "border-gray-300"
@@ -545,6 +566,23 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     validationErrors.password ? "border-red-500" : ""
                   }`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3"
+                >
+                  {showPassword ? (
+                    <EyeOff
+                      className="text-gray-400 hover:text-orange-500"
+                      size={18}
+                    />
+                  ) : (
+                    <Eye
+                      className="text-gray-400 hover:text-orange-500"
+                      size={18}
+                    />
+                  )}
+                </button>
                 {validationErrors.password && (
                   <p className="text-red-500 text-xs mt-1">
                     {validationErrors.password}
@@ -565,9 +603,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     Remember me
                   </label>
                 </div>
-                <a href="#" className="text-sm text-orange-600 hover:underline">
+                {/* <a href="#" className="text-sm text-orange-600 hover:underline">
                   Forgot password?
-                </a>
+                </a> */}
               </div>
               <button
                 type="submit"
