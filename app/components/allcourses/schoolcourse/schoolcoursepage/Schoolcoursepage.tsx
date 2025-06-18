@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -31,13 +31,14 @@ interface Userdata {
   id: string;
   full_name: string;
   email: string;
-  phone_number: string; // Changed to string to match input validation
+  phone_number: number;
   school_name: string;
   question: string;
   question_text: string;
   selected_option: string;
   selected_option_text: string;
   class_type: string;
+  location: string;
 }
 
 interface Option {
@@ -82,51 +83,172 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setUser] = useState<Userdata[]>([]);
   const [activeTab, setActiveTab] = useState<string>(""); // Added activeTab state
-  const [enrollFormData, setEnrollFormData] = useState<{
-    full_name: string;
-    email: string;
-    class_type: string;
-    phone_number: string; // Changed to string
-    school_name: string;
-    question: string;
-    selected_option: Record<string, string>;
-  }>({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
     question: "",
-    selected_option: {},
+    location: "",
+    selected_option: {} as Record<string, string>, // Change to only string keys
   });
   const [formStep, setFormStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<{
-    full_name: string;
-    email: string;
-    class_type: string;
-    phone_number: string;
-    school_name: string;
-  }>({
+  const [validationErrors, setValidationErrors] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
-
   const router = useRouter();
+  const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const tabs = [
+    {
+      id: "engineering",
+      label: "ENGINEERING",
+      path: "/engineering",
+      dropdownItems: [
+        { label: "JEE", path: "/schoolcourse/engineering/jee" },
+        { label: "KEAM", path: "/schoolcourse/engineering/keam" },
+        { label: "BITSAT", path: "/schoolcourse/engineering/bitsat" },
+        { label: "VITEEE", path: "/schoolcourse/engineering/vitee" },
+        { label: "KCET", path: "/schoolcourse/engineering/kcet" },
+      ],
+    },
+    {
+      id: "MEDICAL",
+      label: "MEDICAL",
+      path: "/medical",
+      dropdownItems: [
+        { label: "NEET (UG)", path: "/schoolcourse/medical/neet" },
+        {
+          label: "PARAMEDICAL ENTRANCE",
+          path: "/schoolcourse/medical/paramedical",
+        },
+        { label: "JIPMER", path: "/schoolcourse/medical/jipmer" },
+      ],
+    },
+
+    {
+      id: "MANAGEMENT",
+      label: "MANAGEMENT",
+      path: "/management",
+      dropdownItems: [
+        { label: "IPM ", path: "/schoolcourse/ipm" },
+        // { label: "CHRIST", path: "/schoolcoursepage/MANAGEMENT/CHRIST" },
+        { label: "SET", path: "/schoolcourse/management/set" },
+        { label: "NPAT", path: "/schoolcourse/management/npat" },
+        { label: "MHCET", path: "/schoolcourse/management/mhcet" },
+      ],
+    },
+
+    {
+      id: "LAW",
+      label: "LAW",
+      path: "/law",
+      dropdownItems: [
+        { label: "CLAT", path: "/schoolcourse-law/clat" },
+        { label: "SLAT", path: "/schoolcourse/law/SLAT" },
+        { label: "AILET", path: "/schoolcourse/law/AILET" },
+        { label: "KLEE", path: "/schoolcourse/law/KLEE" },
+        { label: "CULEE", path: "/schoolcourse/law/CULEE" },
+      ],
+    },
+
+    {
+      id: "CUET",
+      label: "CUET",
+      path: "/cuet",
+      dropdownItems: [
+        { label: "CUET ", path: "/collegecourse/management/cuet" },
+      ],
+    },
+
+    {
+      id: "DEFENCE",
+      label: "DEFENCE",
+      path: "/defence",
+      dropdownItems: [
+        { label: "NDA ", path: "/schoolcourse/defence/nda" },
+        { label: "AFCAT", path: "/schoolcoursepage/DEFENCE/AFCAT" },
+      ],
+    },
+
+    {
+      id: "TUITIONS",
+      label: "TUITIONS",
+      path: "/tuitions",
+      dropdownItems: [
+        { label: "TUITIONS", path: "/schoolcoursepage/TUITIONS/TUITIONS" },
+        // { label: "CHEMISTRY", path: "/" },
+        // { label: "MATHS", path: "/" },
+        // { label: "BIOLOGY ", path: "/" },
+        // { label: "ACCOUNTING ", path: "/" },
+        // { label: "ECONOMICS", path: "/" },
+        // { label: "ENGLISH ", path: "/" },
+        // { label: "COMMERCE", path: "/" },
+        // { label: "BUSINESS STUDIES", path: "/" },
+      ],
+      //(6-12 Standards)
+      // {
+      //   // code: "TUITIONS",
+      //   title: "TUITIONS",
+      //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+      //   classType: "CLASSES FOR 11TH & 12TH",
+      //   path: "/courses/bank"
+
+      // }
+    },
+    {
+      id: "OTHERS",
+      label: "OTHERS",
+      path: "/others",
+      dropdownItems: [
+        {
+          label: "ASHOKA UNIVERSITY",
+          path: "/schoolcoursepage/OTHERS/ASHOKAUNIVERSITY",
+        },
+        {
+          label: "CHRIST UNIVERSITY ",
+          path: "/schoolcourse/others/christuniversity",
+        },
+        { label: "SYMBIOSIS", path: "/schoolcoursepage/OTHERS/SYMBIOSIS" },
+        { label: "NMIMS", path: "/schoolcoursepage/OTHERS/NMIMS" },
+        { label: "ST. XAVIER'S", path: "/schoolcoursepage/OTHERS/STXAVIERS" },
+      ],
+    },
+
+    {
+      id: "DESIGN",
+      label: "DESIGN & ARCHITECTURE",
+      path: "/design",
+      dropdownItems: [
+        { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
+        { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
+        { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
+        { label: "CEED", path: "/schoolcoursepage/DESIGN/CEED" },
+        { label: "JEE MAIN", path: "/schoolcoursepage/DESIGN/JEEMAIN" },
+        { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
+      ],
+    },
+  ];
 
   // Find the course based on the slug
   const course = courses.find(
     (c) => c.slug.toLowerCase() === slug.toLowerCase()
   );
   console.log(courses);
-  
-console.log(programs);
+
+  console.log(programs);
 
   console.log(slug);
-  
+
   const handleEnrollClick = () => {
     router.push("/CourseEnrollmentPortal");
   };
@@ -163,15 +285,33 @@ console.log(programs);
   };
 
   const validateMobileNumber = (mobile: string): string => {
-    if (!mobile || mobile.trim() === "") return "Mobile number is required";
+    if (!mobile || mobile.trim() === "") {
+      return "Mobile number is required";
+    }
+
+    // Validate 10-digit Indian mobile number
     const mobileRegex = /^[6-9]\d{9}$/;
-    if (!mobileRegex.test(mobile))
+    if (!mobileRegex.test(mobile)) {
       return "Please enter a valid 10-digit mobile number";
-    const isDuplicate = user.some((u) => u.phone_number === mobile);
-    if (isDuplicate) return "This mobile number is already registered";
+    }
+
+    // Check for duplicate mobile number
+    const isDuplicate = user.some((u) => u.phone_number.toString() === mobile);
+    if (isDuplicate) {
+      return "This mobile number is already registered";
+    }
+
     return "";
   };
-
+  const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
+    }
+    return "";
+  };
   const validateSchoolCollege = (school: string): string => {
     if (!school || school.trim() === "")
       return "School/Institute name is required";
@@ -181,36 +321,54 @@ console.log(programs);
 
   const nextStep = () => {
     let error = "";
+
+    // Validate current field before proceeding
     switch (formStep) {
       case 0:
-        error = validateFullName(enrollFormData.full_name);
+        error = validateFullName(enrollFormData.full_name || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, full_name: error }));
-          return;
+          return; // Don't proceed if validation fails
         }
         break;
       case 1:
-        error = validateEmail(enrollFormData.email);
+        error = validateEmail(enrollFormData.email || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, email: error }));
           return;
         }
         break;
       case 2:
-        error = validateClassType(enrollFormData.class_type);
+        error = validateClassType(enrollFormData.class_type || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, class_type: error }));
           return;
         }
         break;
       case 3:
-        error = validateMobileNumber(enrollFormData.phone_number);
+        error = validateMobileNumber(enrollFormData.phone_number || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, phone_number: error }));
           return;
         }
         break;
+      case 4:
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
+
+    // If validation passes, proceed to next step
     setFormStep((prev) => prev + 1);
   };
 
@@ -248,16 +406,64 @@ console.log(programs);
   };
 
   const calculateProgress = () => {
-    const totalSteps = 8;
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
+  // Reset the form when modal closes
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!openDropdown) return; // Ensure openDropdown is not null
+
+      const dropdownElement = dropdownRefs.current[
+        openDropdown
+      ] as HTMLElement | null;
+
+      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openDropdown]);
+
+  // Add this useEffect to handle body scrolling
+  useEffect(() => {
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open
+      document.body.style.overflow = "hidden";
+      // Store current scroll position
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown]);
 
   useEffect(() => {
     if (!isModalOpen) {
       setScreeningStep(1);
       setFormStep(0);
-      setCurrentQuestionIndex(0);
+      setCurrentQuestionIndex(0); // Add this line to reset the question index
       setEnrollFormData({
         full_name: "",
         email: "",
@@ -266,6 +472,7 @@ console.log(programs);
         school_name: "",
         question: "",
         selected_option: {},
+        location: "",
       });
     }
   }, [isModalOpen]);
@@ -285,15 +492,18 @@ console.log(programs);
     setIsSubmitting(true);
 
     try {
+      // Check if all required fields are filled
       const requiredFields = [
         "full_name",
         "email",
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
+      // Use type assertion to check fields
       const missingFields = requiredFields.filter(
-        (field) => !enrollFormData[field]
+        (field) => !enrollFormData[field as keyof typeof enrollFormData]
       );
 
       if (missingFields.length > 0) {
@@ -304,6 +514,7 @@ console.log(programs);
         return;
       }
 
+      // Check if we have screening answers
       if (Object.keys(enrollFormData.selected_option).length === 0) {
         toast.error("Please answer all screening questions");
         setIsSubmitting(false);
@@ -313,6 +524,7 @@ console.log(programs);
       let successCount = 0;
       const totalQuestions = Object.keys(enrollFormData.selected_option).length;
 
+      // Process each question one by one with the full user data
       for (const [questionId, selectedOption] of Object.entries(
         enrollFormData.selected_option
       )) {
@@ -324,8 +536,9 @@ console.log(programs);
               email: enrollFormData.email,
               class_type: enrollFormData.class_type,
               phone_number: enrollFormData.phone_number,
-              school_name: enrollFormData.school_name,
+              school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -341,8 +554,11 @@ console.log(programs);
         }
       }
 
+      // Check if all submissions were successful
       if (successCount === totalQuestions) {
         toast.success("Your enrollment has been submitted successfully!");
+
+        // Reset form fields
         setEnrollFormData({
           full_name: "",
           email: "",
@@ -351,7 +567,10 @@ console.log(programs);
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
+
+        // Reset steps
         setIsModalOpen(false);
         setFormStep(0);
         setScreeningStep(0);
@@ -428,8 +647,157 @@ console.log(programs);
     return <div>Course not found</div>;
   }
 
+  const toggleDropdown = (tabId: string | null) => {
+    setOpenDropdown(openDropdown === tabId ? null : tabId);
+  };
+
+  // Handle keyboard navigation for tabs
+  const handleTabKeyNav = (
+    e: React.KeyboardEvent<HTMLElement>,
+    index: number
+  ) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (index + 1) % tabs.length;
+      setActiveMainTab(tabs[nextIndex].id);
+      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex = (index - 1 + tabs.length) % tabs.length;
+      setActiveMainTab(tabs[prevIndex].id);
+      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      toggleDropdown(tabs[index].id);
+    }
+  };
+
+  // Handle keyboard navigation for dropdown items
+  const handleDropdownKeyNav = <T,>(
+    e: React.KeyboardEvent<HTMLElement>,
+    tabId: string,
+    itemIndex: number,
+    items: Array<T>
+  ) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIndex = (itemIndex + 1) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevIndex = (itemIndex - 1 + items.length) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setOpenDropdown(null);
+      document.getElementById(`tab-${tabId}`)?.focus();
+    }
+  };
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+      <div
+        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36  p-3 mt-10 space-x-2 scrollbar-hide"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+        role="tablist"
+        aria-label="Study Abroad Programs "
+      >
+        {tabs.map((tab, index) => (
+          <div
+            key={tab.id}
+            className="relative  flex-shrink-0 w-auto min-w-[150px]"
+            ref={(el) => {
+              dropdownRefs.current[tab.id] = el;
+            }}
+          >
+            <button
+              id={`tab-${tab.id}`}
+              role="tab"
+              aria-selected={activeMainTab === tab.id}
+              aria-controls={`tabpanel-${tab.id}`}
+              aria-expanded={openDropdown === tab.id}
+              onClick={() => {
+                setActiveMainTab(tab.id);
+                toggleDropdown(tab.id);
+              }}
+              onKeyDown={(e) => handleTabKeyNav(e, index)}
+              tabIndex={activeMainTab === tab.id ? 0 : -1}
+              className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+                activeMainTab === tab.id
+                  ? "bg-[#FF6B3D] text-white font-medium"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              } rounded-full flex items-center justify-center`}
+            >
+              <span>{tab.label}</span>
+              <svg
+                className={`ml-1 w-4 h-4 transition-transform ${
+                  openDropdown === tab.id ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+
+            {/* Dropdown menu with fixed positioning */}
+            {openDropdown === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setOpenDropdown(null)}
+              >
+                <div
+                  className="w-[90%] max-w-md bg-black border border-gray-700 rounded-md shadow-lg mx-auto mt-56"
+                  style={{
+                    position: "relative",
+                    top: "0",
+                    maxHeight: "calc(100vh - 150px)",
+                    overflowY: "auto",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col space-y-2 p-2">
+                    {tab.dropdownItems.map((item, itemIndex) => (
+                      <Link
+                        key={`${tab.id}-${itemIndex}`}
+                        href={item.path}
+                        id={`dropdown-${tab.id}-item-${itemIndex}`}
+                        className="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md"
+                        role="menuitem"
+                        tabIndex={openDropdown === tab.id ? 0 : -1}
+                        onClick={() => setOpenDropdown(null)}
+                        onKeyDown={(e) =>
+                          handleDropdownKeyNav(
+                            e,
+                            tab.id,
+                            itemIndex,
+                            tab.dropdownItems
+                          )
+                        }
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
       <div className="relative w-full z-10">
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
           <div className="w-full px-4 mt-24">
@@ -615,7 +983,7 @@ console.log(programs);
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                <button
+                  <button
                     type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
                     onClick={openModal}
@@ -662,7 +1030,7 @@ console.log(programs);
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   {course.title} Master Class
                 </h3>
-                    <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >
@@ -708,6 +1076,7 @@ console.log(programs);
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
+            {/* Close button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
@@ -725,6 +1094,8 @@ console.log(programs);
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
+
+            {/* Header section with image */}
             <div className="bg-[#F55D3E] p-4 md:p-6 text-white">
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/3 flex justify-center mb-3 md:mb-0">
@@ -748,6 +1119,8 @@ console.log(programs);
                   </p>
                 </div>
               </div>
+
+              {/* Progress bar */}
               <div className="w-full h-2 bg-white bg-opacity-30 rounded-full mt-4">
                 <div
                   className="h-full bg-white rounded-full transition-all duration-300"
@@ -755,7 +1128,9 @@ console.log(programs);
                 />
               </div>
             </div>
+
             <div className="p-4 md:p-6">
+              {/* Screening Questions - Only show these when screeningStep < 4 */}
               {screeningStep <= questions.length && questions.length > 0 && (
                 <div className="flex flex-col items-center">
                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4">
@@ -775,7 +1150,7 @@ console.log(programs);
                         className={`w-full p-3 text-left border rounded-lg transition-colors ${
                           enrollFormData.selected_option[
                             questions[currentQuestionIndex].id
-                          ] === String(option.id)
+                          ] === option.text
                             ? "bg-[#F55D3E] text-white"
                             : "border-gray-300 hover:bg-orange-50"
                         }`}
@@ -784,7 +1159,7 @@ console.log(programs);
                           className={
                             enrollFormData.selected_option[
                               questions[currentQuestionIndex].id
-                            ] === String(option.id)
+                            ] === option.text
                               ? "text-white"
                               : "text-gray-800"
                           }
@@ -796,6 +1171,8 @@ console.log(programs);
                   </div>
                 </div>
               )}
+
+              {/* Main Form Steps - Only show when screening is complete */}
               {screeningStep > questions.length && (
                 <div className="w-full max-w-md mx-auto">
                   <form onSubmit={handleEnrollSubmit}>
@@ -810,7 +1187,7 @@ console.log(programs);
                             id="full_name"
                             name="full_name"
                             placeholder="Your Full Name"
-                            value={enrollFormData.full_name}
+                            value={enrollFormData.full_name || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.full_name
@@ -843,6 +1220,7 @@ console.log(programs);
                         </button>
                       </div>
                     )}
+
                     {formStep === 1 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -854,7 +1232,7 @@ console.log(programs);
                             id="email"
                             name="email"
                             placeholder="Your Email Address"
-                            value={enrollFormData.email}
+                            value={enrollFormData.email || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.email
@@ -894,6 +1272,7 @@ console.log(programs);
                         </div>
                       </div>
                     )}
+
                     {formStep === 2 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -904,8 +1283,8 @@ console.log(programs);
                             type="text"
                             id="class_type"
                             name="class_type"
-                            placeholder="e.g. Resume Building, Interview Prep"
-                            value={enrollFormData.class_type}
+                            placeholder="e.g. Math, Science, English"
+                            value={enrollFormData.class_type || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.class_type
@@ -947,6 +1326,7 @@ console.log(programs);
                         </div>
                       </div>
                     )}
+
                     {formStep === 3 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -962,7 +1342,7 @@ console.log(programs);
                               id="phone_number"
                               name="phone_number"
                               placeholder="Your Phone Number"
-                              value={enrollFormData.phone_number}
+                              value={enrollFormData.phone_number || ""}
                               onChange={handleFormChange}
                               className={`w-full p-3 border text-black ${
                                 validationErrors.phone_number
@@ -1022,6 +1402,7 @@ console.log(programs);
                         </div>
                       </div>
                     )}
+
                     {formStep === 4 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -1033,7 +1414,7 @@ console.log(programs);
                             id="school_name"
                             name="school_name"
                             placeholder="Your School/Institute"
-                            value={enrollFormData.school_name}
+                            value={enrollFormData.school_name || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border text-black ${
                               validationErrors.school_name
@@ -1057,17 +1438,71 @@ console.log(programs);
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >
@@ -1080,6 +1515,33 @@ console.log(programs);
                 </div>
               )}
             </div>
+
+            {/* Summary section showing answers (visible at the bottom after questions are answered) */}
+            {/* {screeningStep === 4 && (
+            <div className="p-4 bg-gray-50 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
+              <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
+                {EnrollformData.answer1 && (
+                  <div>
+                    <span className="font-medium block">Learning goal:</span>
+                    {EnrollformData.answer1}
+                  </div>
+                )}
+                {EnrollformData.answer2 && (
+                  <div>
+                    <span className="font-medium block">Schedule:</span>
+                    {EnrollformData.answer2}
+                  </div>
+                )}
+                {EnrollformData.answer3 && (
+                  <div>
+                    <span className="font-medium block">Found via:</span>
+                    {EnrollformData.answer3}
+                  </div>
+                )}
+              </div>
+            </div>
+          )} */}
           </div>
         </div>
       )}

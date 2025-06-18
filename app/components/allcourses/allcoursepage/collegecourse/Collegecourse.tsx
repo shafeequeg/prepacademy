@@ -49,6 +49,7 @@ interface Userdata {
   selected_option: string;
   selected_option_text: string;
   class_type: string;
+  location: string;
 }
 
 interface Option {
@@ -177,7 +178,9 @@ const tabs = [
     id: "CEVILSERVICE",
     label: "CIVIL SERVICE",
     path: "/slat",
-    dropdownItems: [{ label: "UPSC", path: "/collegecoursespage/civilservice/upsc" }],
+    dropdownItems: [
+      { label: "UPSC", path: "/collegecoursespage/civilservice/upsc" },
+    ],
   },
   {
     id: "GOVERNMENT",
@@ -202,8 +205,14 @@ const tabs = [
     label: "DESIGN & ARCHITECTURE",
     path: "/culee",
     dropdownItems: [
-      { label: "NID PG ", path: "/collegecoursespage/designandarchictecture/nidpg" },
-      { label: "NIFT PG", path: "/collegecoursespage/designandarchictecture/niftpg" },
+      {
+        label: "NID PG ",
+        path: "/collegecoursespage/designandarchictecture/nidpg",
+      },
+      {
+        label: "NIFT PG",
+        path: "/collegecoursespage/designandarchictecture/niftpg",
+      },
     ],
   },
   {
@@ -250,6 +259,7 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
     question: "",
+    location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
   const [formStep, setFormStep] = useState(0);
@@ -260,6 +270,7 @@ const CatExamApplySection: React.FC = () => {
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
 
   const router = useRouter();
@@ -281,12 +292,47 @@ const CatExamApplySection: React.FC = () => {
   //   }));
   // };
 
+
+    useEffect(() => {
+    if (!isModalOpen) {
+      setScreeningStep(1);
+      setFormStep(0);
+      setCurrentQuestionIndex(0); // Add this line to reset the question index
+      setEnrollFormData({
+        full_name: "",
+        email: "",
+        class_type: "",
+        phone_number: "",
+        school_name: "",
+        question: "",
+        selected_option: {},
+        location: "",
+      });
+    }
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    fetchQuestions();
+    fetchUser();
+  }, []);
+
+  
   const validateFullName = (name: string): string => {
     if (!name || name.trim() === "") {
       return "Full name is required";
     }
     if (name.trim().length < 3) {
       return "Name must be at least 3 characters";
+    }
+    return "";
+  };
+
+  const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
     }
     return "";
   };
@@ -384,6 +430,20 @@ const CatExamApplySection: React.FC = () => {
           return;
         }
         break;
+      case 4:
+      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+        return;
+      }
+      break;
+    case 5:
+      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, location: error }));
+        return;
+      }
+      break;
     }
 
     // If validation passes, proceed to next step
@@ -424,33 +484,13 @@ const CatExamApplySection: React.FC = () => {
   console.log(user);
 
   const calculateProgress = () => {
-    const totalSteps = 8; // 3 screening + 5 form fields
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
   // Reset the form when modal closes
 
-  useEffect(() => {
-    if (!isModalOpen) {
-      setScreeningStep(1);
-      setFormStep(0);
-      setCurrentQuestionIndex(0); // Add this line to reset the question index
-      setEnrollFormData({
-        full_name: "",
-        email: "",
-        class_type: "",
-        phone_number: "",
-        school_name: "",
-        question: "",
-        selected_option: {},
-      });
-    }
-  }, [isModalOpen]);
 
-  useEffect(() => {
-    fetchQuestions();
-    fetchUser();
-  }, []);
 
   // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   // e.preventDefault();
@@ -496,6 +536,7 @@ const CatExamApplySection: React.FC = () => {
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
       // Use type assertion to check fields
       const missingFields = requiredFields.filter(
@@ -534,6 +575,7 @@ const CatExamApplySection: React.FC = () => {
               phone_number: enrollFormData.phone_number,
               school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -562,6 +604,7 @@ const CatExamApplySection: React.FC = () => {
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
 
         // Reset steps
@@ -571,7 +614,7 @@ const CatExamApplySection: React.FC = () => {
         setCurrentQuestionIndex(0);
       } else if (successCount > 0) {
         toast.warning(
-          `Partially successful: ${successCount} out of ${totalQuestions} responses saved.`
+          ` Successful  and responses saved.`
         );
       } else {
         toast.error("Failed to submit enrollment. Please try again.");
@@ -614,6 +657,8 @@ const CatExamApplySection: React.FC = () => {
     }));
 
     // Validate the changed field
+
+
     let errorMessage = "";
     switch (name) {
       case "full_name":
@@ -630,6 +675,10 @@ const CatExamApplySection: React.FC = () => {
         break;
       case "school_name":
         errorMessage = validateSchoolCollege(value);
+        break;
+
+      case "location": // Add this case
+        errorMessage = validateLocation(value);
         break;
     }
 
@@ -863,11 +912,11 @@ const CatExamApplySection: React.FC = () => {
       </div>
       <div className="relative w-full z-10  ">
         {/* Apply Section with Mascot */}
-        <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
+        <div className="relative w-full bg-gradient-to-r  from-[#0A1015] to-[#121820] text-white py-10 bg-center bg-no-repeat bg-cover ">
           <div className="w-full px-4 ">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
-              <div className="lg:w-[35%]">
+              <div className="lg:w-[35%] -ml-2 md:-ml-3 lg:-ml-2">
                 <div className="mb-6">
                   {/* <p className="text-[#FF6B3D] text-sm font-medium px-3 py-1 bg-[#1A2836] inline-block rounded-md mb-4">
                 Learn from the Experts
@@ -1445,17 +1494,70 @@ const CatExamApplySection: React.FC = () => {
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >

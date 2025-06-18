@@ -1228,61 +1228,61 @@ const CourseEnrollmentPortal: React.FC = () => {
     }
   };
 
-  const handleCartCheckout = () => {
-    if (cartItems.length === 0) return;
+  // const handleCartCheckout = () => {
+  //   if (cartItems.length === 0) return;
 
-    const userData = localStorage.getItem("user");
-    let user_uuid = "";
+  //   const userData = localStorage.getItem("user");
+  //   let user_uuid = "";
 
-    if (userData) {
-      try {
-        const parsedData = JSON.parse(userData);
-        user_uuid = parsedData.uuid || "";
-        if (!user_uuid) {
-          setShowAuthAlert(true);
-          return;
-        }
-      } catch (error) {
-        console.error("Error parsing user data from localStorage:", error);
-        setShowAuthAlert(true);
-        return;
-      }
-    } else {
-      setShowAuthAlert(true);
-      return;
-    }
+  //   if (userData) {
+  //     try {
+  //       const parsedData = JSON.parse(userData);
+  //       user_uuid = parsedData.uuid || "";
+  //       if (!user_uuid) {
+  //         setShowAuthAlert(true);
+  //         return;
+  //       }
+  //     } catch (error) {
+  //       console.error("Error parsing user data from localStorage:", error);
+  //       setShowAuthAlert(true);
+  //       return;
+  //     }
+  //   } else {
+  //     setShowAuthAlert(true);
+  //     return;
+  //   }
 
-    const courseUuid = cartItems[0].uuid || crypto.randomUUID();
-    const totalPrice = cartItems.reduce(
-      (total, item) => total + parsePriceToNumber(item.price),
-      0
-    );
-    const originalPrice = Math.round(totalPrice * 1.25);
-    const discount = originalPrice - totalPrice;
+  //   const courseUuid = cartItems[0].uuid || crypto.randomUUID();
+  //   const totalPrice = cartItems.reduce(
+  //     (total, item) => total + parsePriceToNumber(item.price),
+  //     0
+  //   );
+  //   const originalPrice = Math.round(totalPrice * 1.25);
+  //   const discount = originalPrice - totalPrice;
 
-    const courseTitles = cartItems
-      .map((item) => item.title.replace(" Course", ""))
-      .join(", ");
-    const duration = cartItems[0].duration;
+  //   const courseTitles = cartItems
+  //     .map((item) => item.title.replace(" Course", ""))
+  //     .join(", ");
+  //   const duration = cartItems[0].duration;
 
-    router.push(
-      `/payment/${courseUuid}?title=${encodeURIComponent(
-        courseTitles
-      )}&price=₹${totalPrice.toLocaleString("en-IN")}&items=${
-        cartItems.length
-      }&duration=${encodeURIComponent(
-        duration
-      )}&originalPrice=₹${originalPrice.toLocaleString(
-        "en-IN"
-      )}&discount=₹${discount.toLocaleString(
-        "en-IN"
-      )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
-        courseUuid
-      )}`
-    );
+  //   router.push(
+  //     `/payment/${courseUuid}?title=${encodeURIComponent(
+  //       courseTitles
+  //     )}&price=₹${totalPrice.toLocaleString("en-IN")}&items=${
+  //       cartItems.length
+  //     }&duration=${encodeURIComponent(
+  //       duration
+  //     )}&originalPrice=₹${originalPrice.toLocaleString(
+  //       "en-IN"
+  //     )}&discount=₹${discount.toLocaleString(
+  //       "en-IN"
+  //     )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
+  //       courseUuid
+  //     )}`
+  //   );
 
-    closeCartModal();
-  };
+  //   closeCartModal();
+  // };
   const addToWishlist = () => {
     const currentCategory =
       salesCategories.find((cat) => cat.id?.toString() === activeMainTab)
@@ -1291,7 +1291,7 @@ const CourseEnrollmentPortal: React.FC = () => {
 
     const courseToAdd: WishlistItem = {
       id: `${activeMainTab}-${activeSubTab}-${activeCourse}`,
-      title: activeCourse, // Remove ' Course' suffix here
+      title: currentCourseData.title || activeCourse, // Use course title from data
       price: currentCourseData.amount,
       duration: currentCourseData.duration,
       category: currentCategory,
@@ -1326,7 +1326,7 @@ const CourseEnrollmentPortal: React.FC = () => {
 
     const courseToAdd: WishlistItem = {
       id: `${activeMainTab}-${activeSubTab}-${activeCourse}`,
-      title: activeCourse, // Remove ' Course' suffix here
+    title: currentCourseData.title || activeCourse, // Use course title from data
       price: currentCourseData.amount,
       duration: currentCourseData.duration,
       category: currentCategory,
@@ -1353,72 +1353,14 @@ const CourseEnrollmentPortal: React.FC = () => {
     setTimeout(() => setAlertMessage(null), 3000);
   };
 
- const handleEnrollNow = async () => {
-  const currentCourseData = getCurrentCourseData();
-  if (!currentCourseData.uuid) {
-    setShowAuthAlert(true);
-    return;
-  }
-  const userData = localStorage.getItem("user");
-  let user_uuid = "";
-  if (userData) {
-    try {
-      const parsedData = JSON.parse(userData);
-      user_uuid = parsedData.uuid || "";
-      if (!user_uuid) {
-        setShowAuthAlert(true);
-        return;
-      }
-    } catch (error) {
-      console.error("Error parsing user data from localStorage:", error);
+  const handleEnrollNow = async () => {
+    const currentCourseData = getCurrentCourseData();
+    if (!currentCourseData.uuid) {
       setShowAuthAlert(true);
       return;
     }
-  } else {
-    setShowAuthAlert(true);
-    return;
-  }
-  
-  setIsEnrolling(true); // Start loading
-  
-  try {
-    const originalPrice = parsePriceToNumber(currentCourseData.amount) * 1.2;
-    router.push(
-      `/payment/${currentCourseData.uuid}?title=${encodeURIComponent(
-        currentCourseData.title || activeCourse
-      )}&price=${encodeURIComponent(
-        currentCourseData.amount
-      )}&duration=${encodeURIComponent(
-        currentCourseData.duration
-      )}&originalPrice=₹${originalPrice}&discount=₹${(
-        originalPrice - parsePriceToNumber(currentCourseData.amount)
-      ).toFixed(2)}&user_uuid=${encodeURIComponent(
-        user_uuid
-      )}&uuid=${encodeURIComponent(currentCourseData.uuid)}`
-    );
-  } finally {
-    // Reset loading state after navigation
-    setTimeout(() => setIsEnrolling(false), 1000);
-  }
-};
-
-  const removeFromWishlist = (id: string) => {
-    setWishlistItems(wishlistItems.filter((item) => item.id !== id));
-  };
-
-  const removeFromCart = (id: string) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
-  const openWishlistModal = () => setIsWishlistModalOpen(true);
-  const closeWishlistModal = () => setIsWishlistModalOpen(false);
-  const openCartModal = () => setIsCartModalOpen(true);
-  const closeCartModal = () => setIsCartModalOpen(false);
-
-  const handleWishlistEnroll = (item: WishlistItem) => {
     const userData = localStorage.getItem("user");
     let user_uuid = "";
-
     if (userData) {
       try {
         const parsedData = JSON.parse(userData);
@@ -1437,30 +1379,90 @@ const CourseEnrollmentPortal: React.FC = () => {
       return;
     }
 
-    const courseUuid = item.uuid || crypto.randomUUID();
-    const itemPrice = parsePriceToNumber(item.price);
-    const originalPrice = Math.round(itemPrice * 1.25);
-    const discount = originalPrice - itemPrice;
+    setIsEnrolling(true); 
 
-    router.push(
-      `/payment/${courseUuid}?title=${encodeURIComponent(
-        item.title
-      )}&price=₹${itemPrice.toLocaleString(
-        "en-IN"
-      )}&duration=${encodeURIComponent(
-        item.duration
-      )}&originalPrice=₹${originalPrice.toLocaleString(
-        "en-IN"
-      )}&discount=₹${discount.toLocaleString(
-        "en-IN"
-      )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
-        courseUuid
-      )}`
-    );
 
-    closeWishlistModal();
+    try {
+      const originalPrice = parsePriceToNumber(currentCourseData.amount) * 1.2;
+      router.push(
+        `/payment/${currentCourseData.uuid}?title=${encodeURIComponent(
+          currentCourseData.title || activeCourse
+        )}&price=${encodeURIComponent(
+          currentCourseData.amount
+        )}&duration=${encodeURIComponent(
+          currentCourseData.duration
+        )}&originalPrice=₹${originalPrice}&discount=₹${(
+          originalPrice - parsePriceToNumber(currentCourseData.amount)
+        ).toFixed(2)}&user_uuid=${encodeURIComponent(
+          user_uuid
+        )}&uuid=${encodeURIComponent(currentCourseData.uuid)}`
+      );
+    } finally {
+      // Reset loading state after navigation
+      setTimeout(() => setIsEnrolling(false), 1000);
+    }
   };
 
+  const removeFromWishlist = (id: string) => {
+    setWishlistItems(wishlistItems.filter((item) => item.id !== id));
+  };
+
+  const removeFromCart = (id: string) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
+
+  const openWishlistModal = () => setIsWishlistModalOpen(true);
+  const closeWishlistModal = () => setIsWishlistModalOpen(false);
+  const openCartModal = () => setIsCartModalOpen(true);
+  const closeCartModal = () => setIsCartModalOpen(false);
+
+  // const handleWishlistEnroll = (item: WishlistItem) => {
+  //   const userData = localStorage.getItem("user");
+  //   let user_uuid = "";
+
+  //   if (userData) {
+  //     try {
+  //       const parsedData = JSON.parse(userData);
+  //       user_uuid = parsedData.uuid || "";
+  //       if (!user_uuid) {
+  //         setShowAuthAlert(true);
+  //         return;
+  //       }
+  //     } catch (error) {
+  //       console.error("Error parsing user data from localStorage:", error);
+  //       setShowAuthAlert(true);
+  //       return;
+  //     }
+  //   } else {
+  //     setShowAuthAlert(true);
+  //     return;
+  //   }
+
+  //   const courseUuid = item.uuid || crypto.randomUUID();
+  //   const itemPrice = parsePriceToNumber(item.price);
+  //   const originalPrice = Math.round(itemPrice * 1.25);
+  //   const discount = originalPrice - itemPrice;
+
+  //   router.push(
+  //     `/payment/${courseUuid}?title=${encodeURIComponent(
+  //       item.title
+  //     )}&price=₹${itemPrice.toLocaleString(
+  //       "en-IN"
+  //     )}&duration=${encodeURIComponent(
+  //       item.duration
+  //     )}&originalPrice=₹${originalPrice.toLocaleString(
+  //       "en-IN"
+  //     )}&discount=₹${discount.toLocaleString(
+  //       "en-IN"
+  //     )}&user_uuid=${encodeURIComponent(user_uuid)}&uuid=${encodeURIComponent(
+  //       courseUuid
+  //     )}`
+  //   );
+
+  //   closeWishlistModal();
+  // };
+
+  
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <style jsx>{`
@@ -1508,25 +1510,45 @@ const CourseEnrollmentPortal: React.FC = () => {
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
           <div
             className={`alert ${
-              alertMessage.type === "cart" || alertMessage.type === "wishlist"
+              alertMessage.type === "cart"
+                ? "bg-green-500 border-green-600"
+                : alertMessage.type === "wishlist"
                 ? "bg-green-500 border-green-600"
                 : "bg-red-500 border-red-600"
             } text-white px-6 py-3 rounded-lg shadow-lg border`}
           >
             <div className="flex items-center space-x-2">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 18.5c-.77.833.192 2.5 1.732 2.5z"
-                />
-              </svg>
+              {alertMessage.type === "wishlist" ? (
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3c3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              ) : alertMessage.type === "cart" ? (
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM2 2v2h1l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21 4H5.21l-.94-2H2zm16 16c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z" />
+                </svg>
+              ) : (
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 18.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              )}
               <span className="font-medium">{alertMessage.message}</span>
             </div>
           </div>
@@ -1559,8 +1581,7 @@ const CourseEnrollmentPortal: React.FC = () => {
               addToCart={addToCart}
               addToWishlist={addToWishlist}
               parsePriceToNumber={parsePriceToNumber}
-                isEnrolling={isEnrolling}
-
+              isEnrolling={isEnrolling}
             />
           ) : (
             <CourseList
@@ -1580,16 +1601,18 @@ const CourseEnrollmentPortal: React.FC = () => {
         closeModal={closeWishlistModal}
         wishlistItems={wishlistItems}
         removeFromWishlist={removeFromWishlist}
-        handleWishlistEnroll={handleWishlistEnroll}
         parsePriceToNumber={parsePriceToNumber}
+        setShowAuthAlert={setShowAuthAlert}
+        setShowLoginModal={setShowLoginModal}
       />
       <CartModal
         isOpen={isCartModalOpen}
         closeModal={closeCartModal}
         cartItems={cartItems}
         removeFromCart={removeFromCart}
-        handleCartCheckout={handleCartCheckout}
         parsePriceToNumber={parsePriceToNumber}
+        setShowAuthAlert={setShowAuthAlert}
+        setShowLoginModal={setShowLoginModal}
       />
       <AuthAlertModal
         isOpen={showAuthAlert}

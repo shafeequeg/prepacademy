@@ -129,7 +129,7 @@ const ProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="h-screen bg-[#2B1615] flex items-center justify-center">
+      <div className="h-screen bg-[#2B1615] flex items-center justify-center ">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -194,7 +194,7 @@ const ProfilePage = () => {
 
   return (
     <div className="h-screen bg-[#2B1615] overflow-y-auto">
-      <div className="max-w-4xl mx-auto px-4 py-6 mt-9">
+      <div className="max-w-4xl mx-auto px-4 py-6 ">
         {/* Header */}
         {/* <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-orange-100">PrepAcademy</h1>
@@ -202,7 +202,7 @@ const ProfilePage = () => {
         </div> */}
 
         {/* Main Profile Card */}
-        <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 backdrop-blur-xl border border-orange-700/30 rounded-2xl overflow-hidden shadow-xl">
+        <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 backdrop-blur-xl border border-orange-700/30 rounded-2xl overflow-hidden shadow-xl mt-6 md:mt-28">
           {/* Profile Header */}
           <div className="relative bg-gradient-to-r from-orange-600 to-orange-500 p-6">
             <div className="absolute inset-0 bg-black/10"></div>
@@ -230,7 +230,7 @@ const ProfilePage = () => {
               </div>
 
               {/* User Info */}
-              <div className="text-center sm:text-left flex-1">
+              <div className="text-center sm:text-left flex-1 ">
                 <h2 className="text-2xl font-bold text-white mb-1">
                   {currentUser.full_name}
                 </h2>

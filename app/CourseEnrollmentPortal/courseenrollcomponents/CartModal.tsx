@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { ShoppingCart, X } from "lucide-react";
 import { WishlistItem } from "./types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface CartModalProps {
   isOpen: boolean;
   closeModal: () => void;
   cartItems: WishlistItem[];
   removeFromCart: (id: string) => void;
-  handleCartCheckout: () => void;
   parsePriceToNumber: (priceString: string | undefined) => number;
+  setShowAuthAlert: (show: boolean) => void;
+  setShowLoginModal: (show: boolean) => void;
 }
+
+// interface AuthAlertModalProps {
+//   isOpen: boolean;
+//   closeModal: () => void;
+//   openLoginModal: () => void;
+//   showLoginButton?: boolean; // Add this prop
+// }
 
 const CartModal: React.FC<CartModalProps> = React.memo(
   ({
@@ -18,10 +27,93 @@ const CartModal: React.FC<CartModalProps> = React.memo(
     closeModal,
     cartItems,
     removeFromCart,
-    handleCartCheckout,
     parsePriceToNumber,
+    setShowAuthAlert,
+    // setShowLoginModal,
   }) => {
+    const router = useRouter();
+    const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set());
+
     if (!isOpen) return null;
+
+
+    const handleBuyNow = async (item: WishlistItem) => {
+      // Start loading for this specific item
+      setLoadingItems((prev) => new Set(prev).add(item.id));
+
+      const userData = localStorage.getItem("user");
+      let user_uuid = "";
+
+      if (userData) {
+        try {
+          const parsedData = JSON.parse(userData);
+          user_uuid = parsedData.uuid || "";
+          if (!user_uuid) {
+            setLoadingItems((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(item.id);
+              return newSet;
+            });
+            setShowAuthAlert(true);
+            closeModal();
+            return;
+          }
+        } catch (error) {
+          console.error("Error parsing user data from localStorage:", error);
+          setLoadingItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(item.id);
+            return newSet;
+          });
+          setShowAuthAlert(true);
+          closeModal();
+          return;
+        }
+      } else {
+        setLoadingItems((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(item.id);
+          return newSet;
+        });
+        setShowAuthAlert(true);
+        closeModal();
+        return;
+      }
+
+      try {
+        const courseUuid = item.uuid || crypto.randomUUID();
+        const itemPrice = parsePriceToNumber(item.price);
+        const originalPrice = Math.round(itemPrice * 1.25);
+        const discount = originalPrice - itemPrice;
+
+        router.push(
+          `/payment/${courseUuid}?title=${encodeURIComponent(
+            item.title
+          )}&price=₹${itemPrice.toLocaleString(
+            "en-IN"
+          )}&duration=${encodeURIComponent(
+            item.duration
+          )}&originalPrice=₹${originalPrice.toLocaleString(
+            "en-IN"
+          )}&discount=₹${discount.toLocaleString(
+            "en-IN"
+          )}&user_uuid=${encodeURIComponent(
+            user_uuid
+          )}&uuid=${encodeURIComponent(courseUuid)}`
+        );
+
+        closeModal();
+      } finally {
+        // Stop loading after navigation
+        setTimeout(() => {
+          setLoadingItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(item.id);
+            return newSet;
+          });
+        }, 1000);
+      }
+    };
 
     return (
       <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center p-4">
@@ -100,6 +192,39 @@ const CartModal: React.FC<CartModalProps> = React.memo(
                             Duration: {item.duration}
                           </p>
                         </div>
+                        <button
+                          onClick={() => handleBuyNow(item)}
+                          disabled={loadingItems.has(item.id)}
+                          className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-md transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none"
+                        >
+                          {loadingItems.has(item.id) ? (
+                            <div className="flex items-center justify-center">
+                              <svg
+                                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                              </svg>
+                              Processing...
+                            </div>
+                          ) : (
+                            "Buy Now"
+                          )}
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -108,22 +233,6 @@ const CartModal: React.FC<CartModalProps> = React.memo(
             )}
           </div>
           <div className="border-t border-orange-600 p-6 bg-gray-700">
-            {cartItems.length > 0 && (
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-orange-300">
-                  Total:
-                </h3>
-                <span className="text-2xl font-bold text-orange-300">
-                  ₹
-                  {cartItems
-                    .reduce(
-                      (total, item) => total + parsePriceToNumber(item.price),
-                      0
-                    )
-                    .toLocaleString("en-IN")}
-                </span>
-              </div>
-            )}
             <div className="flex justify-end gap-4">
               <button
                 onClick={closeModal}
@@ -131,14 +240,6 @@ const CartModal: React.FC<CartModalProps> = React.memo(
               >
                 Close
               </button>
-              {cartItems.length > 0 && (
-                <button
-                  onClick={handleCartCheckout}
-                  className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-md transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
-                >
-                  Checkout
-                </button>
-              )}
             </div>
           </div>
         </div>

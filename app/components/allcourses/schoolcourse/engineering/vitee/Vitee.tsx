@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 // import Image from 'next/image';
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -41,7 +41,9 @@ interface Userdata {
   selected_option: string;
   selected_option_text: string;
   class_type: string;
+  location: string;
 }
+
 
 interface Option {
   id: string | number;
@@ -249,6 +251,135 @@ const courseCards = [
   },
 ];
 
+const tabs = [
+  {
+    id: "engineering",
+    label: "ENGINEERING",
+    path: "/engineering",
+    dropdownItems: [
+      { label: "JEE", path: "/schoolcourse/engineering/jee" },
+      { label: "KEAM", path: "/schoolcourse/engineering/keam" },
+      { label: "BITSAT", path: "/schoolcourse/engineering/bitsat" },
+      { label: "VITEEE", path: "/schoolcourse/engineering/vitee" },
+      { label: "KCET", path: "/schoolcourse/engineering/kcet" },
+    ],
+  },
+  {
+    id: "MEDICAL",
+    label: "MEDICAL",
+    path: "/medical",
+    dropdownItems: [
+      { label: "NEET (UG)", path: "/schoolcourse/medical/neet" },
+      {
+        label: "PARAMEDICAL ENTRANCE",
+        path: "/schoolcourse/medical/paramedical",
+      },
+      { label: "JIPMER", path: "/schoolcourse/medical/jipmer" },
+    ],
+  },
+
+  {
+    id: "MANAGEMENT",
+    label: "MANAGEMENT",
+    path: "/management",
+    dropdownItems: [
+      { label: "IPM ", path: "/schoolcourse/ipm" },
+      // { label: "CHRIST", path: "/schoolcoursepage/MANAGEMENT/CHRIST" },
+      { label: "SET", path: "/schoolcourse/management/set" },
+      { label: "NPAT", path: "/schoolcourse/management/npat" },
+      { label: "MHCET", path: "/schoolcourse/management/mhcet" },
+    ],
+  },
+
+  {
+    id: "LAW",
+    label: "LAW",
+    path: "/law",
+    dropdownItems: [
+      { label: "CLAT", path: "/schoolcourse-law/clat" },
+      { label: "SLAT", path: "/schoolcourse/law/SLAT" },
+      { label: "AILET", path: "/schoolcourse/law/AILET" },
+      { label: "KLEE", path: "/schoolcourse/law/KLEE" },
+      { label: "CULEE", path: "/schoolcourse/law/CULEE" },
+    ],
+  },
+
+  {
+    id: "CUET",
+    label: "CUET",
+    path: "/cuet",
+    dropdownItems: [{ label: "CUET ", path: "/collegecourse/management/cuet" }],
+  },
+
+  {
+    id: "DEFENCE",
+    label: "DEFENCE",
+    path: "/defence",
+    dropdownItems: [
+      { label: "NDA ", path: "/schoolcourse/defence/nda" },
+      { label: "AFCAT", path: "/schoolcoursepage/DEFENCE/AFCAT" },
+    ],
+  },
+
+  {
+    id: "TUITIONS",
+    label: "TUITIONS",
+    path: "/tuitions",
+    dropdownItems: [
+      { label: "TUITIONS", path: "/schoolcoursepage/TUITIONS/TUITIONS" },
+      // { label: "CHEMISTRY", path: "/" },
+      // { label: "MATHS", path: "/" },
+      // { label: "BIOLOGY ", path: "/" },
+      // { label: "ACCOUNTING ", path: "/" },
+      // { label: "ECONOMICS", path: "/" },
+      // { label: "ENGLISH ", path: "/" },
+      // { label: "COMMERCE", path: "/" },
+      // { label: "BUSINESS STUDIES", path: "/" },
+    ],
+    //(6-12 Standards)
+    // {
+    //   // code: "TUITIONS",
+    //   title: "TUITIONS",
+    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+    //   classType: "CLASSES FOR 11TH & 12TH",
+    //   path: "/courses/bank"
+
+    // }
+  },
+  {
+    id: "OTHERS",
+    label: "OTHERS",
+    path: "/others",
+    dropdownItems: [
+      {
+        label: "ASHOKA UNIVERSITY",
+        path: "/schoolcoursepage/OTHERS/ASHOKAUNIVERSITY",
+      },
+      {
+        label: "CHRIST UNIVERSITY ",
+        path: "/schoolcourse/others/christuniversity",
+      },
+      { label: "SYMBIOSIS", path: "/schoolcoursepage/OTHERS/SYMBIOSIS" },
+      { label: "NMIMS", path: "/schoolcoursepage/OTHERS/NMIMS" },
+      { label: "ST. XAVIER'S", path: "/schoolcoursepage/OTHERS/STXAVIERS" },
+    ],
+  },
+
+  {
+    id: "DESIGN",
+    label: "DESIGN & ARCHITECTURE",
+    path: "/design",
+    dropdownItems: [
+      { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
+      { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
+      { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
+      { label: "CEED", path: "/schoolcoursepage/DESIGN/CEED" },
+      { label: "JEE MAIN", path: "/schoolcoursepage/DESIGN/JEEMAIN" },
+      { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
+    ],
+  },
+];
+
 const CatExamApplySection: React.FC = () => {
   //   const [showIcons, setShowIcons] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
@@ -273,13 +404,14 @@ const CatExamApplySection: React.FC = () => {
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-  const [enrollFormData, setEnrollFormData] = useState({
+   const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
     question: "",
+    location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
   const [formStep, setFormStep] = useState(0);
@@ -290,9 +422,12 @@ const CatExamApplySection: React.FC = () => {
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
   const router = useRouter();
-
+ const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -348,6 +483,15 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
+   const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
+    }
+    return "";
+  };
   const validateMobileNumber = (mobile: string): string => {
     if (!mobile || mobile.trim() === "") {
       return "Mobile number is required";
@@ -415,6 +559,20 @@ const CatExamApplySection: React.FC = () => {
           return;
         }
         break;
+      case 4:
+      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+        return;
+      }
+      break;
+    case 5:
+      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, location: error }));
+        return;
+      }
+      break;
     }
 
     // If validation passes, proceed to next step
@@ -455,7 +613,7 @@ const CatExamApplySection: React.FC = () => {
   console.log(user);
 
   const calculateProgress = () => {
-    const totalSteps = 8; // 3 screening + 5 form fields
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
@@ -474,6 +632,7 @@ const CatExamApplySection: React.FC = () => {
         school_name: "",
         question: "",
         selected_option: {},
+        location: "",
       });
     }
   }, [isModalOpen]);
@@ -528,6 +687,7 @@ const CatExamApplySection: React.FC = () => {
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
       // Use type assertion to check fields
       const missingFields = requiredFields.filter(
@@ -566,6 +726,7 @@ const CatExamApplySection: React.FC = () => {
               phone_number: enrollFormData.phone_number,
               school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -594,6 +755,7 @@ const CatExamApplySection: React.FC = () => {
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
 
         // Reset steps
@@ -725,10 +887,207 @@ const CatExamApplySection: React.FC = () => {
     (course) => course.type === activeTab
   );
 
+  
+  const toggleDropdown = (tabId: string | null) => {
+    setOpenDropdown(openDropdown === tabId ? null : tabId);
+  };
+
+  // Handle keyboard navigation for tabs
+  const handleTabKeyNav = (
+    e: React.KeyboardEvent<HTMLElement>,
+    index: number
+  ) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (index + 1) % tabs.length;
+      setActiveMainTab(tabs[nextIndex].id);
+      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex = (index - 1 + tabs.length) % tabs.length;
+      setActiveMainTab(tabs[prevIndex].id);
+      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      toggleDropdown(tabs[index].id);
+    }
+  };
+
+  // Handle keyboard navigation for dropdown items
+  const handleDropdownKeyNav = <T,>(
+    e: React.KeyboardEvent<HTMLElement>,
+    tabId: string,
+    itemIndex: number,
+    items: Array<T>
+  ) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIndex = (itemIndex + 1) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevIndex = (itemIndex - 1 + items.length) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setOpenDropdown(null);
+      document.getElementById(`tab-${tabId}`)?.focus();
+    }
+  };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!openDropdown) return; // Ensure openDropdown is not null
+
+      const dropdownElement = dropdownRefs.current[
+        openDropdown
+      ] as HTMLElement | null;
+
+      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openDropdown]);
+
+  // Add this useEffect to handle body scrolling
+  useEffect(() => {
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open
+      document.body.style.overflow = "hidden";
+      // Store current scroll position
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown]);
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
-      {/* Background Image Between Sections */}
       {/* Main Content */}
+
+        <div
+        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36  p-3 mt-10 space-x-2 scrollbar-hide"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+        role="tablist"
+        aria-label="Study Abroad Programs "
+      >
+        {tabs.map((tab, index) => (
+          <div
+            key={tab.id}
+            className="relative  flex-shrink-0 w-auto min-w-[150px]"
+            ref={(el) => {
+              dropdownRefs.current[tab.id] = el;
+            }}
+          >
+            <button
+              id={`tab-${tab.id}`}
+              role="tab"
+              aria-selected={activeMainTab === tab.id}
+              aria-controls={`tabpanel-${tab.id}`}
+              aria-expanded={openDropdown === tab.id}
+              onClick={() => {
+                setActiveMainTab(tab.id);
+                toggleDropdown(tab.id);
+              }}
+              onKeyDown={(e) => handleTabKeyNav(e, index)}
+              tabIndex={activeMainTab === tab.id ? 0 : -1}
+              className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+                activeMainTab === tab.id
+                  ? "bg-[#FF6B3D] text-white font-medium"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              } rounded-full flex items-center justify-center`}
+            >
+              <span>{tab.label}</span>
+              <svg
+                className={`ml-1 w-4 h-4 transition-transform ${
+                  openDropdown === tab.id ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+
+            {/* Dropdown menu with fixed positioning */}
+            {openDropdown === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setOpenDropdown(null)}
+              >
+                <div
+                  className="w-[90%] max-w-md bg-black border border-gray-700 rounded-md shadow-lg mx-auto mt-56"
+                  style={{
+                    position: "relative",
+                    top: "0",
+                    maxHeight: "calc(100vh - 150px)",
+                    overflowY: "auto",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col space-y-2 p-2">
+                    {tab.dropdownItems.map((item, itemIndex) => (
+                      <Link
+                        key={`${tab.id}-${itemIndex}`}
+                        href={item.path}
+                        id={`dropdown-${tab.id}-item-${itemIndex}`}
+                        className="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md"
+                        role="menuitem"
+                        tabIndex={openDropdown === tab.id ? 0 : -1}
+                        onClick={() => setOpenDropdown(null)}
+                        onKeyDown={(e) =>
+                          handleDropdownKeyNav(
+                            e,
+                            tab.id,
+                            itemIndex,
+                            tab.dropdownItems
+                          )
+                        }
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
@@ -1089,7 +1448,7 @@ const CatExamApplySection: React.FC = () => {
           </div>
         </div>
       </div>
-      {isModalOpen && (
+       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}
@@ -1454,17 +1813,70 @@ const CatExamApplySection: React.FC = () => {
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >

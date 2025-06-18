@@ -80,7 +80,7 @@ export default function Header() {
           setUser(parsedUser);
         } catch (error) {
           console.error("Error parsing currentUser:", error);
-          localStorage.removeItem("currentUser"); 
+          localStorage.removeItem("currentUser");
         }
       } else if (userData) {
         try {
@@ -88,14 +88,13 @@ export default function Header() {
           setUser(parsedUser);
         } catch (error) {
           console.error("Error parsing user:", error);
-          localStorage.removeItem("user"); 
+          localStorage.removeItem("user");
         }
       }
     };
 
     fetchUserData();
   }, []);
-
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -206,17 +205,18 @@ export default function Header() {
         animation: slideIn 0.5s ease-out;
       }
 
-      .logout-success-box {
+   .logout-success-box {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, #15938F, #FFE4B5);
+        background: linear-gradient(135deg, #F55D3E, #a52a1a);
         border-radius: 20px;
         padding: 2rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         z-index: 200;
         animation: slideIn 0.5s ease-out;
+        border: 2px solid #FFE4B5;
       }
 
       @keyframes slideIn {
@@ -269,14 +269,17 @@ export default function Header() {
       .success-button {
         padding: 0.5rem 1.5rem;
         border-radius: 10px;
-        background: #a52a1a;
-        color: #FFE4B5;
+        background: #FFE4B5;
+        color: #a52a1a;
         font-weight: 600;
         transition: all 0.3s ease;
+        border: 2px solid transparent;
       }
 
       .success-button:hover {
-        background: #F55D3E;
+        background: #fff;
+        color: #F55D3E;
+        border-color: #FFE4B5;
         transform: scale(1.05);
       }
     `;
@@ -580,14 +583,14 @@ export default function Header() {
                         >
                           Profile
                         </div>
-                        
+
                         <div
                           onClick={() => handleNavigation("/my-courses")}
                           className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
                         >
                           My Courses
                         </div>
-                        
+
                         {user.program && (
                           <div className="block text-white px-4 py-2 text-xs cursor-default border-t border-[#F55D3E]/10">
                             Program: {user.program}
@@ -878,8 +881,6 @@ export default function Header() {
             ACCOUNT
           </div>
         </div>
-
-       
 
         {user ? (
           <>

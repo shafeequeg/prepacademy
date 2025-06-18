@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   FaWhatsapp,
@@ -14,6 +14,16 @@ import LoginForm from "@/app/components/login/Login";
 const Footer = () => {
   const [RegisterModal, SetRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+    // Only access localStorage after component mounts on client
+    const loggedInStatus = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loggedInStatus ? JSON.parse(loggedInStatus) : false);
+  }, []);
 
   const toggleregistermodal = (value: boolean) => {
     SetRegisterModal(value);
@@ -22,6 +32,8 @@ const Footer = () => {
   const toggleLoginModal = (value: boolean) => {
     setLoginModal(value);
   };
+
+  console.log(isLoggedIn);
 
   return (
     <footer className="bg-[#0B1117] w-full py-12">
@@ -143,37 +155,34 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="text-center md:text-left flex flex-col items-center md:items-start">
-              <h3 className="text-white font-medium text-lg mb-4">
-                ENROLL NOW
-              </h3>
-              <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                <button
-                  className="bg-[#F1291F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm"
-                  onClick={() => toggleLoginModal(true)}
-                >
-                  Login
-                </button>
-                <button
-                  className="bg-transparent text-white border border-white px-4 py-2 rounded hover:bg-gray-800 transition-colors text-sm"
-                  onClick={() => toggleregistermodal(true)}
-                >
-                  Signup
-                </button>
+
+            {/* Only render login/signup buttons after client-side hydration */}
+            {isClient && !isLoggedIn && (
+              <div className="text-center md:text-left flex flex-col items-center md:items-start">
+                <h3 className="text-white font-medium text-lg mb-4">
+                  ENROLL NOW
+                </h3>
+                <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                  <button
+                    className="bg-[#F1291F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm"
+                    onClick={() => toggleLoginModal(true)}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="bg-transparent text-white border border-white px-4 py-2 rounded hover:bg-gray-800 transition-colors text-sm"
+                    onClick={() => toggleregistermodal(true)}
+                  >
+                    Signup
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <div className="text-center md:text-left ">
             <h3 className="text-white font-medium text-lg mb-4">LEGAL HELP</h3>
             <ul className="space-y-3">
-              {/* {["Terms and Condition", "Privacy Policy", "Refund Policy"].map((text, index) => (
-                <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white text-sm">
-                    {text}
-                  </a>
-                </li>
-              ))} */}
               {[
                 { text: "Terms and Condition", link: "/terms-and-conditions" },
                 { text: "Privacy Policy", link: "/privacypolicy" },
@@ -202,13 +211,13 @@ const Footer = () => {
         <RegisterForm closeModal={() => toggleregistermodal(false)} />
       )}
 
-{loginModal && (
-  <LoginForm 
-    closeModal={() => toggleLoginModal(false)}
-    onSuccess={() => {}}
-    source="chatbot" // or "percentage-calculator" depending on your needs
-  />
-)}
+      {loginModal && (
+        <LoginForm
+          closeModal={() => toggleLoginModal(false)}
+          onSuccess={() => {}}
+          source="chatbot" // or "percentage-calculator" depending on your needs
+        />
+      )}
     </footer>
   );
 };

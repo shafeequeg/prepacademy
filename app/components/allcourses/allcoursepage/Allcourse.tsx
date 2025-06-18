@@ -187,11 +187,11 @@ const AllCourses: React.FC = () => {
               </div>
               <div className="w-full md:w-1/2">
                 <Image
-                  src="/collegecourse.jpeg"
+                  src="/allcourse/collegeimage.jpeg"
                   alt="College Students"
                   width={600}
                   height={400}
-                  className="rounded-lg object-cover w-full h-full max-h-72"
+                  className="rounded-lg object-cover w-full h-80 aspect-[3/2]"
                 />
               </div>
             </div>
@@ -236,11 +236,11 @@ const AllCourses: React.FC = () => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src="/schoolcourse.jpeg"
+                src="/allcourse/schoolimages.jpeg"
                 alt="School Students"
                 width={600}
                 height={300}
-                className="rounded-lg object-cover w-full h-full max-h-72"
+                className="rounded-lg object-cover w-full h-80 aspect-[3/2]"
               />
             </div>
           </div>

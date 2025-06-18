@@ -31,14 +31,16 @@ interface Userdata {
   id: string;
   full_name: string;
   email: string;
-  phone_number: string; // Changed to string to match input validation
+  phone_number: number;
   school_name: string;
   question: string;
   question_text: string;
   selected_option: string;
   selected_option_text: string;
   class_type: string;
+  location: string;
 }
+
 
 interface Option {
   id: string | number;
@@ -72,6 +74,39 @@ const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   );
 };
 
+const tabs = [
+  {
+    id: "ResumeBuilding",
+    label: "Resume Building",
+    path: "/careercounseling/ResumeBuilding",
+  },
+  {
+    id: "InterviewPreparation",
+    label: "Interview Preparation",
+    path: "/careercounseling/InterviewPreparation",
+  },
+  {
+    id: "CareerPlanning",
+    label: "Career Planning",
+    path: "/careercounseling/CareerPlanning",
+  },
+  {
+    id: "SkillDevelopment", // Remove space from "Skill Development"
+    label: "Skill Development",
+    path: "/careercounseling/SkillDevelopment",
+  },
+  {
+    id: "JobSearchStrategies", // Remove spaces from "Job Search Strategies"
+    label: "Job Search Strategies",
+    path: "/careercounseling/JobSearchStrategies",
+  },
+  {
+    id: "StreamSelection", // Remove space from "Stream Selection "
+    label: "Stream Selection",
+    path: "/careercounseling/StreamSelection",
+  },
+];
+
 const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   slug,
 }) => {
@@ -82,37 +117,28 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setUser] = useState<Userdata[]>([]);
   const [activeTab, setActiveTab] = useState<string>(""); // Added activeTab state
-  const [enrollFormData, setEnrollFormData] = useState<{
-    full_name: string;
-    email: string;
-    class_type: string;
-    phone_number: string; // Changed to string
-    school_name: string;
-    question: string;
-    selected_option: Record<string, string>;
-  }>({
+   const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
     question: "",
-    selected_option: {},
+    location: "",
+    selected_option: {} as Record<string, string>, // Change to only string keys
   });
+
+  const [activeMainTab, setActiveMainTab] = useState(slug || "");
+
   const [formStep, setFormStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<{
-    full_name: string;
-    email: string;
-    class_type: string;
-    phone_number: string;
-    school_name: string;
-  }>({
+  const [validationErrors, setValidationErrors] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
 
   const router = useRouter();
@@ -159,13 +185,33 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
     return "";
   };
 
-  const validateMobileNumber = (mobile: string): string => {
-    if (!mobile || mobile.trim() === "") return "Mobile number is required";
+   const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
+    }
+    return "";
+  };
+
+   const validateMobileNumber = (mobile: string): string => {
+    if (!mobile || mobile.trim() === "") {
+      return "Mobile number is required";
+    }
+
+    // Validate 10-digit Indian mobile number
     const mobileRegex = /^[6-9]\d{9}$/;
-    if (!mobileRegex.test(mobile))
+    if (!mobileRegex.test(mobile)) {
       return "Please enter a valid 10-digit mobile number";
-    const isDuplicate = user.some((u) => u.phone_number === mobile);
-    if (isDuplicate) return "This mobile number is already registered";
+    }
+
+    // Check for duplicate mobile number
+    const isDuplicate = user.some((u) => u.phone_number.toString() === mobile);
+    if (isDuplicate) {
+      return "This mobile number is already registered";
+    }
+
     return "";
   };
 
@@ -178,36 +224,54 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
 
   const nextStep = () => {
     let error = "";
+
+    // Validate current field before proceeding
     switch (formStep) {
       case 0:
-        error = validateFullName(enrollFormData.full_name);
+        error = validateFullName(enrollFormData.full_name || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, full_name: error }));
-          return;
+          return; // Don't proceed if validation fails
         }
         break;
       case 1:
-        error = validateEmail(enrollFormData.email);
+        error = validateEmail(enrollFormData.email || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, email: error }));
           return;
         }
         break;
       case 2:
-        error = validateClassType(enrollFormData.class_type);
+        error = validateClassType(enrollFormData.class_type || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, class_type: error }));
           return;
         }
         break;
       case 3:
-        error = validateMobileNumber(enrollFormData.phone_number);
+        error = validateMobileNumber(enrollFormData.phone_number || "");
         if (error) {
           setValidationErrors((prev) => ({ ...prev, phone_number: error }));
           return;
         }
         break;
+      case 4:
+      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+        return;
+      }
+      break;
+    case 5:
+      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, location: error }));
+        return;
+      }
+      break;
     }
+
+    // If validation passes, proceed to next step
     setFormStep((prev) => prev + 1);
   };
 
@@ -245,16 +309,17 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   };
 
   const calculateProgress = () => {
-    const totalSteps = 8;
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
+  // Reset the form when modal closes
 
   useEffect(() => {
     if (!isModalOpen) {
       setScreeningStep(1);
       setFormStep(0);
-      setCurrentQuestionIndex(0);
+      setCurrentQuestionIndex(0); // Add this line to reset the question index
       setEnrollFormData({
         full_name: "",
         email: "",
@@ -263,9 +328,11 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         school_name: "",
         question: "",
         selected_option: {},
+        location: "",
       });
     }
   }, [isModalOpen]);
+
 
   useEffect(() => {
     fetchPrograms();
@@ -282,15 +349,18 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
     setIsSubmitting(true);
 
     try {
+      // Check if all required fields are filled
       const requiredFields = [
         "full_name",
         "email",
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
+      // Use type assertion to check fields
       const missingFields = requiredFields.filter(
-        (field) => !enrollFormData[field]
+        (field) => !enrollFormData[field as keyof typeof enrollFormData]
       );
 
       if (missingFields.length > 0) {
@@ -301,6 +371,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         return;
       }
 
+      // Check if we have screening answers
       if (Object.keys(enrollFormData.selected_option).length === 0) {
         toast.error("Please answer all screening questions");
         setIsSubmitting(false);
@@ -310,6 +381,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
       let successCount = 0;
       const totalQuestions = Object.keys(enrollFormData.selected_option).length;
 
+      // Process each question one by one with the full user data
       for (const [questionId, selectedOption] of Object.entries(
         enrollFormData.selected_option
       )) {
@@ -321,8 +393,9 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
               email: enrollFormData.email,
               class_type: enrollFormData.class_type,
               phone_number: enrollFormData.phone_number,
-              school_name: enrollFormData.school_name,
+              school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -338,8 +411,11 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         }
       }
 
+      // Check if all submissions were successful
       if (successCount === totalQuestions) {
         toast.success("Your enrollment has been submitted successfully!");
+
+        // Reset form fields
         setEnrollFormData({
           full_name: "",
           email: "",
@@ -348,7 +424,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
+
+        // Reset steps
         setIsModalOpen(false);
         setFormStep(0);
         setScreeningStep(0);
@@ -425,8 +504,62 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
     return <div>Course not found</div>;
   }
 
+  
+ const handleTabKeyNav = (
+     e: React.KeyboardEvent,
+     index: number,
+     tabArray: typeof tabs,
+     setTabFn: (id: string) => void
+   ) => {
+     if (e.key === "ArrowRight") {
+       const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
+       setTabFn(tabArray[nextIndex].id);
+       document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
+     } else if (e.key === "ArrowLeft") {
+       const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
+       setTabFn(tabArray[prevIndex].id);
+       document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
+     }
+   };
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
+
+      <div className="bg-black px-4 py-3 sticky top-0  mt-14  md:mt-32">
+          <div className="max-w-7xl mx-auto">
+            <div
+              className="flex items-center justify-start gap-2 md:gap-4 pb-1 lg:mt-2 overflow-x-auto md:overflow-visible w-full w768:overflow-x-scroll w768:mt-16 "
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              role="tablist"
+              aria-label="Career Counseling Programs"
+            >
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-selected={activeMainTab === tab.id}
+                  aria-controls={`tabpanel-${tab.id}`}
+                  onClick={() => {
+                    setActiveMainTab(tab.id);
+                    router.push(tab.path); // Navigate to the dynamic path
+                  }}
+                  onKeyDown={(e) =>
+                    handleTabKeyNav(e, index, tabs, setActiveMainTab)
+                  }
+                  tabIndex={activeMainTab === tab.id ? 0 : -1}
+                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+                    activeMainTab === tab.id
+                      ? "bg-[#FF6B3D] text-white font-medium"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  } rounded-full`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       <div className="relative w-full z-10">
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
           <div className="w-full px-4 mt-24">
@@ -702,9 +835,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         </div>
       </div>
 
-      {isModalOpen && (
+        {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
+            {/* Close button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-700 hover:text-black z-10"
@@ -722,6 +856,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
+
+            {/* Header section with image */}
             <div className="bg-[#F55D3E] p-4 md:p-6 text-white">
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/3 flex justify-center mb-3 md:mb-0">
@@ -745,6 +881,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                   </p>
                 </div>
               </div>
+
+              {/* Progress bar */}
               <div className="w-full h-2 bg-white bg-opacity-30 rounded-full mt-4">
                 <div
                   className="h-full bg-white rounded-full transition-all duration-300"
@@ -752,7 +890,9 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 />
               </div>
             </div>
+
             <div className="p-4 md:p-6">
+              {/* Screening Questions - Only show these when screeningStep < 4 */}
               {screeningStep <= questions.length && questions.length > 0 && (
                 <div className="flex flex-col items-center">
                   <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4">
@@ -772,7 +912,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                         className={`w-full p-3 text-left border rounded-lg transition-colors ${
                           enrollFormData.selected_option[
                             questions[currentQuestionIndex].id
-                          ] === String(option.id)
+                          ] === option.text
                             ? "bg-[#F55D3E] text-white"
                             : "border-gray-300 hover:bg-orange-50"
                         }`}
@@ -781,7 +921,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                           className={
                             enrollFormData.selected_option[
                               questions[currentQuestionIndex].id
-                            ] === String(option.id)
+                            ] === option.text
                               ? "text-white"
                               : "text-gray-800"
                           }
@@ -793,6 +933,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                   </div>
                 </div>
               )}
+
+              {/* Main Form Steps - Only show when screening is complete */}
               {screeningStep > questions.length && (
                 <div className="w-full max-w-md mx-auto">
                   <form onSubmit={handleEnrollSubmit}>
@@ -807,7 +949,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                             id="full_name"
                             name="full_name"
                             placeholder="Your Full Name"
-                            value={enrollFormData.full_name}
+                            value={enrollFormData.full_name || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.full_name
@@ -840,6 +982,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                         </button>
                       </div>
                     )}
+
                     {formStep === 1 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -851,7 +994,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                             id="email"
                             name="email"
                             placeholder="Your Email Address"
-                            value={enrollFormData.email}
+                            value={enrollFormData.email || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.email
@@ -891,6 +1034,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                         </div>
                       </div>
                     )}
+
                     {formStep === 2 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -901,8 +1045,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                             type="text"
                             id="class_type"
                             name="class_type"
-                            placeholder="e.g. Resume Building, Interview Prep"
-                            value={enrollFormData.class_type}
+                            placeholder="e.g. Math, Science, English"
+                            value={enrollFormData.class_type || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border ${
                               validationErrors.class_type
@@ -944,6 +1088,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                         </div>
                       </div>
                     )}
+
                     {formStep === 3 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -959,7 +1104,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                               id="phone_number"
                               name="phone_number"
                               placeholder="Your Phone Number"
-                              value={enrollFormData.phone_number}
+                              value={enrollFormData.phone_number || ""}
                               onChange={handleFormChange}
                               className={`w-full p-3 border text-black ${
                                 validationErrors.phone_number
@@ -1019,6 +1164,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                         </div>
                       </div>
                     )}
+
                     {formStep === 4 && (
                       <div className="space-y-4">
                         <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
@@ -1030,7 +1176,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                             id="school_name"
                             name="school_name"
                             placeholder="Your School/Institute"
-                            value={enrollFormData.school_name}
+                            value={enrollFormData.school_name || ""}
                             onChange={handleFormChange}
                             className={`w-full p-3 border text-black ${
                               validationErrors.school_name
@@ -1054,17 +1200,70 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >
@@ -1077,6 +1276,33 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 </div>
               )}
             </div>
+
+            {/* Summary section showing answers (visible at the bottom after questions are answered) */}
+            {/* {screeningStep === 4 && (
+            <div className="p-4 bg-gray-50 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
+              <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
+                {EnrollformData.answer1 && (
+                  <div>
+                    <span className="font-medium block">Learning goal:</span>
+                    {EnrollformData.answer1}
+                  </div>
+                )}
+                {EnrollformData.answer2 && (
+                  <div>
+                    <span className="font-medium block">Schedule:</span>
+                    {EnrollformData.answer2}
+                  </div>
+                )}
+                {EnrollformData.answer3 && (
+                  <div>
+                    <span className="font-medium block">Found via:</span>
+                    {EnrollformData.answer3}
+                  </div>
+                )}
+              </div>
+            </div>
+          )} */}
           </div>
         </div>
       )}

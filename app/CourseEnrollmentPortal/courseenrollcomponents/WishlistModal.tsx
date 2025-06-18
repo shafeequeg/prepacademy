@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heart, X } from "lucide-react";
 import { WishlistItem } from "./types";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface WishlistModalProps {
   isOpen: boolean;
   closeModal: () => void;
   wishlistItems: WishlistItem[];
   removeFromWishlist: (id: string) => void;
-  handleWishlistEnroll: (item: WishlistItem) => void;
   parsePriceToNumber: (priceString: string | undefined) => number;
+  setShowAuthAlert: (show: boolean) => void;
+  setShowLoginModal: (show: boolean) => void;
 }
 
 const WishlistModal: React.FC<WishlistModalProps> = React.memo(
@@ -17,10 +20,92 @@ const WishlistModal: React.FC<WishlistModalProps> = React.memo(
     closeModal,
     wishlistItems,
     removeFromWishlist,
-    handleWishlistEnroll,
     parsePriceToNumber,
+    setShowAuthAlert,
+    // setShowLoginModal,
   }) => {
+    const router = useRouter();
+    const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set());
+
     if (!isOpen) return null;
+
+    const handleBuyNow = async (item: WishlistItem) => {
+      // Start loading for this specific item
+      setLoadingItems((prev) => new Set(prev).add(item.id));
+
+      const userData = localStorage.getItem("user");
+      let user_uuid = "";
+
+      if (userData) {
+        try {
+          const parsedData = JSON.parse(userData);
+          user_uuid = parsedData.uuid || "";
+          if (!user_uuid) {
+            setLoadingItems((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(item.id);
+              return newSet;
+            });
+            setShowAuthAlert(true);
+            closeModal();
+            return;
+          }
+        } catch (error) {
+          console.error("Error parsing user data from localStorage:", error);
+          setLoadingItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(item.id);
+            return newSet;
+          });
+          setShowAuthAlert(true);
+          closeModal();
+          return;
+        }
+      } else {
+        setLoadingItems((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(item.id);
+          return newSet;
+        });
+        setShowAuthAlert(true);
+        closeModal();
+        return;
+      }
+
+      try {
+        const courseUuid = item.uuid || crypto.randomUUID();
+        const itemPrice = parsePriceToNumber(item.price);
+        const originalPrice = Math.round(itemPrice * 1.25);
+        const discount = originalPrice - itemPrice;
+
+        router.push(
+          `/payment/${courseUuid}?title=${encodeURIComponent(
+            item.title
+          )}&price=₹${itemPrice.toLocaleString(
+            "en-IN"
+          )}&duration=${encodeURIComponent(
+            item.duration
+          )}&originalPrice=₹${originalPrice.toLocaleString(
+            "en-IN"
+          )}&discount=₹${discount.toLocaleString(
+            "en-IN"
+          )}&user_uuid=${encodeURIComponent(
+            user_uuid
+          )}&uuid=${encodeURIComponent(courseUuid)}`
+        );
+
+        closeModal();
+      } finally {
+        // Stop loading after navigation
+        setTimeout(() => {
+          setLoadingItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(item.id);
+            return newSet;
+          });
+        }, 1000);
+      }
+    };
 
     return (
       <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center p-4">
@@ -56,11 +141,14 @@ const WishlistModal: React.FC<WishlistModalProps> = React.memo(
                     className="border border-orange-600 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex flex-col"
                   >
                     {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-32 w-full object-cover"
-                      />
+                      <div className="relative w-full h-32">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     ) : (
                       <div className="h-32 bg-gradient-to-r from-orange-500 to-orange-600"></div>
                     )}
@@ -100,10 +188,37 @@ const WishlistModal: React.FC<WishlistModalProps> = React.memo(
                           )}
                         </div>
                         <button
-                          onClick={() => handleWishlistEnroll(item)}
-                          className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                          onClick={() => handleBuyNow(item)}
+                          disabled={loadingItems.has(item.id)}
+                          className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none"
                         >
-                          Buy Now
+                          {loadingItems.has(item.id) ? (
+                            <div className="flex items-center justify-center">
+                              <svg
+                                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                              </svg>
+                              Processing...
+                            </div>
+                          ) : (
+                            "Buy Now"
+                          )}
                         </button>
                       </div>
                     </div>
@@ -115,15 +230,10 @@ const WishlistModal: React.FC<WishlistModalProps> = React.memo(
           <div className="border-t border-orange-600 p-4 flex justify-end bg-gray-800">
             <button
               onClick={closeModal}
-              className="px-4 py-2 bg-gray-700 text-orange-300 rounded-md mr-2 hover:bg-gray-600 transition-all duration-300 transform hover:scale-105"
+              className="px-4 py-2 bg-gray-700 text-orange-300 rounded-md hover:bg-gray-600 transition-all duration-300 transform hover:scale-105"
             >
               Close
             </button>
-            {wishlistItems.length > 0 && (
-              <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-md transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
-                Enroll All
-              </button>
-            )}
           </div>
         </div>
       </div>

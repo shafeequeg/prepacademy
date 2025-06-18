@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 // import Image from 'next/image';
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -38,7 +38,9 @@ interface Userdata {
   selected_option: string;
   selected_option_text: string;
   class_type: string;
+  location: string;
 }
+
 
 interface Option {
   id: string | number;
@@ -244,6 +246,15 @@ const courseCards = [
   },
 ];
 
+const tabs = [
+  { id: "IELTS", label: "IELTS", path: "/studyabroad/ielts" },
+  { id: "SAT", label: "SAT", path: "/studyabroad/sat" },
+  { id: "ACT", label: "ACT", path: "/studyabroad/act" },
+  { id: "GRE", label: "GRE", path: "/studyabroad/gre" },
+  { id: "GMAT", label: "GMAT", path: "/studyabroad/gmat" },
+];
+
+
 const CatExamApplySection: React.FC = () => {
   //   const [showIcons, setShowIcons] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
@@ -299,6 +310,7 @@ const CatExamApplySection: React.FC = () => {
     phone_number: "",
     school_name: "",
     question: "",
+    location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
   const [formStep, setFormStep] = useState(0);
@@ -309,8 +321,10 @@ const CatExamApplySection: React.FC = () => {
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
   const [screeningStep, setScreeningStep] = useState(1);
+  const [activeMainTab, setActiveMainTab] = useState("engineering");
 
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
@@ -447,6 +461,16 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
+   const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
+    }
+    return "";
+  };
+
   const validateEmail = (email: string): string => {
     if (!email || email.trim() === "") {
       return "Email address is required";
@@ -503,7 +527,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-  const nextStep = () => {
+    const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -536,6 +560,20 @@ const CatExamApplySection: React.FC = () => {
           return;
         }
         break;
+      case 4:
+      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+        return;
+      }
+      break;
+    case 5:
+      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, location: error }));
+        return;
+      }
+      break;
     }
 
     // If validation passes, proceed to next step
@@ -578,7 +616,7 @@ const CatExamApplySection: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const calculateProgress = () => {
-    const totalSteps = 8; // 3 screening + 5 form fields
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
@@ -597,6 +635,7 @@ const CatExamApplySection: React.FC = () => {
         school_name: "",
         question: "",
         selected_option: {},
+        location: "",
       });
     }
   }, [isModalOpen]);
@@ -662,7 +701,7 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
-  const handleEnrollSubmit = async (e: React.FormEvent) => {
+ const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -674,6 +713,7 @@ const CatExamApplySection: React.FC = () => {
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
       // Use type assertion to check fields
       const missingFields = requiredFields.filter(
@@ -712,6 +752,7 @@ const CatExamApplySection: React.FC = () => {
               phone_number: enrollFormData.phone_number,
               school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -740,6 +781,7 @@ const CatExamApplySection: React.FC = () => {
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
 
         // Reset steps
@@ -761,7 +803,6 @@ const CatExamApplySection: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
   const handleScreeningChange = (
     questionId: number | string,
     optionId: string | number
@@ -855,9 +896,100 @@ const CatExamApplySection: React.FC = () => {
 
   //free trial
 
+   const handleTabKeyNav = (
+    e: React.KeyboardEvent,
+    index: number,
+    tabArray: typeof tabs | typeof offeringTypes,
+    setTabFn: (id: string) => void
+  ) => {
+    if (e.key === "ArrowRight") {
+      const nextIndex = index < tabArray.length - 1 ? index + 1 : 0;
+      setTabFn(tabArray[nextIndex].id);
+      document.getElementById(`tab-${tabArray[nextIndex].id}`)?.focus();
+    } else if (e.key === "ArrowLeft") {
+      const prevIndex = index > 0 ? index - 1 : tabArray.length - 1;
+      setTabFn(tabArray[prevIndex].id);
+      document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
+    }
+  };
+
+  // Create refs for each section
+  const ieltsRef = useRef<HTMLDivElement | null>(null);
+  const satRef = useRef<HTMLDivElement | null>(null);
+  const actRef = useRef<HTMLDivElement | null>(null);
+  const greRef = useRef<HTMLDivElement | null>(null);
+  const gmatRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToRef = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    switch (activeMainTab) {
+      case "IELTS":
+        scrollToRef(ieltsRef);
+        break;
+      case "SAT":
+        scrollToRef(satRef);
+        break;
+      case "ACT":
+        scrollToRef(actRef);
+        break;
+      case "GRE":
+        scrollToRef(greRef);
+        break;
+      case "GMAT":
+        scrollToRef(gmatRef);
+        break;
+      default:
+        break;
+    }
+  }, [activeMainTab]);
+
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
+
+         <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
+          <div className="max-w-7xl mx-auto">
+            <div
+              className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              role="tablist"
+              aria-label="Study Abroad Programs"
+            >
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-selected={activeMainTab === tab.id}
+                  aria-controls={`tabpanel-${tab.id}`}
+                  onClick={() => {
+                    setActiveMainTab(tab.id);
+                    // Navigate to the path associated with the tab
+                    window.location.href = tab.path;
+                  }}
+                  onKeyDown={(e) =>
+                    handleTabKeyNav(e, index, tabs, setActiveMainTab)
+                  }
+                  tabIndex={activeMainTab === tab.id ? 0 : -1}
+                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+                    activeMainTab === tab.id
+                      ? "bg-[#FF6B3D] text-white font-medium"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  } rounded-full`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
       {/* Main Content */}
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
@@ -1390,7 +1522,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
       </div>
 
-      {isModalOpen && (
+        {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}
@@ -1755,17 +1887,70 @@ const CatExamApplySection: React.FC = () => {
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >

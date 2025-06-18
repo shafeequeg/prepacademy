@@ -48,14 +48,14 @@ const StudyAbroadSection: React.FC = () => {
       title: "Interview Preparation",
       description:
         "Get expert guidance to ace your job interviews with confidence.",
-        path: "/careercounseling",
-      },
+      path: "/careercounseling",
+    },
     {
       title: "Career Planning",
       description:
         "Personalized career counseling to align with your ambitions.",
-        path: "/careercounseling",
-      },
+      path: "/careercounseling",
+    },
     {
       title: "Skill Development",
       description: "Enhance your skills to stay competitive in the job market.",
@@ -88,13 +88,12 @@ const StudyAbroadSection: React.FC = () => {
             </p>
           </div>
 
-
-
-          {/* Right Content - Image */}
+        {/* Right Content - Image */}
+        
           <div className="lg:w-1/2">
-            <div className="relative w-full h-48 lg:h-56">
+            <div className="relative  w-full aspect-[4/3] lg:aspect-[16/10]">
               <Image
-                src="/studyabroad.jpeg"
+                src="/allcourse/studyabroadimage.jpeg"
                 alt="Student studying abroad"
                 fill
                 className="object-contain rounded-lg"

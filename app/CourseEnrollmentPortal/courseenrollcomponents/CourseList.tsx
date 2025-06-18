@@ -5,7 +5,7 @@ import { SalesSubjects, CourseData } from "./types";
 interface SalesSection {
   id?: number | string;
   section_name?: string;
-subject?: number | string;  // Add other properties that exist in your sales section data
+  subject?: number | string; // Add other properties that exist in your sales section data
 }
 
 interface CourseListProps {
@@ -112,7 +112,10 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     const handleViewDetailsClick = (course: CourseData) => {
       // Pass the course UUID/ID to show course details
       // The second parameter should be false since this is a course, not a section
-      handleCourseClick(course.uuid?.toString() || course.id?.toString() || "", false);
+      handleCourseClick(
+        course.uuid?.toString() || course.id?.toString() || "",
+        false
+      );
     };
 
     return (
@@ -145,7 +148,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
                 key={course.id}
                 className="border border-orange-600 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer bg-gray-800 hover:border-orange-500 transform hover:scale-105 flex flex-col h-full"
               >
-                <div className="relative h-40 w-full overflow-hidden rounded-t-lg flex-shrink-0">
+                <div className="relative h- w-full overflow-hidden rounded-t-lg flex-shrink-0 aspect-[4/3]">
                   <Image
                     src={course.image || "/default-course.jpg"}
                     alt={course.title || "Course image"}
@@ -168,7 +171,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
                       {course.duration}
                     </span>
                   </div>
-                  <button 
+                  <button
                     className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg font-medium"
                     onClick={(e) => {
                       e.stopPropagation(); // Prevent event bubbling

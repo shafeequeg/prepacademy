@@ -79,8 +79,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                     {(
                       Math.floor(Number(currentCourseData.amount)) +
                       Math.floor(Math.random() * 9000 + 1000)
-                    ) // Adds 1000-10000
-                      .toLocaleString("en-US")}
+                    ).toLocaleString("en-US")}
                   </span>
                 </div>
               </div>
