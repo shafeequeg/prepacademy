@@ -10,7 +10,7 @@ export default function RefundPolicy() {
         <meta name="description" content="PrepAcademy&apos;s refund policy" />
       </Head>
 
-      <main className="max-w-5xl min-h-screen flex-grow mx-auto py-8 px-4 sm:px-6 lg:px-8 relative top-24">
+      <main className="max-w-5xl min-h-screen flex-grow mx-auto py-8 px-4 sm:px-6 lg:px-8 relative top-12 md:mt-12">
         <h1 className="text-3xl font-bold text-white mb-8">Refund Policy</h1>
 
         <div className="space-y-6 text-gray-200">

@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // interface VideoCardProps {
 //   title: string;
@@ -40,7 +41,6 @@ interface Userdata {
   class_type: string;
   location: string;
 }
-
 
 interface Option {
   id: string | number;
@@ -254,7 +254,6 @@ const tabs = [
   { id: "GMAT", label: "GMAT", path: "/studyabroad/gmat" },
 ];
 
-
 const CatExamApplySection: React.FC = () => {
   //   const [showIcons, setShowIcons] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
@@ -287,9 +286,9 @@ const CatExamApplySection: React.FC = () => {
     location: "",
     course: "",
   });
+  const router = useRouter();
 
-
-   const [mainFormErrors, setMainFormErrors] = useState({
+  const [mainFormErrors, setMainFormErrors] = useState({
     full_name: "",
     mobile_number: "",
     email: "",
@@ -324,7 +323,7 @@ const CatExamApplySection: React.FC = () => {
     location: "",
   });
   const [screeningStep, setScreeningStep] = useState(1);
-  const [activeMainTab, setActiveMainTab] = useState("engineering");
+  const [activeMainTab, setActiveMainTab] = useState("IELTS");
 
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
@@ -340,7 +339,7 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
-   const validateMainFullName = (name: string) => {
+  const validateMainFullName = (name: string) => {
     if (!name || name.trim() === "") {
       return "Full name is required";
     }
@@ -402,10 +401,9 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-
   console.log(programs);
 
-    const handleInputChange = (
+  const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
@@ -448,9 +446,6 @@ const CatExamApplySection: React.FC = () => {
     setMainFormErrors((prev) => ({ ...prev, [name]: errorMessage }));
   };
 
-
-
-
   const validateFullName = (name: string): string => {
     if (!name || name.trim() === "") {
       return "Full name is required";
@@ -461,7 +456,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -527,7 +522,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-    const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -561,19 +556,19 @@ const CatExamApplySection: React.FC = () => {
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -649,8 +644,7 @@ const CatExamApplySection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
-     const errors = {
+    const errors = {
       full_name: validateMainFullName(formData.full_name),
       mobile_number: validateMainMobile(formData.mobile_number),
       email: validateMainEmail(formData.email),
@@ -701,7 +695,7 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
- const handleEnrollSubmit = async (e: React.FormEvent) => {
+  const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -895,8 +889,13 @@ const CatExamApplySection: React.FC = () => {
   );
 
   //free trial
+  const [isLoading, setIsLoading] = useState(false);
 
-   const handleTabKeyNav = (
+
+  console.log(setIsLoading);
+  
+  
+  const handleTabKeyNav = (
     e: React.KeyboardEvent,
     index: number,
     tabArray: typeof tabs | typeof offeringTypes,
@@ -948,53 +947,56 @@ const CatExamApplySection: React.FC = () => {
     }
   }, [activeMainTab]);
 
+   const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
+  };
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
 
-         <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
-          <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              role="tablist"
-              aria-label="Study Abroad Programs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => {
-                    setActiveMainTab(tab.id);
-                    // Navigate to the path associated with the tab
-                    window.location.href = tab.path;
-                  }}
-                  onKeyDown={(e) =>
-                    handleTabKeyNav(e, index, tabs, setActiveMainTab)
-                  }
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id
-                      ? "bg-[#FF6B3D] text-white font-medium"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+      <div className="bg-black px-4 py-3 sticky top-0  mt-10 md:mt-24 lg:mt-28">
+        <div className="max-w-7xl mx-auto">
+          <div
+            className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            role="tablist"
+            aria-label="Study Abroad Programs"
+          >
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                id={`tab-${tab.id}`}
+                role="tab"
+                aria-selected={activeMainTab === tab.id}
+                aria-controls={`tabpanel-${tab.id}`}
+                onClick={() => {
+                  setActiveMainTab(tab.id);
+                  // Navigate to the path associated with the tab
+                  window.location.href = tab.path;
+                }}
+                onKeyDown={(e) =>
+                  handleTabKeyNav(e, index, tabs, setActiveMainTab)
+                }
+                tabIndex={activeMainTab === tab.id ? 0 : -1}
+                className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
+                  activeMainTab === tab.id
+                    ? "bg-[#FF6B3D] text-white font-medium"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                } rounded-full`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
+      </div>
 
       {/* Main Content */}
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">
@@ -1032,7 +1034,7 @@ const CatExamApplySection: React.FC = () => {
                     />
                     <p className="text-white">
                       {" "}
-                     Mentoring & Teaching by experts Regular {" "}
+                      Mentoring & Teaching by experts Regular{" "}
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -1043,28 +1045,31 @@ const CatExamApplySection: React.FC = () => {
                       height={20} // 5 * 4
                       className="w-5 h-5 mr-3"
                     />
-                    <p className="text-white">
-                     Testing & Analysis {" "}
-                    </p>
+                    <p className="text-white">Testing & Analysis </p>
                   </div>
 
-                    <div className="flex items-center">
+                  <div className="flex items-center">
                     <Image
                       src="/aboutusverified.png"
                       alt="Check Icon"
-                      width={20} 
+                      width={20}
                       height={20}
                       className="w-5 h-5 mr-3"
                     />
                     <p className="text-white">
-                   Support for School/Board Exams  {" "}
+                      Support for School/Board Exams{" "}
                     </p>
                   </div>
                 </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                    <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+                    disabled={isLoading}
+
+                  >
                     Enroll Now
                   </button>
                   <button
@@ -1425,7 +1430,7 @@ const CatExamApplySection: React.FC = () => {
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                <button
+                  <button
                     type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
                     onClick={openModal}
@@ -1476,7 +1481,7 @@ const CatExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   IELTS Master Class
                 </h3>
-                     <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >
@@ -1522,7 +1527,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
       </div>
 
-        {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}

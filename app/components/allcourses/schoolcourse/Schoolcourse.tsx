@@ -40,7 +40,6 @@ interface Userdata {
   location: string;
 }
 
-
 interface Option {
   id: string | number;
   question: string | number; // question ID this option belongs to
@@ -265,12 +264,23 @@ const CatExamApplySection: React.FC = () => {
   // });
 
   // const [isModalOpen, setIsModalOpen] = useState(false);
+ const isIPhone = () => {
+    if (typeof window === "undefined") return false; // Guard for server-side
+    return (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  };
+
+  const [isIPhoneDropdownOpen, setIsIPhoneDropdownOpen] = useState<
+    string | null
+  >(null);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-   const [enrollFormData, setEnrollFormData] = useState({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
@@ -280,7 +290,6 @@ const CatExamApplySection: React.FC = () => {
     location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
-
 
   const [formStep, setFormStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -463,7 +472,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -472,7 +481,6 @@ const CatExamApplySection: React.FC = () => {
     }
     return "";
   };
-
 
   const validateMobileNumber = (mobile: string): string => {
     if (!mobile || mobile.trim() === "") {
@@ -504,7 +512,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -538,19 +546,19 @@ const CatExamApplySection: React.FC = () => {
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -779,78 +787,85 @@ const CatExamApplySection: React.FC = () => {
     }));
   };
 
+  // Replace the schoolCourses array in your second file with this:
   const schoolCourses = [
     {
-      // code: "ENGINEERING",
       title: "ENGINEERING",
       description: "JEE, KEAM, BITSAT, VITEEE, KCET",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=engineering",
     },
     {
-      // code: "MEDICAL",
       title: "MEDICAL",
       description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=MEDICAL",
     },
     {
-      // code: "MANAGEMENT",
       title: "MANAGEMENT",
       description: "IPM, CHRIST, SET, NPAT,MHCET",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/schoolcourse/management",
+      path: "/schoolcourse?tab=MANAGEMENT",
     },
     {
-      // code: "LAW",
       title: "LAW",
       description: "CLAT, SLAT, AILET, KLEE, CULEE",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/law",
+      path: "/schoolcourse?tab=LAW",
     },
     {
-      // code: "CUET",
       title: "  CUET ",
       description: "COMMON UNIVERSITY ENTRANCE TEST",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=CUET",
     },
     {
-      // code: "DEFENCE",
       title: "DEFENCE",
       description: "NDA, AFCAT",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=DEFENCE",
     },
     {
-      // code: "DESIGN",
       title: "DESIGN & ARCHITECTURE",
       description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
       classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=DESIGN",
     },
     {
-      // code: "OTHERS",
       title: "OTHERS",
       description:
         "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
       classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=OTHERS",
     },
     {
-      // code: "TUITIONS",
       title: "TUITIONS",
       description:
         "PHYSICS, CHEMISTRY,BIOLOGY, MATHS,ENGLISH,COMMERCE,BUSINESS STUDIES,ACCOUNTING,ECONOMICS",
       classType: "CLASSES FOR 11TH & 12TH",
-      path: "/courses/bank",
+      path: "/schoolcourse?tab=TUITIONS",
     },
   ];
 
-  const toggleDropdown = (tabId: string | null) => {
-    setOpenDropdown(openDropdown === tabId ? null : tabId);
-  };
+  // Or if you prefer to handle it on component mount:
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get("tab");
 
+    if (tabParam) {
+      setActiveMainTab(tabParam.toUpperCase());
+      setOpenDropdown(tabParam.toUpperCase());
+    }
+  }, []);
+
+  const toggleDropdown = (tabId: string | null) => {
+    if (isIPhone()) {
+      setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
+      setActiveMainTab(tabId || "");
+    } else {
+      setOpenDropdown(openDropdown === tabId ? null : tabId);
+    }
+  };
   // Handle keyboard navigation for tabs
   const handleTabKeyNav = (
     e: React.KeyboardEvent<HTMLElement>,
@@ -895,30 +910,62 @@ const CatExamApplySection: React.FC = () => {
   };
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!openDropdown) return; // Ensure openDropdown is not null
-
-      const dropdownElement = dropdownRefs.current[
-        openDropdown
-      ] as HTMLElement | null;
-
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
-        setOpenDropdown(null);
+    if (isIPhone()) {
+      if (isIPhoneDropdownOpen) {
+        // Disable scrolling on body when iPhone dropdown is open
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
+      } else {
+        // Re-enable scrolling when iPhone dropdown is closed
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.top = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
       }
-    };
+      return;
+    }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
     };
-  }, [openDropdown]);
+  }, [openDropdown, isIPhoneDropdownOpen]);
 
   // Add this useEffect to handle body scrolling
   useEffect(() => {
+    if (isIPhone()) {
+      // For iPhone, don't manipulate body scroll for the inline dropdown
+      return;
+    }
+
     if (openDropdown) {
-      // Disable scrolling on body when dropdown is open
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
       document.body.style.overflow = "hidden";
-      // Store current scroll position
       document.body.style.position = "fixed";
       document.body.style.width = "100%";
       document.body.style.top = `-${window.scrollY}px`;
@@ -943,15 +990,19 @@ const CatExamApplySection: React.FC = () => {
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white  ">
-      <div
-        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36  p-3 mt-10 space-x-2 scrollbar-hide"
+    <div
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
+          isIPhone() && isIPhoneDropdownOpen
+            ? "overflow-hidden"
+            : "overflow-x-auto"
+        }`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
           WebkitOverflowScrolling: "touch",
         }}
         role="tablist"
-        aria-label="Study Abroad Programs "
+        aria-label="Study Abroad Programs"
       >
         {tabs.map((tab, index) => (
           <div
@@ -989,6 +1040,7 @@ const CatExamApplySection: React.FC = () => {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -997,9 +1049,8 @@ const CatExamApplySection: React.FC = () => {
                 ></path>
               </svg>
             </button>
-
             {/* Dropdown menu with fixed positioning */}
-            {openDropdown === tab.id && (
+            {openDropdown === tab.id && !isIPhone() && (
               <div
                 className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
                 onClick={() => setOpenDropdown(null)}
@@ -1038,6 +1089,47 @@ const CatExamApplySection: React.FC = () => {
                         {item.label}
                       </Link>
                     ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isIPhone() && isIPhoneDropdownOpen === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setIsIPhoneDropdownOpen(null)}
+              >
+                <div
+                  className="absolute top-0 left-4 right-4 bg-black border border-gray-600 rounded-lg shadow-lg mx-2"
+                  style={{
+                    marginTop: "120px", // Adjust based on your header height
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+                    {/* Header showing selected tab */}
+                    {/* <div className="mb-4 pb-2 border-b border-gray-700">
+                      <h3 className="text-lg font-semibold text-[#FF6B3D]">
+                        {tab.label}
+                      </h3>
+                    </div> */}
+
+                    {/* Dropdown items */}
+                    <div className="space-y-2">
+                      {tab.dropdownItems.map((item, itemIndex) => (
+                        <Link
+                          key={`iphone-${tab.id}-${itemIndex}`}
+                          href={item.path}
+                          className="block w-full px-4 py-3 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white rounded-md transition-colors duration-200"
+                          role="menuitem"
+                          onClick={() => setIsIPhoneDropdownOpen(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1213,10 +1305,9 @@ const CatExamApplySection: React.FC = () => {
                 {schoolCourses.map((course, index) => (
                   <CourseCard
                     key={index}
-                    // code={course.code}
                     title={course.title}
                     description={course.description}
-                    // classType={course.classType}
+                    classType={course.classType} // Make sure this is passed
                     path={course.path}
                     className="border-l-4 border-[#F55D3E] p-4"
                   />

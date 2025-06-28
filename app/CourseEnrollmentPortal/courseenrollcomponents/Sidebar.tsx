@@ -102,6 +102,41 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
       }
     };
 
+    // Enhanced course click handler with mobile scroll
+    const handleCourseClickWithScroll = (
+      courseId: string,
+      isSection: boolean
+    ) => {
+      handleCourseClick(courseId, isSection);
+
+      // Add scroll behavior for mobile screens only
+      if (window.innerWidth < 768) {
+        // md breakpoint
+        setTimeout(() => {
+          // Try to find the course content area (adjust selector as needed)
+          const courseContentArea =
+            document.querySelector('[class*="md:col-span-3"]') ||
+            document.querySelector('[class*="course-content"]') ||
+            document.querySelector(".course-list") ||
+            document.querySelector(".course-details");
+
+          if (courseContentArea) {
+            courseContentArea.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
+            });
+          } else {
+            // Fallback: scroll to a reasonable position
+            window.scrollTo({
+              top: window.innerHeight * 0.5, // Scroll to middle of viewport
+              behavior: "smooth",
+            });
+          }
+        }, 100); // Small delay to ensure DOM is updated
+      }
+    };
+
     // Function to get filtered sections for a subject
     const getFilteredSections = (subjectId: string) => {
       // First, find matching sections from salesCoursessection where subject matches subjectId
@@ -183,7 +218,7 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
                       const sectionId = section.id?.toString() || "";
                       const sectionName = section.section_name || "";
                       const courseCount = getCourseCountForSection(sectionId);
-console.log(courseCount);
+                      console.log(courseCount);
 
                       return (
                         <div
@@ -195,7 +230,7 @@ console.log(courseCount);
                           } transition-all duration-300`}
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent parent click
-                            handleCourseClick(sectionId, true);
+                            handleCourseClickWithScroll(sectionId, true);
                           }}
                         >
                           <div className="flex justify-between items-center">

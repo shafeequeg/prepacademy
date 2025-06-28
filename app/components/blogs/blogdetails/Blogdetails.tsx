@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import axiosInstance from "../../apiconfig/axios";
 import { API_URLS } from "../../apiconfig/api_urls";
 
@@ -19,627 +21,172 @@ interface Blog {
   alt_img_text: string;
 }
 
-// Static blog interface to match the Blog interface
 interface StaticBlog {
   id: number;
   title: string;
   description: string;
   image: string;
   alt_img_text: string;
-  category_name?: string; // Add this optional property
+  category_name?: string;
 }
 
-// Helper function to safely render HTML content and add section dividers
 const createMarkup = (htmlContent: string) => {
-  // Add image container divs around images for better responsive behavior
-  let modifiedHtml = htmlContent
+  const modifiedHtml = htmlContent
     .replace(/<img/g, '<div class="image-container"><img')
     .replace(/<\/img>/g, "</img></div>");
-
-  // Add table container divs around tables
-  modifiedHtml = modifiedHtml
-    .replace(/<table/g, '<div class="table-container"><table')
-    .replace(/<\/table>/g, "</table></div>");
-
-  // Add section dividers after each heading
-  modifiedHtml = modifiedHtml
-    .replace(
-      /<h1([^>]*)>(.*?)<\/h1>/g,
-      '<div class="section-container"><h1$1>$2</h1>'
-    )
-    .replace(
-      /<h2([^>]*)>(.*?)<\/h2>/g,
-      '<div class="section-container"><h2$1>$2</h2>'
-    )
-    .replace(
-      /<h3([^>]*)>(.*?)<\/h3>/g,
-      '<div class="section-container"><h3$1>$2</h3>'
-    );
-
-  // Close section divs
-  modifiedHtml = modifiedHtml.replace(
-    /(<div class="section-container">.*?)(?=<div class="section-container">|$)/,
-    "$1</div>"
-  );
-
   return { __html: modifiedHtml };
 };
 
+// Function to convert table to mobile-friendly format - UPDATED VERSION
+const createResponsiveTable = (tableHtml: string) => {
+  const tableRegex = /<table[^>]*>([\s\S]*?)<\/table>/;
+  const match = tableHtml.match(tableRegex);
 
+  if (!match) return tableHtml;
 
-// Helper function to extract only tables from HTML content
-const extractTables = (htmlContent: string) => {
-  const tableRegex = /<table[^>]*>[\s\S]*?<\/table>/g;
-  const tables = htmlContent.match(tableRegex) || [];
-  return tables
-    .map((table) => `<div class="table-container">${table}</div>`)
-    .join("");
+  const tableContent = match[1];
+  const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
+
+  let headers: string[] = [];
+  const rows: string[][] = [];
+  let rowMatch;
+  let isFirstRow = true;
+
+  while ((rowMatch = rowRegex.exec(tableContent)) !== null) {
+    const rowContent = rowMatch[1];
+
+    if (isFirstRow) {
+      const headerRegex = /<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g;
+      let headerMatch;
+
+      while ((headerMatch = headerRegex.exec(rowContent)) !== null) {
+        headers.push(headerMatch[1].replace(/<[^>]*>/g, "").trim());
+      }
+
+      if (/<th[^>]*>/i.test(rowContent)) {
+        isFirstRow = false;
+        continue;
+      }
+    }
+
+    const cellRegex = /<td[^>]*>([\s\S]*?)<\/td>/g;
+    const cells: string[] = [];
+    let cellMatch;
+
+    while ((cellMatch = cellRegex.exec(rowContent)) !== null) {
+      cells.push(cellMatch[1].replace(/<[^>]*>/g, "").trim());
+    }
+
+    if (cells.length > 0) {
+      rows.push(cells);
+    }
+
+    isFirstRow = false;
+  }
+
+  if (headers.length === 0 && rows.length > 0) {
+    headers = rows[0].map((_, index) => `Column ${index + 1}`);
+  }
+
+  let mobileTableHtml = '<div class="mobile-table-scroll-wrapper"><table>';
+
+  if (headers.length > 0) {
+    mobileTableHtml += "<thead><tr>";
+    headers.forEach((header) => {
+      mobileTableHtml += `<th style="background-color: transparent;">${header}</th>`;
+    });
+    mobileTableHtml += "</tr></thead>";
+  }
+
+  mobileTableHtml += "<tbody>";
+  rows.forEach((row) => {
+    mobileTableHtml += "<tr>";
+    row.forEach((cell) => {
+      mobileTableHtml += `<td>${cell}</td>`;
+    });
+    mobileTableHtml += "</tr>";
+  });
+  mobileTableHtml += "</tbody></table></div>";
+
+  return `
+    <div class="table-responsive-wrapper">
+      <div class="desktop-table">${tableHtml.replace(
+        /border=[^>]*|style=['"][^'"]*border[^'"]*['"]/gi,
+        ""
+      )}</div>
+      <div class="mobile-table-container">
+        <div class="mobile-table">${mobileTableHtml}</div>
+      </div>
+    </div>
+  `;
 };
 
-// Helper function to remove tables from HTML content
-const removeTablesFromContent = (htmlContent: string) => {
-  return htmlContent.replace(/<table[^>]*>[\s\S]*?<\/table>/g, "");
-};
-
-export default function BlogDetails({ id }: BlogDetailsProps) {
+export default function BlogDetailslatest({ id }: BlogDetailsProps) {
   const [activeTab, setActiveTab] = useState("all");
-
-  // Enhanced CSS for modern blog design
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.textContent = `
-      /* Sidebar container for tabs */
-      .sidebar-container {
-        background-color: #1f2937;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        width: 35%;
-        height: fit-content;
-        position: sticky;
-        top: 1rem;
-      }
-
-      .tab-button {
-        padding: 0.75rem 1rem;
-        border: none;
-        background: transparent;
-        color: #9ca3af;
-        cursor: pointer;
-        border-radius: 0.375rem;
-        transition: all 0.2s ease;
-        font-size: 0.875rem;
-        font-weight: 500;
-        white-space: nowrap;
-        width: 100%;
-        text-align: left;
-        margin-bottom: 0.5rem;
-      }
-
-      .tab-button.active {
-        background-color: #374151;
-        color: #f9fafb;
-      }
-
-      .tab-button:hover:not(.active) {
-        color: #d1d5db;
-        background-color: #2d3748;
-      }
-
-      /* Main blog content container with dark theme */
-      .blog-content {
-        color: #d1d5db;
-        font-size: 1rem;
-        line-height: 1.75;
-        background-color: #1f2937;
-        padding: 3rem;
-        border-radius: 1rem;
-        box-shadow: 
-          0 20px 25px -5px rgba(0, 0, 0, 0.3), 
-          0 10px 10px -5px rgba(0, 0, 0, 0.2);
-        max-width: 100%;
-        position: relative;
-        overflow: hidden;
-        border-left: 4px solid #ea580c;
-      }
-
-      /* Gradient overlay for visual depth */
-      .blog-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #ea580c, #ef4444, #8b5cf6, #06b6d4);
-        border-radius: 1rem 1rem 0 0;
-      }
-
-      /* Typography improvements with dark theme */
-      .blog-content h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #f9fafb;
-        margin: 2rem 0 1.5rem 0;
-        line-height: 1.2;
-        position: relative;
-        padding-left: 1.5rem;
-        border-left: 6px solid #ea580c;
-      }
-
-      .blog-content h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #f3f4f6;
-        margin: 2rem 0 1rem 0;
-        line-height: 1.3;
-        position: relative;
-        padding-left: 1.25rem;
-        border-left: 4px solid #ea580c;
-      }
-
-      .blog-content h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #e5e7eb;
-        margin: 1.5rem 0 1rem 0;
-        line-height: 1.4;
-        position: relative;
-        padding-left: 1rem;
-        border-left: 3px solid #ea580c;
-      }
-
-      .blog-content h4 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #d1d5db;
-        margin: 1.5rem 0 0.75rem 0;
-        line-height: 1.4;
-        position: relative;
-        padding-left: 0.75rem;
-        border-left: 2px solid #ea580c;
-      }
-
-      /* Paragraph styling with dark theme */
-      .blog-content p {
-        margin-bottom: 1.5rem;
-        line-height: 1.8;
-        color: #d1d5db;
-        font-size: 1.1rem;
-        text-align: justify;
-      }
-
-      /* Image improvements */
-      .blog-content img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 0.75rem;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        margin: 2rem auto;
-        display: block;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .blog-content img:hover {
-        transform: scale(1.02);
-        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Enhanced responsive table styling with static background colors */
-      .blog-content .table-container {
-        width: 100%;
-        margin: 2rem 0;
-        overflow-x: auto;
-        border-radius: 0.75rem;
-        background: transparent;
-      }
-
-      .blog-content table {
-        width: 100%;
-        border-collapse: collapse;
-        background: transparent;
-        font-size: 1rem;
-        margin: 0;
-        border-radius: 0.75rem;
-        overflow: hidden;
-      }
-
-      .blog-content table th {
-        background: #eae2b7; /* Static background for table headers */
-        color: #fff; /* Pure white for better visibility */
-        font-weight: 600;
-        padding: 1rem 1.25rem;
-        text-align: left;
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        border: none;
-      }
-
-      .blog-content table td {
-        padding: 1rem 1.25rem;
-        color: #fff; /* Pure white for better visibility */
-        background: #fcbf49; /* Static background for table cells */
-        vertical-align: top;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        border: 1px solid #4b5563;
-      }
-
-      .blog-content table tr:nth-child(even) td {
-        background: #fcbf49; /* Static background for table cells */
-      }
-
-      .blog-content table tr:hover td {
-        background: #e5a83c; /* Slightly darker shade of #fcbf49 on hover */
-        transition: background-color 0.2s ease;
-      }
-
-      /* List styling with dark theme */
-      .blog-content ul, .blog-content ol {
-        margin: 1.5rem 0;
-        padding-left: 2rem;
-      }
-
-      .blog-content ul li {
-        list-style-type: none;
-        position: relative;
-        margin-bottom: 0.75rem;
-        padding-left: 1.5rem;
-        color: #d1d5db;
-      }
-
-      .blog-content ul li::before {
-        content: '→';
-        position: absolute;
-        left: 0;
-        color: #ea580c;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-
-      .blog-content ol li {
-        margin-bottom: 0.75rem;
-        color: #d1d5db;
-      }
-
-      /* Links with dark theme */
-      .blog-content a {
-        color: #60a5fa;
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: all 0.3s ease;
-        font-weight: 500;
-      }
-
-      .blog-content a:hover {
-        color: #93c5fd;
-        border-bottom-color: #60a5fa;
-      }
-
-      /* Section containers with dark theme */
-      .blog-content .section-container {
-        position: relative;
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #4b5563;
-      }
-
-      .blog-content .section-container:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-      }
-
-      /* Blockquotes with dark theme */
-      .blog-content blockquote {
-        border-left: 4px solid #ea580c;
-        background: #374151;
-        padding: 1.5rem 2rem;
-        margin: 2rem 0;
-        border-radius: 0 0.5rem 0.5rem 0;
-        font-style: italic;
-        color: #fbbf24;
-      }
-
-      /* Code blocks with dark theme */
-      .blog-content pre {
-        background: #111827;
-        color: #e5e7eb;
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        overflow-x: auto;
-        margin: 1.5rem 0;
-        font-size: 0.9rem;
-        border: 1px solid #374151;
-      }
-
-      .blog-content code {
-        background: #374151;
-        color: #e5e7eb;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        font-size: 0.9em;
-      }
-
-      /* Container for sidebar and content */
-      .main-container {
-        display: flex;
-        flex-direction: row;
-        width: 90%; /* 100% - 10% padding (5% on each side) */
-        margin: 0 auto;
-        gap: 2rem;
-      }
-
-      .content-section {
-        width: 65%;
-        max-height: calc(100vh - 2rem);
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #ea580c #1f2937;
-      }
-
-      .content-section::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      .content-section::-webkit-scrollbar-track {
-        background: #1f2937;
-      }
-
-      .content-section::-webkit-scrollbar-thumb {
-        background: #ea580c;
-        border-radius: 4px;
-      }
-
-      .content-section::-webkit-scrollbar-thumb:hover {
-        background: #fb923c;
-      }
-
-      /* Responsive design */
-      @media (max-width: 1200px) {
-        .blog-content table {
-          font-size: 0.95rem;
-        }
-        
-        .blog-content table th,
-        .blog-content table td {
-          padding: 0.9rem 1.1rem;
-        }
-      }
-
-      @media (max-width: 1024px) {
-        .blog-content {
-          padding: 2rem;
-          margin: 1rem 0;
-        }
-        
-        .blog-content h1 {
-          font-size: 2rem;
-        }
-        
-        .blog-content h2 {
-          font-size: 1.75rem;
-        }
-        
-        .blog-content table {
-          font-size: 0.9rem;
-        }
-        
-        .blog-content table th,
-        .blog-content table td {
-          padding: 0.8rem 1rem;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .blog-content {
-          padding: 1.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.75rem;
-        }
-        
-        .blog-content h1 {
-          font-size: 1.75rem;
-        }
-        
-        .blog-content h2 {
-          font-size: 1.5rem;
-        }
-        
-        .blog-content h3 {
-          font-size: 1.25rem;
-        }
-        
-        .blog-content p {
-          font-size: 1rem;
-        }
-        
-        .blog-content table {
-          font-size: 0.85rem;
-        }
-        
-        .blog-content table th,
-        .blog-content table td {
-          padding: 0.7rem 0.8rem;
-        }
-
-        .main-container {
-          flex-direction: column;
-          width: 100%;
-          gap: 1rem;
-        }
-
-        .sidebar-container {
-          width: 100%;
-          margin: 0;
-          position: static;
-        }
-
-        .content-section {
-          width: 100%;
-          max-height: none;
-          overflow-y: visible;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .blog-content {
-          padding: 1rem;
-          margin: 0.25rem 0;
-        }
-        
-        .blog-content table {
-          font-size: 0.8rem;
-        }
-        
-        .blog-content table th,
-        .blog-content table td {
-          padding: 0.6rem 0.7rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .blog-content h1 {
-          font-size: 1.5rem;
-        }
-        
-        .blog-content table {
-          font-size: 0.75rem;
-        }
-        
-        .blog-content table th,
-        .blog-content table td {
-          padding: 0.5rem 0.6rem;
-        }
-
-        .tab-button {
-          padding: 0.5rem 0.75rem;
-          font-size: 0.75rem;
-        }
-      }
-
-      /* Ensure content alignment */
-      .blog-content * {
-        max-width: 100%;
-      }
-
-      .blog-content > *:first-child {
-        margin-top: 0;
-      }
-
-      .blog-content > *:last-child {
-        margin-bottom: 0;
-      }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
+  const [allBlog, setAllBlog] = useState<Blog[]>([]);
 
   const blogsdetails: StaticBlog[] = [
     {
       id: 1,
       title: "Best IPM BBA Coaching & Exam Preparation Institute in India",
-      description: "Your Path to Success",
+      description: `
+        <div class="introduction">
+          <h2>Introduction</h2>
+          <p>Mi tincidunt elit, id quisque ligula ac diam, amet. Vel enim suspendisse morbi eleifend faucibus eget vestibulum felis. Dictum quis montes, sit sit. Tellus aliquam enim urna, vitae maecenas et mauris a, ac cursus mauris.</p>
+          
+          <p>Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis fusce augue enim. Quis at habitant diam at molestie tristique rhoncus, donec. In turpis vel et quam pellentesque. Ipsum molestie aliquet sodales id est ac volutpat.</p>
+          
+          <blockquote>"In a world older and more complete than ours they move finished and complete, gifted with extensions of the senses we have lost or never attained, living by voices we shall never hear."</blockquote>
+          <cite>- Olivia Rhye, Product Designer</cite>
+          
+          <p>Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum, nulla odio nisl vitae. In aliquet pellentesque aenean hac vestibulum turpis mi bibendum diam. Tempor integer aliquam in vitae malesuada fringilla.</p>
+          
+          <table>
+            <tr>
+              <th>Course</th>
+              <th>Duration</th>
+              <th>Fee</th>
+              <th>Rating</th>
+            </tr>
+            <tr>
+              <td>IPM BBA</td>
+              <td>2 Years</td>
+              <td>₹50,000</td>
+              <td>4.8/5</td>
+            </tr>
+            <tr>
+              <td>CAT Preparation</td>
+              <td>1 Year</td>
+              <td>₹35,000</td>
+              <td>4.7/5</td>
+            </tr>
+            <tr>
+              <td>GMAT Coaching</td>
+              <td>6 Months</td>
+              <td>₹40,000</td>
+              <td>4.9/5</td>
+            </tr>
+          </table>
+        </div>
+      `,
       image: "/blogs/blog1.png",
       alt_img_text: "",
       category_name: "Education",
     },
     {
       id: 2,
-      title: "CAT Exam Preparation: Ace the CAT ",
+      title: "CAT Exam Preparation: Ace the CAT",
       description: "Essential Tips and Resources for Exam Preparation",
       image: "/blogs/blog2.png",
       alt_img_text: "",
       category_name: "CAT Preparation",
     },
-    {
-      id: 3,
-      title: "Important Study Hacks for CAT 2025 Students",
-      description: "Important Study Hacks for CAT 2025 Students",
-      image: "/blogs/blog3.png",
-      alt_img_text: "",
-      category_name: "Study Tips",
-    },
-    {
-      id: 4,
-      title: "CAT 2025 Course",
-      description: "CAT 2025 Courses: Which One is Right for You?",
-      image: "/blogs/blog4.png",
-      alt_img_text: "",
-      category_name: "Courses",
-    },
-    {
-      id: 5,
-      title: "CAT 2025 Exam Preparation",
-      description: "From Zero to Hero: Comprehensive CAT 2025 Exam Preparation",
-      image: "/blogs/blog5.png",
-      alt_img_text: "",
-      category_name: "Exam Prep",
-    },
-    {
-      id: 6,
-      title: "Prep Academy Blog - Strategy for CAT 2025 Mastering the CAT: ",
-      description: "Mastering the CAT: A Comprehensive Strategy for CAT 2025",
-      image: "/blogs/blog6.png",
-      alt_img_text: "",
-      category_name: "Strategy",
-    },
-    {
-      id: 7,
-      title: "Unlock Your Potential",
-      description: "The Best CAT 2025 Classes to Join",
-      image: "/blogs/blog7.png",
-      alt_img_text: "",
-      category_name: "Classes",
-    },
-    {
-      id: 8,
-      title: "CAT 2025",
-      description: "The Ultimate Guide to Preparing and Succeeding",
-      image: "/blogs/blog8.png",
-      alt_img_text: "",
-      category_name: "Guide",
-    },
-    {
-      id: 9,
-      image: "/aboutusnews/aboutusnews1.jpeg",
-      title: "Registration and examination date announced 'NMMIMS NPAT 2025'",
-      description:
-        "The Narsee Monjee Institute of Management Studies (NMIMS) has announced the registration and examination dates for the NPAT 2025. The registration process commenced in mid-December 2024 and will continue until April 2025. The examination is scheduled to be held from March 1 to May 31, 2025. ",
-      alt_img_text: "",
-      category_name: "News",
-    },
-    {
-      id: 10,
-      title:
-        "NTA CUET 2025: UG Registration, Exam Dates, Notification, Eligibility, Pattern (Revised), Syllabus",
-      description:
-        "The National Testing Agency (NTA) is set to commence the registration process for the Common University Entrance Test (CUET) 2025 for undergraduate (UG) programs. The registration is expected to begin in the first week of February 2025 and will conclude in the first week of April 2025. Prospective candidates can apply online through the official CUET website: cuet.nta.nic.in. ",
-      image: "/aboutusnews/aboutusnews2.jpeg",
-      alt_img_text: "",
-      category_name: "Registration",
-    },
-    {
-      id: 11,
-      image: "/news3.png",
-      title: "How to Crack CAT?",
-      description:
-        "Cracking the Common Admission Test (CAT) 2025 requires a strategic and disciplined approach. Here's a comprehensive guide to help you prepare effectively:",
-      alt_img_text: "",
-      category_name: "Tips",
-    },
+    // ... other blogs
   ];
-
-  const [allBlog, setAllBlog] = useState<Blog[]>([]);
 
   const fetchBlogs = async () => {
     try {
       const response = await axiosInstance.get(API_URLS.BLOG.GET_BLOG);
-      console.log(response);
       setAllBlog(response.data);
     } catch (error) {
       console.error(error);
@@ -657,143 +204,522 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
 
   if (!blog) {
     return (
-      <div className="bg-gray-900 min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="bg-gray-900 text-white h-fit mt-24">
+        <div className="container mx-auto px-4 md:px-8 py-8 text-center">
           <div className="text-6xl mb-4">📝</div>
-          <h2 className="text-2xl font-bold text-gray-100 mb-2">
-            Blog Not Found
-          </h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Blog Not Found</h2>
           <p className="text-gray-400">
-            The blog post you&apos;re looking for doesn&apos;t exist.
+            The blog post you&pos;re looking for doesn&pos;t exist.
           </p>
         </div>
       </div>
     );
   }
 
-  // Function to render content based on active tab
   const renderContent = () => {
     if (!blog?.description) return null;
 
+    let contentToRender = "";
+
     switch (activeTab) {
       case "all":
-        return (
-          <div
-            className="blog-content"
-            dangerouslySetInnerHTML={createMarkup(blog.description)}
-          />
-        );
+        contentToRender = blog.description;
+        break;
       case "tables":
-        const tablesContent = extractTables(blog.description);
-        return tablesContent ? (
-          <div
-            className="blog-content"
-            dangerouslySetInnerHTML={{ __html: tablesContent }}
-          />
-        ) : (
-          <div className="blog-content">
-            <p className="text-gray-400 text-center py-8">
-              No tables found in this content.
-            </p>
-          </div>
-        );
+        const tablesContent =
+          blog.description.match(/<table[^>]*>[\s\S]*?<\/table>/g) || [];
+        if (tablesContent.length === 0) {
+          return (
+            <div className="blog-content">
+              <p className="text-gray-400 text-center py-8">
+                No tables found in this content.
+              </p>
+            </div>
+          );
+        }
+        contentToRender = tablesContent.join("");
+        break;
       case "content":
-        const contentWithoutTables = removeTablesFromContent(blog.description);
-        return (
-          <div
-            className="blog-content"
-            dangerouslySetInnerHTML={createMarkup(contentWithoutTables)}
-          />
+        contentToRender = blog.description.replace(
+          /<table[^>]*>[\s\S]*?<\/table>/g,
+          ""
         );
+        break;
       default:
         return null;
     }
+
+    // Process tables for responsiveness
+    const processedContent = contentToRender.replace(
+      /<table[^>]*>[\s\S]*?<\/table>/g,
+      (match) => createResponsiveTable(match)
+    );
+
+    return (
+      <div
+        className="blog-content prose prose-invert max-w-none"
+        dangerouslySetInnerHTML={createMarkup(processedContent)}
+      />
+    );
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen">
-      {/* Hero Section with dark theme */}
-      <div className="relative overflow-hidden bg-gray-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-900 to-black opacity-90"></div>
-        <div className="relative z-10 px-4 md:px-8 py-20 md:py-32">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Content */}
-              <div className="text-white space-y-6">
-                <div className="inline-block px-4 py-2 bg-orange-600/20 rounded-full text-sm font-medium backdrop-blur-sm border border-orange-600/30">
-                  {blog.category_name || "Featured Article"}
-                </div>
-                <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-100">
-                  {blog.title}
-                </h1>
-                <div className="flex items-center space-x-4 text-gray-300">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                    <span>Published Recently</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                    <span>Educational Content</span>
-                  </div>
-                </div>
-              </div>
+    <div className="bg-gray-900 text-white h-fit mt-24">
+      {/* Header Section */}
+      <div className="">
+        <div className="relative">
+          <div className="w-full md:w-3/4 h-60 md:h-80 relative mx-auto text-center">
+            <Image
+              src={blog.image}
+              alt={blog.alt_img_text || blog.title}
+              fill
+              className="object-cover opacity-50 mt-5"
+            />
+          </div>
 
-              {/* Image */}
-              <div className="relative">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-gray-700">
-                  <Image
-                    src={blog.image}
-                    alt={blog.alt_img_text || blog.title}
-                    fill
-                    className="object-cover opacity-90"
-                    priority
-                  />
-                </div>
-                <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-r from-orange-600 to-red-600 rounded-full opacity-20"></div>
-                <div className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full opacity-30"></div>
-              </div>
+          <div className="container mx-auto px-4 md:px-8 absolute top-0 left-0 right-0 pt-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 px-2">
+                {blog.title}
+              </h1>
             </div>
           </div>
         </div>
 
-       
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-600/10 rounded-full blur-3xl"></div>
-        </div>
-      </div>
+        {/* Main Content */}
+        <div className="container mx-auto px-4 md:px-8 py-8 mt-4">
+          <div className="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto">
+            {/* Sidebar */}
+            <div className="w-full md:w-52 md:flex-shrink-0">
+              <div className="border-l-2 border-orange-600 pl-4 mb-6">
+                <h3 className="text-lg font-medium text-orange-600 mb-2">
+                  Content Navigation
+                </h3>
+                <button
+                  className={`block text-base mb-2 font-semibold w-full text-left ${
+                    activeTab === "all"
+                      ? "text-orange-600"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                  onClick={() => setActiveTab("all")}
+                >
+                  Overview
+                </button>
+                <button
+                  className={`block text-base mb-2 font-semibold w-full text-left ${
+                    activeTab === "tables"
+                      ? "text-orange-600"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                  onClick={() => setActiveTab("tables")}
+                >
+                  Visual Tables
+                </button>
+                <button
+                  className={`block text-base mb-2 font-semibold w-full text-left ${
+                    activeTab === "content"
+                      ? "text-orange-600"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                  onClick={() => setActiveTab("content")}
+                >
+                  Reading Material
+                </button>
+              </div>
 
-      {/* Main content with sidebar */}
-      <div className="container mx-auto px-4 md:px-8 py-12 bg-gray-900">
-        <div className="main-container">
-        
-          <div className="sidebar-container">
-            <button
-              className={`tab-button ${activeTab === "all" ? "active" : ""}`}
-              onClick={() => setActiveTab("all")}
-            >
-              All
-            </button>
-            <button
-              className={`tab-button ${activeTab === "tables" ? "active" : ""}`}
-              onClick={() => setActiveTab("tables")}
-            >
-              Tables
-            </button>
-            <button
-              className={`tab-button ${
-                activeTab === "content" ? "active" : ""
-              }`}
-              onClick={() => setActiveTab("content")}
-            >
-              Content
-            </button>
+              <div className="mb-6">
+                <p className="text-sm mb-2">Share this on</p>
+                <div className="flex gap-2">
+                  <Link
+                    href="https://www.facebook.com/prepacademy.in"
+                    className="bg-blue-800 p-2 rounded-full hover:bg-blue-700"
+                    aria-label="Share on Facebook"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaFacebook />
+                  </Link>
+                  <Link
+                    href="https://www.instagram.com/prepacademy.in/"
+                    className="bg-gradient-to-r from-[#f09433]  via-[#dc2743] to-[#cc2366] p-2 rounded-full hover:opacity-90 transition-opacity"
+                    aria-label="Share on Instagram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram className="text-white" />
+                  </Link>
+                  <Link
+                    href="https://www.linkedin.com/company/prep-academy-india/"
+                    className="bg-blue-600 p-2 rounded-full hover:bg-blue-500"
+                    aria-label="Share on LinkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="flex-1">
+              {/* Content Section */}
+              <div className="mb-8">
+                <div className="bg-gray-800 p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600">
+                  {renderContent()}
+                </div>
+              </div>
+
+              {/* Tables Section - Only show when activeTab is "all" */}
+              {/* Tables Section - Only show when activeTab is "all" */}
+              {activeTab === "all" && (
+                <div className="mb-8">
+                  {(() => {
+                    const tables = blog.description.match(
+                      /<table[^>]*>[\s\S]*?<\/table>/g
+                    );
+                    if (tables && tables.length > 0) {
+                      return (
+                        <>
+                          <h2 className="text-xl font-bold mb-4 text-orange-600">
+                            Data Tables
+                          </h2>
+                          <div className="space-y-6">
+                            {tables.map((table, index) => (
+                              <div
+                                key={index}
+                                className="bg-gray-800 p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-orange-600"
+                                dangerouslySetInnerHTML={{
+                                  __html: createResponsiveTable(table),
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      );
+                    }
+                    return null; // Don't render anything if no tables found
+                  })()}
+                </div>
+              )}
+            </div>
           </div>
-
-          {/* Content */}
-          <div className="content-section">{renderContent()}</div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .blog-content * {
+          color: #ffffff !important;
+        }
+
+        .blog-content p,
+        .blog-content div,
+        .blog-content span,
+        .blog-content li,
+        .blog-content ul,
+        .blog-content ol,
+        .blog-content strong,
+        .blog-content em,
+        .blog-content b,
+        .blog-content i {
+          color: #ffffff !important;
+        }
+
+        .blog-content h1,
+        .blog-content h2,
+        .blog-content h3,
+        .blog-content h4,
+        .blog-content h5,
+        .blog-content h6 {
+          color: white !important;
+          font-weight: 600;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .blog-content h2 {
+          font-size: 1.875rem;
+          border-bottom: 2px solid #f97316;
+          padding-bottom: 0.5rem;
+        }
+
+        .blog-content p {
+          color: #ffffff !important;
+          line-height: 1.75;
+          margin-bottom: 1.5rem;
+        }
+
+        .blog-content blockquote {
+          border-left: 4px solid #f97316;
+          margin: 2rem 0;
+          padding: 1.5rem 2rem;
+          background: #374151;
+          border-radius: 0.5rem;
+          font-style: italic;
+          color: #ffffff !important;
+          font-size: 1.125rem;
+        }
+
+        .blog-content cite {
+          color: #f97316;
+          font-size: 0.875rem;
+          font-weight: 500;
+        }
+
+        .blog-content img {
+          border-radius: 1rem;
+          margin: 2rem 0;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          max-width: 100%;
+          height: auto;
+        }
+
+        /* Enhanced Desktop Table Styles - Updated to match first screenshot */
+        .desktop-table table {
+          border-radius: 0;
+          overflow: visible;
+          margin: 2rem 0;
+          border: 1px solid #4a5568;
+
+          width: 100%;
+          border-collapse: collapse;
+          border: none;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .desktop-table thead {
+          background: #ff6b35;
+          position: relative;
+        }
+
+        .desktop-table thead::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: transparent;
+          pointer-events: none;
+        }
+
+        .desktop-table th {
+          background: transparent;
+          color: #ffffff !important;
+          padding: 20px 24px;
+          text-align: left;
+          font-weight: 700;
+          font-size: 16px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          border: 1px solid #4a5568;
+          position: relative;
+          text-shadow: none;
+        }
+
+        .desktop-table tbody {
+          background: transparent;
+        }
+
+        .desktop-table td {
+          padding: 18px 24px;
+          border: 1px solid #4a5568;
+          color: #ffffff !important;
+          font-weight: 400;
+          font-size: 15px;
+          position: relative;
+          text-shadow: none;
+          background: transparent;
+        }
+
+        .desktop-table tbody tr:last-child td {
+          border-bottom: 1px solid #4a5568;
+        }
+
+        .desktop-table tbody tr {
+          transition: all 0.3s ease;
+          background: transparent;
+        }
+
+        .desktop-table tbody tr:hover {
+          background: rgba(255, 107, 53, 0.1);
+          transform: none;
+        }
+
+        .desktop-table tbody tr:nth-child(even) {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        .desktop-table tbody tr:nth-child(even):hover {
+          background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Table Responsive Wrapper */
+        .table-responsive-wrapper {
+          margin: 2rem 0;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+
+        .mobile-table-container {
+          display: none;
+        }
+
+        .mobile-table-container .mobile-table {
+          background: #2d3748;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          width: 100%;
+        }
+
+        .mobile-table-container .mobile-table table {
+          width: 100%;
+          min-width: 100%;
+          border-collapse: collapse;
+          font-size: 12px;
+          border: 1px solid #4a5568;
+
+          background: transparent;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .mobile-table-container .mobile-table thead {
+          background: #ff6b35; /* Solid orange header instead of gradient */
+          position: relative;
+        }
+
+        .mobile-table-container .mobile-table thead::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: transparent;
+          pointer-events: none;
+        }
+
+        .mobile-table-container .mobile-table th {
+          background: transparent;
+          color: #ffffff !important;
+          padding: 16px 12px;
+          text-align: left;
+          font-weight: 700;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          white-space: nowrap;
+          border: 1px solid #4a5568;
+          position: relative;
+          text-shadow: none;
+        }
+
+        .mobile-table-container .mobile-table tbody {
+          background: transparent;
+        }
+
+        .mobile-table-container .mobile-table td {
+          padding: 14px 12px;
+          border: 1px solid #4a5568;
+          color: #ffffff !important;
+          font-weight: 400;
+          white-space: nowrap;
+          text-shadow: none;
+          background: transparent;
+          font-size: 11px;
+        }
+
+        .mobile-table-container .mobile-table tbody tr:nth-child(even) {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        .mobile-table-container .mobile-table tbody tr:hover {
+          background: rgba(255, 107, 53, 0.1);
+        }
+
+        .mobile-table-container .mobile-table tbody tr:nth-child(even):hover {
+          background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Horizontal scroll wrapper for very small screens */
+        .mobile-table-scroll-wrapper {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          border-radius: 8px;
+        }
+
+        .image-container {
+          text-align: center;
+          margin: 2rem 0;
+        }
+
+        .image-container img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        /* Override any inherited text colors */
+        .blog-content .introduction *,
+        .blog-content .introduction p,
+        .blog-content .introduction div {
+          color: #ffffff !important;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+          .blog-content h2 {
+            font-size: 1.5rem;
+          }
+
+          .blog-content blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+          }
+
+          .blog-content img {
+            margin: 1.5rem 0;
+          }
+
+          /* Hide desktop table and show mobile version */
+          .desktop-table {
+            display: none;
+          }
+
+          .mobile-table-container {
+            display: block;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .blog-content {
+            font-size: 0.9rem;
+          }
+
+          .blog-content h2 {
+            font-size: 1.25rem;
+          }
+
+          .blog-content blockquote {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+          }
+
+          .mobile-table-container .mobile-table th {
+            padding: 14px 10px;
+            font-size: 10px;
+          }
+
+          .mobile-table-container .mobile-table td {
+            padding: 12px 10px;
+            font-size: 10px;
+          }
+        }
+      `}</style>
     </div>
   );
 }

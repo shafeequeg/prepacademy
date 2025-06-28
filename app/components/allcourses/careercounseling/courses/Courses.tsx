@@ -525,7 +525,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
 
-      <div className="bg-black px-4 py-3 sticky top-0  mt-14  md:mt-32">
+      <div className="bg-black px-4 py-3 sticky top-0  mt-14  md:mt-16 lg:mt-28">
           <div className="max-w-7xl mx-auto">
             <div
               className="flex items-center justify-start gap-2 md:gap-4 pb-1 lg:mt-2 overflow-x-auto md:overflow-visible w-full w768:overflow-x-scroll w768:mt-16 "
@@ -562,7 +562,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         </div>
       <div className="relative w-full z-10">
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               <div className="lg:w-[35%]">
                 <div className="mb-6">

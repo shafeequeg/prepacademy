@@ -264,75 +264,129 @@ const courseCards = [
 
 const tabs = [
   {
+    id: "engineering",
+    label: "ENGINEERING",
+    path: "/engineering",
+    dropdownItems: [
+      { label: "JEE", path: "/schoolcourse/engineering/jee" },
+      { label: "KEAM", path: "/schoolcourse/engineering/keam" },
+      { label: "BITSAT", path: "/schoolcourse/engineering/bitsat" },
+      { label: "VITEEE", path: "/schoolcourse/engineering/vitee" },
+      { label: "KCET", path: "/schoolcourse/engineering/kcet" },
+    ],
+  },
+  {
+    id: "MEDICAL",
+    label: "MEDICAL",
+    path: "/medical",
+    dropdownItems: [
+      { label: "NEET (UG)", path: "/schoolcourse/medical/neet" },
+      {
+        label: "PARAMEDICAL ENTRANCE",
+        path: "/schoolcourse/medical/paramedical",
+      },
+      { label: "JIPMER", path: "/schoolcourse/medical/jipmer" },
+    ],
+  },
+
+  {
     id: "MANAGEMENT",
     label: "MANAGEMENT",
-    path: "/collegecourse",
+    path: "/management",
     dropdownItems: [
-      { label: "CAT", path: "/collegecourse/management/cat" },
-      { label: "XAT", path: "/collegecoursespage/management/xat" },
-      { label: "KMAT", path: "/collegecourse/management/kmat" },
-      { label: "CMAT", path: "/collegecoursespage/management/cmat" },
-      { label: "MAT", path: "/collegecoursespage/management/mat" },
-      { label: "NMAT", path: "/collegecoursespage/management/nmat" },
-      { label: "CUET(PG)", path: "/collegecoursespage/management/cuetpg" },
-      { label: "MICAT", path: "/collegecoursespage/management/micat" },
-      { label: "MHCET", path: "/collegecoursespage/management/mhcet" },
+      { label: "IPM ", path: "/schoolcourse/ipm" },
+      // { label: "CHRIST", path: "/schoolcoursepage/MANAGEMENT/CHRIST" },
+      { label: "SET", path: "/schoolcourse/management/set" },
+      { label: "NPAT", path: "/schoolcourse/management/npat" },
+      { label: "MHCET", path: "/schoolcourse/management/mhcet" },
     ],
   },
+
   {
-    id: "CEVILSERVICE",
-    label: "CIVIL SERVICE",
-    path: "/slat",
+    id: "LAW",
+    label: "LAW",
+    path: "/law",
     dropdownItems: [
-      { label: "UPSC", path: "/collegecoursespage/civilservice/upsc" },
+      { label: "CLAT", path: "/schoolcourse-law/clat" },
+      { label: "SLAT", path: "/schoolcourse/law/SLAT" },
+      { label: "AILET", path: "/schoolcourse/law/AILET" },
+      { label: "KLEE", path: "/schoolcourse/law/KLEE" },
+      { label: "CULEE", path: "/schoolcourse/law/CULEE" },
     ],
   },
+
   {
-    id: "GOVERNMENT",
-    label: "GOVERNMENT",
-    path: "/ailet",
-    dropdownItems: [
-      { label: "RAILWAY ", path: "/collegecoursespage/government/railway" },
-      { label: "SSC", path: "/collegecoursespage/government/ssc" },
-    ],
+    id: "CUET",
+    label: "CUET",
+    path: "/cuet",
+    dropdownItems: [{ label: "CUET ", path: "/collegecourse/management/cuet" }],
   },
+
   {
     id: "DEFENCE",
     label: "DEFENCE",
-    path: "/klee",
+    path: "/defence",
     dropdownItems: [
-      { label: "CDS", path: "/collegecoursespage/defence/cds" },
-      { label: "AFCAT", path: "/collegecoursespage/defence/afcat" },
+      { label: "NDA ", path: "/schoolcourse/defence/nda" },
+      { label: "AFCAT", path: "/schoolcoursepage/DEFENCE/AFCAT" },
     ],
   },
+
   {
-    id: "MAT",
+    id: "TUITIONS",
+    label: "TUITIONS",
+    path: "/tuitions",
+    dropdownItems: [
+      { label: "TUITIONS", path: "/schoolcoursepage/TUITIONS/TUITIONS" },
+      // { label: "CHEMISTRY", path: "/" },
+      // { label: "MATHS", path: "/" },
+      // { label: "BIOLOGY ", path: "/" },
+      // { label: "ACCOUNTING ", path: "/" },
+      // { label: "ECONOMICS", path: "/" },
+      // { label: "ENGLISH ", path: "/" },
+      // { label: "COMMERCE", path: "/" },
+      // { label: "BUSINESS STUDIES", path: "/" },
+    ],
+    //(6-12 Standards)
+    // {
+    //   // code: "TUITIONS",
+    //   title: "TUITIONS",
+    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+    //   classType: "CLASSES FOR 11TH & 12TH",
+    //   path: "/courses/bank"
+
+    // }
+  },
+  {
+    id: "OTHERS",
+    label: "OTHERS",
+    path: "/others",
+    dropdownItems: [
+      {
+        label: "ASHOKA UNIVERSITY",
+        path: "/schoolcoursepage/OTHERS/ASHOKAUNIVERSITY",
+      },
+      {
+        label: "CHRIST UNIVERSITY ",
+        path: "/schoolcourse/others/christuniversity",
+      },
+      { label: "SYMBIOSIS", path: "/schoolcoursepage/OTHERS/SYMBIOSIS" },
+      { label: "NMIMS", path: "/schoolcoursepage/OTHERS/NMIMS" },
+      { label: "ST. XAVIER'S", path: "/schoolcoursepage/OTHERS/STXAVIERS" },
+    ],
+  },
+
+  {
+    id: "DESIGN",
     label: "DESIGN & ARCHITECTURE",
-    path: "/culee",
+    path: "/design",
     dropdownItems: [
-      {
-        label: "NID PG ",
-        path: "/collegecoursespage/designandarchictecture/nidpg",
-      },
-      {
-        label: "NIFT PG",
-        path: "/collegecoursespage/designandarchictecture/niftpg",
-      },
-    ],
-  },
-  {
-    id: "BANK",
-    label: "BANK",
-    path: "/culee/bank",
-    dropdownItems: [
-      { label: "SBI ", path: "/collegecoursespage/bank/sbi" },
-      { label: "IBPS P O", path: "/collegecoursespage/bank/ibpspo" },
-      { label: "RBI GRADE B", path: "/collegecoursespage/bank/rbigradeb" },
-      { label: "IBPS RRB ", path: "/collegecoursespage/bank/ibpsrrb" },
-      { label: "SBI CLERK ", path: "/collegecoursespage/bank/sbiclerk" },
-      { label: "IBPS CLERK ", path: "/collegecoursespage/bank/ibpsclerk" },
-      { label: "NABARD ", path: "/collegecoursespage/bank/nabard" },
-      { label: "LIC AAO ", path: "/collegecoursespage/bank/licaao" },
+      { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
+      { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
+      { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
+      { label: "CEED", path: "/schoolcoursepage/DESIGN/CEED" },
+      { label: "JEE MAIN", path: "/schoolcoursepage/DESIGN/JEEMAIN" },
+      { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
     ],
   },
 ];
@@ -369,6 +423,18 @@ const CUETExamApplySection: React.FC = () => {
     location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
+
+  const isIPhone = () => {
+    if (typeof window === "undefined") return false; // Guard for server-side
+    return (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  };
+
+  const [isIPhoneDropdownOpen, setIsIPhoneDropdownOpen] = useState<
+    string | null
+  >(null);
   const [formStep, setFormStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
@@ -381,7 +447,7 @@ const CUETExamApplySection: React.FC = () => {
   });
 
   const router = useRouter();
- const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [activeMainTab, setActiveMainTab] = useState("CUET");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -857,11 +923,14 @@ const CUETExamApplySection: React.FC = () => {
     (course) => course.type === activeTab
   );
 
-
   const toggleDropdown = (tabId: string | null) => {
-    setOpenDropdown(openDropdown === tabId ? null : tabId);
+    if (isIPhone()) {
+      setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
+      setActiveMainTab(tabId || "");
+    } else {
+      setOpenDropdown(openDropdown === tabId ? null : tabId);
+    }
   };
-
   // Handle keyboard navigation for tabs
   const handleTabKeyNav = (
     e: React.KeyboardEvent<HTMLElement>,
@@ -904,33 +973,64 @@ const CUETExamApplySection: React.FC = () => {
       document.getElementById(`tab-${tabId}`)?.focus();
     }
   };
-
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!openDropdown) return; // Ensure openDropdown is not null
-
-      const dropdownElement = dropdownRefs.current[
-        openDropdown
-      ] as HTMLElement | null;
-
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
-        setOpenDropdown(null);
+    if (isIPhone()) {
+      if (isIPhoneDropdownOpen) {
+        // Disable scrolling on body when iPhone dropdown is open
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
+      } else {
+        // Re-enable scrolling when iPhone dropdown is closed
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.top = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
       }
-    };
+      return;
+    }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
     };
-  }, [openDropdown]);
+  }, [openDropdown, isIPhoneDropdownOpen]);
 
   // Add this useEffect to handle body scrolling
   useEffect(() => {
+    if (isIPhone()) {
+      // For iPhone, don't manipulate body scroll for the inline dropdown
+      return;
+    }
+
     if (openDropdown) {
-      // Disable scrolling on body when dropdown is open
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
       document.body.style.overflow = "hidden";
-      // Store current scroll position
       document.body.style.position = "fixed";
       document.body.style.width = "100%";
       document.body.style.top = `-${window.scrollY}px`;
@@ -952,6 +1052,7 @@ const CUETExamApplySection: React.FC = () => {
       document.body.style.top = "";
     };
   }, [openDropdown]);
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
@@ -983,8 +1084,12 @@ const CUETExamApplySection: React.FC = () => {
         </Link>
       ))}
     </div> */}
-       <div
-        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36 mt-10 p-3 space-x-2 scrollbar-hide"
+    <div
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
+          isIPhone() && isIPhoneDropdownOpen
+            ? "overflow-hidden"
+            : "overflow-x-auto"
+        }`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -996,7 +1101,7 @@ const CUETExamApplySection: React.FC = () => {
         {tabs.map((tab, index) => (
           <div
             key={tab.id}
-            className="relative flex-shrink-0 w-auto min-w-[150px]"
+            className="relative  flex-shrink-0 w-auto min-w-[150px]"
             ref={(el) => {
               dropdownRefs.current[tab.id] = el;
             }}
@@ -1029,6 +1134,7 @@ const CUETExamApplySection: React.FC = () => {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -1037,9 +1143,8 @@ const CUETExamApplySection: React.FC = () => {
                 ></path>
               </svg>
             </button>
-
             {/* Dropdown menu with fixed positioning */}
-            {openDropdown === tab.id && (
+            {openDropdown === tab.id && !isIPhone() && (
               <div
                 className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
                 onClick={() => setOpenDropdown(null)}
@@ -1082,13 +1187,54 @@ const CUETExamApplySection: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {isIPhone() && isIPhoneDropdownOpen === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setIsIPhoneDropdownOpen(null)}
+              >
+                <div
+                  className="absolute top-0 left-4 right-4 bg-black border border-gray-600 rounded-lg shadow-lg mx-2"
+                  style={{
+                    marginTop: "120px", // Adjust based on your header height
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+                    {/* Header showing selected tab */}
+                    {/* <div className="mb-4 pb-2 border-b border-gray-700">
+                      <h3 className="text-lg font-semibold text-[#FF6B3D]">
+                        {tab.label}
+                      </h3>
+                    </div> */}
+
+                    {/* Dropdown items */}
+                    <div className="space-y-2">
+                      {tab.dropdownItems.map((item, itemIndex) => (
+                        <Link
+                          key={`iphone-${tab.id}-${itemIndex}`}
+                          href={item.path}
+                          className="block w-full px-4 py-3 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white rounded-md transition-colors duration-200"
+                          role="menuitem"
+                          onClick={() => setIsIPhoneDropdownOpen(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
       <div className="relative w-full z-10  ">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">

@@ -195,14 +195,27 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
     location: "",
   });
 
+  const isIPhone = () => {
+    if (typeof window === "undefined") return false; // Guard for server-side
+    return (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  };
+
+  const [isIPhoneDropdownOpen, setIsIPhoneDropdownOpen] = useState<
+    string | null
+  >(null);
   const router = useRouter();
-  const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [activeMainTab, setActiveMainTab] = useState("");
+
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   // Find the course based on the slug
   const course = courses.find(
     (c) => c.slug.toLowerCase() === slug.toLowerCase()
   );
+
   console.log(courses);
 
   console.log(programs);
@@ -374,55 +387,6 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   };
   // Reset the form when modal closes
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!openDropdown) return; // Ensure openDropdown is not null
-
-      const dropdownElement = dropdownRefs.current[
-        openDropdown
-      ] as HTMLElement | null;
-
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
-        setOpenDropdown(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [openDropdown]);
-
-  // Add this useEffect to handle body scrolling
-  useEffect(() => {
-    if (openDropdown) {
-      // Disable scrolling on body when dropdown is open
-      document.body.style.overflow = "hidden";
-      // Store current scroll position
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.body.style.top = `-${window.scrollY}px`;
-    } else {
-      // Re-enable scrolling when dropdown is closed
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      document.body.style.top = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
-    }
-
-    return () => {
-      // Cleanup function to ensure scrolling is re-enabled
-      document.body.style.position = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      document.body.style.top = "";
-    };
-  }, [openDropdown]);
-
-  
   useEffect(() => {
     if (!isModalOpen) {
       setScreeningStep(1);
@@ -440,16 +404,31 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
       });
     }
   }, [isModalOpen]);
-
   useEffect(() => {
     fetchPrograms();
     fetchQuestions();
     fetchUser();
+
     // Set initial activeTab if course exists
     if (course?.offeringTypes?.[0]?.id) {
       setActiveTab(course.offeringTypes[0].id);
     }
-  }, [course]);
+
+    // Add this: Set activeMainTab based on current course
+    if (course) {
+      // Find the tab that matches the current course
+      const matchingTab = tabs.find((tab) =>
+        tab.dropdownItems.some(
+          (item) =>
+            item.path.includes(slug) ||
+            item.label.toLowerCase().includes(course.courseTitle.toLowerCase())
+        )
+      );
+      if (matchingTab) {
+        setActiveMainTab(matchingTab.id);
+      }
+    }
+  }, [course, slug]); // Add slug to dependencies
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -607,14 +586,98 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
     }));
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (isIPhone()) {
+      if (isIPhoneDropdownOpen) {
+        // Disable scrolling on body when iPhone dropdown is open
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
+      } else {
+        // Re-enable scrolling when iPhone dropdown is closed
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.top = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
+      }
+      return;
+    }
+
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown, isIPhoneDropdownOpen]);
+
+  // Add this useEffect to handle body scrolling
+  useEffect(() => {
+    if (isIPhone()) {
+      // For iPhone, don't manipulate body scroll for the inline dropdown
+      return;
+    }
+
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown]);
+
   if (!course) {
     return <div>Course not found</div>;
   }
 
   const toggleDropdown = (tabId: string | null) => {
-    setOpenDropdown(openDropdown === tabId ? null : tabId);
+    if (isIPhone()) {
+      setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
+      setActiveMainTab(tabId || "");
+    } else {
+      setOpenDropdown(openDropdown === tabId ? null : tabId);
+    }
   };
-
   // Handle keyboard navigation for tabs
   const handleTabKeyNav = (
     e: React.KeyboardEvent<HTMLElement>,
@@ -661,7 +724,11 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       <div
-        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36 mt-10 p-3 space-x-2 scrollbar-hide"
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
+          isIPhone() && isIPhoneDropdownOpen
+            ? "overflow-hidden"
+            : "overflow-x-auto"
+        }`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -673,7 +740,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
         {tabs.map((tab, index) => (
           <div
             key={tab.id}
-            className="relative flex-shrink-0 w-auto min-w-[150px]"
+            className="relative  flex-shrink-0 w-auto min-w-[150px]"
             ref={(el) => {
               dropdownRefs.current[tab.id] = el;
             }}
@@ -691,7 +758,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
               onKeyDown={(e) => handleTabKeyNav(e, index)}
               tabIndex={activeMainTab === tab.id ? 0 : -1}
               className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
-                activeMainTab === tab.id
+                activeMainTab === tab.id ||
+                tab.dropdownItems.some((item) => item.path.includes(slug))
                   ? "bg-[#FF6B3D] text-white font-medium"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
               } rounded-full flex items-center justify-center`}
@@ -714,9 +782,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 ></path>
               </svg>
             </button>
-
             {/* Dropdown menu with fixed positioning */}
-            {openDropdown === tab.id && (
+            {openDropdown === tab.id && !isIPhone() && (
               <div
                 className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
                 onClick={() => setOpenDropdown(null)}
@@ -759,12 +826,53 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 </div>
               </div>
             )}
+
+            {isIPhone() && isIPhoneDropdownOpen === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setIsIPhoneDropdownOpen(null)}
+              >
+                <div
+                  className="absolute top-0 left-4 right-4 bg-black border border-gray-600 rounded-lg shadow-lg mx-2"
+                  style={{
+                    marginTop: "120px", // Adjust based on your header height
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+                    {/* Header showing selected tab */}
+                    {/* <div className="mb-4 pb-2 border-b border-gray-700">
+                      <h3 className="text-lg font-semibold text-[#FF6B3D]">
+                        {tab.label}
+                      </h3>
+                    </div> */}
+
+                    {/* Dropdown items */}
+                    <div className="space-y-2">
+                      {tab.dropdownItems.map((item, itemIndex) => (
+                        <Link
+                          key={`iphone-${tab.id}-${itemIndex}`}
+                          href={item.path}
+                          className="block w-full px-4 py-3 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white rounded-md transition-colors duration-200"
+                          role="menuitem"
+                          onClick={() => setIsIPhoneDropdownOpen(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
       <div className="relative w-full z-10">
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               <div className="lg:w-[35%]">
                 <div className="mb-6">

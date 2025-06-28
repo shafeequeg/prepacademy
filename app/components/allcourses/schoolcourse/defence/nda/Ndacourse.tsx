@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 // import Image from 'next/image';
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -43,7 +43,6 @@ interface Userdata {
   class_type: string;
   location: string;
 }
-
 
 interface Option {
   id: string | number;
@@ -251,6 +250,135 @@ const courseCards = [
   },
 ];
 
+const tabs = [
+  {
+    id: "engineering",
+    label: "ENGINEERING",
+    path: "/engineering",
+    dropdownItems: [
+      { label: "JEE", path: "/schoolcourse/engineering/jee" },
+      { label: "KEAM", path: "/schoolcourse/engineering/keam" },
+      { label: "BITSAT", path: "/schoolcourse/engineering/bitsat" },
+      { label: "VITEEE", path: "/schoolcourse/engineering/vitee" },
+      { label: "KCET", path: "/schoolcourse/engineering/kcet" },
+    ],
+  },
+  {
+    id: "MEDICAL",
+    label: "MEDICAL",
+    path: "/medical",
+    dropdownItems: [
+      { label: "NEET (UG)", path: "/schoolcourse/medical/neet" },
+      {
+        label: "PARAMEDICAL ENTRANCE",
+        path: "/schoolcourse/medical/paramedical",
+      },
+      { label: "JIPMER", path: "/schoolcourse/medical/jipmer" },
+    ],
+  },
+
+  {
+    id: "MANAGEMENT",
+    label: "MANAGEMENT",
+    path: "/management",
+    dropdownItems: [
+      { label: "IPM ", path: "/schoolcourse/ipm" },
+      // { label: "CHRIST", path: "/schoolcoursepage/MANAGEMENT/CHRIST" },
+      { label: "SET", path: "/schoolcourse/management/set" },
+      { label: "NPAT", path: "/schoolcourse/management/npat" },
+      { label: "MHCET", path: "/schoolcourse/management/mhcet" },
+    ],
+  },
+
+  {
+    id: "LAW",
+    label: "LAW",
+    path: "/law",
+    dropdownItems: [
+      { label: "CLAT", path: "/schoolcourse-law/clat" },
+      { label: "SLAT", path: "/schoolcourse/law/SLAT" },
+      { label: "AILET", path: "/schoolcourse/law/AILET" },
+      { label: "KLEE", path: "/schoolcourse/law/KLEE" },
+      { label: "CULEE", path: "/schoolcourse/law/CULEE" },
+    ],
+  },
+
+  {
+    id: "CUET",
+    label: "CUET",
+    path: "/cuet",
+    dropdownItems: [{ label: "CUET ", path: "/collegecourse/management/cuet" }],
+  },
+
+  {
+    id: "DEFENCE",
+    label: "DEFENCE",
+    path: "/defence",
+    dropdownItems: [
+      { label: "NDA ", path: "/schoolcourse/defence/nda" },
+      { label: "AFCAT", path: "/schoolcoursepage/DEFENCE/AFCAT" },
+    ],
+  },
+
+  {
+    id: "TUITIONS",
+    label: "TUITIONS",
+    path: "/tuitions",
+    dropdownItems: [
+      { label: "TUITIONS", path: "/schoolcoursepage/TUITIONS/TUITIONS" },
+      // { label: "CHEMISTRY", path: "/" },
+      // { label: "MATHS", path: "/" },
+      // { label: "BIOLOGY ", path: "/" },
+      // { label: "ACCOUNTING ", path: "/" },
+      // { label: "ECONOMICS", path: "/" },
+      // { label: "ENGLISH ", path: "/" },
+      // { label: "COMMERCE", path: "/" },
+      // { label: "BUSINESS STUDIES", path: "/" },
+    ],
+    //(6-12 Standards)
+    // {
+    //   // code: "TUITIONS",
+    //   title: "TUITIONS",
+    //   description: "PHYSICS, CHEMISTRY, MATHS, BIOLOGY, ACCOUNTING, ECONOMICS,ENGLISH,COMMERCE,BUSINESS STUDIES",
+    //   classType: "CLASSES FOR 11TH & 12TH",
+    //   path: "/courses/bank"
+
+    // }
+  },
+  {
+    id: "OTHERS",
+    label: "OTHERS",
+    path: "/others",
+    dropdownItems: [
+      {
+        label: "ASHOKA UNIVERSITY",
+        path: "/schoolcoursepage/OTHERS/ASHOKAUNIVERSITY",
+      },
+      {
+        label: "CHRIST UNIVERSITY ",
+        path: "/schoolcourse/others/christuniversity",
+      },
+      { label: "SYMBIOSIS", path: "/schoolcoursepage/OTHERS/SYMBIOSIS" },
+      { label: "NMIMS", path: "/schoolcoursepage/OTHERS/NMIMS" },
+      { label: "ST. XAVIER'S", path: "/schoolcoursepage/OTHERS/STXAVIERS" },
+    ],
+  },
+
+  {
+    id: "DESIGN",
+    label: "DESIGN & ARCHITECTURE",
+    path: "/design",
+    dropdownItems: [
+      { label: "NID ", path: "/schoolcourse/designandarchitecture/nid" },
+      { label: "NIFT ", path: "/schoolcourse/designandarchitecture/nift" },
+      { label: "UCEED ", path: "/schoolcourse/designandarchitecture/uceed" },
+      { label: "CEED", path: "/schoolcoursepage/DESIGN/CEED" },
+      { label: "JEE MAIN", path: "/schoolcoursepage/DESIGN/JEEMAIN" },
+      { label: "NATA ", path: "/schoolcourse/designandarchitecture/nata" },
+    ],
+  },
+];
+
 const CatExamApplySection: React.FC = () => {
   //   const [showIcons, setShowIcons] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
@@ -274,7 +402,7 @@ const CatExamApplySection: React.FC = () => {
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-   const [enrollFormData, setEnrollFormData] = useState({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
@@ -294,8 +422,23 @@ const CatExamApplySection: React.FC = () => {
     school_name: "",
     location: "",
   });
+  const isIPhone = () => {
+    if (typeof window === "undefined") return false; // Guard for server-side
+    return (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  };
 
+  const [isIPhoneDropdownOpen, setIsIPhoneDropdownOpen] = useState<
+    string | null
+  >(null);
+
+  
   const router = useRouter();
+  const [activeMainTab, setActiveMainTab] = useState("DEFENCE");
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleEnrollClick = () => {
     router.push("/CourseEnrollmentPortal");
@@ -373,7 +516,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -393,7 +536,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -427,19 +570,19 @@ const CatExamApplySection: React.FC = () => {
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -504,7 +647,6 @@ const CatExamApplySection: React.FC = () => {
       });
     }
   }, [isModalOpen]);
-
 
   useEffect(() => {
     fetchPrograms();
@@ -758,15 +900,292 @@ const CatExamApplySection: React.FC = () => {
   const filteredCourses = courseCards.filter(
     (course) => course.type === activeTab
   );
+ const toggleDropdown = (tabId: string | null) => {
+    if (isIPhone()) {
+      setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
+      setActiveMainTab(tabId || "");
+    } else {
+      setOpenDropdown(openDropdown === tabId ? null : tabId);
+    }
+  };
+  // Handle keyboard navigation for tabs
+  const handleTabKeyNav = (
+    e: React.KeyboardEvent<HTMLElement>,
+    index: number
+  ) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (index + 1) % tabs.length;
+      setActiveMainTab(tabs[nextIndex].id);
+      document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex = (index - 1 + tabs.length) % tabs.length;
+      setActiveMainTab(tabs[prevIndex].id);
+      document.getElementById(`tab-${tabs[prevIndex].id}`)?.focus();
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      toggleDropdown(tabs[index].id);
+    }
+  };
+
+  // Handle keyboard navigation for dropdown items
+  const handleDropdownKeyNav = <T,>(
+    e: React.KeyboardEvent<HTMLElement>,
+    tabId: string,
+    itemIndex: number,
+    items: Array<T>
+  ) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIndex = (itemIndex + 1) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${nextIndex}`)?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevIndex = (itemIndex - 1 + items.length) % items.length;
+      document.getElementById(`dropdown-${tabId}-item-${prevIndex}`)?.focus();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setOpenDropdown(null);
+      document.getElementById(`tab-${tabId}`)?.focus();
+    }
+  };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (isIPhone()) {
+      if (isIPhoneDropdownOpen) {
+        // Disable scrolling on body when iPhone dropdown is open
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
+      } else {
+        // Re-enable scrolling when iPhone dropdown is closed
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.top = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
+      }
+      return;
+    }
+
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown, isIPhoneDropdownOpen]);
+
+  // Add this useEffect to handle body scrolling
+  useEffect(() => {
+    if (isIPhone()) {
+      // For iPhone, don't manipulate body scroll for the inline dropdown
+      return;
+    }
+
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+    };
+  }, [openDropdown]);
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
       {/* Main Content */}
+
+     <div
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
+          isIPhone() && isIPhoneDropdownOpen
+            ? "overflow-hidden"
+            : "overflow-x-auto"
+        }`}
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+        role="tablist"
+        aria-label="Study Abroad Programs"
+      >
+        {tabs.map((tab, index) => (
+          <div
+            key={tab.id}
+            className="relative  flex-shrink-0 w-auto min-w-[150px]"
+            ref={(el) => {
+              dropdownRefs.current[tab.id] = el;
+            }}
+          >
+            <button
+              id={`tab-${tab.id}`}
+              role="tab"
+              aria-selected={activeMainTab === tab.id}
+              aria-controls={`tabpanel-${tab.id}`}
+              aria-expanded={openDropdown === tab.id}
+              onClick={() => {
+                setActiveMainTab(tab.id);
+                toggleDropdown(tab.id);
+              }}
+              onKeyDown={(e) => handleTabKeyNav(e, index)}
+              tabIndex={activeMainTab === tab.id ? 0 : -1}
+              className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
+                activeMainTab === tab.id
+                  ? "bg-[#FF6B3D] text-white font-medium"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              } rounded-full flex items-center justify-center`}
+            >
+              <span>{tab.label}</span>
+              <svg
+                className={`ml-1 w-4 h-4 transition-transform ${
+                  openDropdown === tab.id ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            {/* Dropdown menu with fixed positioning */}
+            {openDropdown === tab.id && !isIPhone() && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setOpenDropdown(null)}
+              >
+                <div
+                  className="w-[90%] max-w-md bg-black border border-gray-700 rounded-md shadow-lg mx-auto mt-56"
+                  style={{
+                    position: "relative",
+                    top: "0",
+                    maxHeight: "calc(100vh - 150px)",
+                    overflowY: "auto",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col space-y-2 p-2">
+                    {tab.dropdownItems.map((item, itemIndex) => (
+                      <Link
+                        key={`${tab.id}-${itemIndex}`}
+                        href={item.path}
+                        id={`dropdown-${tab.id}-item-${itemIndex}`}
+                        className="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white whitespace-nowrap rounded-md"
+                        role="menuitem"
+                        tabIndex={openDropdown === tab.id ? 0 : -1}
+                        onClick={() => setOpenDropdown(null)}
+                        onKeyDown={(e) =>
+                          handleDropdownKeyNav(
+                            e,
+                            tab.id,
+                            itemIndex,
+                            tab.dropdownItems
+                          )
+                        }
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isIPhone() && isIPhoneDropdownOpen === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setIsIPhoneDropdownOpen(null)}
+              >
+                <div
+                  className="absolute top-0 left-4 right-4 bg-black border border-gray-600 rounded-lg shadow-lg mx-2"
+                  style={{
+                    marginTop: "120px", // Adjust based on your header height
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+                    {/* Header showing selected tab */}
+                    {/* <div className="mb-4 pb-2 border-b border-gray-700">
+                      <h3 className="text-lg font-semibold text-[#FF6B3D]">
+                        {tab.label}
+                      </h3>
+                    </div> */}
+
+                    {/* Dropdown items */}
+                    <div className="space-y-2">
+                      {tab.dropdownItems.map((item, itemIndex) => (
+                        <Link
+                          key={`iphone-${tab.id}-${itemIndex}`}
+                          href={item.path}
+                          className="block w-full px-4 py-3 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white rounded-md transition-colors duration-200"
+                          role="menuitem"
+                          onClick={() => setIsIPhoneDropdownOpen(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">
@@ -1124,7 +1543,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
       </div>
 
-       {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}

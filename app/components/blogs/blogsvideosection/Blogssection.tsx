@@ -60,7 +60,7 @@ const stripHtmlAndTruncate = (
 };
 
 const BlogSection = () => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState<number | null>(null);
   const [allBlog, setAllBlog] = useState<Blogs[]>([]);
   const [Blogcategory, setAllBlogcategory] = useState<Blogcategory[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -114,14 +114,10 @@ const BlogSection = () => {
     let filteredBlogs = allBlog;
 
     // Filter by category if activeTab is selected
-    if (activeTab !== "") {
-      filteredBlogs = allBlog.filter((blog) => {
-        const category = Blogcategory.find((cat) => cat.id === blog.category);
-        return category?.category === activeTab;
-      });
+    if (activeTab !== null) {
+      filteredBlogs = allBlog.filter((blog) => blog.category === activeTab);
     }
 
-    
     // Filter by search term if searchTerm is not empty
     if (searchTerm.trim() !== "") {
       filteredBlogs = filteredBlogs.filter((blog) =>
@@ -131,13 +127,34 @@ const BlogSection = () => {
 
     return filteredBlogs;
   })();
+  // const handleTabClick = (categoryId, categoryName) => {
+  //   setActiveTab(categoryId); // Store ID instead of name
+  // };
 
-  console.log(displayBlogs);
+  // const displayBlogsAlternative = (() => {
+  //   let filteredBlogs = allBlog;
+
+  //   if (activeTab !== "") {
+  //     filteredBlogs = allBlog.filter((blog) => blog.category === activeTab);
+  //   }
+
+  //   if (searchTerm.trim() !== "") {
+  //     filteredBlogs = filteredBlogs.filter((blog) =>
+  //       blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //   }
+
+  //   return filteredBlogs;
+  // })();
+
+  // console.log(displayBlogs);
 
   useEffect(() => {
     fetchBlogs();
     fetchBlogsCategories();
   }, []);
+
+  console.log(Blogcategory);
 
   return (
     <div className="w-full bg-[#1A1A1A] min-h-screen mt-16 md:mt-28 p-6 md:p-8">
@@ -168,23 +185,36 @@ const BlogSection = () => {
           </div>
 
           {/* Categories Dropdowns */}
-          <div className="flex gap-4 w-full md:w-auto">
+          {/* <div className="flex gap-4 w-full md:w-auto">
             <select className="w-full md:w-auto bg-[#F55D3E1A] text-white rounded-md py-2 px-4">
               <option className="">Categories</option>
             </select>
-          </div>
+          </div> */}
         </div>
 
         {/* Tabs */}
         <div role="tablist" className="flex flex-wrap gap-3 w-full">
+          <button
+            role="tab"
+            aria-selected={activeTab === null}
+            onClick={() => setActiveTab(null)}
+            className={`w-full md:w-auto min-w-[200px] px-6 py-3 font-bold rounded-md text-base text-center transition-colors ${
+              activeTab === null
+                ? "bg-[#F55D3E] text-white"
+                : "bg-[#F55D3E1A] text-[#F55D3E] hover:bg-[#F55D3E33]"
+            }`}
+          >
+            All
+          </button>
+
           {Blogcategory.map((tab) => (
             <button
               key={tab.id}
               role="tab"
-              aria-selected={activeTab === tab.category}
-              onClick={() => setActiveTab(tab.category)}
+              aria-selected={activeTab === tab.id}
+              onClick={() => setActiveTab(tab.id)}
               className={`w-full md:w-auto min-w-[200px] px-6 py-3 font-bold rounded-md text-base text-center transition-colors ${
-                activeTab === tab.category
+                activeTab === tab.id
                   ? "bg-[#F55D3E] text-white"
                   : "bg-[#F55D3E1A] text-[#F55D3E] hover:bg-[#F55D3E33]"
               }`}
@@ -195,49 +225,47 @@ const BlogSection = () => {
         </div>
       </div>
 
-      {/* Blog Grid - Will show default blogs initially, then tab-specific blogs when clicked */}
-
+      {/* Blog Grid - FIXED IMAGE CONTAINER */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {(displayBlogs.length > 0 ? displayBlogs : allBlog).map(
-          (blog: Blogs) => (
-            <div
-              key={blog.id}
-              className="bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full"
-            >
-              <div className="w-full h-48">
-                {" "}
-                {/* Fixed image height */}
-                <div className="relative w-full h-full">
-                  <Image
-                    src={blog.image}
-                    alt={blog.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">
-                  {blog.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
-                  <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
-                    {stripHtmlAndTruncate(blog.description)}
-                  </p>
-                </p>
-                <div className="mt-auto pt-2 ">
-                  <Link href={`/blogdetails/${blog.id}`} passHref>
-                    <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
-                      Read More <span>→</span>
-                    </button>
-                  </Link>
-                </div>
+        {displayBlogs.map((blog: Blogs) => (
+          <div
+            key={blog.id}
+            className="bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full"
+          >
+            {/* Rest of your blog card JSX remains the same */}
+            <div className="w-full aspect-video relative overflow-hidden">
+              <Image
+                src={blog.image}
+                alt={blog.alt_img_text || blog.title}
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
+            </div>
+
+            <div className="p-4 flex flex-col flex-grow">
+              <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">
+                {blog.title}
+              </h3>
+              <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+                {stripHtmlAndTruncate(blog.description)}
+              </p>
+              <div className="mt-auto pt-2">
+                <Link href={`/blogdetails/${blog.id}`} passHref>
+                  <button className="text-[#FF5733] text-sm flex items-center gap-2 hover:text-[#FF4522] transition-colors">
+                    Read More <span>→</span>
+                  </button>
+                </Link>
               </div>
             </div>
-          )
-        )}
+          </div>
+        ))}
       </div>
-
+      {displayBlogs.length === 0 && (
+        <div className="text-center text-gray-400 py-8">
+          <p>No blogs found for the selected category.</p>
+        </div>
+      )}
       {/* Counselling CTA Section */}
       <div className="relative w-full rounded-xl overflow-hidden bg-gradient-to-r from-[#2A1810] to-[#3A2820] p-8 md:p-12 mt-4">
         {/* Content Container */}
@@ -266,8 +294,8 @@ const BlogSection = () => {
             <Image
               src="/groupphotopopularcourse.png"
               alt="Our Mentors"
-              width={500} // Adjust as needed
-              height={300} // Adjust as needed
+              width={500}
+              height={300}
               className="w-full md:w-[500px] h-auto object-contain"
             />
           </div>

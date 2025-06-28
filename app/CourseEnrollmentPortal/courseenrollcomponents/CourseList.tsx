@@ -28,6 +28,37 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     salesCoursessection = [],
     handleCourseClick,
   }) => {
+    // Enhanced course click handler with mobile scroll
+    const handleViewDetailsClickWithScroll = (course: CourseData) => {
+      // Pass the course UUID/ID to show course details
+      const courseId = course.uuid?.toString() || course.id?.toString() || "";
+      handleCourseClick(courseId, false);
+      
+      // Add scroll behavior for mobile screens only
+      if (window.innerWidth < 768) { // md breakpoint
+        setTimeout(() => {
+          // Try to find the course details area
+          const courseDetailsArea = document.querySelector('.course-details') ||
+                                   document.querySelector('[class*="course-details"]') ||
+                                   document.querySelector('[class*="md:col-span-3"]');
+          
+          if (courseDetailsArea) {
+            courseDetailsArea.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start',
+              inline: 'nearest'
+            });
+          } else {
+            // Fallback: scroll to a reasonable position
+            window.scrollTo({
+              top: window.innerHeight * 0.6, // Scroll past the sidebar
+              behavior: 'smooth'
+            });
+          }
+        }, 100); // Small delay to ensure DOM is updated
+      }
+    };
+
     // Function to get filtered courses based on the current selection
     const getFilteredCourses = () => {
       if (!activeSubTab) {
@@ -89,7 +120,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     // Render message if no activeSubTab is selected
     if (!activeSubTab) {
       return (
-        <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600">
+        <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-content">
           <div className="text-center py-12">
             <h3 className="text-lg font-medium text-orange-400 mb-2">
               Select a Category
@@ -108,18 +139,8 @@ const CourseList: React.FC<CourseListProps> = React.memo(
       ? `${subjectName} - ${sectionName}`
       : subjectName;
 
-    // Function to handle view details click
-    const handleViewDetailsClick = (course: CourseData) => {
-      // Pass the course UUID/ID to show course details
-      // The second parameter should be false since this is a course, not a section
-      handleCourseClick(
-        course.uuid?.toString() || course.id?.toString() || "",
-        false
-      );
-    };
-
     return (
-      <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600">
+      <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-content">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-orange-400">
             {headerText}
@@ -175,7 +196,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
                     className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-2 rounded-md text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg font-medium"
                     onClick={(e) => {
                       e.stopPropagation(); // Prevent event bubbling
-                      handleViewDetailsClick(course);
+                      handleViewDetailsClickWithScroll(course);
                     }}
                   >
                     View Details

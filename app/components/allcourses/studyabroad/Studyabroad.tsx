@@ -153,7 +153,7 @@ const CatExamApplySection: React.FC = () => {
 
   const router = useRouter();
 
-  const [activeMainTab, setActiveMainTab] = useState("engineering");
+  const [activeMainTab, setActiveMainTab] = useState("");
   // const [activeTab, setActiveTab] = useState("online");
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
@@ -749,7 +749,7 @@ console.log(setIsLoading);
       {/* Main Content */}
       <div className="relative w-full z-10">
         {/* Main Tabs Section */}
-        <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
+        <div className="bg-black px-4 py-3 sticky top-0  mt-10 md:mt-24 lg:mt-28">
           <div className="max-w-7xl mx-auto">
             <div
               className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
@@ -788,7 +788,7 @@ console.log(setIsLoading);
 
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">
@@ -1062,7 +1062,7 @@ console.log(setIsLoading);
           {/* Right Content - Image */}
           <div className="relative w-[100%] md:w-[40%]  aspect-[4/3] min-h-[250px]">
             <Image
-              src="/allcourse/studyabroadcourse.jpg"
+                src="/allcourse/allcoursestudyabroad.jpeg"
               alt="Study Aborad Students"
               fill
               className="rounded-lg object-cover"

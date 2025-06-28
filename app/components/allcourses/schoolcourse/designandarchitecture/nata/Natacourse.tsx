@@ -44,7 +44,6 @@ interface Userdata {
   location: string;
 }
 
-
 interface Option {
   id: string | number;
   question: string | number; // question ID this option belongs to
@@ -397,12 +396,22 @@ const CatExamApplySection: React.FC = () => {
   //       submitted_at:'',
   //     });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isIPhone = () => {
+    if (typeof window === "undefined") return false; // Guard for server-side
+    return (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  };
 
+  const [isIPhoneDropdownOpen, setIsIPhoneDropdownOpen] = useState<
+    string | null
+  >(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-   const [enrollFormData, setEnrollFormData] = useState({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
@@ -413,7 +422,7 @@ const CatExamApplySection: React.FC = () => {
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
 
-   const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [activeMainTab, setActiveMainTab] = useState("DESIGN");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [formStep, setFormStep] = useState(0);
@@ -484,7 +493,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -524,7 +533,7 @@ const CatExamApplySection: React.FC = () => {
     return "";
   };
 
-   const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -558,19 +567,19 @@ const CatExamApplySection: React.FC = () => {
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -611,7 +620,7 @@ const CatExamApplySection: React.FC = () => {
   console.log(user);
 
   // Determine progress percentage
- const calculateProgress = () => {
+  const calculateProgress = () => {
     const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
@@ -635,7 +644,6 @@ const CatExamApplySection: React.FC = () => {
       });
     }
   }, [isModalOpen]);
-
 
   useEffect(() => {
     fetchPrograms();
@@ -886,11 +894,14 @@ const CatExamApplySection: React.FC = () => {
     (course) => course.type === activeTab
   );
 
-  
   const toggleDropdown = (tabId: string | null) => {
-    setOpenDropdown(openDropdown === tabId ? null : tabId);
+    if (isIPhone()) {
+      setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
+      setActiveMainTab(tabId || "");
+    } else {
+      setOpenDropdown(openDropdown === tabId ? null : tabId);
+    }
   };
-
   // Handle keyboard navigation for tabs
   const handleTabKeyNav = (
     e: React.KeyboardEvent<HTMLElement>,
@@ -935,30 +946,62 @@ const CatExamApplySection: React.FC = () => {
   };
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!openDropdown) return; // Ensure openDropdown is not null
-
-      const dropdownElement = dropdownRefs.current[
-        openDropdown
-      ] as HTMLElement | null;
-
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
-        setOpenDropdown(null);
+    if (isIPhone()) {
+      if (isIPhoneDropdownOpen) {
+        // Disable scrolling on body when iPhone dropdown is open
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
+      } else {
+        // Re-enable scrolling when iPhone dropdown is closed
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.top = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
       }
-    };
+      return;
+    }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (openDropdown) {
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      // Re-enable scrolling when dropdown is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      // Cleanup function to ensure scrolling is re-enabled
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.top = "";
     };
-  }, [openDropdown]);
+  }, [openDropdown, isIPhoneDropdownOpen]);
 
   // Add this useEffect to handle body scrolling
   useEffect(() => {
+    if (isIPhone()) {
+      // For iPhone, don't manipulate body scroll for the inline dropdown
+      return;
+    }
+
     if (openDropdown) {
-      // Disable scrolling on body when dropdown is open
+      // Disable scrolling on body when dropdown is open (non-iPhone devices)
       document.body.style.overflow = "hidden";
-      // Store current scroll position
       document.body.style.position = "fixed";
       document.body.style.width = "100%";
       document.body.style.top = `-${window.scrollY}px`;
@@ -985,15 +1028,19 @@ const CatExamApplySection: React.FC = () => {
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Main Content */}
 
-        <div
-        className="flex items-center overflow-x-auto w-full bg-black md:mt-44 w853:mt-24 w768:mt-24 lg:mt-36  p-3 mt-10 space-x-2 scrollbar-hide"
+    <div
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
+          isIPhone() && isIPhoneDropdownOpen
+            ? "overflow-hidden"
+            : "overflow-x-auto"
+        }`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
           WebkitOverflowScrolling: "touch",
         }}
         role="tablist"
-        aria-label="Study Abroad Programs "
+        aria-label="Study Abroad Programs"
       >
         {tabs.map((tab, index) => (
           <div
@@ -1031,6 +1078,7 @@ const CatExamApplySection: React.FC = () => {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -1039,9 +1087,8 @@ const CatExamApplySection: React.FC = () => {
                 ></path>
               </svg>
             </button>
-
             {/* Dropdown menu with fixed positioning */}
-            {openDropdown === tab.id && (
+            {openDropdown === tab.id && !isIPhone() && (
               <div
                 className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
                 onClick={() => setOpenDropdown(null)}
@@ -1084,13 +1131,54 @@ const CatExamApplySection: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {isIPhone() && isIPhoneDropdownOpen === tab.id && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden"
+                onClick={() => setIsIPhoneDropdownOpen(null)}
+              >
+                <div
+                  className="absolute top-0 left-4 right-4 bg-black border border-gray-600 rounded-lg shadow-lg mx-2"
+                  style={{
+                    marginTop: "120px", // Adjust based on your header height
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  role="menu"
+                  aria-labelledby={`tab-${tab.id}`}
+                >
+                  <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+                    {/* Header showing selected tab */}
+                    {/* <div className="mb-4 pb-2 border-b border-gray-700">
+                      <h3 className="text-lg font-semibold text-[#FF6B3D]">
+                        {tab.label}
+                      </h3>
+                    </div> */}
+
+                    {/* Dropdown items */}
+                    <div className="space-y-2">
+                      {tab.dropdownItems.map((item, itemIndex) => (
+                        <Link
+                          key={`iphone-${tab.id}-${itemIndex}`}
+                          href={item.path}
+                          className="block w-full px-4 py-3 text-sm text-gray-300 hover:bg-[#FF6B3D] hover:text-white rounded-md transition-colors duration-200"
+                          role="menuitem"
+                          onClick={() => setIsIPhoneDropdownOpen(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">
@@ -1350,7 +1438,7 @@ const CatExamApplySection: React.FC = () => {
                   <h2 className="text-white text-2xl md:text-3xl font-medium mb-6">
                     Let&apos;s Make It Happen
                   </h2>
-                 <button
+                  <button
                     type="button"
                     className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-opacity-90 transition-colors"
                     onClick={openModal}
@@ -1401,7 +1489,7 @@ const CatExamApplySection: React.FC = () => {
                 <h3 className="text-white text-center text-lg font-medium mb-5">
                   NATA Master Class
                 </h3>
-                  <button
+                <button
                   onClick={openModal}
                   className="inline-block bg-[#F55D3E] text-white text-sm py-2 px-6 rounded hover:bg-[#F55D3E] hover:text-white transition-colors"
                 >
@@ -1447,7 +1535,7 @@ const CatExamApplySection: React.FC = () => {
         </div>
       </div>
 
-       {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}

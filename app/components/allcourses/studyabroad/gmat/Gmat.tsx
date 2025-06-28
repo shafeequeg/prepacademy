@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "@/app/components/apiconfig/axios";
 import { API_URLS } from "@/app/components/apiconfig/api_urls";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // interface VideoCardProps {
 //   title: string;
@@ -327,7 +328,7 @@ const CatExamApplySection: React.FC = () => {
   const [screeningStep, setScreeningStep] = useState(1);
 
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
-  const [activeMainTab, setActiveMainTab] = useState("engineering");
+  const [activeMainTab, setActiveMainTab] = useState("GMAT");
 
   console.log(programs);
 
@@ -951,10 +952,17 @@ const CatExamApplySection: React.FC = () => {
     }
   }, [activeMainTab]);
 
+  const router = useRouter();
+
+
+   const handleEnrollClick = () => {
+    router.push("/CourseEnrollmentPortal");
+  };
+
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
-         <div className="bg-black px-4 py-3 sticky top-0 z-50 mt-32">
+        <div className="bg-black px-4 py-3 sticky top-0  mt-10 md:mt-24 lg:mt-28">
           <div className="max-w-7xl mx-auto">
             <div
               className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
@@ -995,7 +1003,7 @@ const CatExamApplySection: React.FC = () => {
       <div className="relative w-full z-10">
         {/* Apply Section with Mascot */}
         <div className="relative w-full bg-gradient-to-r p- from-[#0A1015] to-[#121820] text-white py-12 bg-center bg-no-repeat bg-cover ">
-          <div className="w-full px-4 mt-24">
+          <div className="w-full px-4 mt-1">
             <div className="flex flex-col lg:flex-row gap-16 relative max-w-7xl mx-auto">
               {/* Left Content */}
               <div className="lg:w-[35%]">
@@ -1047,7 +1055,11 @@ const CatExamApplySection: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <button className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors">
+                  <button
+                    className="bg-[#FF6B3D] hover:bg-[#E04D2E] text-white py-3 px-6 rounded-md font-medium transition-colors"
+                    onClick={handleEnrollClick}
+
+                  >
                     Enroll Now
                   </button>
                   <button

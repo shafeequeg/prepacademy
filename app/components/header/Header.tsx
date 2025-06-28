@@ -554,76 +554,79 @@ export default function Header() {
                 Take A Quick Test
               </a>
 
-              <div
-                ref={accountDropdownRef}
-                className="account-dropdown relative group"
-              >
-                {user ? (
-                  <>
-                    <div
-                      className="flex items-center space-x-2 text-white hover:text-white text-xl font-semibold cursor-pointer rounded-full bg-black/20 px-4 py-2 transition-all duration-300"
-                      onMouseEnter={() => setAccountDropdownOpen(true)}
-                    >
-                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                        <FiUser className="text-white" size={16} />
-                      </div>
-                      <span className="truncate max-w-[120px]">
-                        {user.full_name}
-                      </span>
-                      <FiChevronDown size={16} />
-                    </div>
-                    {accountDropdownOpen && (
-                      <div
-                        className="absolute right-0 mt-20 bg-black shadow-lg rounded-lg w-56 z-50 overflow-hidden transition-all duration-300 border border-[#F55D3E]/30"
-                        onMouseLeave={() => setAccountDropdownOpen(false)}
-                      >
-                        <div
-                          onClick={() => handleNavigation("/profile")}
-                          className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
-                        >
-                          Profile
-                        </div>
 
-                        <div
-                          onClick={() => handleNavigation("/my-courses")}
-                          className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
-                        >
-                          My Courses
-                        </div>
+<div
+  ref={accountDropdownRef}
+  className="account-dropdown relative group"
+>
+  {user ? (
+    <>
+      <div
+        className="flex items-center space-x-2 text-white hover:text-white text-xl font-semibold cursor-pointer rounded-full bg-black/20 px-4 py-2 transition-all duration-300"
+        onClick={() => setAccountDropdownOpen(!accountDropdownOpen)}
+      >
+        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+          <FiUser className="text-white" size={16} />
+        </div>
+        <span className="truncate max-w-[120px]">
+          {user.full_name}
+        </span>
+        <FiChevronDown 
+          size={16} 
+          className={`transition-transform duration-200 ${
+            accountDropdownOpen ? 'rotate-180' : ''
+          }`}
+        />
+      </div>
+      {accountDropdownOpen && (
+        <div className="absolute right-0 mt-20 bg-black shadow-lg rounded-lg w-56 z-50 overflow-hidden transition-all duration-300 border border-[#F55D3E]/30">
+          <div
+            onClick={() => handleNavigation("/profile")}
+            className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
+          >
+            Profile
+          </div>
 
-                        {user.program && (
-                          <div className="block text-white px-4 py-2 text-xs cursor-default border-t border-[#F55D3E]/10">
-                            Program: {user.program}
-                          </div>
-                        )}
-                        {user.exam_target && (
-                          <div className="block text-white px-4 py-2 text-xs cursor-default">
-                            Target: {user.exam_target}
-                          </div>
-                        )}
-                        <div
-                          onClick={handleLogout}
-                          className="flex items-center text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200"
-                        >
-                          <FiLogOut className="mr-2 h-4 w-4" />
-                          Logout
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <button
-                    onClick={handleLoginClick}
-                    className="flex items-center space-x-2 bg-black/20 text-white hover:bg-black/30 px-4 py-2 rounded-full text-xl font-semibold transition-all duration-300"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                      <FiUser className="text-white" size={16} />
-                    </div>
-                    <span>Login</span>
-                    <FiChevronDown size={16} />
-                  </button>
-                )}
-              </div>
+          <div
+            onClick={() => handleNavigation("/my-courses")}
+            className="block text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200 flex items-center"
+          >
+            My Courses
+          </div>
+
+          {user.program && (
+            <div className="block text-white px-4 py-2 text-xs cursor-default border-t border-[#F55D3E]/10">
+              Program: {user.program}
+            </div>
+          )}
+          {user.exam_target && (
+            <div className="block text-white px-4 py-2 text-xs cursor-default">
+              Target: {user.exam_target}
+            </div>
+          )}
+          <div
+            onClick={handleLogout}
+            className="flex items-center text-white hover:text-[#F55D3E] hover:bg-gray-900 px-4 py-3 text-sm cursor-pointer transition-all duration-200"
+          >
+            <FiLogOut className="mr-2 h-4 w-4" />
+            Logout
+          </div>
+        </div>
+      )}
+    </>
+  ) : (
+    <button
+      onClick={handleLoginClick}
+      className="flex items-center space-x-2 bg-black/20 text-white hover:bg-black/30 px-4 py-2 rounded-full text-xl font-semibold transition-all duration-300"
+    >
+      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+        <FiUser className="text-white" size={16} />
+      </div>
+      <span>Login</span>
+      <FiChevronDown size={16} />
+    </button>
+  )}
+</div>
             </nav>
           </div>
         </div>
@@ -841,9 +844,9 @@ export default function Header() {
 
         {[
           { label: "Contact Us", path: "/contact" },
-          { label: "Find a Center", path: "/findcenter" },
-          { label: "Become a Franchise", path: "/refund" },
-          { label: "Become a Employee", path: "/employee" },
+          { label: "Find a Center", path: "/findacenter" },
+          { label: "Become a Franchise", path: "/becomeafranchise" },
+          { label: "Become a Employee", path: "/becomeanemployee" },
         ].map(({ label, path }) => (
           <div
             key={path}

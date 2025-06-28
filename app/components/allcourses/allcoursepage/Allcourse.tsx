@@ -10,6 +10,7 @@ interface CourseCardProps {
   classType?: string;
   path?: string;
   className?: string;
+  
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -44,120 +45,104 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
 const AllCourses: React.FC = () => {
   // College course data - updated with 6 categories only
-  const collegeCourses = [
-    {
-      // code: "MGMT",
-      title: "Management",
-      description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
-      path: "/collegecourse",
-    },
-    {
-      // code: "CIVIL",
-      title: "Civil Services",
-      description: "UPSC",
-      path: "/collegecourse",
-    },
-    {
-      // code: "GOVT",
-      title: "Government",
-      description: "RAILWAY, SSC",
-      path: "/collegecourse",
-    },
-    {
-      // code: "DEF",
-      title: "Defence",
-      description: "CDS, AFCAT ",
-      path: "/collegecourse",
-    },
-    {
-      // code: "DESIGN",
-      title: "Design & Architecture",
-      description: "NID PG, NIFT PG",
-      path: "/collegecourse",
-    },
-    {
-      // code: "BANK",
-      title: "Bank",
-      description:
-        "SBI, IBPS PO, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
-      path: "/collegecourse",
-    },
-  ];
+ // In AllCourses.tsx - Update only the collegeCourses array paths
+
+const collegeCourses = [
+  {
+    title: "Management",
+    description: "CAT, XAT, KMAT, CMAT, MAT, NMAT, CUET(PG), MICAT, MHCET",
+    path: "/collegecourse?tab=MANAGEMENT",
+  },
+  {
+    title: "Civil Services",
+    description: "UPSC",
+    path: "/collegecourse?tab=CEVILSERVICE",
+  },
+  {
+    title: "Government",
+    description: "RAILWAY, SSC",
+    path: "/collegecourse?tab=GOVERNMENT",
+  },
+  {
+    title: "Defence",
+    description: "CDS, AFCAT ",
+    path: "/collegecourse?tab=DEFENCE",
+  },
+  {
+    title: "Design & Architecture",
+    description: "NID PG, NIFT PG",
+    path: "/collegecourse?tab=MAT",
+  },
+  {
+    title: "Bank",
+    description: "SBI, IBPS PO, RBI GRADE B, IBPS RRB, SBI CLERK, IBPS CLERK, NABARD , LIC AAO",
+    path: "/collegecourse?tab=BANK",
+  },
+];
 
   // School course data
-  const schoolCourses = [
-    {
-      // code: "ENGINEERING",
-      title: "ENGINEERING",
-      description: "JEE, KEAM, BITSAT, VITEEE, KCET",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "MEDICAL",
-      title: "MEDICAL",
-      description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "MANAGEMENT",
-      title: "MANAGEMENT",
-      description: "IPM, CHRIST, SET, NPAT,MHCET",
-      classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "LAW",
-      title: "LAW",
-      description: "CLAT, SLAT, AILET, KLEE, CULEE",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "CUET",
-      title: "COMMON UNIVERSITY ENTRANCE TEST",
-      description: "COMMON UNIVERSITY ENTRANCE TEST",
-      classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "DEFENCE",
-      title: "DEFENCE",
-      description: "NDA, AFCAT",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "DESIGN",
-      title: "DESIGN & ARCHITECTURE",
-      description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
-      classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "OTHERS",
-      title: "OTHERS",
-      description:
-        "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
-      classType: "CLASSES FOR 12TH & DROPPERS",
-      path: "/schoolcourse",
-    },
-    {
-      // code: "TUITIONS",
-      title: "TUITIONS",
-      description:
-        "PHYSICS, CHEMISTRY,BIOLOGY, MATHS,ENGLISH,COMMERCE,BUSINESS STUDIES,ACCOUNTING,ECONOMICS",
-      classType: "CLASSES FOR 11TH & 12TH",
-      path: "/schoolcourse",
-    },
-  ];
+const schoolCourses = [
+  {
+    title: "ENGINEERING",
+    description: "JEE, KEAM, BITSAT, VITEEE, KCET",
+    classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+    path: "/schoolcourse?tab=engineering",
+  },
+  {
+    title: "MEDICAL",
+    description: "NEET (UG), PARAMEDICAL ENTRANCE, JIPMER",
+    classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+    path: "/schoolcourse?tab=MEDICAL",
+  },
+  {
+    title: "MANAGEMENT",
+    description: "IPM, CHRIST, SET, NPAT,MHCET",
+    classType: "CLASSES FOR 12TH & DROPPERS",
+    path: "/schoolcourse?tab=MANAGEMENT",
+  },
+  {
+    title: "LAW",
+    description: "CLAT, SLAT, AILET, KLEE, CULEE",
+    classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+    path: "/schoolcourse?tab=LAW",
+  },
+  {
+    title: "COMMON UNIVERSITY ENTRANCE TEST",
+    description: "COMMON UNIVERSITY ENTRANCE TEST",
+    classType: "CLASSES FOR 12TH & DROPPERS",
+    path: "/schoolcourse?tab=CUET",
+  },
+  {
+    title: "DEFENCE",
+    description: "NDA, AFCAT",
+    classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+    path: "/schoolcourse?tab=DEFENCE",
+  },
+  {
+    title: "DESIGN & ARCHITECTURE",
+    description: "NID, NIFT, UCEED, CEED, JEE MAIN, NATA",
+    classType: "CLASSES FOR 11TH, 12TH & DROPPERS",
+    path: "/schoolcourse?tab=DESIGN",
+  },
+  {
+    title: "OTHERS",
+    description: "ASHOKA UNIVERSITY, CHRIST UNIVERSITY , SYMBIOSIS,NMIMS,ST. XAVIER'S",
+    classType: "CLASSES FOR 12TH & DROPPERS",
+    path: "/schoolcourse?tab=OTHERS",
+  },
+  {
+    title: "TUITIONS",
+    description: "PHYSICS, CHEMISTRY,BIOLOGY, MATHS,ENGLISH,COMMERCE,BUSINESS STUDIES,ACCOUNTING,ECONOMICS",
+    classType: "CLASSES FOR 11TH & 12TH",
+    path: "/schoolcourse?tab=TUITIONS",
+  },
+];
 
   return (
     <div className="text-white min-h-screen">
       {/* Courses Header */}
       <div className="bg-gradient-to-r py-4 px-6 ml-4 md:ml-20">
-        <h1 className="text-3xl font-semibold mt-32">
+        <h1 className="text-3xl font-semibold mt-16 md:mt-28">
           <span className="text-[#F55D3E] font-serif italic">All</span> Courses
         </h1>
       </div>
@@ -187,11 +172,13 @@ const AllCourses: React.FC = () => {
               </div>
               <div className="w-full md:w-1/2">
                 <Image
-                  src="/allcourse/collegeimage.jpeg"
+                  src="/allcourse/allcoursecollegecourse.jpeg"
                   alt="College Students"
                   width={600}
-                  height={400}
-                  className="rounded-lg object-cover w-full h-80 aspect-[3/2]"
+                  height={338}
+                  className="rounded-lg object-cover w-full aspect-video"
+                  quality={90}
+                  priority
                 />
               </div>
             </div>
@@ -236,11 +223,13 @@ const AllCourses: React.FC = () => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src="/allcourse/schoolimages.jpeg"
-                alt="School Students"
+                src="/allcourse/allcourseschoolcourse.jpeg"
+                alt="College Students"
                 width={600}
-                height={300}
-                className="rounded-lg object-cover w-full h-80 aspect-[3/2]"
+                height={375}
+                className="rounded-lg object-cover w-full aspect-[16/10]"
+                quality={90}
+                priority
               />
             </div>
           </div>

@@ -25,13 +25,37 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
   }) => {
     const handleBackToCourses = () => {
       setActiveCourse(""); // Clear the active course to return to course list
+      
+      // Add scroll behavior for mobile screens only
+      if (window.innerWidth < 768) { // md breakpoint
+        setTimeout(() => {
+          // Try to find the course list area
+          const courseListArea = document.querySelector('.course-content') ||
+                                document.querySelector('[class*="course-content"]') ||
+                                document.querySelector('[class*="md:col-span-3"]');
+          
+          if (courseListArea) {
+            courseListArea.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start',
+              inline: 'nearest'
+            });
+          } else {
+            // Fallback: scroll to top of content area
+            window.scrollTo({
+              top: window.innerHeight * 0.3,
+              behavior: 'smooth'
+            });
+          }
+        }, 100); // Small delay to ensure DOM is updated
+      }
     };
 
     console.log(parsePriceToNumber);
     console.log(currentCourseData);
 
     return (
-      <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600">
+      <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-details">
         <div className="mb-6">
           <button
             onClick={handleBackToCourses}

@@ -95,24 +95,25 @@ const TestimonialsAndCTA = () => {
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-  const [enrollFormData, setEnrollFormData] = useState({
+   const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
-    // location:"",
     question: "",
+    location: "",
     selected_option: {} as Record<string, string>, // Change to only string keys
   });
   const [formStep, setFormStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [validationErrors, setValidationErrors] = useState({
+ const [validationErrors, setValidationErrors] = useState({
     full_name: "",
     email: "",
     class_type: "",
     phone_number: "",
     school_name: "",
+    location: "",
   });
 
   console.log(showIcons);
@@ -126,6 +127,20 @@ const TestimonialsAndCTA = () => {
     }
     return "";
   };
+
+
+  
+   const validateLocation = (location: string): string => {
+    if (!location || location.trim() === "") {
+      return "Location is required";
+    }
+    if (location.trim().length < 2) {
+      return "Enter a valid location";
+    }
+    return "";
+  };
+
+
 
   const validateEmail = (email: string): string => {
     if (!email || email.trim() === "") {
@@ -183,7 +198,64 @@ const TestimonialsAndCTA = () => {
     return "";
   };
 
-  const nextStep = () => {
+  const handleScreeningChange = (
+    questionId: number | string,
+    optionId: string | number
+  ) => {
+    setEnrollFormData((prev) => ({
+      ...prev,
+      selected_option: {
+        ...prev.selected_option,
+        [questionId]: String(optionId), // Convert to string to ensure type safety
+      },
+    }));
+  };
+
+  const nextScreeningStep = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      // If all questions answered, move to the next step
+      setScreeningStep(screeningStep + 1);
+    }
+  };
+
+  // Handle main form changes
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEnrollFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Validate the changed field
+    let errorMessage = "";
+    switch (name) {
+      case "full_name":
+        errorMessage = validateFullName(value);
+        break;
+      case "email":
+        errorMessage = validateEmail(value);
+        break;
+      case "class_type":
+        errorMessage = validateClassType(value);
+        break;
+      case "phone_number":
+        errorMessage = validateMobileNumber(value);
+        break;
+      case "school_name":
+        errorMessage = validateSchoolCollege(value);
+        break;
+    }
+
+    setValidationErrors((prev) => ({
+      ...prev,
+      [name]: errorMessage,
+    }));
+  };
+
+  // Navigate through form steps
+   const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -216,6 +288,20 @@ const TestimonialsAndCTA = () => {
           return;
         }
         break;
+      case 4:
+      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+        return;
+      }
+      break;
+    case 5:
+      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+      if (error) {
+        setValidationErrors((prev) => ({ ...prev, location: error }));
+        return;
+      }
+      break;
     }
 
     // If validation passes, proceed to next step
@@ -229,6 +315,8 @@ const TestimonialsAndCTA = () => {
       setScreeningStep((prev) => prev - 1);
     }
   };
+
+
 
   const fetchQuestions = async () => {
     try {
@@ -256,8 +344,8 @@ const TestimonialsAndCTA = () => {
   console.log(user);
 
   // Determine progress percentage
-  const calculateProgress = () => {
-    const totalSteps = 8; // 3 screening + 5 form fields
+ const calculateProgress = () => {
+    const totalSteps = 9; // 3 screening + 6 form fields (including location)
     const currentStep = screeningStep <= 3 ? screeningStep - 1 : 3 + formStep;
     return (currentStep / totalSteps) * 100;
   };
@@ -276,9 +364,11 @@ const TestimonialsAndCTA = () => {
         school_name: "",
         question: "",
         selected_option: {},
+        location: "",
       });
     }
   }, [isModalOpen]);
+
 
   useEffect(() => {
     // fetchPrograms();
@@ -286,8 +376,7 @@ const TestimonialsAndCTA = () => {
     fetchUser();
   }, []);
 
-
-   const handleEnrollSubmit = async (e: React.FormEvent) => {
+ const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -299,6 +388,7 @@ const TestimonialsAndCTA = () => {
         "class_type",
         "phone_number",
         "school_name",
+        "location",
       ] as const;
       // Use type assertion to check fields
       const missingFields = requiredFields.filter(
@@ -337,6 +427,7 @@ const TestimonialsAndCTA = () => {
               phone_number: enrollFormData.phone_number,
               school_name: enrollFormData.school_name, // Note: your API might expect school_college not school_name
               question: questionId,
+              location: enrollFormData.location,
               selected_option: selectedOption,
             }
           );
@@ -365,6 +456,7 @@ const TestimonialsAndCTA = () => {
           school_name: "",
           question: "",
           selected_option: {},
+          location: "",
         });
 
         // Reset steps
@@ -387,60 +479,7 @@ const TestimonialsAndCTA = () => {
     }
   };
 
-  const handleScreeningChange = (
-    questionId: number | string,
-    optionId: string | number
-  ) => {
-    setEnrollFormData((prev) => ({
-      ...prev,
-      selected_option: {
-        ...prev.selected_option,
-        [questionId]: String(optionId), // Convert to string to ensure type safety
-      },
-    }));
-  };
-
-  const nextScreeningStep = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      // If all questions answered, move to the next step
-      setScreeningStep(screeningStep + 1);
-    }
-  };
-
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEnrollFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    // Validate the changed field
-    let errorMessage = "";
-    switch (name) {
-      case "full_name":
-        errorMessage = validateFullName(value);
-        break;
-      case "email":
-        errorMessage = validateEmail(value);
-        break;
-      case "class_type":
-        errorMessage = validateClassType(value);
-        break;
-      case "phone_number":
-        errorMessage = validateMobileNumber(value);
-        break;
-      case "school_name":
-        errorMessage = validateSchoolCollege(value);
-        break;
-    }
-
-    setValidationErrors((prev) => ({
-      ...prev,
-      [name]: errorMessage,
-    }));
-  };
+ 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -565,7 +604,7 @@ const TestimonialsAndCTA = () => {
         </div>
       </div>
 
-     {isModalOpen && (
+         {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}
@@ -930,17 +969,70 @@ const TestimonialsAndCTA = () => {
                             Back
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={nextStep}
                             className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
                               !enrollFormData.school_name ||
-                              validationErrors.school_name ||
-                              isSubmitting
+                              validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
                             }`}
                             disabled={
                               !enrollFormData.school_name ||
-                              !!validationErrors.school_name ||
+                              !!validationErrors.school_name
+                            }
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {formStep === 5 && (
+                      <div className="space-y-4">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-800 mb-4 text-center">
+                          What&apos;s your location?
+                        </h3>
+                        <div>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Your Location (City, State)"
+                            value={enrollFormData.location || ""}
+                            onChange={handleFormChange}
+                            className={`w-full p-3 border text-black ${
+                              validationErrors.location
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            required
+                          />
+                          {validationErrors.location && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {validationErrors.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex space-x-3">
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="w-1/3 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
+                              !enrollFormData.location ||
+                              validationErrors.location ||
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-orange-700"
+                            }`}
+                            disabled={
+                              !enrollFormData.location ||
+                              !!validationErrors.location ||
                               isSubmitting
                             }
                           >
@@ -956,30 +1048,30 @@ const TestimonialsAndCTA = () => {
 
             {/* Summary section showing answers (visible at the bottom after questions are answered) */}
             {/* {screeningStep === 4 && (
-                  <div className="p-4 bg-gray-50 border-t border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
-                    <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
-                      {EnrollformData.answer1 && (
-                        <div>
-                          <span className="font-medium block">Learning goal:</span>
-                          {EnrollformData.answer1}
-                        </div>
-                      )}
-                      {EnrollformData.answer2 && (
-                        <div>
-                          <span className="font-medium block">Schedule:</span>
-                          {EnrollformData.answer2}
-                        </div>
-                      )}
-                      {EnrollformData.answer3 && (
-                        <div>
-                          <span className="font-medium block">Found via:</span>
-                          {EnrollformData.answer3}
-                        </div>
-                      )}
-                    </div>
+            <div className="p-4 bg-gray-50 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Your selections:</h4>
+              <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
+                {EnrollformData.answer1 && (
+                  <div>
+                    <span className="font-medium block">Learning goal:</span>
+                    {EnrollformData.answer1}
                   </div>
-                )} */}
+                )}
+                {EnrollformData.answer2 && (
+                  <div>
+                    <span className="font-medium block">Schedule:</span>
+                    {EnrollformData.answer2}
+                  </div>
+                )}
+                {EnrollformData.answer3 && (
+                  <div>
+                    <span className="font-medium block">Found via:</span>
+                    {EnrollformData.answer3}
+                  </div>
+                )}
+              </div>
+            </div>
+          )} */}
           </div>
         </div>
       )}

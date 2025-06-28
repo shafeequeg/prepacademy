@@ -13,28 +13,28 @@ const StudyAbroadSection: React.FC = () => {
     {
       title: "IELTS",
       description: "English proficiency test for study, work, and migration",
-      path: "/studyabroad",
+      path: "/studyabroad/ielts",
     },
     {
       title: "SAT",
       description:
         "Standardized test for college admissions, mainly in the U.S.",
-      path: "/studyabroad",
+      path: "/studyabroad/sat",
     },
     {
       title: "ACT",
       description: "Entrance exam for admission into various universities",
-      path: "/studyabroad",
+      path: "/studyabroad/act",
     },
     {
       title: "GRE",
       description: "Graduate school admission test for various disciplines",
-      path: "/studyabroad",
+      path: "/studyabroad/gre",
     },
     {
       title: "GMAT",
       description: "Global entrance exam for MBA and business programs",
-      path: "/studyabroad",
+      path: "/studyabroad/gmat",
     },
   ];
 
@@ -42,30 +42,36 @@ const StudyAbroadSection: React.FC = () => {
     {
       title: "Resume Building",
       description: "Craft a professional resume tailored to your career goals.",
-      path: "/careercounseling",
+      path: "/careercounseling/ResumeBuilding",
     },
     {
       title: "Interview Preparation",
       description:
         "Get expert guidance to ace your job interviews with confidence.",
-      path: "/careercounseling",
+      path: "/careercounseling/InterviewPreparation",
     },
     {
       title: "Career Planning",
       description:
         "Personalized career counseling to align with your ambitions.",
-      path: "/careercounseling",
+      path: "/careercounseling/CareerPlanning",
     },
     {
       title: "Skill Development",
       description: "Enhance your skills to stay competitive in the job market.",
-      path: "/careercounseling",
+      path: "/careercounseling/SkillDevelopment",
     },
     {
       title: "Job Search Strategies",
       description: "Effective techniques to land your dream job faster.",
-      path: "/careercounseling",
+      path: "/careercounseling/JobSearchStrategies",
     },
+
+    //  {
+    //   title: "Stream Selection",
+    //   description: "Choose the right academic stream to align with your career goals.",
+    //   path: "/careercounseling/StreamSelection",
+    // },
   ];
 
   return (
@@ -88,15 +94,15 @@ const StudyAbroadSection: React.FC = () => {
             </p>
           </div>
 
-        {/* Right Content - Image */}
-        
+          {/* Right Content - Image */}
+
           <div className="lg:w-1/2">
-            <div className="relative  w-full aspect-[4/3] lg:aspect-[16/10]">
+            <div className="relative w-full aspect-[4/3] lg:aspect-[16/10] rounded-lg overflow-hidden">
               <Image
-                src="/allcourse/studyabroadimage.jpeg"
+                src="/allcourse/allcoursestudyabroad.jpeg"
                 alt="Student studying abroad"
                 fill
-                className="object-contain rounded-lg"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>

@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import AxiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
 import Link from "next/link";
+import Image from "next/image";
 
 type Location = {
   name: string;
@@ -87,14 +88,73 @@ export default function ContactPage() {
       mapUrl:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15745.891686137547!2d76.56364743377378!3d9.379822803411672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06257ceb61ebf7%3A0xd527a0512c4a2401!2sPrep%20Academy%20-%20CLAT%2C%20CUET%2C%20IPM%2C%20SLAT%2C%20AILET%2C%20SAT%2C%20CAT%2C%20CMAT%2C%20MAT%2C%20GMAT%2CGRE%2C%20CRT%20Coaching!5e0!3m2!1sen!2sin!4v1740825588734!5m2!1sen!2sin",
     },
-
     {
-      name: "Pukalakkat Complex, Mahakavi Vailoppilli Road",
+      name: "Kochi Palarivattom",
       address:
-        "Prep Academy , Pukalakkat Complex, Mahakavi Vailoppilli Road, Opp Pandal cake Shop, Palarivattam, Kochi - 682025",
+        "Prep Academy, Pukalakkat Complex, Mahakavi Vailoppilli Road, Opp Pandal cake Shop, Palarivattam, Kochi - 682025",
       phone: "9446056789",
       mapUrl:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31433.7274007533!2d76.26947127431639!3d9.999015000000012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d000540f32b%3A0xe06e1340e2956cb!2sPandhal%20cake%20shop%20Palarivattom!5e0!3m2!1sen!2sin!4v1747908324505!5m2!1sen!2sin",
+    },
+
+    {
+      name: "Jajmau, Kanpur",
+      address:
+        "188 B, Shop No:2, Lower Ground Floor, Sai Complex, Pardevanpur Defence Colony, Jajmau, Kanpur Nagar - 208007, Uttar Pradesh",
+      phone: "9446056789",
+      mapUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228593.24698602836!2d80.18844074051621!3d26.46315844806217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c411e0903162b%3A0x7bcfc7979f414d59!2sKannattu%20Fingold!5e0!3m2!1sen!2sin!4v1750251804661!5m2!1sen!2sin",
+    },
+
+    {
+      name: "Farrukhabad Railway Road",
+      address:
+        "Saurabh Pandey 5/3 railway Road, In front Dr Ravindra Dubey Hospital, Farrukhabad",
+      phone: "9446056789",
+      mapUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21037294.562456273!2d52.65757413579002!3d10.594940388966338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd4f11494e6d%3A0x567aff91fe6a0d58!2sKANNATTU%20FINGOLD%20FINANCE%20PVT%20LTD!5e0!3m2!1sen!2sin!4v1750252347697!5m2!1sen!2sin",
+    },
+    {
+      name: "Ram Bagh, Kanpur",
+      address: "104A/351 P Road, Ram Bagh, 80 ft Road, Kanpur",
+      phone: "9446056789",
+      mapUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228593.24698602836!2d80.18844074051621!3d26.46315844806217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c47286556181b%3A0x63a8100b099ec08e!2sKannattu%20Fingold%20Finance%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1750252085202!5m2!1sen!2sin",
+    },
+    {
+      name: "Adambakkam, Chennai",
+      address:
+        "No: 7, Ground Floor, Karuneegar Street, Adambakkam, Chennai - 600088 (Near: St Thomas Mount Railway Station)",
+      phone: "9446056789",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6448506549805!2d80.19876317484179!3d12.994552487322906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d45ae037a21%3A0xb435928e203faa98!2sKANNATTU%20FINGOLD!5e0!3m2!1sen!2sin!4v1750252463754!5m2!1sen!2sin",
+    },
+    {
+      name: "Kovilambakkam, Chennai",
+      address:
+        "No 8, Muthiaya Nagar, Medavakkam Main Road, Kovilambakkam, Chennai – 600129",
+      phone: "9446056789",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6448506549805!2d80.19876317484179!3d12.994552487322906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d45ae037a21%3A0xb435928e203faa98!2sKANNATTU%20FINGOLD!5e0!3m2!1sen!2sin!4v1750252463754!5m2!1sen!2sin",
+    },
+    {
+      name: "Ekkattuthangal, Chennai",
+      address:
+        "Door No. 2/2, Gandhi Nagar Main Road, Ekkattuthangal, Chennai – 600032",
+      phone: "9446056789",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6448506549805!2d80.19876317484179!3d12.994552487322906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d45ae037a21%3A0xb435928e203faa98!2sKANNATTU%20FINGOLD!5e0!3m2!1sen!2sin!4v1750252463754!5m2!1sen!2sin",
+    },
+    {
+      name: "West Mambalam, Chennai",
+      address:
+        "No. 16 A, First Floor, Govinda Road, West Mambalam, Chennai - 600033",
+      phone: "9446056789",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6448506549805!2d80.19876317484179!3d12.994552487322906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d45ae037a21%3A0xb435928e203faa98!2sKANNATTU%20FINGOLD!5e0!3m2!1sen!2sin!4v1750252463754!5m2!1sen!2sin",
+    },
+    {
+      name: "Tharamani, Chennai",
+      address:
+        "No. 3, Kennadi Street, Thanthai Periyar Nagar, Tharamani, Chennai - 600017",
+      phone: "9446056789",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6448506549805!2d80.19876317484179!3d12.994552487322906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d45ae037a21%3A0xb435928e203faa98!2sKANNATTU%20FINGOLD!5e0!3m2!1sen!2sin!4v1750252463754!5m2!1sen!2sin",
     },
   ];
 
@@ -397,17 +457,33 @@ export default function ContactPage() {
         </div>
 
         {/* Map Section */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 pb-8">
-          <div className="rounded-xl overflow-hidden h-64">
-            <iframe
-              src={mapUrl} // Dynamically updated map URL
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="bg-[#1F1F21] border border-gray-800 rounded-xl p-6 h-80 md:h-96">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+              {/* Left side - Dynamic Map */}
+              <div className="h-full rounded-lg overflow-hidden">
+                <iframe
+                  src={mapUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+
+              {/* Right side - Image */}
+              <div className="h-full rounded-lg overflow-hidden">
+                <Image
+                  src="/contactmap.png"
+                  alt="Location Map"
+                  width={500}
+                  height={400}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -574,3 +650,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

@@ -477,16 +477,65 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
               <label className="block text-white text-sm font-medium mb-2">
                 SELECT SLOT <span className="text-red-500">*</span>
               </label>
-              <input
-                type="date"
-                name="timeSlot"
-                value={formData.timeSlot}
-                onChange={handleChange}
-                min={getTomorrowDate()}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.timeSlot ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none`}
-              />
+              <div className="relative">
+                <input
+                  type="date"
+                  name="timeSlot"
+                  value={formData.timeSlot}
+                  onChange={handleChange}
+                  min={getTomorrowDate()}
+                  className={`w-full h-12 min-h-[48px] bg-[#220F0F] border ${
+                    errors.timeSlot ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]
+      
+      /* iOS Safari specific fixes */
+      [-webkit-appearance:none]
+      [appearance:none]
+      
+      /* Text color for all webkit browsers */
+      [&::-webkit-datetime-edit]:text-white
+      [&::-webkit-datetime-edit]:bg-transparent
+      [&::-webkit-datetime-edit]:h-full
+      [&::-webkit-datetime-edit]:flex
+      [&::-webkit-datetime-edit]:items-center
+      [&::-webkit-datetime-edit-text]:text-white
+      [&::-webkit-datetime-edit-month-field]:text-white
+      [&::-webkit-datetime-edit-day-field]:text-white
+      [&::-webkit-datetime-edit-year-field]:text-white
+      
+      /* Calendar icon styling */
+      [&::-webkit-calendar-picker-indicator]:opacity-100
+      [&::-webkit-calendar-picker-indicator]:cursor-pointer
+      [&::-webkit-calendar-picker-indicator]:filter-invert
+      [&::-webkit-calendar-picker-indicator]:bg-transparent
+      [&::-webkit-calendar-picker-indicator]:color-white
+      [&::-webkit-calendar-picker-indicator]:w-5
+      [&::-webkit-calendar-picker-indicator]:h-5
+      
+      /* Remove spin buttons */
+      [&::-webkit-inner-spin-button]:[-webkit-appearance:none]
+      [&::-webkit-outer-spin-button]:[-webkit-appearance:none]
+      
+      /* Ensure visibility on iOS */
+      [-webkit-text-fill-color:white]
+      [color:white!important]`}
+                  style={{
+                    colorScheme: "light",
+                    WebkitTextFillColor: "white",
+                    color: "white !important",
+                    height: "48px",
+                    minHeight: "48px",
+                    lineHeight: "1.5",
+                  }}
+                />
+
+                {/* Fallback placeholder for empty state */}
+                {!formData.timeSlot && (
+                  <div className="absolute inset-0 flex items-center px-4 pointer-events-none text-gray-400 text-sm">
+                    {/* Select  Slot */}
+                  </div>
+                )}
+              </div>
               {errors.timeSlot && (
                 <p className="text-red-500 text-xs mt-1">{errors.timeSlot}</p>
               )}

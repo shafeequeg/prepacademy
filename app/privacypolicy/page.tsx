@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
         <meta name="description" content="PrepAcademy's privacy policy" />
       </Head>
 
-      <main className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8 relative top-24 text-white">
+      <main className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8 relative top-12 md:mt-12 text-white">
         <h1 className="text-3xl font-bold text-white mb-12">Privacy Policy</h1>
         
         <div className="space-y-8 text-white">
