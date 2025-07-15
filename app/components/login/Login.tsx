@@ -27,7 +27,13 @@ import Image from "next/image";
 
 interface LoginModalProps {
   closeModal: () => void;
-  source: "chatbot" | "percentage-calculator" | "account";
+  source:
+    | "chatbot"
+    | "percentage-calculator"
+    | "account"
+    | "course-purchase"
+    | "wishlist-purchase"
+    | "cart-purchase";
   onSuccess: () => void;
 }
 interface ApiError {
@@ -177,21 +183,42 @@ const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   const saveUserToLocalStorage = (user: User) => {
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify({
-        id: user.id,
-        uuid: user.uuid,
-        full_name: user.full_name,
-        email: user.email,
-        phone_number: user.phone_number,
-        firebase_user_id: user.firebase_user_id,
-      })
-    );
+    const userInfo = {
+      id: user.id,
+      uuid: user.uuid,
+      full_name: user.full_name,
+      email: user.email,
+      phone_number: user.phone_number,
+      firebase_user_id: user.firebase_user_id,
+    };
+
+    // Save to both keys for consistency
+    localStorage.setItem("currentUser", JSON.stringify(userInfo));
+    localStorage.setItem("user", JSON.stringify(userInfo));
     localStorage.setItem("isLoggedIn", "true");
   };
 
-  
+  const checkUserByEmail = (email: string) => {
+    return users.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+  };
+
+  const checkUserByPhone = (phone: string) => {
+    // Normalize phone number for comparison
+    let normalizedPhone = phone.replace(/\D/g, ""); // Remove non-digits
+    if (normalizedPhone.startsWith("91")) {
+      normalizedPhone = normalizedPhone.substring(2);
+    }
+
+    return users.find((user) => {
+      let userPhone = user.phone_number.replace(/\D/g, "");
+      if (userPhone.startsWith("91")) {
+        userPhone = userPhone.substring(2);
+      }
+      return userPhone === normalizedPhone;
+    });
+  };
 
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -205,32 +232,48 @@ const LoginModal: React.FC<LoginModalProps> = ({
       });
       return;
     }
+
     setLoading(true);
     setError(null);
 
     try {
-      const user = users.find((user) => user.email === formData.email);
+      // Check if user exists with this email
+      const user = checkUserByEmail(formData.email);
       if (!user) {
-        setError("User not found. Please check your email or register.");
+        setError(
+          "No account found with this email address. Please check your email or create a new account."
+        );
         setLoading(false);
         return;
       }
+
       if (user.password !== formData.password) {
         setError("Incorrect password. Please try again.");
         setLoading(false);
         return;
       }
+
+      // Rest of the login logic remains the same...
       saveUserToLocalStorage(user);
       setCurrentUser(user);
       setLoading(false);
       setLoginSuccess(true);
-       if (typeof window !== 'undefined') {
-      window.location.href = "/"; 
-    }
-     
+
       setTimeout(() => {
-        closeModal();
-      }, 3000);
+        if (
+          source === "course-purchase" ||
+          source === "wishlist-purchase" ||
+          source === "cart-purchase"
+        ) {
+          onSuccess();
+          closeModal();
+        } else {
+          if (typeof window !== "undefined") {
+            window.location.reload();
+          }
+          closeModal();
+        }
+      }, 1500);
     } catch (error) {
       const err = error as ApiError;
       setError(err.message || "Login failed. Please try again.");
@@ -244,7 +287,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
       setValidationErrors({ ...validationErrors, phone_number: phoneError });
       return;
     }
-    setLoading(true); // Set loading to true at the start
+
+    // Check if user exists with this phone number BEFORE sending OTP
+    const user = checkUserByPhone(formData.phone_number);
+    if (!user) {
+      setOtpError(
+        "No account found with this phone number. Please check your number or create a new account."
+      );
+      return;
+    }
+
+    setLoading(true);
     setIsVerifying(true);
     setOtpError(null);
 
@@ -276,9 +329,12 @@ const LoginModal: React.FC<LoginModalProps> = ({
       setValidationErrors({ ...validationErrors, otp: otpError });
       return;
     }
+
+    setLoading(true);
+    setIsVerifying(true);
+    setOtpError(null);
+
     try {
-      setIsVerifying(true);
-      setOtpError(null);
       const result = await verifyOTP(otp);
       if (result.success) {
         setIsVerified(true);
@@ -288,23 +344,29 @@ const LoginModal: React.FC<LoginModalProps> = ({
             firebase_user_id: result.user?.uid || "",
           }));
 
-          // Find user by phone number
-          const user = users.find(
-            (user) =>
-              user.phone_number === formData.phone_number ||
-              user.phone_number === `+91${formData.phone_number}` ||
-              `+91${user.phone_number}` === formData.phone_number
-          );
+          // Use the helper function to find user
+          const user = checkUserByPhone(formData.phone_number);
 
           if (user) {
             saveUserToLocalStorage(user);
             setCurrentUser(user);
             setLoginSuccess(true);
 
-            // Close the modal after 3 seconds of showing success
             setTimeout(() => {
-              closeModal();
-            }, 3000);
+              if (
+                source === "course-purchase" ||
+                source === "wishlist-purchase" ||
+                source === "cart-purchase"
+              ) {
+                onSuccess();
+                closeModal();
+              } else {
+                if (typeof window !== "undefined") {
+                  window.location.reload();
+                }
+                closeModal();
+              }
+            }, 1500);
           } else {
             setOtpError("User not found with this phone number.");
           }
@@ -314,15 +376,47 @@ const LoginModal: React.FC<LoginModalProps> = ({
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
-      setOtpError("Verification failed. Please try again.");
+      let errorMessage = "Verification failed. Please try again.";
+
+      if (typeof error === "object" && error !== null && "code" in error) {
+        const firebaseError = error as { code: string; message?: string };
+
+        switch (firebaseError.code) {
+          case "auth/invalid-verification-code":
+            errorMessage = "Invalid OTP. Please check and try again.";
+            break;
+          case "auth/code-expired":
+            errorMessage = "OTP has expired. Please request a new one.";
+            break;
+          case "auth/session-expired":
+            errorMessage = "Session expired. Please request a new OTP.";
+            break;
+          case "auth/too-many-requests":
+            errorMessage = "Too many attempts. Please try again later.";
+            break;
+          case "auth/invalid-phone-number":
+            errorMessage = "Invalid phone number format.";
+            break;
+          default:
+            errorMessage =
+              firebaseError.message || "Verification failed. Please try again.";
+        }
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      setOtpError(errorMessage);
     } finally {
       setIsVerifying(false);
+      setLoading(false);
     }
   };
 
   if (showRegister) {
     return <RegisterForm closeModal={() => setShowRegister(false)} />;
   }
+
+  console.log(users);
 
   // Login Success Screen
   if (loginSuccess && currentUser) {
@@ -501,6 +595,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
               </p>
             </div>
           )}
+
+          {otpError && loginMethod === "phone_number" && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+              <AlertCircle
+                className="text-red-500 flex-shrink-0 mt-0.5"
+                size={16}
+              />
+              <p className="text-red-600 text-sm">{otpError}</p>
+            </div>
+          )}
+
           {loginMethod === "email" ? (
             <form onSubmit={handleEmailLogin} className="space-y-4">
               <div className="relative">
@@ -727,11 +832,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     <button
                       type="button"
                       onClick={handleVerifyOTP}
-                      disabled={loading}
+                      disabled={loading || isVerifying}
                       className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-70"
                     >
-                      {loading ? (
-                        <span className="flex items-center">
+                      {loading || isVerifying ? (
+                        <span className="flex items-center justify-center">
                           <Loader2 className="animate-spin mr-2" size={18} />
                           Verifying...
                         </span>

@@ -434,7 +434,7 @@ const CatExamApplySection: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#ipm`);
   };
 
   const fetchPrograms = async () => {

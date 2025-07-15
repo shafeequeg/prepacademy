@@ -849,7 +849,7 @@ const CatExamApplySection: React.FC = () => {
   const router = useRouter();
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#clat`);
   };
 
   const filteredCourses = courseCards.filter(

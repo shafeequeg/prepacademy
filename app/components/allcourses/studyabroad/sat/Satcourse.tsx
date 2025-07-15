@@ -952,8 +952,8 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
     }
   }, [activeMainTab]);
 
-   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+  const handleEnrollClick = () => {
+    router.push(`/CourseEnrollmentPortal#sat`);
   };
 
   return (

@@ -413,7 +413,7 @@ export type DropdownItem = {
         },
         {
           id: "CareerPlanning",
-          label: "Career Planning",
+          label: "Career Counseling",
           path: "/career-counseling/career-planning",
           course: {
             label: "Career Roadmap Development",
@@ -1542,7 +1542,7 @@ export type DropdownItem = {
     ]
   },
   "CareerPlanning": {
-    title: "Career Planning",
+    title: "Career Counseling",
     description: "Personalized career roadmap development",
     price: "₹8,999",
     duration: "1 month",

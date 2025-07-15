@@ -74,9 +74,9 @@ Resume Building is the process of creating a structured and professional summary
     offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "Classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "Bookmaterials", label: "Book Materials" },
-      { id: "SelfBased", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "Bookmaterials", label: "Book Materials" },
+      // { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
@@ -185,9 +185,9 @@ Resume Building is the process of creating a structured and professional summary
     offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "Classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "Bookmaterials", label: "Book Materials" },
-      { id: "SelfBased", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "Bookmaterials", label: "Book Materials" },
+      // { id: "SelfBased", label: "Self Based" },
     ],
     offerings: [
       {
@@ -296,9 +296,9 @@ Resume Building is the process of creating a structured and professional summary
     offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "study-material", label: "Study Material" },
-      { id: "self-based", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "study-material", label: "Study Material" },
+      // { id: "self-based", label: "Self Based" },
     ],
     offerings: [
       {
@@ -498,9 +498,9 @@ Resume Building is the process of creating a structured and professional summary
     offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "study-material", label: "Study Material" },
-      { id: "self-based", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "study-material", label: "Study Material" },
+      // { id: "self-based", label: "Self Based" },
     ],
     offerings: [
       {
@@ -681,10 +681,10 @@ Resume Building is the process of creating a structured and professional summary
   },
   {
     slug: "CareerPlanning",
-    title: "Career Planning",
-    courseTitle: "Master Career Planning with ",
+    title: "Career Counseling",
+    courseTitle: "Master Career Counseling with ",
     description: `
-      Our Career Planning course helps you identify your strengths, set career goals, and create a roadmap to achieve them. Learn how to explore career options, make informed decisions, and build a fulfilling career.
+      Our Career Counseling course helps you identify your strengths, set career goals, and create a roadmap to achieve them. Learn how to explore career options, make informed decisions, and build a fulfilling career.
     `,
     points: [
       "Personalized Career Assessments",
@@ -700,9 +700,9 @@ Resume Building is the process of creating a structured and professional summary
     offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "study-material", label: "Study Material" },
-      { id: "self-based", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "study-material", label: "Study Material" },
+      // { id: "self-based", label: "Self Based" },
     ],
     offerings: [
       {
@@ -836,7 +836,7 @@ Resume Building is the process of creating a structured and professional summary
       },
     ],
     demoVideos: [
-      { title: "Career Planning Basics", videoId: "5qws0gIHpuY" },
+      { title: "Career Counseling Basics", videoId: "5qws0gIHpuY" },
       { title: "Advanced Career Strategies", videoId: "wfIq-nqvByY" },
       { title: "Career Assessment Session", videoId: "nQfvbJjl-XE" },
     ],
@@ -844,7 +844,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         category: "Workshop Announcement",
         description:
-          "New Career Planning workshops scheduled for November 2025.",
+          "New Career Counseling workshops scheduled for November 2025.",
       },
       {
         category: "Resource Update",
@@ -865,9 +865,9 @@ Resume Building is the process of creating a structured and professional summary
     ],
     faqs: [
       {
-        question: "What is career planning?",
+        question: "What is Career Counseling?",
         answer:
-          "Career planning is the process of identifying your strengths, interests, and goals to create a roadmap for your professional future.",
+          "Career Counseling is the process of identifying your strengths, interests, and goals to create a roadmap for your professional future.",
       },
       {
         question: "How do I choose the right career?",
@@ -902,9 +902,9 @@ Resume Building is the process of creating a structured and professional summary
    offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "study-material", label: "Study Material" },
-      { id: "self-based", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "study-material", label: "Study Material" },
+      // { id: "self-based", label: "Self Based" },
     ],
     offerings: [
       {
@@ -1104,9 +1104,9 @@ Resume Building is the process of creating a structured and professional summary
      offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
-      { id: "test", label: "Test Series" },
-      { id: "study-material", label: "Study Material" },
-      { id: "self-based", label: "Self Based" },
+      // { id: "test", label: "Test Series" },
+      // { id: "study-material", label: "Study Material" },
+      // { id: "self-based", label: "Self Based" },
     ],
     offerings: [
       {

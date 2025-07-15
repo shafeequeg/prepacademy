@@ -3,6 +3,7 @@ import { ShoppingCart, X } from "lucide-react";
 import { WishlistItem } from "./types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import LoginModal from "@/app/components/login/Login";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -13,13 +14,6 @@ interface CartModalProps {
   setShowAuthAlert: (show: boolean) => void;
   setShowLoginModal: (show: boolean) => void;
 }
-
-// interface AuthAlertModalProps {
-//   isOpen: boolean;
-//   closeModal: () => void;
-//   openLoginModal: () => void;
-//   showLoginButton?: boolean; // Add this prop
-// }
 
 const CartModal: React.FC<CartModalProps> = React.memo(
   ({
@@ -33,50 +27,35 @@ const CartModal: React.FC<CartModalProps> = React.memo(
   }) => {
     const router = useRouter();
     const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set());
+    const [showLoginModalLocal, setShowLoginModalLocal] = useState(false);
+    const [pendingItem, setPendingItem] = useState<WishlistItem | null>(null);
 
     if (!isOpen) return null;
 
+    const proceedToPayment = (item: WishlistItem) => {
+      // Get fresh user data from localStorage
+      const userData =
+        localStorage.getItem("user") || localStorage.getItem("currentUser");
 
-    const handleBuyNow = async (item: WishlistItem) => {
-      // Start loading for this specific item
-      setLoadingItems((prev) => new Set(prev).add(item.id));
+      if (!userData) {
+        console.error("No user data found after login");
+        setShowAuthAlert(true);
+        return;
+      }
 
-      const userData = localStorage.getItem("user");
       let user_uuid = "";
+      try {
+        const parsedData = JSON.parse(userData);
+        user_uuid = parsedData.uuid || "";
 
-      if (userData) {
-        try {
-          const parsedData = JSON.parse(userData);
-          user_uuid = parsedData.uuid || "";
-          if (!user_uuid) {
-            setLoadingItems((prev) => {
-              const newSet = new Set(prev);
-              newSet.delete(item.id);
-              return newSet;
-            });
-            setShowAuthAlert(true);
-            closeModal();
-            return;
-          }
-        } catch (error) {
-          console.error("Error parsing user data from localStorage:", error);
-          setLoadingItems((prev) => {
-            const newSet = new Set(prev);
-            newSet.delete(item.id);
-            return newSet;
-          });
+        if (!user_uuid) {
+          console.error("No user UUID found in user data");
           setShowAuthAlert(true);
-          closeModal();
           return;
         }
-      } else {
-        setLoadingItems((prev) => {
-          const newSet = new Set(prev);
-          newSet.delete(item.id);
-          return newSet;
-        });
+      } catch (error) {
+        console.error("Error parsing user data:", error);
         setShowAuthAlert(true);
-        closeModal();
         return;
       }
 
@@ -113,6 +92,71 @@ const CartModal: React.FC<CartModalProps> = React.memo(
           });
         }, 1000);
       }
+    };
+
+    const handleBuyNow = async (item: WishlistItem) => {
+      // Start loading for this specific item
+      setLoadingItems((prev) => new Set(prev).add(item.id));
+
+      // Check if user is logged in
+      const userData = localStorage.getItem("user");
+      let user_uuid = "";
+
+      if (userData) {
+        try {
+          const parsedData = JSON.parse(userData);
+          user_uuid = parsedData.uuid || "";
+          if (!user_uuid) {
+            setLoadingItems((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(item.id);
+              return newSet;
+            });
+            // Set pending item and show login modal
+            setPendingItem(item);
+            setShowLoginModalLocal(true);
+            return;
+          }
+        } catch (error) {
+          console.error("Error parsing user data from localStorage:", error);
+          setLoadingItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(item.id);
+            return newSet;
+          });
+          // Set pending item and show login modal
+          setPendingItem(item);
+          setShowLoginModalLocal(true);
+          return;
+        }
+      } else {
+        setLoadingItems((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(item.id);
+          return newSet;
+        });
+        // Set pending item and show login modal
+        setPendingItem(item);
+        setShowLoginModalLocal(true);
+        return;
+      }
+
+      // User is logged in, proceed with payment
+      proceedToPayment(item);
+    };
+
+    const handleLoginSuccess = () => {
+      setShowLoginModalLocal(false);
+
+      // Small delay to ensure login state is properly set
+      setTimeout(() => {
+        if (pendingItem) {
+          // Re-add loading state for the pending item
+          setLoadingItems((prev) => new Set(prev).add(pendingItem.id));
+          proceedToPayment(pendingItem);
+          setPendingItem(null);
+        }
+      }, 100);
     };
 
     return (
@@ -243,6 +287,14 @@ const CartModal: React.FC<CartModalProps> = React.memo(
             </div>
           </div>
         </div>
+
+        {showLoginModalLocal && (
+          <LoginModal
+            closeModal={() => setShowLoginModalLocal(false)}
+            source="cart-purchase"
+            onSuccess={handleLoginSuccess}
+          />
+        )}
       </div>
     );
   }

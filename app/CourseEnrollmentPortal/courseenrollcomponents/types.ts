@@ -22,6 +22,7 @@ export type CourseData = {
   uuid?: string;
 };
 
+
 export type SalesCategory = {
   id?: number;
   category?: string;

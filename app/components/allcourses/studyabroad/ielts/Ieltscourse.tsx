@@ -947,8 +947,8 @@ const CatExamApplySection: React.FC = () => {
     }
   }, [activeMainTab]);
 
-   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+  const handleEnrollClick = () => {
+    router.push(`/CourseEnrollmentPortal#ielts`);
   };
 
   return (

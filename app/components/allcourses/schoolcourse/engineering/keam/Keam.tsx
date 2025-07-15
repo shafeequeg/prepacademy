@@ -528,9 +528,8 @@ const CatExamApplySection: React.FC = () => {
     }
     return "";
   };
-
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#keam`);
   };
 
   const nextStep = () => {

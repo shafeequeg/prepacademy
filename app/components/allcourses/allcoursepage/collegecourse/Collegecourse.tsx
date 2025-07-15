@@ -175,8 +175,8 @@ const tabs = [
     ],
   },
   {
-    id: "CEVILSERVICE",
-    label: "CIVIL SERVICE",
+    id: "CIVILSERVICE",
+    label: "CIVIL SERVICES",
     path: "/slat",
     dropdownItems: [
       { label: "UPSC", path: "/collegecoursespage/civilservice/upsc" },
@@ -510,8 +510,10 @@ const CatExamApplySection: React.FC = () => {
     }
   };
 
+  
   //  console.log(question);
   console.log(user);
+console.log(collegeCourses);
 
   const calculateProgress = () => {
     const totalSteps = 9; // 3 screening + 6 form fields (including location)
@@ -1164,16 +1166,36 @@ useEffect(() => {
 
                 {/* Updated college courses grid with 6 centered cards with navigation */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                  {collegeCourses.map((course, index) => (
-                    <CourseCard
-                      key={index}
-                      // code={course.code}
-                      title={course.title}
-                      description={course.description}
-                      // path={course.path}
-                      className="border-l-4 border-[#F55D3E] p-4"
-                    />
-                  ))}
+                  {collegeCourses.map((course, index) => {
+                    // Find the corresponding tab id by matching course title (case-insensitive) to tab label
+                    const matchingTab = tabs.find(
+                      (tab) => tab.label.replace(/\s+/g, '').toLowerCase() === course.title.replace(/\s+/g, '').toLowerCase()
+                    );
+                    const tabId = matchingTab ? matchingTab.id : null;
+                    return (
+                      <div
+                        key={index}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          if (tabId) {
+                            setActiveMainTab(tabId);
+                            setOpenDropdown(tabId);
+                            // Optionally scroll to the tab section if needed
+                            const tabList = document.querySelector('[role="tablist"]');
+                            if (tabList) {
+                              tabList.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }
+                        }}
+                      >
+                        <CourseCard
+                          title={course.title}
+                          description={course.description}
+                          className="border-l-4 border-[#F55D3E] p-4"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

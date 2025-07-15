@@ -478,7 +478,7 @@ const CatExamApplySection: React.FC = () => {
   };
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#nift`);
   };
 
   const validateMobileNumber = (mobile: string): string => {

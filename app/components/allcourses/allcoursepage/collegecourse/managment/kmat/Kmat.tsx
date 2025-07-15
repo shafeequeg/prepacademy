@@ -400,7 +400,7 @@ const CUETExamApplySection: React.FC = () => {
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#kmat`);
   };
 
   const fetchPrograms = async () => {

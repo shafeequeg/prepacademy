@@ -51,7 +51,7 @@ const StudyAbroadSection: React.FC = () => {
       path: "/careercounseling/InterviewPreparation",
     },
     {
-      title: "Career Planning",
+      title: "Career Counseling",
       description:
         "Personalized career counseling to align with your ambitions.",
       path: "/careercounseling/CareerPlanning",

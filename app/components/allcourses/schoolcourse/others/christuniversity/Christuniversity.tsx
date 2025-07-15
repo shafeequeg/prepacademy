@@ -438,7 +438,7 @@ const CatExamApplySection: React.FC = () => {
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#christuniversity`);
   };
   const fetchPrograms = async () => {
     try {

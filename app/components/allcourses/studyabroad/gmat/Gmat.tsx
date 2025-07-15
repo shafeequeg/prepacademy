@@ -955,8 +955,8 @@ const CatExamApplySection: React.FC = () => {
   const router = useRouter();
 
 
-   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+  const handleEnrollClick = () => {
+    router.push(`/CourseEnrollmentPortal#gmat`);
   };
 
   return (

@@ -87,7 +87,7 @@ const tabs = [
   },
   {
     id: "CareerPlanning",
-    label: "Career Planning",
+    label: "Career Counseling",
     path: "/careercounseling/CareerPlanning",
   },
   {
@@ -149,7 +149,12 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   );
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    // Find the course section_name that matches the slug (case-sensitive, spaces removed)
+    const course = courses.find((c) => c.slug === slug);
+    let sectionName = course?.title || slug;
+    // Remove spaces for hash
+    const cleanedSectionName = sectionName.replace(/\s+/g, "");
+    router.push(`/CourseEnrollmentPortal#${cleanedSectionName}`);
   };
 
   console.log(programs);
@@ -803,7 +808,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-10">
+        <div className="container mx-auto px-4 py-10" >
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
               <span className="text-white font-serif italic">Demo</span>

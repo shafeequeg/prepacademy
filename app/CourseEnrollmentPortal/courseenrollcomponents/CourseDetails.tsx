@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { CourseData } from "./types";
+import LoginModal from "@/app/components/login/Login";
 
 interface CourseDetailsProps {
   currentCourseData: CourseData;
@@ -11,6 +12,14 @@ interface CourseDetailsProps {
   addToWishlist: (event: React.MouseEvent<HTMLButtonElement>) => void;
   parsePriceToNumber: (priceString: string | undefined) => number;
   isEnrolling: boolean;
+  showLoginModal?: boolean;
+  setShowLoginModal?: (show: boolean) => void;
+  onLoginSuccess?: () => void;
+  pendingAction?: "buy" | "cart" | "wishlist" | null;
+  salesSection: { id?: number; section_name?: string }[]; // Add this prop
+  salesCategories: { id?: number; category?: string }[]; // Add this
+  activeMainTab: string; // Add this
+  setActiveMainTab: (tab: string) => void;
 }
 
 const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
@@ -22,29 +31,38 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
     addToWishlist,
     parsePriceToNumber,
     isEnrolling,
+    showLoginModal,
+    setShowLoginModal,
+    onLoginSuccess,
+    salesSection,
+    salesCategories, // Add this
+    activeMainTab, // Add this
+    setActiveMainTab,
   }) => {
     const handleBackToCourses = () => {
       setActiveCourse(""); // Clear the active course to return to course list
-      
+
       // Add scroll behavior for mobile screens only
-      if (window.innerWidth < 768) { // md breakpoint
+      if (window.innerWidth < 768) {
+        // md breakpoint
         setTimeout(() => {
           // Try to find the course list area
-          const courseListArea = document.querySelector('.course-content') ||
-                                document.querySelector('[class*="course-content"]') ||
-                                document.querySelector('[class*="md:col-span-3"]');
-          
+          const courseListArea =
+            document.querySelector(".course-content") ||
+            document.querySelector('[class*="course-content"]') ||
+            document.querySelector('[class*="md:col-span-3"]');
+
           if (courseListArea) {
-            courseListArea.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start',
-              inline: 'nearest'
+            courseListArea.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
             });
           } else {
             // Fallback: scroll to top of content area
             window.scrollTo({
               top: window.innerHeight * 0.3,
-              behavior: 'smooth'
+              behavior: "smooth",
             });
           }
         }, 100); // Small delay to ensure DOM is updated
@@ -54,8 +72,45 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
     console.log(parsePriceToNumber);
     console.log(currentCourseData);
 
+
+    useEffect(() => {
+      // Only auto-switch tabs if we're not on a slug-based route
+      const isSlugRoute = window.location.pathname.includes('/careercounseling/');
+
+      if (!isSlugRoute) {
+        // Find the category that matches the current course's category
+        const matchingCategory = salesCategories?.find(
+          (category) => category.id?.toString() === currentCourseData.course?.toString()
+        );
+
+        if (matchingCategory) {
+          setActiveMainTab(matchingCategory.id?.toString() || "");
+        }
+      }
+    }, [currentCourseData.course, salesCategories, setActiveMainTab]);
+    
+    console.log(salesSection);
+
+    // Find the section name from salesSection using currentCourseData.section
+    const sectionName = salesSection?.find(
+      (s) => s.id?.toString() === currentCourseData.section?.toString()
+    )?.section_name || currentCourseData.section || 'N/A';
+
+    console.log(sectionName);
+
+    // Create a clean ID by removing spaces and special characters
+    const cleanId = sectionName && sectionName !== 'N/A'
+      ? String(sectionName).replace(/\s+/g, "").replace(/[^a-zA-Z0-9]/g, '')
+      : undefined;
+
+
+    console.log(cleanId);
+
     return (
-      <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-details">
+      <div
+        className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-details"
+        id={cleanId}       >
+        {/* Show course section name for testing */}
         <div className="mb-6">
           <button
             onClick={handleBackToCourses}
@@ -67,7 +122,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
         </div>
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-2/5">
-            <div className="relative h-64 w-full rounded-lg overflow-hidden">
+            <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden min-h-[280px]">
               <Image
                 src={currentCourseData.image || "/default-course.jpg"}
                 alt={currentCourseData.title || "Course image"}
@@ -184,6 +239,14 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
             {currentCourseData.course_description}
           </p>
         </div>
+
+        {showLoginModal && setShowLoginModal && (
+          <LoginModal
+            closeModal={() => setShowLoginModal(false)}
+            source="course-purchase"
+            onSuccess={onLoginSuccess || (() => { })}
+          />
+        )}
       </div>
     );
   }

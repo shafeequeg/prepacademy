@@ -480,7 +480,7 @@ const CatExamApplySection: React.FC = () => {
   // };
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#cat`);
   };
 
   const validateFullName = (name: string): string => {

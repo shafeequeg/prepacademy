@@ -4,14 +4,14 @@ import Course from "@/app/components/allcourses/careercounseling/courses/Courses
 import Gladiators from "@/app/components/allcourses/careercounseling/courses/Gladiators";
 import About from "@/app/components/allcourses/careercounseling/courses/About";
 
-// Define the valid slugs based on your tabs
+// Define the valid slugs based on your tabs (all lowercase)
 const validSlugs = [
-  "ResumeBuilding",
-  "InterviewPreparation",
-  "CareerPlanning",
-  "SkillDevelopment",
-  "JobSearchStrategies",
-  "StreamSelection",
+  "resumebuilding",
+  "interviewpreparation",
+  "careerplanning",
+  "skilldevelopment",
+  "jobsearchstrategies",
+  "streamselection",
 ];
 
 interface PageProps {
@@ -20,19 +20,21 @@ interface PageProps {
   }>;
 }
 
+
 export default async function CareerCounselingCoursePage({ params }: PageProps) {
   const { slug } = await params;
+  const normalizedSlug = slug.toLowerCase();
 
-  // Check if the slug is valid
-  if (!validSlugs.includes(slug)) {
+  // Check if the slug is valid (case-insensitive)
+  if (!validSlugs.includes(normalizedSlug)) {
     notFound();
   }
 
   return (
     <div>
-      <Course slug={slug} />
-      <Gladiators slug={slug} />
-      <About slug={slug} />
+      <Course slug={normalizedSlug} />
+      <Gladiators slug={normalizedSlug} />
+      <About slug={normalizedSlug} />
     </div>
   );
 }
@@ -47,17 +49,19 @@ export async function generateStaticParams() {
 // Generate metadata based on slug
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
+  const normalizedSlug = slug.toLowerCase();
 
   const slugTitles: Record<string, string> = {
-    ResumeBuilding: "Resume Building",
-    InterviewPreparation: "Interview Preparation",
-    CareerPlanning: "Career Planning",
-    SkillDevelopment: "Skill Development",
-    JobSearchStrategies: "Job Search Strategies",
-    StreamSelection: "Stream Selection",
+    resumebuilding: "Resume Building",
+    interviewpreparation: "Interview Preparation",
+    careerplanning: "Career Planning",
+    skilldevelopment: "Skill Development",
+    jobsearchstrategies: "Job Search Strategies",
+    streamselection: "Stream Selection",
   };
+  
 
-  const title = slugTitles[slug] || "Career Counseling";
+  const title = slugTitles[normalizedSlug] || "Career Counseling";
 
   return {
     title: `${title} - Career Counseling`,

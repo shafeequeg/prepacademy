@@ -223,7 +223,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
   console.log(slug);
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    const course = courses.find((c) => c.slug === slug);
+    let sectionName = course?.title || slug;
+    const cleanedSectionName = sectionName.replace(/\s+/g, "");
+    router.push(`/CourseEnrollmentPortal#${cleanedSectionName}`);
   };
 
   const fetchPrograms = async () => {

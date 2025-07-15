@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 // import axiosInstance from "../../apiconfig/axios";
 // import { API_URLS } from "../../apiconfig/api_urls";
 import Image from "next/image";
+import Link from "next/link";
 import AssistanceForm from "../../assistanceForm/AssistanceForm";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -57,7 +58,7 @@ const tabs = [
   },
   {
     id: "CareerPlanning",
-    label: "Career Planning",
+    label: "Career Counseling ",
     path: "/careercounseling/CareerPlanning",
   },
   {
@@ -194,24 +195,29 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
     {
       title: "Resume Building",
       description: "Craft a professional resume tailored to your career goals.",
+      path: "/careercounseling/ResumeBuilding",
     },
     {
       title: "Interview Preparation",
       description:
         "Get expert guidance to ace your job interviews with confidence.",
+      path: "/careercounseling/InterviewPreparation",
     },
     {
-      title: "Career Planning",
+      title: "Career Counseling",
       description:
         "Personalized career counseling to align with your ambitions.",
+      path: "/careercounseling/CareerPlanning",
     },
     {
       title: "Skill Development",
       description: "Enhance your skills to stay competitive in the job market.",
+      path: "/careercounseling/SkillDevelopment",
     },
     {
       title: "Job Search Strategies",
       description: "Effective techniques to land your dream job faster.",
+      path: "/careercounseling/JobSearchStrategies",
     },
   ];
 
@@ -545,7 +551,7 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
   const openModal = () => setIsModalOpen(true);
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#careercounseling`);
   };
 
   const handleTabKeyNav = (
@@ -564,6 +570,7 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
       document.getElementById(`tab-${tabArray[prevIndex].id}`)?.focus();
     }
   };
+
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
@@ -685,17 +692,18 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
           {careerCounselingCards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-[#1F1414] shadow-md p-8 w-full rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E]"
-            >
-              <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">
-                {card.title}
-              </h3>
-              <p className="text-white text-base md:text-lg">
-                {card.description}
-              </p>
-            </div>
+            <Link key={index} href={card.path || "#"} passHref>
+              <div
+                className="bg-[#1F1414] shadow-md p-8 w-full h-[220px] rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-[#F55D3E] cursor-pointer flex flex-col"
+              >
+                <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">
+                  {card.title}
+                </h3>
+                <p className="text-white text-base md:text-lg">
+                  {card.description}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

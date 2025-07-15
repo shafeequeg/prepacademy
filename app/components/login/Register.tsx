@@ -25,8 +25,6 @@ interface RegistrationModalProps {
   closeModal: () => void;
 }
 
-
-
 interface FormData {
   full_name: string;
   email: string;
@@ -151,9 +149,14 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       setOtpError("Please enter a valid Indian mobile number");
       return;
     }
-
+    if (checkDuplicatePhone(formData.phone_number)) {
+      setPhoneError("This mobile number is already registered");
+      setOtpError("Cannot send OTP - Mobile number already exists");
+      return;
+    }
     setIsVerifying(true);
     setOtpError(null);
+    setPhoneError("");
 
     try {
       // Initialize reCAPTCHA
@@ -271,7 +274,11 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
     setFormData((prev) => {
       // If updating fullName, also update full_name
       if (name === "fullName") {
-        return { ...prev, [name]: value, full_name: value };
+        return { ...prev, full_name: value };
+      }
+
+      if (name === "dateOfBirth") {
+        return { ...prev, dob: value, dateOfBirth: value };
       }
 
       // For gender radio buttons, capitalize the first letter
@@ -373,23 +380,19 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
     try {
       setIsSubmitting(true);
 
-      // Ensure phone number is properly formatted
       const phoneNumber = formData.phone_number.startsWith("+91")
         ? formData.phone_number
         : `+91${formData.phone_number.replace(/\D/g, "").slice(-10)}`;
 
-      // Skip creating a new Firebase user - we already have the ID from verification
       if (!formData.firebase_user_id) {
         throw new Error(
           "Missing Firebase user ID. Please verify your phone number again."
         );
       }
 
-      // Use the Firebase user ID we already captured during OTP verification
       const registrationData = {
         ...formData,
         phone_number: phoneNumber,
-        // Remove confirm_password as it's not needed in API call
         confirm_password: undefined,
       };
 
@@ -399,13 +402,22 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       );
 
       if (response.status >= 200 && response.status < 300) {
+        // Set the current user from response
+        setCurrentUser(response.data.user);
         setLoginSuccess(true);
 
-        setCurrentUser(response.data.user);
+        // Save user to localStorage
+        localStorage.setItem("currentUser", JSON.stringify(response.data.user));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Add this redirect logic:
         setTimeout(() => {
+          if (typeof window !== "undefined") {
+            window.location.reload();
+          }
           closeModal();
-          window.location.reload();
-        }, 3000);
+        }, 1500);
       } else {
         throw new Error("Registration failed");
       }
@@ -526,6 +538,8 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       } else if (checkDuplicateEmail(formData.email)) {
         setEmailError("This email is already registered");
         hasErrors = true;
+      } else {
+        setEmailError(""); // Clear email error if valid
       }
 
       // Check phone validation
@@ -535,6 +549,8 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
       } else if (checkDuplicatePhone(formData.phone_number)) {
         setPhoneError("This mobile number is already registered");
         hasErrors = true;
+      } else {
+        setPhoneError(""); // Clear phone error if valid
       }
 
       // Check if phone is verified
@@ -665,6 +681,18 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
     );
   }
 
+  if (showlogin) {
+    return (
+      <LoginModal
+        closeModal={() => setshowlogin(false)}
+        onSuccess={() => {
+          setLoginSuccess(true);
+          closeModal();
+        }}
+        source="chatbot"
+      />
+    );
+  }
   // In the form section, replace the OTP success toast with this:
 
   return (
@@ -750,7 +778,7 @@ const RegistrationModal = ({ closeModal }: RegistrationModalProps) => {
                     </div>
                     <input
                       type="text"
-                      name="fullName"
+                      name="full_name"
                       placeholder="Full Name"
                       value={formData.full_name}
                       onChange={handleChange}

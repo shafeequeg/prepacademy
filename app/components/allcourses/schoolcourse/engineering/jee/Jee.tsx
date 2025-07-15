@@ -450,10 +450,10 @@ const CatExamApplySection: React.FC = () => {
       // toast.error("Failed to fetch programs. Please try again.");
     }
   };
-
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#jee`);
   };
+  
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 

@@ -10,6 +10,8 @@ interface CategoryTabsProps {
 }
 
 const CategoryTabs: React.FC<CategoryTabsProps> = React.memo(({ salesCategories, activeMainTab, setActiveMainTab, setActiveSubTab, setActiveCourse }) => {
+  console.log(salesCategories);
+  
   return (
     <div className="flex flex-wrap border-b border-orange-600">
       {salesCategories.map((category) => (

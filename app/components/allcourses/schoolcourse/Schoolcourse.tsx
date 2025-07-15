@@ -106,7 +106,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 //schoocourse
 const tabs = [
   {
-    id: "engineering",
+    id: "ENGINEERING",
     label: "ENGINEERING",
     path: "/engineering",
     dropdownItems: [
@@ -423,7 +423,7 @@ const CatExamApplySection: React.FC = () => {
   //   };
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#schoolcourse`);
   };
 
   const fetchPrograms = async () => {
@@ -988,6 +988,9 @@ const CatExamApplySection: React.FC = () => {
     };
   }, [openDropdown]);
 
+
+  console.log(schoolCourses);
+  
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white  ">
     <div
@@ -1301,16 +1304,34 @@ const CatExamApplySection: React.FC = () => {
                 </div>
               </div>
 
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {schoolCourses.map((course, index) => (
-                  <CourseCard
+                  <div
                     key={index}
-                    title={course.title}
-                    description={course.description}
-                    classType={course.classType} // Make sure this is passed
-                    path={course.path}
-                    className="border-l-4 border-[#F55D3E] p-4"
-                  />
+                    className="cursor-pointer"
+                    onClick={() => {
+                      // Extract tab id from course.path (e.g., /schoolcourse?tab=engineering)
+                      const tabParam = course.path?.split('tab=')[1]?.toUpperCase();
+                      if (tabParam) {
+                        setActiveMainTab(tabParam);
+                        setOpenDropdown(tabParam);
+                        // Optionally scroll to the tab section if needed
+                        const tabList = document.querySelector('[role="tablist"]');
+                        if (tabList) {
+                          tabList.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }
+                    }}
+                  >
+                    <CourseCard
+                      title={course.title}
+                      description={course.description}
+                      classType={course.classType}
+                      path={course.path}
+                      className="border-l-4 border-[#F55D3E] p-4"
+                    />
+                  </div>
                 ))}
               </div>
             </div>

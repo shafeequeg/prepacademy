@@ -627,7 +627,7 @@ console.log(setIsLoading);
   };
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#studyabroad`);
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -667,23 +667,28 @@ console.log(setIsLoading);
     {
       title: "IELTS",
       description: "English proficiency test for study, work, and migration",
+      path: "/studyabroad/ielts",
     },
     {
       title: "SAT",
       description:
         "Standardized test for college admissions, mainly in the U.S.",
+      path: "/studyabroad/sat",
     },
     {
       title: "ACT",
       description: "Entrance exam for admission into various universities",
+      path: "/studyabroad/act",
     },
     {
       title: "GRE",
       description: "Graduate school admission test for various disciplines",
+      path: "/studyabroad/gre",
     },
     {
       title: "GMAT",
       description: "Global entrance exam for MBA and business programs",
+      path: "/studyabroad/gmat",
     },
   ];
 
@@ -1075,17 +1080,18 @@ console.log(setIsLoading);
         {/* Study Abroad Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
           {studyAbroadCards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-[#1F1414] p-6 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 border-l-4 border-[#F55D3E]"
-            >
-              <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">
-                {card.title}
-              </h3>
-              <p className="text-gray-300 text-base md:text-lg">
-                {card.description}
-              </p>
-            </div>
+            <Link key={index} href={card.path || "#"} passHref>
+              <div
+                className="bg-[#1F1414] p-6 rounded-lg hover:bg-[#2A1B1B] transition-all duration-300 border-l-4 border-[#F55D3E] cursor-pointer"
+              >
+                <h3 className="text-[#F55D3E] font-medium mb-2 uppercase text-base">
+                  {card.title}
+                </h3>
+                <p className="text-gray-300 text-base md:text-lg">
+                  {card.description}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

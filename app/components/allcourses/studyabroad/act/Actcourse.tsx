@@ -944,9 +944,9 @@ const CatExamApplySection: React.FC = () => {
   }, [activeMainTab]);
 
     const router = useRouter();
- const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
-  };
+    const handleEnrollClick = () => {
+      router.push(`/CourseEnrollmentPortal#act`);
+    };
 
   return (
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">

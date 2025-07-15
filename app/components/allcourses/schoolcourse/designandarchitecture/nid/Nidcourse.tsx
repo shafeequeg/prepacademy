@@ -537,7 +537,7 @@ const CatExamApplySection: React.FC = () => {
   };
 
   const handleEnrollClick = () => {
-    router.push("/CourseEnrollmentPortal");
+    router.push(`/CourseEnrollmentPortal#nid`);
   };
 
   const nextScreeningStep = () => {
