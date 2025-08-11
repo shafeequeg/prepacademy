@@ -57,6 +57,28 @@ interface Question {
   options?: Option[];
 }
 
+// Compact, tab-specific copy for the Study Abroad modal
+interface ConsultationText {
+  headline: string;
+  subhead: string;
+}
+
+const getStudyAbroadText = (activeTabId?: string): ConsultationText => {
+  const normalized = (activeTabId || "").toLowerCase();
+  const overrides: Record<string, ConsultationText> = {
+    ielts: { headline: "IELTS Consultation", subhead: "Get matched with the right mentor." },
+    sat: { headline: "SAT Consultation", subhead: "Get matched with the right mentor." },
+    act: { headline: "ACT Consultation", subhead: "Get matched with the right mentor." },
+    gre: { headline: "GRE Consultation", subhead: "Get matched with the right mentor." },
+    gmat: { headline: "GMAT Consultation", subhead: "Get matched with the right mentor." },
+  };
+
+  return overrides[normalized] || {
+    headline: "Study Abroad Consultation",
+    subhead: "Get matched with the right mentor.",
+  };
+};
+
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
   description,
@@ -1134,11 +1156,10 @@ console.log(setIsLoading);
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    {getStudyAbroadText(activeMainTab).headline}
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    {getStudyAbroadText(activeMainTab).subhead}
                   </p>
                 </div>
               </div>

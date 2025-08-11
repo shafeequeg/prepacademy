@@ -287,7 +287,7 @@ const CatExamApplySection: React.FC = () => {
 
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-   const [enrollFormData, setEnrollFormData] = useState({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
@@ -307,7 +307,7 @@ const CatExamApplySection: React.FC = () => {
     school_name: "",
     location: "",
   });
-const [activeMainTab, setActiveMainTab] = useState("SAT");
+  const [activeMainTab, setActiveMainTab] = useState("SAT");
 
   const [programs, setPrograms] = useState<Program[]>([]); // State to store fetched programs
 
@@ -464,7 +464,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -494,7 +494,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
     return "";
   };
 
-  
+
   const validateSchoolCollege = (school: string): string => {
     if (!school || school.trim() === "") {
       return "School/Institute name is required";
@@ -508,7 +508,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-   const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -542,19 +542,19 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -687,7 +687,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
     }
   };
 
- const handleEnrollSubmit = async (e: React.FormEvent) => {
+  const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -899,7 +899,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
   );
 
 
-   const handleTabKeyNav = (
+  const handleTabKeyNav = (
     e: React.KeyboardEvent,
     index: number,
     tabArray: typeof tabs | typeof offeringTypes,
@@ -960,42 +960,41 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
     <div className="relative w-full bg-gradient-to-r from-[#121010] to-[#1A1311] text-white">
       {/* Background Image Between Sections */}
 
-        <div className="bg-black px-4 py-3 sticky top-0  mt-10 md:mt-24 lg:mt-28">
-          <div className="max-w-7xl mx-auto">
-            <div
-              className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              role="tablist"
-              aria-label="Study Abroad Programs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  id={`tab-${tab.id}`}
-                  role="tab"
-                  aria-selected={activeMainTab === tab.id}
-                  aria-controls={`tabpanel-${tab.id}`}
-                  onClick={() => {
-                    setActiveMainTab(tab.id);
-                    // Navigate to the path associated with the tab
-                    window.location.href = tab.path;
-                  }}
-                  onKeyDown={(e) =>
-                    handleTabKeyNav(e, index, tabs, setActiveMainTab)
-                  }
-                  tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id
-                      ? "bg-[#FF6B3D] text-white font-medium"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+      <div className="bg-black px-4 py-3 sticky top-0  mt-10 md:mt-24 lg:mt-28">
+        <div className="max-w-7xl mx-auto">
+          <div
+            className="flex items-center justify-start gap-2 md:gap-4 pb-1 overflow-x-auto md:overflow-visible w-full mt-4 w768:mt-3"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            role="tablist"
+            aria-label="Study Abroad Programs"
+          >
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                id={`tab-${tab.id}`}
+                role="tab"
+                aria-selected={activeMainTab === tab.id}
+                aria-controls={`tabpanel-${tab.id}`}
+                onClick={() => {
+                  setActiveMainTab(tab.id);
+                  // Navigate to the path associated with the tab
+                  window.location.href = tab.path;
+                }}
+                onKeyDown={(e) =>
+                  handleTabKeyNav(e, index, tabs, setActiveMainTab)
+                }
+                tabIndex={activeMainTab === tab.id ? 0 : -1}
+                className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${activeMainTab === tab.id
+                    ? "bg-[#FF6B3D] text-white font-medium"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   } rounded-full`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
+      </div>
 
       {/* Main Content */}
       <div className="relative w-full z-10">
@@ -1116,11 +1115,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           placeholder="Enter your Full Name"
                           value={formData.full_name}
                           onChange={handleInputChange}
-                          className={`w-full bg-[#131F2C] border ${
-                            mainFormErrors.full_name
+                          className={`w-full bg-[#131F2C] border ${mainFormErrors.full_name
                               ? "border-red-500"
                               : "border-[#1A2836]"
-                          } rounded-md p-3 text-white`}
+                            } rounded-md p-3 text-white`}
                           required
                         />
                         {mainFormErrors.full_name && (
@@ -1137,11 +1135,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           placeholder="Mobile Number"
                           value={formData.mobile_number}
                           onChange={handleInputChange}
-                          className={`w-full bg-[#131F2C] border ${
-                            mainFormErrors.mobile_number
+                          className={`w-full bg-[#131F2C] border ${mainFormErrors.mobile_number
                               ? "border-red-500"
                               : "border-[#1A2836]"
-                          } rounded-md p-3 text-white`}
+                            } rounded-md p-3 text-white`}
                           maxLength={10}
                           required
                         />
@@ -1159,11 +1156,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           placeholder="Email Address"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className={`w-full bg-[#131F2C] border ${
-                            mainFormErrors.email
+                          className={`w-full bg-[#131F2C] border ${mainFormErrors.email
                               ? "border-red-500"
                               : "border-[#1A2836]"
-                          } rounded-md p-3 text-white`}
+                            } rounded-md p-3 text-white`}
                           required
                         />
                         {mainFormErrors.email && (
@@ -1180,11 +1176,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           placeholder="College or School Studied"
                           value={formData.college_studied}
                           onChange={handleInputChange}
-                          className={`w-full bg-[#131F2C] border ${
-                            mainFormErrors.college_studied
+                          className={`w-full bg-[#131F2C] border ${mainFormErrors.college_studied
                               ? "border-red-500"
                               : "border-[#1A2836]"
-                          } rounded-md p-3 text-white`}
+                            } rounded-md p-3 text-white`}
                           required
                         />
                         {mainFormErrors.college_studied && (
@@ -1201,11 +1196,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           placeholder="Location"
                           value={formData.location}
                           onChange={handleInputChange}
-                          className={`w-full bg-[#131F2C] border ${
-                            mainFormErrors.location
+                          className={`w-full bg-[#131F2C] border ${mainFormErrors.location
                               ? "border-red-500"
                               : "border-[#1A2836]"
-                          } rounded-md p-3 text-white`}
+                            } rounded-md p-3 text-white`}
                           required
                         />
                         {mainFormErrors.location && (
@@ -1221,11 +1215,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             name="program_type"
                             value={formData.program_type}
                             onChange={handleInputChange}
-                            className={`w-full bg-[#131F2C] border ${
-                              mainFormErrors.program_type
+                            className={`w-full bg-[#131F2C] border ${mainFormErrors.program_type
                                 ? "border-red-500"
                                 : "border-[#1A2836]"
-                            } rounded-md p-3 text-white appearance-none`}
+                              } rounded-md p-3 text-white appearance-none`}
                             required
                           >
                             <option value="" disabled>
@@ -1328,11 +1321,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                   <button
                     key={type.id}
                     onClick={() => setActiveTab(type.id)}
-                    className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${
-                      activeTab === type.id
+                    className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${activeTab === type.id
                         ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
                         : "text-gray-500 hover:text-gray-400"
-                    }`}
+                      }`}
                   >
                     {type.label}
                   </button>
@@ -1516,7 +1508,7 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
         </div>
       </div>
 
-       {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}
@@ -1554,13 +1546,14 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    Fast-Track Your SAT Preparation
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    You’re just one step away from expert coaching to boost your SAT score
+                    and open doors to top universities.
                   </p>
                 </div>
+
               </div>
 
               {/* Progress bar */}
@@ -1590,13 +1583,12 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           );
                           nextScreeningStep();
                         }}
-                        className={`w-full p-3 text-left border rounded-lg transition-colors ${
-                          enrollFormData.selected_option[
+                        className={`w-full p-3 text-left border rounded-lg transition-colors ${enrollFormData.selected_option[
                             questions[currentQuestionIndex].id
                           ] === option.text
                             ? "bg-[#F55D3E] text-white"
                             : "border-gray-300 hover:bg-orange-50"
-                        }`}
+                          }`}
                       >
                         <span
                           className={
@@ -1632,11 +1624,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             placeholder="Your Full Name"
                             value={enrollFormData.full_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.full_name
+                            className={`w-full p-3 border ${validationErrors.full_name
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.full_name && (
@@ -1648,12 +1639,11 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                         <button
                           type="button"
                           onClick={nextStep}
-                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                            !enrollFormData.full_name ||
-                            validationErrors.full_name
+                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.full_name ||
+                              validationErrors.full_name
                               ? "opacity-50 cursor-not-allowed"
                               : "hover:bg-orange-700"
-                          }`}
+                            }`}
                           disabled={
                             !enrollFormData.full_name ||
                             !!validationErrors.full_name
@@ -1677,11 +1667,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             placeholder="Your Email Address"
                             value={enrollFormData.email || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.email
+                            className={`w-full p-3 border ${validationErrors.email
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.email && (
@@ -1701,11 +1690,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.email || validationErrors.email
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.email || validationErrors.email
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.email || !!validationErrors.email
                             }
@@ -1729,11 +1717,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             placeholder="e.g. Math, Science, English"
                             value={enrollFormData.class_type || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.class_type
+                            className={`w-full p-3 border ${validationErrors.class_type
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.class_type && (
@@ -1753,12 +1740,11 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.class_type ||
-                              validationErrors.class_type
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.class_type ||
+                                validationErrors.class_type
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.class_type ||
                               !!validationErrors.class_type
@@ -1787,11 +1773,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                               placeholder="Your Phone Number"
                               value={enrollFormData.phone_number || ""}
                               onChange={handleFormChange}
-                              className={`w-full p-3 border text-black ${
-                                validationErrors.phone_number
+                              className={`w-full p-3 border text-black ${validationErrors.phone_number
                                   ? "border-red-500"
                                   : "border-gray-300"
-                              } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                                } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                               required
                             />
                           </div>
@@ -1829,12 +1814,11 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.phone_number ||
-                              validationErrors.phone_number
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.phone_number ||
+                                validationErrors.phone_number
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.phone_number ||
                               !!validationErrors.phone_number
@@ -1859,11 +1843,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             placeholder="Your School/Institute"
                             value={enrollFormData.school_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border text-black ${
-                              validationErrors.school_name
+                            className={`w-full p-3 border text-black ${validationErrors.school_name
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.school_name && (
@@ -1883,12 +1866,11 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.school_name ||
-                              validationErrors.school_name
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.school_name ||
+                                validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.school_name ||
                               !!validationErrors.school_name
@@ -1912,11 +1894,10 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                             placeholder="Your Location (City, State)"
                             value={enrollFormData.location || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border text-black ${
-                              validationErrors.location
+                            className={`w-full p-3 border text-black ${validationErrors.location
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.location && (
@@ -1935,13 +1916,12 @@ const [activeMainTab, setActiveMainTab] = useState("SAT");
                           </button>
                           <button
                             type="submit"
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.location ||
-                              validationErrors.location ||
-                              isSubmitting
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.location ||
+                                validationErrors.location ||
+                                isSubmitting
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.location ||
                               !!validationErrors.location ||

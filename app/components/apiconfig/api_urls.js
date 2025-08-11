@@ -54,6 +54,8 @@ export const API_URLS = {
 
   USERS: {
     GET_USERS: "api/form/",
+    PATCH_USER_BY_UUID: uuid => `api/form/${uuid}/`,
+
   },
 
   

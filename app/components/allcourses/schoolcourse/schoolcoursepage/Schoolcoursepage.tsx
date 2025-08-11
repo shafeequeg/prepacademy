@@ -53,6 +53,61 @@ interface Question {
   options?: Option[];
 }
 
+// Compact, slug-specific copy for the School Course modal
+interface TrialCopy {
+  headline: string;
+  subhead: string;
+}
+
+const getSchoolCourseTrialCopy = (
+  slugValue: string,
+  courseObj?: { title?: string; courseTitle?: string }
+): TrialCopy => {
+  const normalized = (slugValue || "").toLowerCase();
+  const courseName = courseObj?.courseTitle || courseObj?.title || slugValue?.toUpperCase() || "Your";
+
+  const overrides: Record<string, TrialCopy> = {
+    // Engineering
+    jee: { headline: "JEE Trial", subhead: "Get matched with the right mentor." },
+    bitsat: { headline: "BITSAT Trial", subhead: "Get matched with the right mentor." },
+    kcet: { headline: "KCET Trial", subhead: "Get matched with the right mentor." },
+    keam: { headline: "KEAM Trial", subhead: "Get matched with the right mentor." },
+    vitee: { headline: "VITEEE Trial", subhead: "Get matched with the right mentor." },
+    // Medical
+    neet: { headline: "NEET Trial", subhead: "Get matched with the right mentor." },
+    jipmer: { headline: "JIPMER Trial", subhead: "Get matched with the right mentor." },
+    paramedical: { headline: "Paramedical Trial", subhead: "Get matched with the right mentor." },
+    // Management
+    ipm: { headline: "IPM Trial", subhead: "Get matched with the right mentor." },
+    set: { headline: "SET Trial", subhead: "Get matched with the right mentor." },
+    npat: { headline: "NPAT Trial", subhead: "Get matched with the right mentor." },
+    mhcet: { headline: "MHCET Trial", subhead: "Get matched with the right mentor." },
+    // Law
+    clat: { headline: "CLAT Trial", subhead: "Get matched with the right mentor." },
+    slat: { headline: "SLAT Trial", subhead: "Get matched with the right mentor." },
+    ailet: { headline: "AILET Trial", subhead: "Get matched with the right mentor." },
+    klee: { headline: "KLEE Trial", subhead: "Get matched with the right mentor." },
+    culee: { headline: "CULEE Trial", subhead: "Get matched with the right mentor." },
+    // Defence
+    nda: { headline: "NDA Trial", subhead: "Get matched with the right mentor." },
+    afcat: { headline: "AFCAT Trial", subhead: "Get matched with the right mentor." },
+    // Design & Architecture
+    nid: { headline: "NID Trial", subhead: "Get matched with the right mentor." },
+    nift: { headline: "NIFT Trial", subhead: "Get matched with the right mentor." },
+    uceed: { headline: "UCEED Trial", subhead: "Get matched with the right mentor." },
+    nata: { headline: "NATA Trial", subhead: "Get matched with the right mentor." },
+    // Common
+    cuet: { headline: "CUET Trial", subhead: "Get matched with the right mentor." },
+  };
+
+  return (
+    overrides[normalized] || {
+      headline: `${courseName} Trial`,
+      subhead: "Get matched with the right mentor.",
+    }
+  );
+};
+
 interface CUETExamApplySectionProps {
   slug: string;
 }
@@ -1228,11 +1283,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    {getSchoolCourseTrialCopy(slug, course).headline}
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    {getSchoolCourseTrialCopy(slug, course).subhead}
                   </p>
                 </div>
               </div>

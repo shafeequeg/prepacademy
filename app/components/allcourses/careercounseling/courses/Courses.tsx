@@ -54,6 +54,36 @@ interface Question {
   options?: Option[];
 }
 
+// Compact, slug-specific copy for this modal
+interface TrialText {
+  headline: string;
+  subhead: string;
+}
+
+const getCareerTrialText = (
+  slugValue: string,
+  courseObj?: { title?: string; courseTitle?: string }
+): TrialText => {
+  const normalized = (slugValue || "").toLowerCase();
+  const courseName = courseObj?.courseTitle || courseObj?.title || slugValue || "Career";
+
+  const overrides: Record<string, TrialText> = {
+    resumebuilding: { headline: "Resume Building Trial", subhead: "Get matched with the right mentor." },
+    interviewpreparation: { headline: "Interview Prep Trial", subhead: "Get matched with the right mentor." },
+    careerplanning: { headline: "Career Counseling Trial", subhead: "Get matched with the right mentor." },
+    skilldevelopment: { headline: "Skills Trial", subhead: "Get matched with the right mentor." },
+    jobsearchstrategies: { headline: "Job Search Trial", subhead: "Get matched with the right mentor." },
+    streamselection: { headline: "Stream Selection Trial", subhead: "Get matched with the right mentor." },
+  };
+
+  return (
+    overrides[normalized] || {
+      headline: `${courseName} Trial`,
+      subhead: "Get matched with the right mentor.",
+    }
+  );
+};
+
 interface CUETExamApplySectionProps {
   slug: string;
 }
@@ -665,7 +695,7 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
           </div>
         </div>
 
-        <div className="bg-[#1A0E0E] py-16">
+        {/* <div className="bg-[#1A0E0E] py-16">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-4xl font-semibold text-center mb-6 ml-2">
               <span className="text-[#F55D3E] font-serif italic">Our</span>{" "}
@@ -730,7 +760,8 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 ))}
             </div>
           </div>
-        </div>
+        </div> */}
+
 
         <div className="bg-black py-8">
           <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -878,11 +909,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    {getCareerTrialText(slug, course).headline}
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    {getCareerTrialText(slug, course).subhead}
                   </p>
                 </div>
               </div>

@@ -57,6 +57,64 @@ interface CUETExamApplySectionProps {
   slug: string;
 }
 
+// Copy to personalize the Free Trial modal based on course slug
+interface CourseLike {
+  title?: string;
+  courseTitle?: string;
+}
+
+interface FreeTrialText {
+  headline: string;
+  subhead: string;
+}
+
+const getFreeTrialText = (slugValue: string, courseObj?: CourseLike): FreeTrialText => {
+  const normalized = (slugValue || "").toLowerCase();
+  const courseName = courseObj?.courseTitle || courseObj?.title || slugValue?.toUpperCase() || "Your";
+
+  const overrides: Record<string, FreeTrialText> = {
+    cat: {
+      headline: "CAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    kmat: {
+      headline: "KMAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    cuet: {
+      headline: "CUET Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    xat: {
+      headline: "XAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    cmat: {
+      headline: "CMAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    mat: {
+      headline: "MAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    nmat: {
+      headline: "NMAT Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+    mhcet: {
+      headline: "MHCET Trial",
+      subhead: "Get matched with the right mentor.",
+    },
+  };
+
+  return (
+    overrides[normalized] || {
+      headline: `${courseName} Trial`,
+      subhead: "Get matched with the right mentor.",
+    }
+  );
+};
+
 const DemoVideoCard: React.FC<DemoVideoCardProps> = ({ title, videoId }) => {
   return (
     <div className="relative group cursor-pointer">
@@ -1186,11 +1244,10 @@ const CUETExamApplySection: React.FC<CUETExamApplySectionProps> = ({
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    {getFreeTrialText(slug, course).headline}
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    {getFreeTrialText(slug, course).subhead}
                   </p>
                 </div>
               </div>

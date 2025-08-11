@@ -143,24 +143,22 @@ Resume Building is the process of creating a structured and professional summary
     ],
     faqs: [
       {
-        question: "What is the JEE exam?",
-        answer:
-          "The Joint Entrance Examination (JEE) is an entrance examination conducted for admission to engineering programs in premier institutes like IITs, NITs, and other top colleges in India. It consists of JEE Main and JEE Advanced.",
+        question: "What does the Resume Building service include?",
+        answer: "Our Resume Building service delivers a professionally written, ATS-friendly resume tailored to your target role, using clean formatting, role-specific keywords, and measurable impact statements to improve ATS parsing and recruiter search visibility. We also provide guidance on formatting, impact statements, and keyword use, with optional cover letter and LinkedIn profile optimization available."
+      },
+      
+      {
+        question: "I have limited experience. Can you still help?",
+        answer: "Yes. We highlight internships, projects, coursework, certifications, and transferable skills to present a strong, achievement-focused profile."
       },
       {
-        question: "Is JEE open for non-Indian students?",
-        answer:
-          "Yes, JEE is open to candidates from all over the world, including non-Indian students, provided they meet the eligibility criteria set by the National Testing Agency (NTA).",
+        question: "Will my resume be tailored to my industry or role?",
+        answer: "Yes. We customize your resume to your target role(s) and industry, with appropriate keywords, competencies, and impact metrics."
       },
+    
       {
-        question: "Where can I get the JEE syllabus?",
-        answer:
-          "The JEE syllabus includes Physics, Chemistry, and Mathematics. It is recommended to visit the official website jeemain.nta.nic.in for detailed information.",
-      },
-      {
-        question: "Is the JEE exam tough?",
-        answer:
-          "JEE is considered highly competitive and challenging due to its vast syllabus and limited seats. However, with consistent preparation and practice, candidates can perform well.",
+        question: "How long does the process take?",
+        answer: "Typically 5–7 business days from your kickoff submission. Each revision cycle usually takes 2–3 business days."
       },
     ],
   },
@@ -304,7 +302,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -316,7 +314,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -328,7 +326,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -340,7 +338,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -352,7 +350,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -364,7 +362,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -506,7 +504,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -518,7 +516,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -530,7 +528,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -542,7 +540,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -554,7 +552,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -566,7 +564,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -708,7 +706,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -720,7 +718,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -732,7 +730,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -744,7 +742,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -756,7 +754,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -768,7 +766,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -899,7 +897,7 @@ Resume Building is the process of creating a structured and professional summary
       { title: "Developing Soft Skills", videoId: "_lgTHGKC7Oc" },
       { title: "Technical Skills Mastery", videoId: "RyLsKV6z2tw" },
     ],
-   offeringTypes: [
+    offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
       // { id: "test", label: "Test Series" },
@@ -910,7 +908,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -922,7 +920,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -934,7 +932,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -946,7 +944,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -958,7 +956,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -970,7 +968,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1101,7 +1099,7 @@ Resume Building is the process of creating a structured and professional summary
       { title: "Networking for Jobs", videoId: "_lgTHGKC7Oc" },
       { title: "Optimizing LinkedIn", videoId: "RyLsKV6z2tw" },
     ],
-     offeringTypes: [
+    offeringTypes: [
       { id: "online", label: "Online Class" },
       { id: "classroom", label: "Classroom" },
       // { id: "test", label: "Test Series" },
@@ -1112,7 +1110,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -1124,7 +1122,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -1136,7 +1134,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -1148,7 +1146,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1160,7 +1158,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1172,7 +1170,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1314,7 +1312,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-1",
         title: "Daily Class",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -1326,7 +1324,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-2",
         title: "Night Class",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "online",
         features: [
           "Live doubt-solving sessions",
@@ -1338,7 +1336,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-online-3",
         title: "Weekend Class",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "online",
         features: [
           "Personal mentoring",
@@ -1350,7 +1348,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-1",
         title: "Day Classes",
-    image: "/catdailyclass.jpeg",
+        image: "/catdailyclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1362,7 +1360,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-2",
         title: "Night Classes",
-    image: "/catnightclass.jpeg",
+        image: "/catnightclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",
@@ -1374,7 +1372,7 @@ Resume Building is the process of creating a structured and professional summary
       {
         id: "JEEMAIN-classroom-3",
         title: "Weekend Classes",
-    image: "/catweekendclass.jpeg",
+        image: "/catweekendclass.jpeg",
         type: "classroom",
         features: [
           "Personal mentoring",

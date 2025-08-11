@@ -598,11 +598,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                     handleTabKeyNav(e, index, tabs, setActiveMainTab)
                   }
                   tabIndex={activeMainTab === tab.id ? 0 : -1}
-                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${
-                    activeMainTab === tab.id
-                      ? "bg-[#FF6B3D] text-white font-medium"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                  } rounded-full`}
+                  className={`px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors flex-1 text-center ${activeMainTab === tab.id
+                    ? "bg-[#FF6B3D] text-white font-medium"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                    } rounded-full`}
                 >
                   {tab.label}
                 </button>
@@ -746,13 +745,14 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    Expert Career Guidance Awaits
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    Connect with our counselors to discover your strengths and plan your path to success.
                   </p>
                 </div>
+
+
               </div>
 
               {/* Progress bar */}
@@ -782,13 +782,12 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                           );
                           nextScreeningStep();
                         }}
-                        className={`w-full p-3 text-left border rounded-lg transition-colors ${
-                          enrollFormData.selected_option[
-                            questions[currentQuestionIndex].id
-                          ] === option.text
-                            ? "bg-[#F55D3E] text-white"
-                            : "border-gray-300 hover:bg-orange-50"
-                        }`}
+                        className={`w-full p-3 text-left border rounded-lg transition-colors ${enrollFormData.selected_option[
+                          questions[currentQuestionIndex].id
+                        ] === option.text
+                          ? "bg-[#F55D3E] text-white"
+                          : "border-gray-300 hover:bg-orange-50"
+                          }`}
                       >
                         <span
                           className={
@@ -824,11 +823,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                             placeholder="Your Full Name"
                             value={enrollFormData.full_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.full_name
-                                ? "border-red-500"
-                                : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            className={`w-full p-3 border ${validationErrors.full_name
+                              ? "border-red-500"
+                              : "border-gray-300"
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.full_name && (
@@ -840,12 +838,11 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                         <button
                           type="button"
                           onClick={nextStep}
-                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                            !enrollFormData.full_name ||
+                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.full_name ||
                             validationErrors.full_name
-                              ? "opacity-50 cursor-not-allowed"
-                              : "hover:bg-orange-700"
-                          }`}
+                            ? "opacity-50 cursor-not-allowed"
+                            : "hover:bg-orange-700"
+                            }`}
                           disabled={
                             !enrollFormData.full_name ||
                             !!validationErrors.full_name
@@ -869,11 +866,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                             placeholder="Your Email Address"
                             value={enrollFormData.email || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.email
-                                ? "border-red-500"
-                                : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            className={`w-full p-3 border ${validationErrors.email
+                              ? "border-red-500"
+                              : "border-gray-300"
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.email && (
@@ -893,11 +889,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.email || validationErrors.email
-                                ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-orange-700"
-                            }`}
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.email || validationErrors.email
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:bg-orange-700"
+                              }`}
                             disabled={
                               !enrollFormData.email || !!validationErrors.email
                             }
@@ -921,11 +916,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                             placeholder="e.g. Math, Science, English"
                             value={enrollFormData.class_type || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.class_type
-                                ? "border-red-500"
-                                : "border-gray-300"
-                            } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            className={`w-full p-3 border ${validationErrors.class_type
+                              ? "border-red-500"
+                              : "border-gray-300"
+                              } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.class_type && (
@@ -945,12 +939,11 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.class_type ||
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.class_type ||
                               validationErrors.class_type
-                                ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-orange-700"
-                            }`}
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:bg-orange-700"
+                              }`}
                             disabled={
                               !enrollFormData.class_type ||
                               !!validationErrors.class_type
@@ -979,11 +972,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                               placeholder="Your Phone Number"
                               value={enrollFormData.phone_number || ""}
                               onChange={handleFormChange}
-                              className={`w-full p-3 border text-black ${
-                                validationErrors.phone_number
-                                  ? "border-red-500"
-                                  : "border-gray-300"
-                              } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              className={`w-full p-3 border text-black ${validationErrors.phone_number
+                                ? "border-red-500"
+                                : "border-gray-300"
+                                } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                               required
                             />
                           </div>
@@ -1021,12 +1013,11 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.phone_number ||
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.phone_number ||
                               validationErrors.phone_number
-                                ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-orange-700"
-                            }`}
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:bg-orange-700"
+                              }`}
                             disabled={
                               !enrollFormData.phone_number ||
                               !!validationErrors.phone_number
@@ -1051,11 +1042,10 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                             placeholder="Your School/Institute"
                             value={enrollFormData.school_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border text-black ${
-                              validationErrors.school_name
-                                ? "border-red-500"
-                                : "border-gray-300"
-                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                            className={`w-full p-3 border text-black ${validationErrors.school_name
+                              ? "border-red-500"
+                              : "border-gray-300"
+                              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.school_name && (
@@ -1074,13 +1064,12 @@ const CatExamApplySection: React.FC<CatExamApplySectionProps> = ({ slug }) => {
                           </button>
                           <button
                             type="submit"
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.school_name ||
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.school_name ||
                               validationErrors.school_name ||
                               isSubmitting
-                                ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-orange-700"
-                            }`}
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:bg-orange-700"
+                              }`}
                             disabled={
                               !enrollFormData.school_name ||
                               !!validationErrors.school_name ||

@@ -363,7 +363,7 @@ const CUETExamApplySection: React.FC = () => {
   const [screeningStep, setScreeningStep] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [user, setuser] = useState<Userdata[]>([]);
-   const [enrollFormData, setEnrollFormData] = useState({
+  const [enrollFormData, setEnrollFormData] = useState({
     full_name: "",
     email: "",
     class_type: "",
@@ -395,7 +395,7 @@ const CUETExamApplySection: React.FC = () => {
     string | null
   >(null);
   const router = useRouter();
- const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
+  const [activeMainTab, setActiveMainTab] = useState("MANAGEMENT");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -429,7 +429,7 @@ const CUETExamApplySection: React.FC = () => {
     return "";
   };
 
-   const validateLocation = (location: string): string => {
+  const validateLocation = (location: string): string => {
     if (!location || location.trim() === "") {
       return "Location is required";
     }
@@ -496,7 +496,7 @@ const CUETExamApplySection: React.FC = () => {
     return "";
   };
 
-   const nextStep = () => {
+  const nextStep = () => {
     let error = "";
 
     // Validate current field before proceeding
@@ -530,19 +530,19 @@ const CUETExamApplySection: React.FC = () => {
         }
         break;
       case 4:
-      error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
-        return;
-      }
-      break;
-    case 5:
-      error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
-      if (error) {
-        setValidationErrors((prev) => ({ ...prev, location: error }));
-        return;
-      }
-      break;
+        error = validateSchoolCollege(enrollFormData.school_name || ""); // Fixed: was validating location instead of school_name
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, school_name: error })); // Fixed: was setting location error instead of school_name
+          return;
+        }
+        break;
+      case 5:
+        error = validateLocation(enrollFormData.location || ""); // This is correct for step 5
+        if (error) {
+          setValidationErrors((prev) => ({ ...prev, location: error }));
+          return;
+        }
+        break;
     }
 
     // If validation passes, proceed to next step
@@ -873,7 +873,7 @@ const CUETExamApplySection: React.FC = () => {
   const filteredCourses = courseCards.filter(
     (course) => course.type === activeTab
   );
- const toggleDropdown = (tabId: string | null) => {
+  const toggleDropdown = (tabId: string | null) => {
     if (isIPhone()) {
       setIsIPhoneDropdownOpen(isIPhoneDropdownOpen === tabId ? null : tabId);
       setActiveMainTab(tabId || "");
@@ -1035,12 +1035,11 @@ const CUETExamApplySection: React.FC = () => {
       ))}
     </div> */}
 
-   <div
-        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${
-          isIPhone() && isIPhoneDropdownOpen
+      <div
+        className={`flex items-center w-full bg-black md:mt-24 mt-14 p-3 space-x-2 scrollbar-hide  ${isIPhone() && isIPhoneDropdownOpen
             ? "overflow-hidden"
             : "overflow-x-auto"
-        }`}
+          }`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -1069,23 +1068,21 @@ const CUETExamApplySection: React.FC = () => {
               }}
               onKeyDown={(e) => handleTabKeyNav(e, index)}
               tabIndex={activeMainTab === tab.id ? 0 : -1}
-              className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${
-                activeMainTab === tab.id
+              className={`w-full px-4 py-2 text-sm md:text-base whitespace-nowrap transition-colors ${activeMainTab === tab.id
                   ? "bg-[#FF6B3D] text-white font-medium"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-              } rounded-full flex items-center justify-center`}
+                } rounded-full flex items-center justify-center`}
             >
               <span>{tab.label}</span>
               <svg
-                className={`ml-1 w-4 h-4 transition-transform ${
-                  openDropdown === tab.id ? "rotate-180" : ""
-                }`}
+                className={`ml-1 w-4 h-4 transition-transform ${openDropdown === tab.id ? "rotate-180" : ""
+                  }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                
+
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -1352,11 +1349,10 @@ const CUETExamApplySection: React.FC = () => {
                   <button
                     key={type.id}
                     onClick={() => setActiveTab(type.id)}
-                    className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${
-                      activeTab === type.id
+                    className={`px-3 sm:px-5 md:px-8 py-2 text-base sm:text-lg md:text-xl whitespace-nowrap transition-colors relative ${activeTab === type.id
                         ? "text-[#F55D3E] border-b-2 border-[#F55D3E]"
                         : "text-gray-500 hover:text-gray-400"
-                    }`}
+                      }`}
                   >
                     {type.label}
                   </button>
@@ -1540,7 +1536,7 @@ const CUETExamApplySection: React.FC = () => {
         </div>
       </div>
 
-         {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-11/12 md:w-3/4 max-w-xl relative overflow-hidden max-h-[95vh] md:max-h-none">
             {/* Close button */}
@@ -1578,13 +1574,14 @@ const CUETExamApplySection: React.FC = () => {
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    Fast-Track Your KMAT Preparation
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    You’re just one step away from starting expert-led training to boost your
+                    KMAT score and secure admission to your desired management program.
                   </p>
                 </div>
+
               </div>
 
               {/* Progress bar */}
@@ -1614,13 +1611,12 @@ const CUETExamApplySection: React.FC = () => {
                           );
                           nextScreeningStep();
                         }}
-                        className={`w-full p-3 text-left border rounded-lg transition-colors ${
-                          enrollFormData.selected_option[
+                        className={`w-full p-3 text-left border rounded-lg transition-colors ${enrollFormData.selected_option[
                             questions[currentQuestionIndex].id
                           ] === option.text
                             ? "bg-[#F55D3E] text-white"
                             : "border-gray-300 hover:bg-orange-50"
-                        }`}
+                          }`}
                       >
                         <span
                           className={
@@ -1656,11 +1652,10 @@ const CUETExamApplySection: React.FC = () => {
                             placeholder="Your Full Name"
                             value={enrollFormData.full_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.full_name
+                            className={`w-full p-3 border ${validationErrors.full_name
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.full_name && (
@@ -1672,12 +1667,11 @@ const CUETExamApplySection: React.FC = () => {
                         <button
                           type="button"
                           onClick={nextStep}
-                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                            !enrollFormData.full_name ||
-                            validationErrors.full_name
+                          className={`w-full bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.full_name ||
+                              validationErrors.full_name
                               ? "opacity-50 cursor-not-allowed"
                               : "hover:bg-orange-700"
-                          }`}
+                            }`}
                           disabled={
                             !enrollFormData.full_name ||
                             !!validationErrors.full_name
@@ -1701,11 +1695,10 @@ const CUETExamApplySection: React.FC = () => {
                             placeholder="Your Email Address"
                             value={enrollFormData.email || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.email
+                            className={`w-full p-3 border ${validationErrors.email
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.email && (
@@ -1725,11 +1718,10 @@ const CUETExamApplySection: React.FC = () => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.email || validationErrors.email
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.email || validationErrors.email
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.email || !!validationErrors.email
                             }
@@ -1753,11 +1745,10 @@ const CUETExamApplySection: React.FC = () => {
                             placeholder="e.g. Math, Science, English"
                             value={enrollFormData.class_type || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border ${
-                              validationErrors.class_type
+                            className={`w-full p-3 border ${validationErrors.class_type
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.class_type && (
@@ -1777,12 +1768,11 @@ const CUETExamApplySection: React.FC = () => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.class_type ||
-                              validationErrors.class_type
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.class_type ||
+                                validationErrors.class_type
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.class_type ||
                               !!validationErrors.class_type
@@ -1811,11 +1801,10 @@ const CUETExamApplySection: React.FC = () => {
                               placeholder="Your Phone Number"
                               value={enrollFormData.phone_number || ""}
                               onChange={handleFormChange}
-                              className={`w-full p-3 border text-black ${
-                                validationErrors.phone_number
+                              className={`w-full p-3 border text-black ${validationErrors.phone_number
                                   ? "border-red-500"
                                   : "border-gray-300"
-                              } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                                } border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                               required
                             />
                           </div>
@@ -1853,12 +1842,11 @@ const CUETExamApplySection: React.FC = () => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.phone_number ||
-                              validationErrors.phone_number
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.phone_number ||
+                                validationErrors.phone_number
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.phone_number ||
                               !!validationErrors.phone_number
@@ -1883,11 +1871,10 @@ const CUETExamApplySection: React.FC = () => {
                             placeholder="Your School/Institute"
                             value={enrollFormData.school_name || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border text-black ${
-                              validationErrors.school_name
+                            className={`w-full p-3 border text-black ${validationErrors.school_name
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.school_name && (
@@ -1907,12 +1894,11 @@ const CUETExamApplySection: React.FC = () => {
                           <button
                             type="button"
                             onClick={nextStep}
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.school_name ||
-                              validationErrors.school_name
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.school_name ||
+                                validationErrors.school_name
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.school_name ||
                               !!validationErrors.school_name
@@ -1936,11 +1922,10 @@ const CUETExamApplySection: React.FC = () => {
                             placeholder="Your Location (City, State)"
                             value={enrollFormData.location || ""}
                             onChange={handleFormChange}
-                            className={`w-full p-3 border text-black ${
-                              validationErrors.location
+                            className={`w-full p-3 border text-black ${validationErrors.location
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
+                              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F55D3E] focus:border-transparent`}
                             required
                           />
                           {validationErrors.location && (
@@ -1959,13 +1944,12 @@ const CUETExamApplySection: React.FC = () => {
                           </button>
                           <button
                             type="submit"
-                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${
-                              !enrollFormData.location ||
-                              validationErrors.location ||
-                              isSubmitting
+                            className={`w-2/3 bg-[#F55D3E] text-white py-3 px-4 rounded-lg font-medium transition-colors ${!enrollFormData.location ||
+                                validationErrors.location ||
+                                isSubmitting
                                 ? "opacity-50 cursor-not-allowed"
                                 : "hover:bg-orange-700"
-                            }`}
+                              }`}
                             disabled={
                               !enrollFormData.location ||
                               !!validationErrors.location ||

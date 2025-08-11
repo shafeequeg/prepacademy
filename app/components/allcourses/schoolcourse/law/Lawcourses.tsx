@@ -1174,11 +1174,10 @@ if (!course) {
                 </div>
                 <div className="md:w-2/3">
                   <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">
-                    Fast Track Your Trial Class
+                    {`Fast Track Your ${course.title} Trial Class`}
                   </h2>
                   <p className="text-center md:text-left mt-2 text-sm md:text-base">
-                    We are just a step away from finding the perfect tutor for
-                    your child
+                    {`We are just a step away from getting you started with ${course.title} preparation.`}
                   </p>
                 </div>
               </div>
