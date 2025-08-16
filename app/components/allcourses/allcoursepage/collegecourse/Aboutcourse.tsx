@@ -325,15 +325,15 @@ const ExamPrepLowerSections: React.FC = () => {
             </p>
           </div>
 
-          {/* Carousel Container */}
+          
           <div className="relative">
-            {/* Row 2: Testimonials Carousel */}
+           
             <div
               ref={carouselRef}
               className="flex overflow-x-hidden scroll-smooth relative"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-              {/* Create groups of cards based on visibleItems */}
+             
               {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                 <div
                   key={slideIndex}

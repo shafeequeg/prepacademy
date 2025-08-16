@@ -1337,7 +1337,7 @@ export const courses: Course[] = [
   },
   {
     slug: "OTHERS/STXAVIERS",
-    title: "St. Xavier's",
+    title: "STXAVIERS",
     courseTitle: "Crack St. Xavier's Entrance 2025 with ",
     description:
       "St. Xavier’s College, Mumbai – one of India’s most prestigious institutions – conducts the St. Xavier’s Entrance Test (XET) for admission to select undergraduate programs like BMS (Bachelor of Management Studies) and BA in Mass Communication & Journalism.Preparing with expert guidance significantly boosts your chances of securing a seat in this top-tier college – and that’s where our Prep Academy course comes in.",
@@ -1771,7 +1771,7 @@ export const courses: Course[] = [
   },
   {
     slug: "DESIGN/JEEMAIN",
-    title: "JEE Main (Design & Architecture)",
+    title: "JEE Main",
     courseTitle: "Crack JEE Main (Design & Architecture) 2025 with ",
     description:
       "JEE Main is India’s most important engineering entrance exam, conducted by the National Testing Agency (NTA) for admission to NITs, IIITs, CFTIs, and other top engineering institutions. It also serves as the qualifying exam for JEE Advanced, required for admission to the prestigious IITs.Our Prep Academy course is designed to help you master the concepts, boost your problem-solving speed, and excel in JEE Main with confidence.",

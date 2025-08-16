@@ -137,6 +137,9 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
       }
     };
 
+
+    
+
     // Function to get filtered sections for a subject
     const getFilteredSections = (subjectId: string) => {
       // First, find matching sections from salesCoursessection where subject matches subjectId
@@ -169,6 +172,68 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
       ).length;
     };
 
+    // Function to determine if a section should be highlighted
+    const isSectionHighlighted = (sectionId: string) => {
+      // If activeCourse is a section ID, compare directly
+      if (activeCourse === sectionId) {
+        return true;
+      }
+
+      // If activeCourse is a course title, find the course and check its section
+      const matchingCourse = salesCourses.find(
+        (course) => course.title === activeCourse
+      );
+
+      if (matchingCourse && matchingCourse.section?.toString() === sectionId) {
+        return true;
+      }
+
+      return false;
+    };
+
+    // Function to determine if a subject should be active
+    const isSubjectActive = (subjectId: string) => {
+      // Direct match with activeSubTab
+      if (activeSubTab === subjectId) {
+        return true;
+      }
+
+      // Only proceed if we have an activeCourse and it's not empty
+      if (!activeCourse || activeCourse === '') {
+        return false;
+      }
+
+      // Case 1: activeCourse is a course title
+      const matchingCourse = salesCourses.find(
+        (course) => course.title === activeCourse
+      );
+
+      if (matchingCourse) {
+        // Find the section for this course
+        const courseSection = salesCoursessection.find(
+          (section) => section.id?.toString() === matchingCourse.section?.toString()
+        );
+
+        // Check if this section belongs to the current subject
+        if (courseSection && courseSection.subject?.toString() === subjectId) {
+          return true;
+        }
+        // If we found a matching course but it doesn't belong to this subject, return false
+        return false;
+      }
+
+      // Case 2: activeCourse is a section ID
+      const activeCourseSection = salesCoursessection.find(
+        (section) => section.id?.toString() === activeCourse
+      );
+
+      if (activeCourseSection && activeCourseSection.subject?.toString() === subjectId) {
+        return true;
+      }
+
+      return false;
+    };
+
     console.log(activeCategorySubjects);
     console.log(activeSubTab);
 
@@ -178,7 +243,7 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
         <div className="space-y-2">
           {activeCategorySubjects.map((subject) => {
             const subjectId = subject.id?.toString() || "";
-            const isActive = activeSubTab === subjectId;
+            const isActive = isSubjectActive(subjectId);
             const filteredSections = getFilteredSections(subjectId);
 
             console.log(subject);
@@ -193,22 +258,21 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
             return (
               <div key={subject.id} className="border-b border-orange-600 pb-2">
                 <div
-                  className={`flex justify-between items-center py-2 px-3 rounded-md cursor-pointer ${
-                    isActive
+                  className={`flex justify-between items-center py-2 px-3 rounded-md cursor-pointer ${isActive
                       ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
                       : "hover:bg-gradient-to-r from-orange-700 to-orange-600 text-orange-300"
-                  } transition-all duration-300`}
+                    } transition-all duration-300`}
                   onClick={() => handleToggleSubTab(subjectId)}
                 >
                   <span className="font-medium text-sm">
                     {subject.subject_name}
                   </span>
+
                   <span>
                     <ChevronDown
                       size={16}
-                      className={`text-orange-300 transition-transform duration-300 ${
-                        isActive ? "rotate-180" : "rotate-0"
-                      }`}
+                      className={`text-orange-300 transition-transform duration-300 ${isActive ? "rotate-180" : "rotate-0"
+                        }`}
                     />
                   </span>
                 </div>
@@ -218,16 +282,16 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
                       const sectionId = section.id?.toString() || "";
                       const sectionName = section.section_name || "";
                       const courseCount = getCourseCountForSection(sectionId);
+                      const isSectionActive = isSectionHighlighted(sectionId);
                       console.log(courseCount);
 
                       return (
                         <div
                           key={`${section.id}-${section.section_name}`}
-                          className={`py-1 px-3 text-sm rounded-md cursor-pointer ${
-                            activeCourse === sectionId
+                          className={`py-1 px-3 text-sm rounded-md cursor-pointer ${isSectionActive
                               ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
                               : "text-orange-300 hover:bg-gradient-to-r from-orange-700 to-orange-600"
-                          } transition-all duration-300`}
+                            } transition-all duration-300`}
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent parent click
                             handleCourseClickWithScroll(sectionId, true);

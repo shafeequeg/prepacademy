@@ -1369,8 +1369,8 @@ const CatExamApplySection: React.FC = () => {
                     className="bg-[#220F0F] rounded-lg overflow-hidden flex flex-col"
                   >
                     {" "}
-                    {/* Added flex and flex-col here */}
-                    {/* Image Container */}
+                  
+                   
                     <div className="w-full flex items-center justify-center bg-gray-800">
                       <Image
                         src={card.image}

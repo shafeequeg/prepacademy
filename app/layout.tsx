@@ -27,7 +27,10 @@ export const metadata: Metadata = {
   openGraph: {
     description:"India's leading online learning platform for NEET and JEE preparation",
     images: ['']
-  }
+  },
+  verification: {
+    google: "ufNnIZZlzbbCtMIo5IJwcExN0J0lfSLcoDidQ5jbEpA",
+  },
 };
 
 export default function RootLayout({

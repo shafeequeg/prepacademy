@@ -56,7 +56,7 @@ export interface Course {
 export const courses: Course[] = [
   {
     slug: "management/xat",
-    title: "XAT Preparation",
+    title: "XAT",
     courseTitle: "Master XAT 2025 with ",
     description: `
 The Xavier Aptitude Test (XAT) is a national-level MBA entrance examination conducted annually by XLRI Jamshedpur on behalf of Xavier Association of Management Institutes (XAMI). It is used for admission into management programs at XLRI and over 160 other B-schools across India. 
@@ -230,12 +230,12 @@ XAT 2025 will be conducted in Computer-Based Test (CBT) mode on January 5, 2025 
         description: "	Registration for XAT 2025 is now open and will close on November 30, 2024. ",
       },
 
-         {
+      {
         category: "XAT 2025 Exam Date: ",
         description: "Scheduled for January 5, 2025 (Sunday). ",
       },
 
-         {
+      {
         category: "Admit cards",
         description: "The admit cards will be available for download from December 20, 2024. ",
       },
@@ -268,7 +268,7 @@ XAT 2025 will be conducted in Computer-Based Test (CBT) mode on January 5, 2025 
         question: "Where can I find the XAT syllabus? ",
         answer: "The XAT syllabus includes sections on Verbal & Logical Ability, Decision Making, Quantitative Ability & Data Interpretation, and General Knowledge. Essay writing may also be a component depending on the year. ",
       },
-        {
+      {
         question: "Is the XAT exam tough? ",
         answer: "Yes, XAT is generally considered tougher than other MBA entrance exams like CAT, especially due to the Decision Making and Essay Writing sections. Strategic preparation is crucial. ",
       },
@@ -277,7 +277,7 @@ XAT 2025 will be conducted in Computer-Based Test (CBT) mode on January 5, 2025 
   },
   {
     slug: "management/cmat",
-    title: "CMAT Preparation",
+    title: "CMAT",
     courseTitle: "Ace CMAT 2025 with ",
     description: `
 The Common Management Admission Test (CMAT) is a national-level examination administered by the National Testing Agency (NTA) for admissions into MBA and other postgraduate management programs offered by AICTE-approved institutions across India. 
@@ -451,7 +451,7 @@ Ace the CMAT with our expert coaching and study materials!
         category: "Application Form",
         description: "The National Testing Agency (NTA) has released the CMAT 2025 application form ",
       },
-       {
+      {
         category: "Registration",
         description: "The registration process for the Common Management Admission Test (CMAT) 2025 is set to close soon, with the deadline for submitting applications expected by March 2025 ",
       },
@@ -485,7 +485,7 @@ Ace the CMAT with our expert coaching and study materials!
         answer: "The CMAT syllabus includes sections on Quantitative Techniques, Logical Reasoning, Language Comprehension, General Awareness, and Innovation & Entrepreneurship. The detailed syllabus is available on cmat.nta.nic.in. ",
       },
 
-        {
+      {
         question: "Is the CMAT exam tough? ",
         answer: "CMAT is considered moderately difficult and is generally easier compared to CAT or XAT. With proper preparation, many candidates are able to achieve a good score. ",
       },
@@ -667,7 +667,7 @@ MAT 2025 will be conducted in Computer-Based Test (CBT), Paper-Based Test (PBT),
         category: "Application Form",
         description: " The All India Management Association (AIMA) has released the MAT May 2025 session application form ",
       },
-       {
+      {
         category: "Registration Process",
         description: " The registration process for the MAT 2025 May session is currently ongoing, with the final application deadline varying by test mode (PBT, CBT, IBT) – check mat.aima.in for detailed schedule ",
       },
@@ -701,7 +701,7 @@ MAT 2025 will be conducted in Computer-Based Test (CBT), Paper-Based Test (PBT),
         answer: "The MAT syllabus generally includes Language Comprehension, Intelligence & Critical Reasoning, Mathematical Skills, Data Analysis & Sufficiency, and Indian & Global Environment. Visit mat.aima.in for official updates. ",
       },
 
-        {
+      {
         question: "Is the MAT exam tough? ",
         answer: "MAT is considered to be of moderate difficulty and is suitable for candidates with basic aptitude skills. With the right preparation, it is manageable for most aspirants. ",
       },
@@ -709,7 +709,7 @@ MAT 2025 will be conducted in Computer-Based Test (CBT), Paper-Based Test (PBT),
   },
   {
     slug: "management/nmat",
-    title: "NMAT Preparation",
+    title: "NMAT",
     courseTitle: "Crack NMAT 2025 with ",
     description: `
 The NMAT by GMAC is a national-level entrance examination administered by the Graduate Management Admission Council (GMAC) for admissions into MBA and other graduate management programs offered by NMIMS and other top B-schools in India and globally. 
@@ -883,7 +883,7 @@ NMAT 2025 will be conducted in Computer-Based Test (CBT) mode at test centers an
         description: "The Graduate Management Admission Council (GMAC) has released the NMAT 2025 application form ",
       },
 
-        {
+      {
         category: "Registration Process",
         description: "The registration process for the NMAT 2025 exam is set to begin in August 2025 and will remain open until October 2025 ",
       },
@@ -917,7 +917,7 @@ NMAT 2025 will be conducted in Computer-Based Test (CBT) mode at test centers an
         answer: "The NMAT syllabus typically includes Language Skills, Quantitative Skills, and Logical Reasoning. The detailed content is available on the official website mba.com/nmat. ",
       },
 
-        {
+      {
         question: "Is the NMAT exam tough? ",
         answer: ". NMAT is considered to be moderately difficult with a candidate-friendly format (no negative marking, flexible scheduling). Consistent practice and mock tests are key to a good score. ",
       },
@@ -925,7 +925,7 @@ NMAT 2025 will be conducted in Computer-Based Test (CBT) mode at test centers an
   },
   {
     slug: "management/cuetpg",
-    title: "CUET PG Preparation",
+    title: "cuetpg",
     courseTitle: "Succeed in CUET PG 2025 with Expert Prep",
     description: `
 The Common University Entrance Test (CUET) is a national-level examination administered by the National Testing Agency (NTA) for admissions into undergraduate (UG) programs across various central and participating universities in India. 
@@ -1099,7 +1099,7 @@ CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to
         description: "The National Testing Agency (NTA) has released the CUET PG 2025 application form ",
       },
 
-       {
+      {
         category: "Registration Process",
         description: "The registration process for the Common University Entrance Test-Postgraduate (CUET PG) 2025 is set to close soon, with the deadline for submitting applications expected in January 2025 ",
       },
@@ -1133,7 +1133,7 @@ CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to
         answer: "The CUET PG syllabus is available on the official website cuet.nta.nic.in. It varies by subject, so candidates must refer to their applied course for accurate details. ",
       },
 
-       {
+      {
         question: "Is the CUET PG exam difficult? ",
         answer: "CUET PG is moderately challenging. The difficulty level can vary depending on the subject and the candidate's preparation. Understanding the exam pattern and practicing past papers can be very helpful. ",
       },
@@ -1141,7 +1141,7 @@ CUET (UG) 2025 will be conducted in Computer-Based Test (CBT) mode from May 8 to
   },
   {
     slug: "management/micat",
-    title: "MICAT Preparation",
+    title: "MICAT",
     courseTitle: "Master MICAT 2025 for MICA Admission",
     description: `
 The Mudra Institute of Communications Admission Test (MICAT) is a national-level entrance exam conducted by MICA, Ahmedabad, for admission to its flagship 2-year Post Graduate Diploma in Management – Communications (PGDM-C) and Post Graduate Diploma in Management (PGDM) programs, held twice a year—MICAT I and MICAT II—and includes both objective and subjective questions that assess analytical ability, verbal ability, logical reasoning, divergent thinking, written communication skills, and general awareness; MICAT 2025 will be conducted in Computer-Based Test (CBT) mode in two phases: MICAT I on December 7, 2024, and MICAT II on January 25, 2025.    `,
@@ -1313,7 +1313,7 @@ The Mudra Institute of Communications Admission Test (MICAT) is a national-level
         description: "	Registration for MICAT I 2025 is open from August 23 to November 20, 2024. ",
       },
 
-         {
+      {
         category: "MICAT II Registration",
         description: "	MICAT II registration will begin on November 23, 2024, and close on January 15, 2025.  ",
       },
@@ -1347,12 +1347,12 @@ The Mudra Institute of Communications Admission Test (MICAT) is a national-level
         answer: "No, it is not mandatory. You can appear for either MICAT I or MICAT II or both. The higher of the two scores will be used for further selection. ",
       },
 
-        {
+      {
         question: "Is there a separate application for MICAT? ",
         answer: "Yes, candidates must apply separately for MICAT through the official MICA website (mica.ac.in). ",
       },
 
-        {
+      {
         question: "Is MICAT a difficult exam?  ",
         answer: "MICAT is considered moderately difficult. It includes a mix of aptitude and psychometric assessments, which can be challenging but manageable with proper preparation. ",
       },
@@ -1360,7 +1360,7 @@ The Mudra Institute of Communications Admission Test (MICAT) is a national-level
   },
   {
     slug: "management/mhcet",
-    title: "MH-CET Preparation",
+    title: "MHCET",
     courseTitle: "Crack MH-CET 2025 for Top MBA Colleges",
     description: `
 The Maharashtra Common Entrance Test (MHCET or MHT CET) is a state-level entrance exam conducted by the State Common Entrance Test Cell, Maharashtra, for admission into undergraduate courses in Engineering, Pharmacy, and Agriculture offered by colleges across Maharashtra. 
@@ -1563,12 +1563,12 @@ MHCET 2025 will be conducted in Computer-Based Test (CBT) mode between April and
         answer: "You can apply online through the official CET Cell website at cetcell.mahacet.org once the application window opens. ",
       },
 
-        {
+      {
         question: "Is MHT CET tough? ",
         answer: "MHT CET is considered moderately difficult. With regular practice and good understanding of the Class 11 and 12 syllabus, it is manageable. ",
       },
 
-         {
+      {
         question: "What is the syllabus for MHT CET? ",
         answer: ". The syllabus is primarily based on the Maharashtra State Board curriculum for Physics, Chemistry, Mathematics/Biology of Class 11 and 12. ",
       },
@@ -1576,7 +1576,7 @@ MHCET 2025 will be conducted in Computer-Based Test (CBT) mode between April and
   },
   {
     slug: "civilservice/upsc",
-    title: "UPSC Preparation",
+    title: "UPSE",
     courseTitle: "Conquer UPSC 2025 with ",
     description: `
 The Union Public Service Commission (UPSC) conducts the Civil Services Examination (CSE), a national-level competitive exam, for recruitment into prestigious services like IAS, IPS, IFS, and other Central Government Group A & B services. 
@@ -1751,7 +1751,7 @@ UPSC Civil Services (Prelims) 2025 is scheduled to be conducted on May 25, 2025.
         description: "	The notification for Civil Services Examination (Prelims) 2025 will be released on February 12, 2025. ",
       },
 
-       {
+      {
         category: "Last Date of Civil Services Examination (Prelims)",
         description: "The last date to apply for the UPSC Prelims 2025 is March 4, 2025. ",
       },
@@ -1785,12 +1785,12 @@ UPSC Civil Services (Prelims) 2025 is scheduled to be conducted on May 25, 2025.
         answer: "Yes, UPSC is considered one of the toughest exams in India due to its vast syllabus, intense competition, and multi-stage format. However, consistent preparation and the right strategy can lead to success. ",
       },
 
-       {
+      {
         question: "Who can apply for the UPSC exam? ",
         answer: "Any Indian citizen who holds a graduate degree from a recognized university and meets the age and eligibility criteria can apply for the UPSC CSE. ",
       },
 
-         {
+      {
         question: "How many attempts are allowed for UPSC? ",
         answer: "General category candidates are allowed 6 attempts up to 32 years of age. OBC candidates have 9 attempts up to 35 years, and SC/ST candidates have unlimited attempts up to 37 years, subject to other conditions. ",
       },
@@ -1798,7 +1798,7 @@ UPSC Civil Services (Prelims) 2025 is scheduled to be conducted on May 25, 2025.
   },
   {
     slug: "government/railway",
-    title: "Railway Exam Preparation with ",
+    title: "Railway",
     courseTitle: "Ace Railway Exams 2025 with Confidence",
     description: `
 The Railway Recruitment Board (RRB) exams are national-level competitive examinations conducted to recruit candidates for various technical and non-technical posts in Indian Railways. 
@@ -1972,7 +1972,7 @@ RRB exams 2025 will be conducted in Computer-Based Test (CBT) mode, with notific
         description: "The online application window for RRB ALP 2025 is now open from January 20, 2025. ",
       },
 
-       {
+      {
         category: "Deadline",
         description: "The deadline for submitting applications is February 19, 2025 (11:59 PM). ",
       },
@@ -2006,7 +2006,7 @@ RRB exams 2025 will be conducted in Computer-Based Test (CBT) mode, with notific
         answer: "Candidates can apply through the official RRB website of their respective region when the notification is released. ",
       },
 
-        {
+      {
         question: "What is the difficulty level of the RRB exam? ",
         answer: "The difficulty level is usually moderate; however, competition is high due to the large number of applicants. ",
       },
@@ -3117,7 +3117,7 @@ NIFT PG 2025 will be conducted in a Computer-Based Test (CBT) mode in early 2025
           "Work experience is not mandatory for M.Des and M.F.Tech, but may be considered an added advantage for M.F.M candidates. ",
       },
 
-        {
+      {
         question: "Where can I apply for NIFT PG 2025? ",
         answer:
           "You can apply online through the official website of NIFT: www.nift.ac.in ",
@@ -4444,7 +4444,7 @@ The Institute of Banking Personnel Selection (IBPS) Regional Rural Banks (RRB) e
   },
   {
     slug: "bank/nabard",
-    title: "NABARD Grade A",
+    title: "NABARD",
     courseTitle: "Crack NABARD Grade A 2025 with ",
     description:
       "NABARD Grade A preparation focuses on the National Bank for Agriculture and Rural Development's exam for Assistant Manager roles. The course covers Reasoning, Quantitative Aptitude, English, General Awareness, Computer Knowledge, and specialized subjects like Agriculture and Rural Development. It equips candidates for Prelims, Mains, and Interview stages to secure a prestigious banking role.",

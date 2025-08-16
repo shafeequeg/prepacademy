@@ -292,7 +292,36 @@ const CourseEnrollmentPortal: React.FC = () => {
         setActiveCourse(course.title || "");
       }
     } else {
-      setActiveCourse(courseIdentifier);
+      // When a course is selected from CourseList, find its subject and open that tab
+      const selectedCourse = salesCourses.find(
+        (course) => course.title === courseIdentifier
+      );
+      
+      if (selectedCourse) {
+        // Find the section for this course
+        const courseSection = salesSection.find(
+          (section) => section.id?.toString() === selectedCourse.section?.toString()
+        );
+        
+        if (courseSection) {
+          // Find the subject for this section
+          const subject = salesSubjects.find(
+            (subject) => subject.id?.toString() === courseSection.subject?.toString()
+          );
+          
+          if (subject) {
+            // Set the active subject tab
+            setActiveSubTab(subject.id?.toString() || "");
+          }
+        }
+        
+        // Set the active course
+        
+        setActiveCourse(courseIdentifier);
+      } else {
+        // Fallback: just set the course
+        setActiveCourse(courseIdentifier);
+      }
     }
   };
 

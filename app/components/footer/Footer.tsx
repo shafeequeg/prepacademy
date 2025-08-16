@@ -98,6 +98,8 @@ const Footer = () => {
             </ul>
           </div>
 
+          
+
           <div className="flex flex-col">
             <div className="mb-8 text-center md:text-left">
               <h3 className="text-white font-medium text-lg mb-4">
@@ -106,9 +108,11 @@ const Footer = () => {
               <ul className="space-y-3">
                 {[
                   { text: "Contact us", link: "/contact" },
+                  { text: "Career", link: "/careers" },
                   { text: "Find a Centre", link: "/findacenter" },
                   { text: "Become a Franchise", link: "/becomeafranchise" },
                   { text: "Become an Employee", link: "/becomeanemployee" },
+                
                 ].map((item, index) => (
                   <li key={index}>
                     <a

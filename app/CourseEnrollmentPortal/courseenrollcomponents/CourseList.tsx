@@ -30,9 +30,9 @@ const CourseList: React.FC<CourseListProps> = React.memo(
   }) => {
     // Enhanced course click handler with mobile scroll
     const handleViewDetailsClickWithScroll = (course: CourseData) => {
-      // Pass the course UUID/ID to show course details
-      const courseId = course.uuid?.toString() || course.id?.toString() || "";
-      handleCourseClick(courseId, false);
+      // Pass the course title to show course details and ensure proper sidebar highlighting
+      const courseTitle = course.title || "";
+      handleCourseClick(courseTitle, false);
       
       // Add scroll behavior for mobile screens only
       if (window.innerWidth < 768) { // md breakpoint

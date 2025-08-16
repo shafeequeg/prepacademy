@@ -84,15 +84,14 @@ const StudentTestimonials = () => {
   const [visibleItems, setVisibleItems] = useState(4);
 
 
-  
+
   // Function to render stars
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
         key={index}
-        className={`w-4 h-4 ${
-          index < rating ? "fill-current text-[#F55D3E]" : "fill-current text-gray-400"
-        }`}
+        className={`w-4 h-4 ${index < rating ? "fill-current text-[#F55D3E]" : "fill-current text-gray-400"
+          }`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -144,7 +143,7 @@ const StudentTestimonials = () => {
 
   // Calculate how many slides are needed based on visible items
   const totalSlides = Math.ceil(testimonials.length / visibleItems);
-  
+
   // Handle manual navigation
   const goToSlide = (index: number) => {
     if (carouselRef.current) {
@@ -154,19 +153,20 @@ const StudentTestimonials = () => {
         behavior: "smooth",
       });
     }
-  };  
+  };
 
   return (
     <section className="py-16 bg-[#231815] text-white mt-5">
       <div className="container mx-auto px-4 md:px-8">
         {/* Row 1: Heading and Motivational Text */}
+
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-medium mb-4">
             <span className="font-dmserif italic"> Read what Our{" "}</span>
             <span className="text-[#F55D3E] font-bold">Students Say</span>
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Are you ready to conquer the world? Your CAT 2024 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
+            Are you ready to conquer the world? Your CAT 2025 journey might seem daunting, but remember, every great achievement starts with a single step. Believe in yourself, because you hold the power to make your dreams a reality!
           </p>
         </div>
 
@@ -186,15 +186,14 @@ const StudentTestimonials = () => {
                   .map((testimonial) => (
                     <div
                       key={testimonial.id}
-                      className={`p-2 ${
-                        visibleItems === 1
-                          ? 'w-full'
-                          : visibleItems === 2
+                      className={`p-2 ${visibleItems === 1
+                        ? 'w-full'
+                        : visibleItems === 2
                           ? 'w-1/2'
                           : visibleItems === 3
-                          ? 'w-1/3'
-                          : 'w-1/4'
-                      }`}
+                            ? 'w-1/3'
+                            : 'w-1/4'
+                        }`}
                     >
                       <div className="bg-[#2C2422] p-6 rounded-lg shadow-md h-full">
                         {/* Avatar and Name */}
@@ -214,9 +213,9 @@ const StudentTestimonials = () => {
 
                         {/* Comment */}
                         <p className="text-sm text-gray-300">
-  {testimonial.comment.split(" ").slice(0, 20).join(" ")}
-  {testimonial.comment.split(" ").length > 20 ? "..." : ""}
-</p>
+                          {testimonial.comment.split(" ").slice(0, 20).join(" ")}
+                          {testimonial.comment.split(" ").length > 20 ? "..." : ""}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -230,9 +229,8 @@ const StudentTestimonials = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`mx-1 h-2 w-2 rounded-full ${
-                  currentIndex === index ? 'bg-[#F55D3E]' : 'bg-gray-400'
-                }`}
+                className={`mx-1 h-2 w-2 rounded-full ${currentIndex === index ? 'bg-[#F55D3E]' : 'bg-gray-400'
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
