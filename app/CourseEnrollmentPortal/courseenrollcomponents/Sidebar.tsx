@@ -61,6 +61,18 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
     const [salesCoursessection, setsalesCoursessection] = useState<
       CourseData[]
     >([]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Check if screen is mobile
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const fetchSaleCourse = async () => {
       try {
@@ -136,9 +148,6 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
         }, 100); // Small delay to ensure DOM is updated
       }
     };
-
-
-    
 
     // Function to get filtered sections for a subject
     const getFilteredSections = (subjectId: string) => {
@@ -237,6 +246,90 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
     console.log(activeCategorySubjects);
     console.log(activeSubTab);
 
+    // Mobile Layout
+    if (isMobile) {
+      return (
+        <div className="bg-gray-800 rounded-lg shadow-md border border-orange-600 mb-4">
+          {/* Mobile Header */}
+          <div className="p-3 border-b border-orange-600">
+            <h2 className="font-semibold text-orange-400 text-sm">Categories</h2>
+          </div>
+
+          {/* Mobile Horizontal Scrollable Categories */}
+          <div className="p-2">
+            <div className="flex overflow-x-auto scrollbar-hide space-x-2 pb-2">
+              {activeCategorySubjects.map((subject) => {
+                const subjectId = subject.id?.toString() || "";
+                const isActive = isSubjectActive(subjectId);
+
+                return (
+                  <button
+                    key={subject.id}
+                    className={`flex-shrink-0 px-3 py-2 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap ${isActive
+                        ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white shadow-lg"
+                        : "bg-gray-700 text-orange-300 hover:bg-gray-600 border border-orange-600"
+                      }`}
+                    onClick={() => handleToggleSubTab(subjectId)}
+                  >
+                    {subject.subject_name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile Sections - Show as a modal-like dropdown */}
+          {activeSubTab && (
+            <div className="border-t border-orange-600 bg-gray-750">
+              <div className="p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-medium text-orange-400">
+                    {activeCategorySubjects.find(s => s.id?.toString() === activeSubTab)?.subject_name} Sections
+                  </h3>
+                  <button
+                    onClick={() => handleToggleSubTab("")}
+                    className="text-orange-300 hover:text-orange-400"
+                  >
+                    ×
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">
+                  {getFilteredSections(activeSubTab).map((section) => {
+                    const sectionId = section.id?.toString() || "";
+                    const sectionName = section.section_name || "";
+                    const isSectionActive = isSectionHighlighted(sectionId);
+
+                    return (
+                      <div
+                        key={`${section.id}-${section.section_name}`}
+                        className={`p-3 rounded-lg text-sm transition-all duration-300 cursor-pointer ${isSectionActive
+                            ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white shadow-md"
+                            : "bg-gray-700 text-orange-300 hover:bg-gray-600 border border-gray-600"
+                          }`}
+                        onClick={() => {
+                          handleCourseClickWithScroll(sectionId, true);
+                          // Don't auto-close on mobile, let user see the selection
+                        }}
+                      >
+                        <span className="font-medium">{sectionName}</span>
+                      </div>
+                    );
+                  })}
+                  {getFilteredSections(activeSubTab).length === 0 && (
+                    <div className="p-3 text-sm text-orange-300 opacity-60 text-center">
+                      No sections available
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Desktop Layout (Original)
     return (
       <div className="bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-orange-600">
         <h2 className="font-semibold text-orange-400 mb-4">Categories</h2>
@@ -259,8 +352,8 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
               <div key={subject.id} className="border-b border-orange-600 pb-2">
                 <div
                   className={`flex justify-between items-center py-2 px-3 rounded-md cursor-pointer ${isActive
-                      ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
-                      : "hover:bg-gradient-to-r from-orange-700 to-orange-600 text-orange-300"
+                    ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
+                    : "hover:bg-gradient-to-r from-orange-700 to-orange-600 text-orange-300"
                     } transition-all duration-300`}
                   onClick={() => handleToggleSubTab(subjectId)}
                 >
@@ -289,8 +382,8 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
                         <div
                           key={`${section.id}-${section.section_name}`}
                           className={`py-1 px-3 text-sm rounded-md cursor-pointer ${isSectionActive
-                              ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
-                              : "text-orange-300 hover:bg-gradient-to-r from-orange-700 to-orange-600"
+                            ? "bg-gradient-to-r from-orange-600 to-orange-500 text-white"
+                            : "text-orange-300 hover:bg-gradient-to-r from-orange-700 to-orange-600"
                             } transition-all duration-300`}
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent parent click
@@ -299,9 +392,6 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
                         >
                           <div className="flex justify-between items-center">
                             <span>{sectionName}</span>
-                            {/* <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded-full">
-                              {courseCount}
-                            </span> */}
                           </div>
                         </div>
                       );
@@ -332,6 +422,15 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
 
           .animate-fadeIn {
             animation: fadeIn 0.3s ease-out;
+          }
+
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
           }
         `}</style>
       </div>

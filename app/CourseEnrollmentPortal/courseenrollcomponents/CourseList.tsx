@@ -16,6 +16,7 @@ interface CourseListProps {
   salesSubjects: SalesSubjects[];
   salesCoursessection?: SalesSection[]; // Changed from any[] to SalesSection[]
   handleCourseClick: (courseId: string, isSection: boolean) => void;
+  searchTerm?: string;
 }
 
 const CourseList: React.FC<CourseListProps> = React.memo(
@@ -27,6 +28,7 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     salesSubjects,
     salesCoursessection = [],
     handleCourseClick,
+    searchTerm = "",
   }) => {
     // Enhanced course click handler with mobile scroll
     const handleViewDetailsClickWithScroll = (course: CourseData) => {
@@ -59,40 +61,61 @@ const CourseList: React.FC<CourseListProps> = React.memo(
       }
     };
 
-    // Function to get filtered courses based on the current selection
+    // Function to get filtered courses based on the current selection and search term
     const getFilteredCourses = () => {
-      if (!activeSubTab) {
-        return [];
-      }
+      let filteredCourses = [];
 
-      if (activeCourse) {
-        // If a specific section is selected, show courses for that section
-        const matchingCourseSection = salesCoursessection.find(
-          (courseSection) => courseSection.id?.toString() === activeCourse
-        );
-
-        if (!matchingCourseSection) {
+      // If there's a search term, search across all courses
+      if (searchTerm.trim()) {
+        const searchLower = searchTerm.toLowerCase();
+        filteredCourses = salesCourses.filter((course) => {
+          const title = course.title?.toLowerCase() || "";
+          const description = course.description?.toLowerCase() || "";
+          const courseDescription = course.course_description?.toLowerCase() || "";
+          
+          return (
+            title.includes(searchLower) ||
+            description.includes(searchLower) ||
+            courseDescription.includes(searchLower)
+          );
+        });
+      } else {
+        // Original filtering logic when no search term
+        if (!activeSubTab) {
           return [];
         }
 
-        return salesCourses.filter(
-          (course) =>
-            course.section?.toString() === matchingCourseSection.id?.toString()
-        );
-      } else {
-        // If no specific section is selected, show all courses for the subject
-        const matchingCourseSections = salesCoursessection.filter(
-          (courseSection) => courseSection.subject?.toString() === activeSubTab
-        );
+        if (activeCourse) {
+          // If a specific section is selected, show courses for that section
+          const matchingCourseSection = salesCoursessection.find(
+            (courseSection) => courseSection.id?.toString() === activeCourse
+          );
 
-        const sectionIds = matchingCourseSections.map((section) =>
-          section.id?.toString()
-        );
+          if (!matchingCourseSection) {
+            return [];
+          }
 
-        return salesCourses.filter((course) =>
-          sectionIds.includes(course.section?.toString())
-        );
+          filteredCourses = salesCourses.filter(
+            (course) =>
+              course.section?.toString() === matchingCourseSection.id?.toString()
+          );
+        } else {
+          // If no specific section is selected, show all courses for the subject
+          const matchingCourseSections = salesCoursessection.filter(
+            (courseSection) => courseSection.subject?.toString() === activeSubTab
+          );
+
+          const sectionIds = matchingCourseSections.map((section) =>
+            section.id?.toString()
+          );
+
+          filteredCourses = salesCourses.filter((course) =>
+            sectionIds.includes(course.section?.toString())
+          );
+        }
       }
+
+      return filteredCourses;
     };
 
     const filteredCourses = getFilteredCourses();
@@ -117,8 +140,8 @@ const CourseList: React.FC<CourseListProps> = React.memo(
     console.log("Section Name:", sectionName);
     console.log("Active Sub Tab:", activeSubTab);
 
-    // Render message if no activeSubTab is selected
-    if (!activeSubTab) {
+    // Render message if no activeSubTab is selected and no search term
+    if (!activeSubTab && !searchTerm.trim()) {
       return (
         <div className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-content">
           <div className="text-center py-12">
@@ -134,8 +157,10 @@ const CourseList: React.FC<CourseListProps> = React.memo(
       );
     }
 
-    // Determine the header text based on whether a section is selected
-    const headerText = activeCourse
+    // Determine the header text based on whether a section is selected or searching
+    const headerText = searchTerm.trim()
+      ? `Search Results for "${searchTerm}"`
+      : activeCourse
       ? `${subjectName} - ${sectionName}`
       : subjectName;
 
@@ -148,18 +173,22 @@ const CourseList: React.FC<CourseListProps> = React.memo(
           <p className="text-sm text-orange-300 mt-1">
             {filteredCourses.length} course
             {filteredCourses.length !== 1 ? "s" : ""} available
-            {!activeCourse && " (All sections)"}
+            {searchTerm.trim() 
+              ? " (Search results)" 
+              : !activeCourse && " (All sections)"}
           </p>
         </div>
 
         {filteredCourses.length === 0 ? (
           <div className="text-center py-12">
             <h3 className="text-lg font-medium text-orange-400 mb-2">
-              No courses available
+              {searchTerm.trim() ? "No search results found" : "No courses available"}
             </h3>
             <p className="text-orange-300">
-              There are currently no courses available for this{" "}
-              {activeCourse ? "section" : "subject"}.
+              {searchTerm.trim() 
+                ? `No courses found matching "${searchTerm}". Try a different search term.`
+                : `There are currently no courses available for this ${activeCourse ? "section" : "subject"}.`
+              }
             </p>
           </div>
         ) : (

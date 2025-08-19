@@ -172,7 +172,7 @@ const StudentTestimonials = () => {
 
         {/* Carousel Container */}
         <div className="relative">
-          {/* Row 2: Testimonials Carousel */}
+         
           <div
             ref={carouselRef}
             className="flex overflow-x-hidden scroll-smooth relative"
@@ -235,6 +235,7 @@ const StudentTestimonials = () => {
               />
             ))}
           </div>
+
         </div>
       </div>
     </section>

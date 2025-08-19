@@ -72,7 +72,7 @@ const MyCourses = () => {
   }, []);
 
   // Filter courses based on search term
-  const filteredCourses = purchasedCourses.filter(course => 
+  const filteredCourses = purchasedCourses.filter(course =>
     course.course_details.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -82,30 +82,28 @@ const MyCourses = () => {
     return saleCourse?.thumbnail || '/images/default-course.jpg';
   };
 
-
-  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100">
-      {/* Header with gradient background similar to the image */}
-      <div className="bg-gradient-to-r from-orange-400 via-orange-500 to-[#F55D3E] text-white p-8 shadow-lg ">
+    <div className="min-h-screen bg-[#2B1615]">
+      {/* Header with background using logo colors */}
+      <div className="bg-orange-600 text-white p-8 shadow-xl">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold tracking-wider mt-28">My Learning Journey</h1>
+          <h1 className="text-3xl font-bold tracking-wider mt-28 text-white">My Learning Journey</h1>
           <p className="mt-2 text-red-100">Continue where you left off and build your skills</p>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Search with improved styling */}
+        {/* Search with improved styling using orange theme */}
         <div className="mb-8">
           <div className="relative max-w-md mx-auto">
-            <input 
-              type="text" 
-              placeholder="Search my courses" 
-              className="w-full pl-5 pr-12 py-3 border-0 rounded-full shadow-md focus:ring-2 focus:ring-red-400 outline-none transition-all"
+            <input
+              type="text"
+              placeholder="Search my courses"
+              className="w-full pl-5 pr-12 py-3 border-0 rounded-full shadow-lg bg-slate-800 text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-400 outline-none transition-all"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="absolute right-4 top-3.5 text-red-500">
+            <button className="absolute right-4 top-3.5 text-teal-400 hover:text-teal-300 transition-colors">
               <FiSearch size={20} />
             </button>
           </div>
@@ -114,39 +112,39 @@ const MyCourses = () => {
         {/* Courses Grid */}
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-400"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCourses.length > 0 ? (
               filteredCourses.map((course) => (
-                <div key={course.course_uuid} className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-                  <div className="relative h-48 bg-gray-200">
-                    <Image 
-                      src={getCourseThumbnail(course.course_uuid)} 
+                <div key={course.course_uuid} className="bg-slate-800 rounded-xl shadow-xl overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl border-2 border-slate-700 hover:border-teal-500">
+                  <div className="relative h-48 bg-slate-700">
+                    <Image
+                      src={getCourseThumbnail(course.course_uuid)}
                       alt={course.course_details.title}
                       layout="fill"
                       objectFit="cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
-                    <div className="absolute bottom-3 right-3 bg-[#F55D3E] text-white text-xs font-bold px-2 py-1 rounded-full">
+                    <div className="absolute inset-0 bg-slate-900 opacity-60"></div>
+                    <div className="absolute bottom-3 right-3 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                       {course.course_details.duration}
                     </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-bold text-xl mb-2 text-gray-800">{course.course_details.title}</h3>
-                    <p className="text-sm text-gray-500 mb-4 flex items-center">
+                  <div className="p-5 bg-slate-800">
+                    <h3 className="font-bold text-xl mb-2 text-white">{course.course_details.title}</h3>
+                    <p className="text-sm text-slate-300 mb-4 flex items-center">
                       <span className="mr-1">📅</span>
                       Purchased: {new Date(course.timestamp).toLocaleDateString()}
                     </p>
                     <div className="flex items-center mb-3">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div className="bg-gradient-to-r from-red-400 to-[#F55D3E] h-2.5 rounded-full" style={{ width: '0%' }}></div>
+                      <div className="w-full bg-orange-800/50 rounded-full h-2.5 shadow-inner">
+                        <div className="bg-gradient-to-r from-orange-400 via-red-400 to-amber-400 h-2.5 rounded-full shadow-sm" style={{ width: '0%' }}></div>
                       </div>
-                      <span className="ml-2 text-xs font-medium text-gray-500">0%</span>
+                      <span className="ml-2 text-xs font-medium text-orange-300">0%</span>
                     </div>
                     <div className="mt-4">
-                      <button className="w-full py-3 bg-gradient-to-r from-orange-400 to-[#F55D3E] text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all flex items-center justify-center">
+                      <button className="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <FiBookOpen className="mr-2" />
                         Continue Learning
                       </button>
@@ -156,22 +154,22 @@ const MyCourses = () => {
               ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-gray-600 text-lg">No courses found. Try adjusting your search.</p>
+                <p className="text-slate-300 text-lg">No courses found. Try adjusting your search.</p>
               </div>
             )}
           </div>
         )}
 
-        {/* No courses message with improved styling */}
+        {/* No courses message with improved styling using orange theme */}
         {!isLoading && purchasedCourses.length === 0 && (
-          <div className="text-center py-14 bg-white rounded-xl shadow-lg p-8 mx-auto max-w-2xl">
-            <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FiBookOpen size={40} className="text-red-500" />
+          <div className="text-center py-14 bg-slate-800 rounded-xl shadow-2xl p-8 mx-auto max-w-2xl border-2 border-slate-700">
+            <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <FiBookOpen size={40} className="text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Your Learning Library is Empty</h3>
-            <p className="text-gray-600 mb-8">Discover and enroll in courses that align with your career goals and interests.</p>
-            <Link href="/allcourses">
-              <span className="px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all font-medium">
+            <h3 className="text-2xl font-bold text-white mb-4">Your Learning Library is Empty</h3>
+            <p className="text-slate-300 mb-8">Discover and enroll in courses that align with your career goals and interests.</p>
+            <Link href="/CourseEnrollmentPortal">
+              <span className="px-8 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 Explore Courses
               </span>
             </Link>

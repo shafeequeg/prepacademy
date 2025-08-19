@@ -52,6 +52,7 @@ const CourseEnrollmentPortal: React.FC = () => {
   const [pendingAction, setPendingAction] = useState<
     "buy" | "cart" | "wishlist" | null
   >(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
@@ -218,7 +219,7 @@ const CourseEnrollmentPortal: React.FC = () => {
         localStorage.removeItem("wishlistItems"); // Clear invalid data
       }
     }
-  }, []); 
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -296,27 +297,27 @@ const CourseEnrollmentPortal: React.FC = () => {
       const selectedCourse = salesCourses.find(
         (course) => course.title === courseIdentifier
       );
-      
+
       if (selectedCourse) {
         // Find the section for this course
         const courseSection = salesSection.find(
           (section) => section.id?.toString() === selectedCourse.section?.toString()
         );
-        
+
         if (courseSection) {
           // Find the subject for this section
           const subject = salesSubjects.find(
             (subject) => subject.id?.toString() === courseSection.subject?.toString()
           );
-          
+
           if (subject) {
             // Set the active subject tab
             setActiveSubTab(subject.id?.toString() || "");
           }
         }
-        
+
         // Set the active course
-        
+
         setActiveCourse(courseIdentifier);
       } else {
         // Fallback: just set the course
@@ -602,6 +603,21 @@ const CourseEnrollmentPortal: React.FC = () => {
   const openCartModal = () => setIsCartModalOpen(true);
   const closeCartModal = () => setIsCartModalOpen(false);
 
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    // Clear current selections when searching
+    if (searchTerm.trim()) {
+      setActiveSubTab("");
+      setActiveCourse("");
+    }
+  };
+
+  // Wrapper function for course selection from search suggestions
+  const handleCourseSelectFromSearch = (courseTitle: string) => {
+    console.log('Course selected from search:', courseTitle);
+    handleCourseClick(courseTitle, false);
+  };
+
   // const handleWishlistEnroll = (item: WishlistItem) => {
   //   const userData = localStorage.getItem("user");
   //   let user_uuid = "";
@@ -740,13 +756,26 @@ const CourseEnrollmentPortal: React.FC = () => {
       )}
 
       <main className="container mx-auto px-4 py-8">
+
         <CategoryTabs
           salesCategories={salesCategories}
           activeMainTab={activeMainTab}
           setActiveMainTab={setActiveMainTab}
           setActiveSubTab={setActiveSubTab}
           setActiveCourse={setActiveCourse}
+          onSearch={handleSearch}
+          onCourseSelect={handleCourseSelectFromSearch}
+          allCourses={salesCourses}
         />
+        {/* Debug info */}
+        {/* {process.env.NODE_ENV === 'development' && (
+          <div className="text-xs text-gray-500 mt-2">
+          Total Courses : {salesCourses.length} courses 
+          </div>
+        )} */}
+
+
+
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-4">
           <Sidebar
             activeMainTab={activeMainTab}
@@ -784,9 +813,11 @@ const CourseEnrollmentPortal: React.FC = () => {
               salesSubjects={salesSubjects}
               salesCoursessection={salesSection}
               handleCourseClick={handleCourseClick}
+              searchTerm={searchTerm}
             />
           )}
         </div>
+
       </main>
       <WishlistModal
         isOpen={isWishlistModalOpen}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown, Clock, Users, Star, Globe, Calendar, Award, PlayCircle, Download, Shield, BookOpen, Target } from "lucide-react";
+import { ChevronDown, Clock,  Globe, Award, PlayCircle, Download, Shield, BookOpen, Target } from "lucide-react";
 import { CourseData } from "./types";
 import LoginModal from "@/app/components/login/Login";
 
@@ -36,7 +36,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
     onLoginSuccess,
     salesSection,
     salesCategories,
-    activeMainTab,
+    // activeMainTab,
     setActiveMainTab,
   }) => {
     const handleBackToCourses = () => {
@@ -97,16 +97,16 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
     console.log(cleanId);
 
     // Mock data for demonstration (you can replace with actual data)
-    const mockRating = 4.6;
-    const mockReviews = 12694;
-    const mockStudents = 93230;
+    // const mockRating = 4.6;
+    // const mockReviews = 12694;
+    // const mockStudents = 93230;
     const mockLanguage = "English";
 
     const originalPrice = Math.floor(Number(currentCourseData.amount)) + Math.floor(Math.random() * 9000 + 1000);
     const discountPercentage = Math.round(((originalPrice - Number(currentCourseData.amount)) / originalPrice) * 100);
 
     // Calculate estimated course duration in hours from description/features
-    const estimatedHours = Math.floor(Math.random() * 20) + 8; // 8-28 hours range
+    const estimatedHours = 150; // 8-28 hours range
     const weeklyCommitment = Math.floor(estimatedHours / 4) + 1; // Assuming 4 weeks completion
 
     // Extract course benefits from features
@@ -117,11 +117,11 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
 
     return (
       <div
-        className="bg-gray-800 rounded-lg shadow-md p-6 md:col-span-3 border border-orange-600 course-details text-white"
+        className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 md:col-span-3 border border-orange-600 course-details text-white"
         id={cleanId}
       >
         {/* Back to courses button */}
-        <div className="mb-6">
+        <div className="mb-4 md:mb-6">
           <button
             onClick={handleBackToCourses}
             className="text-orange-300 flex items-center text-sm hover:text-orange-200 transition-colors duration-300"
@@ -131,13 +131,74 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
           </button>
         </div>
 
+        {/* Mobile Hero Section */}
+        <div className="block md:hidden mb-6">
+          <div className="relative">
+            {/* Course Image - Mobile optimized */}
+            <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
+              <Image
+                src={currentCourseData.image || "/default-course.jpg"}
+                alt={currentCourseData.title || "Course image"}
+                fill
+                className="object-cover"
+              />
+              {/* Overlay with key info */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-2 py-1 rounded text-xs font-medium">
+                    <Award size={12} className="inline mr-1" />
+                    Bestseller
+                  </div>
+                  <div className="bg-orange-500 text-white px-2 py-1 rounded text-xs font-medium">
+                    {discountPercentage}% off
+                  </div>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-lg font-bold text-white">
+                    ₹{parseFloat(currentCourseData.amount).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                  </span>
+                  <span className="text-xs text-gray-300 line-through">
+                    ₹{originalPrice.toLocaleString("en-US")}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Course Title and Description - Mobile */}
+            <div className="mb-4">
+              <h1 className="text-lg font-bold text-white mb-2 leading-tight">
+                {currentCourseData.title}
+              </h1>
+              <p className="text-sm text-orange-300 mb-3 leading-relaxed line-clamp-3">
+                {currentCourseData.description}
+              </p>
+
+              {/* Quick Course Info - Mobile */}
+              <div className="flex flex-wrap items-center gap-3 text-xs">
+                <div className="flex items-center gap-1 text-orange-300">
+                  <Clock size={12} />
+                  <span>{currentCourseData.duration}</span>
+                </div>
+                <div className="flex items-center gap-1 text-orange-300">
+                  <Globe size={12} />
+                  <span>{mockLanguage}</span>
+                </div>
+                <div className="flex items-center gap-1 text-orange-300">
+                  <Target size={12} />
+                  <span>All Levels</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Main content */}
-        <div className="pb-8">
+        <div className="pb-20 md:pb-8">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             {/* Left column - Course info */}
             <div className="xl:col-span-2">
-              {/* Header section */}
-              <div className="mb-6">
+              {/* Header section - Desktop only */}
+              <div className="hidden md:block mb-6">
                 <h1 className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight">
                   {currentCourseData.title}
                 </h1>
@@ -147,29 +208,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
 
                 {/* Course meta info with rating */}
                 <div className="flex flex-wrap items-center gap-4 mb-4">
-                  {/* <div className="flex items-center gap-2">
-                    <span className="text-orange-400 font-bold">{mockRating}</span>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={14}
-                          className={i < Math.floor(mockRating) 
-                            ? "fill-orange-400 text-orange-400" 
-                            : i < mockRating 
-                            ? "fill-orange-400/50 text-orange-400" 
-                            : "text-gray-500"}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-orange-300 underline cursor-pointer text-sm">
-                      ({mockReviews.toLocaleString()} reviews)
-                    </span>
-                  </div> */}
-                  {/* <div className="flex items-center gap-1 text-orange-300">
-                    <Users size={14} />
-                    <span className="text-sm">{mockStudents.toLocaleString()} students</span>
-                  </div> */}
                   <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                     <Award size={14} className="inline mr-1" />
                     Bestseller
@@ -179,12 +217,10 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                     <span className="text-sm">{mockLanguage}</span>
                   </div>
                 </div>
-
-
               </div>
 
-              {/* Course image for mobile/tablet */}
-              <div className="xl:hidden mb-6">
+              {/* Course image for tablet */}
+              <div className="hidden md:block xl:hidden mb-6">
                 <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden">
                   <Image
                     src={currentCourseData.image || "/default-course.jpg"}
@@ -196,69 +232,101 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                 </div>
               </div>
 
-              {/* What you'll learn section */}
+              {/* What you'll learn section - Mobile optimized */}
+
               <div className="mb-6">
-                <h2 className="text-xl font-bold text-orange-400 mb-4">What you'll learn</h2>
-                <div className="bg-gray-700 p-4 rounded-lg border border-orange-600/30">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                    {courseFeatures.slice(0, 8).map((feature, index) => (
+                <h2 className="text-lg md:text-xl font-bold text-orange-400 mb-3 md:mb-4">What you&apos;ll learn </h2>
+                <div className="bg-gray-700 p-3 md:p-4 rounded-lg border border-orange-600/30">
+                  <div className="grid grid-cols-1 gap-2 md:gap-3">
+                    {courseFeatures.slice(0, window.innerWidth < 768 ? 6 : 8).map((feature, index) => (
                       <div key={index} className="flex items-start gap-2">
-                        <div className="w-4 h-4 mt-0.5 flex-shrink-0">
-                          <svg viewBox="0 0 24 24" className="text-green-400 w-4 h-4">
+                        <div className="w-3 h-3 md:w-4 md:h-4 mt-0.5 flex-shrink-0">
+                          <svg viewBox="0 0 24 24" className="text-green-400 w-full h-full">
                             <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                           </svg>
                         </div>
-                        <span className="text-orange-300 text-sm leading-relaxed">
+                        <span className="text-orange-300 text-xs md:text-sm leading-relaxed">
                           {feature}
                         </span>
                       </div>
                     ))}
+                    {courseFeatures.length > 6 && window.innerWidth < 768 && (
+                      <div className="text-orange-400 text-xs mt-2">
+                        +{courseFeatures.length - 6} more features...
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Course Description */}
-
+              {/* Course Description - Mobile optimized */}
               <div className="mb-6">
-                <h2 className="text-xl font-bold text-orange-400 mb-4">Course Description</h2>
-                <div className="text-orange-300 leading-relaxed text-sm">
-                  <p>{currentCourseData.course_description}</p>
+                <h2 className="text-lg md:text-xl font-bold text-orange-400 mb-3 md:mb-4">Course Description</h2>
+                <div className="text-orange-300 leading-relaxed text-xs md:text-sm">
+                  <p className="md:block">
+                    <span className="md:hidden line-clamp-4">{currentCourseData.course_description}</span>
+                    <span className="hidden md:inline">{currentCourseData.course_description}</span>
+                  </p>
                 </div>
               </div>
 
-
-              {/* Course Details */}
+              {/* Course Details - Mobile optimized */}
               <div className="mb-6">
-                <h2 className="text-xl font-bold text-orange-400 mb-4">Course Details</h2>
-                <div className="bg-gray-700 p-4 rounded-lg border border-orange-600/30">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-center gap-3">
-                      <BookOpen className="text-orange-400" size={20} />
+                <h2 className="text-lg md:text-xl font-bold text-orange-400 mb-3 md:mb-4">Course Details</h2>
+                <div className="bg-gray-700 p-3 md:p-4 rounded-lg border border-orange-600/30">
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-4">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <BookOpen className="text-orange-400" size={16} />
                       <div>
-                        <p className="text-white font-medium text-sm">Duration</p>
-                        <p className="text-orange-300 text-sm">{currentCourseData.duration}</p>
+                        <p className="text-white font-medium text-xs md:text-sm">Duration</p>
+                        <p className="text-orange-300 text-xs md:text-sm">{currentCourseData.duration}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="text-orange-400" size={20} />
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <Clock className="text-orange-400" size={16} />
                       <div>
-                        <p className="text-white font-medium text-sm">Weekly Commitment</p>
-                        <p className="text-orange-300 text-sm">{weeklyCommitment}-{weeklyCommitment + 1} hours/week</p>
+                        <p className="text-white font-medium text-xs md:text-sm">Weekly</p>
+                        <p className="text-orange-300 text-xs md:text-sm">{weeklyCommitment}-{weeklyCommitment + 1} hrs/week</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Target className="text-orange-400" size={20} />
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <Target className="text-orange-400" size={16} />
                       <div>
-                        <p className="text-white font-medium text-sm">Skill Level</p>
-                        <p className="text-orange-300 text-sm">Beginner to Advanced</p>
+                        <p className="text-white font-medium text-xs md:text-sm">Level</p>
+                        <p className="text-orange-300 text-xs md:text-sm">All Levels</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Download className="text-orange-400" size={20} />
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <Download className="text-orange-400" size={16} />
                       <div>
-                        <p className="text-white font-medium text-sm">Resources</p>
-                        <p className="text-orange-300 text-sm">Downloadable materials</p>
+                        <p className="text-white font-medium text-xs md:text-sm">Resources</p>
+                        <p className="text-orange-300 text-xs md:text-sm">Downloads</p>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Course Includes - Mobile Section */}
+              <div className="block md:hidden mb-6">
+                <h2 className="text-lg font-bold text-orange-400 mb-3">This course includes</h2>
+                <div className="bg-gray-700 rounded-lg p-3 border border-orange-600/30">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-2 text-orange-300 text-xs">
+                      <PlayCircle size={12} />
+                      <span>{estimatedHours}+ hrs video</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-orange-300 text-xs">
+                      <Download size={12} />
+                      <span>Resources</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-orange-300 text-xs">
+                      <Shield size={12} />
+                      <span>Lifetime access</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-orange-300 text-xs">
+                      <Award size={12} />
+                      <span>Certificate</span>
                     </div>
                   </div>
                 </div>
@@ -362,8 +430,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                       </div>
                     </div>
 
-
-
                     {/* Wishlist button */}
                     <button
                       onClick={addToWishlist}
@@ -376,10 +442,10 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-1 text-green-400 text-xs mb-1">
                         <Shield size={12} />
-                        <span className="font-medium">30-Day Money-Back Guarantee</span>
+                        <span className="font-medium">7-Day Money-Back Guarantee</span>
                       </div>
                       <p className="text-gray-400 text-xs">
-                        Not satisfied? Get a full refund within 30 days
+                        Not satisfied? Get a full refund within 7 days
                       </p>
                     </div>
                   </div>
@@ -388,10 +454,11 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
             </div>
           </div>
 
-          {/* Mobile sticky bottom bar */}
-          <div className="xl:hidden fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-orange-600 p-3 shadow-xl z-50">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex-1">
+          {/* Enhanced Mobile sticky bottom bar */}
+          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-t border-orange-600 shadow-xl z-50">
+            {/* Top section with pricing and guarantee */}
+            <div className="px-4 py-2 border-b border-gray-700">
+              <div className="flex items-center justify-between">
                 <div className="flex items-baseline gap-2">
                   <span className="text-lg font-bold text-white">
                     ₹{parseFloat(currentCourseData.amount).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
@@ -403,18 +470,27 @@ const CourseDetails: React.FC<CourseDetailsProps> = React.memo(
                     {discountPercentage}% off
                   </span>
                 </div>
+                <div className="flex items-center gap-1 text-green-400 text-xs">
+                  <Shield size={12} />
+                  <span>7-day refund</span>
+                </div>
               </div>
-              <div className="flex gap-2">
+            </div>
+
+            {/* Bottom section with action buttons */}
+            <div className="px-4 py-3">
+              <div className="flex gap-3">
                 <button
                   onClick={addToCart}
-                  className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded font-medium transition-all duration-300 text-sm"
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2.5 px-3 rounded-lg font-medium transition-all duration-300 text-sm border border-orange-500/30"
                 >
                   Add to Cart
                 </button>
                 <button
                   onClick={handleEnrollNow}
                   disabled={isEnrolling}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-2 px-4 rounded font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="flex-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-2.5 px-6 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-lg"
+                  style={{ flex: '2' }}
                 >
                   {isEnrolling ? "Processing..." : "Buy Now"}
                 </button>

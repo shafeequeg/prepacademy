@@ -51,6 +51,23 @@ export const API_URLS = {
     GET_USERDATA: "api/user-responses/",
   },
 
+    FRANCHISE: {
+    POST_FRANCHISE: "api/franchises/",
+  },
+
+   POSITION: {
+    GET_POSITION: "api/positions/",
+  },
+
+
+   CAREERS: {
+    POST_CAREERS: "api/careers-application/",
+  },
+
+     NOTIFICATION: {
+    POST_NOTIFICATION: "api/notifications/",
+  },
+
 
   USERS: {
     GET_USERS: "api/form/",

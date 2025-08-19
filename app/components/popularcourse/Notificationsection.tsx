@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import axiosInstance from "../apiconfig/axios";
 import { API_URLS } from "../apiconfig/api_urls";
@@ -9,6 +8,19 @@ import { API_URLS } from "../apiconfig/api_urls";
 interface NotificationTabProps {
   title: string;
   formLabel: string;
+}
+
+
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+      error?: string;
+    };
+    status?: number;
+  };
+  request?: unknown;
+  message?: string;
 }
 
 interface Courses {
@@ -24,17 +36,19 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     name: "",
-    number: "",
+    phone: "",
     email: "",
-    selection: "",
-    subcourse: "",
-    targetYear: "",
-    timeSlot: "",
+    course_id: "",
+    subject_id: "",
+    target_year: "",
+    slot_date: "",
+    slot_time: "",
   });
   const [course, setcourse] = useState<Courses[]>([]);
   const [uniqueSubjects, setUniqueSubjects] = useState<string[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Courses[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Get tomorrow's date in YYYY-MM-DD format
   const getTomorrowDate = () => {
@@ -60,14 +74,14 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
       }));
     }
 
-    // When subject is selected, filter courses for that subject and reset subcourse
-    if (name === "selection" && value) {
-      const coursesForSubject = course.filter((c) => c.subject_name === value);
+    // When course is selected, filter subjects for that course and reset subject
+    if (name === "course" && value) {
+      const coursesForSubject = course.filter((c) => c.subject.toString() === value);
       setFilteredCourses(coursesForSubject);
-      // Reset subcourse when main course changes
+      // Reset subject when main course changes
       setFormData((prev) => ({
         ...prev,
-        subcourse: "",
+        subject: "",
       }));
     }
   };
@@ -104,11 +118,11 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
       newErrors.name = "Name must be at least 2 characters long";
     }
 
-    // Number validation
-    if (!formData.number.trim()) {
-      newErrors.number = "Phone number is required";
-    } else if (!/^\d{10}$/.test(formData.number.replace(/\s/g, ""))) {
-      newErrors.number = "Please enter a valid 10-digit phone number";
+    // Phone validation
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone.replace(/\s/g, ""))) {
+      newErrors.phone = "Please enter a valid 10-digit phone number";
     }
 
     // Email validation
@@ -118,38 +132,45 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
       newErrors.email = "Please enter a valid email address";
     }
 
-    // Selection validation
-    if (!formData.selection) {
-      newErrors.selection = `${formLabel} is required`;
+    // Course validation
+    if (!formData.course_id) {
+      newErrors.course = `${formLabel} is required`;
     }
 
-    // Subcourse validation
-    if (!formData.subcourse) {
-      newErrors.subcourse = "Subcourse is required";
+    // Subject validation
+    if (!formData.subject_id) {
+      newErrors.subject = "Subject is required";
     }
 
     // Target year validation
-    if (!formData.targetYear) {
-      newErrors.targetYear = "Target year is required";
+    if (!formData.target_year) {
+      newErrors.target_year = "Target year is required";
     }
 
-    // Time slot validation
-    if (!formData.timeSlot) {
-      newErrors.timeSlot = "Please select a date";
+    // Slot date validation
+    if (!formData.slot_date) {
+      newErrors.slot_date = "Please select a date";
     } else {
-      const selectedDate = new Date(formData.timeSlot);
+      const selectedDate = new Date(formData.slot_date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       if (selectedDate <= today) {
-        newErrors.timeSlot = "Please select a future date";
+        newErrors.slot_date = "Please select a future date";
       }
     }
+
+    // Slot time validation (optional, you can remove if not needed)
+    // if (!formData.slot_time) {
+    //   newErrors.slot_time = "Please select a time slot";
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -157,33 +178,69 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
       return;
     }
 
-    // EmailJS configuration with dummy tokens
-    const serviceID = "service_dummy123";
-    const templateID = "template_dummy456";
-    const userID = "user_dummy789";
+    setIsSubmitting(true);
 
-    emailjs.send(serviceID, templateID, formData, userID).then(
-      () => {
+    try {
+      // Prepare data for API
+      const apiData = {
+        name: formData.name.trim(),
+        phone: formData.phone.replace(/\s/g, ""), // Remove spaces
+        email: formData.email.trim(),
+        course: parseInt(formData.course_id), // Convert to integer
+        subject: parseInt(formData.subject_id), // Convert to integer
+        target_year: formData.target_year,
+        slot_date: formData.slot_date,
+        slot_time: formData.slot_time || "", // Include slot_time even if empty
+        source: title, // Auto-filled based on current tab
+      };
+
+      const response = await axiosInstance.post(
+        API_URLS.NOTIFICATION.POST_NOTIFICATION,
+        apiData
+      );
+
+      if (response.status === 200 || response.status === 201) {
         toast.success(`${title} form submitted successfully!`);
+
         // Reset form
         setFormData({
           name: "",
-          number: "",
+          phone: "",
           email: "",
-          selection: "",
-          subcourse: "",
-          targetYear: "",
-          timeSlot: "",
+          course_id: "",
+          subject_id: "",
+          target_year: "",
+          slot_date: "",
+          slot_time: "",
         });
         setFilteredCourses([]);
         setErrors({});
-      },
-      (error) => {
-        console.error("EmailJS error:", error);
+      }
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      console.error("API error:", apiError);
+
+      // Handle different error scenarios
+      if (apiError.response) {
+        // Server responded with error status
+        const errorMessage = apiError.response.data?.message ||
+          apiError.response.data?.error ||
+          `Failed to submit ${title} form. Please try again.`;
+        toast.error(errorMessage);
+      } else if (apiError.request) {
+        // Request was made but no response received
+        toast.error("Network error. Please check your connection and try again.");
+      } else {
+        // Something else happened
         toast.error(`Failed to submit ${title} form. Please try again.`);
       }
-    );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  console.log(filteredCourses);
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -351,9 +408,9 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.name ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
+                disabled={isSubmitting}
+                className={`w-full bg-[#220F0F] border ${errors.name ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] disabled:opacity-50 disabled:cursor-not-allowed`}
               />
               {errors.name && (
                 <p className="text-red-500 text-xs mt-1">{errors.name}</p>
@@ -361,20 +418,20 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
             </div>
             <div>
               <label className="block text-white text-sm font-medium mb-2">
-                NUMBER <span className="text-red-500">*</span>
+                PHONE <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                name="number"
-                placeholder="Enter your number"
-                value={formData.number}
+                name="phone"
+                placeholder="Enter your phone number"
+                value={formData.phone}
                 onChange={handleChange}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.number ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
+                disabled={isSubmitting}
+                className={`w-full bg-[#220F0F] border ${errors.phone ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] disabled:opacity-50 disabled:cursor-not-allowed`}
               />
-              {errors.number && (
-                <p className="text-red-500 text-xs mt-1">{errors.number}</p>
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
               )}
             </div>
           </div>
@@ -390,103 +447,106 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full bg-[#220F0F] border ${
-                errors.email ? "border-red-500" : "border-gray-800"
-              } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]`}
+              disabled={isSubmitting}
+              className={`w-full bg-[#220F0F] border ${errors.email ? "border-red-500" : "border-gray-800"
+                } rounded-md px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] disabled:opacity-50 disabled:cursor-not-allowed`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">{errors.email}</p>
             )}
           </div>
 
-          {/* Course and Subcourse in one row */}
+          {/* Course and Subject in one row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-white text-sm font-medium mb-2">
                 {formLabel} <span className="text-red-500">*</span>
               </label>
               <select
-                name="selection"
-                value={formData.selection}
+                name="course_id"
+                value={formData.course_id}
                 onChange={handleChange}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.selection ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer`}
+                disabled={isSubmitting}
+                className={`w-full bg-[#220F0F] border ${errors.course ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 <option value="">Select {formLabel}</option>
-                {uniqueSubjects.map((subject, index) => (
-                  <option key={index} value={subject}>
-                    {subject}
-                  </option>
-                ))}
+                {uniqueSubjects.map((subject, index) => {
+                  // Find the first course with this subject name to get the subject ID
+                  const subjectCourse = course.find(c => c.subject_name === subject);
+                  return (
+                    <option key={index} value={subjectCourse?.subject.toString()}>
+                      {subject}
+                    </option>
+                  );
+                })}
               </select>
-              {errors.selection && (
-                <p className="text-red-500 text-xs mt-1">{errors.selection}</p>
+              {errors.course && (
+                <p className="text-red-500 text-xs mt-1">{errors.course}</p>
               )}
             </div>
             <div>
               <label className="block text-white text-sm font-medium mb-2">
-                SUBCOURSE <span className="text-red-500">*</span>
+                SUBJECT <span className="text-red-500">*</span>
               </label>
               <select
-                name="subcourse"
-                value={formData.subcourse}
+                name="subject_id"
+                value={formData.subject_id}
                 onChange={handleChange}
-                disabled={!formData.selection}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.subcourse ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
+                disabled={!formData.course_id || isSubmitting}
+                className={`w-full bg-[#220F0F] border ${errors.subject ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                <option value="">Select Subcourse</option>
+                <option value="">Select Subject</option>
                 {filteredCourses.map((subcourse) => (
-                  <option key={subcourse.id} value={subcourse.section_name}>
+                  <option key={subcourse.id} value={subcourse.id}>
                     {subcourse.section_name}
                   </option>
                 ))}
               </select>
-              {errors.subcourse && (
-                <p className="text-red-500 text-xs mt-1">{errors.subcourse}</p>
+              {errors.subject && (
+                <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
               )}
             </div>
           </div>
 
-          {/* Target Year and Time Slot in one row */}
+          {/* Target Year and Slot Date in one row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
               <label className="block text-white text-sm font-medium mb-2">
                 TARGET YEAR <span className="text-red-500">*</span>
               </label>
               <select
-                name="targetYear"
-                value={formData.targetYear}
+                name="target_year"
+                value={formData.target_year}
                 onChange={handleChange}
-                className={`w-full bg-[#220F0F] border ${
-                  errors.targetYear ? "border-red-500" : "border-gray-800"
-                } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer`}
+                disabled={isSubmitting}
+                className={`w-full bg-[#220F0F] border ${errors.target_year ? "border-red-500" : "border-gray-800"
+                  } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 <option value="">Select Target year</option>
                 <option value="2025">2025</option>
                 <option value="2026">2026</option>
                 <option value="2027">2027</option>
               </select>
-              {errors.targetYear && (
-                <p className="text-red-500 text-xs mt-1">{errors.targetYear}</p>
+              {errors.target_year && (
+                <p className="text-red-500 text-xs mt-1">{errors.target_year}</p>
               )}
             </div>
             <div>
               <label className="block text-white text-sm font-medium mb-2">
-                SELECT SLOT <span className="text-red-500">*</span>
+                SELECT DATE <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <input
                   type="date"
-                  name="timeSlot"
-                  value={formData.timeSlot}
+                  name="slot_date"
+                  value={formData.slot_date}
                   onChange={handleChange}
                   min={getTomorrowDate()}
-                  className={`w-full h-12 min-h-[48px] bg-[#220F0F] border ${
-                    errors.timeSlot ? "border-red-500" : "border-gray-800"
-                  } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E]
+                  disabled={isSubmitting}
+                  className={`w-full h-12 min-h-[48px] bg-[#220F0F] border ${errors.slot_date ? "border-red-500" : "border-gray-800"
+                    } rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] disabled:opacity-50 disabled:cursor-not-allowed
       
       /* iOS Safari specific fixes */
       [-webkit-appearance:none]
@@ -530,23 +590,41 @@ const NotificationTab: React.FC<NotificationTabProps> = ({
                 />
 
                 {/* Fallback placeholder for empty state */}
-                {!formData.timeSlot && (
+                {!formData.slot_date && (
                   <div className="absolute inset-0 flex items-center px-4 pointer-events-none text-gray-400 text-sm">
-                    {/* Select  Slot */}
+                    {/* Select Date */}
                   </div>
                 )}
               </div>
-              {errors.timeSlot && (
-                <p className="text-red-500 text-xs mt-1">{errors.timeSlot}</p>
+              {errors.slot_date && (
+                <p className="text-red-500 text-xs mt-1">{errors.slot_date}</p>
               )}
             </div>
           </div>
 
+          {/* Optional: Slot Time field - uncomment if needed */}
+          {/* 
+          <div className="mb-6">
+            <label className="block text-white text-sm font-medium mb-2">
+              SELECT TIME SLOT
+            </label>
+            <input
+              type="time"
+              name="slot_time"
+              value={formData.slot_time}
+              onChange={handleChange}
+              disabled={isSubmitting}
+              className={`w-full bg-[#220F0F] border border-gray-800 rounded-md px-4 py-3 text-gray-300 focus:outline-none focus:ring-1 focus:ring-[#F55D3E] disabled:opacity-50 disabled:cursor-not-allowed`}
+            />
+          </div>
+          */}
+
           <button
             type="submit"
-            className="flex items-center justify-between bg-gradient-to-r from-[#F55D3E] to-[#E85D3E] text-white font-medium rounded-md px-5 py-3 hover:opacity-90 transition-opacity w-full"
+            disabled={isSubmitting}
+            className="flex items-center justify-between bg-gradient-to-r from-[#F55D3E] to-[#E85D3E] text-white font-medium rounded-md px-5 py-3 hover:opacity-90 transition-opacity w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span>SUBMIT</span>
+            <span>{isSubmitting ? "SUBMITTING..." : "SUBMIT"}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"

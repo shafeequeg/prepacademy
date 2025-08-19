@@ -1,25 +1,42 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Send,
   User,
   Mail,
   Phone,
-  // FileText,
-  // MessageSquare,
   AlertCircle,
   CheckCircle,
   Briefcase,
   ArrowRight,
 } from "lucide-react";
+import axiosInstance from "../components/apiconfig/axios";
+import { API_URLS } from "../components/apiconfig/api_urls";
+
+interface Position {
+  id: string;
+  name: string;
+}
+
+interface ApiError {
+  response?: {
+    status: number;
+    data?: {
+      message?: string;
+      error?: string;
+      [key: string]: unknown;
+    };
+  };
+  message?: string;
+}
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
-  position: string;
-  coverLetter: string;
+  position_id: string;
+  cover_letter: string;
   resume: File | null;
 }
 
@@ -34,47 +51,78 @@ const BecomeEmployeePage: React.FC = () => {
     "idle" | "success" | "error"
   >("idle");
   const [errors, setErrors] = useState<FormErrors>({});
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [loadingPositions, setLoadingPositions] = useState(true);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
-    position: "",
-    coverLetter: "",
+    position_id: "",
+    cover_letter: "",
     resume: null,
   });
 
-  const positions = [
-    "Software Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "UI/UX Designer",
-    "Product Manager",
-    "Other",
-  ];
+  // Fetch positions on component mount
+  useEffect(() => {
+    const fetchPositions = async () => {
+      try {
+        setLoadingPositions(true);
+        // Replace with your actual API call for positions
+        const response = await axiosInstance.get(API_URLS.POSITION.GET_POSITION);
+        setPositions(response.data.positions || response.data || []);
+      } catch (error) {
+        console.error("Error fetching positions:", error);
+        // Fallback positions in case API fails
+        setPositions([
+          { id: "1", name: "Software Developer" },
+          { id: "2", name: "Frontend Developer" },
+          { id: "3", name: "Backend Developer" },
+          { id: "4", name: "UI/UX Designer" },
+          { id: "5", name: "Product Manager" },
+          { id: "6", name: "Other" },
+        ]);
+      } finally {
+        setLoadingPositions(false);
+      }
+    };
+
+    fetchPositions();
+  }, []);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    else if (formData.name.trim().length < 2)
-      newErrors.name = "Name must be at least 2 characters";
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long";
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name.trim())) {
+      newErrors.name = "Name can only contain letters and spaces";
+    }
 
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "Invalid email address";
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = "Please enter a valid email address";
+    }
 
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    else if (
-      !/^\+?[\d\s\-\(\)]{10,15}$/.test(formData.phone.replace(/\s/g, ""))
-    )
-      newErrors.phone = "Invalid phone number";
+    // Phone validation - exactly 10 digits
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone.trim())) {
+      newErrors.phone = "Phone number must be exactly 10 digits";
+    }
 
-    if (!formData.position) newErrors.position = "Please select a position";
+    if (!formData.position_id) newErrors.position_id = "Please select a position";
 
-    if (!formData.coverLetter.trim())
-      newErrors.coverLetter = "Cover letter is required";
-    else if (formData.coverLetter.trim().length < 20)
-      newErrors.coverLetter = "Cover letter must be at least 20 characters";
+    // Cover letter validation
+    if (!formData.cover_letter.trim()) {
+      newErrors.cover_letter = "Cover letter is required";
+    } else if (formData.cover_letter.trim().length < 50) {
+      newErrors.cover_letter = "Cover letter must be at least 50 characters long";
+    }
 
     if (!formData.resume) newErrors.resume = "Resume is required";
 
@@ -90,6 +138,34 @@ const BecomeEmployeePage: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  // Special handler for phone number input
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Remove all non-digit characters
+    const digitsOnly = value.replace(/\D/g, '');
+    // Limit to 10 digits
+    const limitedDigits = digitsOnly.slice(0, 10);
+
+    setFormData((prev) => ({ ...prev, phone: limitedDigits }));
+    if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+  };
+
+  // Prevent non-numeric input on keypress for phone field
+  const handlePhoneKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Allow backspace, delete, tab, escape, enter, and arrow keys
+    if (
+      [8, 9, 27, 13, 37, 38, 39, 40, 46].includes(e.keyCode) ||
+      // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+      (e.ctrlKey && [65, 67, 86, 88].includes(e.keyCode))
+    ) {
+      return;
+    }
+    // Prevent if not a number
+    if (!/[0-9]/.test(e.key)) {
+      e.preventDefault();
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +186,7 @@ const BecomeEmployeePage: React.FC = () => {
       if (!allowedTypes.includes(file.type)) {
         setErrors((prev) => ({
           ...prev,
-          resume: "Only PDF, DOC, or DOCX files allowed",
+          resume: "Only PDF, DOC, or DOCX files are allowed",
         }));
         return;
       }
@@ -128,29 +204,53 @@ const BecomeEmployeePage: React.FC = () => {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("position", formData.position);
-      formDataToSend.append("cover_letter", formData.coverLetter);
-      if (formData.resume) formDataToSend.append("resume", formData.resume);
+      formDataToSend.append("name", formData.name.trim());
+      formDataToSend.append("email", formData.email.trim());
+      formDataToSend.append("phone", formData.phone.trim());
+      formDataToSend.append("position_id", formData.position_id);
+      formDataToSend.append("cover_letter", formData.cover_letter.trim());
 
-      // Simulate API call for demo
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      if (formData.resume) {
+        formDataToSend.append("resume", formData.resume);
+      }
 
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        position: "",
-        coverLetter: "",
-        resume: null,
-      });
-      formRef.current?.reset();
-    } catch (error) {
+      // Make the API call
+      const response = await axiosInstance.post(
+        API_URLS.CAREERS.POST_CAREERS,
+        formDataToSend,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          position_id: "",
+          cover_letter: "",
+          resume: null,
+        });
+        formRef.current?.reset();
+      } else {
+        throw new Error("Unexpected response status");
+      }
+    } catch (error: unknown) {
       console.error("Submission Error:", error);
-      setSubmitStatus("error");
+
+      const apiError = error as ApiError;
+
+      // Handle specific error cases
+      if (apiError.response?.status === 400) {
+        const serverErrors = apiError.response.data as FormErrors;
+        setErrors(serverErrors);
+      } else {
+        setSubmitStatus("error");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -185,7 +285,7 @@ const BecomeEmployeePage: React.FC = () => {
       {/* Compact Form Section */}
       <div className="max-w-2xl mx-auto">
         <div className="bg-gradient-to-br from-orange-950/40 to-[#231917] rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-2xl border border-orange-900/30 backdrop-blur-sm">
-          
+
           {/* Status Messages */}
           {submitStatus === "success" && (
             <div className="mb-6 p-4 bg-green-900/30 backdrop-blur-sm rounded-lg border border-green-800/50 flex items-start">
@@ -208,7 +308,7 @@ const BecomeEmployeePage: React.FC = () => {
           )}
 
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-            
+
             {/* Personal Information */}
             <div className="space-y-4">
               {/* Name */}
@@ -239,7 +339,7 @@ const BecomeEmployeePage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-orange-300 text-sm font-medium mb-2">
-                    Email *
+                    Email Address *
                   </label>
                   <div className="relative">
                     <input
@@ -248,7 +348,7 @@ const BecomeEmployeePage: React.FC = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 placeholder-orange-600/60 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 text-sm sm:text-base"
-                      placeholder="your@email.com"
+                      placeholder="Enter your Email"
                     />
                     <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-600/60" />
                   </div>
@@ -262,19 +362,24 @@ const BecomeEmployeePage: React.FC = () => {
 
                 <div>
                   <label className="block text-orange-300 text-sm font-medium mb-2">
-                    Phone *
+                    Phone Number *
                   </label>
                   <div className="relative">
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
-                      onChange={handleInputChange}
+                      onChange={handlePhoneChange}
+                      onKeyPress={handlePhoneKeyPress}
+                      maxLength={10}
                       className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 placeholder-orange-600/60 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 text-sm sm:text-base"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="Enter your Phone number"
                     />
                     <Phone className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-600/60" />
                   </div>
+                  <p className="text-orange-400/60 text-xs mt-1">
+                    Enter 10-digit mobile number (numbers only)
+                  </p>
                   {errors.phone && (
                     <span className="text-red-400 text-xs mt-1 flex items-center">
                       <AlertCircle className="w-3 h-3 mr-1" />
@@ -287,31 +392,58 @@ const BecomeEmployeePage: React.FC = () => {
               {/* Position */}
               <div>
                 <label className="block text-orange-300 text-sm font-medium mb-2">
-                  Position *
+                  Preferred Position *
                 </label>
                 <select
-                  name="position"
-                  value={formData.position}
+                  name="position_id"
+                  value={formData.position_id}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 text-sm sm:text-base"
+                  disabled={loadingPositions}
+                  className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 text-sm sm:text-base disabled:opacity-50"
                 >
                   <option value="" className="bg-[#231917] text-orange-300">
-                    Select your preferred role
+                    {loadingPositions ? "Loading positions..." : "Select the role you're applying for"}
                   </option>
-                  {positions.map((pos) => (
+                  {positions.map((position) => (
                     <option
-                      key={pos}
-                      value={pos}
+                      key={position.id}
+                      value={position.id}
                       className="bg-[#231917] text-orange-300"
                     >
-                      {pos}
+                      {position.name}
                     </option>
                   ))}
                 </select>
-                {errors.position && (
+                {errors.position_id && (
                   <span className="text-red-400 text-xs mt-1 flex items-center">
                     <AlertCircle className="w-3 h-3 mr-1" />
-                    {errors.position}
+                    {errors.position_id}
+                  </span>
+                )}
+              </div>
+
+              {/* Cover Letter */}
+              <div>
+                <label className="block text-orange-300 text-sm font-medium mb-2">
+                  Cover Letter *
+                </label>
+                <textarea
+                  name="cover_letter"
+                  value={formData.cover_letter}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 placeholder-orange-600/60 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 resize-y text-sm sm:text-base"
+                  placeholder="Tell us about your background, relevant experience, skills, and why you're interested in joining our team. What unique value would you bring to this role?"
+                />
+                <div className="flex justify-between items-center mt-1 text-xs">
+                  <span className="text-orange-400/60">
+                    {formData.cover_letter.length} characters (minimum 50 required)
+                  </span>
+                </div>
+                {errors.cover_letter && (
+                  <span className="text-red-400 text-xs mt-1 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
+                    {errors.cover_letter}
                   </span>
                 )}
               </div>
@@ -328,37 +460,13 @@ const BecomeEmployeePage: React.FC = () => {
                   accept=".pdf,.doc,.docx"
                   className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:bg-orange-700 file:text-orange-100 hover:file:bg-orange-600 file:transition-colors file:text-sm"
                 />
-                <p className="text-orange-400/70 text-xs mt-1">PDF, DOC, or DOCX • Maximum 5MB</p>
+                <p className="text-orange-400/70 text-xs mt-1">
+                  Upload your latest resume in PDF, DOC, or DOCX format • Maximum file size: 5MB
+                </p>
                 {errors.resume && (
                   <span className="text-red-400 text-xs mt-1 flex items-center">
                     <AlertCircle className="w-3 h-3 mr-1" />
                     {errors.resume}
-                  </span>
-                )}
-              </div>
-
-              {/* Cover Letter */}
-              <div>
-                <label className="block text-orange-300 text-sm font-medium mb-2">
-                  Cover Letter *
-                </label>
-                <textarea
-                  name="coverLetter"
-                  value={formData.coverLetter}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-4 py-3 bg-orange-950/30 border border-orange-800/50 rounded-lg text-orange-100 placeholder-orange-600/60 focus:outline-none focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all duration-300 resize-y text-sm sm:text-base"
-                  placeholder="Tell us about yourself and why you're interested in joining our team..."
-                />
-                <div className="flex justify-between items-center mt-1 text-xs">
-                  <span className="text-orange-400/60">
-                    {formData.coverLetter.length} characters
-                  </span>
-                </div>
-                {errors.coverLetter && (
-                  <span className="text-red-400 text-xs mt-1 flex items-center">
-                    <AlertCircle className="w-3 h-3 mr-1" />
-                    {errors.coverLetter}
                   </span>
                 )}
               </div>
@@ -367,13 +475,13 @@ const BecomeEmployeePage: React.FC = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || loadingPositions}
               className="w-full bg-gradient-to-r from-orange-700 to-orange-600 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg disabled:hover:scale-100 flex items-center justify-center group"
             >
               {isSubmitting ? (
                 <>
                   <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2"></div>
-                  <span>Submitting...</span>
+                  <span>Submitting Application...</span>
                 </>
               ) : (
                 <>
